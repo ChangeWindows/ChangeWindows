@@ -3739,7 +3739,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['href', 'active'],
   computed: {
     classes: function classes() {
-      return this.active ? 'inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out' : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out';
+      return this.active ? 'inline-flex items-center px-1 pt-1 border-b-2 border-accent-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-accent-700 transition duration-150 ease-in-out' : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out';
     }
   }
 });
@@ -3773,7 +3773,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['active', 'href', 'as'],
   computed: {
     classes: function classes() {
-      return this.active ? 'block pl-3 pr-4 py-2 border-l-4 border-indigo-400 text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out' : 'block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out';
+      return this.active ? 'block pl-3 pr-4 py-2 border-l-4 border-accent-400 text-base font-medium text-accent-700 bg-accent-50 focus:outline-none focus:text-accent-800 focus:bg-accent-100 focus:border-accent-700 transition duration-150 ease-in-out' : 'block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out';
     }
   }
 });
@@ -28014,7 +28014,7 @@ var render = function() {
           "div",
           {
             class: {
-              "bg-indigo-500": _vm.style == "success",
+              "bg-accent-500": _vm.style == "success",
               "bg-red-700": _vm.style == "danger"
             }
           },
@@ -28040,7 +28040,7 @@ var render = function() {
                           {
                             staticClass: "flex p-2 rounded-lg",
                             class: {
-                              "bg-indigo-600": _vm.style == "success",
+                              "bg-accent-600": _vm.style == "success",
                               "bg-red-600": _vm.style == "danger"
                             }
                           },
@@ -28123,7 +28123,7 @@ var render = function() {
                           staticClass:
                             "-mr-1 flex p-2 rounded-md focus:outline-none sm:-mr-2 transition ease-in-out duration-150",
                           class: {
-                            "hover:bg-indigo-600 focus:bg-indigo-600":
+                            "hover:bg-accent-600 focus:bg-accent-600":
                               _vm.style == "success",
                             "hover:bg-red-600 focus:bg-red-600":
                               _vm.style == "danger"
@@ -28198,7 +28198,7 @@ var render = function() {
     "button",
     {
       staticClass:
-        "inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150",
+        "inline-flex items-center px-3 py-1 bg-accent-500 border border-transparent rounded-md font-semibold text-white hover:bg-accent-400 active:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-accent-500 focus:ring-opacity-50 transition ease-in-out duration-150",
       attrs: { type: _vm.type }
     },
     [_vm._t("default")],
@@ -28238,7 +28238,7 @@ var render = function() {
       }
     ],
     staticClass:
-      "rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
+      "rounded border-gray-300 text-accent-500 shadow-sm focus:border-accent-300 focus:ring focus:ring-accent-200 focus:ring-opacity-50",
     attrs: { type: "checkbox" },
     domProps: {
       value: _vm.value,
@@ -28527,7 +28527,7 @@ var render = function() {
     "button",
     {
       staticClass:
-        "inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150",
+        "inline-flex items-center justify-center px-3 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-white hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-red-500 focus:ring-opacity-50 active:bg-red-600 transition ease-in-out duration-150",
       attrs: { type: _vm.type }
     },
     [_vm._t("default")],
@@ -28859,7 +28859,7 @@ var render = function() {
   return _c("input", {
     ref: "input",
     staticClass:
-      "border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm",
+      "border-gray-300 border-2 focus:border-accent-300 focus:ring focus:ring-accent-200 focus:ring-opacity-50 rounded-md",
     domProps: { value: _vm.value },
     on: {
       input: function($event) {
@@ -29164,7 +29164,7 @@ var render = function() {
     "button",
     {
       staticClass:
-        "inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150",
+        "inline-flex items-center px-3 py-1 bg-gray-200 rounded-md font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 focus:ring-opacity-50 active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150",
       attrs: { type: _vm.type }
     },
     [_vm._t("default")],
@@ -29382,12 +29382,12 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "mt-3 flex items-center text-sm font-semibold text-indigo-700"
+                    "mt-3 flex items-center text-sm font-semibold text-accent-500"
                 },
                 [
                   _c("div", [_vm._v("Explore the documentation")]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "ml-1 text-indigo-500" }, [
+                  _c("div", { staticClass: "ml-1 text-accent-500" }, [
                     _c(
                       "svg",
                       {
@@ -29461,12 +29461,12 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "mt-3 flex items-center text-sm font-semibold text-indigo-700"
+                      "mt-3 flex items-center text-sm font-semibold text-accent-500"
                   },
                   [
                     _c("div", [_vm._v("Start watching Laracasts")]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "ml-1 text-indigo-500" }, [
+                    _c("div", { staticClass: "ml-1 text-accent-500" }, [
                       _c(
                         "svg",
                         {
