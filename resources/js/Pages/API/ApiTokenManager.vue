@@ -45,8 +45,6 @@
         </jet-form-section>
 
         <div v-if="tokens.length > 0">
-            <jet-section-border />
-
             <!-- Manage API Tokens -->
             <div class="mt-10 sm:mt-0">
                 <jet-action-section>
@@ -90,7 +88,7 @@
         </div>
 
         <!-- Token Value Modal -->
-        <jet-dialog-modal :show="displayingToken" @close="displayingToken = false">
+        <jet-dialog-modal id="displayingTokenModal">
             <template #title>
                 API Token
             </template>
@@ -113,7 +111,7 @@
         </jet-dialog-modal>
 
         <!-- API Token Permissions Modal -->
-        <jet-dialog-modal :show="managingPermissionsFor" @close="managingPermissionsFor = null">
+        <jet-dialog-modal id="managingPermissionsForModal">
             <template #title>
                 API Token Permissions
             </template>
@@ -141,7 +139,7 @@
         </jet-dialog-modal>
 
         <!-- Delete Token Confirmation Modal -->
-        <jet-confirmation-modal :show="apiTokenBeingDeleted" @close="apiTokenBeingDeleted = null">
+        <jet-confirmation-modal id="apiTokenBeingDeletedModal">
             <template #title>
                 Delete API Token
             </template>
@@ -176,7 +174,6 @@
     import JetInputError from '@/Jetstream/InputError'
     import JetLabel from '@/Jetstream/Label'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
-    import JetSectionBorder from '@/Jetstream/SectionBorder'
 
     export default {
         components: {
@@ -192,7 +189,6 @@
             JetInputError,
             JetLabel,
             JetSecondaryButton,
-            JetSectionBorder,
         },
 
         props: [

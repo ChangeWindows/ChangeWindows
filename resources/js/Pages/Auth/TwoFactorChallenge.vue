@@ -1,10 +1,6 @@
 <template>
     <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
-
-        <div class="mb-4 text-sm text-gray-600">
+        <div class="mb-4">
             <template v-if="! recovery">
                 Please confirm access to your account by entering the authentication code provided by your authenticator application.
             </template>
@@ -17,18 +13,18 @@
         <jet-validation-errors class="mb-4" />
 
         <form @submit.prevent="submit">
-            <div v-if="! recovery">
-                <jet-label for="code" value="Code" />
+            <div v-if="! recovery" class="form-floating">
                 <jet-input ref="code" id="code" type="text" inputmode="numeric" class="mt-1 block w-full" v-model="form.code" autofocus autocomplete="one-time-code" />
+                <jet-label for="code" value="Code" />
             </div>
 
-            <div v-else>
-                <jet-label for="recovery_code" value="Recovery Code" />
+            <div v-else class="form-floating">
                 <jet-input ref="recovery_code" id="recovery_code" type="text" class="mt-1 block w-full" v-model="form.recovery_code" autocomplete="one-time-code" />
+                <jet-label for="recovery_code" value="Recovery Code" />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer" @click.prevent="toggleRecovery">
+            <div class="form-floating">
+                <button type="button" class="btn btn-light" @click.prevent="toggleRecovery">
                     <template v-if="! recovery">
                         Use a recovery code
                     </template>
@@ -38,7 +34,7 @@
                     </template>
                 </button>
 
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Login
                 </jet-button>
             </div>
@@ -48,7 +44,6 @@
 
 <script>
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
     import JetButton from '@/Jetstream/Button'
     import JetInput from '@/Jetstream/Input'
     import JetLabel from '@/Jetstream/Label'
@@ -57,7 +52,6 @@
     export default {
         components: {
             JetAuthenticationCard,
-            JetAuthenticationCardLogo,
             JetButton,
             JetInput,
             JetLabel,

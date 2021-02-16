@@ -1,12 +1,14 @@
 <template>
-    <div class="font-sans text-gray-900 antialiased">
-        <div class="pt-4 bg-gray-100">
-            <div class="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
-                <div>
-                    <jet-authentication-card-logo />
-                </div>
+    <div class="container">
+        <div class="row justify-content-around mt-5">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="rounded border shadow p-3">
+                    <div class="h2 mb-4 mt-2 text-center">
+                        <i class="far fa-fw fa-sun-haze"></i> <span class="fw-bold">Horizon</span>
+                    </div>
 
-                <div v-html="policy" class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose">
+                    <div v-html="policy" class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose">
+                    </div>
                 </div>
             </div>
         </div>
@@ -14,13 +16,7 @@
 </template>
 
 <script>
-import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-
 export default {
     props: ['policy'],
-
-    components: {
-        JetAuthenticationCardLogo,
-    },
 }
 </script>

@@ -1,10 +1,10 @@
-<template>
+  <template>
     <span>
         <span @click="startConfirmingPassword">
             <slot />
         </span>
 
-        <jet-dialog-modal :show="confirmingPassword" @close="closeModal">
+        <jet-dialog-modal id="confirmingPasswordModal" @close="confirmingPassword = false">
             <template #title>
                 {{ title }}
             </template>
@@ -13,21 +13,22 @@
                 {{ content }}
 
                 <div class="mt-4">
-                    <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
+                    <jet-input type="password" placeholder="Password"
                                 ref="password"
                                 v-model="form.password"
+                               :class="{ 'is-invalid': form.error }"
                                 @keyup.enter.native="confirmPassword" />
 
-                    <jet-input-error :message="form.error" class="mt-2" />
+                    <jet-input-error :message="form.error" />
                 </div>
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="closeModal">
+                <jet-secondary-button data-bs-dismiss="modal">
                     Nevermind
                 </jet-secondary-button>
 
-                <jet-button class="ml-2" @click.native="confirmPassword" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <jet-button class="ml-2" @click.native="confirmPassword" :class="{ 'text-black-50': form.processing }" :disabled="form.processing">
                     {{ button }}
                 </jet-button>
             </template>
@@ -75,13 +76,19 @@
 
         methods: {
             startConfirmingPassword() {
+                this.form.error = '';
+                this.modal = new Bootstrap.Modal(document.getElementById('confirmingPasswordModal'))
+
                 axios.get(route('password.confirmation')).then(response => {
                     if (response.data.confirmed) {
                         this.$emit('confirmed');
                     } else {
-                        this.confirmingPassword = true;
+                        this.modal.show()
+                        this.form.password = '';
 
-                        setTimeout(() => this.$refs.password.focus(), 250)
+                        setTimeout(() => {
+                            this.$refs.password.focus()
+                        }, 250)
                     }
                 })
             },
@@ -91,22 +98,18 @@
 
                 axios.post(route('password.confirm'), {
                     password: this.form.password,
-                }).then(() => {
+                }).then(response => {
+                    this.modal.hide()
+                    this.form.password = '';
+                    this.form.error = '';
                     this.form.processing = false;
-                    this.closeModal()
+
                     this.$nextTick(() => this.$emit('confirmed'));
                 }).catch(error => {
                     this.form.processing = false;
                     this.form.error = error.response.data.errors.password[0];
-                    this.$refs.password.focus()
                 });
-            },
-
-            closeModal() {
-                this.confirmingPassword = false
-                this.form.password = '';
-                this.form.error = '';
-            },
+            }
         }
     }
 </script>

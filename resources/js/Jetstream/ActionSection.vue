@@ -1,13 +1,21 @@
 <template>
-    <div class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="row g-3 mt-3">
         <jet-section-title>
             <template #title><slot name="title"></slot></template>
             <template #description><slot name="description"></slot></template>
         </jet-section-title>
 
-        <div class="mt-5 md:mt-0 md:col-span-2">
-            <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
-                <slot name="content"></slot>
+        <div class="col-12 col-md-8">
+            <div class="shadow rounded border overflow-hidden">
+                <div class="p-4">
+                    <div class="grid grid-cols-6 gap-6">
+                        <slot name="content"></slot>
+                    </div>
+                </div>
+
+                <div class="bg-light d-flex justify-content-end px-4 py-3" v-if="hasActions">
+                    <slot name="actions"></slot>
+                </div>
             </div>
         </div>
     </div>
@@ -19,6 +27,12 @@
     export default {
         components: {
             JetSectionTitle,
+        },
+
+        computed: {
+            hasActions() {
+                return !! this.$slots.actions
+            }
         }
     }
 </script>

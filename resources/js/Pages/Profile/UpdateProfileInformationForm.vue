@@ -10,27 +10,26 @@
 
         <template #form>
             <!-- Profile Photo -->
-            <div class="col-span-6 sm:col-span-4" v-if="$page.props.jetstream.managesProfilePhotos">
+            <div v-if="$page.props.jetstream.managesProfilePhotos">
                 <!-- Profile Photo File Input -->
-                <input type="file" class="hidden"
+                <jet-label for="photo" value="Photo" />
+                <input type="file" class="d-none"
                             ref="photo"
                             @change="updatePhotoPreview">
 
-                <jet-label for="photo" value="Photo" />
-
                 <!-- Current Profile Photo -->
-                <div class="mt-2" v-show="! photoPreview">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-20 w-20 object-cover">
+                <div class="mt-2" v-show="!photoPreview">
+                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded" style="width: 56px; height: 56px;">
                 </div>
 
                 <!-- New Profile Photo Preview -->
                 <div class="mt-2" v-show="photoPreview">
-                    <span class="block rounded-full w-20 h-20"
-                          :style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'">
+                    <span class="d-block rounded"
+                          :style="'width: 56px; height: 56px; background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'">
                     </span>
                 </div>
 
-                <jet-secondary-button class="mt-2 mr-2" type="button" @click.native.prevent="selectNewPhoto">
+                <jet-secondary-button class="mt-2" type="button" @click.native.prevent="selectNewPhoto">
                     Select A New Photo
                 </jet-secondary-button>
 
@@ -42,17 +41,17 @@
             </div>
 
             <!-- Name -->
-            <div class="col-span-6 sm:col-span-4">
+            <div class="form-floating mt-4">
+                <jet-input id="name" type="text" v-model="form.name" autocomplete="name" placeholder="Name" :class="{ 'is-invalid': form.errors.name }" />
                 <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autocomplete="name" />
-                <jet-input-error :message="form.errors.name" class="mt-2" />
+                <jet-input-error :message="form.errors.name" />
             </div>
 
             <!-- Email -->
-            <div class="col-span-6 sm:col-span-4">
+            <div class="form-floating mt-4">
+                <jet-input id="email" type="email" v-model="form.email" placeholder="Email" :class="{ 'is-invalid': form.errors.email }" />
                 <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" />
-                <jet-input-error :message="form.errors.email" class="mt-2" />
+                <jet-input-error :message="form.errors.email" />
             </div>
         </template>
 

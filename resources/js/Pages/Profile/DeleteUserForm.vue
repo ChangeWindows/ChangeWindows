@@ -13,16 +13,10 @@
                 Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.
             </div>
 
-            <div class="mt-5">
-                <jet-danger-button @click.native="confirmUserDeletion">
-                    Delete Account
-                </jet-danger-button>
-            </div>
-
             <!-- Delete Account Confirmation Modal -->
-            <jet-dialog-modal :show="confirmingUserDeletion" @close="closeModal">
+            <jet-dialog-modal id="confirmingUserDeletionModal">
                 <template #title>
-                    Delete Account
+                    Delete account
                 </template>
 
                 <template #content>
@@ -44,10 +38,16 @@
                     </jet-secondary-button>
 
                     <jet-danger-button class="ml-2" @click.native="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Delete Account
+                        Delete account
                     </jet-danger-button>
                 </template>
             </jet-dialog-modal>
+        </template>
+
+        <template #actions>
+            <jet-danger-button @click.native="confirmUserDeletion">
+                Delete account
+            </jet-danger-button>
         </template>
     </jet-action-section>
 </template>

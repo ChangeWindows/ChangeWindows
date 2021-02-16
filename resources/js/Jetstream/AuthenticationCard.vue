@@ -1,11 +1,13 @@
 <template>
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <div>
-            <slot name="logo" />
-        </div>
+    <div class="row justify-content-around mt-5">
+        <div class="col-12 col-sm-10 col-md-7 col-lg-4 col-xl-3">
+            <div class="rounded border shadow p-3">
+                <div class="h2 mb-4 mt-2 text-center">
+                    <i class="far fa-fw fa-sun-haze"></i> <span class="fw-bold">Horizon</span>
+                </div>
 
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-            <slot />
+                <slot />
+            </div>
         </div>
     </div>
 </template>

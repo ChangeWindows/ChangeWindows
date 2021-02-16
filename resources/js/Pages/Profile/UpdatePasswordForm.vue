@@ -9,22 +9,22 @@
         </template>
 
         <template #form>
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="current_password" value="Current Password" />
-                <jet-input id="current_password" type="password" class="mt-1 block w-full" v-model="form.current_password" ref="current_password" autocomplete="current-password" />
-                <jet-input-error :message="form.errors.current_password" class="mt-2" />
+            <div class="form-floating">
+                <jet-input id="current_password" type="password" v-model="form.current_password" ref="current_password" autocomplete="current-password" placeholder="Current password" :class="{ 'is-invalid': form.errors.current_password }" />
+                <jet-label for="current_password" value="Current password" />
+                <jet-input-error :message="form.errors.current_password" />
             </div>
 
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="password" value="New Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" ref="password" autocomplete="new-password" />
-                <jet-input-error :message="form.errors.password" class="mt-2" />
+            <div class="form-floating mt-4">
+                <jet-input id="password" type="password" v-model="form.password" ref="password" autocomplete="new-password" placeholder="New password" :class="{ 'is-invalid': form.errors.password }" />
+                <jet-label for="password" value="New password" />
+                <jet-input-error :message="form.errors.password" />
             </div>
 
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
-                <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" autocomplete="new-password" />
-                <jet-input-error :message="form.errors.password_confirmation" class="mt-2" />
+            <div class="form-floating mt-4">
+                <jet-input id="password_confirmation" type="password" v-model="form.password_confirmation" autocomplete="new-password" placeholder="Confirm password" :class="{ 'is-invalid': form.errors.password_confirmation }" />
+                <jet-label for="password_confirmation" value="Confirm password" />
+                <jet-input-error :message="form.errors.password_confirmation" />
             </div>
         </template>
 
