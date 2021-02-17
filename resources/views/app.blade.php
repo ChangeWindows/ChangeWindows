@@ -12,6 +12,13 @@
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
         <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script>
+            @auth
+                window.Permissions = {!! json_encode(Auth::user()->allPermissions, true) !!};
+            @else
+                window.Permissions = [];
+            @endauth
+        </script>
     </head>
     <body class="font-sans antialiased">
         @inertia

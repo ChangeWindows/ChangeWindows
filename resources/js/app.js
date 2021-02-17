@@ -5,8 +5,10 @@ import Vue from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue';
 import { InertiaProgress } from '@inertiajs/progress';
 import PortalVue from 'portal-vue';
+import Permissions from './mixins/Permissions';
 
 Vue.mixin({ methods: { route } });
+Vue.mixin(Permissions);
 Vue.use(InertiaPlugin);
 Vue.use(PortalVue);
 
