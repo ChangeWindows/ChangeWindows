@@ -5010,7 +5010,7 @@ textarea.form-control-lg {
   background-color: rgba(255, 255, 255, 0.85);
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0.4px rgba(0, 0, 0, 0.02), 0 0 0.9px rgba(0, 0, 0, 0.028), 0 0 1.8px rgba(0, 0, 0, 0.035), 0 0 3.1px rgba(0, 0, 0, 0.042), 0 0 5.8px rgba(0, 0, 0, 0.05), 0 0 14px rgba(0, 0, 0, 0.07);
   border-radius: 0.25rem;
 }
 .toast:not(.showing):not(.show) {
@@ -6146,15 +6146,15 @@ textarea.form-control-lg {
 }
 
 .shadow {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 0 0.4px rgba(0, 0, 0, 0.02), 0 0 0.9px rgba(0, 0, 0, 0.028), 0 0 1.8px rgba(0, 0, 0, 0.035), 0 0 3.1px rgba(0, 0, 0, 0.042), 0 0 5.8px rgba(0, 0, 0, 0.05), 0 0 14px rgba(0, 0, 0, 0.07) !important;
 }
 
 .shadow-sm {
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  box-shadow: 0 0 0.2px rgba(0, 0, 0, 0.014), 0 0 0.5px rgba(0, 0, 0, 0.02), 0 0 1px rgba(0, 0, 0, 0.025), 0 0 1.8px rgba(0, 0, 0, 0.03), 0 0 3.3px rgba(0, 0, 0, 0.036), 0 0 8px rgba(0, 0, 0, 0.05) !important;
 }
 
 .shadow-lg {
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+  box-shadow: 0 0 0.7px rgba(0, 0, 0, 0.028), 0 0 1.7px rgba(0, 0, 0, 0.04), 0 0 3.3px rgba(0, 0, 0, 0.05), 0 0 5.8px rgba(0, 0, 0, 0.06), 0 0 10.9px rgba(0, 0, 0, 0.072), 0 0 26px rgba(0, 0, 0, 0.1) !important;
 }
 
 .shadow-none {

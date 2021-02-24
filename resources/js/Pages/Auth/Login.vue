@@ -19,8 +19,8 @@
 
             <div class="mt-4">
                 <div class="form-check">
-                    <jet-checkbox name="remember" v-model="form.remember" />
-                    <label class="form-check-label">Remember me</label>
+                    <jet-checkbox name="remember" id="remember" v-model="form.remember" />
+                    <label class="form-check-label" for="remember">Remember me</label>
                 </div>
             </div>
 

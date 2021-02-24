@@ -26,6 +26,12 @@
             >
               Dashboard
             </jet-nav-link>
+            <jet-nav-link
+              :href="route('admin.platforms')"
+              :active="route().current('admin.platforms')"
+            >
+              Platforms
+            </jet-nav-link>
           </ul>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <jet-dropdown id="settingsDropdown">
@@ -70,7 +76,7 @@
     <div>
       <!-- Page Heading -->
       <header class="bg-primary text-white" v-if="$slots.header">
-        <div class="container py-3">
+        <div class="container py-3 d-flex justify-content-between align-items-center">
           <slot name="header"></slot>
         </div>
       </header>
