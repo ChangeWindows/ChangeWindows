@@ -1,10 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-use App\Http\Controllers\Admin\PlatformController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,21 +14,5 @@ use App\Http\Controllers\Admin\PlatformController;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'horizonVersion' => config('app.version')
-    ]);
-})->name('home');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
-
-Route::middleware(['auth:sanctum', 'verified'])->prefix('admin')->name('admin')->group(function() {
-    Route::prefix('platforms')->name('.platforms')->group(function() {
-        Route::get('/', [PlatformController::class, 'index'])->name('');
-        Route::get('/create', [PlatformController::class, 'create'])->name('.create');
-        Route::get('/edit/{platform}', [PlatformController::class, 'edit'])->name('.edit');
-    });
+    return view('welcome');
 });

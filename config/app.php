@@ -13,19 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Horizon'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Application Version
-    |--------------------------------------------------------------------------
-    |
-    | This value is the version of your application. This value is used when
-    | the framework needs to place the application's version in a notification
-    | or any other location as required by the application or its packages.
-    */
-
-    'version' => '0.0.0',
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -186,8 +174,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\FortifyServiceProvider::class,
-        App\Providers\JetstreamServiceProvider::class,
 
     ],
 
