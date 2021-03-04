@@ -12,6 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+    .copy('node_modules/@fortawesome/fontawesome-pro/js/regular.min.js', 'public/js/fonts')
+    .copy('node_modules/@fortawesome/fontawesome-pro/js/brands.min.js', 'public/js/fonts')
+    .copy('node_modules/@fortawesome/fontawesome-pro/js/fontawesome.min.js', 'public/js/fonts')
+    .copy('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js', 'public/js')
+    .sass('resources/sass/style.scss', 'public/css');
