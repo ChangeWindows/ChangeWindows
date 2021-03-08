@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,10 @@ Route::get('/platforms', function () {
 Route::get('/releases', function () {
     return view('releases');
 })->middleware(['auth'])->name('releases');
+
+Route::get('/about', function () {
+    return Inertia::render('About/Show');
+})->middleware(['auth'])->name('about');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

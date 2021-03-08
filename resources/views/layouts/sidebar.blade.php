@@ -26,7 +26,7 @@
 
     <hr />
 
-    <a href="{{ route('timeline') }}" class="sidebar-item">
+    <a href="{{ route('about') }}" class="sidebar-item">
         <i class="far fa-fw fa-circle-info"></i> <span class="sidebar-label">About</span>
     </a>
 

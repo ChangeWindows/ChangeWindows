@@ -10,6 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@babel/preset-react": "^7.12.13",
         "@fortawesome/fontawesome-pro": "6.0.0-alpha2",
         "alpinejs": "^2.7.3",
         "autoprefixer": "^10.1.0",
@@ -20,5 +21,13 @@
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.32.8",
         "sass-loader": "^11.0.1"
+    },
+    "dependencies": {
+        "@inertiajs/inertia": "^0.8.5",
+        "@inertiajs/inertia-react": "^0.5.4",
+        "@inertiajs/progress": "^0.2.4",
+        "@types/react": "^17.0.3",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1"
     }
 }
