@@ -18,16 +18,15 @@
         <script src="{{ asset('js/fonts/fontawesome.min.js') }}" defer></script>
     </head>
     <body class="bg-light">
-        @include('layouts.navigation')
+        <div class="grid">
+            <header class="grid-sidebar">
+                @include('layouts.sidebar')
+            </header>
 
-        <!-- Page Heading -->
-        <header class="container">
-            {{ $header }}
-        </header>
-
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
+            <!-- Page Content -->
+            <main class="grid-content">
+                {{ $slot }}
+            </main>
+        </div>
     </body>
 </html>

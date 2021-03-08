@@ -1,0 +1,172 @@
+.grid {
+    display: grid;
+    grid-template-columns: 260px auto;
+    grid-template-rows: auto;
+    grid-template-areas: 'sidebar content';
+    height: 100vh;
+    width: 100vw;
+
+    overflow-x: hidden;
+    position: relative;
+
+    @media (max-width: 991px) {
+        grid-template-columns: 56px auto;
+    }
+
+    @media (max-width: 575px) {
+        grid-template-columns: auto;
+        grid-template-rows: auto 64px;
+        grid-template-areas: 'content' 'sidebar';
+    }
+
+    .grid-sidebar {
+        grid-area: sidebar;
+        background-color: darken($light, 6);
+        justify-content: stretch;
+        overflow: auto;
+        z-index: 5;
+        
+        @media (max-width: 575px) {
+            background-color: #fff;
+            z-index: 7;
+            box-shadow: $box-shadow;
+        }
+
+        .navbar {
+            background-color: rgba(darken($light, 6), .75);
+            backdrop-filter: blur(10px) saturate(120%);
+            border-bottom: darken($light, 12) 1px solid;
+            z-index: 5;
+            
+            @media (max-width: 575px) {
+                display: none;
+            }
+            
+            @media (max-width: 991px) {
+                .brand-label {
+                    display: none;
+                }
+            }
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+
+            padding: .5rem .75rem;
+            height: calc(100% - 57px);
+            
+            @media (max-width: 991px) {
+                padding: .5rem;
+            }
+
+            @media (max-width: 575px) {
+                flex-direction: row;
+                padding: 0;
+            }
+
+            .sidebar-item {
+                display: flex;
+                align-items: center;
+                position: relative;
+
+                transition: $transition-base;
+
+                padding: .5rem;
+                border-radius: $border-radius;
+                background-color: transparent;
+                border: none;
+                width: 100%;
+                height: 40px;
+
+                text-decoration: none;
+                color: $dark;
+
+                @media (max-width: 991px) {
+                    justify-content: center;
+                }
+
+                @media (max-width: 575px) {
+                    background-color: transparent;
+                    border-radius: 0;
+                    padding: 0;
+                    margin: 0;
+                    height: 64px;
+                    flex-direction: column;
+                    justify-content: center;
+                    width: 100%;
+                    text-align: center;
+                }
+
+                svg {
+                    margin-right: .5rem;
+
+                    @media (max-width: 991px) {
+                        margin-right: 0;
+                    }
+                }
+
+                .sidebar-label {
+                    @media (max-width: 991px) {
+                        display: none;
+                    }
+
+                    @media (max-width: 575px) {
+                        display: block;
+                        font-size: 90%;
+                        font-weight: 600;
+                        color: lighten($dark, 35);
+                        margin: .25rem auto 0;
+                        max-width: 80px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        line-height: 1;
+                    }
+                }
+
+                &.active {
+                    svg {
+                        color: $primary;
+                    }
+
+                    @media (min-width: 576px) {
+                        &::after {
+                            position: absolute;
+                            background-color: $primary;
+                            left: 0;
+                            top: 25%;
+                            height: 50%;
+                            width: 2px;
+                            content: '';
+                        }
+                    }
+                }
+
+                &:hover {
+                    background-color: darken($light, 10);
+                    color: $dark;
+
+                    @media (max-width: 575px) {
+                        background-color: darken($light, 3);
+                    }
+                }
+            }
+        }
+    }
+
+    .grid-content {
+        grid-area: content;
+        box-shadow: $box-shadow;
+        background-color: darken($light, 2);
+        z-index: 6;
+        overflow: auto;
+
+        .navbar {
+            background-color: rgba(darken($light, 2), .75);
+            backdrop-filter: blur(10px) saturate(120%);
+            border-bottom: darken($light, 8) 1px solid;
+            z-index: 6;
+        }
+    }
+}

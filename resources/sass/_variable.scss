@@ -1,0 +1,45 @@
+// Features
+$enable-negative-margins: true;
+
+// Body
+$body-bg: #fff;
+
+// Colors
+$accent: #0066ff;
+$primary: $accent;
+$blue: #0f6dec;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #e52262;
+$red: #e74018;
+$orange: #fb8009;
+$yellow: #ffc000;
+$green: #97c800;
+$teal: #10b08f;
+$cyan: #0098df;
+
+$leak: #e52262;
+$skip: #e74018;
+$dev: #fb8009;
+$beta: #ffc000;
+$preview: #c0d700;
+$release: #97c800;
+$public: #46c429;
+$broad: #10b08f;
+$ltsc: #0098df;
+
+$mobile: #00bcf2;
+$iso: #00cea6;
+$iot: #f7630c;
+$holographic: #ff4343;
+$pc: #0078d7;
+$tenx: #9ad93a;
+$xbox: #107c10;
+$team: #e3008c;
+$server: #ffb900;
+$sdk: #886ce4;
+$azure: #4300df;
+
+// Shadows
+$box-shadow-sm: 0 0px 0.1px rgba(0, 0, 0, 0.02), 0 0px 0.3px rgba(0, 0, 0, 0.028), 0 0px 0.5px rgba(0, 0, 0, 0.035), 0 0px 0.9px rgba(0, 0, 0, 0.042), 0 0px 1.7px rgba(0, 0, 0, 0.05), 0 0px 4px rgba(0, 0, 0, 0.07);
+$box-shadow: 0 0px 0.3px rgba(0, 0, 0, 0.02), 0 0px 0.8px rgba(0, 0, 0, 0.028), 0 0px 1.5px rgba(0, 0, 0, 0.035), 0 0px 2.7px rgba(0, 0, 0, 0.042), 0 0px 5px rgba(0, 0, 0, 0.05), 0 0px 12px rgba(0, 0, 0, 0.07);

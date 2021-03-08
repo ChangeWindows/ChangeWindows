@@ -1,0 +1,10 @@
+.btn {
+    &.btn-link {
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            background-color: darken($light, 8);
+        }
+    }
+}

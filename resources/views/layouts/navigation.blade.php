@@ -9,10 +9,15 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto">
                 <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
+                    <i class="far fa-fw fa-flag"></i> Releases
                 </x-nav-link>
+                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <i class="far fa-fw fa-circle-info"></i> About
+                </x-nav-link>
+            </ul>
+            <ul class="navbar-nav">
                 <x-dropdown align="right">
                     <x-slot name="trigger">
                         {{ Auth::user()->name }}

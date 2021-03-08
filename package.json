@@ -10,7 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "@fortawesome/fontawesome-pro": "5.15.2",
+        "@fortawesome/fontawesome-pro": "6.0.0-alpha2",
         "alpinejs": "^2.7.3",
         "autoprefixer": "^10.1.0",
         "axios": "^0.21",

@@ -1,0 +1,42 @@
+.navbar {
+    .navbar-brand {
+        margin-right: 1.5rem;
+    }
+    
+    .nav-item {
+        @media (min-width: 1200px) {
+            &:not(:last-child) {
+                margin-right: 1.5rem;
+            }
+        }
+
+        .nav-link {
+            position: relative;
+            padding-left: 0;
+            padding-right: 0;
+
+            @media (max-width: 1199px) {   
+                padding-left: .75rem;
+            }
+
+            &.active {
+                &::after {
+                    position: absolute;
+                    background-color: $primary;
+                    left: 0;
+                    bottom: 0;
+                    height: 2px;
+                    width: 100%;
+                    content: '';
+                    
+                    @media (max-width: 1199px) {    
+                        left: 0;
+                        top: 25%;
+                        height: 50%;
+                        width: 2px;
+                    }
+                }
+            }
+        }
+    }
+}

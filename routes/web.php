@@ -14,8 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->middleware(['auth'])->name('welcome');
+    return view('timeline');
+})->middleware(['auth'])->name('timeline');
+
+Route::get('/platforms', function () {
+    return view('platforms');
+})->middleware(['auth'])->name('platforms');
+
+Route::get('/releases', function () {
+    return view('releases');
+})->middleware(['auth'])->name('releases');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

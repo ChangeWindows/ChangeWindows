@@ -1,0 +1,29 @@
+.nav {
+    &.nav-lined {
+        .nav-link {
+            position: relative;
+            padding-left: 0;
+            padding-right: 0;
+            border: none;
+            background: transparent;
+
+            @media (min-width: 1200px) {
+                &:not(:last-child) {
+                    margin-right: 1.5rem;
+                }
+            }
+
+            &.active {
+                &::after {
+                    position: absolute;
+                    background-color: $primary;
+                    left: 0;
+                    bottom: 0;
+                    height: 2px;
+                    width: 100%;
+                    content: '';
+                }
+            }
+        }
+    }
+}

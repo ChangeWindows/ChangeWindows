@@ -1,3 +1,185 @@
+@import 'variable';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import 'ui';
+@import 'card';
+@import 'navbar';
+@import 'button';
+@import 'utilities';
+@import 'nav';
+@import 'progress';
+
+.navbar-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-icon {
+    background: $primary;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: .25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: .5rem;
+}
+
+// Timeline items
+.timeline {
+    .flight {
+        display: flex;
+        height: 40px;
+        align-items: center;
+        transition: $transition-base;
+
+        &:nth-child(even) {
+            background-color: darken($light, 5);
+        }
+
+        &:hover {
+            background-color: darken($light, 8);
+        }
+
+        .flight-icon {
+            width: 40px;
+            text-align: center;
+        }
+
+        .flight-build {
+            margin-right: .5rem;
+            min-width: 150px;
+        }
+
+        .flight-channels {
+            flex: 1;
+            margin-right: .5rem;
+        }
+
+        .flight-version {
+            margin-right: .5rem;
+        }
+    }
+
+    .promotion {
+        display: flex;
+        height: 40px;
+        align-items: center;
+        transition: $transition-base;
+
+        &:nth-child(even) {
+            background-color: darken($light, 5);
+        }
+
+        &:hover {
+            background-color: darken($light, 8);
+        }
+
+        .promotion-icon {
+            width: 40px;
+            text-align: center;
+        }
+
+        .promotion-version {
+            margin-right: .5rem;
+            min-width: 100px;
+        }
+
+        .promotion-channels {
+            flex: 1;
+            margin-right: .5rem;
+        }
+    }
+
+    .release {
+        display: flex;
+        height: 40px;
+        align-items: center;
+        transition: $transition-base;
+
+        &:nth-child(even) {
+            background-color: darken($light, 5);
+        }
+
+        &:hover {
+            background-color: darken($light, 8);
+        }
+
+        .release-icon {
+            width: 40px;
+            text-align: center;
+        }
+
+        .release-version {
+            margin-right: .5rem;
+            min-width: 100px;
+        }
+
+        .release-channels {
+            flex: 1;
+            margin-right: .5rem;
+        }
+    }
+}
+
+// Channels
+.card {
+    &.channel {
+        min-width: 150px;
+        background-color: $light;
+        border: none;
+        box-shadow: $box-shadow-sm;
+        padding: .5rem .75rem;
+
+        &.channel-disabled {
+            filter: grayscale(1);
+        }
+    
+        .channel-name {
+            margin-top: -.125rem;
+            margin-bottom: -.375rem;
+            font-weight: 600;
+        }
+    
+        .channel-build {
+            margin-bottom: .5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+    
+        .channel-date {
+            color: $text-muted;
+            font-size: .875rem;
+        }
+    }
+
+    &.release {
+        background-color: $light;
+        border: none;
+        box-shadow: $box-shadow-sm;
+        padding: .5rem .75rem;
+        height: 100%;
+
+        h3 {
+            margin-bottom: 0;
+        }
+
+        .release-channels {
+            margin-top: .25rem;
+        }
+
+        .release-actions {
+            background-color: darken($light, 4);
+            padding: .5rem .75rem;
+            border-bottom-left-radius: $border-radius;
+            border-bottom-right-radius: $border-radius;
+            margin: .75rem -.75rem -.5rem -.75rem;
+        }
+    }
+}

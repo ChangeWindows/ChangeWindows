@@ -1,0 +1,15 @@
+.progress {
+    height: .75rem;
+    background-color: #fff;
+    border-radius: 1rem;
+
+    .progress-bar {
+        border-radius: 1rem;
+    }
+}
+
+.progress-group {
+    :not(:first-child) {
+        margin-left: .5rem;
+    }
+}
