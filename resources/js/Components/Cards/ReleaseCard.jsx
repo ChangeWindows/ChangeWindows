@@ -1,3 +1,5 @@
+import { faArrowRight } from '@fortawesome/pro-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 import React from 'react'
 
@@ -15,7 +17,7 @@ export default function ReleaseCard({ name, channels, alts }) {
                     ))}
                 </div>}
                 <div className="release-actions">
-                    <a href="#" className="btn btn-link btn-sm"><i className="far fa-fw fa-arrow-right"></i> View release</a>
+                    <a href="#" className="btn btn-link btn-sm"><FontAwesomeIcon icon={faArrowRight} fixedWidth /> View release</a>
                 </div>
             </div>
         </div>
