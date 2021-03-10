@@ -16,15 +16,19 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return view('timeline');
+    return Inertia::render('Timeline/Show');
+})->middleware(['auth'])->name('home');
+
+Route::get('/timeline', function () {
+    return Inertia::render('Timeline/Show');
 })->middleware(['auth'])->name('timeline');
 
 Route::get('/platforms', function () {
-    return view('platforms');
+    return Inertia::render('Platforms/Show');
 })->middleware(['auth'])->name('platforms');
 
 Route::get('/releases', function () {
-    return view('releases');
+    return Inertia::render('Releases/Show');
 })->middleware(['auth'])->name('releases');
 
 Route::get('/about', function () {
