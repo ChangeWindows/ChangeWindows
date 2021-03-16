@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +37,21 @@ Route::get('/about', function () {
     return Inertia::render('About/Show');
 })->middleware(['auth'])->name('about');
 
+Route::get('/about', function () {
+    return Inertia::render('About/Show');
+})->middleware(['auth'])->name('about');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+
+Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
+    Route::prefix('users')->name('.users')->group(function() {
+        Route::get('', [AdminUserController::class, 'index'])->name('');
+        Route::get('/edit/{user}', [AdminUserController::class, 'edit'])->name('.edit');
+        Route::patch('/edit/{user}', [AdminUserController::class, 'update'])->name('.update');
+    });
+});
 
 require __DIR__.'/auth.php';

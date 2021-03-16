@@ -8,6 +8,8 @@ $headings-font-weight: 700;
 $body-bg: #fff;
 
 // Colors
+$min-contrast-ratio: 4;
+
 $accent: #0066ff;
 $primary: $accent;
 $blue: #0f6dec;
@@ -44,5 +46,6 @@ $sdk: #886ce4;
 $azure: #4300df;
 
 // Shadows
-$box-shadow-sm: 0 0px 0.1px rgba(0, 0, 0, 0.02), 0 0px 0.3px rgba(0, 0, 0, 0.028), 0 0px 0.5px rgba(0, 0, 0, 0.035), 0 0px 0.9px rgba(0, 0, 0, 0.042), 0 0px 1.7px rgba(0, 0, 0, 0.05), 0 0px 4px rgba(0, 0, 0, 0.07);
+$box-shadow-sm: 0 0px 0.2px rgba(0, 0, 0, 0.02), 0 0px 0.4px rgba(0, 0, 0, 0.028), 0 0px 0.8px rgba(0, 0, 0, 0.035), 0 0px 1.3px rgba(0, 0, 0, 0.042), 0 0px 2.5px rgba(0, 0, 0, 0.05), 0 0px 6px rgba(0, 0, 0, 0.07);
 $box-shadow: 0 0px 0.3px rgba(0, 0, 0, 0.02), 0 0px 0.8px rgba(0, 0, 0, 0.028), 0 0px 1.5px rgba(0, 0, 0, 0.035), 0 0px 2.7px rgba(0, 0, 0, 0.042), 0 0px 5px rgba(0, 0, 0, 0.05), 0 0px 12px rgba(0, 0, 0, 0.07);
+$box-shadow-lg: 0 0px 0.7px rgba(0, 0, 0, 0.02), 0 0px 1.6px rgba(0, 0, 0, 0.028), 0 0px 3px rgba(0, 0, 0, 0.035), 0 0px 5.4px rgba(0, 0, 0, 0.042), 0 0px 10px rgba(0, 0, 0, 0.05), 0 0px 24px rgba(0, 0, 0, 0.07);

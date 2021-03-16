@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import React from 'react'
 
 export default function ReleaseCard({ name, channels, alts }) {
-
     return (
         <div className="col-12 col-sm-6 col-xl-4 col-xxl-3">
             <div className="card release">

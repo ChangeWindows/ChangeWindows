@@ -31,6 +31,29 @@
     margin-right: .5rem;
 }
 
+
+
+// Scrollbar
+* {
+    scrollbar-color: darken($light, 20);
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: darken($light, 20);
+        border-radius: 10px;
+    }
+
+    scrollbar-width: thin;
+}
+
 // Timeline items
 .timeline {
     .flight {
@@ -130,6 +153,12 @@
 
 // Channels
 .card {
+    .card-footer {
+        background: transparent;
+        border-top: 1px solid darken($light, 6);
+        padding: .5rem .75rem;
+    }
+    
     &.channel {
         min-width: 150px;
         background-color: $light;
@@ -175,7 +204,7 @@
         }
 
         .release-actions {
-            background-color: darken($light, 4);
+            border-top: 1px solid darken($light, 6);
             padding: .5rem .75rem;
             border-bottom-left-radius: $border-radius;
             border-bottom-right-radius: $border-radius;
