@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 
-import App from '../../../Layouts/App';
+import Admin from '../../../Layouts/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
@@ -43,7 +43,7 @@ export default function Edit({ role, permissions }) {
     }
 
     return (
-        <App>
+        <Admin>
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">
@@ -129,6 +129,6 @@ export default function Edit({ role, permissions }) {
                     </div>
                 </div>
             </form>
-        </App>
+        </Admin>
     )
 }

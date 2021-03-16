@@ -1,14 +1,14 @@
 import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
-import App from '../../../Layouts/App';
+import Admin from '../../../Layouts/Admin';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Show({ roles }) {
     return (
-        <App>
+        <Admin>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <InertiaLink className="navbar-brand" href="/admin/roles">Roles</InertiaLink>
@@ -33,6 +33,6 @@ export default function Show({ roles }) {
                     ))}
                 </div>
             </div>
-        </App>
+        </Admin>
     )
 }

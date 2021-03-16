@@ -3,7 +3,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSunHaze, faListTimeline, faLaptopMobile, faFlag, faCodeBranch, faCircleInfo, faArrowRightFromBracket, faUsers, faUserTag, faGauge } from '@fortawesome/pro-regular-svg-icons';
+import { faSunHaze, faCircleInfo, faArrowRightFromBracket, faUsers, faUserTag, faArrowLeft } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Navigation() {
     function handleLogout(e) {
@@ -23,24 +23,20 @@ export default function Navigation() {
             </nav>
 
             <div className="sidebar">
-                <InertiaLink href="/timeline" className="sidebar-item ">
-                    <FontAwesomeIcon icon={faListTimeline} fixedWidth /> <span className="sidebar-label">Timeline</span>
-                </InertiaLink>
-
-                <InertiaLink href="/platforms" className="sidebar-item">
-                    <FontAwesomeIcon icon={faLaptopMobile} fixedWidth /> <span className="sidebar-label">Platforms</span>
-                </InertiaLink>
-
-                <InertiaLink href="/releases" className="sidebar-item">
-                    <FontAwesomeIcon icon={faFlag} fixedWidth /> <span className="sidebar-label">Releases</span>
+                <InertiaLink href="/timeline" className="sidebar-item d-none d-sm-flex">
+                    <FontAwesomeIcon icon={faArrowLeft} fixedWidth /> <span className="sidebar-label">Back</span>
                 </InertiaLink>
 
                 <div className="my-2 border-bottom" />
 
                 <InertiaLink href="/admin/users" className="sidebar-item">
-                    <FontAwesomeIcon icon={faGauge} fixedWidth /> <span className="sidebar-label">Backstage</span>
+                    <FontAwesomeIcon icon={faUsers} fixedWidth /> <span className="sidebar-label">Users</span>
                 </InertiaLink>
 
+                <InertiaLink href="/admin/roles" className="sidebar-item">
+                    <FontAwesomeIcon icon={faUserTag} fixedWidth /> <span className="sidebar-label">Roles</span>
+                </InertiaLink>
+                
                 <div className="my-2 border-bottom" />
 
                 <InertiaLink href="/about" className="sidebar-item">
