@@ -8,6 +8,8 @@ use Inertia\Inertia;
 use App\Models\User;
 use URL;
 use Redirect;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Collection;
 
 class UserController extends Controller
 {
@@ -30,7 +32,13 @@ class UserController extends Controller
         // $this->authorize('show_users');
 
         return Inertia::render('Admin/Users/Edit', [
-            'user' => $user
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'roles' => $user->getRoleNames()
+            ],
+            'roles' => Role::get()
         ]);
     }
 
@@ -41,6 +49,16 @@ class UserController extends Controller
             'name' => request('name'),
             'email' => request('email')
         ]);
+
+        $user_roles = new Collection(request('roles'));
+
+        foreach(Role::get() as $role) {
+            if ($user_roles->contains($role->name)) {
+                $user->assignRole($role->name);
+            } else {
+                $user->removeRole($role->name);
+            }
+        }
 
         return Redirect::route('admin.users.edit', $user);
     }

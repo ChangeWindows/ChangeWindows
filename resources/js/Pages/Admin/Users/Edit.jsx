@@ -5,7 +5,7 @@ import App from '../../../Layouts/App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ user }) {
+export default function Edit({ user, roles }) {
     const [curUser, setCurUser] = useState(user);
 
     useEffect(() => {
@@ -13,10 +13,21 @@ export default function Edit({ user }) {
     }, [user]);
 
     function formHandler(event) {
-        const { id, value } = event.target;
+        const { id, value, name } = event.target;
         const _user = Object.assign({}, curUser);
 
-        _user[id] = value;
+        switch (name) {
+            case 'role':
+                if (_user.roles.find((role) => role === id)) {
+                    _user.roles = _user.roles.filter((role) => role !== id);
+                } else {
+                    _user.roles = [..._user.roles, id];
+                }
+                break;
+            default:
+                _user[id] = value;
+                break;
+        }
 
         setCurUser(_user);
     }
@@ -42,7 +53,7 @@ export default function Edit({ user }) {
                 </nav>
             
                 <div className="container my-3">
-                    <div className="row">
+                    <div className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
                             <h4 className="h5 mb-0">Identity</h4>
                             <p className="text-muted mb-0"><small>Hello! Who are you?</small></p>
@@ -62,6 +73,38 @@ export default function Edit({ user }) {
                                                 <input type="email" className="form-control" id="email" placeholder="name@example.com" value={curUser.email} onChange={formHandler} />
                                                 <label htmlFor="email">Email address</label>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row mb-3">
+                        <div className="col-12 col-md-4 my-4 my-md-0">
+                            <h4 className="h5 mb-0">Permissions</h4>
+                            <p className="text-muted mb-0"><small>What you can do.</small></p>
+                        </div>
+                        <div className="col-12 col-md-8">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="row g-3">
+                                        <div className="col-12 col-sm-6">
+                                            {roles.map((role, key) => (
+                                                <div className="form-check" key={key}>
+                                                    <input
+                                                        className="form-check-input"
+                                                        type="checkbox"
+                                                        value="1"
+                                                        id={role.name}
+                                                        name="role"
+                                                        checked={curUser.roles.filter((_role) => _role === role.name).length === 1}
+                                                        onChange={formHandler}
+                                                    />
+                                                    <label className="form-check-label" htmlFor={role.name}>
+                                                        {role.name}
+                                                    </label>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
