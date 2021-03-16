@@ -5,41 +5,41 @@ import App from '../../../Layouts/App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ user, roles }) {
-    const [curUser, setCurUser] = useState(user);
+export default function Edit({ role, permissions }) {
+    const [curRole, setCurRole] = useState(role);
 
     useEffect(() => {
-        setCurUser(user);
-    }, [user]);
+        setCurRole(role);
+    }, [role]);
 
     function formHandler(event) {
         const { id, value, name } = event.target;
-        const _user = Object.assign({}, curUser);
+        const _role = Object.assign({}, curRole);
 
         switch (name) {
-            case 'role':
-                if (_user.roles.find((role) => role === id)) {
-                    _user.roles = _user.roles.filter((role) => role !== id);
+            case 'permission':
+                if (_role.permissions.find((role) => role === id)) {
+                    _role.permissions = _role.permissions.filter((role) => role !== id);
                 } else {
-                    _user.roles = [..._user.roles, id];
+                    _role.permissions = [..._role.permissions, id];
                 }
                 break;
             default:
-                _user[id] = value;
+                _role[id] = value;
                 break;
         }
 
-        setCurUser(_user);
+        setCurRole(_role);
     }
 
     function handleSubmit(event) {
       event.preventDefault();
-      Inertia.patch(`/admin/users/edit/${curUser.id}`, curUser);
+      Inertia.patch(`/admin/roles/edit/${curRole.id}`, curRole);
     }
 
     function handleDelete(event) {
       event.preventDefault();
-      Inertia.delete(`/admin/users/delete/${curUser.id}`, curUser);
+      Inertia.delete(`/admin/roles/delete/${curRole.id}`, curRole);
     }
 
     return (
@@ -47,7 +47,7 @@ export default function Edit({ user, roles }) {
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">
-                        <a className="navbar-brand" href="#">{user.name}</a>
+                        <a className="navbar-brand" href="#">{role.name}</a>
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
                     </div>
                 </nav>
@@ -55,8 +55,8 @@ export default function Edit({ user, roles }) {
                 <div className="container my-3">
                     <div className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
-                            <h4 className="h5 mb-0">Identity</h4>
-                            <p className="text-muted mb-0"><small>Hello! Who are you?</small></p>
+                            <h4 className="h5 mb-0">General</h4>
+                            <p className="text-muted mb-0"><small>Basic role settings.</small></p>
                         </div>
                         <div className="col-12 col-md-8">
                             <div className="card">
@@ -64,14 +64,8 @@ export default function Edit({ user, roles }) {
                                     <div className="row g-3">
                                         <div className="col-12 col-sm-6">
                                             <div className="form-floating">
-                                                <input type="text" className="form-control" id="name" value={curUser.name} onChange={formHandler} />
+                                                <input type="text" className="form-control" id="name" value={curRole.name} onChange={formHandler} />
                                                 <label htmlFor="name">Name</label>
-                                            </div>
-                                        </div>
-                                        <div className="col-12 col-sm-6">
-                                            <div className="form-floating">
-                                                <input type="email" className="form-control" id="email" placeholder="name@example.com" value={curUser.email} onChange={formHandler} />
-                                                <label htmlFor="email">Email address</label>
                                             </div>
                                         </div>
                                     </div>
@@ -82,26 +76,26 @@ export default function Edit({ user, roles }) {
                     <div className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
                             <h4 className="h5 mb-0">Permissions</h4>
-                            <p className="text-muted mb-0"><small>What you can do.</small></p>
+                            <p className="text-muted mb-0"><small>What this role can do.</small></p>
                         </div>
                         <div className="col-12 col-md-8">
                             <div className="card">
                                 <div className="card-body">
-                                    <div className="row g-3">
-                                        {roles.map((role, key) => (
-                                            <div className="col-12 col-sm-6" key={key}>
+                                    <div className="row g-2">
+                                        {permissions.map((permission, key) => (
+                                            <div className="col-12 col-sm-6 col-md-4" key={key}>
                                                 <div className="form-check">
                                                     <input
                                                         className="form-check-input"
                                                         type="checkbox"
                                                         value="1"
-                                                        id={role.name}
-                                                        name="role"
-                                                        checked={curUser.roles.filter((_role) => _role === role.name).length === 1}
+                                                        id={permission.name}
+                                                        name="permission"
+                                                        checked={curRole.permissions.filter((_permission) => _permission === permission.name).length === 1}
                                                         onChange={formHandler}
                                                     />
-                                                    <label className="form-check-label" htmlFor={role.name}>
-                                                        {role.name}
+                                                    <label className="form-check-label" htmlFor={permission.name}>
+                                                        {permission.name}
                                                     </label>
                                                 </div>
                                             </div>

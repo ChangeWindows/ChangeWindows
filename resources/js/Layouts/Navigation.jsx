@@ -3,7 +3,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSunHaze, faListTimeline, faLaptopMobile, faFlag, faCodeBranch, faCircleInfo, faArrowRightFromBracket, faUsers } from '@fortawesome/pro-regular-svg-icons';
+import { faSunHaze, faListTimeline, faLaptopMobile, faFlag, faCodeBranch, faCircleInfo, faArrowRightFromBracket, faUsers, faUserTag } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Navigation() {
     function handleLogout(e) {
@@ -43,6 +43,10 @@ export default function Navigation() {
 
                 <InertiaLink href="/admin/users" className="sidebar-item">
                     <FontAwesomeIcon icon={faUsers} fixedWidth /> <span className="sidebar-label">Users</span>
+                </InertiaLink>
+
+                <InertiaLink href="/admin/roles" className="sidebar-item">
+                    <FontAwesomeIcon icon={faUserTag} fixedWidth /> <span className="sidebar-label">Roles</span>
                 </InertiaLink>
 
                 <hr />

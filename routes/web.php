@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 
 
 /*
@@ -51,6 +52,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('', [AdminUserController::class, 'index'])->name('');
         Route::get('/edit/{user}', [AdminUserController::class, 'edit'])->name('.edit');
         Route::patch('/edit/{user}', [AdminUserController::class, 'update'])->name('.update');
+    });
+    
+    Route::prefix('roles')->name('.roles')->group(function() {
+        Route::get('', [AdminRoleController::class, 'index'])->name('');
+        Route::get('/edit/{role}', [AdminRoleController::class, 'edit'])->name('.edit');
+        Route::patch('/edit/{role}', [AdminRoleController::class, 'update'])->name('.update');
     });
 });
 
