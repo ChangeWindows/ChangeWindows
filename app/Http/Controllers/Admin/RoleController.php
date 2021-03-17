@@ -23,7 +23,9 @@ class RoleController extends Controller
                     'name' => $role->name,
                     'editUrl' => URL::route('admin.roles.edit', $role)
                 ];
-            })
+            }),
+            'createUrl' => URL::route('admin.roles.create'),
+            'status' => session('status')
         ]);
     }
 
@@ -36,6 +38,15 @@ class RoleController extends Controller
                 'name' => $role->name,
                 'permissions' => $role->getPermissionNames()
             ],
+            'permissions' => Permission::get(),
+            'status' => session('status')
+        ]);
+    }
+
+    public function create() {
+        // $this->authorize('show_roles');
+
+        return Inertia::render('Admin/Roles/Create', [
             'permissions' => Permission::get()
         ]);
     }
@@ -57,6 +68,30 @@ class RoleController extends Controller
             }
         }
 
-        return Redirect::route('admin.roles.edit', $role);
+        return Redirect::route('admin.roles.edit', $role)->with('status', 'Succesfully updated this role.');
+    }
+
+    public function store(Role $role) {
+        // $this->authorize('show_roles');
+
+        $role = $role->create([
+            'name' => request('name'),
+        ]);
+        
+        $role_permissions = new Collection(request('permissions'));
+
+        foreach($role_permissions as $permission) {
+            $role->givePermissionTo($permission);
+        }
+
+        return Redirect::route('admin.roles.edit', ['role' => $role->id])->with('status', 'Succesfully created this role.');;
+    }
+
+    public function destroy(Role $role) {
+        // $this->authorize('show_roles');
+
+        $role->delete();
+
+        return Redirect::route('admin.roles')->with('status', 'Succesfully deleted role.');
     }
 }

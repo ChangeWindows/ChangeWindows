@@ -1,0 +1,8 @@
+.alert {
+    box-shadow: $box-shadow-sm;
+    border: none;
+
+    &.alert-success {
+        box-shadow: $box-shadow-sm-success;
+    }
+}

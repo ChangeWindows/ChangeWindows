@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowLeft, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ role, permissions, status = null }) {
-    const [curRole, setCurRole] = useState(role);
-
-    useEffect(() => {
-        setCurRole(role);
-    }, [role]);
+export default function Create({ permissions }) {
+    const [curRole, setCurRole] = useState({ name: '', permissions: [] });
 
     function formHandler(event) {
         const { id, value, name } = event.target;
@@ -35,12 +31,7 @@ export default function Edit({ role, permissions, status = null }) {
 
     function handleSubmit(event) {
       event.preventDefault();
-      Inertia.patch(`/admin/roles/${curRole.id}/edit`, curRole);
-    }
-
-    function handleDelete(event) {
-      event.preventDefault();
-      Inertia.delete(`/admin/roles/${curRole.id}`, curRole);
+      Inertia.post(`/admin/roles`, curRole);
     }
 
     return (
@@ -51,16 +42,13 @@ export default function Edit({ role, permissions, status = null }) {
                         <InertiaLink href="/admin/roles" className="btn btn-sm me-2">
                             <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                         </InertiaLink>
-                        <a className="navbar-brand" href="#">{curRole.name ?? 'Unnamed role'}</a>
+                        <a className="navbar-brand" href="#">{curRole.name || 'Unnamed role'}</a>
                         <div className="flex-grow-1" />
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
                     </div>
                 </nav>
             
                 <div className="container my-3">
-                    {status &&
-                        <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
-                    }
                     <div className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
                             <h4 className="h5 mb-0">General</h4>
@@ -108,28 +96,6 @@ export default function Edit({ role, permissions, status = null }) {
                                                 </div>
                                             </div>
                                         ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <form onSubmit={handleDelete}>
-                <div className="container my-3">
-                    <div className="row">
-                        <div className="col-12 col-md-4 my-4 my-md-0">
-                            <h4 className="h5 mb-0 text-danger">Danger zone</h4>
-                            <p className="text-muted mb-0"><small>All alone in the danger zone.</small></p>
-                        </div>
-                        <div className="col-12 col-md-8">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="row g-3">
-                                        <div className="col-12">
-                                            <p>Deleting a user will remove all the content associated with that user. Are you sure?</p>
-                                            <button className="btn btn-danger btn-sm" type="submit"><FontAwesomeIcon icon={faTrashCan} fixedWidth /> Delete</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

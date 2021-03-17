@@ -56,8 +56,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
     
     Route::prefix('roles')->name('.roles')->group(function() {
         Route::get('', [AdminRoleController::class, 'index'])->name('');
-        Route::get('/edit/{role}', [AdminRoleController::class, 'edit'])->name('.edit');
-        Route::patch('/edit/{role}', [AdminRoleController::class, 'update'])->name('.update');
+        Route::post('', [AdminRoleController::class, 'store'])->name('.store');
+        Route::delete('{role}', [AdminRoleController::class, 'destroy'])->name('.destroy');
+        Route::get('/create', [AdminRoleController::class, 'create'])->name('.create');
+        Route::get('/{role}/edit', [AdminRoleController::class, 'edit'])->name('.edit');
+        Route::patch('/{role}/edit', [AdminRoleController::class, 'update'])->name('.update');
     });
 });
 

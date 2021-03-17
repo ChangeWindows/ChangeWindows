@@ -3,13 +3,14 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-@import 'ui';
-@import 'card';
-@import 'navbar';
+@import 'alert';
 @import 'button';
-@import 'utilities';
+@import 'card';
 @import 'nav';
+@import 'navbar';
 @import 'progress';
+@import 'ui';
+@import 'utilities';
 
 .navbar-brand {
     display: flex;
@@ -30,8 +31,6 @@
     align-items: center;
     margin-right: .5rem;
 }
-
-
 
 // Scrollbar
 * {
