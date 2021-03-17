@@ -2,6 +2,8 @@ import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 
+import NavigationItem from './NavigationItem';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSunHaze, faCircleInfo, faArrowRightFromBracket, faUsers, faUserTag, faArrowLeft } from '@fortawesome/pro-regular-svg-icons';
 
@@ -23,25 +25,16 @@ export default function Navigation() {
             </nav>
 
             <div className="sidebar">
-                <InertiaLink href="/timeline" className="sidebar-item d-none d-sm-flex">
-                    <FontAwesomeIcon icon={faArrowLeft} fixedWidth /> <span className="sidebar-label">Back</span>
-                </InertiaLink>
+                <NavigationItem url="/timeline" icon={faArrowLeft} title="Back" />
 
                 <div className="my-2 border-bottom" />
 
-                <InertiaLink href="/admin/users" className="sidebar-item">
-                    <FontAwesomeIcon icon={faUsers} fixedWidth /> <span className="sidebar-label">Users</span>
-                </InertiaLink>
-
-                <InertiaLink href="/admin/roles" className="sidebar-item">
-                    <FontAwesomeIcon icon={faUserTag} fixedWidth /> <span className="sidebar-label">Roles</span>
-                </InertiaLink>
+                <NavigationItem url="/admin/users" icon={faUsers} title="Users" />
+                <NavigationItem url="/admin/roles" icon={faUserTag} title="Roles" />
                 
                 <div className="my-2 border-bottom" />
 
-                <InertiaLink href="/about" className="sidebar-item">
-                    <FontAwesomeIcon icon={faCircleInfo} fixedWidth /> <span className="sidebar-label">About</span>
-                </InertiaLink>
+                <NavigationItem url="/about" icon={faCircleInfo} title="About" />
 
                 <div className="flex-grow-1 d-none d-sm-block" />
 

@@ -3,7 +3,8 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSunHaze, faListTimeline, faLaptopMobile, faFlag, faCodeBranch, faCircleInfo, faArrowRightFromBracket, faUsers, faUserTag, faGauge } from '@fortawesome/pro-regular-svg-icons';
+import { faSunHaze, faListTimeline, faLaptopMobile, faFlag, faCircleInfo, faArrowRightFromBracket, faGauge } from '@fortawesome/pro-regular-svg-icons';
+import NavigationItem from './NavigationItem';
 
 export default function Navigation() {
     function handleLogout(e) {
@@ -23,29 +24,17 @@ export default function Navigation() {
             </nav>
 
             <div className="sidebar">
-                <InertiaLink href="/timeline" className="sidebar-item ">
-                    <FontAwesomeIcon icon={faListTimeline} fixedWidth /> <span className="sidebar-label">Timeline</span>
-                </InertiaLink>
-
-                <InertiaLink href="/platforms" className="sidebar-item">
-                    <FontAwesomeIcon icon={faLaptopMobile} fixedWidth /> <span className="sidebar-label">Platforms</span>
-                </InertiaLink>
-
-                <InertiaLink href="/releases" className="sidebar-item">
-                    <FontAwesomeIcon icon={faFlag} fixedWidth /> <span className="sidebar-label">Releases</span>
-                </InertiaLink>
+                <NavigationItem url="/timeline" icon={faListTimeline} title="Timeline" />
+                <NavigationItem url="/platforms" icon={faLaptopMobile} title="Platforms" />
+                <NavigationItem url="/releases" icon={faFlag} title="Releases" />
 
                 <div className="my-2 border-bottom" />
 
-                <InertiaLink href="/admin/users" className="sidebar-item">
-                    <FontAwesomeIcon icon={faGauge} fixedWidth /> <span className="sidebar-label">Backstage</span>
-                </InertiaLink>
+                <NavigationItem url="/admin/users" icon={faGauge} title="Backstage" />
 
                 <div className="my-2 border-bottom" />
 
-                <InertiaLink href="/about" className="sidebar-item">
-                    <FontAwesomeIcon icon={faCircleInfo} fixedWidth /> <span className="sidebar-label">About</span>
-                </InertiaLink>
+                <NavigationItem url="/about" icon={faCircleInfo} title="About" />
 
                 <div className="flex-grow-1 d-none d-sm-block" />
 
