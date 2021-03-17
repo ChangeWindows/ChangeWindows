@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ user, roles }) {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+
+export default function Edit({ user, roles, status = null }) {
     const [curUser, setCurUser] = useState(user);
 
     useEffect(() => {
@@ -47,12 +49,19 @@ export default function Edit({ user, roles }) {
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">
-                        <a className="navbar-brand" href="#">{user.name}</a>
+                        <InertiaLink href="/admin/roles" className="btn btn-sm me-2">
+                            <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
+                        </InertiaLink>
+                        <span className="navbar-brand">{curUser.name}</span>
+                        <div className="flex-grow-1" />
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
                     </div>
                 </nav>
             
                 <div className="container my-3">
+                    {status &&
+                        <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
+                    }
                     <div className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
                             <h4 className="h5 mb-0">Identity</h4>

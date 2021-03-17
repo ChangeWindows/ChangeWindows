@@ -15,7 +15,7 @@ export default function Show() {
         <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
-                    <a className="navbar-brand" href="#">Releases</a>
+                    <span className="navbar-brand">Releases</span>
                 </div>
             </nav>
         

@@ -11,7 +11,7 @@ export default function Show({ roles, createUrl, status = null }) {
         <Admin>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
-                    <InertiaLink className="navbar-brand" href="/admin/roles">Roles</InertiaLink>
+                    <span className="navbar-brand">Roles</span>
                     <div className="flex-grow-1" />
                     <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
                         <FontAwesomeIcon icon={faPlus} fixedWidth/> New

@@ -15,7 +15,7 @@ export default function Show() {
         <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
-                    <a className="navbar-brand" href="#">Timeline</a>
+                    <span className="navbar-brand">Timeline</span>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-page" aria-controls="navbar-page" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

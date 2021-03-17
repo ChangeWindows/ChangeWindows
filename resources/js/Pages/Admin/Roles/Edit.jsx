@@ -3,6 +3,7 @@ import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
@@ -51,7 +52,7 @@ export default function Edit({ role, permissions, status = null }) {
                         <InertiaLink href="/admin/roles" className="btn btn-sm me-2">
                             <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                         </InertiaLink>
-                        <a className="navbar-brand" href="#">{curRole.name ?? 'Unnamed role'}</a>
+                        <span className="navbar-brand">{curRole.name ?? 'Unnamed role'}</span>
                         <div className="flex-grow-1" />
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
                     </div>

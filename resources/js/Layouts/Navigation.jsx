@@ -2,9 +2,10 @@ import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 
+import NavigationItem from './NavigationItem';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSunHaze, faListTimeline, faLaptopMobile, faFlag, faCircleInfo, faArrowRightFromBracket, faGauge } from '@fortawesome/pro-regular-svg-icons';
-import NavigationItem from './NavigationItem';
 
 export default function Navigation() {
     function handleLogout(e) {
