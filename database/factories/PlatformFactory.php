@@ -26,7 +26,8 @@ class PlatformFactory extends Factory
             'color' => $this->faker->hexColor(),
             'icon' => $this->faker->randomElement(['laptop', 'mobile', 'gamepad-modern', 'server', 'head-side-goggles', 'microchip', 'tv', 'compact-disc', 'code', 'tablet', 'cloud']),
             'position' => $this->faker->randomNumber(5),
-            'active' => 1
+            'active' => 1,
+            'legacy' => 0
         ];
     }
 }
