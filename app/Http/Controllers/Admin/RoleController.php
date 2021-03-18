@@ -14,7 +14,7 @@ use Illuminate\Support\Collection;
 class RoleController extends Controller
 {
     public function index() {
-        // $this->authorize('show_roles');
+        $this->authorize('roles');
 
         return Inertia::render('Admin/Roles/Show', [
             'roles' => Role::orderBy('name')->paginate(50)->map(function ($role) {
@@ -30,7 +30,7 @@ class RoleController extends Controller
     }
 
     public function edit(Role $role) {
-        // $this->authorize('show_roles');
+        $this->authorize('roles.edit');
 
         return Inertia::render('Admin/Roles/Edit', [
             'role' => [
@@ -44,7 +44,7 @@ class RoleController extends Controller
     }
 
     public function create() {
-        // $this->authorize('show_roles');
+        $this->authorize('roles.create');
 
         return Inertia::render('Admin/Roles/Create', [
             'permissions' => Permission::get()
@@ -52,7 +52,7 @@ class RoleController extends Controller
     }
 
     public function update(Role $role) {
-        // $this->authorize('show_roles');
+        $this->authorize('roles.edit');
 
         $role->update([
             'name' => request('name'),
@@ -72,7 +72,7 @@ class RoleController extends Controller
     }
 
     public function store(Role $role) {
-        // $this->authorize('show_roles');
+        $this->authorize('roles.create');
 
         $role = $role->create([
             'name' => request('name'),
@@ -88,7 +88,7 @@ class RoleController extends Controller
     }
 
     public function destroy(Role $role) {
-        // $this->authorize('show_roles');
+        $this->authorize('roles.delete');
 
         $role->delete();
 

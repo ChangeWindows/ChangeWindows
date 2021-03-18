@@ -40,10 +40,18 @@ class RolePermissionsSeeder extends Seeder
         $permission_flights_create = Permission::create(['name' => 'flights.create']);
         $permission_flights_edit = Permission::create(['name' => 'flights.edit']);
         $permission_flights_delete = Permission::create(['name' => 'flights.delete']);
+        $permission_users = Permission::create(['name' => 'users']);
+        $permission_users_create = Permission::create(['name' => 'users.create']);
+        $permission_users_edit = Permission::create(['name' => 'users.edit']);
+        $permission_users_delete = Permission::create(['name' => 'users.delete']);
+        $permission_roles = Permission::create(['name' => 'roles']);
+        $permission_roles_create = Permission::create(['name' => 'roles.create']);
+        $permission_roles_edit = Permission::create(['name' => 'roles.edit']);
+        $permission_roles_delete = Permission::create(['name' => 'roles.delete']);
         $permission_settings = Permission::create(['name' => 'settings']);
 
         // Built roles
-        $role_admin->givePermissionTo(['profile', 'dashboard', 'platforms', 'channels', 'releases', 'flights', 'settings']);
+        $role_admin->givePermissionTo(['profile', 'dashboard', 'platforms', 'channels', 'releases', 'flights', 'users', 'roles', 'settings']);
         $role_editor->givePermissionTo(['profile', 'dashboard', 'platforms.edit', 'channels.edit', 'releases', 'flights']);
         $role_user->givePermissionTo(['profile']);
 

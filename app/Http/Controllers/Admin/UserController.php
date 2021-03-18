@@ -14,7 +14,7 @@ use Illuminate\Support\Collection;
 class UserController extends Controller
 {
     public function index() {
-        // $this->authorize('show_users');
+        $this->authorize('users');
 
         return Inertia::render('Admin/Users/Show', [
             'users' => User::orderBy('name')->paginate(50)->map(function ($user) {
@@ -29,7 +29,7 @@ class UserController extends Controller
     }
 
     public function edit(User $user) {
-        // $this->authorize('show_users');
+        $this->authorize('users.edit');
 
         return Inertia::render('Admin/Users/Edit', [
             'user' => [
@@ -43,7 +43,7 @@ class UserController extends Controller
     }
 
     public function update(User $user) {
-        // $this->authorize('show_users');
+        $this->authorize('users.edit');
 
         $user->update([
             'name' => request('name'),
