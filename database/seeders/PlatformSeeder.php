@@ -17,7 +17,7 @@ class PlatformSeeder extends Seeder
         Platform::create([
             'name' => 'PC',
             'color' => '#0078d7',
-            'icon' => 'desktop',
+            'icon' => 'laptop',
             'position' => 1,
             'active' => 1,
             'legacy' => 0
@@ -98,7 +98,7 @@ class PlatformSeeder extends Seeder
         Platform::create([
             'name' => '10X',
             'color' => '#9ad93a',
-            'icon' => 'laptop',
+            'icon' => 'tablet',
             'position' => 4,
             'active' => 1,
             'legacy' => 0
