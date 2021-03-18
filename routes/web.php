@@ -5,6 +5,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
+use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
 
 
 /*
@@ -61,6 +62,15 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/create', [AdminRoleController::class, 'create'])->name('.create');
         Route::get('/{role}/edit', [AdminRoleController::class, 'edit'])->name('.edit');
         Route::patch('/{role}/edit', [AdminRoleController::class, 'update'])->name('.update');
+    });
+    
+    Route::prefix('platforms')->name('.platforms')->group(function() {
+        Route::get('', [AdminPlatformController::class, 'index'])->name('');
+        Route::post('', [AdminPlatformController::class, 'store'])->name('.store');
+        Route::delete('{platform}', [AdminPlatformController::class, 'destroy'])->name('.destroy');
+        Route::get('/create', [AdminPlatformController::class, 'create'])->name('.create');
+        Route::get('/{platform}/edit', [AdminPlatformController::class, 'edit'])->name('.edit');
+        Route::patch('/{platform}/edit', [AdminPlatformController::class, 'update'])->name('.update');
     });
 });
 

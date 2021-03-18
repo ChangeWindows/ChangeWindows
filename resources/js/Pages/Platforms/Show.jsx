@@ -6,7 +6,7 @@ import Flight from '../../Components/Timeline/Flight'
 import Timeline from '../../Components/Timeline/Timeline'
 import ReleaseCard from '../../Components/Cards/ReleaseCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCloud, faCode, faCompactDisc, faFlag, faGamepadModern, faHeadSideGoggles, faLaptop, faListTimeline, faMicrochip, faMobile, faServer, faTablet, faTv } from '@fortawesome/pro-regular-svg-icons'
+import { faCloud, faFlag, faGamepadModern, faHeadSideGoggles, faLaptop, faListTimeline, faMicrochip, faMobile, faServer, faTablet, faTv } from '@fortawesome/pro-regular-svg-icons'
 
 export default function Show() {
     return (

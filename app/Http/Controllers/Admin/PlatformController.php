@@ -1,9 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Platform;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Auth;
+use URL;
+use Redirect;
+use Illuminate\Support\Collection;
 
 class PlatformController extends Controller
 {
@@ -14,7 +20,27 @@ class PlatformController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('platforms.show');
+
+        return Inertia::render('Admin/Platforms/Show', [
+            'can' => [
+                'create_platforms' => Auth::user()->can('platforms.create'),
+                'edit_platforms' => Auth::user()->can('platforms.edit')
+            ],
+            'platforms' => Platform::orderBy('position')->paginate(50)->map(function ($platform) {
+                return [
+                    'id' => $platform->id,
+                    'name' => $platform->name,
+                    'color' => $platform->color,
+                    'icon' => $platform->icon,
+                    'legacy' => $platform->legacy,
+                    'active' => $platform->active,
+                    'editUrl' => URL::route('admin.platforms.edit', $platform)
+                ];
+            }),
+            'createUrl' => URL::route('admin.platforms.create'),
+            'status' => session('status')
+        ]);
     }
 
     /**
