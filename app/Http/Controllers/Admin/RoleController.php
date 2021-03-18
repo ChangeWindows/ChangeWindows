@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Auth;
 use URL;
 use Redirect;
 use Spatie\Permission\Models\Role;
@@ -14,9 +15,13 @@ use Illuminate\Support\Collection;
 class RoleController extends Controller
 {
     public function index() {
-        $this->authorize('roles');
+        $this->authorize('roles.show');
 
         return Inertia::render('Admin/Roles/Show', [
+            'can' => [
+                'create_roles' => Auth::user()->can('roles.create'),
+                'edit_roles' => Auth::user()->can('roles.edit')
+            ],
             'roles' => Role::orderBy('name')->paginate(50)->map(function ($role) {
                 return [
                     'id' => $role->id,
@@ -33,6 +38,10 @@ class RoleController extends Controller
         $this->authorize('roles.edit');
 
         return Inertia::render('Admin/Roles/Edit', [
+            'can' => [
+                'edit_roles' => Auth::user()->can('roles.edit'),
+                'delete_roles' => Auth::user()->can('roles.delete')
+            ],
             'role' => [
                 'id' => $role->id,
                 'name' => $role->name,

@@ -4,9 +4,9 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import Admin from '../../../Layouts/Admin';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faPen } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faEye, faPen } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Show({ users, status = null }) {
+export default function Show({ can, users, status = null }) {
     return (
         <Admin>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
@@ -29,7 +29,7 @@ export default function Show({ users, status = null }) {
                                 </div>
                                 <div className="card-footer">
                                     <InertiaLink href={user.editUrl} className="btn btn-primary btn-sm">
-                                        <FontAwesomeIcon icon={faPen} fixedWidth/> Edit
+                                        {can.edit_users ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
                                     </InertiaLink>
                                 </div>
                             </div>

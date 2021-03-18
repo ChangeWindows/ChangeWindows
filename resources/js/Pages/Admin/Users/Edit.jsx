@@ -7,7 +7,7 @@ import Admin from '../../../Layouts/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ user, roles, status = null }) {
+export default function Edit({ can, user, roles, status = null }) {
     const [curUser, setCurUser] = useState(user);
 
     useEffect(() => {
@@ -49,12 +49,14 @@ export default function Edit({ user, roles, status = null }) {
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">
-                        <InertiaLink href="/admin/roles" className="btn btn-sm me-2">
+                        <InertiaLink href="/admin/users" className="btn btn-sm me-2">
                             <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                         </InertiaLink>
                         <span className="navbar-brand">{curUser.name}</span>
                         <div className="flex-grow-1" />
-                        <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
+                        {can.edit_users &&
+                            <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
+                        }
                     </div>
                 </nav>
             
@@ -62,7 +64,7 @@ export default function Edit({ user, roles, status = null }) {
                     {status &&
                         <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                     }
-                    <div className="row mb-3">
+                    <fieldset className="row mb-3" disabled={!can.edit_users}>
                         <div className="col-12 col-md-4 my-4 my-md-0">
                             <h4 className="h5 mb-0">Identity</h4>
                             <p className="text-muted mb-0"><small>Hello! Who are you?</small></p>
@@ -87,8 +89,8 @@ export default function Edit({ user, roles, status = null }) {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="row mb-3">
+                    </fieldset>
+                    <fieldset className="row mb-3" disabled={!can.edit_users}>
                         <div className="col-12 col-md-4 my-4 my-md-0">
                             <h4 className="h5 mb-0">Permissions</h4>
                             <p className="text-muted mb-0"><small>What you can do.</small></p>
@@ -119,31 +121,33 @@ export default function Edit({ user, roles, status = null }) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </fieldset>
                 </div>
             </form>
-            <form onSubmit={handleDelete}>
-                <div className="container my-3">
-                    <div className="row">
-                        <div className="col-12 col-md-4 my-4 my-md-0">
-                            <h4 className="h5 mb-0 text-danger">Danger zone</h4>
-                            <p className="text-muted mb-0"><small>All alone in the danger zone.</small></p>
-                        </div>
-                        <div className="col-12 col-md-8">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="row g-3">
-                                        <div className="col-12">
-                                            <p>Deleting a user will remove all the content associated with that user. Are you sure?</p>
-                                            <button className="btn btn-danger btn-sm" type="submit"><FontAwesomeIcon icon={faTrashCan} fixedWidth /> Delete</button>
+            {can.delete_users &&
+                <form onSubmit={handleDelete}>
+                    <div className="container my-3">
+                        <div className="row">
+                            <div className="col-12 col-md-4 my-4 my-md-0">
+                                <h4 className="h5 mb-0 text-danger">Danger zone</h4>
+                                <p className="text-muted mb-0"><small>All alone in the danger zone.</small></p>
+                            </div>
+                            <div className="col-12 col-md-8">
+                                <div className="card">
+                                    <div className="card-body">
+                                        <div className="row g-3">
+                                            <div className="col-12">
+                                                <p>Deleting a user will remove all the content associated with that user. Are you sure?</p>
+                                                <button className="btn btn-danger btn-sm" type="submit"><FontAwesomeIcon icon={faTrashCan} fixedWidth /> Delete</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            }
         </Admin>
     )
 }
