@@ -102,6 +102,7 @@ export default function Edit({ role, permissions, status = null }) {
                                                         name="permission"
                                                         checked={curRole.permissions.filter((_permission) => _permission === permission.name).length === 1}
                                                         onChange={formHandler}
+                                                        disabled={curRole.permissions.find((_permission) => _permission === permission.name.substr(0, permission.name.indexOf('.')))}
                                                     />
                                                     <label className="form-check-label" htmlFor={permission.name}>
                                                         {permission.name}
