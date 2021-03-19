@@ -23,6 +23,7 @@ class PlatformFactory extends Factory
     {
         return [
             'name' => $this->faker->randomElement(['PC', 'Mobile', 'Xbox', 'Server', 'Holographic', 'IoT', 'Team', 'ICO', 'SDK', '10X', 'Azure']),
+            'description' => $this->faker-text($maxNbChars = 255),
             'color' => $this->faker->hexColor(),
             'icon' => $this->faker->randomElement(['laptop', 'mobile', 'gamepad-modern', 'server', 'head-side-goggles', 'microchip', 'tv', 'compact-disc', 'code', 'tablet', 'cloud']),
             'position' => $this->faker->randomNumber(5),

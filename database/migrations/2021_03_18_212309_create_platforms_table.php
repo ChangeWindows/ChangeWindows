@@ -16,6 +16,7 @@ class CreatePlatformsTable extends Migration
         Schema::create('platforms', function (Blueprint $table) {
             $table->id();
             $table->string('name')->required();
+            $table->text('description');
             $table->string('color');
             $table->string('icon');
             $table->integer('position')->default(1);
