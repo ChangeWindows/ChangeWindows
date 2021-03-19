@@ -14,6 +14,11 @@ use Illuminate\Support\Collection;
 
 class RoleController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index() {
         $this->authorize('roles.show');
 
@@ -34,6 +39,58 @@ class RoleController extends Controller
         ]);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create() {
+        $this->authorize('roles.create');
+
+        return Inertia::render('Admin/Roles/Create', [
+            'permissions' => Permission::get()
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request) {
+        $this->authorize('roles.create');
+
+        $role = $role->create([
+            'name' => request('name'),
+        ]);
+        
+        $role_permissions = new Collection(request('permissions'));
+
+        foreach($role_permissions as $permission) {
+            $role->givePermissionTo($permission);
+        }
+
+        return Redirect::route('admin.roles.edit', ['role' => $role->id])->with('status', 'Succesfully created this role.');;
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Role  $role
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Role $role) {
         $this->authorize('roles.edit');
 
@@ -52,15 +109,14 @@ class RoleController extends Controller
         ]);
     }
 
-    public function create() {
-        $this->authorize('roles.create');
-
-        return Inertia::render('Admin/Roles/Create', [
-            'permissions' => Permission::get()
-        ]);
-    }
-
-    public function update(Role $role) {
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Role  $role
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Role $role) {
         $this->authorize('roles.edit');
 
         $role->update([
@@ -80,22 +136,12 @@ class RoleController extends Controller
         return Redirect::route('admin.roles.edit', $role)->with('status', 'Succesfully updated this role.');
     }
 
-    public function store(Role $role) {
-        $this->authorize('roles.create');
-
-        $role = $role->create([
-            'name' => request('name'),
-        ]);
-        
-        $role_permissions = new Collection(request('permissions'));
-
-        foreach($role_permissions as $permission) {
-            $role->givePermissionTo($permission);
-        }
-
-        return Redirect::route('admin.roles.edit', ['role' => $role->id])->with('status', 'Succesfully created this role.');;
-    }
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Role $role) {
         $this->authorize('roles.delete');
 
