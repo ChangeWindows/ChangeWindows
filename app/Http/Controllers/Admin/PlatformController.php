@@ -83,7 +83,20 @@ class PlatformController extends Controller
      */
     public function edit(Platform $platform)
     {
-        //
+        $this->authorize('platforms.show');
+
+        return Inertia::render('Admin/Platforms/Edit', [
+            'can' => [
+                'edit_platforms' => Auth::user()->can('platforms.edit'),
+                'delete_platforms' => Auth::user()->can('platforms.delete')
+            ],
+            'urls' => [
+                'update_platform' => URL::route('admin.platforms.update', $platform),
+                'destroy_platform' => URL::route('admin.platforms.destroy', $platform)
+            ],
+            'platform' => $platform,
+            'status' => session('status')
+        ]);
     }
 
     /**
@@ -95,7 +108,19 @@ class PlatformController extends Controller
      */
     public function update(Request $request, Platform $platform)
     {
-        //
+        $this->authorize('platforms.edit');
+
+        $platform->update([
+            'name' => request('name'),
+            'description' => request('description'),
+            'position' => request('position'),
+            'color' => request('color'),
+            'icon' => request('icon'),
+            'legacy' => request('legacy') ? 1 : 0,
+            'active' => request('active') ? 1 : 0
+        ]);
+
+        return Redirect::route('admin.platforms.edit', $platform)->with('status', 'Succesfully updated the platform.');
     }
 
     /**

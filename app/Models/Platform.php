@@ -14,7 +14,7 @@ class Platform extends Model
     public $searchableType = 'Platforms';
 
     protected $table = 'platforms';
-    protected $fillable = ['name', 'color', 'icon', 'position', 'legacy', 'active', 'slug'];
+    protected $fillable = ['name', 'description', 'color', 'icon', 'position', 'legacy', 'active', 'slug'];
     protected $appends = ['plain_icon', 'colored_icon'];
 
     public function getPlainIconAttribute() {

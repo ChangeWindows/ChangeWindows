@@ -71,7 +71,7 @@ class RoleController extends Controller
             $role->givePermissionTo($permission);
         }
 
-        return Redirect::route('admin.roles.edit', ['role' => $role->id])->with('status', 'Succesfully created this role.');;
+        return Redirect::route('admin.roles.edit', ['role' => $role->id])->with('status', 'Succesfully created this role.');
     }
 
     /**
@@ -92,7 +92,7 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Role $role) {
-        $this->authorize('roles.edit');
+        $this->authorize('roles.show');
 
         return Inertia::render('Admin/Roles/Edit', [
             'can' => [
