@@ -84,6 +84,10 @@ class UserController extends Controller
                 'edit_users' => Auth::user()->can('users.edit'),
                 'delete_users' => Auth::user()->can('users.delete')
             ],
+            'urls' => [
+                'update_user' => URL::route('admin.users.update', $user),
+                'destroy_user' => URL::route('admin.users.destroy', $user)
+            ],
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
@@ -130,6 +134,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $this->authorize('users.delete');
+
+        $user->delete();
+
+        return Redirect::route('admin.users')->with('status', 'Succesfully deleted user.');
     }
 }

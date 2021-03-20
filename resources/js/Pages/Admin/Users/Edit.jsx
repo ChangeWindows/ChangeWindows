@@ -36,12 +36,12 @@ export default function Edit({ can, user, roles, status = null }) {
 
     function handleSubmit(event) {
       event.preventDefault();
-      Inertia.patch(`/admin/users/edit/${curUser.id}`, curUser);
+      Inertia.patch(urls.update_user, curUser);
     }
 
     function handleDelete(event) {
       event.preventDefault();
-      Inertia.delete(`/admin/users/delete/${curUser.id}`, curUser);
+      Inertia.delete(urls.delete_user, curUser);
     }
 
     return (
