@@ -50,7 +50,13 @@ class PlatformController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('platforms.create');
+
+        return Inertia::render('Admin/Platforms/Create', [
+            'urls' => [
+                'store_platform' => URL::route('admin.platforms.store'),
+            ]
+        ]);
     }
 
     /**
@@ -61,7 +67,19 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('platforms.create');
+
+        $platform = Platform::create([
+            'name' => request('name'),
+            'description' => request('description'),
+            'position' => request('position'),
+            'color' => request('color'),
+            'icon' => request('icon'),
+            'legacy' => request('legacy') ? 1 : 0,
+            'active' => request('active') ? 1 : 0
+        ]);
+
+        return Redirect::route('admin.platforms.edit', $platform)->with('status', 'Succesfully created this platform.');
     }
 
     /**
@@ -131,6 +149,10 @@ class PlatformController extends Controller
      */
     public function destroy(Platform $platform)
     {
-        //
+        $this->authorize('platforms.delete');
+
+        $platform->delete();
+
+        return Redirect::route('admin.platforms')->with('status', 'Succesfully deleted platform.');
     }
 }

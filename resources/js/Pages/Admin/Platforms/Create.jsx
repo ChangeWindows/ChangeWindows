@@ -6,14 +6,20 @@ import Admin from '../../../Layouts/Admin';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ can, urls, platform, status = null }) {
-    const [curPlatform, setCurPlatform] = useState(platform);
+export default function Create({ urls }) {
+    const [curPlatform, setCurPlatform] = useState({
+        name: '',
+        description: '',
+        icon: '',
+        color: '#',
+        position: 0,
+        active: 1,
+        legacy: 0
+    });
 
-    useEffect(() => {
-        setCurPlatform(platform);
-    }, [platform]);
+    console.log(urls);
 
     function formHandler(event) {
         const { id, value, type } = event.target;
@@ -33,12 +39,7 @@ export default function Edit({ can, urls, platform, status = null }) {
 
     function handleSubmit(event) {
       event.preventDefault();
-      Inertia.patch(urls.update_platform, curPlatform);
-    }
-
-    function handleDelete(event) {
-      event.preventDefault();
-      Inertia.delete(urls.destroy_platform, curPlatform);
+      Inertia.post(urls.store_platform, curPlatform);
     }
 
     return (
@@ -59,7 +60,7 @@ export default function Edit({ can, urls, platform, status = null }) {
                     {status &&
                         <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                     }
-                    <fieldset className="row mb-3" disabled={!can.edit_platforms}>
+                    <fieldset className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
                             <h4 className="h5 mb-0">Identity</h4>
                             <p className="text-muted mb-0"><small>About this platform.</small></p>
@@ -85,7 +86,7 @@ export default function Edit({ can, urls, platform, status = null }) {
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset className="row mb-3" disabled={!can.edit_platforms}>
+                    <fieldset className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
                             <h4 className="h5 mb-0">Appearance</h4>
                             <p className="text-muted mb-0"><small>The way it will look.</small></p>
@@ -102,7 +103,7 @@ export default function Edit({ can, urls, platform, status = null }) {
                                         </div>
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <input type="text" className="form-control" id="color" value={curPlatform.color} onChange={formHandler} defaultValue="#" />
+                                                <input type="text" className="form-control" id="color" value={curPlatform.color} onChange={formHandler} />
                                                 <label htmlFor="color">Color</label>
                                             </div>
                                         </div>
@@ -118,7 +119,7 @@ export default function Edit({ can, urls, platform, status = null }) {
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset className="row mb-3" disabled={!can.edit_platforms}>
+                    <fieldset className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
                             <h4 className="h5 mb-0">Status</h4>
                             <p className="text-muted mb-0"><small>The platform's current status.</small></p>
@@ -166,30 +167,6 @@ export default function Edit({ can, urls, platform, status = null }) {
                     </fieldset>
                 </div>
             </form>
-            {can.delete_platforms &&
-                <form onSubmit={handleDelete}>
-                    <div className="container my-3">
-                        <div className="row">
-                            <div className="col-12 col-md-4 my-4 my-md-0">
-                                <h4 className="h5 mb-0 text-danger">Danger zone</h4>
-                                <p className="text-muted mb-0"><small>All alone in the danger zone.</small></p>
-                            </div>
-                            <div className="col-12 col-md-8">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <div className="row g-3">
-                                            <div className="col-12">
-                                                <p>Deleting a platform will remove all the content associated with that platform. Are you sure?</p>
-                                                <button className="btn btn-danger btn-sm" type="submit"><FontAwesomeIcon icon={faTrashCan} fixedWidth /> Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            }
         </Admin>
     )
 }
