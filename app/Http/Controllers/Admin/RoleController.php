@@ -48,7 +48,10 @@ class RoleController extends Controller
         $this->authorize('roles.create');
 
         return Inertia::render('Admin/Roles/Create', [
-            'permissions' => Permission::get()
+            'permissions' => Permission::get(),
+            'urls' => [
+                'store_role' => URL::route('admin.roles.store'),
+            ]
         ]);
     }
 
@@ -98,6 +101,10 @@ class RoleController extends Controller
             'can' => [
                 'edit_roles' => Auth::user()->can('roles.edit'),
                 'delete_roles' => Auth::user()->can('roles.delete')
+            ],
+            'urls' => [
+                'update_role' => URL::route('admin.roles.update', $role),
+                'destroy_role' => URL::route('admin.roles.destroy', $role)
             ],
             'role' => [
                 'id' => $role->id,

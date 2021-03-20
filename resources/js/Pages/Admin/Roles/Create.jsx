@@ -6,7 +6,7 @@ import Admin from '../../../Layouts/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Create({ permissions }) {
+export default function Create({ permissions, urls }) {
     const [curRole, setCurRole] = useState({ name: '', permissions: [] });
 
     function formHandler(event) {
@@ -31,7 +31,7 @@ export default function Create({ permissions }) {
 
     function handleSubmit(event) {
       event.preventDefault();
-      Inertia.post(`/admin/roles`, curRole);
+      Inertia.post(urls.store_role, curRole);
     }
 
     return (

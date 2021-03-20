@@ -7,7 +7,7 @@ import Admin from '../../../Layouts/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ can, role, permissions, status = null }) {
+export default function Edit({ can, role, permissions, urls, status = null }) {
     const [curRole, setCurRole] = useState(role);
 
     useEffect(() => {
@@ -36,12 +36,12 @@ export default function Edit({ can, role, permissions, status = null }) {
 
     function handleSubmit(event) {
       event.preventDefault();
-      Inertia.patch(`/admin/roles/${curRole.id}/edit`, curRole);
+      Inertia.patch(urls.update_role, curRole);
     }
 
     function handleDelete(event) {
       event.preventDefault();
-      Inertia.delete(`/admin/roles/${curRole.id}`, curRole);
+      Inertia.delete(urls.delete_role, curRole);
     }
 
     return (
@@ -52,7 +52,7 @@ export default function Edit({ can, role, permissions, status = null }) {
                         <InertiaLink href="/admin/roles" className="btn btn-sm me-2">
                             <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                         </InertiaLink>
-                        <span className="navbar-brand">{curRole.name ?? 'Unnamed role'}</span>
+                        <span className="navbar-brand">{curRole.name || 'Unnamed role'}</span>
                         <div className="flex-grow-1" />
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
                     </div>
