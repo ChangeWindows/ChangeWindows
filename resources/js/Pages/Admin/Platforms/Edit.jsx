@@ -102,7 +102,7 @@ export default function Edit({ can, urls, platform, status = null }) {
                                         </div>
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <input type="text" className="form-control" id="color" value={curPlatform.color} onChange={formHandler} defaultValue="#" />
+                                                <input type="text" className="form-control" id="color" value={curPlatform.color} onChange={formHandler} />
                                                 <label htmlFor="color">Color</label>
                                             </div>
                                         </div>
