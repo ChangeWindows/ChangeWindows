@@ -1,16 +1,20 @@
-import React from 'react'
+import React from 'react';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
-import App from '../../Layouts/App'
-import Channel from '../../Components/Cards/Channel'
-import Flight from '../../Components/Timeline/Flight'
-import Promotion from '../../Components/Timeline/Promotion'
-import Release from '../../Components/Timeline/Release'
-import Timeline from '../../Components/Timeline/Timeline'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faCloud, faCode, faCompactDisc, faGamepadModern, faHeadSideGoggles, faLaptop, faMicrochip, faMobile, faServer, faSunHaze, faTablet, faTv } from '@fortawesome/pro-regular-svg-icons'
+import App from '../../Layouts/App';
+import Channel from '../../Components/Cards/Channel';
+import Flight from '../../Components/Timeline/Flight';
+import Promotion from '../../Components/Timeline/Promotion';
+import Release from '../../Components/Timeline/Release';
+import Timeline from '../../Components/Timeline/Timeline';
+
+import PlatformIcon from '../../Components/Platforms/PlatformIcon';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faGamepadModern, faLaptop, faServer, faSunHaze } from '@fortawesome/pro-regular-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-export default function Show() {
+export default function Show({ platforms }) {
     return (
         <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
@@ -26,51 +30,13 @@ export default function Show() {
                                     All
                                 </a>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faLaptop} fixedWidth /> PC
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faGamepadModern} fixedWidth /> Xbox
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faServer} fixedWidth /> Server
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faHeadSideGoggles} fixedWidth /> Holographic
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faTablet} fixedWidth /> 10X
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faTv} fixedWidth /> Team
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faCloud} fixedWidth /> Azure
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faCode} fixedWidth /> SDK
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faCompactDisc} fixedWidth /> ISO
-                                </a>
-                            </li>
+                            {platforms.filter((platform) => !platform.legacy).map((platform, key) => (
+                                <li className="nav-item" key={key}>
+                                    <InertiaLink className="nav-link" href={platform.url}>
+                                        <PlatformIcon platform={platform} /> {platform.name}
+                                    </InertiaLink>
+                                </li>
+                            ))}
                         </ul>
                         <ul className="navbar-nav">
                             <li className="nav-item dropdown">
@@ -78,8 +44,11 @@ export default function Show() {
                                     Legacy
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="legacyPlatforms">
-                                    <li><a className="dropdown-item" href="#"><FontAwesomeIcon icon={faMicrochip} fixedWidth /> IoT</a></li>
-                                    <li><a className="dropdown-item" href="#"><FontAwesomeIcon icon={faMobile} fixedWidth /> Mobile</a></li>
+                                    {platforms.filter((platform) => platform.legacy).map((platform, key) => (
+                                        <li key={key}>
+                                            <InertiaLink className="dropdown-item" href={platform.url}><PlatformIcon platform={platform} /> {platform.name}</InertiaLink>
+                                        </li>
+                                    ))}
                                 </ul>
                             </li>
                         </ul>

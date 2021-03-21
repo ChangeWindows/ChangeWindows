@@ -159,6 +159,22 @@ export default function Edit({ can, urls, platform, status = null }) {
                                                 </label>
                                             </div>
                                         </div>
+                                        <div className="col-12 col-lg-6">
+                                            <div className="form-check">
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    value="1"
+                                                    id="tool"
+                                                    checked={curPlatform.tool === 1}
+                                                    onChange={formHandler}
+                                                />
+                                                <label className="form-check-label" htmlFor="tool">
+                                                    Tool<br />
+                                                    <p className="form-text">This platform is a tool and should not be displayed beyond the timeline.</p>
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

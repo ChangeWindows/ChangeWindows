@@ -28,7 +28,8 @@ class PlatformFactory extends Factory
             'icon' => $this->faker->randomElement(['laptop', 'mobile', 'gamepad-modern', 'server', 'head-side-goggles', 'microchip', 'tv', 'compact-disc', 'code', 'tablet', 'cloud']),
             'position' => $this->faker->randomNumber(5),
             'active' => 1,
-            'legacy' => 0
+            'legacy' => 0,
+            'tool' => 0
         ];
     }
 }

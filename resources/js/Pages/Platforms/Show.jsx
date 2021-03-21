@@ -1,14 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
-import App from '../../Layouts/App'
-import Channel from '../../Components/Cards/Channel'
-import Flight from '../../Components/Timeline/Flight'
-import Timeline from '../../Components/Timeline/Timeline'
-import ReleaseCard from '../../Components/Cards/ReleaseCard'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCloud, faFlag, faGamepadModern, faHeadSideGoggles, faLaptop, faListTimeline, faMicrochip, faMobile, faServer, faTablet, faTv } from '@fortawesome/pro-regular-svg-icons'
+import App from '../../Layouts/App';
+import Channel from '../../Components/Cards/Channel';
+import Flight from '../../Components/Timeline/Flight';
+import Timeline from '../../Components/Timeline/Timeline';
+import ReleaseCard from '../../Components/Cards/ReleaseCard';
 
-export default function Show() {
+import PlatformIcon from '../../Components/Platforms/PlatformIcon';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlag, faLaptop, faListTimeline } from '@fortawesome/pro-regular-svg-icons';
+
+export default function Show({ platforms, platform }) {
     return (
         <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
@@ -19,46 +23,13 @@ export default function Show() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbar-page">
                         <ul className="navbar-nav me-auto">
-                            <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">
-                                    All
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faLaptop} fixedWidth /> PC
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faGamepadModern} fixedWidth /> Xbox
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faServer} fixedWidth /> Server
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faHeadSideGoggles} fixedWidth /> Holographic
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faTablet} fixedWidth /> 10X
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faTv} fixedWidth /> Team
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <FontAwesomeIcon icon={faCloud} fixedWidth /> Azure
-                                </a>
-                            </li>
+                            {platforms.filter((platform) => !platform.legacy).map((platform, key) => (
+                                <li className="nav-item" key={key}>
+                                    <InertiaLink className="nav-link" href={platform.url}>
+                                        <PlatformIcon platform={platform} /> {platform.name}
+                                    </InertiaLink>
+                                </li>
+                            ))}
                         </ul>
                         <ul className="navbar-nav">
                             <li className="nav-item dropdown">
@@ -66,8 +37,11 @@ export default function Show() {
                                     Legacy
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="legacyPlatforms">
-                                    <li><a className="dropdown-item" href="#"><FontAwesomeIcon icon={faMicrochip} fixedWidth /> IoT</a></li>
-                                    <li><a className="dropdown-item" href="#"><FontAwesomeIcon icon={faMobile} fixedWidth /> Mobile</a></li>
+                                    {platforms.filter((platform) => platform.legacy).map((platform, key) => (
+                                        <li key={key}>
+                                            <InertiaLink className="dropdown-item" href={platform.url}><PlatformIcon platform={platform} /> {platform.name}</InertiaLink>
+                                        </li>
+                                    ))}
                                 </ul>
                             </li>
                         </ul>
@@ -78,8 +52,8 @@ export default function Show() {
             <div className="container my-3">
                 <div className="row g-3">
                     <div className="col-12">
-                        <h1 className="h2 text-pc"><FontAwesomeIcon icon={faLaptop} fixedWidth /> <span className="fw-bold">Windows</span> <span className="fw-light">for desktop</span></h1>
-                        <p className="lead fw-bold">When you say "Windows", this is probably the platform you're talking about. Windows for desktops is the main and most popular version of Windows.</p>
+                        <h1 className="h2"><PlatformIcon platform={platform} color /> {platform.name}</h1>
+                        <p className="lead fw-bold">{platform.description}</p>
 
                         <div className="row g-2 mt-3">
                             <Channel

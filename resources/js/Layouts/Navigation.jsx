@@ -26,12 +26,12 @@ export default function Navigation() {
 
             <div className="sidebar">
                 <NavigationItem url="/timeline" icon={faListTimeline} title="Timeline" />
-                <NavigationItem url="/platforms" icon={faLaptopMobile} title="Platforms" />
+                <NavigationItem url="/platforms" primary="/pc" icon={faLaptopMobile} title="Platforms" />
                 <NavigationItem url="/releases" icon={faFlag} title="Releases" />
 
                 <div className="my-2 border-bottom" />
 
-                <NavigationItem url="/admin/users" icon={faGauge} title="Backstage" />
+                <NavigationItem url="/admin/platforms" icon={faGauge} title="Backstage" />
 
                 <div className="my-2 border-bottom" />
 

@@ -35,6 +35,7 @@ class PlatformController extends Controller
                     'icon' => $platform->icon,
                     'legacy' => $platform->legacy,
                     'active' => $platform->active,
+                    'tool' => $platform->tool,
                     'editUrl' => URL::route('admin.platforms.edit', $platform)
                 ];
             }),
@@ -76,7 +77,8 @@ class PlatformController extends Controller
             'color' => request('color'),
             'icon' => request('icon'),
             'legacy' => request('legacy') ? 1 : 0,
-            'active' => request('active') ? 1 : 0
+            'active' => request('active') ? 1 : 0,
+            'tool' => request('tool') ? 1 : 0
         ]);
 
         return Redirect::route('admin.platforms.edit', $platform)->with('status', 'Succesfully created this platform.');
@@ -135,7 +137,8 @@ class PlatformController extends Controller
             'color' => request('color'),
             'icon' => request('icon'),
             'legacy' => request('legacy') ? 1 : 0,
-            'active' => request('active') ? 1 : 0
+            'active' => request('active') ? 1 : 0,
+            'tool' => request('tool') ? 1 : 0
         ]);
 
         return Redirect::route('admin.platforms.edit', $platform)->with('status', 'Succesfully updated the platform.');

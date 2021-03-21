@@ -21,7 +21,8 @@ class PlatformSeeder extends Seeder
             'icon' => 'laptop',
             'position' => 1,
             'active' => 1,
-            'legacy' => 0
+            'legacy' => 0,
+            'tool' => 0
         ]);
 
         Platform::create([
@@ -29,9 +30,10 @@ class PlatformSeeder extends Seeder
             'description' => 'Mobile evolved from Windows Phone merging into the mainline Windows NT-family. Here the OS saw 4 major revisions (8, 8.1, 10 v1511 and 10 v1607) and a number of smaller upgrades after which the platform was deprecated when Microsoft left the smartphone OS market.',
             'color' => '#00bcf2',
             'icon' => 'mobile', 
-            'position' => 0,
+            'position' => 20,
             'active' => 0,
-            'legacy' => 1
+            'legacy' => 1,
+            'tool' => 0
         ]);
 
         Platform::create([
@@ -41,7 +43,8 @@ class PlatformSeeder extends Seeder
             'icon' => 'gamepad-modern',
             'position' => 2,
             'active' => 1,
-            'legacy' => 0
+            'legacy' => 0,
+            'tool' => 0
         ]);
 
         Platform::create([
@@ -51,7 +54,8 @@ class PlatformSeeder extends Seeder
             'icon' => 'server',
             'position' => 3,
             'active' => 1,
-            'legacy' => 0
+            'legacy' => 0,
+            'tool' => 0
         ]);
 
         Platform::create([
@@ -59,9 +63,10 @@ class PlatformSeeder extends Seeder
             'description' => 'Holographic is Microsoft\'s OS for HoloLens, and its main AR platform for Windows Mixed Reality. Like Team, this OS has never been used on a device that was not made by Microsoft.',
             'color' => '#ff4343',
             'icon' => 'head-side-goggles',
-            'position' => 5,
+            'position' => 4,
             'active' => 1,
-            'legacy' => 0
+            'legacy' => 0,
+            'tool' => 0
         ]);
 
         Platform::create([
@@ -69,9 +74,10 @@ class PlatformSeeder extends Seeder
             'description' => 'IoT is Microsoft\'s replacement for Windows for embedded usage. The platform has been deprecated.',
             'color' => '#f7630c',
             'icon' => 'microchip',
-            'position' => 7,
+            'position' => 21,
             'active' => 1,
-            'legacy' => 1
+            'legacy' => 1,
+            'tool' => 0
         ]);
 
         Platform::create([
@@ -79,9 +85,10 @@ class PlatformSeeder extends Seeder
             'description' => 'Team is Microsoft\'s OS for the Surface Hub-line of devices. Like Holographic, this OS has never been used on a device that was not made by Microsoft.',
             'color' => '#e3008c',
             'icon' => 'tv',
-            'position' => 6,
+            'position' => 5,
             'active' => 1,
-            'legacy' => 0
+            'legacy' => 0,
+            'tool' => 0
         ]);
 
         Platform::create([
@@ -91,7 +98,8 @@ class PlatformSeeder extends Seeder
             'icon' => 'compact-disc',
             'position' => 9,
             'active' => 1,
-            'legacy' => 0
+            'legacy' => 0,
+            'tool' => 1
         ]);
 
         Platform::create([
@@ -101,7 +109,8 @@ class PlatformSeeder extends Seeder
             'icon' => 'code',
             'position' => 8,
             'active' => 1,
-            'legacy' => 0
+            'legacy' => 0,
+            'tool' => 1
         ]);
 
         Platform::create([
@@ -109,9 +118,10 @@ class PlatformSeeder extends Seeder
             'description' => 'Windows 10X is Microsoft next generation of Windows. While it was first set to target dual-screen devices like the Surface Neo, it has since been repurposed to target more classic formfactors like laptops and desktops. It is Microsoft\'s goal to eventually let 10X takeover Windows 10\'s place as the mainline Windows version.',
             'color' => '#9ad93a',
             'icon' => 'tablet',
-            'position' => 4,
+            'position' => 6,
             'active' => 1,
-            'legacy' => 0
+            'legacy' => 0,
+            'tool' => 0
         ]);
 
         Platform::create([
@@ -119,9 +129,10 @@ class PlatformSeeder extends Seeder
             'description' => 'Windows, but it is actually Azure.',
             'color' => '#005aa3',
             'icon' => 'cloud', 
-            'position' => 0,
+            'position' => 7,
             'active' => 1,
-            'legacy' => 0
+            'legacy' => 0,
+            'tool' => 0
         ]);
     }
 }

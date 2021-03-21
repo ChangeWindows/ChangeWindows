@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
@@ -23,21 +25,9 @@ Route::get('/', function () {
     return Inertia::render('Timeline/Show');
 })->middleware(['auth'])->name('home');
 
-Route::get('/timeline', function () {
-    return Inertia::render('Timeline/Show');
-})->middleware(['auth'])->name('timeline');
-
-Route::get('/platforms', function () {
-    return Inertia::render('Platforms/Show');
-})->middleware(['auth'])->name('platforms');
-
 Route::get('/releases', function () {
     return Inertia::render('Releases/Show');
 })->middleware(['auth'])->name('releases');
-
-Route::get('/about', function () {
-    return Inertia::render('About/Show');
-})->middleware(['auth'])->name('about');
 
 Route::get('/about', function () {
     return Inertia::render('About/Show');
@@ -47,6 +37,17 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::prefix('')->name('front')->group(function() {
+    Route::prefix('timeline')->name('.timeline')->group(function() {
+        Route::get('', [TimelineController::class, 'index'])->name('');
+        Route::get('/{platform}', [TimelineController::class, 'show'])->name('.show');
+    });
+    
+    Route::prefix('platforms')->name('.platforms')->group(function() {
+        Route::get('', [PlatformController::class, 'index'])->name('');
+        Route::get('/{platform}', [PlatformController::class, 'show'])->name('.show');
+    });
+});
 
 Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
     Route::prefix('users')->name('.users')->group(function() {

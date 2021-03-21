@@ -22,6 +22,7 @@ class CreatePlatformsTable extends Migration
             $table->integer('position')->default(1);
             $table->integer('active')->default(1);
             $table->integer('legacy')->default(0);
+            $table->integer('tool')->default(0);
             $table->string('slug')->unique();
             $table->timestamps();
         });
