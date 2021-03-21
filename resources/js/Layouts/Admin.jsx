@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AdminNavigation from './AdminNavigation'
+import AdminNavigation from './Navigation/AdminNavigation'
 
 export default function App({ children }) {
     return (

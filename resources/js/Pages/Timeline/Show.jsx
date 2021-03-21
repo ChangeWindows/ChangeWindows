@@ -1,9 +1,10 @@
 import React from 'react';
-import { InertiaLink } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
+import DropdownItem from '../../Components/Navbar/DropdownItem';
 import Flight from '../../Components/Timeline/Flight';
+import NavItem from '../../Components/Navbar/NavItem';
 import Promotion from '../../Components/Timeline/Promotion';
 import Release from '../../Components/Timeline/Release';
 import Timeline from '../../Components/Timeline/Timeline';
@@ -31,11 +32,9 @@ export default function Show({ platforms }) {
                                 </a>
                             </li>
                             {platforms.filter((platform) => !platform.legacy).map((platform, key) => (
-                                <li className="nav-item" key={key}>
-                                    <InertiaLink className="nav-link" href={platform.url}>
-                                        <PlatformIcon platform={platform} /> {platform.name}
-                                    </InertiaLink>
-                                </li>
+                                <NavItem url={platform.url} key={key}>
+                                    <PlatformIcon platform={platform} /> {platform.name}
+                                </NavItem>
                             ))}
                         </ul>
                         <ul className="navbar-nav">
@@ -45,9 +44,9 @@ export default function Show({ platforms }) {
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="legacyPlatforms">
                                     {platforms.filter((platform) => platform.legacy).map((platform, key) => (
-                                        <li key={key}>
-                                            <InertiaLink className="dropdown-item" href={platform.url}><PlatformIcon platform={platform} /> {platform.name}</InertiaLink>
-                                        </li>
+                                        <DropdownItem url={platform.url} key={key}>
+                                            <PlatformIcon platform={platform} /> {platform.name}
+                                        </DropdownItem>
                                     ))}
                                 </ul>
                             </li>

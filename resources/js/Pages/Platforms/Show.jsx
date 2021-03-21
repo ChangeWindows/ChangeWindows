@@ -1,11 +1,12 @@
 import React from 'react';
-import { InertiaLink } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
+import DropdownItem from '../../Components/Navbar/DropdownItem';
 import Flight from '../../Components/Timeline/Flight';
-import Timeline from '../../Components/Timeline/Timeline';
+import NavItem from '../../Components/Navbar/NavItem';
 import ReleaseCard from '../../Components/Cards/ReleaseCard';
+import Timeline from '../../Components/Timeline/Timeline';
 
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 
@@ -13,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag, faLaptop, faListTimeline } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Show({ platforms, platform }) {
+    console.log(platforms);
     return (
         <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
@@ -24,11 +26,9 @@ export default function Show({ platforms, platform }) {
                     <div className="collapse navbar-collapse" id="navbar-page">
                         <ul className="navbar-nav me-auto">
                             {platforms.filter((platform) => !platform.legacy).map((platform, key) => (
-                                <li className="nav-item" key={key}>
-                                    <InertiaLink className="nav-link" href={platform.url}>
-                                        <PlatformIcon platform={platform} /> {platform.name}
-                                    </InertiaLink>
-                                </li>
+                                <NavItem url={platform.url} key={key}>
+                                    <PlatformIcon platform={platform} /> {platform.name}
+                                </NavItem>
                             ))}
                         </ul>
                         <ul className="navbar-nav">
@@ -38,9 +38,9 @@ export default function Show({ platforms, platform }) {
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="legacyPlatforms">
                                     {platforms.filter((platform) => platform.legacy).map((platform, key) => (
-                                        <li key={key}>
-                                            <InertiaLink className="dropdown-item" href={platform.url}><PlatformIcon platform={platform} /> {platform.name}</InertiaLink>
-                                        </li>
+                                        <DropdownItem url={platform.url} key={key}>
+                                            <PlatformIcon platform={platform} /> {platform.name}
+                                        </DropdownItem>
                                     ))}
                                 </ul>
                             </li>
