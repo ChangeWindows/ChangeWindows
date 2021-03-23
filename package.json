@@ -16,10 +16,10 @@
         "@fortawesome/free-brands-svg-icons": "6.0.0-alpha2",
         "@fortawesome/pro-regular-svg-icons": "6.0.0-alpha2",
         "@fortawesome/react-fontawesome": "0.1.14",
-        "alpinejs": "^2.7.3",
+        "alpinejs": "^2.8.2",
         "autoprefixer": "^10.2.5",
         "axios": "^0.21",
-        "bootstrap": "^5.0.0-beta2",
+        "bootstrap": "^5.0.0-beta3",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "resolve-url-loader": "^3.1.2",
@@ -32,7 +32,7 @@
         "@inertiajs/progress": "^0.2.4",
         "@types/react": "^17.0.3",
         "clsx": "^1.1.1",
-        "react": "^17.0.1",
-        "react-dom": "^17.0.1"
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
     }
 }
