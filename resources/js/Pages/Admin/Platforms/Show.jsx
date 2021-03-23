@@ -26,7 +26,7 @@ export default function Show({ can, platforms, createUrl, status = null }) {
                     <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                 }
                 <div className="row g-3">
-                    {platforms.map((platform) => {
+                    {platforms.data.map((platform) => {
                         const platformStatus = [];
 
                         platform.active && platformStatus.push('Active');
@@ -45,7 +45,7 @@ export default function Show({ can, platforms, createUrl, status = null }) {
                                         </div>
                                     </div>
                                     <div className="card-footer">
-                                        <InertiaLink href={platform.editUrl} className="btn btn-primary btn-sm">
+                                        <InertiaLink href={platform.edit_url} className="btn btn-primary btn-sm">
                                             {can.edit_platforms ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
                                         </InertiaLink>
                                     </div>

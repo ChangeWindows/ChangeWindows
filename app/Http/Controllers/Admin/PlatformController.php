@@ -27,18 +27,7 @@ class PlatformController extends Controller
                 'create_platforms' => Auth::user()->can('platforms.create'),
                 'edit_platforms' => Auth::user()->can('platforms.edit')
             ],
-            'platforms' => Platform::orderBy('position')->paginate(50)->map(function ($platform) {
-                return [
-                    'id' => $platform->id,
-                    'name' => $platform->name,
-                    'color' => $platform->color,
-                    'icon' => $platform->icon,
-                    'legacy' => $platform->legacy,
-                    'active' => $platform->active,
-                    'tool' => $platform->tool,
-                    'editUrl' => URL::route('admin.platforms.edit', $platform)
-                ];
-            }),
+            'platforms' => Platform::orderBy('position')->paginate(50),
             'createUrl' => URL::route('admin.platforms.create'),
             'status' => session('status')
         ]);
@@ -78,7 +67,7 @@ class PlatformController extends Controller
             'icon' => request('icon'),
             'legacy' => request('legacy') ? 1 : 0,
             'active' => request('active') ? 1 : 0,
-            'tool' => request('tool') ? 1 : 0
+            'active' => request('active') ? 1 : 0
         ]);
 
         return Redirect::route('admin.platforms.edit', $platform)->with('status', 'Succesfully created this platform.');
@@ -137,8 +126,7 @@ class PlatformController extends Controller
             'color' => request('color'),
             'icon' => request('icon'),
             'legacy' => request('legacy') ? 1 : 0,
-            'active' => request('active') ? 1 : 0,
-            'tool' => request('tool') ? 1 : 0
+            'active' => request('active') ? 1 : 0
         ]);
 
         return Redirect::route('admin.platforms.edit', $platform)->with('status', 'Succesfully updated the platform.');
