@@ -72,6 +72,17 @@ export default function Show({ platforms }) {
                     </div>
                     <div className="col-12 col-md-8 col-lg-7">
                         <div className="row g-4">
+                            <Timeline date="25 March 2021">
+                                <Flight
+                                    platform="pc"
+                                    build="120.2212.3530.0"
+                                    channels={[
+                                        { class: 'release', name: 'RP' },
+                                        { class: 'beta', name: 'Beta' }
+                                    ]}
+                                    component="Windows Feature Experience Pack"
+                                />
+                            </Timeline>
                             <Timeline date="5 March 2021">
                                 <Flight
                                     platform="xbox"
