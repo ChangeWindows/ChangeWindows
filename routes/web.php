@@ -8,6 +8,7 @@ use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
+use App\Http\Controllers\Admin\ChannelController as AdminChannelController;
 
 
 /*
@@ -72,6 +73,15 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/create', [AdminPlatformController::class, 'create'])->name('.create');
         Route::get('/{platform}/edit', [AdminPlatformController::class, 'edit'])->name('.edit');
         Route::patch('/{platform}/edit', [AdminPlatformController::class, 'update'])->name('.update');
+    });
+    
+    Route::prefix('channels')->name('.channels')->group(function() {
+        Route::get('', [AdminChannelController::class, 'index'])->name('');
+        Route::post('', [AdminChannelController::class, 'store'])->name('.store');
+        Route::delete('{channel}', [AdminChannelController::class, 'destroy'])->name('.destroy');
+        Route::get('/create', [AdminChannelController::class, 'create'])->name('.create');
+        Route::get('/{channel}/edit', [AdminChannelController::class, 'edit'])->name('.edit');
+        Route::patch('/{channel}/edit', [AdminChannelController::class, 'update'])->name('.update');
     });
 });
 

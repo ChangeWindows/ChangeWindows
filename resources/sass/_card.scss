@@ -1,9 +1,32 @@
 .card {
     box-shadow: $box-shadow-sm;
     border: none;
+    transition: $transition-base;
     
     .card-header {
         padding: .75rem 1rem;
         border: none;
+    }
+
+    &.card-add {
+        border: 4px dashed darken($light, 10);
+        background: transparent;
+        box-shadow: none;
+        height: 100%;
+
+        text-decoration: none;
+        color: $dark;
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &:hover {
+            background: rgba(darken($light, 5), .5);
+            border-color: darken($light, 13);
+        }
     }
 }

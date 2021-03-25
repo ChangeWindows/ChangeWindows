@@ -97,13 +97,17 @@ class PlatformController extends Controller
         return Inertia::render('Admin/Platforms/Edit', [
             'can' => [
                 'edit_platforms' => Auth::user()->can('platforms.edit'),
-                'delete_platforms' => Auth::user()->can('platforms.delete')
+                'delete_platforms' => Auth::user()->can('platforms.delete'),
+                'create_channels' => Auth::user()->can('channels.create'),
+                'edit_channels' => Auth::user()->can('channels.edit')
             ],
             'urls' => [
                 'update_platform' => URL::route('admin.platforms.update', $platform),
-                'destroy_platform' => URL::route('admin.platforms.destroy', $platform)
+                'destroy_platform' => URL::route('admin.platforms.destroy', $platform),
+                'create_channel' => URL::route('admin.channels.create'),
             ],
             'platform' => $platform,
+            'platform_channels' => $platform->channels,
             'status' => session('status')
         ]);
     }

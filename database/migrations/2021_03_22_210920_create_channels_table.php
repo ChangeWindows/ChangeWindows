@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlatformsTable extends Migration
+class CreateChannelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreatePlatformsTable extends Migration
      */
     public function up()
     {
-        Schema::create('platforms', function (Blueprint $table) {
+        Schema::create('channels', function (Blueprint $table) {
             $table->id();
             $table->string('name')->required();
-            $table->text('description');
             $table->string('color')->required();
-            $table->string('icon');
-            $table->integer('position')->default(1);
+            $table->integer('order')->required();
             $table->integer('active')->default(1);
-            $table->integer('legacy')->default(0);
-            $table->integer('tool')->default(0);
+            $table->foreignId('platform_id')->constrained('platforms')->onDelete('cascade');
             $table->string('slug')->unique();
             $table->timestamps();
         });
@@ -35,6 +32,6 @@ class CreatePlatformsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('platforms');
+        Schema::dropIfExists('channels');
     }
 }

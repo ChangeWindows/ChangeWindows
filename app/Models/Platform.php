@@ -18,6 +18,10 @@ class Platform extends Model
     protected $fillable = ['name', 'description', 'color', 'icon', 'position', 'legacy', 'active', 'tool', 'slug'];
     protected $appends = ['plain_icon', 'colored_icon', 'bg_color', 'edit_url'];
 
+    public function channels() {
+        return $this->hasMany(Channel::class);
+    }
+
     public function getPlainIconAttribute() {
         return '<i class="far fa-fw fa-'.$this->icon.' '.$this->icon_modifiers.'"></i>';
     }

@@ -6,9 +6,9 @@ import Admin from '../../../Layouts/Admin';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowLeft, faCheck, faEye, faFloppyDisk, faPen, faPlus, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ can, urls, platform, status = null }) {
+export default function Edit({ can, urls, platform, platform_channels, status = null }) {
     const [curPlatform, setCurPlatform] = useState(platform);
 
     useEffect(() => {
@@ -182,6 +182,49 @@ export default function Edit({ can, urls, platform, status = null }) {
                     </fieldset>
                 </div>
             </form>
+            <div className="container my-3">
+                <div className="row">
+                    <div className="col-12 col-md-4 my-4 my-md-0">
+                        <h4 className="h5 mb-0">Channels</h4>
+                        <p className="text-muted mb-0"><small>The channels for this platform.</small></p>
+                    </div>
+                    <div className="col-12 col-md-8">
+                        <div className="row g-3">
+                            {platform_channels.map((channel) => {
+                                const channelstatus = [];
+
+                                channel.active && channelstatus.push('Active');
+                                
+                                return (
+                                    <div className="col-12 col-sm-6 col-xl-4" key={channel.id}>
+                                        <div className="card border-0 shadow-sm">
+                                            <div className="card-body">
+                                                <h3 className="h5 mb-0">{channel.name}</h3>
+                                                <p className="text-muted mb-0"><small>{channelstatus.join(', ')}</small></p>
+                                            </div>
+                                            <div className="card-footer">
+                                                <InertiaLink href={channel.edit_url} className="btn btn-primary btn-sm">
+                                                    {can.edit_channels ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
+                                                </InertiaLink>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                            {can.create_channels &&
+                                <div className="col-12 col-sm-6 col-xl-4">
+                                    <InertiaLink href={urls.create_channel} className="card card-add">
+                                        <div className="card-body py-4">
+                                            <h3 className="h5 fw-normal mb-2">New channel</h3>
+                                            <h5 className="mb-0"><FontAwesomeIcon icon={faPlus} fixedWidth /></h5>
+                                        </div>
+                                    </InertiaLink>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
             {can.delete_platforms &&
                 <form onSubmit={handleDelete}>
                     <div className="container my-3">
