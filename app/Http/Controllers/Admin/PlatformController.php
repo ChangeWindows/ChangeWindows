@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Auth;
-use URL;
 use Redirect;
 use Illuminate\Support\Collection;
 
@@ -28,7 +27,7 @@ class PlatformController extends Controller
                 'edit_platforms' => Auth::user()->can('platforms.edit')
             ],
             'platforms' => Platform::orderBy('position')->paginate(50),
-            'createUrl' => URL::route('admin.platforms.create'),
+            'createUrl' => route('admin.platforms.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -44,7 +43,7 @@ class PlatformController extends Controller
 
         return Inertia::render('Admin/Platforms/Create', [
             'urls' => [
-                'store_platform' => URL::route('admin.platforms.store'),
+                'store_platform' => route('admin.platforms.store', [], false),
             ]
         ]);
     }
@@ -102,9 +101,9 @@ class PlatformController extends Controller
                 'edit_channels' => Auth::user()->can('channels.edit')
             ],
             'urls' => [
-                'update_platform' => URL::route('admin.platforms.update', $platform),
-                'destroy_platform' => URL::route('admin.platforms.destroy', $platform),
-                'create_channel' => URL::route('admin.channels.create'),
+                'update_platform' => route('admin.platforms.update', $platform, false),
+                'destroy_platform' => route('admin.platforms.destroy', $platform, false),
+                'create_channel' => route('admin.channels.create', [], false),
             ],
             'platform' => $platform,
             'platform_channels' => $platform->channels,

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use URL;
 use App\Models\Platform;
 
 class PlatformController extends Controller
@@ -24,7 +23,7 @@ class PlatformController extends Controller
                     'color' => $platform->color,
                     'icon' => $platform->icon,
                     'legacy' => $platform->legacy,
-                    'url' => URL::route('front.platforms.show', $platform)
+                    'url' => route('front.platforms.show', $platform, false)
                 ];
             }),
             'platform' => $platform,

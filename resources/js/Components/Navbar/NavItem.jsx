@@ -11,7 +11,7 @@ export default function NavItem({ children, url }) {
     return (
         <li className="nav-item" >
             <InertiaLink 
-                className={clsx('nav-link', { 'active': url.includes(page.url)})}
+                className={clsx('nav-link', { 'active': page.url.includes(url)})}
                 href={url}
             >
                 {children}

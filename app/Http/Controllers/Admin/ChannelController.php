@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Auth;
-use URL;
 use Redirect;
 use Illuminate\Support\Collection;
 
@@ -29,7 +28,7 @@ class ChannelController extends Controller
                 'edit_channels' => Auth::user()->can('channels.edit')
             ],
             'channels' => Channel::orderBy('order')->get(),
-            'createUrl' => URL::route('admin.channels.create'),
+            'createUrl' => route('admin.channels.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -45,7 +44,7 @@ class ChannelController extends Controller
 
         return Inertia::render('Admin/Channels/Create', [
             'urls' => [
-                'store_channel' => URL::route('admin.channels.store'),
+                'store_channel' => route('admin.channels.store', [], false),
             ],
             'platforms' => Platform::orderBy('position')->get()
         ]);
@@ -99,8 +98,8 @@ class ChannelController extends Controller
                 'delete_channels' => Auth::user()->can('channels.delete')
             ],
             'urls' => [
-                'update_channel' => URL::route('admin.channels.update', $channel),
-                'destroy_channel' => URL::route('admin.channels.destroy', $channel)
+                'update_channel' => route('admin.channels.update', $channel, false),
+                'destroy_channel' => route('admin.channels.destroy', $channel, false)
             ],
             'channel' => $channel,
             'platforms' => Platform::orderBy('position')->get(),

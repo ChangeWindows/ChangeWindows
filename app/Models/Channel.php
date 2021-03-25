@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
-use URL;
 
 class Channel extends Model
 {
@@ -25,7 +24,7 @@ class Channel extends Model
     }
 
     public function getEditUrlAttribute() {
-        return URL::route('admin.channels.edit', $this);
+        return route('admin.channels.edit', $this, false);
     }
 
     public function getRouteKeyName() {

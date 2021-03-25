@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
-use URL;
 use Redirect;
 use Auth;
 use Spatie\Permission\Models\Role;
@@ -32,7 +31,7 @@ class UserController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
-                    'editUrl' => URL::route('admin.users.edit', $user)
+                    'editUrl' => route('admin.users.edit', $user, false)
                 ];
             })
         ]);
@@ -85,8 +84,8 @@ class UserController extends Controller
                 'delete_users' => Auth::user()->can('users.delete')
             ],
             'urls' => [
-                'update_user' => URL::route('admin.users.update', $user),
-                'destroy_user' => URL::route('admin.users.destroy', $user)
+                'update_user' => route('admin.users.update', $user, false),
+                'destroy_user' => route('admin.users.destroy', $user, false)
             ],
             'user' => [
                 'id' => $user->id,

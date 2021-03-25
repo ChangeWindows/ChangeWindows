@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Auth;
-use URL;
 use Redirect;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -31,10 +30,10 @@ class RoleController extends Controller
                 return [
                     'id' => $role->id,
                     'name' => $role->name,
-                    'editUrl' => URL::route('admin.roles.edit', $role)
+                    'editUrl' => route('admin.roles.edit', $role, false)
                 ];
             }),
-            'createUrl' => URL::route('admin.roles.create'),
+            'createUrl' => route('admin.roles.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -50,7 +49,7 @@ class RoleController extends Controller
         return Inertia::render('Admin/Roles/Create', [
             'permissions' => Permission::get(),
             'urls' => [
-                'store_role' => URL::route('admin.roles.store'),
+                'store_role' => route('admin.roles.store', [], false),
             ]
         ]);
     }
@@ -103,8 +102,8 @@ class RoleController extends Controller
                 'delete_roles' => Auth::user()->can('roles.delete')
             ],
             'urls' => [
-                'update_role' => URL::route('admin.roles.update', $role),
-                'destroy_role' => URL::route('admin.roles.destroy', $role)
+                'update_role' => route('admin.roles.update', $role, false),
+                'destroy_role' => route('admin.roles.destroy', $role, false)
             ],
             'role' => [
                 'id' => $role->id,

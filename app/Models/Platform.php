@@ -35,7 +35,7 @@ class Platform extends Model
     }
 
     public function getEditUrlAttribute() {
-        return URL::route('admin.platforms.edit', $this);
+        return route('admin.platforms.edit', $this, false);
     }
 
     public function getRouteKeyName() {
