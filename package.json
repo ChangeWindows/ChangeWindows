@@ -10,7 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "@babel/preset-react": "^7.12.13",
+        "@babel/preset-react": "^7.13.13",
         "alpinejs": "^2.8.2",
         "autoprefixer": "^10.2.5",
         "axios": "^0.21",
@@ -26,8 +26,8 @@
         "@fortawesome/free-brands-svg-icons": "6.0.0-alpha2",
         "@fortawesome/pro-regular-svg-icons": "6.0.0-alpha2",
         "@fortawesome/react-fontawesome": "0.1.14",
-        "@inertiajs/inertia": "^0.8.5",
-        "@inertiajs/inertia-react": "^0.5.4",
+        "@inertiajs/inertia": "^0.8.6",
+        "@inertiajs/inertia-react": "^0.5.5",
         "@inertiajs/progress": "^0.2.4",
         "@types/react": "^17.0.3",
         "clsx": "^1.1.1",
