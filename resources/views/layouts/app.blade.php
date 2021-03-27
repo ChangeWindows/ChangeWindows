@@ -13,9 +13,6 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
-        <script src="{{ asset('js/fonts/brands.min.js') }}" defer></script>
-        <script src="{{ asset('js/fonts/regular.min.js') }}" defer></script>
-        <script src="{{ asset('js/fonts/fontawesome.min.js') }}" defer></script>
     </head>
     <body class="bg-light">
         @include('layouts.navigation')
