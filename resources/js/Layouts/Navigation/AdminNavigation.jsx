@@ -5,7 +5,7 @@ import { Inertia } from '@inertiajs/inertia';
 import NavigationItem from './NavigationItem';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSunHaze, faCircleInfo, faArrowRightFromBracket, faUsers, faUserTag, faArrowLeft, faLaptopMobile, faCircle } from '@fortawesome/pro-regular-svg-icons';
+import { faSunHaze, faFlag, faCircleInfo, faArrowRightFromBracket, faUsers, faUserTag, faArrowLeft, faLaptopMobile, faCircle } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Navigation() {
     function handleLogout(e) {
@@ -29,6 +29,7 @@ export default function Navigation() {
 
                 <div className="my-2 border-bottom" />
 
+                <NavigationItem url="/admin/releases" icon={faFlag} title="Releases" />
                 <NavigationItem url="/admin/platforms" icon={faLaptopMobile} title="Platforms" />
                 <NavigationItem url="/admin/channels" icon={faCircle} title="Channels" />
 
