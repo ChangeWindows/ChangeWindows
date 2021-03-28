@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\ReleaseController as AdminReleaseController;
 use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
 use App\Http\Controllers\Admin\ChannelController as AdminChannelController;
+use App\Http\Controllers\Admin\ReleaseChannelController as AdminReleaseChannelController;
 
 
 /*
@@ -92,6 +93,15 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/create', [AdminChannelController::class, 'create'])->name('.create');
         Route::get('/{channel}/edit', [AdminChannelController::class, 'edit'])->name('.edit');
         Route::patch('/{channel}/edit', [AdminChannelController::class, 'update'])->name('.update');
+    });
+    
+    Route::prefix('releasechannels')->name('.releasechannels')->group(function() {
+        Route::get('', [AdminReleaseChannelController::class, 'index'])->name('');
+        Route::post('', [AdminReleaseChannelController::class, 'store'])->name('.store');
+        Route::delete('{release_channel}', [AdminReleaseChannelController::class, 'destroy'])->name('.destroy');
+        Route::get('/create', [AdminReleaseChannelController::class, 'create'])->name('.create');
+        Route::get('/{release_channel}/edit', [AdminReleaseChannelController::class, 'edit'])->name('.edit');
+        Route::patch('/{release_channel}/edit', [AdminReleaseChannelController::class, 'update'])->name('.update');
     });
 });
 

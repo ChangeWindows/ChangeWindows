@@ -65,7 +65,6 @@ class PlatformController extends Controller
             'color' => request('color'),
             'icon' => request('icon'),
             'legacy' => request('legacy') ? 1 : 0,
-            'active' => request('active') ? 1 : 0,
             'active' => request('active') ? 1 : 0
         ]);
 

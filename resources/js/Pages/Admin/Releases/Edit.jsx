@@ -5,11 +5,11 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import Admin from '../../../Layouts/Admin';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowLeft, faCheck, faPen, faEye, faPlus, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
 
-export default function Edit({ can, urls, platforms, release, status = null }) {
+export default function Edit({ can, urls, platforms, release, release_channels, status = null }) {
     const [curRelease, setCurRelease] = useState(release);
 
     useEffect(() => {
@@ -219,6 +219,49 @@ export default function Edit({ can, urls, platforms, release, status = null }) {
                     </fieldset>
                 </div>
             </form>
+            <div className="container my-3">
+                <div className="row">
+                    <div className="col-12 col-md-4 my-4 my-md-0">
+                        <h4 className="h5 mb-0">Release channels</h4>
+                        <p className="text-muted mb-0"><small>The channels for this release.</small></p>
+                    </div>
+                    <div className="col-12 col-md-8">
+                        <div className="row g-3">
+                            {release_channels.map((releaseChannel) => {
+                                const releaseChannelstatus = [];
+
+                                releaseChannel.active && releaseChannelstatus.push('Active');
+                                
+                                return (
+                                    <div className="col-12 col-sm-6 col-xl-4" key={releaseChannel.id}>
+                                        <div className="card border-0 shadow-sm">
+                                            <div className="card-body">
+                                                <h3 className="h5 mb-0">{releaseChannel.name}</h3>
+                                                <p className="text-muted mb-0"><small>{releaseChannelstatus.join(', ')}</small></p>
+                                            </div>
+                                            <div className="card-footer">
+                                                <InertiaLink href={releaseChannel.edit_url} className="btn btn-primary btn-sm">
+                                                    {can.edit_releases ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
+                                                </InertiaLink>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                            {can.edit_releases &&
+                                <div className="col-12 col-sm-6 col-xl-4">
+                                    <InertiaLink href={urls.create_release_channel} className="card card-add">
+                                        <div className="card-body py-4">
+                                            <h3 className="h5 fw-normal mb-2">New release channel</h3>
+                                            <h5 className="mb-0"><FontAwesomeIcon icon={faPlus} fixedWidth /></h5>
+                                        </div>
+                                    </InertiaLink>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
             {can.delete_releases &&
                 <form onSubmit={handleDelete}>
                     <div className="container my-3">

@@ -22,6 +22,10 @@ class Release extends Model
         return $this->belongsTo(Platform::class);
     }
 
+    public function releaseChannels() {
+        return $this->hasMany(ReleaseChannel::class);
+    }
+
     public function getEditUrlAttribute() {
         return route('admin.releases.edit', $this, false);
     }
