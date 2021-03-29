@@ -47,7 +47,6 @@ class ReleaseChannelController extends Controller
                 'release' => $request->release,
                 'channel' => $request->channel
             ],
-            'platforms' => Platform::get(),
             'release' => $release,
             'releases' => $platform->releases,
             'channel' => $channel,
@@ -73,7 +72,7 @@ class ReleaseChannelController extends Controller
             'supported' => request('supported') ? 1 : 0
         ]);
 
-        return Redirect::route('admin.releases')->with('status', 'Succesfully created this release channel.');
+        return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully created this release channel.');
     }
 
     /**
@@ -95,7 +94,22 @@ class ReleaseChannelController extends Controller
      */
     public function edit(ReleaseChannel $releaseChannel)
     {
-        //
+        $this->authorize('releases.show');
+
+        return Inertia::render('Admin/ReleaseChannels/Edit', [
+            'can' => [
+                'edit_releases' => Auth::user()->can('releases.edit'),
+                'delete_releases' => Auth::user()->can('releases.delete')
+            ],
+            'urls' => [
+                'update_release_channel' => route('admin.releasechannels.update', $releaseChannel, false),
+                'destroy_release_channel' => route('admin.releasechannels.destroy', $releaseChannel, false)
+            ],
+            'releaseChannel' => $releaseChannel,
+            'releases' => $releaseChannel->release->platform->releases,
+            'channels' => $releaseChannel->release->platform->channels,
+            'status' => session('status')
+        ]);
     }
 
     /**
@@ -118,6 +132,10 @@ class ReleaseChannelController extends Controller
      */
     public function destroy(ReleaseChannel $releaseChannel)
     {
-        //
+        $this->authorize('releases.delete');
+
+        $releaseChannel->delete();
+
+        return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully deleted release channel.');
     }
 }

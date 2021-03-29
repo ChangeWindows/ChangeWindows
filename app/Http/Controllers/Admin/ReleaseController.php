@@ -115,6 +115,7 @@ class ReleaseController extends Controller
             ],
             'release' => $release,
             'platforms' => Platform::orderBy('position')->get(),
+            'channels' => $release->platform->channels,
             'release_channels' => $release->releaseChannels,
             'status' => session('status')
         ]);

@@ -28,8 +28,6 @@ export default function Create({ urls, platforms }) {
         end_delta: null
     });
 
-    console.log(urls);
-
     function formHandler(event) {
         const { id, value, type } = event.target;
         const _release = Object.assign({}, curRelease);

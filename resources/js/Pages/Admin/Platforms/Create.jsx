@@ -19,8 +19,6 @@ export default function Create({ urls }) {
         legacy: 0
     });
 
-    console.log(urls);
-
     function formHandler(event) {
         const { id, value, type } = event.target;
         const _platform = Object.assign({}, curPlatform);

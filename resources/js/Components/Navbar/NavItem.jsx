@@ -6,8 +6,6 @@ import clsx from 'clsx';
 export default function NavItem({ children, url }) {
     const page = usePage();
 
-    console.log(page, url);
-
     return (
         <li className="nav-item" >
             <InertiaLink 

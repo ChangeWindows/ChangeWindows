@@ -31,8 +31,6 @@ export default function Edit({ can, urls, platform, platform_channels, status = 
         setCurPlatform(_platform);
     }
 
-    console.log(platform);
-
     function handleSubmit(event) {
       event.preventDefault();
       Inertia.patch(urls.update_platform, curPlatform);

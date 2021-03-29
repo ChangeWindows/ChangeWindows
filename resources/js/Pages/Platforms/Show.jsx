@@ -14,7 +14,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag, faLaptop, faListTimeline } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Show({ platforms, platform }) {
-    console.log(platforms);
     return (
         <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">

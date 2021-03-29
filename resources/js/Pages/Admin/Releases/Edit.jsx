@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
@@ -9,7 +9,7 @@ import { faArrowLeft, faCheck, faPen, faEye, faPlus, faFloppyDisk, faTrashCan } 
 
 import { format, parseISO } from 'date-fns';
 
-export default function Edit({ can, urls, platforms, release, release_channels, status = null }) {
+export default function Edit({ can, urls, platforms, release, channels, release_channels, status = null }) {
     const [curRelease, setCurRelease] = useState(release);
 
     useEffect(() => {
@@ -41,6 +41,8 @@ export default function Edit({ can, urls, platforms, release, release_channels, 
       event.preventDefault();
       Inertia.delete(urls.destroy_release, curRelease);
     }
+
+    const availablePlatformChannels = useMemo(() => channels.filter((channel) => !release_channels.find((releaseChannel) => releaseChannel.channel_id === channel.id)), [channels, release_channels]);
 
     return (
         <Admin>
@@ -234,10 +236,11 @@ export default function Edit({ can, urls, platforms, release, release_channels, 
                                 
                                 return (
                                     <div className="col-12 col-sm-6 col-xl-4" key={releaseChannel.id}>
-                                        <div className="card border-0 shadow-sm">
+                                        <div className="card border-0 shadow-sm h-100">
                                             <div className="card-body">
                                                 <h3 className="h5 mb-0">{releaseChannel.name}</h3>
                                                 <p className="text-muted mb-0"><small>{releaseChannelstatus.join(', ')}</small></p>
+                                                <div className="flex-grox-1" />
                                             </div>
                                             <div className="card-footer">
                                                 <InertiaLink href={releaseChannel.edit_url} className="btn btn-primary btn-sm">
@@ -248,14 +251,23 @@ export default function Edit({ can, urls, platforms, release, release_channels, 
                                     </div>
                                 );
                             })}
-                            {can.edit_releases &&
+                            {can.edit_releases && availablePlatformChannels.length > 0 &&
                                 <div className="col-12 col-sm-6 col-xl-4">
-                                    <InertiaLink href={urls.create_release_channel} className="card card-add">
-                                        <div className="card-body py-4">
-                                            <h3 className="h5 fw-normal mb-2">New release channel</h3>
-                                            <h5 className="mb-0"><FontAwesomeIcon icon={faPlus} fixedWidth /></h5>
-                                        </div>
-                                    </InertiaLink>
+                                    <div className="dropdown h-100">
+                                        <a href="#" className="card card-add dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <div className="card-body py-3">
+                                                <h3 className="h5 fw-normal mb-2">New release channel</h3>
+                                                <h5 className="mb-0"><FontAwesomeIcon icon={faPlus} fixedWidth /></h5>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            {availablePlatformChannels.map((channel) => (
+                                                <InertiaLink href={`${urls.create_release_channel}&channel=${channel.id}`} className="dropdown-item">
+                                                    {channel.name}
+                                                </InertiaLink>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
                             }
                         </div>

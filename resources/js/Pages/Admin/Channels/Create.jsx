@@ -16,8 +16,6 @@ export default function Create({ urls, platforms }) {
         platform_id: null
     });
 
-    console.log('channel', curChannel);
-
     function formHandler(event) {
         const { id, value, type } = event.target;
         const _channel = Object.assign({}, curChannel);
