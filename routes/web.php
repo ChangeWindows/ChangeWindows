@@ -3,14 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\PlatformController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\Admin\RoleController as AdminRoleController;
-use App\Http\Controllers\Admin\ReleaseController as AdminReleaseController;
-use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
+use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\Admin\ChannelController as AdminChannelController;
+use App\Http\Controllers\Admin\FlightController as AdminFlightController;
+use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
 use App\Http\Controllers\Admin\ReleaseChannelController as AdminReleaseChannelController;
+use App\Http\Controllers\Admin\ReleaseController as AdminReleaseController;
+use App\Http\Controllers\Admin\RoleController as AdminRoleController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 
 /*
@@ -102,6 +103,15 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/create', [AdminReleaseChannelController::class, 'create'])->name('.create');
         Route::get('/{release_channel}/edit', [AdminReleaseChannelController::class, 'edit'])->name('.edit');
         Route::patch('/{release_channel}/edit', [AdminReleaseChannelController::class, 'update'])->name('.update');
+    });
+    
+    Route::prefix('flights')->name('.flights')->group(function() {
+        Route::get('', [AdminFlightController::class, 'index'])->name('');
+        Route::post('', [AdminFlightController::class, 'store'])->name('.store');
+        Route::delete('{flight}', [AdminFlightController::class, 'destroy'])->name('.destroy');
+        Route::get('/create', [AdminFlightController::class, 'create'])->name('.create');
+        Route::get('/{flight}/edit', [AdminFlightController::class, 'edit'])->name('.edit');
+        Route::patch('/{flight}/edit', [AdminFlightController::class, 'update'])->name('.update');
     });
 });
 
