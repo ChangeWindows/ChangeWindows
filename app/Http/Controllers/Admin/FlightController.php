@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Release;
 use App\Models\Flight;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -39,7 +40,39 @@ class FlightController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('flights.create');
+
+        $releases = Release::orderBy('canonical_version')->orderBy('platform_id')->get();
+
+        return Inertia::render('Admin/Flights/Create', [
+            'urls' => [
+                'store_flight' => route('admin.flights.store', [], false),
+            ],
+            'releases' => $releases->map(function ($release) {
+                return [
+                    'id' => $release->id,
+                    'name' => $release->name,
+                    'start_build' => $release->start_build,
+                    'start_delta' => $release->start_delta,
+                    'end_build' => $release->end_build,
+                    'end_delta' => $release->end_delta,
+                    'platform' => [
+                        'icon' => $release->platform->icon,
+                        'name' => $release->platform->name,
+                        'color' => $release->platform->color
+                    ],
+                    'channels' => $release->releaseChannels->map(function ($channel) {
+                        return [
+                            'id' => $channel->id,
+                            'name' => $channel->name,
+                            'supported' => $channel->supported,
+                            'color' => $channel->channel->color,
+                            'order' => $channel->channel->order
+                        ];
+                    })
+                ];
+            })
+        ]);
     }
 
     /**
@@ -50,7 +83,11 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('flights.create');
+
+        dd($request);
+
+        return Redirect::route('admin.flights.edit', $platform)->with('status', 'Succesfully created these flights.');
     }
 
     /**
