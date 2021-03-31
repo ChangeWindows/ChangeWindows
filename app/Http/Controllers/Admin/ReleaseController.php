@@ -130,7 +130,7 @@ class ReleaseController extends Controller
      */
     public function update(Request $request, Release $release)
     {
-        $this->authorize('release.edit');
+        $this->authorize('releases.edit');
 
         $release->update([
             'name' => request('name'),

@@ -121,7 +121,15 @@ class ReleaseChannelController extends Controller
      */
     public function update(Request $request, ReleaseChannel $releaseChannel)
     {
-        //
+        $this->authorize('releases.edit');
+
+        $releaseChannel->update([
+            'name' => request('name'),
+            'short_name' => request('short_name'),
+            'supported' => request('supported') ? 1 : 0
+        ]);
+
+        return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully updated this release channel.');
     }
 
     /**
