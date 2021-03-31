@@ -158,8 +158,13 @@ export default function Create({ urls, releases }) {
                                                             checked={curFlight.releaseChannels.find((channelId) => channelId === channel.id)}
                                                             onChange={formHandler}
                                                         />
-                                                        <label className="form-check-label" htmlFor={channel.id} style={{ color: channel.color}}>
-                                                            {channel.name}
+                                                        <label className="form-check-label" htmlFor={channel.id}>
+                                                            <span style={{ color: channel.color}}>
+                                                                {channel.name}
+                                                            </span>
+                                                            {!channel.supported &&
+                                                                <small className="text-muted"> - <i>Unsupported</i></small>
+                                                            }
                                                         </label>
                                                     </div>
                                                 ))}
@@ -167,7 +172,7 @@ export default function Create({ urls, releases }) {
                                         ))}
                                         {eligibleReleases.length === 0 && 
                                             <div className="col-12">
-                                                <p className="mb-0">This version can't be published to any flight.</p>
+                                                <p className="mb-0">This build doesn't seem to match any release...</p>
                                             </div>
                                         }
                                     </div>
