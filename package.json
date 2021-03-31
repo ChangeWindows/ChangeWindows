@@ -23,9 +23,9 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-svg-core": "1.2.33-alpha2",
-        "@fortawesome/free-brands-svg-icons": "6.0.0-alpha2",
-        "@fortawesome/pro-regular-svg-icons": "6.0.0-alpha2",
+        "@fortawesome/fontawesome-svg-core": "1.2.33-alpha3",
+        "@fortawesome/free-brands-svg-icons": "6.0.0-alpha3",
+        "@fortawesome/pro-regular-svg-icons": "6.0.0-alpha3",
         "@fortawesome/react-fontawesome": "0.1.14",
         "@inertiajs/inertia": "^0.8.6",
         "@inertiajs/inertia-react": "^0.5.5",
