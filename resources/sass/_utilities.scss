@@ -157,3 +157,8 @@
 .bg-ltsc {
     background-color: $ltsc !important;
 }
+
+.grayed {
+    filter: grayscale(1) !important;
+    opacity: .5;
+}

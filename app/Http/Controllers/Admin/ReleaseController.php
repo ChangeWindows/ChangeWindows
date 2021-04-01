@@ -22,12 +22,34 @@ class ReleaseController extends Controller
     {
         $this->authorize('releases.show');
 
+        $releases = Release::orderBy('platform_id')->orderBy('canonical_version')->paginate(50);
+
         return Inertia::render('Admin/Releases/Show', [
             'can' => [
                 'create_releases' => Auth::user()->can('releases.create'),
                 'edit_releases' => Auth::user()->can('releases.edit')
             ],
-            'releases' => Release::paginate(50),
+            'releases' => $releases->map(function ($release) {
+                return [
+                    'name' => $release->name,
+                    'version' => $release->version,
+                    'edit_url' => $release->edit_url,
+                    'platform' => [
+                        'icon' => $release->platform->icon,
+                        'name' => $release->platform->name,
+                        'color' => $release->platform->color
+                    ],
+                    'channels' => $release->releaseChannels->map(function ($channel) {
+                        return [
+                            'id' => $channel->id,
+                            'short_name' => $channel->short_name,
+                            'supported' => $channel->supported,
+                            'color' => $channel->channel->color,
+                            'order' => $channel->channel->order
+                        ];
+                    })
+                ];
+            }),
             'createUrl' => route('admin.releases.create', [], false),
             'status' => session('status')
         ]);
@@ -115,8 +137,19 @@ class ReleaseController extends Controller
             ],
             'release' => $release,
             'platforms' => Platform::orderBy('position')->get(),
-            'channels' => $release->platform->channels,
-            'release_channels' => $release->releaseChannels,
+            'channels' => $release->platform->channels->sortBy('order')->values()->all(),
+            'release_channels' => $release->releaseChannels->map(function ($channel) {
+                return [
+                    'id' => $channel->id,
+                    'name' => $channel->name,
+                    'short_name' => $channel->short_name,
+                    'supported' => $channel->supported,
+                    'color' => $channel->channel->color,
+                    'order' => $channel->channel->order,
+                    'channel_id' => $channel->channel_id,
+                    'edit_url' => $channel->edit_url
+                ];
+            }),
             'status' => session('status')
         ]);
     }

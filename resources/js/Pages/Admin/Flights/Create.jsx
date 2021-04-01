@@ -9,6 +9,7 @@ import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 export default function Create({ urls, releases }) {
+    const [showAll, setShowAll] = useState(false);
     const [curFlight, setCurFlight] = useState({
         major: '',
         minor: '',
@@ -36,17 +37,19 @@ export default function Create({ urls, releases }) {
             const start = Number(`${release.start_build}.${release.start_delta}`);
             const end = Number(`${release.end_build}.${release.end_delta}`);
 
-            if (build < start || build > end) {
+            if (!showAll && (build < start || build > end)) {
                 return false;
             }
 
-            release.channels.filter((channel) => channel.supported);
-
-            release.channels.sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
+            if (!showAll) {
+                release.availableChannels = release.channels.filter((channel) => channel.supported).sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
+            } else {
+                release.availableChannels = release.channels.sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
+            }
 
             return true;
         });
-    }, [curFlight]);
+    }, [curFlight, showAll]);
 
     function formHandler(event) {
         const { id, value, name } = event.target;
@@ -81,7 +84,7 @@ export default function Create({ urls, releases }) {
                         <InertiaLink href="/admin/flights" className="btn btn-sm me-2">
                             <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                         </InertiaLink>
-                        <span className="navbar-brand">{curFlight.name || 'Unnamed flight'}</span>
+                        <span className="navbar-brand">{version || 'New flight'}</span>
                         <div className="flex-grow-1" />
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
                     </div>
@@ -142,12 +145,35 @@ export default function Create({ urls, releases }) {
                         </div>
                         <div className="col-12 col-md-8">
                             <div className="card">
+                                <div className="card-header">
+                                    <div className="form-check">
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            value="1"
+                                            id="showAll"
+                                            name="channel"
+                                            checked={showAll}
+                                            onChange={() => setShowAll(!showAll)}
+                                        />
+                                        <label className="form-check-label fw-bold" htmlFor="showAll">Show all releases and channels</label>
+                                        <small className="text-muted d-block mt-n1">You'll be able to select any channel, but publishing may be blocked if the build doesn't match.</small>
+                                    </div>
+                                </div>
                                 <div className="card-body">
                                     <div className="row g-3">
                                         {eligibleReleases.map((release, key) => (
                                             <div className="col-12 col-lg-6" key={key}>
-                                                <p className="fw-bold"><PlatformIcon platform={release.platform} color /> {release.name}</p>
-                                                {release.channels.map((channel, key) => (
+                                                <div className="d-flex mb-1">
+                                                    <div className="me-2">
+                                                        <PlatformIcon platform={release.platform} color />
+                                                    </div>
+                                                    <div className="d-flex flex-column">
+                                                        <span className="fw-bold">{release.name}</span>
+                                                        <small className="text-muted mt-n1">{`${release.start_build}.${release.start_delta}`} - {`${release.end_build}.${release.end_delta}`}</small>
+                                                    </div>
+                                                </div>
+                                                {release.availableChannels.map((channel, key) => (
                                                     <div className="form-check" key={key}>
                                                         <input
                                                             className="form-check-input"

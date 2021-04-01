@@ -58,6 +58,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('', [AdminUserController::class, 'index'])->name('');
         Route::get('/edit/{user}', [AdminUserController::class, 'edit'])->name('.edit');
         Route::patch('/edit/{user}', [AdminUserController::class, 'update'])->name('.update');
+        Route::delete('{user}', [AdminUserController::class, 'destroy'])->name('.destroy');
     });
     
     Route::prefix('roles')->name('.roles')->group(function() {

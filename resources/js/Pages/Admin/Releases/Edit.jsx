@@ -5,7 +5,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import Admin from '../../../Layouts/Admin';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faPen, faEye, faPlus, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowLeft, faCheck, faPen, faEye, faPeriod, faPlus, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
 
@@ -148,31 +148,31 @@ export default function Edit({ can, urls, platforms, release, channels, release_
                                     <div className="row g-3">
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="start_preview" value={format(parseISO(curRelease.start_preview), 'y-MM-dd')} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="start_preview" value={curRelease.start_preview ? format(parseISO(curRelease.start_preview), 'y-MM-dd') : null} onChange={formHandler} />
                                                 <label htmlFor="start_preview">Start preview</label>
                                             </div>
                                         </div>
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="start_public" value={format(parseISO(curRelease.start_public), 'y-MM-dd')} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="start_public" value={curRelease.start_public ? format(parseISO(curRelease.start_public), 'y-MM-dd') : null} onChange={formHandler} />
                                                 <label htmlFor="start_public">Start public</label>
                                             </div>
                                         </div>
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="start_extended" value={format(parseISO(curRelease.start_extended), 'y-MM-dd')} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="start_extended" value={curRelease.start_extended ? format(parseISO(curRelease.start_extended), 'y-MM-dd') : null} onChange={formHandler} />
                                                 <label htmlFor="start_extended">Start extended</label>
                                             </div>
                                         </div>
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="start_lts" value={format(parseISO(curRelease.start_lts), 'y-MM-dd')} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="start_lts" value={curRelease.start_lts ? format(parseISO(curRelease.start_lts), 'y-MM-dd') : null} onChange={formHandler} />
                                                 <label htmlFor="start_lts">Start LTS</label>
                                             </div>
                                         </div>
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="end_lts" value={format(parseISO(curRelease.end_lts), 'y-MM-dd')} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="end_lts" value={curRelease.end_lts ? format(parseISO(curRelease.end_lts), 'y-MM-dd') : null} onChange={formHandler} />
                                                 <label htmlFor="end_lts">End LTS</label>
                                             </div>
                                         </div>
@@ -232,18 +232,26 @@ export default function Edit({ can, urls, platforms, release, channels, release_
                             {release_channels.map((releaseChannel) => {
                                 const releaseChannelstatus = [];
 
-                                releaseChannel.active && releaseChannelstatus.push('Active');
+                                releaseChannelstatus.push(releaseChannel.short_name)
+                                releaseChannel.supported && releaseChannelstatus.push('Supported');
                                 
                                 return (
                                     <div className="col-12 col-sm-6 col-xl-4" key={releaseChannel.id}>
                                         <div className="card border-0 shadow-sm h-100">
                                             <div className="card-body">
-                                                <h3 className="h5 mb-0">{releaseChannel.name}</h3>
-                                                <p className="text-muted mb-0"><small>{releaseChannelstatus.join(', ')}</small></p>
+                                                <div className="d-flex">
+                                                    <h3 className="h6 mb-0">
+                                                        <div className="dot" style={{ backgroundColor: releaseChannel.color }} />
+                                                    </h3>
+                                                    <div className="ms-2">
+                                                        <h3 className="h6 mb-0">{releaseChannel.name}</h3>
+                                                        <p className="text-muted mb-0"><small>{releaseChannelstatus.join(', ')}</small></p>
+                                                    </div>
+                                                </div>
                                                 <div className="flex-grox-1" />
                                             </div>
                                             <div className="card-footer">
-                                                <InertiaLink href={releaseChannel.edit_url} className="btn btn-primary btn-sm">
+                                                <InertiaLink href={releaseChannel.edit_url} className="btn btn-link btn-sm">
                                                     {can.edit_releases ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
                                                 </InertiaLink>
                                             </div>
@@ -262,8 +270,8 @@ export default function Edit({ can, urls, platforms, release, channels, release_
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             {availablePlatformChannels.map((channel) => (
-                                                <InertiaLink href={`${urls.create_release_channel}&channel=${channel.id}`} className="dropdown-item">
-                                                    {channel.name}
+                                                <InertiaLink href={`${urls.create_release_channel}&channel=${channel.id}`} className="dropdown-item d-flex align-items-center">
+                                                    <div className="dot" style={{ backgroundColor: channel.color, padding: 0, margin: '4px 0 0 0' }} /> <div className="ms-2">{channel.name}</div>
                                                 </InertiaLink>
                                             ))}
                                         </ul>

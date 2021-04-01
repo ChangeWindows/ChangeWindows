@@ -105,7 +105,7 @@ class PlatformController extends Controller
                 'create_channel' => route('admin.channels.create', [], false),
             ],
             'platform' => $platform,
-            'platform_channels' => $platform->channels,
+            'channels' => $platform->channels->sortBy('order')->values()->all(),
             'status' => session('status')
         ]);
     }
