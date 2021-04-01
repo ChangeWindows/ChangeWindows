@@ -183,7 +183,7 @@ class ReleaseController extends Controller
             'end_delta' => request('end_delta')
         ]);
 
-        return Redirect::route('admin.release.edit', $release)->with('status', 'Succesfully updated this release.');
+        return Redirect::route('admin.releases.edit', $release)->with('status', 'Succesfully updated this release.');
     }
 
     /**
