@@ -89,7 +89,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
     });
     
     Route::prefix('channels')->name('.channels')->group(function() {
-        Route::get('', [AdminChannelController::class, 'index'])->name('');
         Route::post('', [AdminChannelController::class, 'store'])->name('.store');
         Route::delete('{channel}', [AdminChannelController::class, 'destroy'])->name('.destroy');
         Route::get('/create', [AdminChannelController::class, 'create'])->name('.create');

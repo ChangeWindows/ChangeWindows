@@ -20,17 +20,6 @@ class ChannelController extends Controller
      */
     public function index()
     {
-        $this->authorize('channels.show');
-
-        return Inertia::render('Admin/Channels/Show', [
-            'can' => [
-                'create_channels' => Auth::user()->can('channels.create'),
-                'edit_channels' => Auth::user()->can('channels.edit')
-            ],
-            'channels' => Channel::orderBy('order')->get(),
-            'createUrl' => route('admin.channels.create', [], false),
-            'status' => session('status')
-        ]);
     }
 
     /**
