@@ -27,13 +27,19 @@ class ChannelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $this->authorize('channels.create');
+        
+        $platform = Platform::find($request->platform);
 
         return Inertia::render('Admin/Channels/Create', [
             'urls' => [
+                'edit_platform' => route('admin.platforms.edit', $platform, false),
                 'store_channel' => route('admin.channels.store', [], false),
+            ],
+            'params' => [
+                'platform' => $request->platform
             ],
             'platforms' => Platform::orderBy('position')->get()
         ]);
@@ -87,6 +93,7 @@ class ChannelController extends Controller
                 'delete_channels' => Auth::user()->can('channels.delete')
             ],
             'urls' => [
+                'edit_platform' => route('admin.platforms.edit', $channel->platform, false),
                 'update_channel' => route('admin.channels.update', $channel, false),
                 'destroy_channel' => route('admin.channels.destroy', $channel, false)
             ],

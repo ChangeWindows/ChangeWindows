@@ -102,7 +102,7 @@ class PlatformController extends Controller
             'urls' => [
                 'update_platform' => route('admin.platforms.update', $platform, false),
                 'destroy_platform' => route('admin.platforms.destroy', $platform, false),
-                'create_channel' => route('admin.channels.create', [], false),
+                'create_channel' => route('admin.channels.create', ['platform' => $platform->id], false)
             ],
             'platform' => $platform,
             'channels' => $platform->channels->sortBy('order')->values()->all(),

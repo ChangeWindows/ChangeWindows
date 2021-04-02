@@ -7,13 +7,13 @@ import Admin from '../../../Layouts/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Create({ urls, platforms }) {
+export default function Create({ urls, platforms, params }) {
     const [curChannel, setCurChannel] = useState({
         name: '',
         color: '#',
         order: 0,
         active: 1,
-        platform_id: null
+        platform_id: params.platform
     });
 
     function formHandler(event) {
@@ -42,7 +42,7 @@ export default function Create({ urls, platforms }) {
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">
-                        <InertiaLink href="/admin/channels" className="btn btn-sm me-2">
+                        <InertiaLink href={urls.edit_platform} className="btn btn-sm me-2">
                             <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                         </InertiaLink>
                         <span className="navbar-brand">{curChannel.name || 'Unnamed channel'}</span>
