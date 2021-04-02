@@ -16,9 +16,8 @@ class TimelineController extends Controller
     public function index()
     {
         return Inertia::render('Timeline/Show', [
-            'platforms' => Platform::orderBy('position')->paginate(50)->map(function ($platform) {
+            'platforms' => Platform::orderBy('position')->get()->map(function ($platform) {
                 return [
-                    'id' => $platform->id,
                     'name' => $platform->name,
                     'color' => $platform->color,
                     'icon' => $platform->icon,
