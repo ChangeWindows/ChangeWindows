@@ -33,11 +33,12 @@ export default function Create({ urls, releases }) {
 
     const eligibleReleases = useMemo(() => {
         return releases.filter((release) => {
-            const build = Number(`${curFlight.build}${curFlight.delta ? `.${curFlight.delta}` : ''}`);
-            const start = Number(`${release.start_build}.${release.start_delta}`);
-            const end = Number(`${release.end_build}.${release.end_delta}`);
-
-            if (!showAll && (build < start || build > end)) {
+            if (!showAll && (
+                Number(curFlight.build) < Number(release.start_build) ||
+                Number(curFlight.build) === Number(release.start_build) && Number(curFlight.delta) <Number( release.start_delta) ||
+                Number(curFlight.build) > Number(release.end_build) ||
+                Number(curFlight.build) === Number(release.end_build) && Number(curFlight.delta) >Number( release.end_delta)
+            )) {
                 return false;
             }
 
@@ -45,6 +46,10 @@ export default function Create({ urls, releases }) {
                 release.availableChannels = release.channels.filter((channel) => channel.supported).sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
             } else {
                 release.availableChannels = release.channels.sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
+            }
+
+            if (!showAll && release.availableChannels.length === 0) {
+                return false;
             }
 
             return true;
