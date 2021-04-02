@@ -15,21 +15,20 @@ export default function Create({ urls, releases }) {
         minor: '',
         build: '',
         delta: '',
-        releaseChannels: []
+        releaseChannels: [],
+        tweet: true
     });
 
     const [version, setVersion] = useState('10.0.');
     useEffect(() => {
         setCurFlight((curFlight) => ({
             ...curFlight,
-            major: Number(version.split('.')[0]) ?? null,
-            minor: Number(version.split('.')[1]) ?? null,
-            build: Number(version.split('.')[2]) ?? null,
-            delta: Number(version.split('.')[3]) ?? null
+            major: !isNaN(version.split('.')[0]) && !!version.split('.')[0] ? Number(version.split('.')[0]) : null,
+            minor: !isNaN(version.split('.')[1]) && !!version.split('.')[1] ? Number(version.split('.')[1]) : null,
+            build: !isNaN(version.split('.')[2]) && !!version.split('.')[2] ? Number(version.split('.')[2]) : null,
+            delta: !isNaN(version.split('.')[3]) && !!version.split('.')[3] ? Number(version.split('.')[3]) : null
         }))
     }, [version]);
-
-    console.log(releases);
 
     const eligibleReleases = useMemo(() => {
         return releases.filter((release) => {
@@ -108,34 +107,66 @@ export default function Create({ urls, releases }) {
                             <div className="card">
                                 <div className="card-body">
                                     <div className="row g-3">
-                                        <div className="col-12">
+                                        <div className="col-12 col-lg-4">
                                             <div className="form-floating">
                                                 <input type="text" className="form-control" id="version" value={version} onChange={(event) => setVersion(event.target.value)} />
                                                 <label htmlFor="version">Version</label>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-md-6 col-lg-3">
+                                        <div className="col-3 col-lg-2">
                                             <div className="form-floating">
                                                 <input type="text" className="form-control" id="major" value={curFlight.major} disabled />
                                                 <label htmlFor="major">Major</label>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-md-6 col-lg-3">
+                                        <div className="col-3 col-lg-2">
                                             <div className="form-floating">
                                                 <input type="text" className="form-control" id="minor" value={curFlight.minor} disabled />
                                                 <label htmlFor="minor">Minor</label>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-md-6 col-lg-3">
+                                        <div className="col-3 col-lg-2">
                                             <div className="form-floating">
                                                 <input type="text" className="form-control" id="build" value={curFlight.build} disabled />
                                                 <label htmlFor="build">Build</label>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-md-6 col-lg-3">
+                                        <div className="col-3 col-lg-2">
                                             <div className="form-floating">
                                                 <input type="text" className="form-control" id="delta" value={curFlight.delta} disabled />
                                                 <label htmlFor="delta">Delta</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset className="row mb-3">
+                        <div className="col-12 col-md-4 my-4 my-md-0">
+                            <h4 className="h5 mb-0">Socials</h4>
+                            <p className="text-muted mb-0"><small>Socializing, but safe of course, it's still a pandemic...</small></p>
+                        </div>
+                        <div className="col-12 col-md-8">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="row g-3">
+                                        <div className="col-12">
+                                            <div className="form-check">
+                                                <input
+                                                    disabled
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    value="1"
+                                                    id="tweet"
+                                                    name="channel"
+                                                    checked={curFlight.tweet}
+                                                    onChange={formHandler}
+                                                />
+                                                <label className="form-check-label" htmlFor="tweet">
+                                                    <span className="fw-bold">Publish to Twitter</span>
+                                                    <p className="lh-sm mt-1 mb-0"><small className="text-muted d-block mt-n1">Send a tweet through the @ChangeWindows and/or @ChangeXbox Twitter handles.</small></p>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -161,8 +192,10 @@ export default function Create({ urls, releases }) {
                                             checked={showAll}
                                             onChange={() => setShowAll(!showAll)}
                                         />
-                                        <label className="form-check-label fw-bold" htmlFor="showAll">Show all releases and channels</label>
-                                        <small className="text-muted d-block mt-n1">You'll be able to select any channel, but publishing may be blocked if the build doesn't match.</small>
+                                        <label className="form-check-label" htmlFor="showAll">
+                                            <span className="fw-bold">Show all releases and channels</span>
+                                            <p className="lh-sm mt-1 mb-0"><small className="text-muted d-block mt-n1">You'll be able to select any channel, but publishing may be blocked if the build doesn't match.</small></p>
+                                        </label>
                                     </div>
                                 </div>
                                 <div className="card-body">
@@ -203,7 +236,11 @@ export default function Create({ urls, releases }) {
                                         ))}
                                         {eligibleReleases.length === 0 && 
                                             <div className="col-12">
-                                                <p className="mb-0">This build doesn't seem to match any release...</p>
+                                                {version === '10.0.' ?
+                                                    <p className="mb-0">Enter a string to get started...</p>
+                                                :
+                                                    <p className="mb-0">This build doesn't seem to match any release...</p>
+                                                }
                                             </div>
                                         }
                                     </div>
