@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Release;
 use App\Models\Flight;
+use App\Models\Timeline;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Auth;
 use Redirect;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 class FlightController extends Controller
@@ -85,9 +87,23 @@ class FlightController extends Controller
     {
         $this->authorize('flights.create');
 
-        dd($request);
+        foreach($request->releaseChannels as $releaseChannel) {
+            $flight = Flight::create([
+                'major' => request('major'),
+                'minor' => request('minor'),
+                'build' => request('build'),
+                'delta' => request('delta'),
+                'release_channel_id' => $releaseChannel
+            ]);
 
-        return Redirect::route('admin.flights.edit', $platform)->with('status', 'Succesfully created these flights.');
+            Timeline::create([
+                'date' => (new Carbon(request('date'))),
+                'entry_type' => Flight::class,
+                'entry_id' => $flight->id
+            ]);
+        }
+
+        return Redirect::route('admin.flights')->with('status', 'Succesfully created these flights.');
     }
 
     /**

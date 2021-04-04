@@ -32,6 +32,6 @@ class Flight extends Model
     }
 
     public function getEditUrlAttribute() {
-        return route('admin.flight.edit', $this, false);
+        return route('admin.flights.edit', $this, false);
     }
 }

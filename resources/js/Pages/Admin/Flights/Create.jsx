@@ -3,19 +3,23 @@ import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
-import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
+
+import { format } from 'date-fns';
 
 export default function Create({ urls, releases }) {
     const [showAll, setShowAll] = useState(false);
+    const [showEligible, setShowEligible] = useState(true);
     const [curFlight, setCurFlight] = useState({
         major: '',
         minor: '',
         build: '',
         delta: '',
         releaseChannels: [],
+        date: new Date(),
         tweet: true
     });
 
@@ -41,7 +45,7 @@ export default function Create({ urls, releases }) {
                 return false;
             }
 
-            if (!showAll) {
+            if (!showAll && !showEligible) {
                 release.availableChannels = release.channels.filter((channel) => channel.supported).sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
             } else {
                 release.availableChannels = release.channels.sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
@@ -53,7 +57,7 @@ export default function Create({ urls, releases }) {
 
             return true;
         });
-    }, [curFlight, showAll]);
+    }, [curFlight, showAll, showEligible]);
 
     function formHandler(event) {
         const { id, value, name } = event.target;
@@ -107,33 +111,39 @@ export default function Create({ urls, releases }) {
                             <div className="card">
                                 <div className="card-body">
                                     <div className="row g-3">
-                                        <div className="col-12 col-lg-4">
+                                        <div className="col-12 col-sm-6">
                                             <div className="form-floating">
                                                 <input type="text" className="form-control" id="version" value={version} onChange={(event) => setVersion(event.target.value)} />
                                                 <label htmlFor="version">Version</label>
                                             </div>
                                         </div>
-                                        <div className="col-3 col-lg-2">
+                                        <div className="col-12 col-sm-6">
                                             <div className="form-floating">
-                                                <input type="text" className="form-control" id="major" value={curFlight.major} disabled />
+                                                <input type="date" className="form-control" id="date" value={format(curFlight.date, 'yyyy-MM-dd')} onChange={formHandler} />
+                                                <label htmlFor="date">Date</label>
+                                            </div>
+                                        </div>
+                                        <div className="col-3">
+                                            <div className="form-floating">
+                                                <input type="text" className="form-control" id="major" value={curFlight.major ?? ''} disabled />
                                                 <label htmlFor="major">Major</label>
                                             </div>
                                         </div>
-                                        <div className="col-3 col-lg-2">
+                                        <div className="col-3">
                                             <div className="form-floating">
-                                                <input type="text" className="form-control" id="minor" value={curFlight.minor} disabled />
+                                                <input type="text" className="form-control" id="minor" value={curFlight.minor ?? ''} disabled />
                                                 <label htmlFor="minor">Minor</label>
                                             </div>
                                         </div>
-                                        <div className="col-3 col-lg-2">
+                                        <div className="col-3">
                                             <div className="form-floating">
-                                                <input type="text" className="form-control" id="build" value={curFlight.build} disabled />
+                                                <input type="text" className="form-control" id="build" value={curFlight.build ?? ''} disabled />
                                                 <label htmlFor="build">Build</label>
                                             </div>
                                         </div>
-                                        <div className="col-3 col-lg-2">
+                                        <div className="col-3">
                                             <div className="form-floating">
-                                                <input type="text" className="form-control" id="delta" value={curFlight.delta} disabled />
+                                                <input type="text" className="form-control" id="delta" value={curFlight.delta ?? ''} disabled />
                                                 <label htmlFor="delta">Delta</label>
                                             </div>
                                         </div>
@@ -182,6 +192,21 @@ export default function Create({ urls, releases }) {
                         <div className="col-12 col-md-8">
                             <div className="card">
                                 <div className="card-header">
+                                    <div className="form-check">
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            value="1"
+                                            id="showEligible"
+                                            name="channel"
+                                            checked={showEligible}
+                                            onChange={() => setShowEligible(!showEligible)}
+                                        />
+                                        <label className="form-check-label" htmlFor="showEligible">
+                                            <span className="fw-bold">Show all eligible releases and channels</span>
+                                            <p className="lh-sm mt-1 mb-0"><small className="text-muted d-block mt-n1">You'll be able to select any channel within a release that accepts this build string.</small></p>
+                                        </label>
+                                    </div>
                                     <div className="form-check">
                                         <input
                                             className="form-check-input"
