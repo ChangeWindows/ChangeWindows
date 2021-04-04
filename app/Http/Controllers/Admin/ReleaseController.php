@@ -22,7 +22,7 @@ class ReleaseController extends Controller
     {
         $this->authorize('releases.show');
 
-        $releases = Release::orderBy('platform_id')->orderBy('canonical_version')->paginate(50);
+        $releases = Release::orderBy('platform_id')->orderBy('canonical_version')->paginate(100);
 
         return Inertia::render('Admin/Releases/Show', [
             'can' => [
