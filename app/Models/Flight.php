@@ -12,7 +12,7 @@ class Flight extends Model
     public $searchableType = 'Flights';
 
     protected $table = 'flights';
-    protected $fillable = ['major', 'minor', 'build', 'delta', 'release_channel_id', 'baseline_id'];
+    protected $fillable = ['major', 'minor', 'build', 'delta', 'release_channel_id'];
     protected $appends = ['edit_url', 'version', 'flight'];
     
     public function timeline() {
