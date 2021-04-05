@@ -25,6 +25,10 @@ class Platform extends Model
         return $this->hasMany(Release::class);
     }
 
+    public function releaseChannels() {
+        return $this->hasManyThrough(ReleaseChannel::class, Release::class);
+    }
+
     public function getPlainIconAttribute() {
         return '<i class="far fa-fw fa-'.$this->icon.' '.$this->icon_modifiers.'"></i>';
     }

@@ -21,6 +21,10 @@ class ReleaseChannel extends Model
         return $this->belongsTo(Release::class);
     }
 
+    public function flights() {
+        return $this->hasMany(Flight::class);
+    }
+
     public function platform() {
         return $this->hasOneThrough(Platform::class, Channel::class);
     }

@@ -19,6 +19,10 @@ class Channel extends Model
         return $this->belongsTo(Platform::class);
     }
 
+    public function releaseChannels() {
+        return $this->hasMany(ReleaseChannel::class);
+    }
+
     public function getBgColorAttribute() {
         return 'background-color: '.$this->color;
     }
