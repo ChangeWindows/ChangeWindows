@@ -2,7 +2,7 @@ import { faArrowRight } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 
-export default function ReleaseCard({ name, channels, alts }) {
+export default function ReleaseCard({ name, channels, alts, url }) {
     return (
         <div className="col-12 col-sm-6 col-xl-4 col-xxl-3">
             <div className="card release">
@@ -17,7 +17,7 @@ export default function ReleaseCard({ name, channels, alts }) {
                     ))}
                 </div>}
                 <div className="release-actions">
-                    <a href="#" className="btn btn-link btn-sm"><FontAwesomeIcon icon={faArrowRight} fixedWidth /> View release</a>
+                    <a href={url} className="btn btn-link btn-sm"><FontAwesomeIcon icon={faArrowRight} fixedWidth /> View release</a>
                 </div>
             </div>
         </div>

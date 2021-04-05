@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class Release extends Model
 {
     use HasFactory;
     use Sluggable;
+    use HasRelationships;
 
     public $searchableType = 'Releases';
 
     protected $table = 'releases';
     protected $fillable = ['name', 'version', 'canonical_version', 'codename', 'description', 'changelog', 'platform_id', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts', 'start_build', 'start_delta', 'end_build', 'end_delta'];
-    protected $appends = ['edit_url'];
+    protected $appends = ['url', 'edit_url'];
     protected $dates = ['start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts'];
 
     public function platform() {
@@ -26,8 +28,20 @@ class Release extends Model
         return $this->hasMany(ReleaseChannel::class);
     }
 
+    public function flights() {
+        return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->flights());
+    }
+
+    public function timeline() {
+        return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->timeline());
+    }
+
     public function getEditUrlAttribute() {
         return route('admin.releases.edit', $this, false);
+    }
+
+    public function getUrlAttribute() {
+        return route('front.releases.show', $this, false);
     }
 
     public function getRouteKeyName() {

@@ -5,6 +5,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\Admin\ChannelController as AdminChannelController;
 use App\Http\Controllers\Admin\FlightController as AdminFlightController;
 use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
@@ -53,8 +54,8 @@ Route::prefix('')->name('front')->group(function() {
     });
     
     Route::prefix('releases')->name('.releases')->group(function() {
-        Route::get('', [PlatformController::class, 'index'])->name('');
-        Route::get('/{release}', [PlatformController::class, 'show'])->name('.show');
+        Route::get('', [ReleaseController::class, 'index'])->name('');
+        Route::get('/{release}', [ReleaseController::class, 'show'])->name('.show');
     });
 });
 

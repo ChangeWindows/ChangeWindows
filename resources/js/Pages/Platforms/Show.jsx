@@ -95,6 +95,7 @@ export default function Show({ platforms, platform, channels, releases, timeline
                                                             name={release.name}
                                                             alts={[`Version ${release.version}`, release.codename]}
                                                             channels={release.channels}
+                                                            url={release.url}
                                                         />
                                                     );
                                                 })}
@@ -129,7 +130,7 @@ export default function Show({ platforms, platform, channels, releases, timeline
                             </div>
                             <div className="tab-pane fade" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
                                 <div className="row">
-                                    <div className="col-8 mt-4">
+                                    <div className="col-12 mt-4">
                                         <h2 className="h5 mb-3 fw-bold">Timeline</h2>
                                         <div className="row g-4">
                                             {Object.keys(timeline).map((date, key) => (

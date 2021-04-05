@@ -64,6 +64,7 @@ class PlatformController extends Controller
                     'name' => $release->name,
                     'version' => $release->version,
                     'codename' => $release->codename,
+                    'url' => $release->url,
                     'platform' => [
                         'icon' => $release->platform->icon,
                         'name' => $release->platform->name,
@@ -102,8 +103,7 @@ class PlatformController extends Controller
                         ];
                     })
                 ];
-            }),
-            'status' => session('status')
+            })
         ]);
     }
 }
