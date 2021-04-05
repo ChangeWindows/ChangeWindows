@@ -16,11 +16,15 @@ class Flight extends Model
     protected $appends = ['edit_url', 'version', 'flight', 'url'];
     
     public function timeline() {
-        return $this->morphOne(Timeline::class, 'timeline');
+        return $this->morphOne(Timeline::class, 'entry');
     }
 
-    public function releaseChannels() {
+    public function releaseChannel() {
         return $this->belongsTo(ReleaseChannel::class);
+    }
+
+    public function getPlatformAttribute() {
+        return $this->releaseChannel->release->platform;
     }
 
     public function getFlightAttribute() {

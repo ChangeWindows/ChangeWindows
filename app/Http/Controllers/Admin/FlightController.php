@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Release;
 use App\Models\Flight;
 use App\Models\Timeline;
+use App\Models\ReleaseChannel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -12,6 +13,7 @@ use Auth;
 use Redirect;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Twitter;
 
 class FlightController extends Controller
 {
@@ -24,12 +26,35 @@ class FlightController extends Controller
     {
         $this->authorize('flights.show');
 
+        $timeline = Timeline::where('entry_type', Flight::class)->orderBy('date', 'desc')->get()->groupBy('date');
+
         return Inertia::render('Admin/Flights/Show', [
             'can' => [
                 'create_flights' => Auth::user()->can('flights.create'),
                 'edit_flights' => Auth::user()->can('flights.edit')
             ],
-            'flights' => Flight::get(),
+            'timeline' => $timeline->map(function ($items, $date) {
+                return [
+                    'date' => $items[0]->date,
+                    'flights' => $items->map(function ($flight) {
+                        return [
+                            'id' => $flight->entry->id,
+                            'version' => $flight->entry->version,
+                            'date' => $flight->entry->timeline->date,
+                            'release_channel' => [
+                                'name' => $flight->entry->releaseChannel->short_name,
+                                'color' => $flight->entry->releaseChannel->channel->color
+                            ],
+                            'platform' => [
+                                'icon' => $flight->entry->platform->icon,
+                                'name' => $flight->entry->platform->name,
+                                'color' => $flight->entry->platform->color
+                            ],
+                            'edit_url' => $flight->entry->edit_url
+                        ];
+                    })
+                ];
+            }),
             'createUrl' => route('admin.flights.create', [], false),
             'status' => session('status')
         ]);
@@ -88,6 +113,7 @@ class FlightController extends Controller
         $this->authorize('flights.create');
 
         foreach($request->releaseChannels as $releaseChannel) {
+            $release_channel = ReleaseChannel::find($releaseChannel);
             $flight = Flight::create([
                 'major' => request('major'),
                 'minor' => request('minor'),
@@ -101,6 +127,20 @@ class FlightController extends Controller
                 'entry_type' => Flight::class,
                 'entry_id' => $flight->id
             ]);
+
+            if ($request->tweet) {
+                Twitter::postTweet([
+                    'status' =>
+'ChangeWindows Test Tweet
+💻 '.$release_channel->release->name.' (Version '.$release_channel->release->version.')
+✈️ '.$flight->version.'
+👉 '.$release_channel->name.'
+🔗 changewindows.org/releases/'.$release_channel->release->slug.'
+#Windows #WindowsInsiders',
+// 🔗 '.$flight->url, // TODO enable for production
+                    'response_format' => 'json'
+                ]);
+            }
         }
 
         return Redirect::route('admin.flights')->with('status', 'Succesfully created these flights.');

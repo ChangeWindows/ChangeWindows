@@ -2,12 +2,14 @@ import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
+import { format, parseISO } from 'date-fns';
 
-export default function Show({ can, flights, createUrl, status = null }) {
-    console.log('flights', flights);
+export default function Show({ can, timeline, createUrl, status = null }) {
+    console.log(timeline);
     return (
         <Admin>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
@@ -25,19 +27,34 @@ export default function Show({ can, flights, createUrl, status = null }) {
                     <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                 }
                 <div className="row g-3">
-                    {flights.map((flight) => (
-                        <div className="col-12 col-sm-6 col-xl-4 col-xxl-3" key={flight.id}>
-                            <div className="card border-0 shadow-sm">
-                                <div className="card-body">
-                                    <h3 className="h5 mb-0">{flight.version}</h3>
-                                </div>
-                                <div className="card-footer">
-                                    <InertiaLink href={flight.edit_url} className="btn btn-primary btn-sm">
-                                        {can.edit_flights ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
-                                    </InertiaLink>
-                                </div>
+                    {Object.keys(timeline).map((date) => (
+                        <>
+                            <div className="col-12">
+                                <h5 key={date} className="m-0">{format(parseISO(timeline[date].date), 'd MMMM yyyy')}</h5>
                             </div>
-                        </div>
+                            {timeline[date].flights.map((flight, key) => (
+                                <div className="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-2" key={key}>
+                                    <div className="card border-0 shadow-sm h-100">
+                                        <div className="card-body d-flex flex-column">
+                                            <div className="d-flex flex-row">
+                                                <h3 className="h6 mb-0">
+                                                    <PlatformIcon platform={flight.platform} color />
+                                                </h3>
+                                                <div className="ms-2">
+                                                    <h3 className="h6 mb-0">{flight.version}</h3>
+                                                    <span key={key} className="badge me-1" style={{ background: flight.release_channel.color }}>{flight.release_channel.name}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="card-footer">
+                                            <InertiaLink href={flight.edit_url} className="btn btn-link btn-sm">
+                                                {can.edit_flights ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
+                                            </InertiaLink>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </>
                     ))}
                 </div>
             </div>
