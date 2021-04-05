@@ -10,6 +10,7 @@ use Inertia\Inertia;
 use Auth;
 use Redirect;
 use Illuminate\Support\Collection;
+use App\Http\Requests\ReleaseRequest;
 
 class ReleaseController extends Controller
 {
@@ -75,31 +76,14 @@ class ReleaseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\ReleaseRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReleaseRequest $request)
     {
         $this->authorize('releases.create');
 
-        $release = Release::create([
-            'name' => request('name'),
-            'version' => request('version'),
-            'canonical_version' => request('canonical_version'),
-            'codename' => request('codename'),
-            'description' => request('description'),
-            'changelog' => request('changelog'),
-            'platform_id' => request('platform_id'),
-            'start_preview' => request('start_preview'),
-            'start_public' => request('start_public'),
-            'start_extended' => request('start_extended'),
-            'start_lts' => request('start_lts'),
-            'end_lts' => request('end_lts'),
-            'start_build' => request('start_build'),
-            'start_delta' => request('start_delta'),
-            'end_build' => request('end_build'),
-            'end_delta' => request('end_delta')
-        ]);
+        $release = Release::create($request->validated());
 
         return Redirect::route('admin.releases.edit', $release)->with('status', 'Succesfully created this release.');
     }
@@ -157,31 +141,15 @@ class ReleaseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\ReleaseRequest  $request
      * @param  \App\Models\Release  $release
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Release $release)
+    public function update(ReleaseRequest $request, Release $release)
     {
         $this->authorize('releases.edit');
 
-        $release->update([
-            'name' => request('name'),
-            'version' => request('version'),
-            'canonical_version' => request('canonical_version'),
-            'codename' => request('codename'),
-            'description' => request('description'),
-            'changelog' => request('changelog'),
-            'start_preview' => request('start_preview'),
-            'start_public' => request('start_public'),
-            'start_extended' => request('start_extended'),
-            'start_lts' => request('start_lts'),
-            'end_lts' => request('end_lts'),
-            'start_build' => request('start_build'),
-            'start_delta' => request('start_delta'),
-            'end_build' => request('end_build'),
-            'end_delta' => request('end_delta')
-        ]);
+        $release->update($request->validated());
 
         return Redirect::route('admin.releases.edit', $release)->with('status', 'Succesfully updated this release.');
     }

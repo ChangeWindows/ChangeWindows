@@ -19,8 +19,8 @@ class CreateReleasesTable extends Migration
             $table->string('version')->required();
             $table->integer('canonical_version')->required();
             $table->string('codename');
-            $table->text('description');
-            $table->text('changelog');
+            $table->text('description')->nullable();
+            $table->text('changelog')->nullable();
             $table->foreignId('platform_id')->constrained('platforms')->onDelete('cascade');
             $table->date('start_preview')->nullable();
             $table->date('start_public')->nullable();

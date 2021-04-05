@@ -72,7 +72,6 @@ export default function Create({ urls, releases }) {
                 }
                 break;
             case 'tweet':
-                console.log('edit the tweet')
                 _flight.tweet = !_flight.tweet;
                 break;
             default:

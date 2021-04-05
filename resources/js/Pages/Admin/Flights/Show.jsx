@@ -9,7 +9,6 @@ import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icon
 import { format, parseISO } from 'date-fns';
 
 export default function Show({ can, timeline, createUrl, status = null }) {
-    console.log(timeline);
     return (
         <Admin>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
