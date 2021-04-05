@@ -51,6 +51,11 @@ Route::prefix('')->name('front')->group(function() {
         Route::get('', [PlatformController::class, 'index'])->name('');
         Route::get('/{platform}', [PlatformController::class, 'show'])->name('.show');
     });
+    
+    Route::prefix('releases')->name('.releases')->group(function() {
+        Route::get('', [PlatformController::class, 'index'])->name('');
+        Route::get('/{release}', [PlatformController::class, 'show'])->name('.show');
+    });
 });
 
 Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {

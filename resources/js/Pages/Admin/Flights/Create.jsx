@@ -8,7 +8,7 @@ import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
 
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 export default function Create({ urls, releases }) {
     const [showAll, setShowAll] = useState(false);
@@ -19,7 +19,7 @@ export default function Create({ urls, releases }) {
         build: '',
         delta: '',
         releaseChannels: [],
-        date: new Date(),
+        date: format(new Date(), 'yyyy-MM-dd'),
         tweet: true
     });
 
@@ -71,6 +71,10 @@ export default function Create({ urls, releases }) {
                     _flight.releaseChannels = [..._flight.releaseChannels, id];
                 }
                 break;
+            case 'tweet':
+                console.log('edit the tweet')
+                _flight.tweet = !_flight.tweet;
+                break;
             default:
                 _flight[id] = value;
                 break;
@@ -119,7 +123,7 @@ export default function Create({ urls, releases }) {
                                         </div>
                                         <div className="col-12 col-sm-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="date" value={format(curFlight.date, 'yyyy-MM-dd')} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="date" value={format(parseISO(curFlight.date), 'yyyy-MM-dd')} onChange={formHandler} />
                                                 <label htmlFor="date">Date</label>
                                             </div>
                                         </div>
@@ -164,12 +168,11 @@ export default function Create({ urls, releases }) {
                                         <div className="col-12">
                                             <div className="form-check">
                                                 <input
-                                                    disabled
                                                     className="form-check-input"
                                                     type="checkbox"
                                                     value="1"
                                                     id="tweet"
-                                                    name="channel"
+                                                    name="tweet"
                                                     checked={curFlight.tweet}
                                                     onChange={formHandler}
                                                 />
