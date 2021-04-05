@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class Platform extends Model
 {
     use HasFactory;
     use Sluggable;
+    use HasRelationships;
 
     public $searchableType = 'Platforms';
 
@@ -27,6 +29,14 @@ class Platform extends Model
 
     public function releaseChannels() {
         return $this->hasManyThrough(ReleaseChannel::class, Release::class);
+    }
+
+    public function flights() {
+        return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->flights());
+    }
+
+    public function timeline() {
+        return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->timeline());
     }
 
     public function getPlainIconAttribute() {

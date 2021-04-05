@@ -80,6 +80,29 @@ class PlatformController extends Controller
                     })->values()->all()
                 ];
             })->values()->all(),
+            'timeline' => $platform->timeline->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
+                return [
+                    'date' => $items[0]->date,
+                    'flights' => $items->map(function ($flight) {
+                        return [
+                            'id' => $flight->entry->id,
+                            'flight' => $flight->entry->flight,
+                            'date' => $flight->entry->timeline->date,
+                            'version' => $flight->entry->releaseChannel->release->version,
+                            'release_channel' => [
+                                'name' => $flight->entry->releaseChannel->short_name,
+                                'color' => $flight->entry->releaseChannel->channel->color
+                            ],
+                            'platform' => [
+                                'icon' => $flight->entry->platform->icon,
+                                'name' => $flight->entry->platform->name,
+                                'color' => $flight->entry->platform->color
+                            ],
+                            'edit_url' => $flight->entry->edit_url
+                        ];
+                    })
+                ];
+            }),
             'status' => session('status')
         ]);
     }

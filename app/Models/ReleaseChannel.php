@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class ReleaseChannel extends Model
 {
     use HasFactory;
+    use HasRelationships;
 
     protected $table = 'release_channels';
     protected $fillable = ['name', 'short_name', 'supported', 'channel_id', 'release_id'];
@@ -23,6 +25,14 @@ class ReleaseChannel extends Model
 
     public function flights() {
         return $this->hasMany(Flight::class);
+    }
+
+    public function timeline() {
+        return $this->hasManyDeep(
+            Timeline::class,
+            [Flight::class],
+            [null, ['entry_type', 'entry_id']]
+        );
     }
 
     public function platform() {

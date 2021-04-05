@@ -11,10 +11,11 @@ import Timeline from '../../Components/Timeline/Timeline';
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag, faLaptop, faListTimeline } from '@fortawesome/pro-regular-svg-icons';
+import { faAngleDown, faFlag, faListTimeline } from '@fortawesome/pro-regular-svg-icons';
+
 import { format, parseISO } from 'date-fns';
 
-export default function Show({ platforms, platform, channels, releases }) {
+export default function Show({ platforms, platform, channels, releases, timeline }) {
     const [currentReleases, legacyReleases] = useMemo(() => {
         const currentReleases = releases.filter((release) => release.channels.length > 0);
         const legacyReleases = releases.filter((release) => release.channels.length === 0);
@@ -41,7 +42,7 @@ export default function Show({ platforms, platform, channels, releases }) {
                         <ul className="navbar-nav">
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="legacyPlatforms" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Legacy
+                                    <FontAwesomeIcon icon={faAngleDown} /> Legacy
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="legacyPlatforms">
                                     {platforms.filter((platform) => platform.legacy).map((platform, key) => (
@@ -83,21 +84,23 @@ export default function Show({ platforms, platform, channels, releases }) {
                         <div className="tab-content" id="nav-tabContent">
                             <div className="tab-pane fade show active" id="nav-releases" role="tabpanel" aria-labelledby="nav-releases-tab">
                                 <div className="row">
-                                    <div className="col-12 mt-4">
-                                        <h2 className="h5 mb-3 fw-bold">Current releases</h2>
-                                        <div className="row g-2">
-                                            {currentReleases.map((release, key) => {
-                                                return (
-                                                    <ReleaseCard
-                                                        key={key}
-                                                        name={release.name}
-                                                        alts={[`Version ${release.version}`, release.codename]}
-                                                        channels={release.channels}
-                                                    />
-                                                );
-                                            })}
+                                    {currentReleases.length > 0 &&
+                                        <div className="col-12 mt-4">
+                                            <h2 className="h5 mb-3 fw-bold">Current releases</h2>
+                                            <div className="row g-2">
+                                                {currentReleases.map((release, key) => {
+                                                    return (
+                                                        <ReleaseCard
+                                                            key={key}
+                                                            name={release.name}
+                                                            alts={[`Version ${release.version}`, release.codename]}
+                                                            channels={release.channels}
+                                                        />
+                                                    );
+                                                })}
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
                                     <div className="col-12 mt-4">
                                         <h2 className="h5 mb-3 fw-bold">Packages</h2>
                                         <div className="row g-2">
@@ -106,20 +109,22 @@ export default function Show({ platforms, platform, channels, releases }) {
                                             />
                                         </div>
                                     </div>
-                                    <div className="col-12 mt-4">
-                                        <h2 className="h5 mb-3 fw-bold">Unsupported releases</h2>
-                                        <div className="row g-2">
-                                            {legacyReleases.map((release, key) => {
-                                                return (
-                                                    <ReleaseCard
-                                                        key={key}
-                                                        name={release.name}
-                                                        alts={[`Version ${release.version}`, release.codename]}
-                                                    />
-                                                );
-                                            })}
+                                    {legacyReleases.length > 0 &&
+                                        <div className="col-12 mt-4">
+                                            <h2 className="h5 mb-3 fw-bold">Unsupported releases</h2>
+                                            <div className="row g-2">
+                                                {legacyReleases.map((release, key) => {
+                                                    return (
+                                                        <ReleaseCard
+                                                            key={key}
+                                                            name={release.name}
+                                                            alts={[`Version ${release.version}`, release.codename]}
+                                                        />
+                                                    );
+                                                })}
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
                             <div className="tab-pane fade" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
@@ -127,35 +132,19 @@ export default function Show({ platforms, platform, channels, releases }) {
                                     <div className="col-8 mt-4">
                                         <h2 className="h5 mb-3 fw-bold">Timeline</h2>
                                         <div className="row g-4">
-                                            <Timeline date="3 March 2021">
-                                                <Flight
-                                                    platform="pc"
-                                                    build="21627.1000"
-                                                    channels={[
-                                                        { class: 'dev', name: 'Dev' }
-                                                    ]}
-                                                />
-                                            </Timeline>
-                                            <Timeline date="23 February 2021">
-                                                <Flight
-                                                    platform="pc"
-                                                    build="120.2212.3030.0"
-                                                    channels={[
-                                                        { class: 'beta', name: 'Beta' }
-                                                    ]}
-                                                    component="Windows Feature Experience Pack"
-                                                />
-                                            </Timeline>
-                                            <Timeline date="26 January 2021">
-                                                <Flight
-                                                    platform="pc"
-                                                    build="120.2212.2020.0"
-                                                    channels={[
-                                                        { class: 'beta', name: 'Beta' }
-                                                    ]}
-                                                    component="Windows Feature Experience Pack"
-                                                />
-                                            </Timeline>
+                                            {Object.keys(timeline).map((date, key) => (
+                                                <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
+                                                    {timeline[date].flights.map((flight, key) => (
+                                                        <Flight
+                                                            key={key}
+                                                            platform={flight.platform}
+                                                            build={flight.flight}
+                                                            channels={[flight.release_channel]}
+                                                            version={flight.version}
+                                                        />
+                                                    ))}
+                                                </Timeline>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
