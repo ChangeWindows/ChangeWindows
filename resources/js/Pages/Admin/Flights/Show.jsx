@@ -29,7 +29,7 @@ export default function Show({ can, timeline, createUrl, status = null }) {
                     {Object.keys(timeline).map((date) => (
                         <>
                             <div className="col-12">
-                                <h5 key={date} className="m-0">{format(parseISO(timeline[date].date), 'd MMMM yyyy')}</h5>
+                                <h6 key={date} className="m-0">{format(parseISO(timeline[date].date), 'd MMMM yyyy')}</h6>
                             </div>
                             {timeline[date].flights.map((flight, key) => (
                                 <div className="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-2" key={key}>
