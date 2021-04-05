@@ -1,18 +1,12 @@
 import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
-import { Inertia } from '@inertiajs/inertia';
 
-import NavigationItem from './NavigationItem';
+import NavigationBar from './components/NavigationBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSunHaze, faListTimeline, faLaptopMobile, faFlag, faCircleInfo, faArrowRightFromBracket, faGauge } from '@fortawesome/pro-regular-svg-icons';
+import { faSunHaze, faListTimeline, faLaptopMobile, faFlag, faCircleInfo, faGauge } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Navigation() {
-    function handleLogout(e) {
-      e.preventDefault();
-      Inertia.post('/logout');
-    }
-
     return (
         <>
             <nav className="navbar navbar-expand-xs navbar-light sticky-top">
@@ -24,27 +18,15 @@ export default function Navigation() {
                 </div>
             </nav>
 
-            <div className="sidebar">
-                <NavigationItem url="/timeline" icon={faListTimeline} title="Timeline" />
-                <NavigationItem url="/platforms" primary="/pc" icon={faLaptopMobile} title="Platforms" />
-                <NavigationItem url="/releases" icon={faFlag} title="Releases" />
-
-                <div className="my-2 border-bottom" />
-
-                <NavigationItem url="/admin/platforms" icon={faGauge} title="Backstage" />
-
-                <div className="my-2 border-bottom" />
-
-                <NavigationItem url="/about" icon={faCircleInfo} title="About" />
-
-                <div className="flex-grow-1 d-none d-sm-block" />
-
-                <form onSubmit={handleLogout} className="d-none d-sm-block">
-                    <button type="submit" className="sidebar-item">
-                        <FontAwesomeIcon icon={faArrowRightFromBracket} fixedWidth /> <span className="sidebar-label">Log out</span>
-                    </button>
-                </form>
-            </div>
+            <NavigationBar items={[
+                { type: 'link', url: '/timeline', icon: faListTimeline, title: 'Timeline' },
+                { type: 'link', url: '/platforms', icon: faLaptopMobile, title: 'Platforms' },
+                { type: 'link', url: '/releases', icon: faFlag, title: 'Releases' },
+                { type: 'divider' },
+                { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage' },
+                { type: 'divider' },
+                { type: 'link', url: '/about', icon: faCircleInfo, title: 'About' }
+            ]} />
         </>
     )
 }

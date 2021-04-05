@@ -1,18 +1,12 @@
 import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
-import { Inertia } from '@inertiajs/inertia';
 
-import NavigationItem from './NavigationItem';
+import NavigationBar from './components/NavigationBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSunHaze, faFlag, faCircleInfo, faArrowRightFromBracket, faUser, faUserUnlock, faArrowLeft, faLaptopMobile, faPlane } from '@fortawesome/pro-regular-svg-icons';
+import { faSunHaze, faFlag, faCircleInfo, faUser, faUserUnlock, faArrowLeft, faLaptopMobile, faPlane } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Navigation() {
-    function handleLogout(e) {
-      e.preventDefault();
-      Inertia.post('/logout');
-    }
-
     return (
         <>
             <nav className="navbar navbar-expand-xs navbar-light sticky-top">
@@ -24,32 +18,18 @@ export default function Navigation() {
                 </div>
             </nav>
 
-            <div className="sidebar">
-                <NavigationItem url="/timeline" icon={faArrowLeft} title="Back" />
-
-                <div className="my-2 border-bottom" />
-
-                <NavigationItem url="/admin/flights" icon={faPlane} title="Flights" />
-                <NavigationItem url="/admin/releases" icon={faFlag} title="Releases" />
-                <NavigationItem url="/admin/platforms" icon={faLaptopMobile} title="Platforms" />
-
-                <div className="my-2 border-bottom" />
-
-                <NavigationItem url="/admin/users" icon={faUser} title="Users" />
-                <NavigationItem url="/admin/roles" icon={faUserUnlock} title="Roles" />
-                
-                <div className="my-2 border-bottom" />
-
-                <NavigationItem url="/about" icon={faCircleInfo} title="About" />
-
-                <div className="flex-grow-1 d-none d-sm-block" />
-
-                <form onSubmit={handleLogout} className="d-none d-sm-block">
-                    <button type="submit" className="sidebar-item">
-                        <FontAwesomeIcon icon={faArrowRightFromBracket} fixedWidth /> <span className="sidebar-label">Log out</span>
-                    </button>
-                </form>
-            </div>
+            <NavigationBar items={[
+                { type: 'link', url: '/timeline', icon: faArrowLeft, title: 'Back' },
+                { type: 'divider' },
+                { type: 'link', url: '/admin/flights', icon: faPlane, title: 'Flights' },
+                { type: 'link', url: '/admin/releases', icon: faFlag, title: 'Releases' },
+                { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms' },
+                { type: 'divider' },
+                { type: 'link', url: '/admin/users', icon: faUser, title: 'Users' },
+                { type: 'link', url: '/admin/roles', icon: faUserUnlock, title: 'Roles' },
+                { type: 'divider' },
+                { type: 'link', url: '/about', icon: faCircleInfo, title: 'About' }
+            ]} />
         </>
     )
 }
