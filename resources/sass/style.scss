@@ -220,3 +220,14 @@
         }
     }
 }
+
+// Changelogs
+.changelog-content {
+    h2 {
+        @extend h5;
+    }
+    
+    h2 {
+        @extend h6;
+    }
+}

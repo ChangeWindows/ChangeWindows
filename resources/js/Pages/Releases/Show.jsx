@@ -6,10 +6,13 @@ import Flight from '../../Components/Timeline/Flight'
 import Timeline from '../../Components/Timeline/Timeline'
 import Progress from '../../Components/Progress/Progress'
 import ProgressBar from '../../Components/Progress/ProgressBar'
+import PlatformIcon from '../../Components/Platforms/PlatformIcon'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLaptop, faListTimeline, faNotes } from '@fortawesome/pro-regular-svg-icons'
-import PlatformIcon from '../../Components/Platforms/PlatformIcon'
+
 import { format, parseISO } from 'date-fns'
+import Markdown from 'markdown-to-jsx';
 
 export default function Show({ release, platform, channels, timeline }) {
     console.log(channels);
@@ -95,7 +98,7 @@ export default function Show({ release, platform, channels, timeline }) {
                                     <div className="col-12 mt-4">
                                         <h2 className="h5 mb-3 fw-bold">Release notes</h2>
                                         <div className="changelog-content">
-                                            {release.changelog}
+                                            <Markdown>{release.changelog}</Markdown>
                                         </div>
                                     </div>
                                 </div>
