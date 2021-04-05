@@ -20,7 +20,7 @@ export default function Navigation() {
 
             <NavigationBar items={[
                 { type: 'link', url: '/timeline', icon: faListTimeline, title: 'Timeline' },
-                { type: 'link', url: '/platforms', icon: faLaptopMobile, title: 'Platforms' },
+                { type: 'link', url: '/platforms', primary: '/pc', icon: faLaptopMobile, title: 'Platforms' },
                 { type: 'link', url: '/releases', icon: faFlag, title: 'Releases' },
                 { type: 'divider' },
                 { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage' },

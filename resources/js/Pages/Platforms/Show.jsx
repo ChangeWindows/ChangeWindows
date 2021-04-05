@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
@@ -12,8 +12,16 @@ import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag, faLaptop, faListTimeline } from '@fortawesome/pro-regular-svg-icons';
+import { format, parseISO } from 'date-fns';
 
-export default function Show({ platforms, platform }) {
+export default function Show({ platforms, platform, channels, releases }) {
+    const [currentReleases, legacyReleases] = useMemo(() => {
+        const currentReleases = releases.filter((release) => release.channels.length > 0);
+        const legacyReleases = releases.filter((release) => release.channels.length === 0);
+
+        return [currentReleases, legacyReleases];
+    }, [releases]);
+
     return (
         <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
@@ -55,36 +63,14 @@ export default function Show({ platforms, platform }) {
                         <p className="lead fw-bold">{platform.description}</p>
 
                         <div className="row g-2 mt-3">
-                            <Channel
-                                channel={{ class: 'dev', name: 'Dev' }}
-                                build="21327.1000"
-                                date="3 Mar 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'beta', name: 'Beta' }}
-                                build="19043.844"
-                                date="17 Feb 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'release', name: 'Release Preview' }}
-                                build="19042.844"
-                                date="17 Feb 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'public', name: 'Semi-Annual' }}
-                                build="19042.844"
-                                date="3 Mar 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'broad', name: 'Broad' }}
-                                build="17763.1790"
-                                date="16 Feb 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'ltsc', name: 'LTSC' }}
-                                build="17763.1790"
-                                date="16 Feb 2021"
-                            />
+                            {channels.map((channel, key) => (
+                                <Channel
+                                    key={key}
+                                    channel={{ color: channel.color, class: '', name: channel.name }}
+                                    build={channel.flights.length > 0 ? channel.flights[0].version : ''}
+                                    date={channel.flights.length > 0 ? format(parseISO(channel.flights[0].date), 'd MMMM yyyy') : ''}
+                                />
+                            ))}
                         </div>
                     </div>
                     <div className="col-12">
@@ -100,66 +86,16 @@ export default function Show({ platforms, platform }) {
                                     <div className="col-12 mt-4">
                                         <h2 className="h5 mb-3 fw-bold">Current releases</h2>
                                         <div className="row g-2">
-                                            <ReleaseCard
-                                                name="Continuous development"
-                                                channels={[
-                                                    { class: 'dev', name: 'Dev' }
-                                                ]}
-                                            />
-                                            <ReleaseCard
-                                                name="Windows 10 version 21H1"
-                                                alts={['March 2021 Update', 'Vibranium']}
-                                                channels={[
-                                                    { class: 'release', name: 'Release Preview' },
-                                                    { class: 'beta', name: 'Beta' }
-                                                ]}
-                                            />
-                                            <ReleaseCard
-                                                name="Windows 10 version 20H2"
-                                                alts={['November 2020 Update', 'Vibranium']}
-                                                channels={[
-                                                    { class: 'public', name: 'Semi-Annual' },
-                                                    { class: 'release', name: 'Release Preview' },
-                                                    { class: 'beta', name: 'Beta' }
-                                                ]}
-                                            />
-                                            <ReleaseCard
-                                                name="Windows 10 version 2004"
-                                                alts={['May 2020 Update', 'Vibranium']}
-                                                channels={[
-                                                    { class: 'public', name: 'Semi-Annual' }
-                                                ]}
-                                            />
-                                            <ReleaseCard
-                                                name="Windows 10 version 1909"
-                                                alts={['October 2019 Update', 'Titanium']}
-                                                channels={[
-                                                    { class: 'public', name: 'Semi-Annual' }
-                                                ]}
-                                            />
-                                            <ReleaseCard
-                                                name="Windows 10 version 1809"
-                                                alts={['November 2018 Update', 'Redstone 5']}
-                                                channels={[
-                                                    { class: 'ltsc', name: 'LTSC' },
-                                                    { class: 'broad', name: 'Broad' },
-                                                    { class: 'public', name: 'Semi-Annual' }
-                                                ]}
-                                            />
-                                            <ReleaseCard
-                                                name="Windows 10 version 1607"
-                                                alts={['Anniversary Update', 'Redstone 1']}
-                                                channels={[
-                                                    { class: 'ltsc', name: 'LTSC' }
-                                                ]}
-                                            />
-                                            <ReleaseCard
-                                                name="Windows 10 version 1507"
-                                                alts={['Threshold 1']}
-                                                channels={[
-                                                    { class: 'ltsc', name: 'LTSC' }
-                                                ]}
-                                            />
+                                            {currentReleases.map((release, key) => {
+                                                return (
+                                                    <ReleaseCard
+                                                        key={key}
+                                                        name={release.name}
+                                                        alts={[`Version ${release.version}`, release.codename]}
+                                                        channels={release.channels}
+                                                    />
+                                                );
+                                            })}
                                         </div>
                                     </div>
                                     <div className="col-12 mt-4">
@@ -173,26 +109,15 @@ export default function Show({ platforms, platform }) {
                                     <div className="col-12 mt-4">
                                         <h2 className="h5 mb-3 fw-bold">Unsupported releases</h2>
                                         <div className="row g-2">
-                                            <ReleaseCard
-                                                name="Windows 10 version 1903"
-                                                alts={['May 2019 Update', 'Titanium']}
-                                            />
-                                            <ReleaseCard
-                                                name="Windows 10 version 1803"
-                                                alts={['April 1803 Update', 'Redstone 4']}
-                                            />
-                                            <ReleaseCard
-                                                name="Windows 10 version 1709"
-                                                alts={['Fall Creators Update', 'Redstone 3']}
-                                            />
-                                            <ReleaseCard
-                                                name="Windows 10 version 1703"
-                                                alts={['Creators Update', 'Redstone 2']}
-                                            />
-                                            <ReleaseCard
-                                                name="Windows 10 version 1511"
-                                                alts={['November Update', 'Threshold 2']}
-                                            />
+                                            {legacyReleases.map((release, key) => {
+                                                return (
+                                                    <ReleaseCard
+                                                        key={key}
+                                                        name={release.name}
+                                                        alts={[`Version ${release.version}`, release.codename]}
+                                                    />
+                                                );
+                                            })}
                                         </div>
                                     </div>
                                 </div>
@@ -231,43 +156,6 @@ export default function Show({ platforms, platform }) {
                                                     component="Windows Feature Experience Pack"
                                                 />
                                             </Timeline>
-                                        </div>
-                                    </div>
-                                    <div className="col-4">
-                                        <div className="row g-2">
-                                            <div className="col-12 mb-n2">
-                                                <h3 className="h6 text-pc"><FontAwesomeIcon icon={faLaptop} fixedWidth /> <span className="fw-bold">PC</span></h3>
-                                            </div>
-                                            <Channel
-                                                channel={{ class: 'dev', name: 'Dev' }}
-                                                build="21327.1000"
-                                                date="3 Mar 2021"
-                                            />
-                                            <Channel
-                                                channel={{ class: 'beta', name: 'Beta' }}
-                                                build="19043.844"
-                                                date="17 Feb 2021"
-                                            />
-                                            <Channel
-                                                channel={{ class: 'release', name: 'Release Preview' }}
-                                                build="19042.844"
-                                                date="17 Feb 2021"
-                                            />
-                                            <Channel
-                                                channel={{ class: 'public', name: 'Semi-Annual' }}
-                                                build="19042.844"
-                                                date="3 Mar 2021"
-                                            />
-                                            <Channel
-                                                channel={{ class: 'broad', name: 'Broad' }}
-                                                build="17763.1790"
-                                                date="16 Feb 2021"
-                                            />
-                                            <Channel
-                                                channel={{ class: 'ltsc', name: 'LTSC' }}
-                                                build="17763.1790"
-                                                date="16 Feb 2021"
-                                            />
                                         </div>
                                     </div>
                                 </div>

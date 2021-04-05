@@ -43,10 +43,10 @@ export default function NavigationBar({ items }) {
 			{mainItems.map((item, key) => {
 				if (item.type === 'link') {
 					return (
-						<NavigationItem url={item.url} icon={item.icon} title={item.title} key={key} />
+						<NavigationItem url={item.url} icon={item.icon} primary={item.primary} title={item.title} key={key} />
 					);
 				} else if (item.type === 'divider') {
-					return (<div className="my-2 border-bottom" />);
+					return (<div className="my-2 border-bottom" key={key} />);
 				}
 			})}
 			{overflowItems &&
