@@ -120,6 +120,7 @@ export default function Show({ platforms, platform, channels, releases, timeline
                                                             key={key}
                                                             name={release.name}
                                                             alts={[`Version ${release.version}`, release.codename]}
+                                                            url={release.url}
                                                         />
                                                     );
                                                 })}
