@@ -17,8 +17,31 @@ class ReleaseController extends Controller
      */
     public function index()
     {
-        $platform = Release::first();
-        Redirect::route('front.releases.show', ['release' => $release]);
+        return Inertia::render('Releases/Index', [
+            'releases' => Release::orderBy('canonical_version', 'desc')->orderBy('platform_id', 'asc')->get()->map(function ($release) {
+                return [
+                    'name' => $release->name,
+                    'version' => $release->version,
+                    'codename' => $release->codename,
+                    'start_public' => $release->start_public,
+                    'url' => $release->url,
+                    'platform' => [
+                        'icon' => $release->platform->icon,
+                        'name' => $release->platform->name,
+                        'color' => $release->platform->color
+                    ],
+                    'channels' => $release->releaseChannels->where('supported')->map(function ($channel) {
+                        return [
+                            'id' => $channel->id,
+                            'short_name' => $channel->short_name,
+                            'supported' => $channel->supported,
+                            'color' => $channel->channel->color,
+                            'order' => $channel->channel->order
+                        ];
+                    })->values()->all()
+                ];
+            })->values()->all(),
+        ]);
     }
 
     /**
