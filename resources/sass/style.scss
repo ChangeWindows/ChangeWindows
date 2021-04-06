@@ -225,9 +225,11 @@
 .changelog-content {
     h2 {
         @extend h5;
+        font-weight: 600;
     }
     
-    h2 {
+    h3 {
         @extend h6;
+        font-weight: 600;
     }
 }
