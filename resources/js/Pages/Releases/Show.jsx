@@ -91,7 +91,7 @@ export default function Show({ release, platform, channels, timeline }) {
                     <div className="col-12">
                         <div className="d-flex">
                             <div className="me-2">
-                                <h1 className="h2 text-pc"><PlatformIcon platform={platform} /></h1>
+                                <h1 className="h2"><PlatformIcon platform={platform} color /></h1>
                             </div>
                             <div>
                                 <h1 className="h2 mb-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
