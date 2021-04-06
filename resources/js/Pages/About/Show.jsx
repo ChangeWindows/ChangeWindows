@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import App from '../../Layouts/App'
 
-export default function Show() {
+export default function Show({ can, app }) {
     return (
-        <App>
+        <App can={can}>
             <div className="container-fluid">
                 <div className="row vh-100 justify-content-center align-items-center">
                     <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">

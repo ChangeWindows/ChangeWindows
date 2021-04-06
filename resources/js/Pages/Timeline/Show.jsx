@@ -15,9 +15,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faGamepadModern, faLaptop, faServer, faSunHaze } from '@fortawesome/pro-regular-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-export default function Show({ platforms }) {
+export default function Show({ can, platforms }) {
     return (
-        <App>
+        <App can={can}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Timeline</span>

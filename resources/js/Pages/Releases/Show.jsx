@@ -15,7 +15,7 @@ import { differenceInDays } from 'date-fns/esm'
 import { format, isBefore, parseISO } from 'date-fns'
 import Markdown from 'markdown-to-jsx';
 
-export default function Show({ release, platform, channels, timeline }) {
+export default function Show({ can, release, platform, channels, timeline }) {
     const [total_duration, preview_duration, public_duration, extended_duration, lts_duration, preview_progress, public_progress, extended_progress, lts_progress] = useMemo(() => {
         const today = new Date();
         const start_preview = release.start_preview ? parseISO(release.start_preview) : null;
@@ -79,7 +79,7 @@ export default function Show({ release, platform, channels, timeline }) {
     }, [release.start_preview, release.start_public, release.start_extended, release.start_lts, release.end_lts]);
 
     return (
-        <App>
+        <App can={can}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Releases</span>
