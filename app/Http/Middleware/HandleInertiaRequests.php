@@ -38,6 +38,9 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
+            'app' => [
+                'version' => config('app.version')
+            ],
             'can' => [
                 'access_dashboard' => Auth::user()->can('dashboard')
             ]
