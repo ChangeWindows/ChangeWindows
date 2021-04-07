@@ -42,7 +42,7 @@ class HandleInertiaRequests extends Middleware
                 'version' => config('app.version')
             ],
             'can' => [
-                'access_dashboard' => Auth::user()->can('dashboard')
+                'access_dashboard' => Auth::check() ? Auth::user()->can('dashboard') : false
             ]
         ]);
     }

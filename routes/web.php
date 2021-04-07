@@ -36,11 +36,7 @@ Route::get('/releases', function () {
 
 Route::get('/about', function () {
     return Inertia::render('About/Show');
-})->middleware(['auth'])->name('about');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->name('about');
 
 Route::prefix('')->name('front')->group(function() {
     Route::prefix('timeline')->name('.timeline')->group(function() {
