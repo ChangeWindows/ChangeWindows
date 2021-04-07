@@ -27,16 +27,8 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Timeline/Show');
-})->middleware(['auth'])->name('home');
-
-Route::get('/releases', function () {
-    return Inertia::render('Releases/Show');
-})->middleware(['auth'])->name('releases');
-
-Route::get('/about', function () {
-    return Inertia::render('About/Show');
-})->name('about');
+    return redirect()->route('front.timeline');
+})->name('home');
 
 Route::prefix('')->name('front')->group(function() {
     Route::prefix('timeline')->name('.timeline')->group(function() {
@@ -52,6 +44,12 @@ Route::prefix('')->name('front')->group(function() {
     Route::prefix('releases')->name('.releases')->group(function() {
         Route::get('', [ReleaseController::class, 'index'])->name('');
         Route::get('/{release}', [ReleaseController::class, 'show'])->name('.show');
+    });
+    
+    Route::prefix('about')->name('.about')->group(function() {
+        Route::get('', function () {
+            return Inertia::render('About/Show');
+        })->name('');
     });
 });
 
