@@ -1,4 +1,5 @@
 import React, { useMemo, useRef } from 'react';
+import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 
 /* -- Design -- */
