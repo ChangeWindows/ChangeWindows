@@ -1,0 +1,29 @@
+.auth {
+    background-image: url('../images/background.png');
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .auth-card {
+        background-color: rgba(#fff, .8);
+        backdrop-filter: blur(15px) saturate(125%);
+        box-shadow: $box-shadow-lg;
+        padding: 0 1rem 1rem;
+        margin-top: .5rem;
+        width: 320px;
+        border-radius: $border-radius;
+    }
+
+    .btn-link {
+        &.text-white {
+            &:hover,
+            &:focus {
+                background-color: rgba($dark, .2);
+            }
+        }
+    }
+}

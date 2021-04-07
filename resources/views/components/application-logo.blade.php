@@ -1,1 +1,0 @@
-<i class="far fa-fw fa-sun-haze"></i>

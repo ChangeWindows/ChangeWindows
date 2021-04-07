@@ -28,7 +28,12 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 Route::get('/', function () {
     return redirect()->route('front.timeline');
-})->name('home');
+});
+
+
+Route::get('/admin', function () {
+    return redirect()->route('admin.flights');
+});
 
 Route::prefix('')->name('front')->group(function() {
     Route::prefix('timeline')->name('.timeline')->group(function() {
