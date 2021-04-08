@@ -19,7 +19,6 @@ import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
 
 export default function Show({ can, platforms, channel_platforms }) {
-    console.log(channel_platforms);
     return (
         <App can={can}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">

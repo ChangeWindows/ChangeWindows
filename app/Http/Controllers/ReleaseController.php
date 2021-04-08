@@ -28,7 +28,8 @@ class ReleaseController extends Controller
                     'platform' => [
                         'icon' => $release->platform->icon,
                         'name' => $release->platform->name,
-                        'color' => $release->platform->color
+                        'color' => $release->platform->color,
+                        'tool' => $release->platform->tool
                     ],
                     'channels' => $release->releaseChannels->where('supported')->map(function ($channel) {
                         return [
