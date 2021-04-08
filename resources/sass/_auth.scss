@@ -15,7 +15,13 @@
         padding: 0 1rem 1rem;
         margin-top: .5rem;
         width: 320px;
+        max-width: 100%;
         border-radius: $border-radius;
+
+        &.auth-card-lg {
+            width: 440px;
+            max-width: 100%;
+        }
     }
 
     .btn-link {
