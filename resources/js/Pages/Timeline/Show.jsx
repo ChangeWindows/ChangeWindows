@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
@@ -15,7 +15,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faGamepadModern, faLaptop, faServer, faSunHaze } from '@fortawesome/pro-regular-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-export default function Show({ can, platforms }) {
+import { format, parseISO } from 'date-fns';
+import clsx from 'clsx';
+
+export default function Show({ can, platforms, channel_platforms }) {
+    console.log(channel_platforms);
     return (
         <App can={can}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
@@ -226,96 +230,24 @@ export default function Show({ can, platforms }) {
                     </div>
                     <div className="col-12 col-md-4 col-lg-5">
                         <div className="row g-2">
-                            <div className="col-12 mb-n2">
-                                <h3 className="h6 text-pc"><FontAwesomeIcon icon={faLaptop} fixedWidth /> <span className="fw-bold">PC</span></h3>
-                            </div>
-                            <Channel
-                                channel={{ class: 'dev', name: 'Dev' }}
-                                build="21327.1000"
-                                date="3 Mar 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'beta', name: 'Beta' }}
-                                build="19043.844"
-                                date="17 Feb 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'release', name: 'Release Preview' }}
-                                build="19042.844"
-                                date="17 Feb 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'public', name: 'Semi-Annual' }}
-                                build="19042.844"
-                                date="3 Mar 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'broad', name: 'Broad' }}
-                                build="17763.1790"
-                                date="16 Feb 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'ltsc', name: 'LTSC' }}
-                                build="17763.1790"
-                                date="16 Feb 2021"
-                            />
-                            
-        
-                            
-                            <div className="col-12 mb-n2 mt-3">
-                                <h3 className="h6 text-xbox"><FontAwesomeIcon icon={faGamepadModern} fixedWidth /> <span className="fw-bold">Xbox</span></h3>
-                            </div>
-                            <Channel
-                                channel={{ class: 'skip', name: 'Skip' }}
-                                build="21326.1019"
-                                date="5 Mar 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'dev', name: 'Alpha' }}
-                                build="19041.6736"
-                                date="4 Mar 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'beta', name: 'Beta' }}
-                                build="19041.6736"
-                                date="5 Mar 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'preview', name: 'Delta' }}
-                                build="19041.6736"
-                                date="5 Mar 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'release', name: 'Omega' }}
-                                build="19041.6736"
-                                date="5 Mar 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'broad', name: 'Public' }}
-                                build="19041.6288"
-                                date="22 Feb 2021"
-                            />
-                            
-        
-                            
-                            <div className="col-12 mb-n2 mt-3">
-                                <h3 className="h6 text-server"><FontAwesomeIcon icon={faServer} fixedWidth /> <span className="fw-bold">Server</span></h3>
-                            </div>
-                            <Channel
-                                channel={{ class: 'beta', name: 'Preview' }}
-                                build="20303.1"
-                                date="3 Mar 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'broad', name: 'Semi-Annual' }}
-                                build="19042.804"
-                                date="9 Feb 2021"
-                            />
-                            <Channel
-                                channel={{ class: 'ltsc', name: 'LTSC' }}
-                                build="17763.1790"
-                                date="16 Feb 2021"
-                            />
+                            {channel_platforms.map((platform, key) => (
+                                <Fragment key={key}>
+                                    <div className={clsx('col-12 mb-n1', { 'mt-3': key > 0 })}>
+                                        <h3 className="h6" style={{ color: platform.color }}>
+                                            <PlatformIcon platform={platform} color />
+                                            <span className="fw-bold ms-2">{platform.name}</span>
+                                        </h3>
+                                    </div>
+                                    {platform.channels.map((channel, key) => (
+                                        <Channel
+                                            key={key}
+                                            channel={{ color: channel.color, name: channel.name }}
+                                            build={channel.flights.length > 0 ? channel.flights[0].version : ''}
+                                            date={channel.flights.length > 0 ? format(parseISO(channel.flights[0].date), 'd MMMM yyyy') : ''}
+                                        />
+                                    ))}
+                                </Fragment>
+                            ))}
                         </div>
                     </div>
                 </div>

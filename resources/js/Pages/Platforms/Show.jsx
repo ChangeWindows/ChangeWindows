@@ -67,7 +67,7 @@ export default function Show({ can, platforms, platform, channels, releases, tim
                             {channels.map((channel, key) => (
                                 <Channel
                                     key={key}
-                                    channel={{ color: channel.color, class: '', name: channel.name }}
+                                    channel={{ color: channel.color, name: channel.name }}
                                     build={channel.flights.length > 0 ? channel.flights[0].version : ''}
                                     date={channel.flights.length > 0 ? format(parseISO(channel.flights[0].date), 'd MMMM yyyy') : ''}
                                 />

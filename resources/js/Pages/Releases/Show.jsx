@@ -103,7 +103,7 @@ export default function Show({ can, release, platform, channels, timeline }) {
                             {channels.map((channel, key) => (
                                 <Channel
                                     key={key}
-                                    channel={{ color: channel.color, class: '', name: channel.name }}
+                                    channel={{ color: channel.color, name: channel.name }}
                                     build={channel.flight.version ?? 'None'}
                                     date={channel.flight?.date ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : 'No flight'}
                                     disabled={channel.disabled}
