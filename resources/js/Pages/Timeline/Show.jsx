@@ -12,7 +12,7 @@ import Timeline from '../../Components/Timeline/Timeline';
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faGamepadModern, faLaptop, faServer, faSunHaze } from '@fortawesome/pro-regular-svg-icons'
+import { faArrowLeft, faSunHaze } from '@fortawesome/pro-regular-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { format, parseISO } from 'date-fns';
@@ -68,7 +68,7 @@ export default function Show({ can, platforms, channel_platforms }) {
                             </div>
                             <div className="card-body">
                                 <h1 className="h3">Welcome to ChangeWindows Preview</h1>
-                                <p>We're still working on this, so stay with us while we get everything ready for launch.</p>
+                                <p>Hey... you're not really supposed to be here. This is the ChangeWindows test site. The data on here is probably fake. But let us help you find the real ChangeWindows.</p>
                                 <a href="https://changewindows.org" className="btn btn-primary btn-sm me-1"><FontAwesomeIcon icon={faArrowLeft} fixedWidth /> Back to ChangeWindows</a>
                                 <a href="https://github.com/changewindows" className="btn btn-primary btn-sm"><FontAwesomeIcon icon={faGithub} fixedWidth /> GitHub</a>
                             </div>

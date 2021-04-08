@@ -10,7 +10,7 @@ export default function Show({ can, app }) {
     return (
         <App can={can} background>
             <div className="auth-card auth-card-lg">
-                <h1 className="h3 m-0 py-5 text-center"><FontAwesomeIcon icon={faSunHaze} fixedWidth /> About Horizon</h1>
+                <h1 className="h3 m-0 py-5 text-center"><FontAwesomeIcon icon={faSunHaze} fixedWidth className="me-1" /> ChangeWindows Preview</h1>
                 <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faTwitter} /> Twitter</a>
                 <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faGithub} /> GitHub</a>
                 <p className="text-muted mb-2">Version {app.version}</p>
