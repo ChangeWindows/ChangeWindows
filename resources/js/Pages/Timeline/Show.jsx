@@ -5,8 +5,6 @@ import Channel from '../../Components/Cards/Channel';
 import DropdownItem from '../../Components/Navbar/DropdownItem';
 import Flight from '../../Components/Timeline/Flight';
 import NavItem from '../../Components/Navbar/NavItem';
-import Promotion from '../../Components/Timeline/Promotion';
-import Release from '../../Components/Timeline/Release';
 import Timeline from '../../Components/Timeline/Timeline';
 
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
@@ -18,7 +16,8 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
 
-export default function Show({ can, platforms, channel_platforms }) {
+export default function Show({ can, timeline, platforms, channel_platforms }) {
+    console.log(timeline);
     return (
         <App can={can}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
@@ -75,156 +74,19 @@ export default function Show({ can, platforms, channel_platforms }) {
                     </div>
                     <div className="col-12 col-md-8 col-lg-7">
                         <div className="row g-4">
-                            <Timeline date="25 March 2021">
-                                <Flight
-                                    platform="pc"
-                                    build="120.2212.3530.0"
-                                    channels={[
-                                        { class: 'release', name: 'RP' },
-                                        { class: 'beta', name: 'Beta' }
-                                    ]}
-                                    component="Windows Feature Experience Pack"
-                                />
-                            </Timeline>
-                            <Timeline date="5 March 2021">
-                                <Flight
-                                    platform="xbox"
-                                    build="21326.1019"
-                                    channels={[
-                                        { class: 'skip', name: 'Skip'}
-                                    ]}
-                                    version={2108}
-                                />
-                                <Flight
-                                    platform="xbox"
-                                    build="19041.6736"
-                                    channels={[
-                                        { class: 'preview', name: 'Delta' },
-                                        { class: 'beta', name: 'Beta' },
-                                        { class: 'dev', name: 'Alpha' }
-                                    ]}
-                                    version={2103}
-                                />
-                            </Timeline>
-                            <Timeline date="4 March 2021">
-                                <Flight
-                                    platform="xbox"
-                                    build="19041.6736"
-                                    channels={[
-                                        { class: 'release', name: 'Omega' }
-                                    ]}
-                                    version={2103}
-                                />
-                            </Timeline>
-                            <Timeline date="3 March 2021">
-                                <Flight
-                                    platform="pc"
-                                    build="21627.1000"
-                                    channels={[
-                                        { class: 'dev', name: 'Dev' }
-                                    ]}
-                                />
-                                <Flight
-                                    platform="xbox"
-                                    build="21326.1000"
-                                    channels={[
-                                        { class: 'skip', name: 'Skip' }
-                                    ]}
-                                    version={2108}
-                                />
-                                <Flight
-                                    platform="server"
-                                    build="20303.1"
-                                    channels={[
-                                        { class: 'beta', name: 'Preview' }
-                                    ]}
-                                    version="21H2"
-                                />
-                                <Flight
-                                    platform="sdk"
-                                    build="20303.1"
-                                    channels={[
-                                        { class: 'public', name: 'Public' }
-                                    ]}
-                                    version="21H2"
-                                />
-                                <Flight
-                                    platform="holographic"
-                                    build="20303.1000"
-                                    channels={[
-                                        { class: 'beta', name: 'Slow' },
-                                        { class: 'dev', name: 'Fast' }
-                                    ]}
-                                    version="21H1"
-                                />
-                                <Flight
-                                    platform="xbox"
-                                    build="19041.6729"
-                                    channels={[
-                                        { class: 'dev', name: 'Alpha' }
-                                    ]}
-                                    version={2103}
-                                />
-                            </Timeline>
-                            <Timeline date="23 February 2021">
-                                <Flight
-                                    platform="pc"
-                                    build="120.2212.3030.0"
-                                    channels={[
-                                        { class: 'beta', name: 'Beta' }
-                                    ]}
-                                    component="Windows Feature Experience Pack"
-                                />
-                            </Timeline>
-                            <Timeline date="16 February 2021">
-                                <Flight
-                                    platform="azure"
-                                    build="17784.1557"
-                                    channels={[
-                                        { class: 'beta', name: 'Beta' }
-                                    ]}
-                                    version="20H2"
-                                />
-                            </Timeline>
-                            <Timeline date="4 February 2021">
-                                <Flight
-                                    platform="xbox"
-                                    build="19041.5496"
-                                    channels={[
-                                        { class: 'skip', name: 'Skip' }
-                                    ]}
-                                    version={2109}
-                                />
-                                <Promotion
-                                    platform="xbox"
-                                    version="2109"
-                                    channel={{ class: 'skip', name: 'Alpha Skip-Ahead' }}
-                                />
-                                <Release
-                                    platform="xbox"
-                                    version={2109}
-                                />
-                            </Timeline>
-                            <Timeline date="26 January 2021">
-                                <Flight
-                                    platform="pc"
-                                    build="120.2212.2020.0"
-                                    channels={[
-                                        { class: 'beta', name: 'Beta' }
-                                    ]}
-                                    component="Windows Feature Experience Pack"
-                                />
-                            </Timeline>
-                            <Timeline date="20 January 2021">
-                                <Flight
-                                    platform="xbox"
-                                    build="2011.1.2012.11004"
-                                    channels={[
-                                        { class: 'release', name: 'Omega' }
-                                    ]}
-                                    component="Xbox Shell"
-                                />
-                            </Timeline>
+                            {Object.keys(timeline).map((date, key) => (
+                                <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
+                                    {timeline[date].flights.map((flight, key) => (
+                                        <Flight
+                                            key={key}
+                                            platform={flight.platform}
+                                            build={flight.flight}
+                                            channels={flight.release_channel}
+                                            version={flight.version}
+                                        />
+                                    ))}
+                                </Timeline>
+                            ))}
                         </div>
                     </div>
                     <div className="col-12 col-md-4 col-lg-5">
