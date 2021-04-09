@@ -59,12 +59,12 @@ export default function Show({ can, auth, timeline, platforms, channel_platforms
             <div className="container my-3">
                 <div className="row g-3">
                     <div className="col-12">
-                        <div className="card shadow border-0 overflow-hidden d-flex flex-row">
+                        <div className="card shadow border-0 overflow-hidden d-flex flex-column flex-md-row">
                             <div className="bg-primary text-white p-3">
-                                <h3><FontAwesomeIcon icon={faSunHaze} fixedWidth /></h3>
+                                <h3 className="m-0"><FontAwesomeIcon icon={faSunHaze} fixedWidth /><span className="ms-2 d-inline d-md-none">ChangeWindows <span className="d-none d-sm-inline">Preview</span></span></h3>
                             </div>
                             <div className="card-body">
-                                <h1 className="h3">Welcome to ChangeWindows Preview</h1>
+                                <h1 className="h3 d-none d-md-block">Welcome to ChangeWindows Preview</h1>
                                 <p>Hey... you're not really supposed to be here. This is the ChangeWindows test site. The data on here is probably fake. But let us help you find the real ChangeWindows.</p>
                                 <a href="https://changewindows.org" className="btn btn-primary btn-sm me-1"><FontAwesomeIcon icon={faArrowLeft} fixedWidth /> Back to ChangeWindows</a>
                                 <a href="https://github.com/changewindows" className="btn btn-primary btn-sm"><FontAwesomeIcon icon={faGithub} fixedWidth /> GitHub</a>
