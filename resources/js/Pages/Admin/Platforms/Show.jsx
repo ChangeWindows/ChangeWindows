@@ -8,9 +8,9 @@ import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Show({ can, platforms, createUrl, status = null }) {
+export default function Show({ can, auth, platforms, createUrl, status = null }) {
     return (
-        <Admin>
+        <Admin can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Platforms</span>

@@ -8,7 +8,7 @@ import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Create({ urls, platforms }) {
+export default function Create({ can, auth, urls, platforms }) {
     const [curRelease, setCurRelease] = useState({
         name: '',
         version: null,
@@ -50,7 +50,7 @@ export default function Create({ urls, platforms }) {
     }
 
     return (
-        <Admin>
+        <Admin can={can} auth={auth}>
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">

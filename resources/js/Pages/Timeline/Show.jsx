@@ -16,10 +16,9 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
 
-export default function Show({ can, timeline, platforms, channel_platforms }) {
-    console.log(timeline);
+export default function Show({ can, auth, timeline, platforms, channel_platforms }) {
     return (
-        <App can={can}>
+        <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Timeline</span>

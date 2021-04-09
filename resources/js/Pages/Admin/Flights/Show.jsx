@@ -8,9 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
 import { format, parseISO } from 'date-fns';
 
-export default function Show({ can, timeline, createUrl, status = null }) {
+export default function Show({ can, auth, timeline, createUrl, status = null }) {
     return (
-        <Admin>
+        <Admin can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Flights</span>

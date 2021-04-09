@@ -6,7 +6,7 @@ import Admin from '../../../Layouts/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Create({ permissions, urls }) {
+export default function Create({ can, auth, permissions, urls }) {
     const [curRole, setCurRole] = useState({ name: '', permissions: [] });
 
     function formHandler(event) {
@@ -35,7 +35,7 @@ export default function Create({ permissions, urls }) {
     }
 
     return (
-        <Admin>
+        <Admin can={can} auth={auth}>
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">

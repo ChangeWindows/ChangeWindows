@@ -6,7 +6,7 @@ import NavigationBar from './components/NavigationBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSunHaze, faListTimeline, faLaptopMobile, faFlag, faCircleInfo, faGauge } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Navigation({ can }) {
+export default function Navigation({ can, auth }) {
     return (
         <>
             <nav className="navbar navbar-expand-xs navbar-light sticky-top">
@@ -18,15 +18,18 @@ export default function Navigation({ can }) {
                 </div>
             </nav>
 
-            <NavigationBar items={[
-                { type: 'link', url: '/timeline', icon: faListTimeline, title: 'Timeline' },
-                { type: 'link', url: '/platforms', primary: '/pc', icon: faLaptopMobile, title: 'Platforms' },
-                { type: 'link', url: '/releases', icon: faFlag, title: 'Releases' },
-                can.access_dashboard && { type: 'divider' },
-                can.access_dashboard && { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage' },
-                { type: 'divider' },
-                { type: 'link', url: '/about', icon: faCircleInfo, title: 'About' }
-            ]} />
+            <NavigationBar
+                auth={auth}
+                items={[
+                    { type: 'link', url: '/timeline', icon: faListTimeline, title: 'Timeline' },
+                    { type: 'link', url: '/platforms', primary: '/pc', icon: faLaptopMobile, title: 'Platforms' },
+                    { type: 'link', url: '/releases', icon: faFlag, title: 'Releases' },
+                    can.access_dashboard && { type: 'divider' },
+                    can.access_dashboard && { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage' },
+                    { type: 'divider' },
+                    { type: 'link', url: '/about', icon: faCircleInfo, title: 'About' }
+                ]}
+            />
         </>
     )
 }

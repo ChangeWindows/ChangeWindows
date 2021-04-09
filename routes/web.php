@@ -56,6 +56,12 @@ Route::prefix('')->name('front')->group(function() {
             return Inertia::render('About/Show');
         })->name('');
     });
+    
+    Route::middleware(['auth'])->prefix('profile')->name('.profile')->group(function() {
+        Route::get('', function () {
+            return Inertia::render('Profile/Show');
+        })->name('');
+    });
 });
 
 Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {

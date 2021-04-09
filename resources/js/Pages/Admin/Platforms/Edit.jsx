@@ -8,7 +8,7 @@ import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faEye, faFloppyDisk, faPen, faPlus, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ can, urls, platform, channels, status = null }) {
+export default function Edit({ can, auth, urls, platform, channels, status = null }) {
     const [curPlatform, setCurPlatform] = useState(platform);
 
     useEffect(() => {
@@ -42,7 +42,7 @@ export default function Edit({ can, urls, platform, channels, status = null }) {
     }
 
     return (
-        <Admin>
+        <Admin can={can} auth={auth}>
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">

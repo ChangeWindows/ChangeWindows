@@ -7,7 +7,7 @@ import Admin from '../../../Layouts/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ can, urls, releaseChannel, releases, channels, status = null }) {
+export default function Edit({ can, auth, urls, releaseChannel, releases, channels, status = null }) {
     const [curReleaseChannel, setCurReleaseChannel] = useState(releaseChannel);
 
     function formHandler(event) {
@@ -37,7 +37,7 @@ export default function Edit({ can, urls, releaseChannel, releases, channels, st
     }
 
     return (
-        <Admin>
+        <Admin can={can} auth={auth}>
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">

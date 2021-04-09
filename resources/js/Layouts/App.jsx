@@ -3,12 +3,12 @@ import React from 'react'
 
 import Navigation from './Navigation/Navigation'
 
-export default function App({ children, can, background = false }) {
+export default function App({ children, can, auth, background = false }) {
     return (
         <div className="bg-light">
             <div className="grid">
                 <header className="grid-sidebar">
-                    <Navigation can={can} />
+                    <Navigation can={can} auth={auth} />
                 </header>
                 <main className={clsx('grid-content', { 'auth': background })}>
                     { children }

@@ -6,7 +6,7 @@ import NavigationBar from './components/NavigationBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSunHaze, faFlag, faCircleInfo, faUser, faUserUnlock, faArrowLeft, faLaptopMobile, faPlane } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Navigation() {
+export default function AdminNavigation({ can, auth }) {
     return (
         <>
             <nav className="navbar navbar-expand-xs navbar-light sticky-top">
@@ -18,18 +18,21 @@ export default function Navigation() {
                 </div>
             </nav>
 
-            <NavigationBar items={[
-                { type: 'link', url: '/timeline', icon: faArrowLeft, title: 'Back' },
-                { type: 'divider' },
-                { type: 'link', url: '/admin/flights', icon: faPlane, title: 'Flights' },
-                { type: 'link', url: '/admin/releases', icon: faFlag, title: 'Releases' },
-                { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms' },
-                { type: 'divider' },
-                { type: 'link', url: '/admin/users', icon: faUser, title: 'Users' },
-                { type: 'link', url: '/admin/roles', icon: faUserUnlock, title: 'Roles' },
-                { type: 'divider' },
-                { type: 'link', url: '/about', icon: faCircleInfo, title: 'About' }
-            ]} />
+            <NavigationBar
+                auth={auth}
+                items={[
+                    { type: 'link', url: '/timeline', icon: faArrowLeft, title: 'Back' },
+                    { type: 'divider' },
+                    { type: 'link', url: '/admin/flights', icon: faPlane, title: 'Flights' },
+                    { type: 'link', url: '/admin/releases', icon: faFlag, title: 'Releases' },
+                    { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms' },
+                    { type: 'divider' },
+                    { type: 'link', url: '/admin/users', icon: faUser, title: 'Users' },
+                    { type: 'link', url: '/admin/roles', icon: faUserUnlock, title: 'Roles' },
+                    { type: 'divider' },
+                    { type: 'link', url: '/about', icon: faCircleInfo, title: 'About' }
+                ]}
+            />
         </>
     )
 }

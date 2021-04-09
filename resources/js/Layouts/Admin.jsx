@@ -2,12 +2,12 @@ import React from 'react'
 
 import AdminNavigation from './Navigation/AdminNavigation'
 
-export default function App({ children }) {
+export default function App({ children, can, auth }) {
     return (
         <div className="bg-light">
             <div className="grid">
                 <header className="grid-sidebar">
-                    <AdminNavigation />
+                    <AdminNavigation can={can} auth={auth} />
                 </header>
                 <main className="grid-content">
                     { children }

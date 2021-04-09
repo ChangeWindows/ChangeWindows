@@ -8,9 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
 import clsx from 'clsx';
 
-export default function Show({ can, releases, createUrl, status = null }) {
+export default function Show({ can, auth, releases, createUrl, status = null }) {
     return (
-        <Admin>
+        <Admin can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Releases</span>

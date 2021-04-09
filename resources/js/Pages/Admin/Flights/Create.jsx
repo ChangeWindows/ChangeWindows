@@ -10,7 +10,7 @@ import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg
 
 import { format, isDate, parseISO } from 'date-fns';
 
-export default function Create({ urls, releases }) {
+export default function Create({ can, auth, urls, releases }) {
     const [showAll, setShowAll] = useState(false);
     const [showEligible, setShowEligible] = useState(true);
     const [curFlight, setCurFlight] = useState({
@@ -88,7 +88,7 @@ export default function Create({ urls, releases }) {
     }
 
     return (
-        <Admin>
+        <Admin can={can} auth={auth}>
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">

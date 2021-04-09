@@ -9,7 +9,7 @@ import { faArrowLeft, faCheck, faPen, faEye, faPeriod, faPlus, faFloppyDisk, faT
 
 import { format, parseISO } from 'date-fns';
 
-export default function Edit({ can, urls, platforms, release, channels, release_channels, status = null }) {
+export default function Edit({ can, auth, urls, platforms, release, channels, release_channels, status = null }) {
     const [curRelease, setCurRelease] = useState(release);
 
     useEffect(() => {
@@ -45,7 +45,7 @@ export default function Edit({ can, urls, platforms, release, channels, release_
     const availablePlatformChannels = useMemo(() => channels.filter((channel) => !release_channels.find((releaseChannel) => releaseChannel.channel_id === channel.id)), [channels, release_channels]);
 
     return (
-        <Admin>
+        <Admin can={can} auth={auth}>
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">

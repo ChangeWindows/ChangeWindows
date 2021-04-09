@@ -4,7 +4,7 @@ import App from '../../Layouts/App';
 import ReleaseCard from '../../Components/Cards/ReleaseCard';
 import { isAfter, isBefore, parseISO } from 'date-fns';
 
-export default function Index({ can, releases }) {
+export default function Index({ can, auth, releases }) {
     const [devReleases, currentReleases, legacyReleases] = useMemo(() => {
         const devReleases = releases.filter((release) => release.start_public ? isAfter(parseISO(release.start_public), new Date()) : true);
         const currentReleases = releases.filter((release) => isBefore(parseISO(release.start_public), new Date()) && release.channels.length > 0);
@@ -14,7 +14,7 @@ export default function Index({ can, releases }) {
     }, [releases]);
 
     return (
-        <App can={can}>
+        <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Releases</span>

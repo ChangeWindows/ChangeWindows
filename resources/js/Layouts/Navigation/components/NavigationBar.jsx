@@ -6,14 +6,14 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 import NavigationItem from './NavigationItem';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis, faArrowRightFromBracket } from '@fortawesome/pro-regular-svg-icons';
+import { faEllipsis, faArrowRightFromBracket, faCircleUser, faArrowRightToBracket } from '@fortawesome/pro-regular-svg-icons';
 
 /* -- Utilities -- */
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import useWidth from '../../../hooks/useWidth';
 import clsx from 'clsx';
 
-export default function NavigationBar({ items }) {
+export default function NavigationBar({ auth, items }) {
 	const matchesSmUp = useMediaQuery('(min-width: 576px)');
 	const ref = useRef(null);
 	const width = useWidth(ref);
@@ -75,11 +75,20 @@ export default function NavigationBar({ items }) {
 
 			<div className="flex-grow-1 d-none d-sm-block" />
 
-			<form onSubmit={handleLogout} className="d-none d-sm-block">
-				<button type="submit" className="sidebar-item">
-					<FontAwesomeIcon icon={faArrowRightFromBracket} fixedWidth /> <span className="sidebar-label">Log out</span>
-				</button>
-			</form>
+			{auth ?
+				<>
+					<NavigationItem url="/profile" icon={faCircleUser} title={auth.name} />
+					<form onSubmit={handleLogout} className="d-none d-sm-block">
+						<button type="submit" className="sidebar-item">
+							<FontAwesomeIcon icon={faArrowRightFromBracket} fixedWidth /> <span className="sidebar-label">Log out</span>
+						</button>
+					</form>
+				</>
+			:
+				<InertiaLink href="/login" className="sidebar-item" >
+					<FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> <span className="sidebar-label">Sign-in</span>
+				</InertiaLink>
+			}
 		</div>
 	);
 }

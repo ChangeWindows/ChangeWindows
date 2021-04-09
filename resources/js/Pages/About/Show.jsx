@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faSunHaze } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Show({ can, app }) {
+export default function Show({ can, auth, app }) {
     return (
-        <App can={can} background>
+        <App can={can} auth={auth} background>
             <div className="auth-card auth-card-lg">
                 <h1 className="h3 m-0 py-5 text-center"><FontAwesomeIcon icon={faSunHaze} fixedWidth className="me-1" /> ChangeWindows Preview</h1>
                 <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faTwitter} /> Twitter</a>

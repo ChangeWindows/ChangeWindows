@@ -15,7 +15,7 @@ import { faAngleDown, faFlag, faListTimeline } from '@fortawesome/pro-regular-sv
 
 import { format, parseISO } from 'date-fns';
 
-export default function Show({ can, platforms, platform, channels, releases, timeline }) {
+export default function Show({ can, auth, platforms, platform, channels, releases, timeline }) {
     const [currentReleases, legacyReleases] = useMemo(() => {
         const currentReleases = releases.filter((release) => release.channels.length > 0);
         const legacyReleases = releases.filter((release) => release.channels.length === 0);
@@ -24,7 +24,7 @@ export default function Show({ can, platforms, platform, channels, releases, tim
     }, [releases]);
 
     return (
-        <App can={can}>
+        <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Plaforms</span>
