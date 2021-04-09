@@ -11,7 +11,7 @@ export default function Navigation({ can, auth }) {
         <>
             <nav className="navbar navbar-expand-xs navbar-light sticky-top">
                 <div className="container-fluid">
-                    <InertiaLink className="navbar-brand" href="#">
+                    <InertiaLink className="navbar-brand" href="/">
                         <div className="app-icon"><FontAwesomeIcon icon={faSunHaze} fixedWidth /></div>
                         <span className="brand-label fw-bold">ChangeWindows</span>
                     </InertiaLink>
