@@ -18,7 +18,7 @@ class TimelineController extends Controller
     {
         $channel_platforms = Platform::orderBy('position')->where('active', '=', '1')->get();
 
-        return Inertia::render('Timeline/Show', [
+        return Inertia::render('Timeline/Index', [
             'platforms' => Platform::orderBy('position')->get()->map(function ($platform) {
                 return [
                     'name' => $platform->name,
@@ -79,6 +79,27 @@ class TimelineController extends Controller
                 ];
             }),
             'status' => session('status')
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        return Inertia::render('Timeline/Show', [
+            'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
+                return [
+                    'id' => $_platform->id,
+                    'name' => $_platform->name,
+                    'color' => $_platform->color,
+                    'icon' => $_platform->icon,
+                    'legacy' => $_platform->legacy,
+                    'url' => route('front.timeline.show', $_platform, false)
+                ];
+            })
         ]);
     }
 }
