@@ -102,14 +102,6 @@ export default function Show({ can, auth, platforms, platform, channels, release
                                             </div>
                                         </div>
                                     }
-                                    <div className="col-12 mt-4">
-                                        <h2 className="h5 mb-3 fw-bold">Packages</h2>
-                                        <div className="row g-2">
-                                            <ReleaseCard
-                                                name="Windows Feature Experience Pack"
-                                            />
-                                        </div>
-                                    </div>
                                     {legacyReleases.length > 0 &&
                                         <div className="col-12 mt-4">
                                             <h2 className="h5 mb-3 fw-bold">Unsupported releases</h2>
