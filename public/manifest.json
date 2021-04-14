@@ -1,0 +1,22 @@
+{
+    "short_name": "ChangeWindows",
+    "name": "ChangeWindows",
+    "icons": [
+      {
+        "src": "/images/logo-192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/images/logo-512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/timeline",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#0066ff",
+    "description": "Changing Windows one build at a time"
+  }

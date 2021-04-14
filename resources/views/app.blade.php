@@ -11,6 +11,7 @@
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
         
         <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
+        <link rel="manifest" href="{{ asset('manifest.json') }}">
     </head>
     <body>
         @inertia
