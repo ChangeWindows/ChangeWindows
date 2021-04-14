@@ -19,6 +19,13 @@ class Platform extends Model
     protected $fillable = ['name', 'description', 'color', 'icon', 'position', 'legacy', 'active', 'tool', 'slug'];
     protected $appends = ['plain_icon', 'colored_icon', 'bg_color', 'edit_url'];
 
+    protected $casts = [
+        'legacy' => 'integer',
+        'active' => 'integer',
+        'tool' => 'integer',
+        'position' => 'integer'
+    ];
+
     public function channels() {
         return $this->hasMany(Channel::class);
     }

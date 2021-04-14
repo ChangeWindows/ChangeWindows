@@ -15,6 +15,10 @@ class ReleaseChannel extends Model
     protected $fillable = ['name', 'short_name', 'supported', 'channel_id', 'release_id'];
     protected $appends = ['edit_url'];
 
+    protected $casts = [
+        'supported' => 'integer'
+    ];
+
     public function channel() {
         return $this->belongsTo(Channel::class);
     }

@@ -15,6 +15,11 @@ class Channel extends Model
     protected $fillable = ['name', 'color', 'order', 'active', 'platform_id', 'slug'];
     protected $appends = ['bg_color', 'edit_url'];
 
+    protected $casts = [
+        'active' => 'integer',
+        'order' => 'integer'
+    ];
+
     public function platform() {
         return $this->belongsTo(Platform::class);
     }
