@@ -21,7 +21,7 @@ export default function AdminNavigation({ can, auth }) {
             <NavigationBar
                 auth={auth}
                 items={[
-                    { type: 'link', url: '/timeline', icon: faArrowLeft, title: 'Back' },
+                    { type: 'link', url: '/timeline', icon: faArrowLeft, title: 'Back', ignore: true },
                     { type: 'divider' },
                     { type: 'link', url: '/admin/flights', icon: faPlane, title: 'Flights' },
                     { type: 'link', url: '/admin/releases', icon: faFlag, title: 'Releases' },
