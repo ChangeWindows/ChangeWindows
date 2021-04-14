@@ -33,10 +33,14 @@
         }
 
         .navbar {
-            background-color: rgba(darken($light, 6), .75);
-            backdrop-filter: blur(10px) saturate(120%);
+            background-color: darken($light, 6);
             border-bottom: darken($light, 12) 1px solid;
             z-index: 5;
+
+            @supports (backdrop-filter: blur(15px) saturate(125%)) {
+                background-color: rgba(darken($light, 6), .75);
+                backdrop-filter: blur(10px) saturate(120%);
+            }
             
             @media (max-width: 575px) {
                 display: none;
@@ -163,10 +167,14 @@
         overflow: auto;
 
         .navbar {
-            background-color: rgba(darken($light, 2), .75);
-            backdrop-filter: blur(10px) saturate(120%);
+            background-color: darken($light, 2);
             border-bottom: darken($light, 8) 1px solid;
             z-index: 6;
+
+            @supports (backdrop-filter: blur(15px) saturate(125%)) {
+                background-color: rgba(darken($light, 2), .75);
+                backdrop-filter: blur(10px) saturate(120%);
+            }
         }
     }
 }

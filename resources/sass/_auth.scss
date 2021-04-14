@@ -9,14 +9,18 @@
     align-items: center;
 
     .auth-card {
-        background-color: rgba(#fff, .8);
-        backdrop-filter: blur(15px) saturate(125%);
+        background-color: #fff;
         box-shadow: $box-shadow-lg;
         padding: 0 1rem 1rem;
         margin-top: .5rem;
         width: 320px;
         max-width: 100%;
         border-radius: $border-radius;
+
+        @supports (backdrop-filter: blur(15px) saturate(125%)) {
+            background-color: rgba(#fff, .8);
+            backdrop-filter: blur(15px) saturate(125%);
+        }
 
         &.auth-card-lg {
             width: 440px;
