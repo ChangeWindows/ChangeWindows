@@ -7,10 +7,8 @@
             border: none;
             background: transparent;
 
-            @media (min-width: 1200px) {
-                &:not(:last-child) {
-                    margin-right: 1.5rem;
-                }
+            &:not(:last-child) {
+                margin-right: 1.5rem;
             }
 
             &.active {
