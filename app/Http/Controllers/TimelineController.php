@@ -90,7 +90,7 @@ class TimelineController extends Controller
     public function show()
     {
         return Inertia::render('Timeline/Show', [
-            'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
+            'platforms' => Platform::orderBy('position')->get()->map(function ($_platform) {
                 return [
                     'id' => $_platform->id,
                     'name' => $_platform->name,
