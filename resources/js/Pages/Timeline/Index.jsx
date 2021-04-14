@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
@@ -28,9 +29,9 @@ export default function Index({ can, auth, timeline, platforms, channel_platform
                     <div className="collapse navbar-collapse" id="navbar-page">
                         <ul className="navbar-nav me-auto">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">
+                                <InertiaLink className="nav-link active" aria-current="page" href="/timeline">
                                     All
-                                </a>
+                                </InertiaLink>
                             </li>
                             {platforms.filter((platform) => !platform.legacy).map((platform, key) => (
                                 <NavItem url={platform.url} key={key}>
