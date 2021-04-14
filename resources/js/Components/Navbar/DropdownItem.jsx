@@ -9,7 +9,7 @@ export default function DropdownItem({ children, url }) {
     return (
         <li>
             <InertiaLink
-                className={clsx('dropdown-item', { 'active': url.includes(page.url)})}
+                className={clsx('dropdown-item', { 'active': page.url.includes(url)})}
                 href={url}
             >
                 {children}
