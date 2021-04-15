@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
@@ -27,9 +27,9 @@ export default function Show({ can, auth, timeline, createUrl, status = null }) 
                 }
                 <div className="row g-3">
                     {Object.keys(timeline).map((date) => (
-                        <>
+                        <Fragment key={date}>
                             <div className="col-12">
-                                <h6 key={date} className="m-0">{format(parseISO(timeline[date].date), 'd MMMM yyyy')}</h6>
+                                <h6 className="m-0">{format(parseISO(timeline[date].date), 'd MMMM yyyy')}</h6>
                             </div>
                             {timeline[date].flights.map((flight, key) => (
                                 <div className="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-2" key={key}>
@@ -53,7 +53,7 @@ export default function Show({ can, auth, timeline, createUrl, status = null }) 
                                     </div>
                                 </div>
                             ))}
-                        </>
+                        </Fragment>
                     ))}
                 </div>
             </div>

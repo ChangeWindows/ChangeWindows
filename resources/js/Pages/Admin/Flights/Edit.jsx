@@ -11,8 +11,13 @@ import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro
 import { format, isDate, parseISO } from 'date-fns';
 
 export default function Edit({ can, auth, urls, flight, date, platform, release_channel, status = null }) {
-    const [curFlight, setCurFlight] = useState(flight);
-    console.log(flight, date, curFlight, isDate(parseISO(curFlight.date)));
+    const [curFlight, setCurFlight] = useState({
+        major: '',
+        minor: '',
+        build: '',
+        delta: '',
+        date: format(new Date(), 'yyyy-MM-dd')
+    });
 
     useEffect(() => {
         setCurFlight({ ...flight, date: format(parseISO(date.date), 'yyyy-MM-dd') });

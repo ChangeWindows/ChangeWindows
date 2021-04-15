@@ -76,9 +76,9 @@ export default function Index({ can, auth, timeline, platforms, channel_platform
                         <div className="row g-4">
                             {Object.keys(timeline).map((date, key) => (
                                 <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
-                                    {timeline[date].flights.map((flight, key) => (
+                                    {timeline[date].flights.map((flight, _key) => (
                                         <Flight
-                                            key={key}
+                                            key={_key}
                                             platform={flight.platform}
                                             build={flight.flight}
                                             channels={flight.release_channel}
@@ -99,9 +99,9 @@ export default function Index({ can, auth, timeline, platforms, channel_platform
                                             <span className="fw-bold ms-2">{platform.name}</span>
                                         </h3>
                                     </div>
-                                    {platform.channels.map((channel, key) => (
+                                    {platform.channels.map((channel, _key) => (
                                         <Channel
-                                            key={key}
+                                            key={_key}
                                             channel={{ color: channel.color, name: channel.name }}
                                             build={channel.flights.length > 0 ? channel.flights[0].version : ''}
                                             date={channel.flights.length > 0 ? format(parseISO(channel.flights[0].date), 'd MMMM yyyy') : ''}

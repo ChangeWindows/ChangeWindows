@@ -16,7 +16,7 @@ export default function Create({ can, auth, urls, platforms }) {
         codename: '',
         description: '',
         changelog: '',
-        platform_id: null,
+        platform_id: '',
         start_preview: null,
         start_public: null,
         start_extended: null,

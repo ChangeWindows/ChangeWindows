@@ -6,7 +6,6 @@ import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
-import clsx from 'clsx';
 
 export default function Show({ can, auth, releases, createUrl, status = null }) {
     return (
@@ -26,9 +25,9 @@ export default function Show({ can, auth, releases, createUrl, status = null }) 
                     <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                 }
                 <div className="row g-3">
-                    {releases.map((release) => {
+                    {releases.map((release, key) => {
                         return (
-                            <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={release.id}>
+                            <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={key}>
                                 <div className="card border-0 shadow-sm h-100">
                                     <div className="card-body d-flex flex-column">
                                         <div className="d-flex flex-row">
@@ -42,8 +41,8 @@ export default function Show({ can, auth, releases, createUrl, status = null }) 
                                         </div>
                                         <div className="flex-grow-1" />
                                         {release.channels && <div className="release-channels mt-3">
-                                            {release.channels.filter((channel) => channel.supported).map((channel, key) => (
-                                                <span key={key} className="badge me-1" style={{ background: channel.color }}>{channel.short_name}</span>
+                                            {release.channels.filter((channel) => channel.supported).map((channel, _key) => (
+                                                <span key={_key} className="badge me-1" style={{ background: channel.color }}>{channel.short_name}</span>
                                             ))}
                                         </div>}
                                     </div>

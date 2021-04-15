@@ -10,7 +10,24 @@ import { faArrowLeft, faCheck, faPen, faEye, faPeriod, faPlus, faFloppyDisk, faT
 import { format, parseISO } from 'date-fns';
 
 export default function Edit({ can, auth, urls, platforms, release, channels, release_channels, status = null }) {
-    const [curRelease, setCurRelease] = useState(release);
+    const [curRelease, setCurRelease] = useState({
+        name: '',
+        version: null,
+        canonical_version: null,
+        codename: '',
+        description: '',
+        changelog: '',
+        platform_id: (null),
+        start_preview: null,
+        start_public: null,
+        start_extended: null,
+        start_lts: null,
+        end_lts: null,
+        start_build: null,
+        start_delta: null,
+        end_build: null,
+        end_delta: null
+    });
 
     useEffect(() => {
         setCurRelease(release);
@@ -229,14 +246,14 @@ export default function Edit({ can, auth, urls, platforms, release, channels, re
                     </div>
                     <div className="col-12 col-md-8">
                         <div className="row g-3">
-                            {release_channels.map((releaseChannel) => {
+                            {release_channels.map((releaseChannel, key) => {
                                 const releaseChannelstatus = [];
 
                                 releaseChannelstatus.push(releaseChannel.short_name)
                                 releaseChannel.supported && releaseChannelstatus.push('Supported');
                                 
                                 return (
-                                    <div className="col-12 col-sm-6 col-xl-4" key={releaseChannel.id}>
+                                    <div className="col-12 col-sm-6 col-xl-4" key={key}>
                                         <div className="card border-0 shadow-sm h-100">
                                             <div className="card-body">
                                                 <div className="d-flex">
@@ -268,9 +285,9 @@ export default function Edit({ can, auth, urls, platforms, release, channels, re
                                                 <h5 className="mb-0"><FontAwesomeIcon icon={faPlus} fixedWidth /></h5>
                                             </div>
                                         </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            {availablePlatformChannels.map((channel) => (
-                                                <InertiaLink href={`${urls.create_release_channel}&channel=${channel.id}`} className="dropdown-item d-flex align-items-center">
+                                        <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            {availablePlatformChannels.map((channel, key) => (
+                                                <InertiaLink key={key}  href={`${urls.create_release_channel}&channel=${channel.id}`} className="dropdown-item d-flex align-items-center">
                                                     <div className="dot" style={{ backgroundColor: channel.color, padding: 0, margin: '4px 0 0 0' }} /> <div className="ms-2">{channel.name}</div>
                                                 </InertiaLink>
                                             ))}
