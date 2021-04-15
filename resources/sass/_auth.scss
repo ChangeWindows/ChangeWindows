@@ -2,11 +2,15 @@
     background-image: url('../images/background.png');
     background-position: center center;
     background-size: cover;
-    height: calc(100vh - 64px);
+    height: 100vh;
     flex-direction: row;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 575px) {
+        height: calc(100vh - 64px);
+    }
 
     .auth-card {
         background-color: #fff;
