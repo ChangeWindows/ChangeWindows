@@ -2,7 +2,7 @@
     background-image: url('../images/background.png');
     background-position: center center;
     background-size: cover;
-    height: 100vh;
+    height: calc(100vh - 64px);
     flex-direction: row;
     display: flex;
     justify-content: center;
