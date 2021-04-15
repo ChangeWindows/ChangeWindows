@@ -165,7 +165,30 @@ class FlightController extends Controller
      */
     public function edit(Flight $flight)
     {
-        //
+        $this->authorize('flights.show');
+
+        return Inertia::render('Admin/Flights/Edit', [
+            'can' => [
+                'edit_flights' => Auth::user()->can('flights.edit'),
+                'delete_flights' => Auth::user()->can('flights.delete')
+            ],
+            'urls' => [
+                'update_flight' => route('admin.flights.update', $flight, false),
+                'destroy_flight' => route('admin.flights.destroy', $flight, false)
+            ],
+            'flight' => $flight,
+            'platform' => [
+                'icon' => $flight->releaseChannel->channel->platform->icon,
+                'name' => $flight->releaseChannel->channel->platform->name,
+                'color' => $flight->releaseChannel->channel->platform->color
+            ],
+            'release_channel' => [
+                'name' => $flight->releaseChannel->short_name,
+                'color' => $flight->releaseChannel->channel->color
+            ],
+            'date' => $flight->timeline,
+            'status' => session('status')
+        ]);
     }
 
     /**
@@ -177,7 +200,20 @@ class FlightController extends Controller
      */
     public function update(Request $request, Flight $flight)
     {
-        //
+        $this->authorize('flights.edit');
+
+        $flight->update([
+            'major' => request('major'),
+            'minor' => request('minor'),
+            'build' => request('build'),
+            'delta' => request('delta')
+        ]);
+
+        $flight->timeline->update([
+            'date' => (new Carbon(request('date')))
+        ]);
+
+        return Redirect::route('admin.flights.edit', $flight)->with('status', 'Succesfully updated the flight.');
     }
 
     /**
@@ -188,6 +224,11 @@ class FlightController extends Controller
      */
     public function destroy(Flight $flight)
     {
-        //
+        $this->authorize('flights.delete');
+
+        $flight->timeline->delete();
+        $flight->delete();
+
+        return Redirect::route('admin.flights')->with('status', 'Succesfully deleted flight.');
     }
 }

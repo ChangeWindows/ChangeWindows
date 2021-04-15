@@ -122,7 +122,7 @@ export default function Create({ can, auth, urls, releases }) {
                                         </div>
                                         <div className="col-12 col-sm-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="date" value={isDate(curFlight.date) ? format(parseISO(curFlight.date), 'yyyy-MM-dd') : curFlight.date} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="date" value={isDate(parseISO(curFlight.date)) ? format(parseISO(curFlight.date), 'yyyy-MM-dd') : curFlight.date} onChange={formHandler} />
                                                 <label htmlFor="date">Date</label>
                                             </div>
                                         </div>
