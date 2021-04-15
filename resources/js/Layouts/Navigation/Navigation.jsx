@@ -24,8 +24,8 @@ export default function Navigation({ can, auth }) {
                     { type: 'link', url: '/timeline', icon: faListTimeline, title: 'Timeline' },
                     { type: 'link', url: '/platforms', primary: '/pc', icon: faLaptopMobile, title: 'Platforms' },
                     { type: 'link', url: '/releases', icon: faFlag, title: 'Releases' },
-                    can.access_dashboard && { type: 'divider' },
-                    can.access_dashboard && { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage' },
+                    { type: 'divider', permission: can.access_dashboard },
+                    { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage', permission: can.access_dashboard },
                     { type: 'divider' },
                     { type: 'link', url: '/about', icon: faCircleInfo, title: 'About' }
                 ]}

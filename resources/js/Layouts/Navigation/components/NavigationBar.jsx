@@ -25,7 +25,7 @@ export default function NavigationBar({ auth, items }) {
 		const maxVisibleItems = Math.floor(width / 80);
 
 		if (items.length > maxVisibleItems && !matchesSmUp) {
-			items = items.filter((item) => item.type !== 'divider' && !item.ignore);
+			items = items.filter((item) => item.type !== 'divider' && !item.ignore && (item.permission === true || item.permission === undefined));
 
 			setShowAuthOnMainBar(items.length < 3);
 
@@ -54,7 +54,7 @@ export default function NavigationBar({ auth, items }) {
 					return (<div className="my-2 border-bottom" key={key} />);
 				}
 			})}
-			{(overflowItems?.length >= 1 || !showAuthOnMainBar) &&
+			{((overflowItems?.length >= 1 || !showAuthOnMainBar) && !matchesSmUp) &&
 				<>
 					<a className="sidebar-item dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						<FontAwesomeIcon icon={faEllipsis} fixedWidth />
