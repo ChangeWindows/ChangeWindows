@@ -35,7 +35,7 @@ export default function NavigationBar({ auth, items }) {
 			return [main, overflow];
 		}
 
-		return [items, null]
+		return [items, []]
 	}, [items, matchesSmUp, width]);
 
     function handleLogout(e) {
