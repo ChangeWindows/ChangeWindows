@@ -54,10 +54,15 @@ class RolePermissionsSeeder extends Seeder
         $permission_roles_create = Permission::create(['name' => 'roles.create']);
         $permission_roles_edit = Permission::create(['name' => 'roles.edit']);
         $permission_roles_delete = Permission::create(['name' => 'roles.delete']);
+        $permission_tweet_streams = Permission::create(['name' => 'tweet_streams']);
+        $permission_tweet_streams_show = Permission::create(['name' => 'tweet_streams.show']);
+        $permission_tweet_streams_create = Permission::create(['name' => 'tweet_streams.create']);
+        $permission_tweet_streams_edit = Permission::create(['name' => 'tweet_streams.edit']);
+        $permission_tweet_streams_delete = Permission::create(['name' => 'tweet_streams.delete']);
         $permission_settings = Permission::create(['name' => 'settings']);
 
         // Built roles
-        $role_admin->givePermissionTo(['profile', 'dashboard', 'platforms', 'channels', 'releases', 'flights', 'users', 'roles', 'settings']);
+        $role_admin->givePermissionTo(['profile', 'dashboard', 'platforms', 'channels', 'releases', 'flights', 'users', 'roles', 'settings', 'tweet_streams']);
         $role_editor->givePermissionTo(['profile', 'dashboard', 'platforms.show', 'platforms.edit', 'channels.show', 'channels.edit', 'releases', 'flights']);
         $role_user->givePermissionTo(['profile']);
 

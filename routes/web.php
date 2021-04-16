@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ReleaseChannelController as AdminReleaseChannelCo
 use App\Http\Controllers\Admin\ReleaseController as AdminReleaseController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\TweetStreamController as AdminTweetStreamController;
 
 
 /*
@@ -97,6 +98,15 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/create', [AdminPlatformController::class, 'create'])->name('.create');
         Route::get('/{platform}/edit', [AdminPlatformController::class, 'edit'])->name('.edit');
         Route::patch('/{platform}/edit', [AdminPlatformController::class, 'update'])->name('.update');
+    });
+    
+    Route::prefix('tweet_streams')->name('.tweet_streams')->group(function() {
+        Route::get('', [AdminTweetStreamController::class, 'index'])->name('');
+        Route::post('', [AdminTweetStreamController::class, 'store'])->name('.store');
+        Route::delete('{tweet_stream}', [AdminTweetStreamController::class, 'destroy'])->name('.destroy');
+        Route::get('/create', [AdminTweetStreamController::class, 'create'])->name('.create');
+        Route::get('/{tweet_stream}/edit', [AdminTweetStreamController::class, 'edit'])->name('.edit');
+        Route::patch('/{tweet_stream}/edit', [AdminTweetStreamController::class, 'update'])->name('.update');
     });
     
     Route::prefix('channels')->name('.channels')->group(function() {

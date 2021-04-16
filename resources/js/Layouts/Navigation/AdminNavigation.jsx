@@ -5,6 +5,7 @@ import NavigationBar from './components/NavigationBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSunHaze, faFlag, faCircleInfo, faUser, faUserUnlock, faArrowLeft, faLaptopMobile, faPlane } from '@fortawesome/pro-regular-svg-icons';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function AdminNavigation({ can, auth }) {
     return (
@@ -26,6 +27,8 @@ export default function AdminNavigation({ can, auth }) {
                     { type: 'link', url: '/admin/flights', icon: faPlane, title: 'Flights' },
                     { type: 'link', url: '/admin/releases', icon: faFlag, title: 'Releases' },
                     { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms' },
+                    { type: 'divider' },
+                    { type: 'link', url: '/admin/tweet_streams', icon: faTwitter, title: 'Twitter' },
                     { type: 'divider' },
                     { type: 'link', url: '/admin/users', icon: faUser, title: 'Users' },
                     { type: 'link', url: '/admin/roles', icon: faUserUnlock, title: 'Roles' },
