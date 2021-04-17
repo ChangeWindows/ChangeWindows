@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Platform;
+use App\Models\TweetStream;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -42,6 +43,7 @@ class PlatformController extends Controller
         $this->authorize('platforms.create');
 
         return Inertia::render('Admin/Platforms/Create', [
+            'tweet_streams' => TweetStream::all(),
             'urls' => [
                 'store_platform' => route('admin.platforms.store', [], false),
             ]
@@ -64,6 +66,9 @@ class PlatformController extends Controller
             'position' => request('position'),
             'color' => request('color'),
             'icon' => request('icon'),
+            'tweet_template' => request('tweet_template'),
+            'tweet_stream_id' => request('tweet_stream_id'),
+            'retweet_stream_id' => request('retweet_stream_id'),
             'legacy' => request('legacy') ? 1 : 0,
             'active' => request('active') ? 1 : 0
         ]);
@@ -105,6 +110,7 @@ class PlatformController extends Controller
                 'create_channel' => route('admin.channels.create', ['platform' => $platform->id], false)
             ],
             'platform' => $platform,
+            'tweet_streams' => TweetStream::all(),
             'channels' => $platform->channels->sortBy('order')->values()->all(),
             'status' => session('status')
         ]);
@@ -127,6 +133,9 @@ class PlatformController extends Controller
             'position' => request('position'),
             'color' => request('color'),
             'icon' => request('icon'),
+            'tweet_template' => request('tweet_template'),
+            'tweet_stream_id' => request('tweet_stream_id'),
+            'retweet_stream_id' => request('retweet_stream_id'),
             'legacy' => request('legacy') ? 1 : 0,
             'active' => request('active') ? 1 : 0
         ]);

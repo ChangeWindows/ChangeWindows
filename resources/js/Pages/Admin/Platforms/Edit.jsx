@@ -8,7 +8,7 @@ import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faEye, faFloppyDisk, faPen, faPlus, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ can, auth, urls, platform, channels, status = null }) {
+export default function Edit({ can, auth, urls, platform, channels, tweet_streams, status = null }) {
     const [curPlatform, setCurPlatform] = useState(platform);
 
     useEffect(() => {
@@ -174,6 +174,49 @@ export default function Edit({ can, auth, urls, platform, channels, status = nul
                                                     <p className="form-text">This platform is a tool and should not be displayed beyond the timeline.</p>
                                                 </label>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset className="row mb-3" disabled={!can.edit_platforms}>
+                        <div className="col-12 col-md-4 my-4 my-md-0">
+                            <h4 className="h5 mb-0">Tweet Stream</h4>
+                            <p className="text-muted mb-0"><small>Keeping people up-to-date with Twitter.</small></p>
+                        </div>
+                        <div className="col-12 col-md-8">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="row g-3">
+                                        <div className="col-12 col-lg-6">
+                                            <div className="form-floating">
+                                                <select className="form-select" id="tweet_stream_id" aria-label="Tweet Stream" value={curPlatform.tweet_stream_id} onChange={formHandler}>
+                                                    <option style={{ display: 'none' }}>Tweet Stream</option>
+                                                    {tweet_streams.map((tweetStreams, key) => (
+                                                        <option value={tweetStreams.id} key={key}>{tweetStreams.name}</option>
+                                                    ))}
+                                                </select>
+                                                <label htmlFor="tweet_stream_id">Tweet Stream</label>
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-lg-6">
+                                            <div className="form-floating">
+                                                <select className="form-select" id="retweet_stream_id" aria-label="Retweet Stream" value={curPlatform.retweet_stream_id} onChange={formHandler}>
+                                                    <option style={{ display: 'none' }}>Retweet Stream</option>
+                                                    {tweet_streams.map((tweetStreams, key) => (
+                                                        <option value={tweetStreams.id} key={key}>{tweetStreams.name}</option>
+                                                    ))}
+                                                </select>
+                                                <label htmlFor="retweet_stream_id">Retweet Stream</label>
+                                            </div>
+                                        </div>
+                                        <div className="col-12">
+                                            <div className="form-floating">
+                                                <textarea className="form-control font-monospace" id="tweet_template" style={{ minHeight: 158 }} defaultValue={curPlatform.tweet_template} onChange={formHandler}></textarea>
+                                                <label htmlFor="tweet_template">Tweet Template</label>
+                                            </div>
+                                            <p className="form-text">Include <code>%OS%</code>, <code>%FLIGHT%</code>, <code>%CHANNELS%</code>, and <code>%URL%</code>.</p>
                                         </div>
                                     </div>
                                 </div>
