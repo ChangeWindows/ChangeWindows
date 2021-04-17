@@ -177,7 +177,7 @@ export default function Create({ can, auth, urls, releases }) {
                                                 />
                                                 <label className="form-check-label" htmlFor="tweet">
                                                     <span className="fw-bold">Publish to Twitter</span>
-                                                    <p className="lh-sm mt-1 mb-0"><small className="text-muted d-block mt-n1">Send a tweet through the @ChangeWindows and/or @ChangeXbox Twitter handles.</small></p>
+                                                    <p className="lh-sm mt-1 mb-0"><small className="text-muted d-block mt-n1">Tweet to the platform-connected Twitter handles.</small></p>
                                                 </label>
                                             </div>
                                         </div>
