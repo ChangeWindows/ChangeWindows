@@ -64,6 +64,13 @@
     scrollbar-width: thin;
 }
 
+// Forms
+.form-text {
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
 // Timeline items
 .timeline {
     .flight {
