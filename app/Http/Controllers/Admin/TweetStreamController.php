@@ -123,7 +123,18 @@ class TweetStreamController extends Controller
      */
     public function update(Request $request, TweetStream $tweetStream)
     {
-        //
+        $this->authorize('tweet_streams.edit');
+
+        $tweetStream->update([
+            'name' => request('name'),
+            'account' => request('account'),
+            'consumer_key' => request('consumer_key'),
+            'consumer_secret' => request('consumer_secret'),
+            'access_token' => request('access_token'),
+            'access_token_secret' => request('access_token_secret')
+        ]);
+
+        return Redirect::route('admin.tweet_streams.edit', $tweetStream)->with('status', 'Succesfully updated the tweet stream.');
     }
 
     /**

@@ -35,11 +35,11 @@ class Platform extends Model
     }
 
     public function tweetStream() {
-        return $this->hasOne(TwitterStream::class);
+        return $this->belongsTo(TweetStream::class);
     }
 
     public function retweetStream() {
-        return $this->hasOne(TwitterStream::class, 'retweet_stream_id');
+        return $this->belongsTo(TweetStream::class, 'retweet_stream_id');
     }
 
     public function releaseChannels() {

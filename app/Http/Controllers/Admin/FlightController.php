@@ -129,17 +129,32 @@ class FlightController extends Controller
             ]);
 
             if ($request->tweet) {
-                Twitter::postTweet([
-                    'status' =>
-'ChangeWindows Test Tweet
-💻 '.$release_channel->release->name.' (Version '.$release_channel->release->version.')
-✈️ '.$flight->version.'
-👉 '.$release_channel->name.'
-🔗 changewindows.org/releases/'.$release_channel->release->slug.'
-#Windows #WindowsInsiders',
-// 🔗 '.$flight->url, // TODO enable for production
-                    'response_format' => 'json'
-                ]);
+                if ($release_channel->channel->platform->tweetStream) {
+                    $tweet_stream = $release_channel->channel->platform->tweetStream;
+
+                    $twitter_stream = Twitter::usingCredentials($tweet_stream->access_token, $tweet_stream->access_token_secret, $tweet_stream->consumer_key, $tweet_stream->consumer_secret);
+
+                    $posted_tweet = $twitter_stream->postTweet([
+                        'status' => str_replace(
+                            array('%OS%', '%FLIGHT%', '%CHANNELS%', '%URL%'),
+                            array(
+                                $release_channel->release->name.' (Version '.$release_channel->release->version.')',
+                                $flight->version,
+                                $release_channel->name,
+                                'changewindows.org/releases/'.$release_channel->release->slug
+                            ),
+                            $release_channel->channel->platform->tweet_template
+                        )
+                    ]);
+
+                    if ($posted_tweet && $release_channel->channel->platform->retweetStream) {
+                        $retweet_stream = $release_channel->channel->platform->retweetStream;
+                        
+                        $twitter_re_stream = Twitter::usingCredentials($retweet_stream->access_token, $retweet_stream->access_token_secret, $retweet_stream->consumer_key, $retweet_stream->consumer_secret);
+
+                        $posted_retweet = $twitter_re_stream->postRt($posted_tweet->id);
+                    }
+                }
             }
         }
 

@@ -27,6 +27,10 @@ class ReleaseChannel extends Model
         return $this->belongsTo(Release::class);
     }
 
+    public function platform() {
+        return $this->hasOneThrough(Platform::class, Channel::class);
+    }
+
     public function flights() {
         return $this->hasMany(Flight::class);
     }
@@ -40,10 +44,6 @@ class ReleaseChannel extends Model
             ->orderBy('build', 'desc')
             ->orderBy('delta', 'desc')
             ->first();
-    }
-
-    public function platform() {
-        return $this->hasOneThrough(Platform::class, Channel::class);
     }
 
     public function getEditUrlAttribute() {
