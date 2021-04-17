@@ -48,7 +48,13 @@ class TweetStreamController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('tweet_streams.create');
+
+        return Inertia::render('Admin/TweetStreams/Create', [
+            'urls' => [
+                'store_tweet_stream' => route('admin.tweet_streams.store', [], false),
+            ]
+        ]);
     }
 
     /**
@@ -59,7 +65,18 @@ class TweetStreamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('releases.create');
+
+        $tweet_stream = TweetStream::create([
+            'name' => request('name'),
+            'account' => request('account'),
+            'consumer_key' => request('consumer_key'),
+            'consumer_secret' => request('consumer_secret'),
+            'access_token' => request('access_token'),
+            'access_token_secret' => request('access_token_secret')
+        ]);
+
+        return Redirect::route('admin.tweet_streams.edit', $tweet_stream)->with('status', 'Succesfully created this tweet stream.');
     }
 
     /**
@@ -117,6 +134,10 @@ class TweetStreamController extends Controller
      */
     public function destroy(TweetStream $tweetStream)
     {
-        //
+        $this->authorize('tweet_streams.delete');
+
+        $tweetStream->delete();
+
+        return Redirect::route('admin.tweet_streams')->with('status', 'Succesfully deleted tweet stream.');
     }
 }

@@ -4,14 +4,18 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import Admin from '../../../Layouts/Admin';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEye, faPen } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Show({ can, auth, tweet_streams, status = null }) {
+export default function Show({ can, auth, tweet_streams, createUrl, status = null }) {
     return (
         <Admin can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Twitter Tweet Streams</span>
+                    <div className="flex-grow-1" />
+                    <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
+                        <FontAwesomeIcon icon={faPlus} fixedWidth/> New
+                    </InertiaLink>
                 </div>
             </nav>
         

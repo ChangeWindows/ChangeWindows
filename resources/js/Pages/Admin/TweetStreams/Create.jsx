@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ can, auth, urls, tweet_stream, status = null }) {
-    const [curTweetStream, setCurTweetStream] = useState(tweet_stream);
-
-    useEffect(() => {
-        setCurTweetStream(tweet_stream);
-    }, [tweet_stream]);
+export default function Edit({ can, auth, urls, status = null }) {
+    const [curTweetStream, setCurTweetStream] = useState({
+        name: '',
+        account: '',
+        consumer_key: '',
+        consumer_secret: '',
+        access_token: '',
+        access_token_secret: ''
+    });
 
     function formHandler(event) {
         const { id, value, type } = event.target;
@@ -29,12 +32,7 @@ export default function Edit({ can, auth, urls, tweet_stream, status = null }) {
 
     function handleSubmit(event) {
       event.preventDefault();
-      Inertia.patch(urls.update_tweet_stream, curTweetStream);
-    }
-
-    function handleDelete(event) {
-      event.preventDefault();
-      Inertia.delete(urls.destroy_tweet_stream, curTweetStream);
+      Inertia.post(urls.store_tweet_stream, curTweetStream);
     }
 
     return (
@@ -55,7 +53,7 @@ export default function Edit({ can, auth, urls, tweet_stream, status = null }) {
                     {status &&
                         <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                     }
-                    <fieldset className="row mb-3" disabled={!can.edit_tweet_streams}>
+                    <fieldset className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
                             <h4 className="h5 mb-0">Identity</h4>
                             <p className="text-muted mb-0"><small>About this feed.</small></p>
@@ -81,7 +79,7 @@ export default function Edit({ can, auth, urls, tweet_stream, status = null }) {
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset className="row mb-3" disabled={!can.edit_tweet_streams}>
+                    <fieldset className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
                             <h4 className="h5 mb-0">Authentication</h4>
                             <p className="text-muted mb-0"><small>Connecting to the Twitter API.</small></p>
@@ -121,30 +119,6 @@ export default function Edit({ can, auth, urls, tweet_stream, status = null }) {
                     </fieldset>
                 </div>
             </form>
-            {can.delete_tweet_streams &&
-                <form onSubmit={handleDelete}>
-                    <div className="container my-3">
-                        <div className="row">
-                            <div className="col-12 col-md-4 my-4 my-md-0">
-                                <h4 className="h5 mb-0 text-danger">Danger zone</h4>
-                                <p className="text-muted mb-0"><small>All alone in the danger zone.</small></p>
-                            </div>
-                            <div className="col-12 col-md-8">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <div className="row g-3">
-                                            <div className="col-12">
-                                                <p>Deleting a tweet stream will remove all the content associated with that tweet stream. Are you sure?</p>
-                                                <button className="btn btn-danger btn-sm" type="submit"><FontAwesomeIcon icon={faTrashCan} fixedWidth /> Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            }
         </Admin>
     )
 }
