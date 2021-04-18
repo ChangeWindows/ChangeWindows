@@ -6,7 +6,7 @@ import Navigation from './Navigation/Navigation'
 export default function App({ children, can, auth, background = false }) {
     return (
         <div className="bg-light">
-            <div className="grid">
+            <div className="grid" style={{ height: window.innerHeight}}>
                 <header className="grid-sidebar">
                     <Navigation can={can} auth={auth} />
                 </header>

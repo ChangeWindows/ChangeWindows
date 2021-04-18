@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Auth({ children }) {
     return (
-        <div className="auth auth-flow">
+        <div className="auth auth-flow" style={{ height: window.innerHeight}}>
             <div className="content">
                 <a href="javascript:history.back()" className="btn btn-link btn-sm text-white"><FontAwesomeIcon icon={faArrowLeft} /> Back</a>
                 <div className="auth-card">
