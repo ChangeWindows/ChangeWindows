@@ -218,7 +218,7 @@ export default function Create({ can, auth, urls, tweet_streams }) {
                                                 <textarea className="form-control font-monospace" id="tweet_template" style={{ minHeight: 158 }} defaultValue={curPlatform.tweet_template} onChange={formHandler}></textarea>
                                                 <label htmlFor="tweet_template">Tweet Template</label>
                                             </div>
-                                            <p className="form-text">Include <code>%OS%</code>, <code>%FLIGHT%</code>, <code>%CHANNELS%</code>, and <code>%URL%</code>.</p>
+                                            <p className="form-text">Include <code>%RELEASE%</code>, <code>%VERSION%</code>, <code>%CODENAME%</code>, <code>%FLIGHT%</code>, <code>%CHANNELS%</code>, and <code>%URL%</code>.</p>
                                         </div>
                                     </div>
                                 </div>

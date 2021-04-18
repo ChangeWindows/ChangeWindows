@@ -136,9 +136,11 @@ class FlightController extends Controller
 
                     $posted_tweet = $twitter_stream->postTweet([
                         'status' => str_replace(
-                            array('%OS%', '%FLIGHT%', '%CHANNELS%', '%URL%'),
+                            array('%RELEASE%', '%VERSION%', '%CODENAME%', '%FLIGHT%', '%CHANNELS%', '%URL%'),
                             array(
-                                $release_channel->release->name.' (Version '.$release_channel->release->version.')',
+                                $release_channel->release->name,
+                                $release_channel->release->version,
+                                $release_channel->release->codename,
                                 $flight->version,
                                 $release_channel->name,
                                 'changewindows.org/releases/'.$release_channel->release->slug
