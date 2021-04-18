@@ -32,7 +32,7 @@ export default function Register({ can }) {
                 </div>
                 <div className="col-12">
                     <div className="form-floating">
-                        <input type="password" className="form-control" id="password" value={form.password} onChange={(event) => setForm((curForm) => ({ ...curForm, password: event.target.value }))} autocomplete="new-password" />
+                        <input type="password" className="form-control" id="password" value={form.password} onChange={(event) => setForm((curForm) => ({ ...curForm, password: event.target.value }))} autoComplete="new-password" />
                         <label htmlFor="password">Password</label>
                     </div>
                 </div>

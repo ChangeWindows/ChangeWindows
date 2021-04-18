@@ -191,7 +191,7 @@ export default function Edit({ can, auth, urls, platform, channels, tweet_stream
                                     <div className="row g-3">
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <select className="form-select" id="tweet_stream_id" aria-label="Tweet Stream" value={curPlatform.tweet_stream_id} onChange={formHandler}>
+                                                <select className="form-select" id="tweet_stream_id" aria-label="Tweet Stream" value={curPlatform.tweet_stream_id ?? ''} onChange={formHandler}>
                                                     <option style={{ display: 'none' }}>Tweet Stream</option>
                                                     {tweet_streams.map((tweetStreams, key) => (
                                                         <option value={tweetStreams.id} key={key}>{tweetStreams.name}</option>
@@ -202,7 +202,7 @@ export default function Edit({ can, auth, urls, platform, channels, tweet_stream
                                         </div>
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <select className="form-select" id="retweet_stream_id" aria-label="Retweet Stream" value={curPlatform.retweet_stream_id} onChange={formHandler}>
+                                                <select className="form-select" id="retweet_stream_id" aria-label="Retweet Stream" value={curPlatform.retweet_stream_id ?? ''} onChange={formHandler}>
                                                     <option style={{ display: 'none' }}>Retweet Stream</option>
                                                     {tweet_streams.map((tweetStreams, key) => (
                                                         <option value={tweetStreams.id} key={key}>{tweetStreams.name}</option>

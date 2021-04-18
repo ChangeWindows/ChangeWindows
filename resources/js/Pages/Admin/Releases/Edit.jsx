@@ -5,7 +5,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import Admin from '../../../Layouts/Admin';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faPen, faEye, faPeriod, faPlus, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowLeft, faCheck, faPen, faEye, faPlus, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
 
@@ -17,7 +17,7 @@ export default function Edit({ can, auth, urls, platforms, release, channels, re
         codename: '',
         description: '',
         changelog: '',
-        platform_id: (null),
+        platform_id: null,
         start_preview: null,
         start_public: null,
         start_extended: null,
@@ -28,6 +28,8 @@ export default function Edit({ can, auth, urls, platforms, release, channels, re
         end_build: null,
         end_delta: null
     });
+
+    console.log(curRelease);
 
     useEffect(() => {
         setCurRelease(release);
@@ -90,7 +92,7 @@ export default function Edit({ can, auth, urls, platforms, release, channels, re
                                     <div className="row g-3">
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <select className="form-select" disabled id="platform_id" aria-label="Platform" value={curRelease.platform_id} onChange={formHandler}>
+                                                <select className="form-select" disabled id="platform_id" aria-label="Platform" value={curRelease.platform_id ?? ''} onChange={formHandler}>
                                                     <option style={{ display: 'none' }}>Select platform</option>
                                                     {platforms.map((platform, key) => (
                                                         <option value={platform.id} key={key}>{platform.name}</option>

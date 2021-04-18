@@ -78,7 +78,7 @@ export default function Create({ can, auth, urls, platforms }) {
                                     <div className="row g-3">
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <select className="form-select" id="platform_id" aria-label="Platform" value={curRelease.platform_id} onChange={formHandler}>
+                                                <select className="form-select" id="platform_id" aria-label="Platform" value={curRelease.platform_id ?? ''} onChange={formHandler}>
                                                     <option style={{ display: 'none' }}>Select platform</option>
                                                     {platforms.map((platform, key) => (
                                                         <option value={platform.id} key={key}>{platform.name}</option>

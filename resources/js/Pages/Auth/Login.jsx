@@ -26,7 +26,7 @@ export default function Login({ can }) {
                 </div>
                 <div className="col-12">
                     <div className="form-floating">
-                        <input type="password" className="form-control" id="password" value={form.password} onChange={(event) => setForm((curLogin) => ({ ...curLogin, password: event.target.value }))} autocomplete="current-password" />
+                        <input type="password" className="form-control" id="password" value={form.password} onChange={(event) => setForm((curLogin) => ({ ...curLogin, password: event.target.value }))} autoComplete="current-password" />
                         <label htmlFor="password">Password</label>
                     </div>
                 </div>
