@@ -58,24 +58,30 @@ class TimelineController extends Controller
             'timeline' => Timeline::orderBy('date', 'desc')->get()->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
-                    'flights' => $items->map(function ($flight) {
+                    'flights' => $items->groupBy(function($item, $key) {
+                        return $item->entry->flight.'-'.$item->entry->platform->position;
+                    })->map(function ($flights) {
+                        $_cur_flight = $flights->first();
+
                         return [
-                            'id' => $flight->entry->id,
-                            'flight' => $flight->entry->flight,
-                            'date' => $flight->entry->timeline->date,
-                            'version' => $flight->entry->releaseChannel->release->version,
-                            'release_channel' => [[
-                                'name' => $flight->entry->releaseChannel->short_name,
-                                'color' => $flight->entry->releaseChannel->channel->color
-                            ]],
+                            'id' => $_cur_flight->entry->id,
+                            'flight' => $_cur_flight->entry->flight,
+                            'date' => $_cur_flight->entry->timeline->date,
+                            'version' => $_cur_flight->entry->releaseChannel->release->version,
+                            'release_channel' => $flights->map(function ($channels) {
+                                return [
+                                    'name' => $channels->entry->releaseChannel->short_name,
+                                    'color' => $channels->entry->releaseChannel->channel->color
+                                ];
+                            }),
                             'platform' => [
-                                'icon' => $flight->entry->platform->icon,
-                                'name' => $flight->entry->platform->name,
-                                'color' => $flight->entry->platform->color
+                                'icon' => $_cur_flight->entry->platform->icon,
+                                'name' => $_cur_flight->entry->platform->name,
+                                'color' => $_cur_flight->entry->platform->color
                             ],
-                            'edit_url' => $flight->entry->edit_url
+                            'edit_url' => $_cur_flight->entry->edit_url
                         ];
-                    })
+                    })->values()->all()
                 ];
             }),
             'status' => session('status')
