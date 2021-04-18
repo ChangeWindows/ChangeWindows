@@ -9,7 +9,9 @@
     align-items: center;
 
     @media (max-width: 575px) {
-        height: calc(100vh - 64px);
+        &:not(.auth-flow) {
+            height: calc(100vh - 64px);
+        }
     }
 
     .auth-card {
