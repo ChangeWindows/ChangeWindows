@@ -133,7 +133,7 @@ export default function Show({ can, auth, platforms, platform, channels, release
                                                             key={key}
                                                             platform={flight.platform}
                                                             build={flight.flight}
-                                                            channels={[flight.release_channel]}
+                                                            channels={flight.release_channel}
                                                             version={flight.version}
                                                         />
                                                     ))}
