@@ -15,15 +15,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faFlag, faListTimeline } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
+import clsx from 'clsx';
 
 export default function Show({ can, auth, platforms, platform, channels, releases, timeline }) {
-    const [currentReleases, legacyReleases] = useMemo(() => {
-        const currentReleases = releases.filter((release) => release.channels.length > 0);
-        const legacyReleases = releases.filter((release) => release.channels.length === 0);
-
-        return [currentReleases, legacyReleases];
-    }, [releases]);
-
     return (
         <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
@@ -65,10 +59,27 @@ export default function Show({ can, auth, platforms, platform, channels, release
         
             <div className="container my-3">
                 <div className="row g-3">
-                    <div className="col-12 mt-4">
-                        <h2 className="h5 mb-3 fw-bold">Nothing to see here yet</h2>
-                        <p>We're still working on this... See you again later.</p>
-                    </div>
+                    {releases.map((release, key) => (
+                        <div className="col-12" key={key}>
+                            <div className="row g-2">
+                                <div className={clsx('col-12 mb-n1', { 'mt-3': key > 0 })}>
+                                    <h3 className="h6">
+                                        <PlatformIcon platform={release.platform} color />
+                                        <span className="fw-bold ms-2">{release.name} (version {release.version})</span>
+                                    </h3>
+                                </div>
+                                {release.channels.map((channel, _key) => (
+                                    <Channel
+                                        key={_key}
+                                        disabled={!channel.supported}
+                                        channel={{ color: channel.color, name: channel.name }}
+                                        build={channel.flight ? channel.flight.version : ''}
+                                        date={channel.flight ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : ''}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </App>
