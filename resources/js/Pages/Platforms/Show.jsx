@@ -27,7 +27,7 @@ export default function Show({ can, auth, platforms, platform, channels, release
         <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
-                    <span className="navbar-brand">Plaforms</span>
+                    <span className="navbar-brand">Platforms</span>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-page" aria-controls="navbar-page" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
