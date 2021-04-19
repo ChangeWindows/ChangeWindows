@@ -1,0 +1,13 @@
+.dropdown-menu {
+    border: none;
+    box-shadow: $box-shadow;
+    min-width: 200px;
+
+    .dropdown-item {
+        padding: .5rem .75rem;
+
+        svg {
+            margin-right: .5rem;
+        }
+    }
+}
