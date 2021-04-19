@@ -4,7 +4,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import NavigationBar from './components/NavigationBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSunHaze, faListTimeline, faLaptopMobile, faFlag, faCircleInfo, faGauge } from '@fortawesome/pro-regular-svg-icons';
+import { faSunHaze, faListTimeline, faLaptopMobile, faFlag, faCircleInfo, faGauge, faCodeBranch } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Navigation({ can, auth }) {
     return (
@@ -23,6 +23,7 @@ export default function Navigation({ can, auth }) {
                 items={[
                     { type: 'link', url: '/timeline', icon: faListTimeline, title: 'Timeline' },
                     { type: 'link', url: '/platforms', primary: '/pc', icon: faLaptopMobile, title: 'Platforms' },
+                    { type: 'link', url: '/channels', icon: faCodeBranch, title: 'Channels' },
                     { type: 'link', url: '/releases', icon: faFlag, title: 'Releases' },
                     { type: 'divider', permission: can.access_dashboard },
                     { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage', permission: can.access_dashboard },
