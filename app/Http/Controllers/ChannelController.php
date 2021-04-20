@@ -79,6 +79,7 @@ class ChannelController extends Controller
                 ];
             }),
             'platform' => $platform,
+            'channel_order' => $platform->channels->sortBy('order')->pluck('id'),
             'releases' => $platform->releases->sortByDesc('canonical_version')->map(function ($release) {
                 return [
                     'name' => $release->name,
@@ -98,8 +99,9 @@ class ChannelController extends Controller
                             'supported' => $channel->supported,
                             'color' => $channel->channel->color,
                             'order' => $channel->channel->order,
+                            'channel_id' => $channel->channel->id,
                             'flight' => $channel->latest ? [
-                                'version' => $channel->latest->version,
+                                'version' => $channel->latest->flight,
                                 'date' => $channel->latest->timeline->date
                             ] : null
                         ];

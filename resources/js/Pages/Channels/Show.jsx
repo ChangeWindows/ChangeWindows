@@ -1,23 +1,21 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
 import DropdownItem from '../../Components/Navbar/DropdownItem';
-import Flight from '../../Components/Timeline/Flight';
 import NavItem from '../../Components/Navbar/NavItem';
-import ReleaseCard from '../../Components/Cards/ReleaseCard';
-import Timeline from '../../Components/Timeline/Timeline';
 
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faFlag, faListTimeline } from '@fortawesome/pro-regular-svg-icons';
+import { faAngleDown } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
 
-export default function Show({ can, auth, platforms, platform, channels, releases, timeline }) {
+export default function Show({ can, auth, platforms, channel_order, releases }) {
+    console.log(channel_order);
     return (
         <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
@@ -68,15 +66,26 @@ export default function Show({ can, auth, platforms, platform, channels, release
                                         <span className="fw-bold ms-2">{release.name} (version {release.version})</span>
                                     </h3>
                                 </div>
-                                {release.channels.map((channel, _key) => (
-                                    <Channel
-                                        key={_key}
-                                        disabled={!channel.supported}
-                                        channel={{ color: channel.color, name: channel.name }}
-                                        build={channel.flight ? channel.flight.version : ''}
-                                        date={channel.flight ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : ''}
-                                    />
-                                ))}
+                                {channel_order.map((_channel_id, _key) => {
+                                    const channel = release.channels.find((_channel) => _channel.channel_id === _channel_id);
+                                    console.log(channel);
+
+                                    if (channel) {
+                                        return (
+                                            <Channel
+                                                key={_key}
+                                                disabled={!channel.supported}
+                                                channel={{ color: channel.color, name: channel.name }}
+                                                build={channel.flight ? channel.flight.version : ''}
+                                                date={channel.flight ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : ''}
+                                            />
+                                        );
+                                    } else {
+                                        return (
+                                            <div className="col d-none d-xxl-flex" />
+                                        );
+                                    }
+                                })}
                             </div>
                         </div>
                     ))}
