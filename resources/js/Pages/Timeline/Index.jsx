@@ -20,9 +20,9 @@ import clsx from 'clsx';
 export default function Index({ can, auth, timeline, platforms, channel_platforms }) {
     return (
         <App can={can} auth={auth}>
-            <nav className="navbar navbar-expand-xl navbar-light sticky-top">
+            <nav className="navbar navbar-expand-sm navbar-light sticky-top">
                 <div className="container">
-                    <span className="navbar-brand">Timeline</span>
+                    <span className="navbar-brand d-block d-sm-none d-md-block">Timeline</span>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-page" aria-controls="navbar-page" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -35,7 +35,7 @@ export default function Index({ can, auth, timeline, platforms, channel_platform
                             </li>
                             {platforms.filter((platform) => !platform.legacy).map((platform, key) => (
                                 <NavItem url={platform.url} key={key}>
-                                    <PlatformIcon platform={platform} /> {platform.name}
+                                    <PlatformIcon platform={platform} /> <span className="d-inline-block d-sm-none d-xxl-inline-block">{platform.name}</span>
                                 </NavItem>
                             ))}
                         </ul>

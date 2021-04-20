@@ -5,7 +5,7 @@
     }
     
     .nav-item {
-        @media (min-width: 1200px) {
+        @media (min-width: 576px) {
             &:not(:last-child) {
                 margin-right: 1.5rem;
             }
@@ -16,7 +16,7 @@
             padding-left: 0;
             padding-right: 0;
 
-            @media (max-width: 1199px) {   
+            @media (max-width: 575px) { 
                 padding-left: .75rem;
             }
 
@@ -30,7 +30,7 @@
                     width: 100%;
                     content: '';
                     
-                    @media (max-width: 1199px) {    
+                    @media (max-width: 575px) {  
                         left: 0;
                         top: 25%;
                         height: 50%;
