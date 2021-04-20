@@ -16,7 +16,7 @@ class TimelineController extends Controller
      */
     public function index()
     {
-        $channel_platforms = Platform::orderBy('position')->where('active', '=', '1')->get();
+        $channel_platforms = Platform::orderBy('tool')->orderBy('position')->where('active', '=', '1')->get();
 
         return Inertia::render('Timeline/Index', [
             'platforms' => Platform::orderBy('position')->get()->map(function ($platform) {
