@@ -22,7 +22,7 @@ export default function NavigationBar({ auth, items }) {
 	const [showAuthOnMainBar, setShowAuthOnMainBar] = useState(true);
 
 	const [mainItems, overflowItems] = useMemo(() => {
-		const maxVisibleItems = Math.floor(width / 80);
+		const maxVisibleItems = Math.floor(width / 60);
 
 		if (items.length > maxVisibleItems && !matchesSmUp) {
 			items = items.filter((item) => item.type !== 'divider' && !item.ignore && (item.permission === true || item.permission === undefined));
