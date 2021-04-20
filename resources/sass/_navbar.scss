@@ -5,20 +5,14 @@
     }
     
     .nav-item {
-        @media (min-width: 576px) {
             &:not(:last-child) {
                 margin-right: 1.5rem;
             }
-        }
 
         .nav-link {
             position: relative;
             padding-left: 0;
             padding-right: 0;
-
-            @media (max-width: 575px) { 
-                padding-left: .75rem;
-            }
 
             &.active {
                 &::after {
@@ -29,13 +23,6 @@
                     height: 2px;
                     width: 100%;
                     content: '';
-                    
-                    @media (max-width: 575px) {  
-                        left: 0;
-                        top: 25%;
-                        height: 50%;
-                        width: 2px;
-                    }
                 }
             }
         }

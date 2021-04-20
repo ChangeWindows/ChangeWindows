@@ -29,8 +29,6 @@ export default function Edit({ can, auth, urls, platforms, release, channels, re
         end_delta: null
     });
 
-    console.log(curRelease);
-
     useEffect(() => {
         setCurRelease(release);
     }, [release]);

@@ -25,6 +25,7 @@ class TimelineController extends Controller
                     'color' => $platform->color,
                     'icon' => $platform->icon,
                     'legacy' => $platform->legacy,
+                    'tool' => $platform->tool,
                     'url' => route('front.timeline.show', $platform, false)
                 ];
             }),
@@ -103,6 +104,7 @@ class TimelineController extends Controller
                     'color' => $_platform->color,
                     'icon' => $_platform->icon,
                     'legacy' => $_platform->legacy,
+                    'tool' => $_platform->tool,
                     'url' => route('front.timeline.show', $_platform, false)
                 ];
             })

@@ -3,8 +3,13 @@
     box-shadow: $box-shadow;
     min-width: 200px;
 
-    .dropdown-item {
+    .dropdown-header {
         padding: .5rem .75rem;
+        font-weight: 500;
+    }
+
+    .dropdown-item {
+        padding: .375rem .75rem;
 
         svg {
             margin-right: .5rem;

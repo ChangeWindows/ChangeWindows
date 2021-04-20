@@ -1,15 +1,10 @@
-import React, { Fragment } from 'react';
-import { InertiaLink } from '@inertiajs/inertia-react';
+import React from 'react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
-import DropdownItem from '../../Components/Navbar/DropdownItem';
-import NavItem from '../../Components/Navbar/NavItem';
 
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/pro-regular-svg-icons'
+import PlatformNavigation from '../../Components/PlatformNavigation';
 
 import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
@@ -17,42 +12,7 @@ import clsx from 'clsx';
 export default function Index({ can, auth, platforms, channel_platforms }) {
     return (
         <App can={can} auth={auth}>
-            <nav className="navbar navbar-expand-sm navbar-light sticky-top">
-                <div className="container">
-                    <span className="navbar-brand d-block d-sm-none d-md-block">Channels</span>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-page" aria-controls="navbar-page" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbar-page">
-                        <ul className="navbar-nav me-auto">
-                            <li className="nav-item">
-                                <InertiaLink className="nav-link active" aria-current="page" href="/channels">
-                                    All
-                                </InertiaLink>
-                            </li>
-                            {platforms.filter((platform) => !platform.legacy).map((platform, key) => (
-                                <NavItem url={platform.url} key={key}>
-                                    <PlatformIcon platform={platform} /> <span className="d-inline-block d-sm-none d-xxl-inline-block">{platform.name}</span>
-                                </NavItem>
-                            ))}
-                        </ul>
-                        <ul className="navbar-nav">
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="legacyPlatforms" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <FontAwesomeIcon icon={faAngleDown} /> Legacy
-                                </a>
-                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="legacyPlatforms">
-                                    {platforms.filter((platform) => platform.legacy).map((platform, key) => (
-                                        <DropdownItem url={platform.url} key={key}>
-                                            <PlatformIcon platform={platform} /> {platform.name}
-                                        </DropdownItem>
-                                    ))}
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <PlatformNavigation home all="/channels" page="Channels" platforms={platforms} />
         
             <div className="container my-3">
                 <div className="row g-3">
