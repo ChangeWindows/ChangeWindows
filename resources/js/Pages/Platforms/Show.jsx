@@ -28,9 +28,9 @@ export default function Show({ can, auth, platforms, platform, channels, release
         
             <div className="container my-3">
                 <div className="row g-3">
-                    <div className="col-12">
-                        <h1 className="h2"><PlatformIcon platform={platform} color /> {platform.name}</h1>
-                        <p className="lead fw-bold">{platform.description}</p>
+                    <div className="col-12 mt-4">
+                        <h1 className="h5 mb-3"><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
+                        <p>{platform.description}</p>
 
                         <div className="row g-2 mt-3">
                             {channels.map((channel, key) => (
