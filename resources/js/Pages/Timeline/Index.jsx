@@ -89,7 +89,7 @@ export default function Index({ can, auth, timeline, platforms, channel_platform
                             ))}
                         </div>
                     </div>
-                    <div className="col-12 col-md-4 col-lg-5">
+                    <div className="d-none d-md-block col-md-4 col-lg-5">
                         <div className="row g-2">
                             {channel_platforms.map((platform, key) => (
                                 <Fragment key={key}>
