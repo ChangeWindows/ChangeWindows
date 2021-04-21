@@ -80,7 +80,7 @@ class TimelineController extends Controller
                                 'name' => $_cur_flight->entry->platform->name,
                                 'color' => $_cur_flight->entry->platform->color
                             ],
-                            'edit_url' => $_cur_flight->entry->edit_url
+                            'release_url' => $_cur_flight->entry->release_url
                         ];
                     })->values()->all()
                 ];
@@ -161,7 +161,7 @@ class TimelineController extends Controller
                                 'name' => $_cur_flight->entry->platform->name,
                                 'color' => $_cur_flight->entry->platform->color
                             ],
-                            'edit_url' => $_cur_flight->entry->edit_url
+                            'release_url' => $_cur_flight->entry->release_url
                         ];
                     })->values()->all()
                 ];

@@ -29,6 +29,7 @@ export default function Show({ can, auth, timeline, platforms, channel_platforms
                                             build={flight.flight}
                                             channels={flight.release_channel}
                                             version={flight.version}
+                                            url={flight.release_url}
                                         />
                                     ))}
                                 </Timeline>

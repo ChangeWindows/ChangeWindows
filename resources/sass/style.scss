@@ -76,6 +76,15 @@
 
 // Timeline items
 .timeline {
+    a.flight {
+        text-decoration: none;
+        color: inherit;
+        
+        &:hover {
+            background-color: darken($light, 8);
+        }
+    }
+
     .flight {
         display: flex;
         height: 40px;
@@ -84,10 +93,6 @@
 
         &:nth-child(even) {
             background-color: darken($light, 5);
-        }
-
-        &:hover {
-            background-color: darken($light, 8);
         }
 
         .flight-icon {

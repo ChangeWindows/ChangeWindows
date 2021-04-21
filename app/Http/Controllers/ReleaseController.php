@@ -100,8 +100,7 @@ class ReleaseController extends Controller
                                 'icon' => $_cur_flight->entry->platform->icon,
                                 'name' => $_cur_flight->entry->platform->name,
                                 'color' => $_cur_flight->entry->platform->color
-                            ],
-                            'edit_url' => $_cur_flight->entry->edit_url
+                            ]
                         ];
                     })->values()->all()
                 ];

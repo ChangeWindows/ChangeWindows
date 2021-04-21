@@ -104,6 +104,7 @@ export default function Show({ can, auth, platforms, platform, channels, release
                                                             build={flight.flight}
                                                             channels={flight.release_channel}
                                                             version={flight.version}
+                                                            url={flight.release_url}
                                                         />
                                                     ))}
                                                 </Timeline>

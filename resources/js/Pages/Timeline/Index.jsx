@@ -46,6 +46,7 @@ export default function Index({ can, auth, timeline, platforms, channel_platform
                                             build={flight.flight}
                                             channels={flight.release_channel}
                                             version={flight.version}
+                                            url={flight.release_url}
                                         />
                                     ))}
                                 </Timeline>

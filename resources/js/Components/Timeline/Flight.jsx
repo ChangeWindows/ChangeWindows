@@ -1,11 +1,16 @@
-import clsx from 'clsx';
-import React from 'react';
+import React, { useMemo } from 'react';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 import PlatformIcon from '../Platforms/PlatformIcon';
 
-export default function Flight({ platform, build, channels, version = null, component = null }) {
+import clsx from 'clsx';
+
+export default function Flight({ platform, build, channels, version = null, component = null, url = null }) {
+    const Component = useMemo(() => (url ? InertiaLink : 'div'), ['url']);
+    const mainProps = useMemo(() => ({ href: url }), ['url']);
+
     return (
-        <div className="flight">
+        <Component {...mainProps} className="flight">
             <div className="flight-icon">
                 <PlatformIcon platform={platform} color />
             </div>
@@ -16,6 +21,6 @@ export default function Flight({ platform, build, channels, version = null, comp
                 ))}
             </div>
             <div className={clsx('flight-version', { 'text-muted': component })}>{version ?? component}</div>
-        </div>
+        </Component>
     );
 };
