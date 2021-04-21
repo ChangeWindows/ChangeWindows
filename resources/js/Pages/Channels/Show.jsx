@@ -20,10 +20,13 @@ export default function Show({ can, auth, platforms, channel_order, releases }) 
                         <div className="col-12" key={key}>
                             <div className="row g-2">
                                 <div className={clsx('col-12 mb-n1', { 'mt-3': key > 0 })}>
-                                    <h3 className="h6">
-                                        <PlatformIcon platform={release.platform} color />
-                                        <span className="fw-bold ms-2">{release.name} (version {release.version})</span>
-                                    </h3>
+                                    <div className="d-flex flex-row">
+                                        <h3 className="h6 mb-0"><PlatformIcon platform={release.platform} color /></h3>
+                                        <div className="ms-2">
+                                            <h3 className="h6 mb-0">{release.name}</h3>
+                                            <p className="text-muted mb-1 mt-n1"><small>Version {release.version}, {release.codename}</small></p>
+                                        </div>
+                                    </div>
                                 </div>
                                 {channel_order.map((_channel_id, _key) => {
                                     const channel = release.channels.find((_channel) => _channel.channel_id === _channel_id);
