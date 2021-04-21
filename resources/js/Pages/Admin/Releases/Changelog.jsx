@@ -1,15 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faPen, faEye, faPlus, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
 
-import { format, parseISO } from 'date-fns';
-
-export default function Edit({ can, auth, urls, platforms, release, channels, release_channels, status = null }) {
+export default function Edit({ can, auth, urls, release, status = null }) {
     const [curRelease, setCurRelease] = useState({
         name: '',
         version: null,
