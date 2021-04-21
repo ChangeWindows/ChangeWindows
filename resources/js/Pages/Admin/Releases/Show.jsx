@@ -5,7 +5,7 @@ import Admin from '../../../Layouts/Admin';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faEye, faNotes, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Show({ can, auth, releases, createUrl, status = null }) {
     return (
@@ -49,6 +49,9 @@ export default function Show({ can, auth, releases, createUrl, status = null }) 
                                     <div className="card-footer">
                                         <InertiaLink href={release.edit_url} className="btn btn-link btn-sm">
                                             {can.edit_releases ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
+                                        </InertiaLink>
+                                        <InertiaLink href={release.edit_changelog_url} className="btn btn-link btn-sm">
+                                            {can.edit_releases ? <><FontAwesomeIcon icon={faNotes} fixedWidth /> Changelog</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Changelog</>}
                                         </InertiaLink>
                                     </div>
                                 </div>

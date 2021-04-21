@@ -35,6 +35,7 @@ class ReleaseController extends Controller
                     'name' => $release->name,
                     'version' => $release->version,
                     'edit_url' => $release->edit_url,
+                    'edit_changelog_url' => $release->edit_changelog_url,
                     'platform' => [
                         'icon' => $release->platform->icon,
                         'name' => $release->platform->name,
@@ -152,6 +153,45 @@ class ReleaseController extends Controller
         $release->update($request->validated());
 
         return Redirect::route('admin.releases.edit', $release)->with('status', 'Succesfully updated this release.');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Release  $release
+     * @return \Illuminate\Http\Response
+     */
+    public function editChangelog(Release $release)
+    {
+        $this->authorize('releases.show');
+
+        return Inertia::render('Admin/Releases/Changelog', [
+            'can' => [
+                'edit_releases' => Auth::user()->can('releases.edit'),
+                'delete_releases' => Auth::user()->can('releases.delete')
+            ],
+            'urls' => [
+                'update_release' => route('admin.releases.changelog.update', $release, false)
+            ],
+            'release' => $release,
+            'status' => session('status')
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\ReleaseRequest  $request
+     * @param  \App\Models\Release  $release
+     * @return \Illuminate\Http\Response
+     */
+    public function updateChangelog(ReleaseRequest $request, Release $release)
+    {
+        $this->authorize('releases.edit');
+
+        $release->update($request->validated());
+
+        return Redirect::route('admin.releases.changelog.edit', $release)->with('status', 'Succesfully updated this release.');
     }
 
     /**

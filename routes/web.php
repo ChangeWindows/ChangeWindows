@@ -95,6 +95,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/create', [AdminReleaseController::class, 'create'])->name('.create');
         Route::get('/{release}/edit', [AdminReleaseController::class, 'edit'])->name('.edit');
         Route::patch('/{release}/edit', [AdminReleaseController::class, 'update'])->name('.update');
+        Route::get('/{release}/changelog/edit', [AdminReleaseController::class, 'editChangelog'])->name('.changelog.edit');
+        Route::patch('/{release}/changelog/edit', [AdminReleaseController::class, 'updateChangelog'])->name('.changelog.update');
     });
     
     Route::prefix('platforms')->name('.platforms')->group(function() {
