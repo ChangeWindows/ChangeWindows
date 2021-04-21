@@ -18,7 +18,7 @@ class ReleaseController extends Controller
     public function index()
     {
         return Inertia::render('Releases/Index', [
-            'releases' => Release::orderBy('canonical_version', 'desc')->orderBy('platform_id', 'asc')->get()->map(function ($release) {
+            'releases' => Release::orderBy('platform_id', 'asc')->orderBy('canonical_version', 'desc')->get()->map(function ($release) {
                 return [
                     'name' => $release->name,
                     'version' => $release->version,
