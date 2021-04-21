@@ -16,7 +16,7 @@
         "autoprefixer": "^10.2.5",
         "axios": "^0.21",
         "bootstrap": "^5.0.0-beta3",
-        "laravel-mix": "^6.0.16",
+        "laravel-mix": "^6.0.18",
         "lodash": "^4.17.19",
         "postcss": "^8.2.10",
         "resolve-url-loader": "^3.1.2",
