@@ -176,7 +176,16 @@
     }
 }
 
-// Channels
+// Cards
+a.card {
+    text-decoration: none;
+    color: inherit;
+    
+    &:hover {
+        background-color: darken($light, 3);
+    }
+}
+
 .card {
     .card-footer {
         background: transparent;

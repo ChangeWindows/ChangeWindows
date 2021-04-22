@@ -106,7 +106,7 @@ class PlatformController extends Controller
                                 'name' => $_cur_flight->entry->platform->name,
                                 'color' => $_cur_flight->entry->platform->color
                             ],
-                            'release_url' => $_cur_flight->entry->release_url
+                            'url' => $_cur_flight->entry->url
                         ];
                     })->values()->all()
                 ];

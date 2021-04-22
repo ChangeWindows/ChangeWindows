@@ -29,7 +29,7 @@ export default function Show({ can, auth, timeline, platforms, channel_platforms
                                             build={flight.flight}
                                             channels={flight.release_channel}
                                             version={flight.version}
-                                            url={flight.release_url}
+                                            url={flight.url}
                                         />
                                     ))}
                                 </Timeline>
@@ -52,6 +52,7 @@ export default function Show({ can, auth, timeline, platforms, channel_platforms
                                             channel={{ color: channel.color, name: channel.name }}
                                             build={channel.flights.length > 0 ? channel.flights[0].version : ''}
                                             date={channel.flights.length > 0 ? format(parseISO(channel.flights[0].date), 'd MMMM yyyy') : ''}
+                                            url={channel.flights.length > 0 ? channel.flights[0].url : undefined}
                                         />
                                     ))}
                                 </Fragment>

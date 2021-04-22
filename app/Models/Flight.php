@@ -13,7 +13,7 @@ class Flight extends Model
 
     protected $table = 'flights';
     protected $fillable = ['major', 'minor', 'build', 'delta', 'release_channel_id'];
-    protected $appends = ['release_url', 'edit_url', 'version', 'flight', 'url'];
+    protected $appends = ['edit_url', 'version', 'flight', 'url'];
     
     public function timeline() {
         return $this->morphOne(Timeline::class, 'entry');
@@ -40,14 +40,10 @@ class Flight extends Model
     }
 
     public function getUrlAttribute() {
-        return route('front.releases.show', $this->releaseChannel->release);
+        return route('front.releases.show', $this->release, false);
     }
 
     public function getEditUrlAttribute() {
         return route('admin.flights.edit', $this, false);
-    }
-
-    public function getReleaseUrlAttribute() {
-        return route('front.releases.show', $this->release, false);
     }
 }

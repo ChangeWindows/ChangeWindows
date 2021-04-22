@@ -46,7 +46,7 @@ export default function Index({ can, auth, timeline, platforms, channel_platform
                                             build={flight.flight}
                                             channels={flight.release_channel}
                                             version={flight.version}
-                                            url={flight.release_url}
+                                            url={flight.url}
                                         />
                                     ))}
                                 </Timeline>
@@ -63,12 +63,14 @@ export default function Index({ can, auth, timeline, platforms, channel_platform
                                             <span className="fw-bold ms-2">{platform.name}</span>
                                         </h3>
                                     </div>
+                                    {console.log(platform.channels)}
                                     {platform.channels.map((channel, _key) => (
                                         <Channel
                                             key={_key}
                                             channel={{ color: channel.color, name: channel.name }}
                                             build={channel.flights.length > 0 ? channel.flights[0].version : ''}
                                             date={channel.flights.length > 0 ? format(parseISO(channel.flights[0].date), 'd MMMM yyyy') : ''}
+                                            url={channel.flights.length > 0 ? channel.flights[0].url : undefined}
                                         />
                                     ))}
                                 </Fragment>
