@@ -23,19 +23,20 @@ export default function NavigationBar({ auth, items }) {
 
 	const [mainItems, overflowItems] = useMemo(() => {
 		const maxVisibleItems = Math.floor(width / 65);
+		let navigationItems = items.filter((item) => item.permission === true || item.permission === undefined);
 
 		if (items.length > maxVisibleItems && !matchesSmUp) {
-			items = items.filter((item) => item.type !== 'divider' && !item.ignore && (item.permission === true || item.permission === undefined));
+			navigationItems = items.filter((item) => item.type !== 'divider' && !item.ignore);
 
-			setShowAuthOnMainBar(items.length < 3);
+			setShowAuthOnMainBar(navigationItems.length < 3);
 
-			const main = items.slice(0, maxVisibleItems - 1);
-			const overflow = items.slice(maxVisibleItems - 1);
+			const main = navigationItems.slice(0, maxVisibleItems - 1);
+			const overflow = navigationItems.slice(maxVisibleItems - 1);
 
 			return [main, overflow];
 		}
 
-		return [items, []]
+		return [navigationItems, []]
 	}, [items, matchesSmUp, width]);
 
     function handleLogout(e) {
