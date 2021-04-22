@@ -20,7 +20,7 @@ The Channels-page is back with an improved overview page. Each platform will now
 * #18 **Life-cycle timeline**: the responsive design of the life-cycle timeline has been drastically improved with a timeline that will now split to multiple lines.
 * #39 The order of releases on the Releases-page has been updated from "by version" to "by platform by version" to better group related releases.
 
-## Platforms
+### Platforms
 * e6524af Introduces an updated, cleaner heading design for the Platform-pages.
 * #41 **Clickable channels**: the channels at the top of the page will now link to the specific release that this channel currently holds.
 
