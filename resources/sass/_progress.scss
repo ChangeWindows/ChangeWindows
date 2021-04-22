@@ -9,7 +9,40 @@
 }
 
 .progress-group {
-    & > :not(:first-child) {
-        margin-left: .5rem;
+    @media (min-width: 768px) {
+        & > :not(:first-child) {
+            margin-left: .5rem;
+        }
+    }
+}
+
+.progress-title {
+    white-space: nowrap;
+    color: $text-muted;
+    margin-bottom: .25rem;
+    
+    @media (max-width: 767px) {
+        font-weight: 600;
+        color: $body-color;
+    }
+    
+    @media (min-width: 768px) {
+        text-align: center;
+    }
+}
+
+.progress-date {
+    white-space: nowrap;
+    color: $text-muted;
+    margin: 0;
+}
+
+.progress-block {
+    &:not(:last-child) {
+        .progress-date:last-child {
+            @media (min-width: 768px) {
+                display: none;
+            }
+        }
     }
 }

@@ -17,6 +17,7 @@ The Channels-page is back with an improved overview page. Each platform will now
 * 2aec402 **Channels on mobile**: as part of the introduction of the Channels-page, the channels on the Timeline will now disappear entirely on small screens.
 
 ### Releases
+* #18 **Life-cycle timeline**: the responsive design of the life-cycle timeline has been drastically improved with a timeline that will now split to multiple lines.
 * #39 The order of releases on the Releases-page has been updated from "by version" to "by platform by version" to better group related releases.
 
 ## Platforms

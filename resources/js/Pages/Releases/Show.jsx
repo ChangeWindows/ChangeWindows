@@ -16,7 +16,15 @@ import { format, isBefore, parseISO } from 'date-fns'
 import Markdown from 'markdown-to-jsx';
 
 export default function Show({ can, auth, release, platform, channels, timeline }) {
-    const [total_duration, preview_duration, public_duration, extended_duration, lts_duration, preview_progress, public_progress, extended_progress, lts_progress] = useMemo(() => {
+    function max(input) {
+        if (toString.call(input) !== "[object Array]") {
+            return false;
+        }
+
+        return Math.max.apply(null, input);
+    }
+
+    const [total_duration, preview_duration, public_duration, extended_duration, lts_duration, preview_progress, public_progress, extended_progress, lts_progress, highest_duration] = useMemo(() => {
         const today = new Date();
         const start_preview = release.start_preview ? parseISO(release.start_preview) : null;
         const start_public = release.start_public ? parseISO(release.start_public) : null;
@@ -74,8 +82,9 @@ export default function Show({ can, auth, release, platform, channels, timeline 
         }
 
         const total_duration = preview_duration + public_duration + extended_duration + lts_duration;
+        const highest_duration = max([preview_duration, public_duration, extended_duration, lts_duration]);
 
-        return [total_duration, preview_duration, public_duration, extended_duration, lts_duration, preview_progress, public_progress, extended_progress, lts_progress]
+        return [total_duration, preview_duration, public_duration, extended_duration, lts_duration, preview_progress, public_progress, extended_progress, lts_progress, highest_duration];
     }, [release.start_preview, release.start_public, release.start_extended, release.start_lts, release.end_lts]);
 
     return (
@@ -114,43 +123,51 @@ export default function Show({ can, auth, release, platform, channels, timeline 
 
                     <div className="col-12">
                         <h2 className="h5 my-4 fw-bold">Life-cycle</h2>
-                        <div className="d-flex progress-group">
+                        <div className="d-flex progress-group flex-column flex-md-row">
                             {!!preview_duration &&
                                 <Progress
-                                    width={preview_duration / total_duration * 100}
+                                    duration={preview_duration}
+                                    totalDuration={total_duration}
+                                    highestDuration={highest_duration}
                                     title="Development"
-                                    startDescription={format(parseISO(release.start_preview), 'd MMM yyyy')}
-                                    endDescription={public_duration ? undefined : format(parseISO(release.start_public), 'd MMM yyyy')}
+                                    startDescription={format(parseISO(release.start_preview), "d MMM yyyy")}
+                                    endDescription={format(parseISO(release.start_public), "d MMM yyyy")}
                                 >
                                     <ProgressBar progress={preview_progress} />
                                 </Progress>
                             }
                             {!!public_duration &&
                                 <Progress
-                                    width={public_duration / total_duration * 100}
+                                    duration={public_duration}
+                                    totalDuration={total_duration}
+                                    highestDuration={highest_duration}
                                     title="Support"
-                                    startDescription={format(parseISO(release.start_public), 'd MMM yyyy')}
-                                    endDescription={extended_duration ? undefined : format(parseISO(release.start_extended), 'd MMM yyyy')}
+                                    startDescription={format(parseISO(release.start_public), "d MMM yyyy")}
+                                    endDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
                                 >
                                     <ProgressBar progress={public_progress} color="success" />
                                 </Progress>
                             }
                             {!!extended_duration &&
                                 <Progress
-                                    width={extended_duration / total_duration * 100}
+                                    duration={extended_duration}
+                                    totalDuration={total_duration}
+                                    highestDuration={highest_duration}
                                     title="Extended"
-                                    startDescription={format(parseISO(release.start_extended), 'd MMM yyyy')}
-                                    endDescription={lts_duration ? undefined : format(parseISO(release.start_lts), 'd MMM yyyy')}
+                                    startDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
+                                    endDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
                                 >
                                     <ProgressBar progress={extended_progress} color="warning" />
                                 </Progress>
                             }
                             {!!lts_duration &&
                                 <Progress
-                                    width={lts_duration / total_duration * 100}
+                                    duration={lts_duration}
+                                    totalDuration={total_duration}
+                                    highestDuration={highest_duration}
                                     title="LTSC"
-                                    startDescription={format(parseISO(release.start_lts), 'd MMM yyyy')}
-                                    endDescription={format(parseISO(release.end_lts), 'd MMM yyyy')}
+                                    startDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
+                                    endDescription={format(parseISO(release.end_lts), "d MMM yyyy")}
                                 >
                                     <ProgressBar progress={lts_progress} color="danger" />
                                 </Progress>
