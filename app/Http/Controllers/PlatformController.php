@@ -53,7 +53,8 @@ class PlatformController extends Controller
                         if (count($_channel->flights) > 0) {
                             return [
                                 'version' => $_channel->flights[0]->flight,
-                                'date' => $_channel->flights[0]->timeline->date
+                                'date' => $_channel->flights[0]->timeline->date,
+                                'url' => $_channel->flights[0]->url
                             ];
                         }
                     })->where('version', '<>', null)->values()->all()

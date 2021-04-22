@@ -48,7 +48,8 @@ class ChannelController extends Controller
                                 if (count($_channel->flights) > 0) {
                                     return [
                                         'version' => $_channel->flights[0]->flight,
-                                        'date' => $_channel->flights[0]->timeline->date
+                                        'date' => $_channel->flights[0]->timeline->date,
+                                        'url' => $_channel->flights[0]->url
                                     ];
                                 }
                             })->where('version', '<>', null)->values()->all()
@@ -102,7 +103,8 @@ class ChannelController extends Controller
                             'channel_id' => $channel->channel->id,
                             'flight' => $channel->latest ? [
                                 'version' => $channel->latest->flight,
-                                'date' => $channel->latest->timeline->date
+                                'date' => $channel->latest->timeline->date,
+                                'url' => $channel->latest->url
                             ] : null
                         ];
                     })->values()->all()

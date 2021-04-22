@@ -39,6 +39,7 @@ export default function Show({ can, auth, platforms, channel_order, releases }) 
                                                 channel={{ color: channel.color, name: channel.name }}
                                                 build={channel.flight ? channel.flight.version : ''}
                                                 date={channel.flight ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : ''}
+                                                url={channel.flight ? channel.flight.url : undefined}
                                             />
                                         );
                                     } else {
