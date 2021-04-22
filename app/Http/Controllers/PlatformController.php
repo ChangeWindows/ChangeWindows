@@ -50,11 +50,11 @@ class PlatformController extends Controller
                     'order' => $channel->order,
                     'color' => $channel->color,
                     'flights' => collect($release_channels)->map(function ($_channel) {
-                        if (count($_channel->flights) > 0) {
+                        if ($_channel->latest) {
                             return [
-                                'version' => $_channel->flights[0]->flight,
-                                'date' => $_channel->flights[0]->timeline->date,
-                                'url' => $_channel->flights[0]->url
+                                'version' => $_channel->latest->flight,
+                                'date' => $_channel->latest->timeline->date,
+                                'url' => $_channel->latest->url
                             ];
                         }
                     })->where('version', '<>', null)->values()->all()
