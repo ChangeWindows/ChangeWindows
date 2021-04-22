@@ -36,6 +36,7 @@ The Channels-page is back with an improved overview page. Each platform will now
 * #32 **Updates Tweet variables**: to allow for more customization between platforms, the `%OS%` variable for tweets has been split up into `%RELEASE%` and `%VERSION%` and the `%CODENAME` variable has been added.
 
 ## Bug fixes
-- #42 Fixes an issue where the permission of a navigation item would be ignored on large screens.
-- d4ccf93 Fixes an issue where the page height wouldn't update properly when resizing the window.
-- 3ca7b57 Fixes the incorrect spelling of "Platforms" on the Platforms-page.
+* #42 Fixes an issue where the permission of a navigation item would be ignored on large screens.
+* #43 Fixes an issue where channels in flights on the timeline would overlap if they wrap on small devices.
+* d4ccf93 Fixes an issue where the page height wouldn't update properly when resizing the window.
+* 3ca7b57 Fixes the incorrect spelling of "Platforms" on the Platforms-page.

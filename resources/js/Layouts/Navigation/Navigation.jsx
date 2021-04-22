@@ -7,8 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSunHaze, faBarsStaggered, faLaptopMobile, faFlag, faCircleInfo, faGauge, faCodeBranch } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Navigation({ can, auth }) {
-    console.log(can.access_dashboard);
-    
+   
     return (
         <>
             <nav className="navbar navbar-expand-xs navbar-light sticky-top">

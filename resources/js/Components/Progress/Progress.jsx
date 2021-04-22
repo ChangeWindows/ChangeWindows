@@ -5,8 +5,6 @@ import useMediaQuery from '../../hooks/useMediaQuery';
 export default function Progress({ children, title, startDescription = null, endDescription = null, duration = null, totalDuration = null, highestDuration = null }) {
 	const matchesMdUp = useMediaQuery('(min-width: 768px)');
 
-    console.log(highestDuration);
-
     const width = useMemo(() => {
         if (isNaN(duration) || isNaN(totalDuration)) {
             return 'auto';

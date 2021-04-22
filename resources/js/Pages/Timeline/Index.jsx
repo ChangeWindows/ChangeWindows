@@ -63,7 +63,6 @@ export default function Index({ can, auth, timeline, platforms, channel_platform
                                             <span className="fw-bold ms-2">{platform.name}</span>
                                         </h3>
                                     </div>
-                                    {console.log(platform.channels)}
                                     {platform.channels.map((channel, _key) => (
                                         <Channel
                                             key={_key}

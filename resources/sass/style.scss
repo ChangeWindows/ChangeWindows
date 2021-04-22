@@ -87,7 +87,7 @@
 
     .flight {
         display: flex;
-        height: 40px;
+        min-height: 40px;
         align-items: center;
         transition: $transition-base;
 
@@ -108,6 +108,7 @@
         .flight-channels {
             flex: 1;
             margin-right: .5rem;
+            padding: 0 0 .25rem 0;
         }
 
         .flight-version {
