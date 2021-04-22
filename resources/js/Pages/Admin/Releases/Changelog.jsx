@@ -27,27 +27,17 @@ export default function Edit({ can, auth, urls, release, status = null }) {
         end_build: null,
         end_delta: null
     });
+    const [changelog, setChangelog] = useState(null);
 
     useEffect(() => {
         setCurRelease(release);
     }, [release]);
 
-    function formHandler(event) {
-        const { id, value, type } = event.target;
-        const _release = Object.assign({}, curRelease);
-
-        switch (type) {
-            default:
-                _release[id] = value;
-                break;
-        }
-
-        setCurRelease(_release);
-    }
-
     function handleSubmit(event) {
-      event.preventDefault();
-      Inertia.patch(urls.update_release, curRelease);
+        const _release = Object.assign({}, curRelease);
+        _release.changelog = changelog;
+        event.preventDefault();
+        Inertia.patch(urls.update_release, _release);
     }
 
     return (
@@ -80,6 +70,7 @@ export default function Edit({ can, auth, urls, release, status = null }) {
                                         autoFocus
                                         id="changelog"
                                         value={curRelease.changelog}
+                                        onChange={(value) => setChangelog(value)}
                                     />
                                 </div>
                             </div>
