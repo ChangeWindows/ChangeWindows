@@ -6,6 +6,7 @@ import Admin from '../../../Layouts/Admin';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
+import Editor from 'rich-markdown-editor';
 
 export default function Edit({ can, auth, urls, release, status = null }) {
     const [curRelease, setCurRelease] = useState({
@@ -74,15 +75,12 @@ export default function Edit({ can, auth, urls, release, status = null }) {
                         </div>
                         <div className="col-12 mt-3">
                             <div className="card">
-                                <div className="card-body">
-                                    <div className="row g-3">
-                                        <div className="col-12">
-                                            <div className="form-floating">
-                                                <textarea className="form-control font-monospace" id="changelog" style={{ minHeight: 480, maxHeight: '100%' }} defaultValue={curRelease.changelog} onChange={formHandler}></textarea>
-                                                <label htmlFor="changelog">Changelog</label>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div className="card-body ps-5 changelog-content">
+                                    <Editor
+                                        autoFocus
+                                        id="changelog"
+                                        value={curRelease.changelog}
+                                    />
                                 </div>
                             </div>
                         </div>

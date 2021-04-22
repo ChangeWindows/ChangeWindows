@@ -32,7 +32,7 @@ The Channels-page is back with an improved overview page. Each platform will now
 * 247593b The progressbar at the top of the page now uses our brand color.
 
 ### Management
-* #29 **Changelog editor**: introduces a dedicated management page for the changelog of a release to provide more space to edit.
+* #29 **Changelog editor**: introduces a dedicated management page for the changelog of a release to provide more space to edit with a proper markdown editor (enhancements pending).
 * #32 **Updates Tweet variables**: to allow for more customization between platforms, the `%OS%` variable for tweets has been split up into `%RELEASE%` and `%VERSION%` and the `%CODENAME` variable has been added.
 
 ## Bug fixes
