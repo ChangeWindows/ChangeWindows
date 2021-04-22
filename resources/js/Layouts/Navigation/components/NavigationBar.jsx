@@ -26,7 +26,7 @@ export default function NavigationBar({ auth, items }) {
 		let navigationItems = items.filter((item) => item.permission === true || item.permission === undefined);
 
 		if (items.length > maxVisibleItems && !matchesSmUp) {
-			navigationItems = items.filter((item) => item.type !== 'divider' && !item.ignore);
+			navigationItems = navigationItems.filter((item) => item.type !== 'divider' && !item.ignore);
 
 			setShowAuthOnMainBar(navigationItems.length < 3);
 
