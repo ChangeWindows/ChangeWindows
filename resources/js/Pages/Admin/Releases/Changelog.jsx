@@ -65,7 +65,7 @@ export default function Edit({ can, auth, urls, release, status = null }) {
                         </div>
                         <div className="col-12 mt-3">
                             <div className="card">
-                                <div className="card-body ps-5 changelog-content">
+                                <div className="card-body ps-editor changelog-content">
                                     <Editor
                                         autoFocus
                                         id="changelog"
