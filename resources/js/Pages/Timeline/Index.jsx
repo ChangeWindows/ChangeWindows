@@ -52,6 +52,7 @@ export default function Index({ can, auth, timeline, pagination, platforms, chan
                                     ))}
                                 </Timeline>
                             ))}
+                            <Pagination pagination={pagination} />
                         </div>
                     </div>
                     <div className="d-none d-md-block col-md-4 col-lg-5">
