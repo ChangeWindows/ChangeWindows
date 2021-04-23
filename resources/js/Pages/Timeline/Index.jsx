@@ -7,6 +7,7 @@ import Timeline from '../../Components/Timeline/Timeline';
 
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
+import Pagination from '../../Components/Pagination';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faSunHaze } from '@fortawesome/pro-regular-svg-icons'
@@ -15,7 +16,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
 
-export default function Index({ can, auth, timeline, platforms, channel_platforms }) {
+export default function Index({ can, auth, timeline, pagination, platforms, channel_platforms }) {
     return (
         <App can={can} auth={auth}>
             <PlatformNavigation home all="/timeline" page="Timeline" platforms={platforms} />

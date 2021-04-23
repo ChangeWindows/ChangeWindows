@@ -17,6 +17,7 @@ class TimelineController extends Controller
     public function index()
     {
         $channel_platforms = Platform::orderBy('tool')->orderBy('position')->where('active', '=', '1')->get();
+        $timeline = Timeline::orderBy('date', 'desc')->paginate(75);
 
         return Inertia::render('Timeline/Index', [
             'platforms' => Platform::orderBy('position')->get()->map(function ($platform) {
@@ -57,7 +58,7 @@ class TimelineController extends Controller
                     })->sortBy('order')->values()->all(),
                 ];
             }),
-            'timeline' => Timeline::orderBy('date', 'desc')->get()->groupBy('date')->map(function ($items, $date) {
+            'timeline' => $timeline->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function($item, $key) {
@@ -86,6 +87,7 @@ class TimelineController extends Controller
                     })->values()->all()
                 ];
             }),
+            'pagination' => $timeline,
             'status' => session('status')
         ]);
     }

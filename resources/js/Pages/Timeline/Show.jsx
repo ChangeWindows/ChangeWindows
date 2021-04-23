@@ -7,11 +7,12 @@ import Timeline from '../../Components/Timeline/Timeline';
 
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
+import Pagination from '../../Components/Pagination';
 
 import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
 
-export default function Show({ can, auth, timeline, platforms, channel_platforms }) {
+export default function Show({ can, auth, timeline, pagination, platforms, channel_platforms }) {
     return (
         <App can={can} auth={auth}>
             <PlatformNavigation all="/timeline" page="Timeline" platforms={platforms} />
@@ -34,6 +35,7 @@ export default function Show({ can, auth, timeline, platforms, channel_platforms
                                     ))}
                                 </Timeline>
                             ))}
+                            <Pagination pagination={pagination} />
                         </div>
                     </div>
                     <div className="d-none d-md-block col-md-4 col-lg-5">

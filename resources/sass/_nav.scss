@@ -25,3 +25,22 @@
         }
     }
 }
+
+.pagination {
+    .page-item {
+        &.disabled {
+            .page-link {
+                background: transparent;
+            }
+        }
+    }
+
+    .page-link {
+        background: transparent;
+
+        &:hover {
+            background: rgba(darken($light, 5), .5);
+            border-color: darken($light, 13);
+        }
+    }
+}
