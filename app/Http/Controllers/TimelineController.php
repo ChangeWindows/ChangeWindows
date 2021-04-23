@@ -100,6 +100,21 @@ class TimelineController extends Controller
     public function show(Platform $platform)
     {
         $channel_platforms = Platform::orderBy('tool')->orderBy('position')->where('active', '=', '1')->get();
+        $timeline = Timeline::orderBy('date', 'desc')
+            ->join('flights', function ($join) {
+                $join->on('flights.id', '=', 'timeline.entry_id')
+                    ->where('timeline.entry_type', '=', 'App\Models\Flight')
+                     
+                    ->join('release_channels', function ($join) {
+                        $join->on('release_channels.id', '=', 'flights.release_channel_id')
+                     
+                        ->join('channels', function ($join) {
+                            $join->on('channels.id', '=', 'release_channels.channel_id');
+                        });
+                    });
+            })
+            ->where('channels.platform_id', '=', $platform->id)
+            ->paginate(75);
 
         return Inertia::render('Timeline/Show', [
             'platforms' => Platform::orderBy('position')->get()->map(function ($_platform) {
@@ -141,7 +156,7 @@ class TimelineController extends Controller
                     })->sortBy('order')->values()->all(),
                 ];
             }),
-            'timeline' => $platform->timeline->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
+            'timeline' => $timeline->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function($item, $key) {
@@ -170,6 +185,7 @@ class TimelineController extends Controller
                     })->values()->all()
                 ];
             }),
+            'pagination' => $timeline,
             'status' => session('status')
         ]);
     }

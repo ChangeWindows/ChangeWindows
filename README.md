@@ -10,10 +10,11 @@ ChangeWindows 7 Preview 3 is a major feature update to bring ChangeWindows 7 to 
 The Channels-page is back with an improved overview page. Each platform will now show all channels across all releases. When a channel in a release is no longer supported, it will be grayed-out to indicate this.
 
 ### Timeline
-* 5c9cb84 Timeline has an updated icon.
 * #12 **Clickable timeline**: timeline items are now clickable and will link to their corresponding release.
-* #41 **Clickable channels**: like timeline flights, the channels on the right-hand-side are now also clickable to navigate quickly to the corresponding release.
 * #34 **Combine timeline items**: flight that have been released on the same platform in multiple channels on the same day will now be shown on one line instead of each flight having its own line.
+* #40 **Platform timelines**: adds platform timelines with all flights from a single platform. Additionally introduces previous and next pagination.
+* #41 **Clickable channels**: like timeline flights, the channels on the right-hand-side are now also clickable to navigate quickly to the corresponding release.
+* 5c9cb84 Timeline has an updated icon.
 * 2aec402 **Channels on mobile**: as part of the introduction of the Channels-page, the channels on the Timeline will now disappear entirely on small screens.
 
 ### Releases
@@ -21,8 +22,8 @@ The Channels-page is back with an improved overview page. Each platform will now
 * #39 The order of releases on the Releases-page has been updated from "by version" to "by platform by version" to better group related releases.
 
 ### Platforms
-* e6524af Introduces an updated, cleaner heading design for the Platform-pages.
 * #41 **Clickable channels**: the channels at the top of the page will now link to the specific release that this channel currently holds.
+* e6524af Introduces an updated, cleaner heading design for the Platform-pages.
 
 ### General UX
 * #35 Improved dropdown design and better support for touch screens.
