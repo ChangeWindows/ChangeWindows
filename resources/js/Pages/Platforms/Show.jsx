@@ -8,13 +8,14 @@ import Timeline from '../../Components/Timeline/Timeline';
 
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
+import Pagination from '../../Components/Pagination';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag, faListTimeline } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
 
-export default function Show({ can, auth, platforms, platform, channels, releases, timeline }) {
+export default function Show({ can, auth, platforms, platform, channels, releases, timeline, pagination }) {
     const [currentReleases, legacyReleases] = useMemo(() => {
         const currentReleases = releases.filter((release) => release.channels.length > 0);
         const legacyReleases = releases.filter((release) => release.channels.length === 0);
@@ -110,6 +111,7 @@ export default function Show({ can, auth, platforms, platform, channels, release
                                                     ))}
                                                 </Timeline>
                                             ))}
+                                            <Pagination pagination={pagination} />
                                         </div>
                                     </div>
                                 </div>

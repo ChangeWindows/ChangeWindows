@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Redirect;
 use App\Models\Platform;
+use App\Models\Timeline;
 
 class PlatformController extends Controller
 {
@@ -27,6 +28,22 @@ class PlatformController extends Controller
      */
     public function show(Platform $platform)
     {
+        $timeline = Timeline::orderBy('date', 'desc')
+            ->join('flights', function ($join) {
+                $join->on('flights.id', '=', 'timeline.entry_id')
+                    ->where('timeline.entry_type', '=', 'App\Models\Flight')
+                     
+                    ->join('release_channels', function ($join) {
+                        $join->on('release_channels.id', '=', 'flights.release_channel_id')
+                     
+                        ->join('channels', function ($join) {
+                            $join->on('channels.id', '=', 'release_channels.channel_id');
+                        });
+                    });
+            })
+            ->where('channels.platform_id', '=', $platform->id)
+            ->paginate(20);
+
         return Inertia::render('Platforms/Show', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
                 return [
@@ -83,7 +100,7 @@ class PlatformController extends Controller
                     })->values()->all()
                 ];
             })->values()->all(),
-            'timeline' => $platform->timeline->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
+            'timeline' => $timeline->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function($item, $key) {
@@ -111,7 +128,8 @@ class PlatformController extends Controller
                         ];
                     })->values()->all()
                 ];
-            })
+            }),
+            'pagination' => $timeline
         ]);
     }
 }
