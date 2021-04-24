@@ -40,7 +40,7 @@ export default function Create({ can, auth, urls }) {
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">
-                        <InertiaLink href="/admin/roles" className="btn btn-sm me-2">
+                        <InertiaLink href="/admin/permissions" className="btn btn-sm me-2">
                             <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                         </InertiaLink>
                         <span className="navbar-brand">{curPermission.name || 'Unnamed role'}</span>
