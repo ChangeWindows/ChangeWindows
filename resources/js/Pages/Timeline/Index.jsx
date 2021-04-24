@@ -11,7 +11,7 @@ import Pagination from '../../Components/Pagination';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faSunHaze } from '@fortawesome/pro-regular-svg-icons'
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faPatreon } from '@fortawesome/free-brands-svg-icons';
 
 import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
@@ -33,6 +33,7 @@ export default function Index({ can, auth, timeline, pagination, platforms, chan
                                 <p>Hey... you're not really supposed to be here. This is the ChangeWindows test site. The data on here is probably fake. But let us help you find the real ChangeWindows.</p>
                                 <a href="https://changewindows.org" className="btn btn-primary btn-sm me-1"><FontAwesomeIcon icon={faArrowLeft} fixedWidth /> Back to ChangeWindows</a>
                                 <a href="https://github.com/changewindows" className="btn btn-primary btn-sm"><FontAwesomeIcon icon={faGithub} fixedWidth /> GitHub</a>
+                                <a href="https://patreon.com/changewindows" className="btn btn-primary btn-sm"><FontAwesomeIcon icon={faPatreon} fixedWidth /> Sponsor us</a>
                             </div>
                         </div>
                     </div>
