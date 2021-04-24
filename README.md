@@ -9,6 +9,9 @@ ChangeWindows 7 Preview 3 is a major feature update to bring ChangeWindows 7 to 
 ### #33 Channels
 The Channels-page is back with an improved overview page. Each platform will now show all channels across all releases. When a channel in a release is no longer supported, it will be grayed-out to indicate this.
 
+### #44 Permissions
+A settings page has been added to create, update, and delete new permissions for roles. The new page allows to create a master permission as well as its subpermissions like `.delete` and `.update` at once.
+
 ### Timeline
 * #12 **Clickable timeline**: timeline items are now clickable and will link to their corresponding release.
 * #34 **Combine timeline items**: flight that have been released on the same platform in multiple channels on the same day will now be shown on one line instead of each flight having its own line.

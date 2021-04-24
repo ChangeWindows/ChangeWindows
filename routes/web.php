@@ -3,18 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-use App\Http\Controllers\PlatformController;
-use App\Http\Controllers\TimelineController;
-use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\PlatformController;
+use App\Http\Controllers\ReleaseController;
+use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\Admin\ChannelController as AdminChannelController;
 use App\Http\Controllers\Admin\FlightController as AdminFlightController;
+use App\Http\Controllers\Admin\PermissionController as AdminPermissionController;
 use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
 use App\Http\Controllers\Admin\ReleaseChannelController as AdminReleaseChannelController;
 use App\Http\Controllers\Admin\ReleaseController as AdminReleaseController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\TweetStreamController as AdminTweetStreamController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 
 /*
@@ -86,6 +87,15 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/create', [AdminRoleController::class, 'create'])->name('.create');
         Route::get('/{role}/edit', [AdminRoleController::class, 'edit'])->name('.edit');
         Route::patch('/{role}/edit', [AdminRoleController::class, 'update'])->name('.update');
+    });
+    
+    Route::prefix('permissions')->name('.permissions')->group(function() {
+        Route::get('', [AdminPermissionController::class, 'index'])->name('');
+        Route::post('', [AdminPermissionController::class, 'store'])->name('.store');
+        Route::delete('{permission}', [AdminPermissionController::class, 'destroy'])->name('.destroy');
+        Route::get('/create', [AdminPermissionController::class, 'create'])->name('.create');
+        Route::get('/{permission}/edit', [AdminPermissionController::class, 'edit'])->name('.edit');
+        Route::patch('/{permission}/edit', [AdminPermissionController::class, 'update'])->name('.update');
     });
     
     Route::prefix('releases')->name('.releases')->group(function() {

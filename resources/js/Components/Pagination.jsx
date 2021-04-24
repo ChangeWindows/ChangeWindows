@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Pagination(pagination) {
-    console.log(pagination.pagination)
     const { prev_page_url, next_page_url } = pagination.pagination;
 
     return (

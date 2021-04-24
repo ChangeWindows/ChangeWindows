@@ -4,7 +4,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import NavigationBar from './components/NavigationBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSunHaze, faFlag, faCircleInfo, faUser, faUserUnlock, faArrowLeft, faLaptopMobile, faPlane } from '@fortawesome/pro-regular-svg-icons';
+import { faSunHaze, faFlag, faCircleInfo, faUser, faUserUnlock, faArrowLeft, faLaptopMobile, faPlane, faUnlockKeyhole } from '@fortawesome/pro-regular-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function AdminNavigation({ can, auth }) {
@@ -32,6 +32,7 @@ export default function AdminNavigation({ can, auth }) {
                     { type: 'divider' },
                     { type: 'link', url: '/admin/users', icon: faUser, title: 'Users' },
                     { type: 'link', url: '/admin/roles', icon: faUserUnlock, title: 'Roles' },
+                    { type: 'link', url: '/admin/permissions', icon: faUnlockKeyhole, title: 'Permissions' },
                     { type: 'divider' },
                     { type: 'link', url: '/about', icon: faCircleInfo, title: 'About' }
                 ]}
