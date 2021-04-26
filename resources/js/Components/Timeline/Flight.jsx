@@ -20,7 +20,7 @@ export default function Flight({ platform, build, channels, version = null, comp
                     <span key={key} className="badge me-1" style={{ backgroundColor: channel.color }}>{channel.name}</span>
                 ))}
             </div>
-            <div className={clsx('flight-version', { 'text-muted': component })}>{version ?? component}</div>
+            <div className="flight-version text-muted">{version ?? component}</div>
         </Component>
     );
 };

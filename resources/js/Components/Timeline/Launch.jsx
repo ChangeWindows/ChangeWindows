@@ -9,7 +9,9 @@ export default function Launch({ platform, version, url = null }) {
 
     return (
         <Component {...mainProps} className="release text-white" style={{ background: platform.color}}>
-            <div className="release-icon"><PlatformIcon platform={platform} /></div>
+            <div className="release-icon">
+                <PlatformIcon platform={platform} />
+            </div>
             <div className="release-version">{platform.name} <span className="fw-bold">version {version}</span> has entered public testing</div>
         </Component>
     );
