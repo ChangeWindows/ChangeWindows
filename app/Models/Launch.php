@@ -23,10 +23,6 @@ class Launch extends Model
         return $this->belongsTo(Release::class);
     }
 
-    public function getReleaseAttribute() {
-        return $this->release;
-    }
-
     public function getPlatformAttribute() {
         return $this->release->platform;
     }
@@ -36,6 +32,6 @@ class Launch extends Model
     }
 
     public function getEditUrlAttribute() {
-        return route('admin.launches.edit', $this, false);
+        //return route('admin.launches.edit', $this, false);
     }
 }

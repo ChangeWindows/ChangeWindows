@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Release;
 use App\Models\Flight;
 use App\Models\Timeline;
+use App\Models\Promotion;
+use App\Models\Launch;
 use App\Models\ReleaseChannel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -115,6 +117,31 @@ class FlightController extends Controller
 
         foreach($request->releaseChannels as $releaseChannel) {
             $release_channel = ReleaseChannel::find($releaseChannel);
+            
+            if ($release_channel->release->flights->count() === 0) {
+                $launch = Launch::create([
+                    'release_id' => $release_channel->release->id
+                ]);
+    
+                Timeline::create([
+                    'date' => (new Carbon(request('date'))),
+                    'entry_type' => Launch::class,
+                    'entry_id' => $launch->id
+                ]);
+            }
+
+            if ($release_channel->flights->count() === 0) {
+                $promotion = Promotion::create([
+                    'release_channel_id' => $release_channel->id
+                ]);
+    
+                Timeline::create([
+                    'date' => (new Carbon(request('date'))),
+                    'entry_type' => Promotion::class,
+                    'entry_id' => $promotion->id
+                ]);
+            }
+
             $flight = Flight::create([
                 'major' => request('major'),
                 'minor' => request('minor'),

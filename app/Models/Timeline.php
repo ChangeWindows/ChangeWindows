@@ -20,4 +20,12 @@ class Timeline extends Model
     public function flight() {
         return $this->belongsTo(Flight::class, 'entry_id')->whereItemType(Flight::class);
     }
+
+    public function promotion() {
+        return $this->belongsTo(Promotion::class, 'entry_id')->whereItemType(Promotion::class);
+    }
+
+    public function launch() {
+        return $this->belongsTo(Launch::class, 'entry_id')->whereItemType(Launch::class);
+    }
 }
