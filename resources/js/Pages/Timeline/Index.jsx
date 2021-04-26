@@ -3,8 +3,8 @@ import React, { Fragment } from 'react';
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
 import Flight from '../../Components/Timeline/Flight';
-import Promotion from '../../Components/Timeline/Promotion';
 import Launch from '../../Components/Timeline/Launch';
+import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
@@ -58,7 +58,6 @@ export default function Index({ can, auth, timeline, pagination, platforms, chan
                                         }
 
                                         if (flight.type === 'promotion') {
-                                            console.log('promotion', flight);
                                             return (
                                                 <Promotion
                                                     key={`${flight.type}-${flight.id}`}

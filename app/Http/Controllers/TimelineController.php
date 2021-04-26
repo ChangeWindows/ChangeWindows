@@ -62,7 +62,13 @@ class TimelineController extends Controller
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function($item, $key) {
-                        return $item->entry->flight.'-'.$item->entry->platform->position;
+                        if ($item->entry_type === \App\Models\Flight::class) {
+                            return $item->entry->flight.'-'.$item->entry->platform->position;
+                        } else if ($item->entry_type === \App\Models\Promotion::class) {
+                            return 'A-'.$item->entry->platform->position.$item->entry->releaseChannel->channel->order;
+                        } else if ($item->entry_type === \App\Models\Launch::class) {
+                            return 'B-'.$item->entry->platform->position;
+                        }
                     })->map(function ($flights) {
                         if ($flights->first()->entry_type === \App\Models\Flight::class) {
                             $_cur_flight = $flights->first();
@@ -85,7 +91,6 @@ class TimelineController extends Controller
                                 ],
                                 'url' => $_cur_flight->entry->url
                             ];
-                                
                         }
                         
                         if ($flights->first()->entry_type === \App\Models\Promotion::class) {
@@ -105,8 +110,7 @@ class TimelineController extends Controller
                                     'color' => $_cur_promotion->entry->platform->color
                                 ],
                                 'url' => $_cur_promotion->entry->url
-                            ];
-                                
+                            ]; 
                         }
                         
                         if ($flights->first()->entry_type === \App\Models\Launch::class) {
@@ -123,7 +127,6 @@ class TimelineController extends Controller
                                 ],
                                 'url' => $_cur_launch->entry->url
                             ];
-                                
                         }
                     })->values()->all()
                 ];
@@ -145,10 +148,9 @@ class TimelineController extends Controller
             ->join('flights', function ($join) {
                 $join->on('flights.id', '=', 'timeline.entry_id')
                     ->where('timeline.entry_type', '=', 'App\Models\Flight')
-                     
                     ->join('release_channels', function ($join) {
                         $join->on('release_channels.id', '=', 'flights.release_channel_id')
-                     
+                    
                         ->join('channels', function ($join) {
                             $join->on('channels.id', '=', 'release_channels.channel_id');
                         });
@@ -203,26 +205,64 @@ class TimelineController extends Controller
                     'flights' => $items->groupBy(function($item, $key) {
                         return $item->entry->flight.'-'.$item->entry->platform->position;
                     })->map(function ($flights) {
-                        $_cur_flight = $flights->first();
-
-                        return [
-                            'id' => $_cur_flight->entry->id,
-                            'flight' => $_cur_flight->entry->flight,
-                            'date' => $_cur_flight->entry->timeline->date,
-                            'version' => $_cur_flight->entry->releaseChannel->release->version,
-                            'release_channel' => $flights->map(function ($channels) {
-                                return [
-                                    'name' => $channels->entry->releaseChannel->short_name,
-                                    'color' => $channels->entry->releaseChannel->channel->color
-                                ];
-                            }),
-                            'platform' => [
-                                'icon' => $_cur_flight->entry->platform->icon,
-                                'name' => $_cur_flight->entry->platform->name,
-                                'color' => $_cur_flight->entry->platform->color
-                            ],
-                            'url' => $_cur_flight->entry->url
-                        ];
+                        if ($flights->first()->entry_type === \App\Models\Flight::class) {
+                            $_cur_flight = $flights->first();
+                            return [
+                                'type' => 'flight',
+                                'id' => $_cur_flight->entry->id,
+                                'flight' => $_cur_flight->entry->flight,
+                                'date' => $_cur_flight->entry->timeline->date,
+                                'version' => $_cur_flight->entry->releaseChannel->release->version,
+                                'release_channel' => $flights->map(function ($channels) {
+                                    return [
+                                        'name' => $channels->entry->releaseChannel->short_name,
+                                        'color' => $channels->entry->releaseChannel->channel->color
+                                    ];
+                                }),
+                                'platform' => [
+                                    'icon' => $_cur_flight->entry->platform->icon,
+                                    'name' => $_cur_flight->entry->platform->name,
+                                    'color' => $_cur_flight->entry->platform->color
+                                ],
+                                'url' => $_cur_flight->entry->url
+                            ];
+                        }
+                        
+                        if ($flights->first()->entry_type === \App\Models\Promotion::class) {
+                            $_cur_promotion = $flights->first();
+                            return [
+                                'type' => 'promotion',
+                                'id' => $_cur_promotion->entry->id,
+                                'date' => $_cur_promotion->entry->timeline->date,
+                                'version' => $_cur_promotion->entry->releaseChannel->release->version,
+                                'release_channel' => [
+                                    'name' => $_cur_promotion->entry->releaseChannel->short_name,
+                                    'color' => $_cur_promotion->entry->releaseChannel->channel->color
+                                ],
+                                'platform' => [
+                                    'icon' => $_cur_promotion->entry->platform->icon,
+                                    'name' => $_cur_promotion->entry->platform->name,
+                                    'color' => $_cur_promotion->entry->platform->color
+                                ],
+                                'url' => $_cur_promotion->entry->url
+                            ]; 
+                        }
+                        
+                        if ($flights->first()->entry_type === \App\Models\Launch::class) {
+                            $_cur_launch = $flights->first();
+                            return [
+                                'type' => 'launch',
+                                'id' => $_cur_launch->entry->id,
+                                'date' => $_cur_launch->entry->timeline->date,
+                                'version' => $_cur_launch->entry->release->version,
+                                'platform' => [
+                                    'icon' => $_cur_launch->entry->platform->icon,
+                                    'name' => $_cur_launch->entry->platform->name,
+                                    'color' => $_cur_launch->entry->platform->color
+                                ],
+                                'url' => $_cur_launch->entry->url
+                            ];
+                        }
                     })->values()->all()
                 ];
             }),
