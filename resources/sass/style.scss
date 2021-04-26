@@ -116,6 +116,11 @@
         }
     }
 
+    a.promotion {
+        text-decoration: none;
+        color: inherit;
+    }
+
     .promotion {
         display: flex;
         height: 40px;
@@ -144,6 +149,11 @@
             flex: 1;
             margin-right: .5rem;
         }
+    }
+
+    a.release {
+        text-decoration: none;
+        color: inherit;
     }
 
     .release {

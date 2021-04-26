@@ -1,42 +1,18 @@
 import React, { useMemo } from 'react';
-import clsx from 'clsx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloud, faCode, faCompactDisc, faDesktop, faGamepadModern, faHeadSideGoggles, faLaptop, faMobile, faServer, faTablet, faTv } from '@fortawesome/pro-regular-svg-icons';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
-export default function Promotion({ platform, version, channel  }) {
-    const [icon] = useMemo(() => {
-        switch(platform) {
-            case 'pc':
-                return [faLaptop];
-            case 'mobile':
-                return [faMobile];
-            case 'xbox':
-                return [faGamepadModern];
-            case 'server':
-                return [faServer];
-            case 'holographic':
-                return [faHeadSideGoggles];
-            case '10x':
-                return [faTablet];
-            case 'team':
-                return [faTv];
-            case 'azure':
-                return [faCloud];
-            case 'sdk':
-                return [faCode];
-            case 'iso':
-                return [faCompactDisc];
-            default:
-                return [faDesktop];
-        }
-    });
+import PlatformIcon from '../Platforms/PlatformIcon';
+
+export default function Promotion({ platform, version, channel, url  }) {
+    const Component = useMemo(() => (url ? InertiaLink : 'div'), ['url']);
+    const mainProps = useMemo(() => ({ href: url }), ['url']);
 
     return (
-        <div className="promotion">
-            <div className={`promotion-icon color-${platform}`}>
-                <FontAwesomeIcon icon={icon} fixedWidth />
+        <Component {...mainProps} className="promotion">
+            <div className="promotion-icon">
+                <PlatformIcon platform={platform} color />
             </div>
-            <div className="promotion-version">Version {version} has been promoted to <span className={clsx('badge', `bg-${channel.class}`)}>{channel.name}</span></div>
-        </div>
+            <div className="promotion-version">{platform.name} <span className="fw-bold">version {version}</span> has been promoted to <span className="badge me-1" style={{ backgroundColor: channel.color }}>{channel.name}</span></div>
+        </Component>
     )
 };
