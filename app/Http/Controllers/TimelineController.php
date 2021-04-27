@@ -75,7 +75,7 @@ class TimelineController extends Controller
                             $_cur_flight = $flights->first();
                             return [
                                 'type' => 'flight',
-                                'sorted' => 'a',
+                                'event_priority' => 3,
                                 'id' => $_cur_flight->item->id,
                                 'flight' => $_cur_flight->item->flight,
                                 'date' => $_cur_flight->item->timeline->date,
@@ -101,7 +101,7 @@ class TimelineController extends Controller
                             $_cur_promotion = $flights->first();
                             return [
                                 'type' => 'promotion',
-                                'sorted' => 'b',
+                                'event_priority' => 2,
                                 'id' => $_cur_promotion->item->id,
                                 'date' => $_cur_promotion->item->timeline->date,
                                 'version' => $_cur_promotion->item->releaseChannel->release->version,
@@ -124,7 +124,7 @@ class TimelineController extends Controller
                             $_cur_launch = $flights->first();
                             return [
                                 'type' => 'launch',
-                                'sorted' => 'c',
+                                'event_priority' => 1,
                                 'id' => $_cur_launch->item->id,
                                 'date' => $_cur_launch->item->timeline->date,
                                 'version' => $_cur_launch->item->release->version,
@@ -140,10 +140,10 @@ class TimelineController extends Controller
                         }
                     })->sortByDesc(function ($item, $key) {
                         if ($item['type'] === 'flight') {
-                            return $item['sorted'].'.'.$item['cversion'].'.'.$item['flight'].'.'.$item['platform']['order'];
+                            return $item['event_priority'].'.'.$item['cversion'].'.'.$item['flight'].'.'.$item['platform']['order'];
                         }
                         
-                        return $item['sorted'].'.'.$item['cversion'].'.'.$item['platform']['order'];
+                        return $item['event_priority'].'.'.$item['cversion'].'.'.$item['platform']['order'];
                     })->values()->all()
                 ];
             }),
@@ -246,7 +246,7 @@ class TimelineController extends Controller
                             $_cur_flight = $flights->first();
                             return [
                                 'type' => 'flight',
-                                'sorted' => 'a',
+                                'event_priority' => 3,
                                 'id' => $_cur_flight->item->id,
                                 'flight' => $_cur_flight->item->flight,
                                 'date' => $_cur_flight->item->timeline->date,
@@ -272,7 +272,7 @@ class TimelineController extends Controller
                             $_cur_promotion = $flights->first();
                             return [
                                 'type' => 'promotion',
-                                'sorted' => 'b',
+                                'event_priority' => 2,
                                 'id' => $_cur_promotion->item->id,
                                 'date' => $_cur_promotion->item->timeline->date,
                                 'version' => $_cur_promotion->item->releaseChannel->release->version,
@@ -295,7 +295,7 @@ class TimelineController extends Controller
                             $_cur_launch = $flights->first();
                             return [
                                 'type' => 'launch',
-                                'sorted' => 'c',
+                                'event_priority' => 1,
                                 'id' => $_cur_launch->item->id,
                                 'date' => $_cur_launch->item->timeline->date,
                                 'version' => $_cur_launch->item->release->version,
@@ -311,10 +311,10 @@ class TimelineController extends Controller
                         }
                     })->sortByDesc(function ($item, $key) {
                         if ($item['type'] === 'flight') {
-                            return $item['sorted'].'.'.$item['cversion'].'.'.$item['flight'].'.'.$item['platform']['order'];
+                            return $item['event_priority'].'.'.$item['cversion'].'.'.$item['flight'].'.'.$item['platform']['order'];
                         }
                         
-                        return $item['sorted'].'.'.$item['cversion'].'.'.$item['platform']['order'];
+                        return $item['event_priority'].'.'.$item['cversion'].'.'.$item['platform']['order'];
                     })->values()->all()
                 ];
             }),

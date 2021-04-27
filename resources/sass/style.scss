@@ -98,6 +98,7 @@
         .flight-icon {
             width: 40px;
             text-align: center;
+            flex-shrink: 0;
         }
 
         .flight-build {
@@ -113,42 +114,7 @@
 
         .flight-version {
             margin-right: .5rem;
-            font-size: 90%
-        }
-    }
-
-    a.promotion {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .promotion {
-        display: flex;
-        height: 40px;
-        align-items: center;
-        transition: $transition-base;
-
-        &:nth-child(even) {
-            background-color: darken($light, 5);
-        }
-
-        &:hover {
-            background-color: darken($light, 8);
-        }
-
-        .promotion-icon {
-            width: 40px;
-            text-align: center;
-        }
-
-        .promotion-version {
-            margin-right: .5rem;
-            min-width: 100px;
-        }
-
-        .promotion-channels {
-            flex: 1;
-            margin-right: .5rem;
+            font-size: 90%;
         }
     }
 
@@ -159,9 +125,10 @@
 
     .release {
         display: flex;
-        height: 40px;
+        min-height: 40px;
         align-items: center;
         transition: $transition-base;
+        line-height: 1.2;
 
         &:nth-child(even) {
             background-color: darken($light, 5);
@@ -174,16 +141,19 @@
         .release-icon {
             width: 40px;
             text-align: center;
+            flex-shrink: 0;
         }
 
-        .release-version {
+        .release-flight {
+            flex: 1;
             margin-right: .5rem;
             min-width: 100px;
         }
 
-        .release-channels {
-            flex: 1;
+        .release-version {
             margin-right: .5rem;
+            font-size: 90%;
+            color: rgba(255,255,255,.7);
         }
     }
 }

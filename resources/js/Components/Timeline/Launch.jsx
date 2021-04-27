@@ -12,7 +12,8 @@ export default function Launch({ platform, version, url = null }) {
             <div className="release-icon">
                 <PlatformIcon platform={platform} />
             </div>
-            <div className="release-version">{platform.name} <span className="fw-bold">version {version}</span> has entered public testing</div>
+            <div className="release-flight">Version <span className="fw-bold">{version}</span> is now flighting</div>
+            <div className="release-version">{version}</div>
         </Component>
     );
 };
