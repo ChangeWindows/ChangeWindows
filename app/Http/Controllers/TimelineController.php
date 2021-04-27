@@ -65,19 +65,21 @@ class TimelineController extends Controller
                         if ($item->entry_type === \App\Models\Flight::class) {
                             return $item->entry->flight.'-'.$item->entry->platform->position;
                         } else if ($item->entry_type === \App\Models\Promotion::class) {
-                            return 'A-'.$item->entry->platform->position.$item->entry->releaseChannel->channel->order;
+                            return $item->entry->platform->position.$item->entry->releaseChannel->channel->order;
                         } else if ($item->entry_type === \App\Models\Launch::class) {
-                            return 'B-'.$item->entry->platform->position;
+                            return $item->entry->platform->position;
                         }
                     })->map(function ($flights) {
                         if ($flights->first()->entry_type === \App\Models\Flight::class) {
                             $_cur_flight = $flights->first();
                             return [
                                 'type' => 'flight',
+                                'sorted' => 'a',
                                 'id' => $_cur_flight->entry->id,
                                 'flight' => $_cur_flight->entry->flight,
                                 'date' => $_cur_flight->entry->timeline->date,
                                 'version' => $_cur_flight->entry->releaseChannel->release->version,
+                                'cversion' => $_cur_flight->entry->releaseChannel->release->canonical_version,
                                 'release_channel' => $flights->map(function ($channels) {
                                     return [
                                         'name' => $channels->entry->releaseChannel->short_name,
@@ -85,6 +87,7 @@ class TimelineController extends Controller
                                     ];
                                 }),
                                 'platform' => [
+                                    'order' => $_cur_flight->entry->platform->order,
                                     'icon' => $_cur_flight->entry->platform->icon,
                                     'name' => $_cur_flight->entry->platform->name,
                                     'color' => $_cur_flight->entry->platform->color
@@ -97,14 +100,17 @@ class TimelineController extends Controller
                             $_cur_promotion = $flights->first();
                             return [
                                 'type' => 'promotion',
+                                'sorted' => 'b',
                                 'id' => $_cur_promotion->entry->id,
                                 'date' => $_cur_promotion->entry->timeline->date,
                                 'version' => $_cur_promotion->entry->releaseChannel->release->version,
+                                'cversion' => $_cur_promotion->entry->releaseChannel->release->canonical_version,
                                 'release_channel' => [
                                     'name' => $_cur_promotion->entry->releaseChannel->short_name,
                                     'color' => $_cur_promotion->entry->releaseChannel->channel->color
                                 ],
                                 'platform' => [
+                                    'order' => $_cur_promotion->entry->platform->order,
                                     'icon' => $_cur_promotion->entry->platform->icon,
                                     'name' => $_cur_promotion->entry->platform->name,
                                     'color' => $_cur_promotion->entry->platform->color
@@ -117,10 +123,13 @@ class TimelineController extends Controller
                             $_cur_launch = $flights->first();
                             return [
                                 'type' => 'launch',
+                                'sorted' => 'c',
                                 'id' => $_cur_launch->entry->id,
                                 'date' => $_cur_launch->entry->timeline->date,
                                 'version' => $_cur_launch->entry->release->version,
+                                'cversion' => $_cur_launch->entry->release->canonical_version,
                                 'platform' => [
+                                    'order' => $_cur_launch->entry->platform->order,
                                     'icon' => $_cur_launch->entry->platform->icon,
                                     'name' => $_cur_launch->entry->platform->name,
                                     'color' => $_cur_launch->entry->platform->color
@@ -128,6 +137,12 @@ class TimelineController extends Controller
                                 'url' => $_cur_launch->entry->url
                             ];
                         }
+                    })->sortByDesc(function ($item, $key) {
+                        if ($item['type'] === 'flight') {
+                            return $item['sorted'].'.'.$item['cversion'].'.'.$item['flight'].'.'.$item['platform']['order'];
+                        }
+                        
+                        return $item['sorted'].'.'.$item['cversion'].'.'.$item['platform']['order'];
                     })->values()->all()
                 ];
             }),
