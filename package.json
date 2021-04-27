@@ -18,7 +18,7 @@
         "bootstrap": "^5.0.0-beta3",
         "laravel-mix": "^6.0.18",
         "lodash": "^4.17.19",
-        "postcss": "^8.2.12",
+        "postcss": "^8.2.13",
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1"
@@ -31,7 +31,7 @@
         "@inertiajs/inertia": "^0.8.7",
         "@inertiajs/inertia-react": "^0.5.12",
         "@inertiajs/progress": "^0.2.4",
-        "@types/react": "^17.0.3",
+        "@types/react": "^17.0.4",
         "clsx": "^1.1.1",
         "date-fns": "^2.21.1",
         "markdown-to-jsx": "^7.1.2",
