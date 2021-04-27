@@ -81,25 +81,25 @@ class ReleaseController extends Controller
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function($item, $key) {
-                        return $item->entry->flight.'-'.$item->entry->platform->position;
+                        return $item->item->flight.'-'.$item->item->platform->position;
                     })->map(function ($flights) {
                         $_cur_flight = $flights->first();
 
                         return [
-                            'id' => $_cur_flight->entry->id,
-                            'flight' => $_cur_flight->entry->flight,
-                            'date' => $_cur_flight->entry->timeline->date,
-                            'version' => $_cur_flight->entry->releaseChannel->release->version,
+                            'id' => $_cur_flight->item->id,
+                            'flight' => $_cur_flight->item->flight,
+                            'date' => $_cur_flight->item->timeline->date,
+                            'version' => $_cur_flight->item->releaseChannel->release->version,
                             'release_channel' => $flights->map(function ($channels) {
                                 return [
-                                    'name' => $channels->entry->releaseChannel->short_name,
-                                    'color' => $channels->entry->releaseChannel->channel->color
+                                    'name' => $channels->item->releaseChannel->short_name,
+                                    'color' => $channels->item->releaseChannel->channel->color
                                 ];
                             }),
                             'platform' => [
-                                'icon' => $_cur_flight->entry->platform->icon,
-                                'name' => $_cur_flight->entry->platform->name,
-                                'color' => $_cur_flight->entry->platform->color
+                                'icon' => $_cur_flight->item->platform->icon,
+                                'name' => $_cur_flight->item->platform->name,
+                                'color' => $_cur_flight->item->platform->color
                             ]
                         ];
                     })->values()->all()

@@ -16,8 +16,8 @@ class CreateTimelineTable extends Migration
         Schema::create('timeline', function (Blueprint $table) {
             $table->id();
             $table->dateTime('date');
-            $table->integer('entry_id');
-            $table->string('entry_type');
+            $table->integer('item_id');
+            $table->string('item_type');
             $table->timestamps();
         });
     }

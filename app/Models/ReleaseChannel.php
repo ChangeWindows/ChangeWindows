@@ -36,7 +36,7 @@ class ReleaseChannel extends Model
     }
 
     public function timeline() {
-        return $this->hasManyDeep(Timeline::class, [Flight::class], [null, ['entry_type', 'entry_id']]);
+        return $this->hasManyDeep(Timeline::class, [Flight::class], [null, ['item_type', 'item_id']]);
     }
 
     public function getLatestAttribute() {

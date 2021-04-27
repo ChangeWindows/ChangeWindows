@@ -28,7 +28,7 @@ class FlightController extends Controller
     {
         $this->authorize('flights.show');
 
-        $timeline = Timeline::where('entry_type', Flight::class)->orderBy('date', 'desc')->paginate(100);
+        $timeline = Timeline::where('item_type', Flight::class)->orderBy('date', 'desc')->paginate(100);
 
         return Inertia::render('Admin/Flights/Show', [
             'can' => [
@@ -40,19 +40,19 @@ class FlightController extends Controller
                     'date' => $items[0]->date,
                     'flights' => $items->map(function ($flight) {
                         return [
-                            'id' => $flight->entry->id,
-                            'version' => $flight->entry->version,
-                            'date' => $flight->entry->timeline->date,
+                            'id' => $flight->item->id,
+                            'version' => $flight->item->version,
+                            'date' => $flight->item->timeline->date,
                             'release_channel' => [
-                                'name' => $flight->entry->releaseChannel->short_name,
-                                'color' => $flight->entry->releaseChannel->channel->color
+                                'name' => $flight->item->releaseChannel->short_name,
+                                'color' => $flight->item->releaseChannel->channel->color
                             ],
                             'platform' => [
-                                'icon' => $flight->entry->platform->icon,
-                                'name' => $flight->entry->platform->name,
-                                'color' => $flight->entry->platform->color
+                                'icon' => $flight->item->platform->icon,
+                                'name' => $flight->item->platform->name,
+                                'color' => $flight->item->platform->color
                             ],
-                            'edit_url' => $flight->entry->edit_url
+                            'edit_url' => $flight->item->edit_url
                         ];
                     })
                 ];
@@ -125,8 +125,8 @@ class FlightController extends Controller
     
                 Timeline::create([
                     'date' => (new Carbon(request('date'))),
-                    'entry_type' => Launch::class,
-                    'entry_id' => $launch->id
+                    'item_type' => Launch::class,
+                    'item_id' => $launch->id
                 ]);
             }
 
@@ -137,8 +137,8 @@ class FlightController extends Controller
     
                 Timeline::create([
                     'date' => (new Carbon(request('date'))),
-                    'entry_type' => Promotion::class,
-                    'entry_id' => $promotion->id
+                    'item_type' => Promotion::class,
+                    'item_id' => $promotion->id
                 ]);
             }
 
@@ -152,8 +152,8 @@ class FlightController extends Controller
 
             Timeline::create([
                 'date' => (new Carbon(request('date'))),
-                'entry_type' => Flight::class,
-                'entry_id' => $flight->id
+                'item_type' => Flight::class,
+                'item_id' => $flight->id
             ]);
 
             if ($request->tweet) {

@@ -16,7 +16,7 @@ class Launch extends Model
     protected $appends = ['edit_url', 'url'];
     
     public function timeline() {
-        return $this->morphOne(Timeline::class, 'entry');
+        return $this->morphOne(Timeline::class, 'item');
     }
 
     public function release() {
