@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use Redirect;
 use App\Models\Platform;
 use App\Models\Timeline;
+use Illuminate\Database\Eloquent\Builder;
 
 class PlatformController extends Controller
 {
@@ -29,20 +30,33 @@ class PlatformController extends Controller
     public function show(Platform $platform)
     {
         $timeline = Timeline::orderBy('date', 'desc')
-            ->join('flights', function ($join) {
-                $join->on('flights.id', '=', 'timeline.item_id')
-                    ->where('timeline.item_type', '=', 'App\Models\Flight')
-                     
-                    ->join('release_channels', function ($join) {
-                        $join->on('release_channels.id', '=', 'flights.release_channel_id')
-                     
-                        ->join('channels', function ($join) {
-                            $join->on('channels.id', '=', 'release_channels.channel_id');
-                        });
+            ->whereHas('flight', function (Builder $query) use ($platform) {
+                $query->join('release_channels as frs', function ($join) {
+                    $join->on('frs.id', '=', 'flights.release_channel_id')
+                
+                    ->join('channels as fc', function ($join) {
+                        $join->on('fc.id', '=', 'frs.channel_id');
                     });
+                })
+                ->where('fc.platform_id', '=', $platform->id);
             })
-            ->where('channels.platform_id', '=', $platform->id)
-            ->paginate(20);
+            ->orWhereHas('promotion', function (Builder $query) use ($platform) {
+                $query->join('release_channels as prs', function ($join) {
+                    $join->on('prs.id', '=', 'promotions.release_channel_id')
+                
+                    ->join('channels as pc', function ($join) {
+                        $join->on('pc.id', '=', 'prs.channel_id');
+                    });
+                })
+                ->where('pc.platform_id', '=', $platform->id);
+            })
+            ->orWhereHas('launch', function (Builder $query) use ($platform) {
+                $query->join('releases as lr', function ($join) {
+                    $join->on('lr.id', '=', 'launches.release_id');
+                })
+                ->where('lr.platform_id', '=', $platform->id);
+            })
+            ->paginate(75);
 
         return Inertia::render('Platforms/Show', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
@@ -104,28 +118,87 @@ class PlatformController extends Controller
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function($item, $key) {
-                        return $item->item->flight.'-'.$item->item->platform->position;
+                        if ($item->item_type === \App\Models\Flight::class) {
+                            return $item->item->flight.'-'.$item->item->platform->position;
+                        } else if ($item->item_type === \App\Models\Promotion::class) {
+                            return $item->item->platform->position.$item->item->releaseChannel->channel->order;
+                        } else if ($item->item_type === \App\Models\Launch::class) {
+                            return $item->item->platform->position;
+                        }
                     })->map(function ($flights) {
-                        $_cur_flight = $flights->first();
-
-                        return [
-                            'id' => $_cur_flight->item->id,
-                            'flight' => $_cur_flight->item->flight,
-                            'date' => $_cur_flight->item->timeline->date,
-                            'version' => $_cur_flight->item->releaseChannel->release->version,
-                            'release_channel' => $flights->map(function ($channels) {
-                                return [
-                                    'name' => $channels->item->releaseChannel->short_name,
-                                    'color' => $channels->item->releaseChannel->channel->color
-                                ];
-                            }),
-                            'platform' => [
-                                'icon' => $_cur_flight->item->platform->icon,
-                                'name' => $_cur_flight->item->platform->name,
-                                'color' => $_cur_flight->item->platform->color
-                            ],
-                            'url' => $_cur_flight->item->url
-                        ];
+                        if ($flights->first()->item_type === \App\Models\Flight::class) {
+                            $_cur_flight = $flights->first();
+                            return [
+                                'type' => 'flight',
+                                'sorted' => 'a',
+                                'id' => $_cur_flight->item->id,
+                                'flight' => $_cur_flight->item->flight,
+                                'date' => $_cur_flight->item->timeline->date,
+                                'version' => $_cur_flight->item->releaseChannel->release->version,
+                                'cversion' => $_cur_flight->item->releaseChannel->release->canonical_version,
+                                'release_channel' => $flights->map(function ($channels) {
+                                    return [
+                                        'name' => $channels->item->releaseChannel->short_name,
+                                        'color' => $channels->item->releaseChannel->channel->color
+                                    ];
+                                }),
+                                'platform' => [
+                                    'order' => $_cur_flight->item->platform->order,
+                                    'icon' => $_cur_flight->item->platform->icon,
+                                    'name' => $_cur_flight->item->platform->name,
+                                    'color' => $_cur_flight->item->platform->color
+                                ],
+                                'url' => $_cur_flight->item->url
+                            ];
+                        }
+                        
+                        if ($flights->first()->item_type === \App\Models\Promotion::class) {
+                            $_cur_promotion = $flights->first();
+                            return [
+                                'type' => 'promotion',
+                                'sorted' => 'b',
+                                'id' => $_cur_promotion->item->id,
+                                'date' => $_cur_promotion->item->timeline->date,
+                                'version' => $_cur_promotion->item->releaseChannel->release->version,
+                                'cversion' => $_cur_promotion->item->releaseChannel->release->canonical_version,
+                                'release_channel' => [
+                                    'name' => $_cur_promotion->item->releaseChannel->short_name,
+                                    'color' => $_cur_promotion->item->releaseChannel->channel->color
+                                ],
+                                'platform' => [
+                                    'order' => $_cur_promotion->item->platform->order,
+                                    'icon' => $_cur_promotion->item->platform->icon,
+                                    'name' => $_cur_promotion->item->platform->name,
+                                    'color' => $_cur_promotion->item->platform->color
+                                ],
+                                'url' => $_cur_promotion->item->url
+                            ]; 
+                        }
+                        
+                        if ($flights->first()->item_type === \App\Models\Launch::class) {
+                            $_cur_launch = $flights->first();
+                            return [
+                                'type' => 'launch',
+                                'sorted' => 'c',
+                                'id' => $_cur_launch->item->id,
+                                'date' => $_cur_launch->item->timeline->date,
+                                'version' => $_cur_launch->item->release->version,
+                                'cversion' => $_cur_launch->item->release->canonical_version,
+                                'platform' => [
+                                    'order' => $_cur_launch->item->platform->order,
+                                    'icon' => $_cur_launch->item->platform->icon,
+                                    'name' => $_cur_launch->item->platform->name,
+                                    'color' => $_cur_launch->item->platform->color
+                                ],
+                                'url' => $_cur_launch->item->url
+                            ];
+                        }
+                    })->sortByDesc(function ($item, $key) {
+                        if ($item['type'] === 'flight') {
+                            return $item['sorted'].'.'.$item['cversion'].'.'.$item['flight'].'.'.$item['platform']['order'];
+                        }
+                        
+                        return $item['sorted'].'.'.$item['cversion'].'.'.$item['platform']['order'];
                     })->values()->all()
                 ];
             }),

@@ -3,6 +3,8 @@ import React, { useMemo } from 'react';
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
 import Flight from '../../Components/Timeline/Flight';
+import Launch from '../../Components/Timeline/Launch';
+import Promotion from '../../Components/Timeline/Promotion';
 import ReleaseCard from '../../Components/Cards/ReleaseCard';
 import Timeline from '../../Components/Timeline/Timeline';
 
@@ -99,16 +101,44 @@ export default function Show({ can, auth, platforms, platform, channels, release
                                         <div className="row g-4">
                                             {Object.keys(timeline).map((date, key) => (
                                                 <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
-                                                    {timeline[date].flights.map((flight, key) => (
-                                                        <Flight
-                                                            key={key}
-                                                            platform={flight.platform}
-                                                            build={flight.flight}
-                                                            channels={flight.release_channel}
-                                                            version={flight.version}
-                                                            url={flight.url}
-                                                        />
-                                                    ))}
+                                                    {timeline[date].flights.map((flight, _key) => {
+                                                        if (flight.type === 'flight') {
+                                                            return (
+                                                                <Flight
+                                                                    key={`${flight.type}-${flight.id}`}
+                                                                    platform={flight.platform}
+                                                                    build={flight.flight}
+                                                                    channels={flight.release_channel}
+                                                                    version={flight.version}
+                                                                    url={flight.url}
+                                                                />
+                                                            );
+                                                        }
+                
+                                                        if (flight.type === 'promotion') {
+                                                            console.log('promotion', flight);
+                                                            return (
+                                                                <Promotion
+                                                                    key={`${flight.type}-${flight.id}`}
+                                                                    platform={flight.platform}
+                                                                    channel={flight.release_channel}
+                                                                    version={flight.version}
+                                                                    url={flight.url}
+                                                                />
+                                                            );
+                                                        }
+                
+                                                        if (flight.type === 'launch') {
+                                                            return (
+                                                                <Launch
+                                                                    key={`${flight.type}-${flight.id}`}
+                                                                    platform={flight.platform}
+                                                                    version={flight.version}
+                                                                    url={flight.url}
+                                                                />
+                                                            );
+                                                        }
+                                                    })}
                                                 </Timeline>
                                             ))}
                                             <Pagination pagination={pagination} />
