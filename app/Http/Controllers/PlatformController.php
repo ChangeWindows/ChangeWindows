@@ -121,9 +121,9 @@ class PlatformController extends Controller
                         if ($item->item_type === \App\Models\Flight::class) {
                             return $item->item->flight.'-'.$item->item->platform->position;
                         } else if ($item->item_type === \App\Models\Promotion::class) {
-                            return $item->item->platform->position.$item->item->releaseChannel->channel->order;
+                            return $item->item->platform->position.'.'.$item->item->releaseChannel->release->version.'.'.$item->item->releaseChannel->channel->order;
                         } else if ($item->item_type === \App\Models\Launch::class) {
-                            return $item->item->platform->position;
+                            return $item->item->platform->position.'.'.$item->item->release->version;
                         }
                     })->map(function ($flights) {
                         if ($flights->first()->item_type === \App\Models\Flight::class) {
