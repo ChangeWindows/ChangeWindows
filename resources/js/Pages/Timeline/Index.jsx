@@ -4,12 +4,11 @@ import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
 import Flight from '../../Components/Timeline/Flight';
 import Launch from '../../Components/Timeline/Launch';
-import Promotion from '../../Components/Timeline/Promotion';
-import Timeline from '../../Components/Timeline/Timeline';
-
+import Pagination from '../../Components/Pagination';
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
-import Pagination from '../../Components/Pagination';
+import Promotion from '../../Components/Timeline/Promotion';
+import Timeline from '../../Components/Timeline/Timeline';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faSunHaze } from '@fortawesome/pro-regular-svg-icons'

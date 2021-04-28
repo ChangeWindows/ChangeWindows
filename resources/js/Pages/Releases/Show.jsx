@@ -1,21 +1,24 @@
-import React, { useMemo } from 'react'
+import React, { useMemo } from 'react';
 
-import App from '../../Layouts/App'
-import Channel from '../../Components/Cards/Channel'
-import Flight from '../../Components/Timeline/Flight'
-import PlatformIcon from '../../Components/Platforms/PlatformIcon'
-import Progress from '../../Components/Progress/Progress'
-import ProgressBar from '../../Components/Progress/ProgressBar'
-import Timeline from '../../Components/Timeline/Timeline'
+import App from '../../Layouts/App';
+import Channel from '../../Components/Cards/Channel';
+import Flight from '../../Components/Timeline/Flight';
+import Launch from '../../Components/Timeline/Launch';
+import Pagination from '../../Components/Pagination';
+import PlatformIcon from '../../Components/Platforms/PlatformIcon';
+import Progress from '../../Components/Progress/Progress';
+import ProgressBar from '../../Components/Progress/ProgressBar';
+import Promotion from '../../Components/Timeline/Promotion';
+import Timeline from '../../Components/Timeline/Timeline';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faListTimeline, faNotes } from '@fortawesome/pro-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faListTimeline, faNotes } from '@fortawesome/pro-regular-svg-icons';
 
-import { differenceInDays } from 'date-fns/esm'
-import { format, isBefore, parseISO } from 'date-fns'
+import { differenceInDays } from 'date-fns/esm';
+import { format, isBefore, parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
 
-export default function Show({ can, auth, release, platform, channels, timeline }) {
+export default function Show({ can, auth, release, platform, channels, timeline, pagination }) {
     function max(input) {
         if (toString.call(input) !== "[object Array]") {
             return false;
@@ -200,17 +203,46 @@ export default function Show({ can, auth, release, platform, channels, timeline 
                                         <div className="row g-4">
                                             {Object.keys(timeline).map((date, key) => (
                                                 <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
-                                                    {timeline[date].flights.map((flight, key) => (
-                                                        <Flight
-                                                            key={key}
-                                                            platform={flight.platform}
-                                                            build={flight.flight}
-                                                            channels={flight.release_channel}
-                                                            version={flight.version}
-                                                        />
-                                                    ))}
+                                                    {timeline[date].flights.map((flight, _key) => {
+                                                        if (flight.type === 'flight') {
+                                                            return (
+                                                                <Flight
+                                                                    key={`${flight.type}-${flight.id}`}
+                                                                    platform={flight.platform}
+                                                                    build={flight.flight}
+                                                                    channels={flight.release_channel}
+                                                                    version={flight.version}
+                                                                    url={flight.url}
+                                                                />
+                                                            );
+                                                        }
+                
+                                                        if (flight.type === 'promotion') {
+                                                            return (
+                                                                <Promotion
+                                                                    key={`${flight.type}-${flight.id}`}
+                                                                    platform={flight.platform}
+                                                                    channel={flight.release_channel}
+                                                                    version={flight.version}
+                                                                    url={flight.url}
+                                                                />
+                                                            );
+                                                        }
+                
+                                                        if (flight.type === 'launch') {
+                                                            return (
+                                                                <Launch
+                                                                    key={`${flight.type}-${flight.id}`}
+                                                                    platform={flight.platform}
+                                                                    version={flight.version}
+                                                                    url={flight.url}
+                                                                />
+                                                            );
+                                                        }
+                                                    })}
                                                 </Timeline>
                                             ))}
+                                            <Pagination pagination={pagination} />
                                         </div>
                                     </div>
                                 </div>
