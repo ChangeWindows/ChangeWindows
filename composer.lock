@@ -64,16 +64,16 @@
         },
         {
             "name": "atymic/twitter",
-            "version": "3.1.5",
+            "version": "3.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/atymic/twitter.git",
-                "reference": "b45e4bcc7cb9d30d8f8167b084911e24b160d0b1"
+                "reference": "738a2b58775b9f59765c332fa20b9f40ad530167"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atymic/twitter/zipball/b45e4bcc7cb9d30d8f8167b084911e24b160d0b1",
-                "reference": "b45e4bcc7cb9d30d8f8167b084911e24b160d0b1",
+                "url": "https://api.github.com/repos/atymic/twitter/zipball/738a2b58775b9f59765c332fa20b9f40ad530167",
+                "reference": "738a2b58775b9f59765c332fa20b9f40ad530167",
                 "shasum": ""
             },
             "require": {
@@ -137,7 +137,7 @@
             ],
             "support": {
                 "issues": "https://github.com/atymic/twitter/issues",
-                "source": "https://github.com/atymic/twitter/tree/3.1.5"
+                "source": "https://github.com/atymic/twitter/tree/3.1.8"
             },
             "funding": [
                 {
@@ -149,7 +149,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-18T21:58:53+00:00"
+            "time": "2021-04-27T20:45:03+00:00"
         },
         {
             "name": "brick/math",
@@ -1303,16 +1303,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.39.0",
+            "version": "v8.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "0c6f9acb55c8d1621b6f42e3dd5e242cf3b17680"
+                "reference": "a654897ad7f97aea9d7ef292803939798c4a02a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/0c6f9acb55c8d1621b6f42e3dd5e242cf3b17680",
-                "reference": "0c6f9acb55c8d1621b6f42e3dd5e242cf3b17680",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/a654897ad7f97aea9d7ef292803939798c4a02a4",
+                "reference": "a654897ad7f97aea9d7ef292803939798c4a02a4",
                 "shasum": ""
             },
             "require": {
@@ -1467,7 +1467,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-04-27T14:24:05+00:00"
+            "time": "2021-04-28T14:38:56+00:00"
         },
         {
             "name": "laravel/tinker",
