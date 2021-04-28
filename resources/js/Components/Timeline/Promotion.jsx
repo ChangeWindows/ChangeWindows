@@ -15,7 +15,7 @@ export default function Promotion({ platform, version, channel, url  }) {
             <div className="flight-build">
                 Version <span className="fw-bold">{version}</span>
             </div>
-            <div className="flight-channel">
+            <div className="flight-channels">
                 <span className="badge me-1" style={{ backgroundColor: channel.color }}>{channel.name}</span>
             </div>
             <div className="flight-version text-muted">{version ?? component}</div>
