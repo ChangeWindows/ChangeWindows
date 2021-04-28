@@ -36,6 +36,6 @@ class Promotion extends Model
     }
 
     public function getEditUrlAttribute() {
-        //return route('admin.promotions.edit', $this, false);
+        return route('admin.promotions.edit', $this, false);
     }
 }

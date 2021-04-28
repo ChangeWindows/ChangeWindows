@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ReleaseController as AdminReleaseController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\TweetStreamController as AdminTweetStreamController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
 
 
 /*
@@ -151,6 +152,15 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/create', [AdminFlightController::class, 'create'])->name('.create');
         Route::get('/{flight}/edit', [AdminFlightController::class, 'edit'])->name('.edit');
         Route::patch('/{flight}/edit', [AdminFlightController::class, 'update'])->name('.update');
+    });
+    
+    Route::prefix('promotions')->name('.promotions')->group(function() {
+        Route::get('', [AdminPromotionController::class, 'index'])->name('');
+        Route::post('', [AdminPromotionController::class, 'store'])->name('.store');
+        Route::delete('{promotion}', [AdminPromotionController::class, 'destroy'])->name('.destroy');
+        Route::get('/create', [AdminPromotionController::class, 'create'])->name('.create');
+        Route::get('/{promotion}/edit', [AdminPromotionController::class, 'edit'])->name('.edit');
+        Route::patch('/{promotion}/edit', [AdminPromotionController::class, 'update'])->name('.update');
     });
 });
 
