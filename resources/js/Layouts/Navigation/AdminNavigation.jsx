@@ -4,7 +4,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import NavigationBar from './components/NavigationBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSunHaze, faFlag, faCircleInfo, faUser, faUserUnlock, faArrowLeft, faLaptopMobile, faPlane, faUnlockKeyhole } from '@fortawesome/pro-regular-svg-icons';
+import { faSunHaze, faFlag, faCircleInfo, faUser, faUserUnlock, faArrowLeft, faLaptopMobile, faPlane, faUnlockKeyhole, faRocketLaunch, faAnglesUp, faCubes } from '@fortawesome/pro-regular-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function AdminNavigation({ can, auth }) {
@@ -25,7 +25,10 @@ export default function AdminNavigation({ can, auth }) {
                     { type: 'link', url: '/timeline', icon: faArrowLeft, title: 'Back', ignore: true },
                     { type: 'divider' },
                     { type: 'link', url: '/admin/flights', icon: faPlane, title: 'Flights' },
+                    { type: 'link', url: '/admin/promotions', icon: faAnglesUp, title: 'Promotions' },
+                    { type: 'link', url: '/admin/launches', icon: faRocketLaunch, title: 'Launches' },
                     { type: 'link', url: '/admin/releases', icon: faFlag, title: 'Releases' },
+                    { type: 'link', url: '/admin/packages', icon: faCubes, title: 'Packages' },
                     { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms' },
                     { type: 'divider' },
                     { type: 'link', url: '/admin/tweet_streams', icon: faTwitter, title: 'Twitter' },
