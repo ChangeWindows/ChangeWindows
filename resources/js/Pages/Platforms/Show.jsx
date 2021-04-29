@@ -116,7 +116,6 @@ export default function Show({ can, auth, platforms, platform, channels, release
                                                         }
                 
                                                         if (flight.type === 'promotion') {
-                                                            console.log('promotion', flight);
                                                             return (
                                                                 <Promotion
                                                                     key={`${flight.type}-${flight.id}`}

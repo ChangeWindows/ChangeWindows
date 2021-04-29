@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Timeline;
+use App\Models\Release;
 use App\Models\Launch;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -61,7 +62,32 @@ class LaunchController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('flights.create');
+
+        $releases = Release::orderBy('platform_id')->orderBy('canonical_version')->get();
+
+        return Inertia::render('Admin/Launches/Create', [
+            'urls' => [
+                'store_launch' => route('admin.launches.store', [], false),
+            ],
+            'releases' => $releases->whereNull('launch')->values()->map(function ($release) {
+                return [
+                    'id' => $release->id,
+                    'name' => $release->name,
+                    'version' => $release->version,
+                    'codename' => $release->codename,
+                    'start_build' => $release->start_build,
+                    'start_delta' => $release->start_delta,
+                    'end_build' => $release->end_build,
+                    'end_delta' => $release->end_delta,
+                    'platform' => [
+                        'icon' => $release->platform->icon,
+                        'name' => $release->platform->name,
+                        'color' => $release->platform->color
+                    ]
+                ];
+            })
+        ]);
     }
 
     /**
@@ -72,7 +98,19 @@ class LaunchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('flights.create');
+
+        $launch = Launch::create([
+            'release_id' => request('release')
+        ]);
+
+        Timeline::create([
+            'date' => (new Carbon(request('date'))),
+            'item_type' => Launch::class,
+            'item_id' => $launch->id
+        ]);
+
+        return Redirect::route('admin.launches')->with('status', 'Succesfully created this launch.');
     }
 
     /**

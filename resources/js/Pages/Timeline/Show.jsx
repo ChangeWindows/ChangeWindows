@@ -40,7 +40,6 @@ export default function Show({ can, auth, timeline, pagination, platforms, chann
                                         }
 
                                         if (flight.type === 'promotion') {
-                                            console.log('promotion', flight);
                                             return (
                                                 <Promotion
                                                     key={`${flight.type}-${flight.id}`}

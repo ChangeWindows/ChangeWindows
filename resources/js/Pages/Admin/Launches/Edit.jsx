@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
@@ -14,8 +14,6 @@ export default function Edit({ can, auth, urls, launch, release, platform, statu
     const [curLaunch, setCurLaunch] = useState({
         date: format(parseISO(launch.date), 'yyyy-MM-dd')
     });
-
-    console.log(launch);
 
     function formHandler(event) {
         const { id, value, type } = event.target;

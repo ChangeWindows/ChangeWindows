@@ -28,6 +28,10 @@ class Release extends Model
         return $this->hasMany(ReleaseChannel::class);
     }
 
+    public function launch() {
+        return $this->hasOne(Launch::class);
+    }
+
     public function flights() {
         return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->flights());
     }

@@ -10,8 +10,6 @@ import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro
 export default function Edit({ can, auth, permission, urls, status = null }) {
     const [curPermission, setCurPermission] = useState(permission);
 
-    console.log(urls);
-
     useEffect(() => {
         setCurPermission(permission);
     }, [permission]);
