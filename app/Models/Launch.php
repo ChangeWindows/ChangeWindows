@@ -32,6 +32,6 @@ class Launch extends Model
     }
 
     public function getEditUrlAttribute() {
-        //return route('admin.launches.edit', $this, false);
+        return route('admin.launches.edit', $this, false);
     }
 }
