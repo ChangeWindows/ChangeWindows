@@ -12,7 +12,7 @@ import { format, isDate, parseISO } from 'date-fns';
 
 export default function Edit({ can, auth, urls, promotion, release, platform, release_channel, status = null }) {
     const [curPromotion, setCurPromotion] = useState({
-        date: format(new Date(), 'yyyy-MM-dd')
+        date: format(parseISO(promotion.date), 'yyyy-MM-dd')
     });
 
     function formHandler(event) {

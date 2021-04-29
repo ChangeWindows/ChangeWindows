@@ -109,7 +109,9 @@ class PromotionController extends Controller
                 'update_promotion' => route('admin.promotions.update', $promotion, false),
                 'destroy_promotion' => route('admin.promotions.destroy', $promotion, false)
             ],
-            'promotion' => $promotion,
+            'promotion' => [
+                'date' => $promotion->timeline->date
+            ],
             'release' => [
                 'version' => $promotion->releaseChannel->release->version
             ],
