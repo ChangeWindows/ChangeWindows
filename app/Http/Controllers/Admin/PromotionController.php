@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Timeline;
+use App\Models\Release;
 use App\Models\Promotion;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -65,7 +66,39 @@ class PromotionController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('flights.create');
+
+        $releases = Release::orderBy('platform_id')->orderBy('canonical_version')->get();
+
+        return Inertia::render('Admin/Promotions/Create', [
+            'urls' => [
+                'store_promotion' => route('admin.promotions.store', [], false),
+            ],
+            'releases' => $releases->map(function ($release) {
+                return [
+                    'id' => $release->id,
+                    'name' => $release->name,
+                    'start_build' => $release->start_build,
+                    'start_delta' => $release->start_delta,
+                    'end_build' => $release->end_build,
+                    'end_delta' => $release->end_delta,
+                    'platform' => [
+                        'icon' => $release->platform->icon,
+                        'name' => $release->platform->name,
+                        'color' => $release->platform->color
+                    ],
+                    'channels' => $release->releaseChannels->whereNull('promotion')->map(function ($channel) {
+                        return [
+                            'id' => $channel->id,
+                            'name' => $channel->name,
+                            'supported' => $channel->supported,
+                            'color' => $channel->channel->color,
+                            'order' => $channel->channel->order
+                        ];
+                    })->values()
+                ];
+            })
+        ]);
     }
 
     /**
@@ -76,7 +109,19 @@ class PromotionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('flights.create');
+
+        $promotion = Promotion::create([
+            'release_channel_id' => request('channel')
+        ]);
+
+        Timeline::create([
+            'date' => (new Carbon(request('date'))),
+            'item_type' => Promotion::class,
+            'item_id' => $promotion->id
+        ]);
+
+        return Redirect::route('admin.promotions')->with('status', 'Succesfully created this promotion.');
     }
 
     /**

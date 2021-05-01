@@ -12,7 +12,7 @@ import { format, isDate, parseISO } from 'date-fns';
 
 export default function Create({ can, auth, urls, releases }) {
     const [curLaunch, setCurLaunch] = useState({
-        release: '',
+        release: null,
         date: format(new Date(), 'yyyy-MM-dd')
     });
 

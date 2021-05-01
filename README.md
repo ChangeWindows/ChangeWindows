@@ -8,3 +8,6 @@ Whenever a new release begins flighting, ChangeWindows will now show this in the
 
 ## #13 Promotions
 Whenever a new channel within a release opens, ChangeWindows will now show this in the timeline with our new "Promotion"-event.
+
+## Fixed issues
+- 3f2b78a Fixes a spacing issue with the welcome buttons.

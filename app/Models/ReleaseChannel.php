@@ -39,6 +39,10 @@ class ReleaseChannel extends Model
         return $this->hasManyDeep(Timeline::class, [Flight::class], [null, ['item_type', 'item_id']]);
     }
 
+    public function promotion() {
+        return $this->hasOne(Promotion::class);
+    }
+
     public function getLatestAttribute() {
         return Flight::where('release_channel_id', '=', $this->id)
             ->orderBy('build', 'desc')
