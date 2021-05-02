@@ -25,6 +25,7 @@ class ReleaseController extends Controller
                     'name' => $release->name,
                     'version' => $release->version,
                     'codename' => $release->codename,
+                    'package' => $release->package,
                     'start_public' => $release->start_public,
                     'url' => $release->url,
                     'platform' => [

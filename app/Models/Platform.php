@@ -31,7 +31,11 @@ class Platform extends Model
     }
 
     public function releases() {
-        return $this->hasMany(Release::class);
+        return $this->hasMany(Release::class)->where('package', '=', 0);
+    }
+
+    public function packages() {
+        return $this->hasMany(Release::class)->where('package', '=', 1);
     }
 
     public function tweetStream() {

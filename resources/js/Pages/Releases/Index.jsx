@@ -32,6 +32,7 @@ export default function Index({ can, auth, releases }) {
                                         <ReleaseCard
                                             key={key}
                                             name={release.name}
+                                            pack={release.package === 1}
                                             platform={release.platform}
                                             alts={[`Version ${release.version}`, release.codename]}
                                             channels={release.channels}

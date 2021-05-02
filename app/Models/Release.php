@@ -20,6 +20,10 @@ class Release extends Model
     protected $appends = ['url', 'edit_url', 'edit_changelog_url'];
     protected $dates = ['start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts'];
 
+    protected $casts = [
+        'package' => 'integer'
+    ];
+
     public function platform() {
         return $this->belongsTo(Platform::class);
     }

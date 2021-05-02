@@ -94,7 +94,7 @@ export default function Show({ can, auth, release, platform, channels, timeline,
         <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
-                    <span className="navbar-brand">Releases</span>
+                    <span className="navbar-brand">{release.package ? 'Packages' : 'Releases'}</span>
                 </div>
             </nav>
         
@@ -107,7 +107,7 @@ export default function Show({ can, auth, release, platform, channels, timeline,
                             </div>
                             <div>
                                 <h1 className="h2 mb-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
-                                <h2 className="h5 text-muted">Version {release.version}, {release.codename}</h2>
+                                {release.package === 0 && <h2 className="h5 text-muted">Version {release.version}, {release.codename}</h2>}
                             </div>
                         </div>
 

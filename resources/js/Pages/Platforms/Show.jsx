@@ -17,7 +17,7 @@ import { faFlag, faListTimeline } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
 
-export default function Show({ can, auth, platforms, platform, channels, releases, timeline, pagination }) {
+export default function Show({ can, auth, platforms, platform, channels, releases, packages, timeline, pagination }) {
     const [currentReleases, legacyReleases] = useMemo(() => {
         const currentReleases = releases.filter((release) => release.channels.length > 0);
         const legacyReleases = releases.filter((release) => release.channels.length === 0);
@@ -69,6 +69,25 @@ export default function Show({ can, auth, platforms, platform, channels, release
                                                             alts={[`Version ${release.version}`, release.codename]}
                                                             channels={release.channels}
                                                             url={release.url}
+                                                        />
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    }
+                                    {packages.length > 0 &&
+                                        <div className="col-12 mt-4">
+                                            <h2 className="h5 mb-3 fw-bold">Packages</h2>
+                                            <div className="row g-2">
+                                                {packages.map((pack, key) => {
+                                                    return (
+                                                        <ReleaseCard
+                                                            key={key}
+                                                            pack
+                                                            name={pack.name}
+                                                            alts={[`Version ${pack.version}`, pack.codename]}
+                                                            channels={pack.channels}
+                                                            url={pack.url}
                                                         />
                                                     );
                                                 })}

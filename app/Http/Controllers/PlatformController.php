@@ -114,6 +114,27 @@ class PlatformController extends Controller
                     })->values()->all()
                 ];
             })->values()->all(),
+            'packages' => $platform->packages->sortBy('name')->map(function ($release) {
+                return [
+                    'name' => $release->name,
+                    'url' => $release->url,
+                    'platform' => [
+                        'icon' => $release->platform->icon,
+                        'name' => $release->platform->name,
+                        'color' => $release->platform->color,
+                        'tool' => $release->platform->tool
+                    ],
+                    'channels' => $release->releaseChannels->where('supported')->map(function ($channel) {
+                        return [
+                            'id' => $channel->id,
+                            'short_name' => $channel->short_name,
+                            'supported' => $channel->supported,
+                            'color' => $channel->channel->color,
+                            'order' => $channel->channel->order
+                        ];
+                    })->values()->all()
+                ];
+            })->values()->all(),
             'timeline' => $timeline->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
