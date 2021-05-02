@@ -16,9 +16,9 @@ class CreateReleasesTable extends Migration
         Schema::create('releases', function (Blueprint $table) {
             $table->id();
             $table->string('name')->required();
-            $table->string('version')->required();
-            $table->integer('canonical_version')->required();
-            $table->string('codename');
+            $table->string('version')->nullable();
+            $table->integer('canonical_version')->nullable();
+            $table->string('codename')->nullable();
             $table->text('description')->nullable();
             $table->text('changelog')->nullable();
             $table->foreignId('platform_id')->constrained('platforms')->onDelete('cascade');
@@ -27,10 +27,10 @@ class CreateReleasesTable extends Migration
             $table->date('start_extended')->nullable();
             $table->date('start_lts')->nullable();
             $table->date('end_lts')->nullable();
-            $table->string('start_build');
-            $table->string('start_delta');
-            $table->string('end_build');
-            $table->string('end_delta');
+            $table->integer('start_build')->nullable();
+            $table->integer('start_delta')->nullable();
+            $table->integer('end_build')->nullable();
+            $table->integer('end_delta')->nullable();
             $table->string('slug')->unique();
             $table->timestamps();
         });
