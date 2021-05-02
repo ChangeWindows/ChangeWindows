@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 
 import App from '../../Layouts/App';
 import ReleaseCard from '../../Components/Cards/ReleaseCard';
+
 import { isAfter, isBefore, parseISO } from 'date-fns';
 
 export default function Index({ can, auth, releases }) {
@@ -32,7 +33,6 @@ export default function Index({ can, auth, releases }) {
                                         <ReleaseCard
                                             key={key}
                                             name={release.name}
-                                            pack={release.package === 1}
                                             platform={release.platform}
                                             alts={[`Version ${release.version}`, release.codename]}
                                             channels={release.channels}

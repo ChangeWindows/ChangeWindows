@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\ReleaseController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\Admin\ChannelController as AdminChannelController;
 use App\Http\Controllers\Admin\FlightController as AdminFlightController;
@@ -60,6 +61,11 @@ Route::prefix('')->name('front')->group(function() {
     Route::prefix('releases')->name('.releases')->group(function() {
         Route::get('', [ReleaseController::class, 'index'])->name('');
         Route::get('/{release}', [ReleaseController::class, 'show'])->name('.show');
+    });
+    
+    Route::prefix('packages')->name('.packages')->group(function() {
+        Route::get('', [PackageController::class, 'index'])->name('');
+        Route::get('/{release}', [PackageController::class, 'show'])->name('.show');
     });
     
     Route::prefix('about')->name('.about')->group(function() {

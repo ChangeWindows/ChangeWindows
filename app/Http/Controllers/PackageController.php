@@ -10,7 +10,7 @@ use App\Models\Release;
 use App\Models\Timeline;
 use Illuminate\Database\Eloquent\Builder;
 
-class ReleaseController extends Controller
+class PackageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,14 +19,11 @@ class ReleaseController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Releases/Index', [
-            'releases' => Release::where('package', '=', 0)->orderBy('platform_id', 'asc')->orderBy('canonical_version', 'desc')->get()->map(function ($release) {
+        return Inertia::render('Packages/Index', [
+            'packages' => Release::where('package', '=', 1)->orderBy('platform_id', 'asc')->get()->map(function ($release) {
                 return [
                     'name' => $release->name,
                     'version' => $release->version,
-                    'codename' => $release->codename,
-                    'package' => $release->package,
-                    'start_public' => $release->start_public,
                     'url' => $release->url,
                     'platform' => [
                         'icon' => $release->platform->icon,
@@ -84,7 +81,7 @@ class ReleaseController extends Controller
             })
             ->paginate(75);
 
-        return Inertia::render('Releases/Show', [
+        return Inertia::render('Packages/Show', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
                 return [
                     'id' => $_platform->id,

@@ -45,14 +45,26 @@ class Release extends Model
     }
 
     public function getEditUrlAttribute() {
-        return $this->package ? route('admin.packages.edit', $this, false) : route('admin.releases.edit', $this, false);
+        if ($this->package) {
+            return route('admin.packages.edit', $this, false);
+        }
+
+        return route('admin.releases.edit', $this, false);
     }
 
     public function getEditChangelogUrlAttribute() {
-        return $this->package ? route('admin.packages.changelog.edit', $this, false) : route('admin.releases.changelog.edit', $this, false);
+        if ($this->package) {
+            return route('admin.packages.changelog.edit', $this, false);
+        }
+
+        return route('admin.releases.changelog.edit', $this, false);
     }
 
     public function getUrlAttribute() {
+        if ($this->package) {
+            return route('front.packages.show', $this, false);
+        }
+
         return route('front.releases.show', $this, false);
     }
 
