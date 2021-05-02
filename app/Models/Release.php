@@ -16,7 +16,7 @@ class Release extends Model
     public $searchableType = 'Releases';
 
     protected $table = 'releases';
-    protected $fillable = ['name', 'version', 'canonical_version', 'codename', 'description', 'changelog', 'platform_id', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts', 'start_build', 'start_delta', 'end_build', 'end_delta'];
+    protected $fillable = ['name', 'version', 'canonical_version', 'package', 'codename', 'description', 'changelog', 'platform_id', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts', 'start_build', 'start_delta', 'end_build', 'end_delta'];
     protected $appends = ['url', 'edit_url', 'edit_changelog_url'];
     protected $dates = ['start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts'];
 
@@ -41,11 +41,11 @@ class Release extends Model
     }
 
     public function getEditUrlAttribute() {
-        return route('admin.releases.edit', $this, false);
+        return $this->package ? route('admin.packages.edit', $this, false) : route('admin.releases.edit', $this, false);
     }
 
     public function getEditChangelogUrlAttribute() {
-        return route('admin.releases.changelog.edit', $this, false);
+        return $this->package ? route('admin.packages.changelog.edit', $this, false) : route('admin.releases.changelog.edit', $this, false);
     }
 
     public function getUrlAttribute() {

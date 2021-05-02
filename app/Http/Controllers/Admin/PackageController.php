@@ -10,9 +10,9 @@ use Inertia\Inertia;
 use Auth;
 use Redirect;
 use Illuminate\Support\Collection;
-use App\Http\Requests\ReleaseRequest;
+use App\Http\Requests\PackageRequest;
 
-class ReleaseController extends Controller
+class PackageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,19 +23,17 @@ class ReleaseController extends Controller
     {
         $this->authorize('releases.show');
 
-        $releases = Release::where('package', '=', 0)->orderBy('platform_id')->orderBy('canonical_version')->paginate(100);
+        $packages = Release::where('package', '=', 1)->orderBy('platform_id')->paginate(100);
 
-        return Inertia::render('Admin/Releases/Show', [
+        return Inertia::render('Admin/Packages/Show', [
             'can' => [
-                'create_releases' => Auth::user()->can('releases.create'),
-                'edit_releases' => Auth::user()->can('releases.edit')
+                'create_packages' => Auth::user()->can('releases.create'),
+                'edit_packages' => Auth::user()->can('releases.edit')
             ],
-            'releases' => $releases->map(function ($release) {
+            'packages' => $packages->map(function ($release) {
                 return [
                     'name' => $release->name,
-                    'version' => $release->version,
                     'edit_url' => $release->edit_url,
-                    'edit_changelog_url' => $release->edit_changelog_url,
                     'platform' => [
                         'icon' => $release->platform->icon,
                         'name' => $release->platform->name,
@@ -52,7 +50,7 @@ class ReleaseController extends Controller
                     })
                 ];
             }),
-            'createUrl' => route('admin.releases.create', [], false),
+            'createUrl' => route('admin.packages.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -66,9 +64,9 @@ class ReleaseController extends Controller
     {
         $this->authorize('releases.create');
 
-        return Inertia::render('Admin/Releases/Create', [
+        return Inertia::render('Admin/Packages/Create', [
             'urls' => [
-                'store_release' => route('admin.releases.store', [], false),
+                'store_package' => route('admin.packages.store', [], false),
             ],
             'platforms' => Platform::orderBy('position')->get()
         ]);
@@ -77,16 +75,22 @@ class ReleaseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\ReleaseRequest  $request
+     * @param  \Illuminate\Http\PackageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ReleaseRequest $request)
+    public function store(PackageRequest $request)
     {
         $this->authorize('releases.create');
 
-        $release = Release::create($request->validated());
+        $package = Release::create([
+            'name' => request('name'),
+            'description' => request('description'),
+            'changelog' => request('changelog'),
+            'platform_id' => request('platform_id'),
+            'package' => 1
+        ]);
 
-        return Redirect::route('admin.releases.edit', $release)->with('status', 'Succesfully created this release.');
+        return Redirect::route('admin.packages.edit', $package)->with('status', 'Succesfully created this package.');
     }
 
     /**
@@ -95,7 +99,7 @@ class ReleaseController extends Controller
      * @param  \App\Models\Release  $release
      * @return \Illuminate\Http\Response
      */
-    public function show(Release $release)
+    public function show(Release $package)
     {
         //
     }
@@ -106,24 +110,24 @@ class ReleaseController extends Controller
      * @param  \App\Models\Release  $release
      * @return \Illuminate\Http\Response
      */
-    public function edit(Release $release)
+    public function edit(Release $package)
     {
         $this->authorize('releases.show');
 
-        return Inertia::render('Admin/Releases/Edit', [
+        return Inertia::render('Admin/Packages/Edit', [
             'can' => [
-                'edit_releases' => Auth::user()->can('releases.edit'),
-                'delete_releases' => Auth::user()->can('releases.delete')
+                'edit_packages' => Auth::user()->can('releases.edit'),
+                'delete_packages' => Auth::user()->can('releases.delete')
             ],
             'urls' => [
-                'update_release' => route('admin.releases.update', $release, false),
-                'destroy_release' => route('admin.releases.destroy', $release, false),
-                'create_release_channel' => route('admin.releasechannels.create', ['release' => $release->id, 'platform' => $release->platform->id], false)
+                'update_package' => route('admin.packages.update', $package, false),
+                'destroy_package' => route('admin.packages.destroy', $package, false),
+                'create_package_channel' => route('admin.releasechannels.create', ['release' => $package->id, 'platform' => $package->platform->id, 'package' => true], false)
             ],
-            'release' => $release,
+            'pack' => $package,
             'platforms' => Platform::orderBy('position')->get(),
-            'channels' => $release->platform->channels->sortBy('order')->values()->all(),
-            'release_channels' => $release->releaseChannels->map(function ($channel) {
+            'channels' => $package->platform->channels->sortBy('order')->values()->all(),
+            'release_channels' => $package->releaseChannels->map(function ($channel) {
                 return [
                     'id' => $channel->id,
                     'name' => $channel->name,
@@ -142,17 +146,17 @@ class ReleaseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\ReleaseRequest  $request
-     * @param  \App\Models\Release  $release
+     * @param  \Illuminate\Http\PackageRequest  $request
+     * @param  \App\Models\Release  $package
      * @return \Illuminate\Http\Response
      */
-    public function update(ReleaseRequest $request, Release $release)
+    public function update(PackageRequest $request, Release $package)
     {
         $this->authorize('releases.edit');
 
-        $release->update($request->validated());
+        $package->update($request->validated());
 
-        return Redirect::route('admin.releases.edit', $release)->with('status', 'Succesfully updated this release.');
+        return Redirect::route('admin.packages.edit', $package)->with('status', 'Succesfully updated this package.');
     }
 
     /**
@@ -161,19 +165,19 @@ class ReleaseController extends Controller
      * @param  \App\Models\Release  $release
      * @return \Illuminate\Http\Response
      */
-    public function editChangelog(Release $release)
+    public function editChangelog(Release $package)
     {
         $this->authorize('releases.show');
 
-        return Inertia::render('Admin/Releases/Changelog', [
+        return Inertia::render('Admin/Packages/Changelog', [
             'can' => [
-                'edit_releases' => Auth::user()->can('releases.edit'),
-                'delete_releases' => Auth::user()->can('releases.delete')
+                'edit_packages' => Auth::user()->can('releases.edit'),
+                'delete_packages' => Auth::user()->can('releases.delete')
             ],
             'urls' => [
-                'update_release' => route('admin.releases.changelog.update', $release, false)
+                'update_package' => route('admin.packages.changelog.update', $package, false)
             ],
-            'release' => $release,
+            'package' => $package,
             'status' => session('status')
         ]);
     }
@@ -181,17 +185,17 @@ class ReleaseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\ReleaseRequest  $request
+     * @param  \Illuminate\Http\PackageRequest  $request
      * @param  \App\Models\Release  $release
      * @return \Illuminate\Http\Response
      */
-    public function updateChangelog(ReleaseRequest $request, Release $release)
+    public function updateChangelog(PackageRequest $request, Release $package)
     {
         $this->authorize('releases.edit');
 
-        $release->update($request->validated());
+        $package->update($request->validated());
 
-        return Redirect::route('admin.releases.changelog.edit', $release)->with('status', 'Succesfully updated this release.');
+        return Redirect::route('admin.packages.changelog.edit', $package)->with('status', 'Succesfully updated this package.');
     }
 
     /**
@@ -200,12 +204,12 @@ class ReleaseController extends Controller
      * @param  \App\Models\Release  $release
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Release $release)
+    public function destroy(Release $package)
     {
         $this->authorize('releases.delete');
 
-        $release->delete();
+        $package->delete();
 
-        return Redirect::route('admin.releases')->with('status', 'Succesfully deleted release.');
+        return Redirect::route('admin.packages')->with('status', 'Succesfully deleted package.');
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\FlightController as AdminFlightController;
 use App\Http\Controllers\Admin\PermissionController as AdminPermissionController;
 use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
 use App\Http\Controllers\Admin\ReleaseChannelController as AdminReleaseChannelController;
+use App\Http\Controllers\Admin\PackageController as AdminPackageController;
 use App\Http\Controllers\Admin\ReleaseController as AdminReleaseController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\TweetStreamController as AdminTweetStreamController;
@@ -109,6 +110,17 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::patch('/{release}/edit', [AdminReleaseController::class, 'update'])->name('.update');
         Route::get('/{release}/changelog/edit', [AdminReleaseController::class, 'editChangelog'])->name('.changelog.edit');
         Route::patch('/{release}/changelog/edit', [AdminReleaseController::class, 'updateChangelog'])->name('.changelog.update');
+    });
+    
+    Route::prefix('packages')->name('.packages')->group(function() {
+        Route::get('', [AdminPackageController::class, 'index'])->name('');
+        Route::post('', [AdminPackageController::class, 'store'])->name('.store');
+        Route::delete('{package}', [AdminPackageController::class, 'destroy'])->name('.destroy');
+        Route::get('/create', [AdminPackageController::class, 'create'])->name('.create');
+        Route::get('/{package}/edit', [AdminPackageController::class, 'edit'])->name('.edit');
+        Route::patch('/{package}/edit', [AdminPackageController::class, 'update'])->name('.update');
+        Route::get('/{package}/changelog/edit', [AdminPackageController::class, 'editChangelog'])->name('.changelog.edit');
+        Route::patch('/{package}/changelog/edit', [AdminPackageController::class, 'updateChangelog'])->name('.changelog.update');
     });
     
     Route::prefix('platforms')->name('.platforms')->group(function() {

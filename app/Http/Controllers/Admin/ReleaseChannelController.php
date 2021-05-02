@@ -72,7 +72,11 @@ class ReleaseChannelController extends Controller
             'supported' => request('supported') ? 1 : 0
         ]);
 
-        return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully created this release channel.');
+        if ($releaseChannel->release->package) {
+            return Redirect::route('admin.packages.edit', $releaseChannel->release)->with('status', 'Succesfully created this package channel.');
+        } else {
+            return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully created this release channel.');
+        }
     }
 
     /**
@@ -129,7 +133,11 @@ class ReleaseChannelController extends Controller
             'supported' => request('supported') ? 1 : 0
         ]);
 
-        return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully updated this release channel.');
+        if ($releaseChannel->release->package) {
+            return Redirect::route('admin.packages.edit', $releaseChannel->release)->with('status', 'Succesfully updated this package channel.');
+        } else {
+            return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully updated this release channel.');
+        }
     }
 
     /**

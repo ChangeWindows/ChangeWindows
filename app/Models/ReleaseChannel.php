@@ -51,6 +51,10 @@ class ReleaseChannel extends Model
     }
 
     public function getEditUrlAttribute() {
-        return route('admin.releasechannels.edit', $this, false);
+        if ($this->release->package) {
+            return route('admin.releasechannels.edit', ['release_channel' => $this, 'package' => true], false);
+        } else {
+            return route('admin.releasechannels.edit', $this, false);
+        }
     }
 }
