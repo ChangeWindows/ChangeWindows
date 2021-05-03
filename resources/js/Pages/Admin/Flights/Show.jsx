@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
 import { format, parseISO } from 'date-fns';
 
-export default function Show({ can, auth, timeline, pagination, createUrl, status = null }) {
+export default function Show({ can, auth, timeline, pagination, createUrl, createPackageUrl, status = null }) {
     return (
         <Admin can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
@@ -17,7 +17,10 @@ export default function Show({ can, auth, timeline, pagination, createUrl, statu
                     <span className="navbar-brand">Flights</span>
                     <div className="flex-grow-1" />
                     <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
-                        <FontAwesomeIcon icon={faPlus} fixedWidth/> New
+                        <FontAwesomeIcon icon={faPlus} fixedWidth/> Flight
+                    </InertiaLink>
+                    <InertiaLink href={createPackageUrl} className="btn btn-primary btn-sm ms-1">
+                        <FontAwesomeIcon icon={faPlus} fixedWidth/> Package
                     </InertiaLink>
                 </div>
             </nav>

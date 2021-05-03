@@ -167,8 +167,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
     Route::prefix('flights')->name('.flights')->group(function() {
         Route::get('', [AdminFlightController::class, 'index'])->name('');
         Route::post('', [AdminFlightController::class, 'store'])->name('.store');
+        Route::post('/package', [AdminFlightController::class, 'storePackage'])->name('.storePackage');
         Route::delete('{flight}', [AdminFlightController::class, 'destroy'])->name('.destroy');
         Route::get('/create', [AdminFlightController::class, 'create'])->name('.create');
+        Route::get('/createPackage', [AdminFlightController::class, 'createPackage'])->name('.createPackage');
         Route::get('/{flight}/edit', [AdminFlightController::class, 'edit'])->name('.edit');
         Route::patch('/{flight}/edit', [AdminFlightController::class, 'update'])->name('.update');
     });

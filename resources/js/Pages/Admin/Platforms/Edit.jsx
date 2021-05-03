@@ -218,6 +218,13 @@ export default function Edit({ can, auth, urls, platform, channels, tweet_stream
                                             </div>
                                             <p className="form-text">Include <code>%RELEASE%</code>, <code>%VERSION%</code>, <code>%CODENAME%</code>, <code>%FLIGHT%</code>, <code>%CHANNELS%</code>, and <code>%URL%</code>.</p>
                                         </div>
+                                        <div className="col-12">
+                                            <div className="form-floating">
+                                                <textarea className="form-control font-monospace" id="tweet_template_package" style={{ minHeight: 158 }} defaultValue={curPlatform.tweet_template_package} onChange={formHandler}></textarea>
+                                                <label htmlFor="tweet_template_package">Tweet Template for Packages</label>
+                                            </div>
+                                            <p className="form-text">Include <code>%RELEASE%</code>, <code>%FLIGHT%</code>, <code>%CHANNELS%</code>, and <code>%URL%</code>.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

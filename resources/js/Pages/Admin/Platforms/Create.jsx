@@ -18,6 +18,7 @@ export default function Create({ can, auth, urls, tweet_streams }) {
         active: 1,
         legacy: 0,
         tweet_template: '',
+        tweet_template_package: '',
         tweet_stream_id: null,
         retweet_stream_id: null
     });
@@ -219,6 +220,13 @@ export default function Create({ can, auth, urls, tweet_streams }) {
                                                 <label htmlFor="tweet_template">Tweet Template</label>
                                             </div>
                                             <p className="form-text">Include <code>%RELEASE%</code>, <code>%VERSION%</code>, <code>%CODENAME%</code>, <code>%FLIGHT%</code>, <code>%CHANNELS%</code>, and <code>%URL%</code>.</p>
+                                        </div>
+                                        <div className="col-12">
+                                            <div className="form-floating">
+                                                <textarea className="form-control font-monospace" id="tweet_template_package" style={{ minHeight: 158 }} defaultValue={curPlatform.tweet_template_package} onChange={formHandler}></textarea>
+                                                <label htmlFor="tweet_template_package">Tweet Template for Packages</label>
+                                            </div>
+                                            <p className="form-text">Include <code>%RELEASE%</code>, <code>%FLIGHT%</code>, <code>%CHANNELS%</code>, and <code>%URL%</code>.</p>
                                         </div>
                                     </div>
                                 </div>
