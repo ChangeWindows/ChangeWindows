@@ -51,6 +51,10 @@ export default function NavigationBar({ auth, items }) {
 					return (
 						<NavigationItem url={item.url} icon={item.icon} primary={item.primary} title={item.title} key={key} />
 					);
+				} else if (item.type === 'external') {
+					return (
+						<NavigationItem url={item.url} icon={item.icon} primary={item.primary} title={item.title} key={key} external />
+					);
 				} else if (item.type === 'divider') {
 					return (<div className="my-2 border-bottom" key={key} />);
 				}

@@ -4,7 +4,8 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import NavigationBar from './components/NavigationBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSunHaze, faBarsStaggered, faLaptopMobile, faFlag, faCircleInfo, faGauge, faCodeBranch, faCubes } from '@fortawesome/pro-regular-svg-icons';
+import { faSunHaze, faBarsStaggered, faLaptopMobile, faFlag, faCircleInfo, faGauge, faCodeBranch, faCubes, faBullhorn } from '@fortawesome/pro-regular-svg-icons';
+import { faGithub, faMedium, faPatreon, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function Navigation({ can, auth }) {
    
@@ -27,6 +28,11 @@ export default function Navigation({ can, auth }) {
                     { type: 'link', url: '/channels', icon: faCodeBranch, title: 'Channels' },
                     { type: 'link', url: '/releases', icon: faFlag, title: 'Releases' },
                     { type: 'link', url: '/packages', icon: faCubes, title: 'Packages' },
+                    { type: 'divider' },
+                    { type: 'external', url: 'https://medium.com/changewindows', icon: faBullhorn, title: 'Blog' },
+                    { type: 'external', url: 'https://twitter.com/changewindows', icon: faTwitter, title: 'Twitter' },
+                    { type: 'external', url: 'https://patreon.com/changewindows', icon: faPatreon, title: 'Sponsor us' },
+                    { type: 'external', url: 'https://github.com/changewindows', icon: faGithub, title: 'GitHub' },
                     { type: 'divider', permission: can.access_dashboard },
                     { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage', permission: can.access_dashboard },
                     { type: 'divider' },
