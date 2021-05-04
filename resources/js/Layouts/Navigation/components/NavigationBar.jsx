@@ -36,6 +36,8 @@ export default function NavigationBar({ auth, items }) {
 			return [main, overflow];
 		}
 
+		setShowAuthOnMainBar(true);
+
 		return [navigationItems, []]
 	}, [items, matchesSmUp, width]);
 
