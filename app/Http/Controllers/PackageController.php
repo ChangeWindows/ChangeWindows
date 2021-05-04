@@ -101,7 +101,7 @@ class PackageController extends Controller
                     'color' => $release_channel->channel->color,
                     'disabled' => $release_channel->supported ? false : true,
                     'flight' => $release_channel->latest ? [
-                        'version' => $release_channel->latest->flight,
+                        'version' => $release_channel->latest->version,
                         'date' => $release_channel->latest->timeline->date
                     ] : []
                 ];
