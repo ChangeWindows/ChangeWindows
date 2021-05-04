@@ -17,6 +17,7 @@
         "inertiajs/inertia-laravel": "^0.4.0",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "patreon/patreon": "^0.3",
         "spatie/laravel-permission": "^4.0",
         "staudenmeir/eloquent-has-many-deep": "^1.13"
     },

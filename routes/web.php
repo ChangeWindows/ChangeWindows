@@ -21,7 +21,6 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
 use App\Http\Controllers\Admin\LaunchController as AdminLaunchController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,7 +69,28 @@ Route::prefix('')->name('front')->group(function() {
     
     Route::prefix('about')->name('.about')->group(function() {
         Route::get('', function () {
-            return Inertia::render('About/Show');
+            $patreon_api = new \Patreon\API(env('PATREON_API_KEY'));
+            $campaign_response = $patreon_api->fetch_campaign();
+            $campaign_id = $campaign_response->get('data.0.id');
+
+            $pledges_response = $patreon_api->fetch_page_of_pledges($campaign_id, 50);
+            $patrons = collect();
+            foreach ($pledges_response->get('data')->getKeys() as $pledge_data_key) {
+                $pledge_data = $pledges_response->get('data')->get($pledge_data_key);
+
+                if (!$pledge_data->attribute('declined_since')) {
+                    $patron = $pledge_data->relationship('patron')->resolve($pledges_response);
+    
+                    $patrons->push([
+                        'name' => $patron->attribute('full_name'),
+                        'avatar' => $patron->attribute('image_url')
+                    ]);
+                }
+            }
+
+            return Inertia::render('About/Show', [
+                'patrons' => $patrons
+            ]);
         })->name('');
     });
     
