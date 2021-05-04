@@ -40,6 +40,10 @@ class Flight extends Model
     }
 
     public function getUrlAttribute() {
+        if ($this->release->package) {
+            return route('front.packages.show', $this->release, false);
+        }
+
         return route('front.releases.show', $this->release, false);
     }
 
