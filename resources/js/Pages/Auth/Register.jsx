@@ -7,7 +7,7 @@ import Auth from '../../Layouts/Auth';
 import { faArrowRightToBracket, faUserPlus } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function Register({ can }) {
+export default function Register({ can, status }) {
     const [form, setForm] = useState({ name: '', email: '', password: '', password_confirmation: '' });
 
     function handleSubmit(event) {
@@ -18,6 +18,17 @@ export default function Register({ can }) {
     return (
         <Auth can={can}>
             <form onSubmit={handleSubmit} className="row g-3">
+                {Object.keys(status).length > 0 &&
+                    <div className="col-12">
+                        <div className="alert alert-danger mb-0">
+                            {Object.keys(status).map((errorGroup, _key) => (
+                                status[errorGroup].map((error, key) => (
+                                    <span key={key}>{error}</span>
+                                ))
+                            ))}
+                        </div>
+                    </div>
+                }
                 <div className="col-12">
                     <div className="form-floating">
                         <input type="text" className="form-control" id="name" value={form.name} onChange={(event) => setForm((curForm) => ({ ...curForm, name: event.target.value }))} autoFocus />

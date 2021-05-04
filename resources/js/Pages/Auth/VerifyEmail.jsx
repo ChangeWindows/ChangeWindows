@@ -6,7 +6,7 @@ import Auth from '../../Layouts/Auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket, faPaperPlane } from '@fortawesome/pro-regular-svg-icons';
 
-export default function VerifyEmail({ can, session }) {
+export default function VerifyEmail({ can, session, status }) {
     function handleSubmit(event) {
       event.preventDefault();
       Inertia.post('/email/verification-notification', form);
@@ -23,6 +23,17 @@ export default function VerifyEmail({ can, session }) {
                 <div className="col-12">
                     <p className="text-muted"><small>Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.</small></p>
                 </div>
+                {Object.keys(status).length > 0 &&
+                    <div className="col-12">
+                        <div className="alert alert-danger mb-0">
+                            {Object.keys(status).map((errorGroup, _key) => (
+                                status[errorGroup].map((error, key) => (
+                                    <span key={key}>{error}</span>
+                                ))
+                            ))}
+                        </div>
+                    </div>
+                }
                 {session &&
                     <div className="col-12">
                         <p className="text-muted"><small>A new verification link has been sent to the email address you provided during registration.</small></p>

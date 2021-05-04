@@ -6,7 +6,7 @@ import Auth from '../../Layouts/Auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/pro-regular-svg-icons';
 
-export default function ResetPassword({ can, token }) {
+export default function ResetPassword({ can, token, status }) {
     const [form, setForm] = useState({ email: '', password: '', password_confirmation: '' });
 
     function handleSubmit(event) {
@@ -18,6 +18,17 @@ export default function ResetPassword({ can, token }) {
         <Auth can={can}>
             <form onSubmit={handleSubmit} className="row g-3">
                 <input type="hidden" name="token" value={token} />
+                {Object.keys(status).length > 0 &&
+                    <div className="col-12">
+                        <div className="alert alert-danger mb-0">
+                            {Object.keys(status).map((errorGroup, _key) => (
+                                status[errorGroup].map((error, key) => (
+                                    <span key={key}>{error}</span>
+                                ))
+                            ))}
+                        </div>
+                    </div>
+                }
                 <div className="col-12">
                     <div className="form-floating">
                         <input type="email" className="form-control" id="email" value={form.email} onChange={(event) => setForm((curForm) => ({ ...curForm, email: event.target.value }))} autoFocus />

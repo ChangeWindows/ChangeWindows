@@ -16,5 +16,6 @@ Whenever a new channel within a release opens, ChangeWindows will now show this 
 - #47 Adds our blog and social media to the navigation.
 
 ## Fixed issues
+- #45 Fixes an issue where the auth forms wouldn't provide feedback.
 - #48 Fixes an issue where profile items would disappear when resizing beyond the point where the bottom tabbar would appear.
 - 3f2b78a Fixes a spacing issue with the welcome buttons.

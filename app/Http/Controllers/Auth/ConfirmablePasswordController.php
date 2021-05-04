@@ -19,7 +19,9 @@ class ConfirmablePasswordController extends Controller
      */
     public function show(Request $request)
     {
-        return Inertia::render('Auth/ConfirmPassword');
+        return Inertia::render('Auth/ConfirmPassword', [
+            'status' => session('errors') ? session('errors')->default->messages() : false
+        ]);
     }
 
     /**

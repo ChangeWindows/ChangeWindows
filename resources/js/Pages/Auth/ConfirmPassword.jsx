@@ -6,7 +6,7 @@ import Auth from '../../Layouts/Auth';
 import { faCheck } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function ConfirmPassword({ can }) {
+export default function ConfirmPassword({ can, status }) {
     const [form, setForm] = useState({ password: '' });
 
     function handleSubmit(event) {
@@ -20,6 +20,17 @@ export default function ConfirmPassword({ can }) {
                 <div className="col-12">
                     <p className="text-muted"><small>This is a secure area of the application. Please confirm your password before continuing.</small></p>
                 </div>
+                {Object.keys(status).length > 0 &&
+                    <div className="col-12">
+                        <div className="alert alert-danger mb-0">
+                            {Object.keys(status).map((errorGroup, _key) => (
+                                status[errorGroup].map((error, key) => (
+                                    <span key={key}>{error}</span>
+                                ))
+                            ))}
+                        </div>
+                    </div>
+                }
                 <div className="col-12">
                     <div className="form-floating">
                         <input type="password" className="form-control" id="password" value={form.password} onChange={(event) => setForm({ password: event.target.value })} autoComplete="current-password" />

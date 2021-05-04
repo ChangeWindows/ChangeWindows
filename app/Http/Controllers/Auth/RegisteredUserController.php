@@ -20,7 +20,9 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Auth/Register');
+        return Inertia::render('Auth/Register', [
+            'status' => session('errors') ? session('errors')->default->messages() : false
+        ]);
     }
 
     /**

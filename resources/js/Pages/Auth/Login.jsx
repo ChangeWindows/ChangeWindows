@@ -7,8 +7,9 @@ import Auth from '../../Layouts/Auth';
 import { faArrowRightToBracket, faShieldKeyhole } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function Login({ can }) {
+export default function Login({ can, status }) {
     const [form, setForm] = useState({ email: '', password: '', remember_me: true });
+    console.log(status);
 
     function handleSubmit(event) {
       event.preventDefault();
@@ -18,6 +19,17 @@ export default function Login({ can }) {
     return (
         <Auth can={can}>
             <form onSubmit={handleSubmit} className="row g-3">
+                {Object.keys(status).length > 0 &&
+                    <div className="col-12">
+                        <div className="alert alert-danger mb-0">
+                            {Object.keys(status).map((errorGroup, _key) => (
+                                status[errorGroup].map((error, key) => (
+                                    <span key={key}>{error}</span>
+                                ))
+                            ))}
+                        </div>
+                    </div>
+                }
                 <div className="col-12">
                     <div className="form-floating">
                         <input type="email" className="form-control" id="email" value={form.email} onChange={(event) => setForm((curLogin) => ({ ...curLogin, email: event.target.value }))} autoFocus />

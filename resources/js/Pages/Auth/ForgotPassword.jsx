@@ -7,7 +7,7 @@ import Auth from '../../Layouts/Auth';
 import { faPaperPlane } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function ForgotPassword({ can }) {
+export default function ForgotPassword({ can, status }) {
     const [form, setForm] = useState({ email: '' });
 
     function handleSubmit(event) {
@@ -21,6 +21,17 @@ export default function ForgotPassword({ can }) {
                 <div className="col-12">
                     <p className="text-muted"><small>Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.</small></p>
                 </div>
+                {Object.keys(status).length > 0 &&
+                    <div className="col-12">
+                        <div className="alert alert-danger mb-0">
+                            {Object.keys(status).map((errorGroup, _key) => (
+                                status[errorGroup].map((error, key) => (
+                                    <span key={key}>{error}</span>
+                                ))
+                            ))}
+                        </div>
+                    </div>
+                }
                 <div className="col-12">
                     <div className="form-floating">
                         <input type="email" className="form-control" id="email" value={form.email} onChange={(event) => setForm({ email: event.target.value })} autoFocus />
