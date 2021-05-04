@@ -51,6 +51,7 @@ export default function Index({ can, auth, timeline, pagination, platforms, chan
                                                     build={flight.flight}
                                                     channels={flight.release_channel}
                                                     version={flight.version}
+                                                    pack={flight.package}
                                                     url={flight.url}
                                                 />
                                             );

@@ -34,6 +34,7 @@ export default function Show({ can, auth, timeline, pagination, platforms, chann
                                                     build={flight.flight}
                                                     channels={flight.release_channel}
                                                     version={flight.version}
+                                                    pack={flight.package}
                                                     url={flight.url}
                                                 />
                                             );

@@ -127,10 +127,11 @@ class ReleaseController extends Controller
                                 'type' => 'flight',
                                 'event_priority' => 3,
                                 'id' => $_cur_flight->item->id,
-                                'flight' => $_cur_flight->item->flight,
+                                'flight' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->version : $_cur_flight->item->flight,
                                 'date' => $_cur_flight->item->timeline->date,
                                 'version' => $_cur_flight->item->releaseChannel->release->version,
                                 'cversion' => $_cur_flight->item->releaseChannel->release->canonical_version,
+                                'package' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->releaseChannel->release->name : false,
                                 'release_channel' => $flights->map(function ($channels) {
                                     return [
                                         'name' => $channels->item->releaseChannel->short_name,

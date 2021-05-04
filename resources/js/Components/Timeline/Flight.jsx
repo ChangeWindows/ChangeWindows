@@ -5,7 +5,7 @@ import PlatformIcon from '../Platforms/PlatformIcon';
 
 import clsx from 'clsx';
 
-export default function Flight({ platform, build, channels, version = null, component = null, url = null }) {
+export default function Flight({ platform, build, channels, version = null, pack = null, url = null }) {
     const Component = useMemo(() => (url ? InertiaLink : 'div'), ['url']);
     const mainProps = useMemo(() => ({ href: url }), ['url']);
 
@@ -20,7 +20,7 @@ export default function Flight({ platform, build, channels, version = null, comp
                     <span key={key} className="badge me-1" style={{ backgroundColor: channel.color }}>{channel.name}</span>
                 ))}
             </div>
-            <div className="flight-version text-muted">{version ?? component}</div>
+            <div className="flight-version text-muted">{version ?? pack}</div>
         </Component>
     );
 };
