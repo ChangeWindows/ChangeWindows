@@ -3,9 +3,8 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 
 import NavigationBar from './components/NavigationBar';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSunHaze, faBarsStaggered, faLaptopMobile, faFlag, faCircleInfo, faGauge, faCodeBranch, faCubes, faBullhorn } from '@fortawesome/pro-regular-svg-icons';
-import { faGithub, faMedium, faPatreon, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faBarsStaggered, faLaptopMobile, faFlag, faCircleInfo, faGauge, faCodeBranch, faCubes, faBullhorn } from '@fortawesome/pro-regular-svg-icons';
+import { faGithub, faPatreon, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function Navigation({ can, auth }) {
    
@@ -14,7 +13,9 @@ export default function Navigation({ can, auth }) {
             <nav className="navbar navbar-expand-xs navbar-light sticky-top">
                 <div className="container-fluid">
                     <InertiaLink className="navbar-brand" href="/">
-                        <div className="app-icon"><FontAwesomeIcon icon={faSunHaze} fixedWidth /></div>
+                        <div className="app-icon">
+                            <img src="/images/logo-light.svg" width="16px" height="16px" />
+                        </div>
                         <span className="brand-label fw-bold">ChangeWindows</span>
                     </InertiaLink>
                 </div>

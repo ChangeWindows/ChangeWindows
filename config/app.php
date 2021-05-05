@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Horizon'),
+    'name' => env('APP_NAME', 'ChangeWindows'),
 
     /*
     |--------------------------------------------------------------------------

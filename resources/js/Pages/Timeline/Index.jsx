@@ -27,11 +27,14 @@ export default function Index({ can, auth, timeline, pagination, platforms, chan
                     <div className="col-12">
                         <div className="card shadow border-0 overflow-hidden d-flex flex-column flex-md-row">
                             <div className="bg-primary text-white p-3">
-                                <h4 className="m-0"><FontAwesomeIcon icon={faSunHaze} fixedWidth /><span className="ms-2 d-inline d-md-none">ChangeWindows <span className="d-none d-sm-inline">Preview</span></span></h4>
+                                <h4 className="m-0 d-flex align-items-center">
+                                    <img src="/images/logo-light.svg" width="24px" height="24px" style={{ marginTop: 1 }} />
+                                    <span className="ms-2 d-inline d-md-none">ChangeWindows <span className="d-none d-sm-inline">Preview</span></span>
+                                </h4>
                             </div>
                             <div className="card-body">
                                 <h1 className="h4 d-none d-md-block">Welcome to ChangeWindows Preview</h1>
-                                <p>Hey... you're not really supposed to be here. This is the ChangeWindows test site. The data on here is probably fake. But let us help you find the real ChangeWindows.</p>
+                                <p>We're still working on migrating all of our data. Hang in there! If you prefer a complete history, go to our main website.</p>
                                 <a href="https://changewindows.org" className="btn btn-primary btn-sm me-1"><FontAwesomeIcon icon={faArrowLeft} fixedWidth /> Back</a>
                                 <a href="https://github.com/changewindows" className="btn btn-primary btn-sm me-1"><FontAwesomeIcon icon={faGithub} fixedWidth /> GitHub</a>
                                 <a href="https://patreon.com/changewindows" className="btn btn-primary btn-sm"><FontAwesomeIcon icon={faPatreon} fixedWidth /> Sponsor us</a>

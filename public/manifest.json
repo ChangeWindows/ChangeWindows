@@ -3,13 +3,13 @@
     "name": "ChangeWindows",
     "icons": [
       {
-        "src": "/images/logo-192.png",
-        "type": "image/png",
+        "src": "/images/logo.svg",
+        "type": "image/svg+xml",
         "sizes": "192x192"
       },
       {
-        "src": "/images/logo-512.png",
-        "type": "image/png",
+        "src": "/images/logo.svg",
+        "type": "image/svg+xml",
         "sizes": "512x512"
       }
     ],
