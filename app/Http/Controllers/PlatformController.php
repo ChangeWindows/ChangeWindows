@@ -178,7 +178,7 @@ class PlatformController extends Controller
                             $_cur_promotion = $flights->first();
                             return [
                                 'type' => 'promotion',
-                                'sorted' => 'b',
+                                'event_priority' => 2,
                                 'id' => $_cur_promotion->item->id,
                                 'date' => $_cur_promotion->item->timeline->date,
                                 'version' => $_cur_promotion->item->releaseChannel->release->version,
@@ -201,7 +201,7 @@ class PlatformController extends Controller
                             $_cur_launch = $flights->first();
                             return [
                                 'type' => 'launch',
-                                'sorted' => 'c',
+                                'event_priority' => 1,
                                 'id' => $_cur_launch->item->id,
                                 'date' => $_cur_launch->item->timeline->date,
                                 'version' => $_cur_launch->item->release->version,
@@ -217,10 +217,10 @@ class PlatformController extends Controller
                         }
                     })->sortByDesc(function ($item, $key) {
                         if ($item['type'] === 'flight') {
-                            return $item['sorted'].'.'.$item['cversion'].'.'.$item['flight'].'.'.$item['platform']['order'];
+                            return $item['event_priority'].'.'.$item['cversion'].'.'.$item['flight'].'.'.$item['platform']['order'];
                         }
                         
-                        return $item['sorted'].'.'.$item['cversion'].'.'.$item['platform']['order'];
+                        return $item['event_priority'].'.'.$item['cversion'].'.'.$item['platform']['order'];
                     })->values()->all()
                 ];
             }),
