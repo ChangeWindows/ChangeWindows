@@ -11,8 +11,6 @@ import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg
 import { format, isDate, parseISO } from 'date-fns';
 
 export default function Create({ can, auth, urls, releases }) {
-    console.log(releases);
-
     const [curPromotion, setCurPromotion] = useState({
         channel: null,
         date: format(new Date(), 'yyyy-MM-dd')
@@ -30,8 +28,6 @@ export default function Create({ can, auth, urls, releases }) {
                 _promotion[id] = value;
                 break;
         }
-
-        console.log(_promotion)
 
         setCurPromotion(_promotion);
     }

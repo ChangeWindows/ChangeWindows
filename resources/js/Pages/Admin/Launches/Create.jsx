@@ -20,8 +20,6 @@ export default function Create({ can, auth, urls, releases }) {
         const { id, value, name } = event.target;
         const _launch = Object.assign({}, curLaunch);
 
-        console.log(id, value, name);
-
         switch (name) {
             case 'release':
                 _launch.release = Number(id);
@@ -39,8 +37,6 @@ export default function Create({ can, auth, urls, releases }) {
       Inertia.post(urls.store_launch, curLaunch);
     }
     
-    console.log(curLaunch);
-
     return (
         <Admin can={can} auth={auth}>
             <form onSubmit={handleSubmit}>

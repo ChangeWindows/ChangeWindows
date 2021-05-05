@@ -4,7 +4,6 @@ import App from '../../Layouts/App';
 import ReleaseCard from '../../Components/Cards/ReleaseCard';
 
 export default function Index({ can, auth, packages }) {
-    console.log(packages);
     return (
         <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">

@@ -22,8 +22,7 @@ export default function Show({ can, auth, app, patrons }) {
                             <div className="d-flex align-items-center">
                                 <img src={patron.avatar} alt={patron.name} style={{ width: 40, height: 40 }} className="rounded-circle" />
                                 <div className="ms-2">
-                                    <p className="fw-bold m-0 lh-1">{patron.name}</p>
-                                    <p className="m-0 mt-n1 text-muted" style={{ fontSize: '80%' }}>{patron.amount} {patron.currency}</p>
+                                    <p className="fw-bold m-0">{patron.name}</p>
                                 </div>
                             </div>
                         </div>

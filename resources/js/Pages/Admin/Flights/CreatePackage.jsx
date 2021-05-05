@@ -11,7 +11,6 @@ import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg
 import { format, isDate, parseISO } from 'date-fns';
 
 export default function Create({ can, auth, urls, packages }) {
-    console.log(packages);
     const [curFlight, setCurFlight] = useState({
         major: '',
         minor: '',

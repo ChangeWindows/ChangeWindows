@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Login({ can, status }) {
     const [form, setForm] = useState({ email: '', password: '', remember_me: true });
-    console.log(status);
 
     function handleSubmit(event) {
       event.preventDefault();
