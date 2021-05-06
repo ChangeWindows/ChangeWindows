@@ -8,4 +8,6 @@ It was long overdue. After messing with manually tracking our Patrons - for some
 
 ## Fixes and enhancements
 - #36 Revamps our branding to match up with our new logo, finally in SVG-format.
+- #52 Fixes an issue where channels in the timeline would appear in random orders.
 - 7b6c188 Fixes timeline on platform-pages breaking due to incorrect sorting parameters.
+- 6ae37c7 Updates fonts to use Segoe UI Variable.

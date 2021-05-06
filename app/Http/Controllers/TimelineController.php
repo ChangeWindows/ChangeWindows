@@ -84,10 +84,11 @@ class TimelineController extends Controller
                                 'package' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->releaseChannel->release->name : false,
                                 'release_channel' => $flights->map(function ($channels) {
                                     return [
+                                        'order' => $channels->item->releaseChannel->channel->order,
                                         'name' => $channels->item->releaseChannel->short_name,
                                         'color' => $channels->item->releaseChannel->channel->color
                                     ];
-                                }),
+                                })->sortBy('order')->values()->all(),
                                 'platform' => [
                                     'order' => $_cur_flight->item->platform->order,
                                     'icon' => $_cur_flight->item->platform->icon,
@@ -256,10 +257,11 @@ class TimelineController extends Controller
                                 'package' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->releaseChannel->release->name : false,
                                 'release_channel' => $flights->map(function ($channels) {
                                     return [
+                                        'order' => $channels->item->releaseChannel->channel->order,
                                         'name' => $channels->item->releaseChannel->short_name,
                                         'color' => $channels->item->releaseChannel->channel->color
                                     ];
-                                }),
+                                })->sortBy('order')->values()->all(),
                                 'platform' => [
                                     'order' => $_cur_flight->item->platform->order,
                                     'icon' => $_cur_flight->item->platform->icon,
