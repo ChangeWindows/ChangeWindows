@@ -12,6 +12,10 @@ $body-bg: #fff;
 // Colors
 $min-contrast-ratio: 4;
 
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-base: "Segoe UI Variable Text", $font-family-sans-serif;
+$headings-font-family: "Segoe UI Variable Display", $font-family-sans-serif;
+
 $accent: #0066ff;
 $primary: $accent;
 $blue: #0f6dec;
