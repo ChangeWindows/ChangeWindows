@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/pro-regular-svg-icons';
 
 export default function ResetPassword({ can, token, status }) {
-    const [form, setForm] = useState({ email: '', password: '', password_confirmation: '' });
+    const [form, setForm] = useState({ token, email: '', password: '', password_confirmation: '' });
 
     function handleSubmit(event) {
       event.preventDefault();
