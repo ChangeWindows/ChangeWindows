@@ -10,10 +10,6 @@ import PlatformNavigation from '../../Components/PlatformNavigation';
 import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faSunHaze } from '@fortawesome/pro-regular-svg-icons'
-import { faGithub, faPatreon } from '@fortawesome/free-brands-svg-icons';
-
 import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
 
@@ -24,23 +20,6 @@ export default function Index({ can, auth, timeline, pagination, platforms, chan
         
             <div className="container my-3">
                 <div className="row g-3">
-                    <div className="col-12">
-                        <div className="card shadow border-0 overflow-hidden d-flex flex-column flex-md-row">
-                            <div className="bg-primary text-white p-3">
-                                <h4 className="m-0 d-flex align-items-center">
-                                    <img src="/images/logo-light.svg" width="24px" height="24px" style={{ marginTop: 1 }} />
-                                    <span className="ms-2 d-inline d-md-none">ChangeWindows <span className="d-none d-sm-inline">Preview</span></span>
-                                </h4>
-                            </div>
-                            <div className="card-body">
-                                <h1 className="h4 d-none d-md-block">Welcome to ChangeWindows Preview</h1>
-                                <p>We're still working on migrating all of our data. Hang in there! If you prefer a complete history, go to our main website.</p>
-                                <a href="https://changewindows.org" className="btn btn-primary btn-sm me-1"><FontAwesomeIcon icon={faArrowLeft} fixedWidth /> Back</a>
-                                <a href="https://github.com/changewindows" className="btn btn-primary btn-sm me-1"><FontAwesomeIcon icon={faGithub} fixedWidth /> GitHub</a>
-                                <a href="https://patreon.com/changewindows" className="btn btn-primary btn-sm"><FontAwesomeIcon icon={faPatreon} fixedWidth /> Sponsor us</a>
-                            </div>
-                        </div>
-                    </div>
                     <div className="col-12 col-md-8 col-lg-7">
                         <div className="row g-4">
                             {Object.keys(timeline).map((date, key) => (
