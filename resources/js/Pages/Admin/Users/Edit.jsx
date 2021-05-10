@@ -7,7 +7,7 @@ import Admin from '../../../Layouts/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ can, auth, user, roles, status = null }) {
+export default function Edit({ can, auth, user, roles, urls, status = null }) {
     const [curUser, setCurUser] = useState(user);
 
     useEffect(() => {

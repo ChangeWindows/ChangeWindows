@@ -118,11 +118,13 @@ class UserController extends Controller
             if ($user_roles->contains($role->name)) {
                 $user->assignRole($role->name);
             } else {
-                $user->removeRole($role->name);
+                if ($user->hasRole($role->name)) {
+                    $user->removeRole($role->name);
+                }
             }
         }
 
-        return Redirect::route('admin.users.edit', $user);
+        return Redirect::route('admin.users.edit', $user)->with('status', 'Succesfully updated this user.');
     }
 
     /**
