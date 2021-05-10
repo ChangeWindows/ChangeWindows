@@ -38,7 +38,7 @@ export default function Navigation({ home = false, platforms, page, all = false 
                         }
                         {mainPlatforms.map((platform, key) => (
                             <NavItem url={platform.url} key={key}>
-                                <PlatformIcon platform={platform} /> <span className="d-none d-xxl-inline-block">{platform.name}</span>
+                                <PlatformIcon platform={platform} /> <span className="d-none d-xl-inline-block">{platform.name}</span>
                             </NavItem>
                         ))}
                     </ul>
