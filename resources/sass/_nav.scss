@@ -6,12 +6,17 @@
             padding-right: 0;
             border: none;
             background: transparent;
+            color: $body-color;
 
             &:not(:last-child) {
                 margin-right: 1.5rem;
             }
 
             &.active {
+                svg {
+                    color: $primary;
+                }
+                
                 &::after {
                     position: absolute;
                     background-color: $primary;
