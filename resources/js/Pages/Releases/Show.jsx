@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
@@ -12,7 +13,7 @@ import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faListTimeline, faNotes } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowLeft, faListTimeline, faNotes } from '@fortawesome/pro-regular-svg-icons';
 
 import { differenceInDays } from 'date-fns/esm';
 import { format, isBefore, parseISO } from 'date-fns';
@@ -93,7 +94,10 @@ export default function Show({ can, auth, release, platform, channels, timeline,
     return (
         <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                <div className="container">
+                <div className="container justify-content-start">
+                    <InertiaLink href="/releases" className="btn btn-sm me-2">
+                        <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
+                    </InertiaLink>
                     <span className="navbar-brand">Releases</span>
                 </div>
             </nav>

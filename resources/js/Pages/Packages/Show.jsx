@@ -1,4 +1,5 @@
 import React from 'react';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
@@ -10,7 +11,7 @@ import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faListTimeline, faNotes } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowLeft, faListTimeline, faNotes } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
@@ -19,7 +20,10 @@ export default function Show({ can, auth, release, platform, channels, timeline,
     return (
         <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                <div className="container">
+                <div className="container justify-content-start">
+                    <InertiaLink href="/packages" className="btn btn-sm me-2">
+                        <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
+                    </InertiaLink>
                     <span className="navbar-brand">Packages</span>
                 </div>
             </nav>
