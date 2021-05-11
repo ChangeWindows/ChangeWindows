@@ -71,15 +71,21 @@ export default function NavigationBar({ auth, items }) {
 					</a>
 
 					<ul className="dropdown-menu">
-						{overflowItems.map((item, key) => (
-							<InertiaLink
-								key={key}
-								href={`${item.url}${item.primary ?? ''}`}
-								className={clsx('dropdown-item', { 'active': page.url.includes(item.url)})}
-							>
-								<FontAwesomeIcon icon={item.icon} fixedWidth /> {item.title}
-							</InertiaLink>
-						))}
+						{overflowItems.map((item, key) => {
+    						const Component = item.type === 'external' ? 'a' : InertiaLink;
+							const mainProps = item.type === 'external' ? { target: '_blank' } : {};
+							
+							return(
+								<Component
+									{...mainProps}
+									key={key}
+									href={`${item.url}${item.primary ?? ''}`}
+									className={clsx('dropdown-item', { 'active': page.url.includes(item.url)})}
+								>
+									<FontAwesomeIcon icon={item.icon} fixedWidth /> {item.title}
+								</Component>
+							);
+							})}
 						{!showAuthOnMainBar &&
 							<>
 								{auth ?
