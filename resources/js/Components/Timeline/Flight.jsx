@@ -18,7 +18,7 @@ export default function Flight({ platform, build, channels, version = null, pack
                     <span key={key} className="badge me-1" style={{ backgroundColor: channel.color }}>{channel.name}</span>
                 ))}
             </div>
-            <div className="flight-version text-muted">{version ?? pack}</div>
+            <div className="flight-version text-muted">{platform.tool ? null : version ?? pack}</div>
         </Component>
     );
 };

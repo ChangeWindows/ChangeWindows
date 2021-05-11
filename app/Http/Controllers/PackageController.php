@@ -140,6 +140,7 @@ class PackageController extends Controller
                                     'order' => $_cur_flight->item->platform->order,
                                     'icon' => $_cur_flight->item->platform->icon,
                                     'name' => $_cur_flight->item->platform->name,
+                                    'tool' => $_cur_flight->item->platform->tool,
                                     'color' => $_cur_flight->item->platform->color
                                 ],
                                 'url' => $_cur_flight->item->url
