@@ -15,7 +15,9 @@ import { faListTimeline, faNotes } from '@fortawesome/pro-regular-svg-icons';
 import { format, parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
 
-export default function Show({ can, auth, release, platform, channels, timeline, pagination }) {
+export default function Show(props) {
+    const { can, auth, release, platform, channels, timeline, pagination } = props;
+
     return (
         <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
@@ -84,7 +86,6 @@ export default function Show({ can, auth, release, platform, channels, timeline,
                                                                     channels={flight.release_channel}
                                                                     version={flight.version}
                                                                     pack={flight.package}
-                                                                    url={flight.url}
                                                                 />
                                                             );
                                                         }
@@ -96,7 +97,6 @@ export default function Show({ can, auth, release, platform, channels, timeline,
                                                                     platform={flight.platform}
                                                                     channel={flight.release_channel}
                                                                     version={flight.version}
-                                                                    url={flight.url}
                                                                 />
                                                             );
                                                         }
@@ -107,7 +107,6 @@ export default function Show({ can, auth, release, platform, channels, timeline,
                                                                     key={`${flight.type}-${flight.id}`}
                                                                     platform={flight.platform}
                                                                     version={flight.version}
-                                                                    url={flight.url}
                                                                 />
                                                             );
                                                         }

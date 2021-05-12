@@ -215,7 +215,6 @@ export default function Show({ can, auth, release, platform, channels, timeline,
                                                                     channels={flight.release_channel}
                                                                     version={flight.version}
                                                                     pack={flight.package}
-                                                                    url={flight.url}
                                                                 />
                                                             );
                                                         }
@@ -227,7 +226,6 @@ export default function Show({ can, auth, release, platform, channels, timeline,
                                                                     platform={flight.platform}
                                                                     channel={flight.release_channel}
                                                                     version={flight.version}
-                                                                    url={flight.url}
                                                                 />
                                                             );
                                                         }
@@ -238,7 +236,6 @@ export default function Show({ can, auth, release, platform, channels, timeline,
                                                                     key={`${flight.type}-${flight.id}`}
                                                                     platform={flight.platform}
                                                                     version={flight.version}
-                                                                    url={flight.url}
                                                                 />
                                                             );
                                                         }

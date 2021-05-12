@@ -95,8 +95,8 @@ class ReleaseController extends Controller
                     'url' => route('front.platforms.show', $_platform, false)
                 ];
             }),
-            'release' => $release,
-            'platform' => $release->platform,
+            'release' => $release->only('name', 'changelog', 'version', 'codename'),
+            'platform' => $release->platform->only('color', 'icon'),
             'channels' => $release->releaseChannels->map(function ($release_channel) {
                 return [
                     'name' => $release_channel->short_name,
@@ -144,8 +144,7 @@ class ReleaseController extends Controller
                                     'icon' => $_cur_flight->item->platform->icon,
                                     'name' => $_cur_flight->item->platform->name,
                                     'color' => $_cur_flight->item->platform->color
-                                ],
-                                'url' => $_cur_flight->item->url
+                                ]
                             ];
                         }
                         
@@ -167,8 +166,7 @@ class ReleaseController extends Controller
                                     'icon' => $_cur_promotion->item->platform->icon,
                                     'name' => $_cur_promotion->item->platform->name,
                                     'color' => $_cur_promotion->item->platform->color
-                                ],
-                                'url' => $_cur_promotion->item->url
+                                ]
                             ]; 
                         }
                         
@@ -186,8 +184,7 @@ class ReleaseController extends Controller
                                     'icon' => $_cur_launch->item->platform->icon,
                                     'name' => $_cur_launch->item->platform->name,
                                     'color' => $_cur_launch->item->platform->color
-                                ],
-                                'url' => $_cur_launch->item->url
+                                ]
                             ];
                         }
                     })->sortByDesc(function ($item, $key) {
@@ -199,7 +196,10 @@ class ReleaseController extends Controller
                     })->values()->all()
                 ];
             }),
-            'pagination' => $timeline
+            'pagination' => [
+                'prev_page_url' => $timeline->previousPageUrl(),
+                'next_page_url' => $timeline->nextPageUrl()
+            ]
         ]);
     }
 }

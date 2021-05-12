@@ -35,7 +35,10 @@ class PermissionController extends Controller
                     'editUrl' => route('admin.permissions.edit', $permission, false)
                 ];
             }),
-            'pagination' => $permissions,
+            'pagination' => [
+                'prev_page_url' => $permissions->previousPageUrl(),
+                'next_page_url' => $permissions->nextPageUrl()
+            ],
             'createUrl' => route('admin.permissions.create', [], false),
             'status' => session('status')
         ]);

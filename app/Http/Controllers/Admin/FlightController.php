@@ -57,7 +57,10 @@ class FlightController extends Controller
                     })
                 ];
             }),
-            'pagination' => $timeline,
+            'pagination' => [
+                'prev_page_url' => $timeline->previousPageUrl(),
+                'next_page_url' => $timeline->nextPageUrl()
+            ],
             'createUrl' => route('admin.flights.create', [], false),
             'createPackageUrl' => route('admin.flights.createPackage', [], false),
             'status' => session('status')
