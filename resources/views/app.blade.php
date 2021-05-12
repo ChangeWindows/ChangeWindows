@@ -12,6 +12,8 @@
         
         <link rel="shortcut icon" href="{{ asset('images/logo.svg') }}">
         <link rel="manifest" href="{{ asset('manifest.json') }}">
+        <meta name="theme-color" content="#0066ff">
+        <link rel="apple-touch-icon" href="{{ asset('images/logo-mask-192.png') }}">
     </head>
     <body>
         @inertia
