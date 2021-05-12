@@ -101,7 +101,7 @@ export default function Show({ can, auth, release, platform, channels, timeline,
                     <span className="navbar-brand">Releases</span>
                 </div>
             </nav>
-        
+
             <div className="container my-3">
                 <div className="row g-3">
                     <div className="col-12">
@@ -197,7 +197,7 @@ export default function Show({ can, auth, release, platform, channels, timeline,
                                     <div className="col-12 mt-4">
                                         <h2 className="h5 mb-3 fw-bold">Release notes</h2>
                                         <div className="changelog-content">
-                                            <Markdown>{release.changelog}</Markdown>
+                                            {release.changelog ? <Markdown>{release.changelog}</Markdown> : null}
                                         </div>
                                     </div>
                                 </div>
@@ -219,11 +219,10 @@ export default function Show({ can, auth, release, platform, channels, timeline,
                                                                     channels={flight.release_channel}
                                                                     version={flight.version}
                                                                     pack={flight.package}
-                                                                    url={flight.url}
                                                                 />
                                                             );
                                                         }
-                
+
                                                         if (flight.type === 'promotion') {
                                                             return (
                                                                 <Promotion
@@ -231,18 +230,16 @@ export default function Show({ can, auth, release, platform, channels, timeline,
                                                                     platform={flight.platform}
                                                                     channel={flight.release_channel}
                                                                     version={flight.version}
-                                                                    url={flight.url}
                                                                 />
                                                             );
                                                         }
-                
+
                                                         if (flight.type === 'launch') {
                                                             return (
                                                                 <Launch
                                                                     key={`${flight.type}-${flight.id}`}
                                                                     platform={flight.platform}
                                                                     version={flight.version}
-                                                                    url={flight.url}
                                                                 />
                                                             );
                                                         }

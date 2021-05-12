@@ -92,8 +92,8 @@ class PackageController extends Controller
                     'url' => route('front.platforms.show', $_platform, false)
                 ];
             }),
-            'release' => $release,
-            'platform' => $release->platform,
+            'release' => $release->only('name', 'changelog'),
+            'platform' => $release->platform->only('color', 'icon'),
             'channels' => $release->releaseChannels->map(function ($release_channel) {
                 return [
                     'name' => $release_channel->short_name,
@@ -109,7 +109,7 @@ class PackageController extends Controller
             'timeline' => $timeline->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
-                    'flights' => $items->groupBy(function($item, $key) {
+                    'flights' => $items->groupBy(function($item) {
                         if ($item->item_type === \App\Models\Flight::class) {
                             return $item->item->flight.'-'.$item->item->platform->position;
                         } else if ($item->item_type === \App\Models\Promotion::class) {
@@ -142,8 +142,7 @@ class PackageController extends Controller
                                     'name' => $_cur_flight->item->platform->name,
                                     'tool' => $_cur_flight->item->platform->tool,
                                     'color' => $_cur_flight->item->platform->color
-                                ],
-                                'url' => $_cur_flight->item->url
+                                ]
                             ];
                         }
                         
@@ -165,8 +164,7 @@ class PackageController extends Controller
                                     'icon' => $_cur_promotion->item->platform->icon,
                                     'name' => $_cur_promotion->item->platform->name,
                                     'color' => $_cur_promotion->item->platform->color
-                                ],
-                                'url' => $_cur_promotion->item->url
+                                ]
                             ]; 
                         }
                         
@@ -184,8 +182,7 @@ class PackageController extends Controller
                                     'icon' => $_cur_launch->item->platform->icon,
                                     'name' => $_cur_launch->item->platform->name,
                                     'color' => $_cur_launch->item->platform->color
-                                ],
-                                'url' => $_cur_launch->item->url
+                                ]
                             ];
                         }
                     })->sortByDesc(function ($item, $key) {
@@ -197,7 +194,10 @@ class PackageController extends Controller
                     })->values()->all()
                 ];
             }),
-            'pagination' => $timeline
+            'pagination' => [
+                'prev_page_url' => $timeline->previousPageUrl(),
+                'next_page_url' => $timeline->nextPageUrl()
+            ]
         ]);
     }
 }

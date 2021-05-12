@@ -49,7 +49,10 @@ class LaunchController extends Controller
                     })
                 ];
             }),
-            'pagination' => $timeline,
+            'pagination' => [
+                'prev_page_url' => $timeline->previousPageUrl(),
+                'next_page_url' => $timeline->nextPageUrl()
+            ],
             'createUrl' => route('admin.launches.create', [], false),
             'status' => session('status')
         ]);

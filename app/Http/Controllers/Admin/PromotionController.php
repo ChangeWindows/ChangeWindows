@@ -53,7 +53,10 @@ class PromotionController extends Controller
                     })
                 ];
             }),
-            'pagination' => $timeline,
+            'pagination' => [
+                'prev_page_url' => $timeline->previousPageUrl(),
+                'next_page_url' => $timeline->nextPageUrl()
+            ],
             'createUrl' => route('admin.promotions.create', [], false),
             'status' => session('status')
         ]);

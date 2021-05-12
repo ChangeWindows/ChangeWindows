@@ -150,7 +150,10 @@ class TimelineController extends Controller
                     })->values()->all()
                 ];
             }),
-            'pagination' => $timeline,
+            'pagination' => [
+                'prev_page_url' => $timeline->previousPageUrl(),
+                'next_page_url' => $timeline->nextPageUrl()
+            ],
             'status' => session('status')
         ]);
     }
@@ -324,7 +327,10 @@ class TimelineController extends Controller
                     })->values()->all()
                 ];
             }),
-            'pagination' => $timeline,
+            'pagination' => [
+                'prev_page_url' => $timeline->previousPageUrl(),
+                'next_page_url' => $timeline->nextPageUrl()
+            ],
             'status' => session('status')
         ]);
     }

@@ -69,7 +69,7 @@ class PlatformController extends Controller
                     'url' => route('front.platforms.show', $_platform, false)
                 ];
             }),
-            'platform' => $platform,
+            'platform' => $platform->only('name', 'description', 'icon', 'color'),
             'channels' => $platform->channels->where('active')->map(function ($channel) {
                 $release_channels = $channel->releaseChannels
                     ->sortByDesc(function ($release_channel, $key) {
@@ -226,7 +226,10 @@ class PlatformController extends Controller
                     })->values()->all()
                 ];
             }),
-            'pagination' => $timeline
+            'pagination' => [
+                'prev_page_url' => $timeline->previousPageUrl(),
+                'next_page_url' => $timeline->nextPageUrl()
+            ]
         ]);
     }
 }
