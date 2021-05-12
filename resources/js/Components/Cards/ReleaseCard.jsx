@@ -1,4 +1,5 @@
 import React from 'react'
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 import PlatformIcon from '../Platforms/PlatformIcon';
 
@@ -27,7 +28,7 @@ export default function ReleaseCard({ name, platform, channels, alts, url, pack 
                     ))}
                 </div>}
                 <div className="release-actions">
-                    <a href={url} className="btn btn-link btn-sm stretched-link"><FontAwesomeIcon icon={faArrowRight} fixedWidth /> {pack ? 'View package' : 'View release'}</a>
+                    <InertiaLink href={url} className="btn btn-link btn-sm stretched-link"><FontAwesomeIcon icon={faArrowRight} fixedWidth /> {pack ? 'View package' : 'View release'}</InertiaLink>
                 </div>
             </div>
         </div>
