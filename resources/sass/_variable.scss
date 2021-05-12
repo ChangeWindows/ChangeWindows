@@ -6,15 +6,15 @@ $enable-caret: false;
 $headings-font-weight: 700;
 $form-text-font-size: .8rem;
 
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-base: "Segoe UI Variable Text", $font-family-sans-serif;
+$headings-font-family: "Segoe UI Variable Display", $font-family-sans-serif;
+
 // Body
 $body-bg: #fff;
 
 // Colors
 $min-contrast-ratio: 4;
-
-$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-$font-family-base: "Segoe UI Variable Text", $font-family-sans-serif;
-$headings-font-family: "Segoe UI Variable Display", $font-family-sans-serif;
 
 $accent: #0066ff;
 $primary: $accent;
@@ -28,28 +28,6 @@ $yellow: #ffc000;
 $green: #97c800;
 $teal: #10b08f;
 $cyan: #0098df;
-
-$leak: #e52262;
-$skip: #e74018;
-$dev: #fb8009;
-$beta: #ffc000;
-$preview: #c0d700;
-$release: #97c800;
-$public: #46c429;
-$broad: #10b08f;
-$ltsc: #0098df;
-
-$mobile: #00bcf2;
-$iso: #00cea6;
-$iot: #f7630c;
-$holographic: #ff4343;
-$pc: #0078d7;
-$tenx: #9ad93a;
-$xbox: #107c10;
-$team: #e3008c;
-$server: #ffb900;
-$sdk: #886ce4;
-$azure: #4300df;
 
 $border-color: #d9d9d9;
 
