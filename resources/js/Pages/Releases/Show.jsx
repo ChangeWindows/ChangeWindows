@@ -13,13 +13,13 @@ import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBarsStaggered, faNotes, faArrowLeft } from '@fortawesome/pro-regular-svg-icons';
+import { faBarsStaggered, faNotes, faArrowLeft, faChevronLeft, faChevronRight } from '@fortawesome/pro-regular-svg-icons';
 
 import { differenceInDays } from 'date-fns/esm';
 import { format, isBefore, parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
 
-export default function Show({ can, auth, release, platform, channels, timeline, pagination }) {
+export default function Show({ release, platform, channels, timeline, pagination, quick_nav }) {
     function max(input) {
         if (toString.call(input) !== "[object Array]") {
             return false;
@@ -107,6 +107,16 @@ export default function Show({ can, auth, release, platform, channels, timeline,
                         </button>
                     </div>
                     <div className="flex-grow-1" />
+                    {quick_nav.prev &&
+                        <InertiaLink href={quick_nav.prev.url} className="btn btn-sm">
+                            <FontAwesomeIcon icon={faChevronLeft} fixedWidth /> {quick_nav.prev.version}
+                        </InertiaLink>
+                    }
+                    {quick_nav.next &&
+                        <InertiaLink href={quick_nav.next.url} className="btn btn-sm ms-2">
+                            {quick_nav.next.version} <FontAwesomeIcon icon={faChevronRight} fixedWidth />
+                        </InertiaLink>
+                    }
                 </div>
             </nav>
 
