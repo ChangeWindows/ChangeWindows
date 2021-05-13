@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Redirect;
 use App\Models\Platform;
 use App\Models\Release;
 use App\Models\Timeline;
@@ -44,7 +42,7 @@ class ReleaseController extends Controller
                         ];
                     })->values()->all()
                 ];
-            })->values()->all(),
+            })->values()->all()
         ]);
     }
 
