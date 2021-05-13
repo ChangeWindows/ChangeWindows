@@ -50,7 +50,7 @@ export default function Edit({ can, auth, urls, platforms, pack, channels, relea
     const availablePlatformChannels = useMemo(() => channels.filter((channel) => !release_channels.find((releaseChannel) => releaseChannel.channel_id === channel.id)), [channels, release_channels]);
 
     return (
-        <Admin can={can} auth={auth}>
+        <Admin>
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">

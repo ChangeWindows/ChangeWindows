@@ -79,7 +79,11 @@ class ChannelController extends Controller
                     'url' => route('front.channels.show', $_platform, false)
                 ];
             }),
-            'platform' => $platform,
+            'platform' => [
+                'name' => $platform->name,
+                'icon' => $platform->icon,
+                'color' => $platform->color
+            ],
             'channel_order' => $platform->channels->sortBy('order')->pluck('id'),
             'releases' => $platform->releases->sortByDesc('canonical_version')->map(function ($release) {
                 return [

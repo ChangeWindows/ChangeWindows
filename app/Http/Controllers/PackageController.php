@@ -93,7 +93,7 @@ class PackageController extends Controller
                 ];
             }),
             'release' => $release->only('name', 'changelog'),
-            'platform' => $release->platform->only('color', 'icon'),
+            'platform' => $release->platform->only('color', 'icon', 'slug'),
             'channels' => $release->releaseChannels->map(function ($release_channel) {
                 return [
                     'name' => $release_channel->short_name,

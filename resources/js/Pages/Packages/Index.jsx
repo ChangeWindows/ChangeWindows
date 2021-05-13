@@ -5,7 +5,7 @@ import ReleaseCard from '../../Components/Cards/ReleaseCard';
 
 export default function Index({ can, auth, packages }) {
     return (
-        <App can={can} auth={auth}>
+        <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Packages</span>
@@ -14,9 +14,12 @@ export default function Index({ can, auth, packages }) {
         
             <div className="container my-3">
                 <div className="row g-3">
+                    <div className="col-12 mt-4">
+                        <h1 className="h4 mb-2">Packages</h1>
+                    </div>
                     {packages.length > 0 &&
-                        <div className="col-12 mt-4">
-                            <h2 className="h5 mb-3 fw-bold">Packages</h2>
+                        <div className="col-12">
+                            <h2 className="h5 mb-3 fw-bold">Supported packages</h2>
                             <div className="row g-2">
                                 {packages.map((pack, key) => (
                                     <ReleaseCard

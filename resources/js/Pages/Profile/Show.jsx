@@ -5,7 +5,7 @@ import App from '../../Layouts/App';
 export default function Show({ can, auth }) {
     
     return (
-        <App can={can} auth={auth}>
+        <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Profile</span>

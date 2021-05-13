@@ -6,9 +6,9 @@
     }
     
     .nav-item {
-            &:not(:last-child) {
-                margin-right: 1.5rem;
-            }
+        &:not(:last-child) {
+            margin-right: 1.5rem;
+        }
 
         .nav-link {
             position: relative;
@@ -16,6 +16,10 @@
             padding-right: 0;
 
             &.active {
+                svg {
+                    color: $primary !important;
+                }
+                
                 &::after {
                     position: absolute;
                     background-color: $primary;

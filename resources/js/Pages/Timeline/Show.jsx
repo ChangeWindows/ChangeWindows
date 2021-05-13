@@ -14,13 +14,16 @@ import Pagination from '../../Components/Pagination';
 import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
 
-export default function Show({ can, auth, timeline, pagination, platforms, channel_platforms }) {
+export default function Show({ can, auth, timeline, pagination, platform, platforms, channel_platforms }) {
     return (
-        <App can={can} auth={auth}>
+        <App>
             <PlatformNavigation all="/timeline" page="Timeline" platforms={platforms} />
         
             <div className="container my-3">
                 <div className="row g-3">
+                    <div className="col-12 mt-4">
+                        <h1 className="h4 mb-2" style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
+                    </div>
                     <div className="col-12 col-md-8 col-lg-7">
                         <div className="row g-4">
                             {Object.keys(timeline).map((date, key) => (

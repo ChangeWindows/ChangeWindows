@@ -8,7 +8,7 @@ import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icon
 
 export default function Show({ can, auth, tweet_streams, createUrl, status = null }) {
     return (
-        <Admin can={can} auth={auth}>
+        <Admin>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Twitter Tweet Streams</span>

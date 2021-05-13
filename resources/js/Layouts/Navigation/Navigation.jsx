@@ -1,12 +1,13 @@
 import React from 'react';
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 
 import NavigationBar from './components/NavigationBar';
 
 import { faBarsStaggered, faLaptopMobile, faFlag, faCircleInfo, faGauge, faCodeBranch, faCubes, faBullhorn } from '@fortawesome/pro-regular-svg-icons';
 import { faGithub, faPatreon, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
-export default function Navigation({ can, auth }) {
+export default function Navigation() {
+    const { auth, nav_can } = usePage().props;
    
     return (
         <>
@@ -34,8 +35,8 @@ export default function Navigation({ can, auth }) {
                     { type: 'external', url: 'https://twitter.com/changewindows', icon: faTwitter, title: 'Twitter' },
                     { type: 'external', url: 'https://patreon.com/changewindows', icon: faPatreon, title: 'Sponsor us' },
                     { type: 'external', url: 'https://github.com/changewindows', icon: faGithub, title: 'GitHub' },
-                    { type: 'divider', permission: can.access_dashboard },
-                    { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage', permission: can.access_dashboard },
+                    { type: 'divider', permission: nav_can.access_dashboard },
+                    { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage', permission: nav_can.access_dashboard },
                     { type: 'divider' },
                     { type: 'link', url: '/about', icon: faCircleInfo, title: 'About' }
                 ]}

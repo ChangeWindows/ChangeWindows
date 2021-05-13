@@ -13,13 +13,13 @@ import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faListTimeline, faNotes } from '@fortawesome/pro-regular-svg-icons';
+import { faBarsStaggered, faNotes, faArrowLeft, faChevronLeft, faChevronRight } from '@fortawesome/pro-regular-svg-icons';
 
 import { differenceInDays } from 'date-fns/esm';
 import { format, isBefore, parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
 
-export default function Show({ can, auth, release, platform, channels, timeline, pagination }) {
+export default function Show({ release, platform, channels, timeline, pagination, quick_nav }) {
     function max(input) {
         if (toString.call(input) !== "[object Array]") {
             return false;
@@ -92,161 +92,163 @@ export default function Show({ can, auth, release, platform, channels, timeline,
     }, [release.start_preview, release.start_public, release.start_extended, release.start_lts, release.end_lts]);
 
     return (
-        <App can={can} auth={auth}>
+        <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                <div className="container justify-content-start">
-                    <InertiaLink href="/releases" className="btn btn-sm me-2">
+                <div className="container">
+                    <InertiaLink href={`/platforms/${platform.slug}`} className="btn btn-sm me-2">
                         <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                     </InertiaLink>
-                    <span className="navbar-brand">Releases</span>
+                    <div className="nav nav-lined" id="nav-tab" role="tablist">
+                        <button className="nav-link active" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="true">
+                            <FontAwesomeIcon icon={faBarsStaggered} fixedWidth /><span className="d-none d-sm-inline"> Timeline</span>
+                        </button>
+                        <button className="nav-link" id="nav-releases-tab" data-bs-toggle="tab" data-bs-target="#nav-releases" type="button" role="tab" aria-controls="nav-releases" aria-selected="false">
+                            <FontAwesomeIcon icon={faNotes} fixedWidth /><span className="d-none d-sm-inline"> Release notes</span>
+                        </button>
+                    </div>
+                    <div className="flex-grow-1" />
+                    {quick_nav.prev &&
+                        <InertiaLink href={quick_nav.prev.url} className="btn btn-sm">
+                            <FontAwesomeIcon icon={faChevronLeft} fixedWidth /> {quick_nav.prev.version}
+                        </InertiaLink>
+                    }
+                    {quick_nav.next &&
+                        <InertiaLink href={quick_nav.next.url} className="btn btn-sm ms-2">
+                            {quick_nav.next.version} <FontAwesomeIcon icon={faChevronRight} fixedWidth />
+                        </InertiaLink>
+                    }
                 </div>
             </nav>
 
             <div className="container my-3">
                 <div className="row g-3">
-                    <div className="col-12">
+                    <div className="col-12 mt-4">
                         <div className="d-flex">
-                            <div className="me-2">
-                                <h1 className="h2"><PlatformIcon platform={platform} color /></h1>
+                            <div className="me-3">
+                                <h1 className="h4"><PlatformIcon platform={platform} color /></h1>
                             </div>
                             <div>
-                                <h1 className="h2 mb-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
-                                <h2 className="h5 text-muted">Version {release.version}, {release.codename}</h2>
+                                <h1 className="h4 mb-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
+                                <h2 className="h6 text-muted">Version {release.version}, {release.codename}</h2>
                             </div>
-                        </div>
-
-                        <div className="row g-2 mt-3">
-                            {channels.map((channel, key) => (
-                                <Channel
-                                    key={key}
-                                    channel={{ color: channel.color, name: channel.name }}
-                                    build={channel.flight.version ?? 'None'}
-                                    date={channel.flight?.date ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : 'No flight'}
-                                    disabled={channel.disabled}
-                                />
-                            ))}
                         </div>
                     </div>
 
-                    {(!!preview_duration || !!public_duration || !!extended_duration || !!lts_duration) &&
-                        <div className="col-12">
-                            <h2 className="h5 my-4 fw-bold">Life-cycle</h2>
-                            <div className="d-flex progress-group flex-column flex-md-row">
-                                {!!preview_duration &&
-                                    <Progress
-                                        duration={preview_duration}
-                                        totalDuration={total_duration}
-                                        highestDuration={highest_duration}
-                                        title="Development"
-                                        startDescription={format(parseISO(release.start_preview), "d MMM yyyy")}
-                                        endDescription={format(parseISO(release.start_public), "d MMM yyyy")}
-                                    >
-                                        <ProgressBar progress={preview_progress} />
-                                    </Progress>
-                                }
-                                {!!public_duration &&
-                                    <Progress
-                                        duration={public_duration}
-                                        totalDuration={total_duration}
-                                        highestDuration={highest_duration}
-                                        title="Support"
-                                        startDescription={format(parseISO(release.start_public), "d MMM yyyy")}
-                                        endDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
-                                    >
-                                        <ProgressBar progress={public_progress} color="success" />
-                                    </Progress>
-                                }
-                                {!!extended_duration &&
-                                    <Progress
-                                        duration={extended_duration}
-                                        totalDuration={total_duration}
-                                        highestDuration={highest_duration}
-                                        title="Extended"
-                                        startDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
-                                        endDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
-                                    >
-                                        <ProgressBar progress={extended_progress} color="warning" />
-                                    </Progress>
-                                }
-                                {!!lts_duration &&
-                                    <Progress
-                                        duration={lts_duration}
-                                        totalDuration={total_duration}
-                                        highestDuration={highest_duration}
-                                        title="LTSC"
-                                        startDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
-                                        endDescription={format(parseISO(release.end_lts), "d MMM yyyy")}
-                                    >
-                                        <ProgressBar progress={lts_progress} color="danger" />
-                                    </Progress>
-                                }
-                            </div>
-                        </div>
-                    }
-
                     <div className="col-12">
-                        <nav className="mt-4">
-                            <div className="nav nav-lined" id="nav-tab" role="tablist">
-                                <button className="nav-link active" id="nav-releases-tab" data-bs-toggle="tab" data-bs-target="#nav-releases" type="button" role="tab" aria-controls="nav-releases" aria-selected="true"><FontAwesomeIcon icon={faNotes} fixedWidth /> Release notes</button>
-                                <button className="nav-link" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="false"><FontAwesomeIcon icon={faListTimeline} fixedWidth /> Timeline</button>
-                            </div>
-                        </nav>
                         <div className="tab-content" id="nav-tabContent">
-                            <div className="tab-pane fade show active" id="nav-releases" role="tabpanel" aria-labelledby="nav-releases-tab">
-                                <div className="row">
-                                    <div className="col-12 mt-4">
-                                        <h2 className="h5 mb-3 fw-bold">Release notes</h2>
-                                        <div className="changelog-content">
-                                            {release.changelog ? <Markdown>{release.changelog}</Markdown> : null}
-                                        </div>
+                            <div className="tab-pane fade show active" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
+
+                                {(!!preview_duration || !!public_duration || !!extended_duration || !!lts_duration) &&
+                                    <div className="d-flex progress-group flex-column flex-md-row mb-4">
+                                        {!!preview_duration &&
+                                            <Progress
+                                                duration={preview_duration}
+                                                totalDuration={total_duration}
+                                                highestDuration={highest_duration}
+                                                title="Development"
+                                                startDescription={format(parseISO(release.start_preview), "d MMM yyyy")}
+                                                endDescription={format(parseISO(release.start_public), "d MMM yyyy")}
+                                            >
+                                                <ProgressBar progress={preview_progress} />
+                                            </Progress>
+                                        }
+                                        {!!public_duration &&
+                                            <Progress
+                                                duration={public_duration}
+                                                totalDuration={total_duration}
+                                                highestDuration={highest_duration}
+                                                title="Support"
+                                                startDescription={format(parseISO(release.start_public), "d MMM yyyy")}
+                                                endDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
+                                            >
+                                                <ProgressBar progress={public_progress} color="success" />
+                                            </Progress>
+                                        }
+                                        {!!extended_duration &&
+                                            <Progress
+                                                duration={extended_duration}
+                                                totalDuration={total_duration}
+                                                highestDuration={highest_duration}
+                                                title="Extended"
+                                                startDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
+                                                endDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
+                                            >
+                                                <ProgressBar progress={extended_progress} color="warning" />
+                                            </Progress>
+                                        }
+                                        {!!lts_duration &&
+                                            <Progress
+                                                duration={lts_duration}
+                                                totalDuration={total_duration}
+                                                highestDuration={highest_duration}
+                                                title="LTSC"
+                                                startDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
+                                                endDescription={format(parseISO(release.end_lts), "d MMM yyyy")}
+                                            >
+                                                <ProgressBar progress={lts_progress} color="danger" />
+                                            </Progress>
+                                        }
                                     </div>
+                                }
+                                <div className="row g-2 mt-4">
+                                    {channels.map((channel, key) => (
+                                        <Channel
+                                            key={key}
+                                            channel={{ color: channel.color, name: channel.name }}
+                                            build={channel.flight.version ?? 'None'}
+                                            date={channel.flight?.date ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : 'No flight'}
+                                            disabled={channel.disabled}
+                                        />
+                                    ))}
+                                </div>
+                                <div className="row g-4 mt-3">
+                                    {Object.keys(timeline).map((date, key) => (
+                                        <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
+                                            {timeline[date].flights.map((flight, _key) => {
+                                                if (flight.type === 'flight') {
+                                                    return (
+                                                        <Flight
+                                                            key={`${flight.type}-${flight.id}`}
+                                                            platform={flight.platform}
+                                                            build={flight.flight}
+                                                            channels={flight.release_channel}
+                                                            version={flight.version}
+                                                            pack={flight.package}
+                                                        />
+                                                    );
+                                                }
+
+                                                if (flight.type === 'promotion') {
+                                                    return (
+                                                        <Promotion
+                                                            key={`${flight.type}-${flight.id}`}
+                                                            platform={flight.platform}
+                                                            channel={flight.release_channel}
+                                                            version={flight.version}
+                                                        />
+                                                    );
+                                                }
+
+                                                if (flight.type === 'launch') {
+                                                    return (
+                                                        <Launch
+                                                            key={`${flight.type}-${flight.id}`}
+                                                            platform={flight.platform}
+                                                            version={flight.version}
+                                                        />
+                                                    );
+                                                }
+                                            })}
+                                        </Timeline>
+                                    ))}
+                                    <Pagination pagination={pagination} />
                                 </div>
                             </div>
-                            <div className="tab-pane fade" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
+                            <div className="tab-pane fade" id="nav-releases" role="tabpanel" aria-labelledby="nav-releases-tab">
                                 <div className="row">
                                     <div className="col-12 mt-4">
-                                        <h2 className="h5 mb-3 fw-bold">Timeline</h2>
-                                        <div className="row g-4">
-                                            {Object.keys(timeline).map((date, key) => (
-                                                <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
-                                                    {timeline[date].flights.map((flight, _key) => {
-                                                        if (flight.type === 'flight') {
-                                                            return (
-                                                                <Flight
-                                                                    key={`${flight.type}-${flight.id}`}
-                                                                    platform={flight.platform}
-                                                                    build={flight.flight}
-                                                                    channels={flight.release_channel}
-                                                                    version={flight.version}
-                                                                    pack={flight.package}
-                                                                />
-                                                            );
-                                                        }
-
-                                                        if (flight.type === 'promotion') {
-                                                            return (
-                                                                <Promotion
-                                                                    key={`${flight.type}-${flight.id}`}
-                                                                    platform={flight.platform}
-                                                                    channel={flight.release_channel}
-                                                                    version={flight.version}
-                                                                />
-                                                            );
-                                                        }
-
-                                                        if (flight.type === 'launch') {
-                                                            return (
-                                                                <Launch
-                                                                    key={`${flight.type}-${flight.id}`}
-                                                                    platform={flight.platform}
-                                                                    version={flight.version}
-                                                                />
-                                                            );
-                                                        }
-                                                    })}
-                                                </Timeline>
-                                            ))}
-                                            <Pagination pagination={pagination} />
+                                        <div className="changelog-content">
+                                            {release.changelog ? <Markdown>{release.changelog}</Markdown> : null}
                                         </div>
                                     </div>
                                 </div>

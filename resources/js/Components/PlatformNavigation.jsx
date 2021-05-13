@@ -23,7 +23,6 @@ export default function Navigation({ home = false, platforms, page, all = false 
     return (
         <nav className="navbar navbar-expand navbar-light sticky-top">
             <div className="container">
-                <span className="navbar-brand d-none d-md-block">{page}</span>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-page" aria-controls="navbar-page" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

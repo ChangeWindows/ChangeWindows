@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Redirect;
 use App\Models\Platform;
 use App\Models\Release;
 use App\Models\Timeline;
@@ -44,7 +42,7 @@ class ReleaseController extends Controller
                         ];
                     })->values()->all()
                 ];
-            })->values()->all(),
+            })->values()->all()
         ]);
     }
 
@@ -83,6 +81,9 @@ class ReleaseController extends Controller
                 ->where('lr.id', '=', $release->id);
             })
             ->paginate(75);
+            
+        $prev = Release::where('canonical_version', '<', $release->canonical_version)->where('platform_id', '=', $release->platform_id)->where('package', '=', 0)->orderBy('canonical_version', 'desc')->first();
+        $next = Release::where('canonical_version', '>', $release->canonical_version)->where('platform_id', '=', $release->platform_id)->where('package', '=', 0)->orderBy('canonical_version', 'asc')->first();
 
         return Inertia::render('Releases/Show', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
@@ -95,8 +96,18 @@ class ReleaseController extends Controller
                     'url' => route('front.platforms.show', $_platform, false)
                 ];
             }),
-            'release' => $release->only('name', 'changelog', 'version', 'codename'),
-            'platform' => $release->platform->only('color', 'icon'),
+            'release' => $release->only('name', 'changelog', 'version', 'codename', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts'),
+            'quick_nav' => [
+                'prev' => $prev ? [
+                    'url' => $prev->url,
+                    'version' => $prev->version
+                ] : null,
+                'next' => $next ? [
+                    'url' => $next->url,
+                    'version' => $next->version
+                ] : null
+            ],
+            'platform' => $release->platform->only('color', 'icon', 'slug'),
             'channels' => $release->releaseChannels->map(function ($release_channel) {
                 return [
                     'name' => $release_channel->short_name,

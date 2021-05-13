@@ -11,19 +11,22 @@ import clsx from 'clsx';
 
 export default function Index({ can, auth, platforms, channel_platforms }) {
     return (
-        <App can={can} auth={auth}>
+        <App>
             <PlatformNavigation home all="/channels" page="Channels" platforms={platforms} />
         
             <div className="container my-3">
                 <div className="row g-3">
+                    <div className="col-12 mt-4">
+                        <h1 className="h4 mb-2">Channels</h1>
+                    </div>
                     {channel_platforms.map((platform, key) => (
                         <div className={clsx({ 'col-12': platform.channels.length >= 3, 'col-12 col-md-6': platform.channels.length <= 2 })} key={key}>
                             <div className="row g-2">
                                 <div className={clsx('col-12 mb-n1', { 'mt-3': key > 0 })}>
-                                    <h3 className="h6" style={{ color: platform.color }}>
+                                    <h2 className="h5" style={{ color: platform.color }}>
                                         <PlatformIcon platform={platform} color />
                                         <span className="fw-bold ms-2">{platform.name}</span>
-                                    </h3>
+                                    </h2>
                                 </div>
                                 {platform.channels.map((channel, _key) => (
                                     <Channel

@@ -42,8 +42,15 @@ class HandleInertiaRequests extends Middleware
             'app' => [
                 'version' => config('app.version')
             ],
-            'can' => [
-                'access_dashboard' => Auth::check() ? Auth::user()->can('dashboard') : false
+            'nav_can' => [
+                'access_dashboard' => Auth::check() ? Auth::user()->can('dashboard') : false,
+                'show_flights' => Auth::check() ? Auth::user()->can('flights.show') : false,
+                'show_releases' => Auth::check() ? Auth::user()->can('releases.show') : false,
+                'show_platforms' => Auth::check() ? Auth::user()->can('platforms.show') : false,
+                'show_tweet_streams' => Auth::check() ? Auth::user()->can('tweet_streams.show') : false,
+                'show_users' => Auth::check() ? Auth::user()->can('users.show') : false,
+                'show_roles' => Auth::check() ? Auth::user()->can('roles.show') : false,
+                'show_permissions' => Auth::check() ? Auth::user()->can('permissions.show') : false
             ]
         ]);
     }

@@ -8,7 +8,7 @@ import { faCheck, faEye, faPen } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Show({ can, auth, users, status = null }) {
     return (
-        <Admin can={can} auth={auth}>
+        <Admin>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Users</span>

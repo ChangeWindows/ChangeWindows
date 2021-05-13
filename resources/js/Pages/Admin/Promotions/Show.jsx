@@ -11,7 +11,7 @@ import { format, parseISO } from 'date-fns';
 
 export default function Show({ can, auth, timeline, pagination, createUrl, status = null }) {
     return (
-        <Admin can={can} auth={auth}>
+        <Admin>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Promotions</span>
