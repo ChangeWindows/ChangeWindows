@@ -5,11 +5,13 @@ import App from '../../Layouts/App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faTwitter, faPatreon } from '@fortawesome/free-brands-svg-icons';
 
-export default function Show({ can, auth, app, patrons }) {
+export default function Show({ app, patrons, is_preview }) {
     return (
         <App background>
             <div className="auth-card auth-card-lg">
-                <h1 className="h3 m-0 py-5 text-center d-flex justify-content-center align-items-center"><img src="/images/logo-dark.svg" width="28px" height="28px" className="me-2 mt-1" /> ChangeWindows</h1>
+                <h1 className="h3 m-0 py-5 text-center d-flex justify-content-center align-items-center">
+                    <img src={is_preview ? '/images/logo-preview-dark.svg' : '/images/logo-dark.svg'} width="28px" height="28px" className="me-2 mt-1" /> ChangeWindows {is_preview && 'Preview'}
+                </h1>
                 <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faTwitter} /> Twitter</a>
                 <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faGithub} /> GitHub</a>
                 <a href="https://patreon.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faPatreon} /> Patreon</a>
