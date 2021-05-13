@@ -17,13 +17,11 @@
         "axios": "^0.21",
         "bootstrap": "^5.0.0",
         "laravel-mix": "^6.0.19",
-        "laravel-mix-workbox": "^0.1.4",
         "lodash": "^4.17.19",
         "postcss": "^8.2.15",
         "resolve-url-loader": "^4.0.0",
         "sass": "^1.32.13",
-        "sass-loader": "^11.1.0",
-        "workbox-webpack-plugin": "^6.1.5"
+        "sass-loader": "^11.1.0"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "1.2.33-alpha3",

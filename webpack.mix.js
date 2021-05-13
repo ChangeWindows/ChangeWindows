@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-require('laravel-mix-workbox');
 
 /*
  |--------------------------------------------------------------------------
@@ -14,5 +13,4 @@ require('laravel-mix-workbox');
 
 mix.js('resources/js/app.js', 'public/js')
     .copy('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js', 'public/js')
-    .sass('resources/sass/style.scss', 'public/css')
-    .generateSW();
+    .sass('resources/sass/style.scss', 'public/css');
