@@ -9,7 +9,7 @@ import { faCheck, faEye, faNotes, faPen, faPlus } from '@fortawesome/pro-regular
 
 export default function Show({ can, auth, releases, createUrl, status = null }) {
     return (
-        <Admin can={can} auth={auth}>
+        <Admin>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Releases</span>

@@ -18,7 +18,7 @@ export default function Index({ can, auth, releases }) {
     }, [releases]);
 
     return (
-        <App can={can} auth={auth}>
+        <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <div className="nav nav-lined" id="nav-tab" role="tablist">

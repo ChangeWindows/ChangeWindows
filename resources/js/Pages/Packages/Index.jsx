@@ -5,7 +5,7 @@ import ReleaseCard from '../../Components/Cards/ReleaseCard';
 
 export default function Index({ can, auth, packages }) {
     return (
-        <App can={can} auth={auth}>
+        <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <span className="navbar-brand">Packages</span>

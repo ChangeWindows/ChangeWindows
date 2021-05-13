@@ -1,12 +1,14 @@
 import React from 'react';
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 
 import NavigationBar from './components/NavigationBar';
 
 import { faFlag, faCircleInfo, faUser, faUserUnlock, faArrowLeft, faLaptopMobile, faPlane, faUnlockKeyhole, faRocketLaunch, faAnglesUp, faCubes } from '@fortawesome/pro-regular-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
-export default function AdminNavigation({ can, auth }) {
+export default function AdminNavigation() {
+    const { auth, nav_can } = usePage().props;
+
     return (
         <>
             <nav className="navbar navbar-expand-xs navbar-light sticky-top">
@@ -25,18 +27,18 @@ export default function AdminNavigation({ can, auth }) {
                 items={[
                     { type: 'link', url: '/timeline', icon: faArrowLeft, title: 'Back', ignore: true },
                     { type: 'divider' },
-                    { type: 'link', url: '/admin/flights', icon: faPlane, title: 'Flights' },
-                    { type: 'link', url: '/admin/promotions', icon: faAnglesUp, title: 'Promotions' },
-                    { type: 'link', url: '/admin/launches', icon: faRocketLaunch, title: 'Launches' },
-                    { type: 'link', url: '/admin/releases', icon: faFlag, title: 'Releases' },
-                    { type: 'link', url: '/admin/packages', icon: faCubes, title: 'Packages' },
-                    { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms' },
+                    { type: 'link', url: '/admin/flights', icon: faPlane, title: 'Flights', permission: nav_can.show_flights },
+                    { type: 'link', url: '/admin/promotions', icon: faAnglesUp, title: 'Promotions', permission: nav_can.show_flights },
+                    { type: 'link', url: '/admin/launches', icon: faRocketLaunch, title: 'Launches', permission: nav_can.show_flights },
+                    { type: 'link', url: '/admin/releases', icon: faFlag, title: 'Releases', permission: nav_can.show_releases },
+                    { type: 'link', url: '/admin/packages', icon: faCubes, title: 'Packages', permission: nav_can.show_releases },
+                    { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms', permission: nav_can.show_platforms },
                     { type: 'divider' },
-                    { type: 'link', url: '/admin/tweet_streams', icon: faTwitter, title: 'Twitter' },
+                    { type: 'link', url: '/admin/tweet_streams', icon: faTwitter, title: 'Twitter', permission: nav_can.show_tweet_streams },
                     { type: 'divider' },
-                    { type: 'link', url: '/admin/users', icon: faUser, title: 'Users' },
-                    { type: 'link', url: '/admin/roles', icon: faUserUnlock, title: 'Roles' },
-                    { type: 'link', url: '/admin/permissions', icon: faUnlockKeyhole, title: 'Permissions' },
+                    { type: 'link', url: '/admin/users', icon: faUser, title: 'Users', permission: nav_can.show_users },
+                    { type: 'link', url: '/admin/roles', icon: faUserUnlock, title: 'Roles', permission: nav_can.show_roles },
+                    { type: 'link', url: '/admin/permissions', icon: faUnlockKeyhole, title: 'Permissions', permission: nav_can.show_permissions },
                     { type: 'divider' },
                     { type: 'link', url: '/about', icon: faCircleInfo, title: 'About' }
                 ]}

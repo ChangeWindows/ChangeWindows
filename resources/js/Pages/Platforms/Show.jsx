@@ -26,7 +26,7 @@ export default function Show({ can, auth, platforms, platform, channels, release
     }, [releases]);
 
     return (
-        <App can={can} auth={auth}>
+        <App>
             <PlatformNavigation page="Platforms" platforms={platforms} />
         
             <div className="container my-3">

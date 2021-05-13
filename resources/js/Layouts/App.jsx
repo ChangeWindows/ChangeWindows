@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import Navigation from './Navigation/Navigation';
 
-export default function App({ children, can, auth, background = false }) {
+export default function App({ children, background = false }) {
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export default function App({ children, can, auth, background = false }) {
         <div className="bg-light">
             <div className="grid" style={{ height: windowHeight }}>
                 <header className="grid-sidebar">
-                    <Navigation can={can} auth={auth} />
+                    <Navigation />
                 </header>
                 <main className={clsx('grid-content', { 'auth': background })}>
                     { children }

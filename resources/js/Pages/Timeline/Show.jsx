@@ -16,7 +16,7 @@ import clsx from 'clsx';
 
 export default function Show({ can, auth, timeline, pagination, platform, platforms, channel_platforms }) {
     return (
-        <App can={can} auth={auth}>
+        <App>
             <PlatformNavigation all="/timeline" page="Timeline" platforms={platforms} />
         
             <div className="container my-3">

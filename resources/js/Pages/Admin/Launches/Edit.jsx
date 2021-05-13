@@ -39,7 +39,7 @@ export default function Edit({ can, auth, urls, launch, release, platform, statu
     }
 
     return (
-        <Admin can={can} auth={auth}>
+        <Admin>
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">

@@ -20,7 +20,7 @@ export default function Show(props) {
     const { can, auth, release, platform, channels, timeline, pagination } = props;
 
     return (
-        <App can={can} auth={auth}>
+        <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <InertiaLink href={`/platforms/${platform.slug}`} className="btn btn-sm me-2">

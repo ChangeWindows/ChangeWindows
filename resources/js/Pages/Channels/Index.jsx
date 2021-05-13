@@ -11,7 +11,7 @@ import clsx from 'clsx';
 
 export default function Index({ can, auth, platforms, channel_platforms }) {
     return (
-        <App can={can} auth={auth}>
+        <App>
             <PlatformNavigation home all="/channels" page="Channels" platforms={platforms} />
         
             <div className="container my-3">
