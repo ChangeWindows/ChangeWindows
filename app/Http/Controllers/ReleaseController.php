@@ -94,7 +94,7 @@ class ReleaseController extends Controller
                 ];
             }),
             'release' => $release->only('name', 'changelog', 'version', 'codename', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts'),
-            'platform' => $release->platform->only('color', 'icon'),
+            'platform' => $release->platform->only('color', 'icon', 'slug'),
             'channels' => $release->releaseChannels->map(function ($release_channel) {
                 return [
                     'name' => $release_channel->short_name,

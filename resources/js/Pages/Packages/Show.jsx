@@ -1,4 +1,5 @@
 import React from 'react';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
@@ -22,7 +23,9 @@ export default function Show(props) {
         <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
-                    <a href="javascript:history.back()" className="btn btn-sm me-2"><FontAwesomeIcon icon={faArrowLeft} /></a>
+                    <InertiaLink href={`/platforms/${platform.slug}`} className="btn btn-sm me-2">
+                        <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
+                    </InertiaLink>
                     <div className="nav nav-lined" id="nav-tab" role="tablist">
                         <button className="nav-link active" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="true">
                             <FontAwesomeIcon icon={faBarsStaggered} fixedWidth /> Timeline
