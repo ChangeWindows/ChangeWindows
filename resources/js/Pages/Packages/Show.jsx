@@ -10,7 +10,7 @@ import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faListTimeline, faNotes } from '@fortawesome/pro-regular-svg-icons';
+import { faBarsStaggered, faNotes } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
@@ -55,7 +55,7 @@ export default function Show(props) {
                         <nav className="mt-4">
                             <div className="nav nav-lined" id="nav-tab" role="tablist">
                                 <button className="nav-link active" id="nav-releases-tab" data-bs-toggle="tab" data-bs-target="#nav-releases" type="button" role="tab" aria-controls="nav-releases" aria-selected="true"><FontAwesomeIcon icon={faNotes} fixedWidth /> Release notes</button>
-                                <button className="nav-link" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="false"><FontAwesomeIcon icon={faListTimeline} fixedWidth /> Timeline</button>
+                                <button className="nav-link" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="false"><FontAwesomeIcon icon={faBarsStaggered} fixedWidth /> Timeline</button>
                             </div>
                         </nav>
                         <div className="tab-content" id="nav-tabContent">
