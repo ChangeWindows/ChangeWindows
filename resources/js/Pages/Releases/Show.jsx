@@ -100,10 +100,10 @@ export default function Show({ release, platform, channels, timeline, pagination
                     </InertiaLink>
                     <div className="nav nav-lined" id="nav-tab" role="tablist">
                         <button className="nav-link active" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="true">
-                            <FontAwesomeIcon icon={faBarsStaggered} fixedWidth /> Timeline
+                            <FontAwesomeIcon icon={faBarsStaggered} fixedWidth /><span className="d-none d-sm-inline"> Timeline</span>
                         </button>
                         <button className="nav-link" id="nav-releases-tab" data-bs-toggle="tab" data-bs-target="#nav-releases" type="button" role="tab" aria-controls="nav-releases" aria-selected="false">
-                            <FontAwesomeIcon icon={faNotes} fixedWidth /> Release notes
+                            <FontAwesomeIcon icon={faNotes} fixedWidth /><span className="d-none d-sm-inline"> Release notes</span>
                         </button>
                     </div>
                     <div className="flex-grow-1" />
