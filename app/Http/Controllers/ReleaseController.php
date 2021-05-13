@@ -93,7 +93,7 @@ class ReleaseController extends Controller
                     'url' => route('front.platforms.show', $_platform, false)
                 ];
             }),
-            'release' => $release->only('name', 'changelog', 'version', 'codename'),
+            'release' => $release->only('name', 'changelog', 'version', 'codename', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts'),
             'platform' => $release->platform->only('color', 'icon'),
             'channels' => $release->releaseChannels->map(function ($release_channel) {
                 return [
