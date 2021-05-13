@@ -20,6 +20,9 @@ export default function Index({ can, auth, timeline, pagination, platforms, chan
         
             <div className="container my-3">
                 <div className="row g-3">
+                    <div className="col-12 mt-4">
+                        <h1 className="h4 mb-2">Timeline</h1>
+                    </div>
                     <div className="col-12 col-md-8 col-lg-7">
                         <div className="row g-4">
                             {Object.keys(timeline).map((date, key) => (

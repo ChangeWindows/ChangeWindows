@@ -207,6 +207,11 @@ class TimelineController extends Controller
                     'url' => route('front.timeline.show', $_platform, false)
                 ];
             }),
+            'platform' => [
+                'name' => $platform->name,
+                'icon' => $platform->icon,
+                'color' => $platform->color
+            ],
             'channel_platforms' => $channel_platforms->map(function ($platform) {
                 return [
                     'name' => $platform->name,

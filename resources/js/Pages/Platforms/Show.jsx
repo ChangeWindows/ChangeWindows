@@ -32,7 +32,7 @@ export default function Show({ can, auth, platforms, platform, channels, release
             <div className="container my-3">
                 <div className="row g-3">
                     <div className="col-12 mt-4">
-                        <h1 className="h5 mb-3"><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
+                        <h1 className="h4 mb-2" style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
                         <p>{platform.description}</p>
 
                         <div className="row g-2 mt-3">

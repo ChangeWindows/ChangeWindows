@@ -10,7 +10,7 @@ import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBarsStaggered, faNotes } from '@fortawesome/pro-regular-svg-icons';
+import { faBarsStaggered, faNotes, faArrowLeft } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
@@ -22,19 +22,28 @@ export default function Show(props) {
         <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
-                    <span className="navbar-brand">Packages</span>
+                    <a href="javascript:history.back()" className="btn btn-sm me-2"><FontAwesomeIcon icon={faArrowLeft} /></a>
+                    <div className="nav nav-lined" id="nav-tab" role="tablist">
+                        <button className="nav-link active" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="true">
+                            <FontAwesomeIcon icon={faBarsStaggered} fixedWidth /> Timeline
+                        </button>
+                        <button className="nav-link" id="nav-releases-tab" data-bs-toggle="tab" data-bs-target="#nav-releases" type="button" role="tab" aria-controls="nav-releases" aria-selected="false">
+                            <FontAwesomeIcon icon={faNotes} fixedWidth /> Release notes
+                        </button>
+                    </div>
+                    <div className="flex-grow-1" />
                 </div>
             </nav>
 
             <div className="container my-3">
                 <div className="row g-3">
-                    <div className="col-12">
+                    <div className="col-12 mt-4">
                         <div className="d-flex">
-                            <div className="me-2">
-                                <h1 className="h2"><PlatformIcon platform={platform} color /></h1>
+                            <div className="me-3">
+                                <h1 className="h4"><PlatformIcon platform={platform} color /></h1>
                             </div>
                             <div>
-                                <h1 className="h2 mb-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
+                                <h1 className="h4 mb-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
                             </div>
                         </div>
 
@@ -52,24 +61,8 @@ export default function Show(props) {
                     </div>
 
                     <div className="col-12">
-                        <nav className="mt-4">
-                            <div className="nav nav-lined" id="nav-tab" role="tablist">
-                                <button className="nav-link active" id="nav-releases-tab" data-bs-toggle="tab" data-bs-target="#nav-releases" type="button" role="tab" aria-controls="nav-releases" aria-selected="true"><FontAwesomeIcon icon={faNotes} fixedWidth /> Release notes</button>
-                                <button className="nav-link" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="false"><FontAwesomeIcon icon={faBarsStaggered} fixedWidth /> Timeline</button>
-                            </div>
-                        </nav>
                         <div className="tab-content" id="nav-tabContent">
-                            <div className="tab-pane fade show active" id="nav-releases" role="tabpanel" aria-labelledby="nav-releases-tab">
-                                <div className="row">
-                                    <div className="col-12 mt-4">
-                                        <h2 className="h5 mb-3 fw-bold">Release notes</h2>
-                                        <div className="changelog-content">
-                                            {release.changelog ? <Markdown>{release.changelog}</Markdown> : null}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="tab-pane fade" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
+                            <div className="tab-pane fade show active" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
                                 <div className="row">
                                     <div className="col-12 mt-4">
                                         <h2 className="h5 mb-3 fw-bold">Timeline</h2>
@@ -114,6 +107,16 @@ export default function Show(props) {
                                                 </Timeline>
                                             ))}
                                             <Pagination pagination={pagination} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="tab-pane fade" id="nav-releases" role="tabpanel" aria-labelledby="nav-releases-tab">
+                                <div className="row">
+                                    <div className="col-12 mt-4">
+                                        <h2 className="h5 mb-3 fw-bold">Release notes</h2>
+                                        <div className="changelog-content">
+                                            {release.changelog ? <Markdown>{release.changelog}</Markdown> : null}
                                         </div>
                                     </div>
                                 </div>

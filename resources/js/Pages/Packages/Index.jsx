@@ -14,9 +14,14 @@ export default function Index({ can, auth, packages }) {
         
             <div className="container my-3">
                 <div className="row g-3">
+                    <div className="col-12">
+                        <nav className="mt-4">
+                            <h1 className="h4 mb-2">Packages</h1>
+                        </nav>
+                    </div>
                     {packages.length > 0 &&
                         <div className="col-12 mt-4">
-                            <h2 className="h5 mb-3 fw-bold">Packages</h2>
+                            <h2 className="h5 mb-3 fw-bold">Supported packages</h2>
                             <div className="row g-2">
                                 {packages.map((pack, key) => (
                                     <ReleaseCard

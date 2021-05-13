@@ -21,7 +21,10 @@ export default function Index({ can, auth, releases }) {
         <App can={can} auth={auth}>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
-                    <span className="navbar-brand">Releases</span>
+                    <div className="nav nav-lined" id="nav-tab" role="tablist">
+                        <button className="nav-link active" id="nav-active-tab" data-bs-toggle="tab" data-bs-target="#nav-active" type="button" role="tab" aria-controls="nav-active" aria-selected="true"><FontAwesomeIcon icon={faFlag} fixedWidth /> Supported</button>
+                        <button className="nav-link" id="nav-inactive-tab" data-bs-toggle="tab" data-bs-target="#nav-inactive" type="button" role="tab" aria-controls="nav-inactive" aria-selected="false"><FontAwesomeIcon icon={faFlagCheckered} fixedWidth /> Unsupported</button>
+                    </div>
                 </div>
             </nav>
         
@@ -29,10 +32,7 @@ export default function Index({ can, auth, releases }) {
                 <div className="row g-3">
                     <div className="col-12">
                         <nav className="mt-4">
-                            <div className="nav nav-lined" id="nav-tab" role="tablist">
-                                <button className="nav-link active" id="nav-active-tab" data-bs-toggle="tab" data-bs-target="#nav-active" type="button" role="tab" aria-controls="nav-active" aria-selected="true"><FontAwesomeIcon icon={faFlag} fixedWidth /> Supported</button>
-                                <button className="nav-link" id="nav-inactive-tab" data-bs-toggle="tab" data-bs-target="#nav-inactive" type="button" role="tab" aria-controls="nav-inactive" aria-selected="false"><FontAwesomeIcon icon={faFlagCheckered} fixedWidth /> Unsupported</button>
-                            </div>
+                            <h1 className="h4 mb-2">Releases</h1>
                         </nav>
                     </div>
                     <div className="tab-content" id="nav-tabContent">

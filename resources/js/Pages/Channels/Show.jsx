@@ -9,13 +9,16 @@ import PlatformNavigation from '../../Components/PlatformNavigation';
 import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
 
-export default function Show({ can, auth, platforms, channel_order, releases }) {
+export default function Show({ can, auth, platform, platforms, channel_order, releases }) {
     return (
         <App can={can} auth={auth}>
             <PlatformNavigation all="/channels" page="Channels" platforms={platforms} />
         
             <div className="container my-3">
                 <div className="row g-3">
+                    <div className="col-12 mt-4">
+                        <h1 className="h4 mb-2" style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
+                    </div>
                     {releases.map((release, key) => (
                         <div className="col-12" key={key}>
                             <div className="row g-2">
