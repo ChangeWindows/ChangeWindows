@@ -7,7 +7,7 @@ import { faFlag, faCircleInfo, faUser, faUserUnlock, faArrowLeft, faLaptopMobile
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function AdminNavigation() {
-    const { auth, nav_can } = usePage().props;
+    const { auth, nav_can, app } = usePage().props;
 
     return (
         <>
@@ -15,7 +15,7 @@ export default function AdminNavigation() {
                 <div className="container-fluid">
                     <InertiaLink className="navbar-brand" href="/">
                         <div className="app-icon">
-                            <img src="/images/logo-light.svg" width="16px" height="16px" />
+                            <img src={app.preview ? '/images/logo-preview-light.svg' : '/images/logo-light.svg'} width="16px" height="16px" />
                         </div>
                         <span className="brand-label fw-bold">ChangeWindows</span>
                     </InertiaLink>

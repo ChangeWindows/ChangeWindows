@@ -40,7 +40,8 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth' => Auth::user() ? Auth::user()->only('id', 'name', 'email') : null,
             'app' => [
-                'version' => config('app.version')
+                'version' => config('app.version'),
+                'preview' => env('APP_PREVIEW')
             ],
             'nav_can' => [
                 'access_dashboard' => Auth::check() ? Auth::user()->can('dashboard') : false,

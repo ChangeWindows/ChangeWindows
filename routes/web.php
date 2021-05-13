@@ -89,8 +89,7 @@ Route::prefix('')->name('front')->group(function() {
             }
 
             return Inertia::render('About/Show', [
-                'patrons' => $patrons,
-                'is_preview' => env('APP_PREVIEW')
+                'patrons' => $patrons
             ]);
         })->name('');
     });
