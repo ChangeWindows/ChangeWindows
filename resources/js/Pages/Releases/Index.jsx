@@ -30,15 +30,13 @@ export default function Index({ can, auth, releases }) {
         
             <div className="container my-3">
                 <div className="row g-3">
-                    <div className="col-12">
-                        <nav className="mt-4">
-                            <h1 className="h4 mb-2">Releases</h1>
-                        </nav>
+                    <div className="col-12 mt-4">
+                        <h1 className="h4 mb-2">Releases</h1>
                     </div>
                     <div className="tab-content" id="nav-tabContent">
                         <div className="tab-pane fade show active" id="nav-active" role="tabpanel" aria-labelledby="nav-active-tab">
                             {devReleases.length > 0 &&
-                                <div className="col-12 mt-4">
+                                <div className="col-12">
                                     <h2 className="h5 mb-3 fw-bold">Development releases</h2>
                                     <div className="row g-2">
                                         {devReleases.map((release, key) => (
@@ -74,7 +72,7 @@ export default function Index({ can, auth, releases }) {
                         </div>
                         <div className="tab-pane fade" id="nav-inactive" role="tabpanel" aria-labelledby="nav-inactive-tab">
                             {legacyReleases.length > 0 &&
-                                <div className="col-12 mt-4">
+                                <div className="col-12">
                                     <h2 className="h5 mb-3 fw-bold">Unsupported releases</h2>
                                     <div className="row g-2">
                                         {legacyReleases.map((release, key) => (
