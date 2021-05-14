@@ -6,7 +6,7 @@
             padding-right: 0;
             border: none;
             background: transparent;
-            color: $body-color;
+            color: var(--text);
 
             &:not(:last-child) {
                 margin-right: 1.5rem;
@@ -42,10 +42,11 @@
 
     .page-link {
         background: transparent;
+        border-color: var(--nav-border-color) !important;
 
         &:hover {
-            background: rgba(darken($light, 5), .5);
-            border-color: darken($light, 13);
+            background: var(--pagination-bg-hover);
+            border-color: var(--main-border-color);
         }
     }
 }

@@ -3,6 +3,12 @@
         margin-right: 1.5rem;
         font-weight: 500;
         font-family: $headings-font-family;
+        color: var(--text);
+
+        &:hover,
+        &:focus {
+            color: var(--text);
+        }
     }
     
     .nav-item {
@@ -14,8 +20,16 @@
             position: relative;
             padding-left: 0;
             padding-right: 0;
+            color: var(--text);
+
+            &:hover,
+            &:focus {
+                color: var(--text-hover);
+            }
 
             &.active {
+                color: var(--text);
+
                 svg {
                     color: $primary !important;
                 }

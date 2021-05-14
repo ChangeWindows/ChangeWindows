@@ -1,0 +1,24 @@
+.form-control,
+.form-select {
+    background-color: var(--main-bg);
+    border-color: var(--main-border-color);
+    color: var(--text);
+
+    &:focus {
+        background-color: var(--main-bg);
+        border-color: $primary;
+        color: var(--text);
+    }
+
+    &:disabled {
+        background-color: var(--form-disabled-bg);
+    }
+}
+
+.form-check-input {
+    background: var(--checkbox-bg);
+
+    &:disabled {
+        background: var(--checkbox-disabled-bg);
+    }
+}

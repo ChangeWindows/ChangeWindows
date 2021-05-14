@@ -2,6 +2,7 @@
     border: none;
     box-shadow: $box-shadow;
     min-width: 200px;
+    background-color: var(--dropdown-bg);
 
     .dropdown-header {
         padding: .5rem .75rem;
@@ -10,9 +11,22 @@
 
     .dropdown-item {
         padding: .375rem .75rem;
+        color: var(--text);
 
         svg {
             margin-right: .5rem;
+        }
+
+        &:hover,
+        &:focus {
+            background-color: var(--dropdown-bg-hover);
+        }
+
+        &.active {
+            &:hover,
+            &:focus {
+                background-color: $primary;
+            }
         }
     }
 }

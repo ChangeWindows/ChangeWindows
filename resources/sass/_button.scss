@@ -1,10 +1,12 @@
 .btn {
+    color: var(--text);
+    
     &.btn-link {
         text-decoration: none;
 
         &:hover,
         &:focus {
-            background-color: darken($light, 8);
+            background-color: var(--card-bg-hover);
         }
     }
 }

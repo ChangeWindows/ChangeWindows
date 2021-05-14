@@ -6,7 +6,7 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 import NavigationItem from './NavigationItem';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis, faArrowRightFromBracket, faCircleUser, faArrowRightToBracket } from '@fortawesome/pro-regular-svg-icons';
+import { faEllipsis, faArrowRightFromBracket, faCircleUser, faArrowRightToBracket, faGear } from '@fortawesome/pro-regular-svg-icons';
 
 /* -- Utilities -- */
 import useMediaQuery from '../../../hooks/useMediaQuery';
@@ -90,6 +90,9 @@ export default function NavigationBar({ auth, items }) {
 							<>
 								{auth ?
 									<>
+										<InertiaLink href="/settings" className="dropdown-item" >
+											<FontAwesomeIcon icon={faGear} fixedWidth /> Settings
+										</InertiaLink>
 										<InertiaLink href="/profile" className="dropdown-item" >
 											<FontAwesomeIcon icon={faCircleUser} fixedWidth /> {auth.name}
 										</InertiaLink>
@@ -100,9 +103,14 @@ export default function NavigationBar({ auth, items }) {
 										</form>
 									</>
 								:
-									<InertiaLink href="/login" className="dropdown-item" >
-										<FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> Sign-in
-									</InertiaLink>
+									<>
+										<InertiaLink href="/settings" className="dropdown-item" >
+											<FontAwesomeIcon icon={faGear} fixedWidth /> Settings
+										</InertiaLink>
+										<InertiaLink href="/login" className="dropdown-item" >
+											<FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> Sign-in
+										</InertiaLink>
+									</>
 								}
 							</>
 						}
@@ -116,6 +124,7 @@ export default function NavigationBar({ auth, items }) {
 
 					{auth ?
 						<>
+							<NavigationItem url="/settings" icon={faGear} title="Settings" />
 							<NavigationItem url="/profile" icon={faCircleUser} title={auth.name} />
 							<form onSubmit={handleLogout} className="d-none d-sm-block">
 								<button type="submit" className="sidebar-item">
@@ -124,9 +133,12 @@ export default function NavigationBar({ auth, items }) {
 							</form>
 						</>
 					:
-						<InertiaLink href="/login" className="sidebar-item" >
-							<FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> <span className="sidebar-label">Sign-in</span>
-						</InertiaLink>
+						<>
+							<NavigationItem url="/settings" icon={faGear} title="Settings" />
+							<InertiaLink href="/login" className="sidebar-item" >
+								<FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> <span className="sidebar-label">Sign-in</span>
+							</InertiaLink>
+						</>
 					}
 				</>
 			}

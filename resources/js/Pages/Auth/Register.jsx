@@ -16,7 +16,7 @@ export default function Register({ can, status }) {
     }
 
     return (
-        <Auth can={can}>
+        <Auth>
             <form onSubmit={handleSubmit} className="row g-3">
                 {Object.keys(status).length > 0 &&
                     <div className="col-12">

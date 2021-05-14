@@ -10,7 +10,9 @@ export default function Show({ app, patrons }) {
         <App background>
             <div className="auth-card auth-card-lg">
                 <h1 className="h3 m-0 py-5 text-center d-flex justify-content-center align-items-center">
-                    <img src={app.preview ? '/images/logo-preview-dark.svg' : '/images/logo-dark.svg'} width="28px" height="28px" className="me-2 mt-1" /> ChangeWindows {app.preview && 'Preview'}
+                    <img src={app.preview ? '/images/logo-preview-dark.svg' : '/images/logo-dark.svg'} width="28px" height="28px" className="me-2 mt-1 display-light" />
+                    <img src={app.preview ? '/images/logo-preview-light.svg' : '/images/logo-light.svg'} width="28px" height="28px" className="me-2 mt-1 display-dark" />
+                    ChangeWindows {app.preview && 'Preview'}
                 </h1>
                 <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faTwitter} /> Twitter</a>
                 <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faGithub} /> GitHub</a>
@@ -31,7 +33,7 @@ export default function Show({ app, patrons }) {
                     ))}
                 </div>
                 <div className="d-flex flex-column flex-md-row align-items-end justify-content-between mt-4">
-                    <p className="m-0 h4 f-384">Studio <span className="studio-384">384</span></p>
+                    <a className="m-0 h4 f-384" href="https://studio384.be" target="_blank">Studio <span className="studio-384">384</span></a>
                     <p className="m-0">&copy; 2014-2021 &middot; All Right Reserved</p>
                 </div>
             </div>

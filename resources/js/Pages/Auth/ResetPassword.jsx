@@ -15,7 +15,7 @@ export default function ResetPassword({ can, token, status }) {
     }
 
     return (
-        <Auth can={can}>
+        <Auth>
             <form onSubmit={handleSubmit} className="row g-3">
                 <input type="hidden" name="token" value={token} />
                 {Object.keys(status).length > 0 &&

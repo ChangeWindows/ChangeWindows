@@ -21,24 +21,24 @@
 
     .grid-sidebar {
         grid-area: sidebar;
-        background-color: darken($light, 6);
+        background-color: var(--nav-bg);
         justify-content: stretch;
         overflow: auto;
         z-index: 5;
         
         @media (max-width: 575px) {
-            background-color: #fff;
+            background-color: var(--nav-mobile-bg);
             z-index: 7;
             box-shadow: $box-shadow;
         }
 
         .navbar {
-            background-color: darken($light, 6);
-            border-bottom: darken($light, 12) 1px solid;
+            background-color: var(--nav-bg);
+            border-bottom: var(--nav-border-color) 1px solid;
             z-index: 5;
 
             @supports (backdrop-filter: blur(15px) saturate(125%)) {
-                background-color: rgba(darken($light, 6), .75);
+                background-color: var(--nav-bg-acrylic);
                 backdrop-filter: blur(10px) saturate(120%);
             }
             
@@ -69,6 +69,10 @@
                 padding: 0;
             }
 
+            .border-bottom {
+                border-color: var(--nav-border-color) !important;
+            }
+
             .sidebar-item {
                 display: flex;
                 align-items: center;
@@ -84,7 +88,7 @@
                 height: 40px;
 
                 text-decoration: none;
-                color: $dark;
+                color: var(--text);
 
                 @media (max-width: 991px) {
                     justify-content: center;
@@ -119,7 +123,7 @@
                         display: block;
                         font-size: 80%;
                         font-weight: 500;
-                        color: lighten($dark, 35);
+                        color: var(--nav-color-label);
                         margin: .25rem auto 0;
                         max-width: 65px;
                         white-space: nowrap;
@@ -148,11 +152,11 @@
                 }
 
                 &:hover {
-                    background-color: darken($light, 10);
-                    color: $dark;
+                    background-color: var(--nav-item-hover);
+                    color: var(--text);
 
                     @media (max-width: 575px) {
-                        background-color: darken($light, 3);
+                        background-color: var(--nav-bar-item-hover);
                     }
                 }
             }
@@ -162,17 +166,17 @@
     .grid-content {
         grid-area: content;
         box-shadow: $box-shadow;
-        background-color: darken($light, 2);
+        background-color: var(--main-bg);
         z-index: 6;
         overflow: auto;
 
         .navbar {
-            background-color: darken($light, 2);
-            border-bottom: darken($light, 8) 1px solid;
+            background-color: var(--main-bg);
+            border-bottom: var(--main-border-color) 1px solid;
             z-index: 6;
 
             @supports (backdrop-filter: blur(15px) saturate(125%)) {
-                background-color: rgba(darken($light, 2), .75);
+                background-color: var(--main-bg-acrylic);
                 backdrop-filter: blur(10px) saturate(120%);
             }
         }
