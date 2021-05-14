@@ -9,4 +9,13 @@
             background-color: var(--card-bg-hover);
         }
     }
+
+    &.btn-primary,
+    &.btn-danger {
+        color: #fff !important;
+    }
+
+    &.btn-link {
+        color: $primary !important;
+    }
 }
