@@ -33,7 +33,6 @@ export default function AdminNavigation() {
                     { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms', permission: nav_can.show_platforms }
                 ]}
                 overflow={[
-                    { type: 'divider' },
                     { type: 'link', url: '/admin/tweet_streams', icon: faTwitter, title: 'Twitter', permission: nav_can.show_tweet_streams },
                     { type: 'divider' },
                     { type: 'link', url: '/admin/users', icon: faUser, title: 'Users', permission: nav_can.show_users },
