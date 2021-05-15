@@ -106,6 +106,21 @@
                     text-align: center;
                 }
 
+                &.sidebar-item-sm {
+                    @media (min-width: 992px) {
+                        width: 40px;
+                        justify-content: center;
+
+                        .sidebar-label {
+                            display: none;
+                        }
+
+                        svg {
+                            margin-right: 0;
+                        }
+                    }
+                }
+
                 svg {
                     margin-right: .5rem;
 

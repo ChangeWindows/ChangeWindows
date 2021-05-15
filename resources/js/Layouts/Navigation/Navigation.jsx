@@ -32,13 +32,16 @@ export default function Navigation() {
                     { type: 'link', url: '/packages', icon: faCubes, title: 'Packages' },
                     { type: 'divider' },
                     { type: 'external', url: 'https://medium.com/changewindows', icon: faBullhorn, title: 'Blog' },
-                    { type: 'external', url: 'https://twitter.com/changewindows', icon: faTwitter, title: 'Twitter' },
-                    { type: 'external', url: 'https://patreon.com/changewindows', icon: faPatreon, title: 'Sponsor us' },
-                    { type: 'external', url: 'https://github.com/changewindows', icon: faGithub, title: 'GitHub' },
+                    { type: 'socials' },
                     { type: 'divider', permission: nav_can.access_dashboard },
                     { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage', permission: nav_can.access_dashboard },
                     { type: 'divider' },
                     { type: 'link', url: '/about', icon: faCircleInfo, title: 'About' }
+                ]}
+                socials={[
+                    { type: 'external', url: 'https://twitter.com/changewindows', icon: faTwitter, title: 'Twitter' },
+                    { type: 'external', url: 'https://patreon.com/changewindows', icon: faPatreon, title: 'Sponsor us' },
+                    { type: 'external', url: 'https://github.com/changewindows', icon: faGithub, title: 'GitHub' }
                 ]}
             />
         </>
