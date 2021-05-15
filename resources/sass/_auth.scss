@@ -8,7 +8,7 @@
     justify-content: center;
     align-items: center;
 
-    @media (max-width: 575px) {
+    @media (max-width: 576px) {
         &:not(.auth-flow) {
             height: calc(100vh - 58px);
         }
