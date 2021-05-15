@@ -24,13 +24,14 @@ export default function Navigation() {
 
             <NavigationBar
                 auth={auth}
-                items={[
+                main={[
                     { type: 'link', url: '/timeline', icon: faBarsStaggered, title: 'Timeline' },
                     { type: 'link', url: '/platforms', primary: '/pc', icon: faLaptopMobile, title: 'Platforms' },
                     { type: 'link', url: '/channels', icon: faCodeBranch, title: 'Channels' },
                     { type: 'link', url: '/releases', icon: faFlag, title: 'Releases' },
-                    { type: 'link', url: '/packages', icon: faCubes, title: 'Packages' },
-                    { type: 'divider' },
+                    { type: 'link', url: '/packages', icon: faCubes, title: 'Packages' }
+                ]}
+                overflow={[
                     { type: 'external', url: 'https://medium.com/changewindows', icon: faBullhorn, title: 'Blog' },
                     { type: 'socials' },
                     { type: 'divider', permission: nav_can.access_dashboard },

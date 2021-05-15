@@ -13,7 +13,7 @@ import useMediaQuery from '../../../hooks/useMediaQuery';
 import useWidth from '../../../hooks/useWidth';
 import clsx from 'clsx';
 
-export default function NavigationBar({ auth, items, socials }) {
+export default function NavigationBar({ auth, main, overflow, socials }) {
 	const matchesSmUp = useMediaQuery('(min-width: 576px)');
 	const ref = useRef(null);
 	const width = useWidth(ref);
@@ -21,19 +21,24 @@ export default function NavigationBar({ auth, items, socials }) {
 
 	const [mainItems, overflowItems] = useMemo(() => {
 		const maxVisibleItems = Math.floor(width / 65);
-		let navigationItems = items.filter((item) => item.permission === true || item.permission === undefined);
+		let navigationItems = main.filter((item) => item.permission === true || item.permission === undefined);
+		let navigationOverflowItems = overflow.filter((item) => item.permission === true || item.permission === undefined);
 
-		if (items.length > maxVisibleItems && !matchesSmUp) {
-			navigationItems = navigationItems.filter((item) => item.type !== 'divider' && !item.ignore);
+		if (!matchesSmUp) {
+			const mainNav = navigationItems.slice(0, maxVisibleItems - 1);
+			let overflowNav = [...navigationItems.slice(maxVisibleItems - 1), ...navigationOverflowItems];
 
-			const main = navigationItems.slice(0, maxVisibleItems - 1);
-			const overflow = navigationItems.slice(maxVisibleItems - 1);
+			console.log(mainNav.length, navigationItems.length);
 
-			return [main, overflow];
+			if (mainNav.length < navigationItems.length) {
+				overflowNav = [...navigationItems.slice(maxVisibleItems - 1), { type: 'divider' }, ...navigationOverflowItems];
+			}
+
+			return [mainNav, overflowNav];
 		}
 
-		return [navigationItems, []]
-	}, [items, matchesSmUp, width]);
+		return [[...navigationItems, { type: 'divider' }, ...navigationOverflowItems], []]
+	}, [main, overflow, matchesSmUp, width]);
 
     function handleLogout(e) {
         e.preventDefault();
@@ -77,7 +82,29 @@ export default function NavigationBar({ auth, items, socials }) {
     						const Component = item.type === 'external' ? 'a' : InertiaLink;
 							const mainProps = item.type === 'external' ? { target: '_blank' } : {};
 
-							if (item.type === 'socials') {
+							if (item.type === 'link') {
+								return (
+									<Component
+										{...mainProps}
+										key={key}
+										href={`${item.url}${item.primary ?? ''}`}
+										className={clsx('dropdown-item', { 'active': page.url.includes(item.url)})}
+									>
+										<FontAwesomeIcon icon={item.icon} fixedWidth /> {item.title}
+									</Component>
+								);
+							} else if (item.type === 'external') {
+								return (
+									<Component
+										{...mainProps}
+										key={key}
+										href={`${item.url}${item.primary ?? ''}`}
+										className={clsx('dropdown-item', { 'active': page.url.includes(item.url)})}
+									>
+										<FontAwesomeIcon icon={item.icon} fixedWidth /> {item.title}
+									</Component>
+								);
+							} else if (item.type === 'socials') {
 								return socials.map((social, key) => (
 									<Component
 										{...mainProps}
@@ -87,18 +114,12 @@ export default function NavigationBar({ auth, items, socials }) {
 									>
 										<FontAwesomeIcon icon={social.icon} fixedWidth /> {social.title}
 									</Component>
-								))
-							} else {
-								<Component
-									{...mainProps}
-									key={key}
-									href={`${item.url}${item.primary ?? ''}`}
-									className={clsx('dropdown-item', { 'active': page.url.includes(item.url)})}
-								>
-									<FontAwesomeIcon icon={item.icon} fixedWidth /> {item.title}
-								</Component>
+								));
+							} else if (item.type === 'divider') {
+								return (<div className="dropdown-divider" key={key} />);
 							}
 						})}
+						<div className="dropdown-divider" />
 						{auth ?
 							<>
 								<InertiaLink href="/settings" className="dropdown-item" >

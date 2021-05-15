@@ -24,15 +24,15 @@ export default function AdminNavigation() {
 
             <NavigationBar
                 auth={auth}
-                items={[
-                    { type: 'link', url: '/timeline', icon: faArrowLeft, title: 'Back', ignore: true },
-                    { type: 'divider' },
+                main={[
                     { type: 'link', url: '/admin/flights', icon: faPlane, title: 'Flights', permission: nav_can.show_flights },
                     { type: 'link', url: '/admin/promotions', icon: faAnglesUp, title: 'Promotions', permission: nav_can.show_flights },
                     { type: 'link', url: '/admin/launches', icon: faRocketLaunch, title: 'Launches', permission: nav_can.show_flights },
                     { type: 'link', url: '/admin/releases', icon: faFlag, title: 'Releases', permission: nav_can.show_releases },
                     { type: 'link', url: '/admin/packages', icon: faCubes, title: 'Packages', permission: nav_can.show_releases },
-                    { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms', permission: nav_can.show_platforms },
+                    { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms', permission: nav_can.show_platforms }
+                ]}
+                overflow={[
                     { type: 'divider' },
                     { type: 'link', url: '/admin/tweet_streams', icon: faTwitter, title: 'Twitter', permission: nav_can.show_tweet_streams },
                     { type: 'divider' },
@@ -40,7 +40,7 @@ export default function AdminNavigation() {
                     { type: 'link', url: '/admin/roles', icon: faUserUnlock, title: 'Roles', permission: nav_can.show_roles },
                     { type: 'link', url: '/admin/permissions', icon: faUnlockKeyhole, title: 'Permissions', permission: nav_can.show_permissions },
                     { type: 'divider' },
-                    { type: 'link', url: '/about', icon: faCircleInfo, title: 'About' }
+                    { type: 'link', url: '/timeline', icon: faArrowLeft, title: 'Back' }
                 ]}
             />
         </>
