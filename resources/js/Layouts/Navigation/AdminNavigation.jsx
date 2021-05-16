@@ -26,11 +26,11 @@ export default function AdminNavigation() {
                 auth={auth}
                 main={[
                     { type: 'link', url: '/admin/flights', icon: faPlane, title: 'Flights', permission: nav_can.show_flights },
-                    { type: 'link', url: '/admin/promotions', icon: faAnglesUp, title: 'Promotions', permission: nav_can.show_flights },
-                    { type: 'link', url: '/admin/launches', icon: faRocketLaunch, title: 'Launches', permission: nav_can.show_flights },
                     { type: 'link', url: '/admin/releases', icon: faFlag, title: 'Releases', permission: nav_can.show_releases },
                     { type: 'link', url: '/admin/packages', icon: faCubes, title: 'Packages', permission: nav_can.show_releases },
-                    { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms', permission: nav_can.show_platforms }
+                    { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms', permission: nav_can.show_platforms },
+                    { type: 'link', url: '/admin/promotions', icon: faAnglesUp, title: 'Promotions', permission: nav_can.show_flights },
+                    { type: 'link', url: '/admin/launches', icon: faRocketLaunch, title: 'Launches', permission: nav_can.show_flights }
                 ]}
                 overflow={[
                     { type: 'link', url: '/admin/tweet_streams', icon: faTwitter, title: 'Twitter', permission: nav_can.show_tweet_streams },
