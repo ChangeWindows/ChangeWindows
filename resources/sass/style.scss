@@ -26,6 +26,7 @@
     --OFF: ;
     
     --text: #{ light-dark($body-color, $gray-100) };
+    --text-inverse: #{ light-dark($gray-100, $body-color) };
     --text-hover: #{ light-dark(lighten($body-color, 20), darken($gray-100, 25)) };
 
     --nav-bg: #{ light-dark(darken($light, 6), darken($dark, 6)) };
@@ -244,6 +245,11 @@ body {
             color: rgba(255, 255, 255, 0.7);
         }
     }
+}
+
+// Badge
+.badge {
+    color: var(--text-inverse);
 }
 
 // Cards
