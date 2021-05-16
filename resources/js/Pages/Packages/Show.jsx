@@ -82,6 +82,7 @@ export default function Show(props) {
                                                                     channels={flight.release_channel}
                                                                     version={flight.version}
                                                                     pack={flight.package}
+                                                                    overview
                                                                 />
                                                             );
                                                         }
@@ -93,6 +94,7 @@ export default function Show(props) {
                                                                     platform={flight.platform}
                                                                     channel={flight.release_channel}
                                                                     version={flight.version}
+                                                                    overview
                                                                 />
                                                             );
                                                         }
@@ -103,6 +105,7 @@ export default function Show(props) {
                                                                     key={`${flight.type}-${flight.id}`}
                                                                     platform={flight.platform}
                                                                     version={flight.version}
+                                                                    overview
                                                                 />
                                                             );
                                                         }

@@ -2,8 +2,9 @@ import React, { useMemo } from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import PlatformIcon from '../Platforms/PlatformIcon';
+import clsx from 'clsx';
 
-export default function Launch({ platform, version, url = null }) {
+export default function Launch({ platform, version, url = null, overview = false }) {
     const Component = useMemo(() => (url ? InertiaLink : 'div'), ['url']);
     const mainProps = useMemo(() => ({ href: url }), ['url']);
 
@@ -13,7 +14,7 @@ export default function Launch({ platform, version, url = null }) {
                 <PlatformIcon platform={platform} />
             </div>
             <div className="release-flight">Version <span className="fw-bold">{version}</span> is now flighting</div>
-            <div className="release-version">{version}</div>
+            <div className={clsx('release-version', 'text-muted', { 'd-none': overview, 'd-sm-block': overview })}>{version}</div>
         </Component>
     );
 };

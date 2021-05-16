@@ -214,6 +214,7 @@ export default function Show({ release, platform, channels, timeline, pagination
                                                             channels={flight.release_channel}
                                                             version={flight.version}
                                                             pack={flight.package}
+                                                            overview
                                                         />
                                                     );
                                                 }
@@ -225,6 +226,7 @@ export default function Show({ release, platform, channels, timeline, pagination
                                                             platform={flight.platform}
                                                             channel={flight.release_channel}
                                                             version={flight.version}
+                                                            overview
                                                         />
                                                     );
                                                 }
@@ -235,6 +237,7 @@ export default function Show({ release, platform, channels, timeline, pagination
                                                             key={`${flight.type}-${flight.id}`}
                                                             platform={flight.platform}
                                                             version={flight.version}
+                                                            overview
                                                         />
                                                     );
                                                 }
