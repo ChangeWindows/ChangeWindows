@@ -14,7 +14,7 @@ export default function Launch({ platform, version, url = null, overview = false
                 <PlatformIcon platform={platform} />
             </div>
             <div className="release-flight">Version <span className="fw-bold">{version}</span> is now flighting</div>
-            <div className={clsx('release-version', 'text-muted', { 'd-none': overview, 'd-sm-block': overview })}>{version}</div>
+            <div className={clsx('release-version', { 'd-none': overview, 'd-sm-block': overview })}>{version}</div>
         </Component>
     );
 };
