@@ -1,6 +1,6 @@
 .progress {
     height: .75rem;
-    background-color: #fff;
+    background-color: var(--progress-bg);
     border-radius: 1rem;
 
     .progress-bar {
