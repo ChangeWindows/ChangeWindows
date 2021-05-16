@@ -65,6 +65,9 @@
     
     --btn-transparent-bg-hover: #{ light-dark(rgba($dark, .2), rgba($light, .1)) };
 
+    --scroll-native: #{ light-dark(darken($light, 6), darken($dark, 6)) };
+    --scroll-webkit: #{ light-dark(darken($light, 16), lighten($dark, 12)) };
+
     --display-light: #{ light-dark(block, none) };
     --display-dark: #{ light-dark(none, block) };
 }
@@ -131,11 +134,12 @@ body {
 
 // Scrollbar
 * {
-    @media (min-width: 576px) {
-        scrollbar-color: var(--nav-bg);
+    scrollbar-color: var(--scroll-native);
+    scrollbar-width: thin;
 
+    @media (hover: hover) and (pointer: fine) {
         &::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
 
         &::-webkit-scrollbar-track {
@@ -144,11 +148,9 @@ body {
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: var(--nav-bg);
-            border-radius: 10px;
+            background-color: var(--scroll-webkit);
+            border-radius: 2px;
         }
-
-        scrollbar-width: thin;
     }
 }
 
