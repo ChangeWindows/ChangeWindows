@@ -23,7 +23,7 @@
     
     @media (max-width: 767px) {
         font-weight: 600;
-        color: $body-color;
+        color: var(--text);
     }
     
     @media (min-width: 768px) {
