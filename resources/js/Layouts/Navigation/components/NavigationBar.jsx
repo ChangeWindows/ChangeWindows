@@ -147,6 +147,27 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 					</ul>
 				</>
 			}
+			
+			<div className="flex-grow-1 d-none d-sm-block" />
+
+			{auth ?
+				<>
+					<NavigationItem url="/settings" icon={faGear} title="Settings" />
+					<NavigationItem url="/profile" icon={faCircleUser} title={auth.name} />
+					<form onSubmit={handleLogout} className="d-none d-sm-block">
+						<button type="submit" className="sidebar-item">
+							<FontAwesomeIcon icon={faArrowRightFromBracket} fixedWidth /> <span className="sidebar-label">Log out</span>
+						</button>
+					</form>
+				</>
+			:
+				<>
+					<NavigationItem url="/settings" icon={faGear} title="Settings" />
+					<InertiaLink href="/login" className="sidebar-item" >
+						<FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> <span className="sidebar-label">Sign-in</span>
+					</InertiaLink>
+				</>
+			}
 		</div>
 	);
 }
