@@ -49,9 +49,6 @@ export default function Show({ can, auth, packages, createUrl, status = null }) 
                                         <InertiaLink href={pack.edit_url} className="btn btn-link btn-sm">
                                             {can.edit_packages ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
                                         </InertiaLink>
-                                        <InertiaLink href={pack.edit_changelog_url} className="btn btn-link btn-sm">
-                                            {can.edit_packages ? <><FontAwesomeIcon icon={faNotes} fixedWidth /> Changelog</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Changelog</>}
-                                        </InertiaLink>
                                     </div>
                                 </div>
                             </div>

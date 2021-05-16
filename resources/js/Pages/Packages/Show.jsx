@@ -31,7 +31,7 @@ export default function Show(props) {
                             <FontAwesomeIcon icon={faBarsStaggered} fixedWidth /> Timeline
                         </button>
                         <button className="nav-link" id="nav-releases-tab" data-bs-toggle="tab" data-bs-target="#nav-releases" type="button" role="tab" aria-controls="nav-releases" aria-selected="false">
-                            <FontAwesomeIcon icon={faNotes} fixedWidth /> Release notes
+                            <FontAwesomeIcon icon={faNotes} fixedWidth /> Changelog
                         </button>
                     </div>
                     <div className="flex-grow-1" />
@@ -120,7 +120,7 @@ export default function Show(props) {
                             <div className="tab-pane fade" id="nav-releases" role="tabpanel" aria-labelledby="nav-releases-tab">
                                 <div className="row">
                                     <div className="col-12 mt-4">
-                                        <h2 className="h5 mb-3 fw-bold">Release notes</h2>
+                                        <h2 className="h5 mb-3 fw-bold">Changelog</h2>
                                         <div className="changelog-content">
                                             {release.changelog ? <Markdown>{release.changelog}</Markdown> : null}
                                         </div>

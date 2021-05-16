@@ -100,21 +100,21 @@ export default function Show({ release, platform, channels, timeline, pagination
                     </InertiaLink>
                     <div className="nav nav-lined" id="nav-tab" role="tablist">
                         <button className="nav-link active" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="true">
-                            <FontAwesomeIcon icon={faBarsStaggered} fixedWidth /><span className="d-none d-sm-inline"> Timeline</span>
+                            <FontAwesomeIcon icon={faBarsStaggered} fixedWidth /> Timeline
                         </button>
                         <button className="nav-link" id="nav-releases-tab" data-bs-toggle="tab" data-bs-target="#nav-releases" type="button" role="tab" aria-controls="nav-releases" aria-selected="false">
-                            <FontAwesomeIcon icon={faNotes} fixedWidth /><span className="d-none d-sm-inline"> Release notes</span>
+                            <FontAwesomeIcon icon={faNotes} fixedWidth /> Changelog
                         </button>
                     </div>
                     <div className="flex-grow-1" />
                     {quick_nav.prev &&
                         <InertiaLink href={quick_nav.prev.url} className="btn btn-transparent btn-sm">
-                            <FontAwesomeIcon icon={faChevronLeft} fixedWidth /> {quick_nav.prev.version}
+                            <FontAwesomeIcon icon={faChevronLeft} fixedWidth /><span className="d-none d-sm-inline"> {quick_nav.prev.version}</span>
                         </InertiaLink>
                     }
                     {quick_nav.next &&
                         <InertiaLink href={quick_nav.next.url} className="btn btn-transparent btn-sm ms-2">
-                            {quick_nav.next.version} <FontAwesomeIcon icon={faChevronRight} fixedWidth />
+                            <span className="d-none d-sm-inline">{quick_nav.next.version} </span><FontAwesomeIcon icon={faChevronRight} fixedWidth />
                         </InertiaLink>
                     }
                 </div>
