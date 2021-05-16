@@ -54,7 +54,7 @@ export default function Edit({ can, auth, urls, platforms, pack, channels, relea
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">
-                        <InertiaLink href="/admin/packages" className="btn btn-sm me-2">
+                        <InertiaLink href="/admin/packages" className="btn btn-transparent btn-sm me-2">
                             <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                         </InertiaLink>
                         <span className="navbar-brand">{curPack.name || 'Unnamed package'}</span>

@@ -1,6 +1,4 @@
 .btn {
-    color: var(--text);
-    
     &.btn-link {
         text-decoration: none;
 
@@ -10,12 +8,12 @@
         }
     }
 
-    &.btn-primary,
-    &.btn-danger {
-        color: #fff !important;
-    }
+    &.btn-transparent {
+        color: var(--text);
 
-    &.btn-link {
-        color: $primary !important;
+        &:hover,
+        &:focus {
+            background-color: var(--btn-transparent-bg-hover);
+        }
     }
 }

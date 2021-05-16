@@ -41,7 +41,7 @@ export default function Edit({ can, auth, urls, releaseChannel, releases, channe
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">
-                        <InertiaLink href="/admin/releases" className="btn btn-sm me-2">
+                        <InertiaLink href="/admin/releases" className="btn btn-transparent btn-sm me-2">
                             <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                         </InertiaLink>
                         <span className="navbar-brand">{curReleaseChannel.name || 'Unnamed release channel'}</span>

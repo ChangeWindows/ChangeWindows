@@ -62,6 +62,8 @@
     --form-disabled-bg: #{ light-dark($light, transparent) };
     --checkbox-bg: #{ light-dark(#fff, darken($dark, 6)) };
     --checkbox-disabled-bg: #{ light-dark(#eee, darken($dark, 2)) };
+    
+    --btn-transparent-bg-hover: #{ light-dark(rgba($dark, .2), rgba($light, .1)) };
 
     --display-light: #{ light-dark(block, none) };
     --display-dark: #{ light-dark(none, block) };

@@ -43,7 +43,7 @@ export default function Edit({ can, auth, urls, launch, release, platform, statu
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">
-                        <InertiaLink href="/admin/launches" className="btn btn-sm me-2">
+                        <InertiaLink href="/admin/launches" className="btn btn-transparent btn-sm me-2">
                             <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                         </InertiaLink>
                         <span className="navbar-brand">

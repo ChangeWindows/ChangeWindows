@@ -23,7 +23,7 @@ export default function Show(props) {
         <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
-                    <InertiaLink href={`/platforms/${platform.slug}`} className="btn btn-sm me-2">
+                    <InertiaLink href={`/platforms/${platform.slug}`} className="btn btn-transparent btn-sm me-2">
                         <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                     </InertiaLink>
                     <div className="nav nav-lined" id="nav-tab" role="tablist">

@@ -49,7 +49,7 @@ export default function Create({ can, auth, urls, tweet_streams }) {
             <form onSubmit={handleSubmit}>
                 <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                     <div className="container">
-                        <InertiaLink href="/admin/platforms" className="btn btn-sm me-2">
+                        <InertiaLink href="/admin/platforms" className="btn btn-transparent btn-sm me-2">
                             <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                         </InertiaLink>
                         <span className="navbar-brand"><PlatformIcon platform={curPlatform} color className="me-2" /> {curPlatform.name || 'Unnamed platform'}</span>
