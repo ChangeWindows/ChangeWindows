@@ -128,8 +128,8 @@ export default function Show({ release, platform, channels, timeline, pagination
                                 <h1 className="h4"><PlatformIcon platform={platform} color /></h1>
                             </div>
                             <div>
-                                <h1 className="h4 mb-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
-                                <h2 className="h6 text-muted">Version {release.version}, {release.codename}</h2>
+                                <h1 className="h4 m-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
+                                <h2 className="h6 m-0 text-muted">Version {release.version}, {release.codename}</h2>
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,7 @@ export default function Show({ release, platform, channels, timeline, pagination
                             <div className="tab-pane fade show active" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
 
                                 {(!!preview_duration || !!public_duration || !!extended_duration || !!lts_duration) &&
-                                    <div className="d-flex progress-group flex-column flex-md-row mb-4">
+                                    <div className="d-flex progress-group flex-column flex-md-row mt-3">
                                         {!!preview_duration &&
                                             <Progress
                                                 duration={preview_duration}
@@ -190,7 +190,7 @@ export default function Show({ release, platform, channels, timeline, pagination
                                         }
                                     </div>
                                 }
-                                <div className="row g-2 mt-4">
+                                <div className="row g-2 mt-3">
                                     {channels.map((channel, key) => (
                                         <Channel
                                             key={key}
