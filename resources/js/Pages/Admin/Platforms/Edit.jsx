@@ -7,7 +7,7 @@ import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEye, faFloppyDisk, faPen, faPlus, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faFloppyDisk, faPlus, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Edit({ can, urls, platform, channels, tweet_streams, status = null }) {
     const [curPlatform, setCurPlatform] = useState(platform);
@@ -246,7 +246,7 @@ export default function Edit({ can, urls, platform, channels, tweet_streams, sta
                                 
                                 return (
                                     <div className="col-12 col-sm-6 col-xl-4" key={channel.id}>
-                                        <div className="card border-0 shadow-sm h-100">
+                                        <InertiaLink href={channel.edit_url} className="card border-0 shadow-sm h-100">
                                             <div className="card-body">
                                                 <div className="d-flex">
                                                     <h3 className="h6 mb-0">
@@ -259,21 +259,15 @@ export default function Edit({ can, urls, platform, channels, tweet_streams, sta
                                                 </div>
                                                 <div className="flex-grox-1" />
                                             </div>
-                                            <div className="card-footer">
-                                                <InertiaLink href={channel.edit_url} className="btn btn-link btn-sm">
-                                                    {can.edit_channels ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
-                                                </InertiaLink>
-                                            </div>
-                                        </div>
+                                        </InertiaLink>
                                     </div>
                                 );
                             })}
                             {can.create_channels &&
                                 <div className="col-12 col-sm-6 col-xl-4">
                                     <InertiaLink href={urls.create_channel} className="card card-add">
-                                        <div className="card-body py-4">
-                                            <h3 className="h5 fw-normal mb-2">New channel</h3>
-                                            <h5 className="mb-0"><FontAwesomeIcon icon={faPlus} fixedWidth /></h5>
+                                        <div className="card-body py-3">
+                                            <h3 className="h5 fw-normal m-0"><FontAwesomeIcon icon={faPlus} fixedWidth /> New channel</h3>
                                         </div>
                                     </InertiaLink>
                                 </div>

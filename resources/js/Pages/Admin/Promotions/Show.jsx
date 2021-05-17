@@ -7,10 +7,10 @@ import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 import Pagination from '../../../Components/Pagination';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faPlus } from '@fortawesome/pro-regular-svg-icons';
 import { format, parseISO } from 'date-fns';
 
-export default function Show({ can, timeline, pagination, createUrl, status = null }) {
+export default function Show({ timeline, pagination, createUrl, status = null }) {
     return (
         <Admin>
             <NaviBar
@@ -35,24 +35,19 @@ export default function Show({ can, timeline, pagination, createUrl, status = nu
                             </div>
                             {timeline[date].promotions.map((promotion, key) => (
                                 <div className="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-2" key={key}>
-                                    <div className="card border-0 shadow-sm h-100">
+                                    <InertiaLink href={promotion.edit_url} className="card border-0 shadow-sm h-100">
                                         <div className="card-body d-flex flex-column">
                                             <div className="d-flex flex-row">
                                                 <h3 className="h6 mb-0">
                                                     <PlatformIcon platform={promotion.platform} color />
                                                 </h3>
                                                 <div className="ms-2">
-                                                    <h3 className="h6 mb-0">Version {promotion.version}</h3>
+                                                    <h3 className="h6 mb-1">Version {promotion.version}</h3>
                                                     <span key={key} className="badge me-1" style={{ background: promotion.release_channel.color }}>{promotion.release_channel.name}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="card-footer">
-                                            <InertiaLink href={promotion.edit_url} className="btn btn-link btn-sm">
-                                                {can.edit_promotions ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
-                                            </InertiaLink>
-                                        </div>
-                                    </div>
+                                    </InertiaLink>
                                 </div>
                             ))}
                         </Fragment>

@@ -6,9 +6,9 @@ import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faPlus } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Show({ can, packages, createUrl, status = null }) {
+export default function Show({ packages, createUrl, status = null }) {
     return (
         <Admin>
             <NaviBar
@@ -29,7 +29,7 @@ export default function Show({ can, packages, createUrl, status = null }) {
                     {packages.map((pack, key) => {
                         return (
                             <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={key}>
-                                <div className="card border-0 shadow-sm h-100">
+                                <InertiaLink href={pack.edit_url} className="card border-0 shadow-sm h-100">
                                     <div className="card-body d-flex flex-column">
                                         <div className="d-flex flex-row">
                                             <h3 className="h6 mb-0">
@@ -46,12 +46,7 @@ export default function Show({ can, packages, createUrl, status = null }) {
                                             ))}
                                         </div>}
                                     </div>
-                                    <div className="card-footer">
-                                        <InertiaLink href={pack.edit_url} className="btn btn-link btn-sm">
-                                            {can.edit_packages ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
-                                        </InertiaLink>
-                                    </div>
-                                </div>
+                                </InertiaLink>
                             </div>
                         );
                     })}

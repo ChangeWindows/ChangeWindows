@@ -5,9 +5,9 @@ import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faPlus } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Show({ can, tweet_streams, createUrl, status = null }) {
+export default function Show({ tweet_streams, createUrl, status = null }) {
     return (
         <Admin>
             <NaviBar
@@ -27,17 +27,12 @@ export default function Show({ can, tweet_streams, createUrl, status = null }) {
                 <div className="row g-3">
                     {tweet_streams.map((tweet_stream) => (
                         <div className="col-12 col-sm-6 col-xl-4 col-xxl-3" key={tweet_stream.id}>
-                            <div className="card border-0 shadow-sm">
+                            <InertiaLink href={tweet_stream.editUrl} className="card border-0 shadow-sm">
                                 <div className="card-body">
                                     <h3 className="h6 mb-0">{tweet_stream.name}</h3>
                                     <p className="text-muted mb-0 mt-n1"><small>{tweet_stream.account}</small></p>
                                 </div>
-                                <div className="card-footer">
-                                    <InertiaLink href={tweet_stream.editUrl} className="btn btn-link btn-sm">
-                                        {can.edit_tweet_streams ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
-                                    </InertiaLink>
-                                </div>
-                            </div>
+                            </InertiaLink>
                         </div>
                     ))}
                 </div>

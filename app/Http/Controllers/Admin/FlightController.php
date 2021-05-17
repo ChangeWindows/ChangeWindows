@@ -41,7 +41,7 @@ class FlightController extends Controller
                     'flights' => $items->map(function ($flight) {
                         return [
                             'id' => $flight->item->id,
-                            'version' => $flight->item->version,
+                            'version' => $flight->item->flight,
                             'date' => $flight->item->timeline->date,
                             'release_channel' => [
                                 'name' => $flight->item->releaseChannel->short_name,

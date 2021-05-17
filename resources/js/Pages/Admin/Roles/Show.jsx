@@ -5,9 +5,9 @@ import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faPlus } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Show({ can, roles, createUrl, status = null }) {
+export default function Show({ roles, createUrl, status = null }) {
     return (
         <Admin>
             <NaviBar
@@ -27,16 +27,11 @@ export default function Show({ can, roles, createUrl, status = null }) {
                 <div className="row g-3">
                     {roles.map((role) => (
                         <div className="col-12 col-sm-6 col-xl-4 col-xxl-3" key={role.id}>
-                            <div className="card border-0 shadow-sm">
+                            <InertiaLink href={role.editUrl} className="card border-0 shadow-sm">
                                 <div className="card-body">
                                     <h3 className="h6 mb-0">{role.name}</h3>
                                 </div>
-                                <div className="card-footer">
-                                    <InertiaLink href={role.editUrl} className="btn btn-link btn-sm">
-                                        {can.edit_roles ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
-                                    </InertiaLink>
-                                </div>
-                            </div>
+                            </InertiaLink>
                         </div>
                     ))}
                 </div>

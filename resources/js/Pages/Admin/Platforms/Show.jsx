@@ -6,9 +6,9 @@ import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faPlus } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Show({ can, platforms, createUrl, status = null }) {
+export default function Show({ platforms, createUrl, status = null }) {
     return (
         <Admin>
             <NaviBar
@@ -33,8 +33,8 @@ export default function Show({ can, platforms, createUrl, status = null }) {
                         platform.legacy && platformStatus.push('Legacy');
                         
                         return (
-                            <div className="col-12 col-sm-6 col-xl-4 col-xxl-3" key={platform.id}>
-                                <div className="card border-0 shadow-sm">
+                            <div className="col-6 col-xl-4 col-xxl-3" key={platform.id}>
+                                <InertiaLink href={platform.edit_url} className="card border-0 shadow-sm">
                                     <div className="card-body">
                                         <div className="d-flex flex-row">
                                             <h3 className="h6 mb-0"><PlatformIcon platform={platform} color /></h3>
@@ -44,12 +44,7 @@ export default function Show({ can, platforms, createUrl, status = null }) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="card-footer">
-                                        <InertiaLink href={platform.edit_url} className="btn btn-link btn-sm">
-                                            {can.edit_platforms ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
-                                        </InertiaLink>
-                                    </div>
-                                </div>
+                                </InertiaLink>
                             </div>
                         );
                     })}

@@ -6,9 +6,9 @@ import NaviBar from '../../../Components/NaviBar';
 import Pagination from '../../../Components/Pagination';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faPlus } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Show({ can, permissions, pagination, createUrl, status = null }) {
+export default function Show({ permissions, pagination, createUrl, status = null }) {
     return (
         <Admin>
             <NaviBar
@@ -28,16 +28,11 @@ export default function Show({ can, permissions, pagination, createUrl, status =
                 <div className="row g-3">
                     {permissions.map((permission) => (
                         <div className="col-12 col-sm-6 col-xl-4 col-xxl-3" key={permission.id}>
-                            <div className="card border-0 shadow-sm">
+                            <InertiaLink href={permission.editUrl}  className="card border-0 shadow-sm">
                                 <div className="card-body">
                                     <h3 className="h6 mb-0">{permission.name}</h3>
                                 </div>
-                                <div className="card-footer">
-                                    <InertiaLink href={permission.editUrl} className="btn btn-link btn-sm">
-                                        {can.edit_permissions ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
-                                    </InertiaLink>
-                                </div>
-                            </div>
+                            </InertiaLink>
                         </div>
                     ))}
                     <Pagination pagination={pagination} />
