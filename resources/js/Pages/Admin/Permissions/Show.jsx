@@ -27,7 +27,7 @@ export default function Show({ permissions, pagination, createUrl, status = null
                 }
                 <div className="row g-3">
                     {permissions.map((permission) => (
-                        <div className="col-12 col-sm-6 col-xl-4 col-xxl-3" key={permission.id}>
+                        <div className="col-6 col-xl-4 col-xxl-3" key={permission.id}>
                             <InertiaLink href={permission.editUrl}  className="card border-0 shadow-sm">
                                 <div className="card-body">
                                     <h3 className="h6 mb-0">{permission.name}</h3>

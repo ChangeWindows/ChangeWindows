@@ -34,7 +34,7 @@ export default function Show({ timeline, pagination, createUrl, status = null })
                                 <h6 className="m-0">{format(parseISO(timeline[date].date), 'd MMMM yyyy')}</h6>
                             </div>
                             {timeline[date].launches.map((launch, key) => (
-                                <div className="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-2" key={key}>
+                                <div className="col-6 col-md-4 col-xl-3 col-xxl-2" key={key}>
                                     <InertiaLink href={launch.edit_url} className="card border-0 shadow-sm h-100">
                                         <div className="card-body d-flex flex-column">
                                             <div className="d-flex flex-row">

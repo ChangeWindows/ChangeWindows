@@ -26,7 +26,7 @@ export default function Show({ tweet_streams, createUrl, status = null }) {
                 }
                 <div className="row g-3">
                     {tweet_streams.map((tweet_stream) => (
-                        <div className="col-12 col-sm-6 col-xl-4 col-xxl-3" key={tweet_stream.id}>
+                        <div className="col-6 col-xl-4 col-xxl-3" key={tweet_stream.id}>
                             <InertiaLink href={tweet_stream.editUrl} className="card border-0 shadow-sm">
                                 <div className="card-body">
                                     <h3 className="h6 mb-0">{tweet_stream.name}</h3>

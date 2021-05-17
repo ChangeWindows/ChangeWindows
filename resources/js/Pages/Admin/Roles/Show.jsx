@@ -26,7 +26,7 @@ export default function Show({ roles, createUrl, status = null }) {
                 }
                 <div className="row g-3">
                     {roles.map((role) => (
-                        <div className="col-12 col-sm-6 col-xl-4 col-xxl-3" key={role.id}>
+                        <div className="col-6 col-xl-4 col-xxl-3" key={role.id}>
                             <InertiaLink href={role.editUrl} className="card border-0 shadow-sm">
                                 <div className="card-body">
                                     <h3 className="h6 mb-0">{role.name}</h3>

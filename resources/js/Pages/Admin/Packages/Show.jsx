@@ -26,30 +26,28 @@ export default function Show({ packages, createUrl, status = null }) {
                     <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                 }
                 <div className="row g-3">
-                    {packages.map((pack, key) => {
-                        return (
-                            <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={key}>
-                                <InertiaLink href={pack.edit_url} className="card border-0 shadow-sm h-100">
-                                    <div className="card-body d-flex flex-column">
-                                        <div className="d-flex flex-row">
-                                            <h3 className="h6 mb-0">
-                                                <PlatformIcon platform={pack.platform} color />
-                                            </h3>
-                                            <div className="ms-2">
-                                                <h3 className="h6 mb-0">{pack.name}</h3>
-                                            </div>
+                    {packages.map((pack, key) => (
+                        <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={key}>
+                            <InertiaLink href={pack.edit_url} className="card border-0 shadow-sm h-100">
+                                <div className="card-body d-flex flex-column">
+                                    <div className="d-flex flex-row">
+                                        <h3 className="h6 mb-0">
+                                            <PlatformIcon platform={pack.platform} color />
+                                        </h3>
+                                        <div className="ms-2">
+                                            <h3 className="h6 mb-0">{pack.name}</h3>
                                         </div>
-                                        <div className="flex-grow-1" />
-                                        {pack.channels && <div className="release-channels mt-3">
-                                            {pack.channels.filter((channel) => channel.supported).map((channel, _key) => (
-                                                <span key={_key} className="badge me-1" style={{ background: channel.color }}>{channel.short_name}</span>
-                                            ))}
-                                        </div>}
                                     </div>
-                                </InertiaLink>
-                            </div>
-                        );
-                    })}
+                                    <div className="flex-grow-1" />
+                                    {pack.channels.length > 0 && <div className="release-channels mt-3">
+                                        {pack.channels.map((channel, _key) => (
+                                            <span key={_key} className="badge me-1" style={{ background: channel.color }}>{channel.short_name}</span>
+                                        ))}
+                                    </div>}
+                                </div>
+                            </InertiaLink>
+                        </div>
+                    ))}
                 </div>
             </div>
         </Admin>
