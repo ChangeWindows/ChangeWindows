@@ -71,6 +71,18 @@
     --scroll-native: #{ light-dark(darken($light, 6), darken($dark, 6)) };
     --scroll-webkit: #{ light-dark(darken($light, 16), lighten($dark, 12)) };
 
+    --alert-success-bg: #{ light-dark($green-100, $green-800) };
+    --alert-success-color: #{ light-dark($green-700, $green-100) };
+
+    --alert-warning-bg: #{ light-dark($yellow-100, $yellow-800) };
+    --alert-warning-color: #{ light-dark($yellow-800, $yellow-100) };
+
+    --alert-danger-bg: #{ light-dark($red-100, $red-800) };
+    --alert-danger-color: #{ light-dark($red-700, $red-100) };
+
+    --alert-info-bg: #{ light-dark($cyan-100, $cyan-800) };
+    --alert-info-color: #{ light-dark($cyan-700, $cyan-100) };
+
     --display-light: #{ light-dark(block, none) };
     --display-dark: #{ light-dark(none, block) };
 }
