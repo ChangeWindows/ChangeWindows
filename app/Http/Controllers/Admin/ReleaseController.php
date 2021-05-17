@@ -41,11 +41,10 @@ class ReleaseController extends Controller
                         'name' => $release->platform->name,
                         'color' => $release->platform->color
                     ],
-                    'channels' => $release->releaseChannels->map(function ($channel) {
+                    'channels' => $release->releaseChannels->where('supported', '=', 1)->values()->map(function ($channel) {
                         return [
                             'id' => $channel->id,
                             'short_name' => $channel->short_name,
-                            'supported' => $channel->supported,
                             'color' => $channel->channel->color,
                             'order' => $channel->channel->order
                         ];
