@@ -28,8 +28,6 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 			const mainNav = navigationItems.slice(0, maxVisibleItems - 1);
 			let overflowNav = [...navigationItems.slice(maxVisibleItems - 1), ...navigationOverflowItems];
 
-			console.log(mainNav.length, navigationItems.length);
-
 			if (mainNav.length < navigationItems.length) {
 				overflowNav = [...navigationItems.slice(maxVisibleItems - 1), { type: 'divider' }, ...navigationOverflowItems];
 			}
@@ -39,6 +37,13 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 
 		return [[...navigationItems, { type: 'divider' }, ...navigationOverflowItems], []]
 	}, [main, overflow, matchesSmUp, width]);
+
+	const overflowIsActive = useMemo(() => {
+		const overflowUrls = [];
+		overflowItems.filter((item) => item.type === 'link').map((item) => overflowUrls.push(item.url));
+
+		return !!overflowUrls.find((url) => page.url.includes(url));
+	}, [overflowItems]);
 
     function handleLogout(e) {
         e.preventDefault();
@@ -70,7 +75,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 			})}
 			{!matchesSmUp &&
 				<>
-					<a className="sidebar-item dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<a className={clsx('sidebar-item dropdown', { 'active': overflowIsActive })} href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						<FontAwesomeIcon icon={faEllipsis} fixedWidth />
 						<span className="sidebar-label">
 							More
