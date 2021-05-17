@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
-import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+import NaviBar from '../../../Components/NaviBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Create({ can, auth, urls, releases, channels, channel, params }) {
+export default function Create({ urls, releases, channels, channel, params }) {
     const [curReleaseChannel, setCurReleaseChannel] = useState({
         name: channel.name,
         short_name: channel.name.split(' ')[0],
@@ -40,16 +40,14 @@ export default function Create({ can, auth, urls, releases, channels, channel, p
     return (
         <Admin>
             <form onSubmit={handleSubmit}>
-                <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                    <div className="container">
-                        <InertiaLink href="/admin/releases" className="btn btn-transparent btn-sm me-2">
-                            <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
-                        </InertiaLink>
-                        <span className="navbar-brand">{curReleaseChannel.name || 'Unnamed channel'}</span>
-                        <div className="flex-grow-1" />
+                <NaviBar
+                    back="/admin/releases"
+                    actions={
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
-                    </div>
-                </nav>
+                    }
+                >
+                    {curReleaseChannel.name || 'Unnamed channel'}
+                </NaviBar>
             
                 <div className="container my-3">
                     {status &&

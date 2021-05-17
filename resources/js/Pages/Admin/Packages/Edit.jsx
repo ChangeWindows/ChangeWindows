@@ -3,11 +3,10 @@ import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+import NaviBar from '../../../Components/NaviBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faPen, faEye, faPlus, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
-
-import { format, parseISO } from 'date-fns';
+import { faCheck, faPen, faEye, faPlus, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
 export default function Edit({ can, auth, urls, platforms, pack, channels, release_channels, status = null }) {
     const [curPack, setCurPack] = useState({
@@ -52,16 +51,14 @@ export default function Edit({ can, auth, urls, platforms, pack, channels, relea
     return (
         <Admin>
             <form onSubmit={handleSubmit}>
-                <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                    <div className="container">
-                        <InertiaLink href="/admin/packages" className="btn btn-transparent btn-sm me-2">
-                            <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
-                        </InertiaLink>
-                        <span className="navbar-brand">{curPack.name || 'Unnamed package'}</span>
-                        <div className="flex-grow-1" />
+                <NaviBar
+                    back="/admin/packages"
+                    actions={
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
-                    </div>
-                </nav>
+                    }
+                >
+                    {curPack.name || 'Unnamed package'}
+                </NaviBar>
             
                 <div className="container my-3">
                     {status &&

@@ -2,18 +2,15 @@ import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+import NaviBar from '../../../Components/NaviBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEye, faPen } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Show({ can, auth, users, status = null }) {
+export default function Show({ can, users, status = null }) {
     return (
         <Admin>
-            <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                <div className="container">
-                    <span className="navbar-brand">Users</span>
-                </div>
-            </nav>
+            <NaviBar>Users</NaviBar>
         
             <div className="container my-3">
                 {status &&

@@ -3,12 +3,13 @@ import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faEye, faFloppyDisk, faPen, faPlus, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faEye, faFloppyDisk, faPen, faPlus, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ can, auth, urls, platform, channels, tweet_streams, status = null }) {
+export default function Edit({ can, urls, platform, channels, tweet_streams, status = null }) {
     const [curPlatform, setCurPlatform] = useState(platform);
 
     useEffect(() => {
@@ -44,16 +45,14 @@ export default function Edit({ can, auth, urls, platform, channels, tweet_stream
     return (
         <Admin>
             <form onSubmit={handleSubmit}>
-                <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                    <div className="container">
-                        <InertiaLink href="/admin/platforms" className="btn btn-transparent btn-sm me-2">
-                            <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
-                        </InertiaLink>
-                        <span className="navbar-brand"><PlatformIcon platform={curPlatform} color className="me-2" /> {curPlatform.name || 'Unnamed platform'}</span>
-                        <div className="flex-grow-1" />
+                <NaviBar
+                    back="/admin/platforms"
+                    actions={
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
-                    </div>
-                </nav>
+                    }
+                >
+                    <PlatformIcon platform={curPlatform} color className="me-2" /> {curPlatform.name || 'Unnamed platform'}
+                </NaviBar>
             
                 <div className="container my-3">
                     {status &&

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
-import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+import NaviBar from '../../../Components/NaviBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ can, auth, urls, channel, platforms, status = null }) {
+export default function Edit({ can, urls, channel, platforms, status = null }) {
     const [curChannel, setCurChannel] = useState(channel);
 
     useEffect(() => {
@@ -43,16 +43,14 @@ export default function Edit({ can, auth, urls, channel, platforms, status = nul
     return (
         <Admin>
             <form onSubmit={handleSubmit}>
-                <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                    <div className="container">
-                        <InertiaLink href={urls.edit_platform} className="btn btn-transparent btn-sm me-2">
-                            <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
-                        </InertiaLink>
-                        <span className="navbar-brand">{curChannel.name || 'Unnamed channel'}</span>
-                        <div className="flex-grow-1" />
+                <NaviBar
+                    back={urls.edit_platform}
+                    actions={
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
-                    </div>
-                </nav>
+                    }
+                >
+                    {curChannel.name || 'Unnamed channel'}
+                </NaviBar>
             
                 <div className="container my-3">
                     {status &&

@@ -2,28 +2,31 @@ import React, { Fragment } from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
-import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
+import NaviBar from '../../../Components/NaviBar';
 import Pagination from '../../../Components/Pagination';
+import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
 import { format, parseISO } from 'date-fns';
 
-export default function Show({ can, auth, timeline, pagination, createUrl, createPackageUrl, status = null }) {
+export default function Show({ can, timeline, pagination, createUrl, createPackageUrl, status = null }) {
     return (
         <Admin>
-            <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                <div className="container">
-                    <span className="navbar-brand">Flights</span>
-                    <div className="flex-grow-1" />
-                    <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
-                        <FontAwesomeIcon icon={faPlus} fixedWidth/> Flight
-                    </InertiaLink>
-                    <InertiaLink href={createPackageUrl} className="btn btn-primary btn-sm ms-1">
-                        <FontAwesomeIcon icon={faPlus} fixedWidth/> Package
-                    </InertiaLink>
-                </div>
-            </nav>
+            <NaviBar
+                actions={
+                    <>
+                        <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
+                            <FontAwesomeIcon icon={faPlus} fixedWidth/> Flight
+                        </InertiaLink>
+                        <InertiaLink href={createPackageUrl} className="btn btn-primary btn-sm ms-1">
+                            <FontAwesomeIcon icon={faPlus} fixedWidth/> Package
+                        </InertiaLink>
+                    </>
+                }
+            >
+                Flights
+            </NaviBar>
         
             <div className="container my-3">
                 {status &&

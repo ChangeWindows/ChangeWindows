@@ -1,16 +1,16 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
-import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, isDate, parseISO } from 'date-fns';
 
-export default function Create({ can, auth, urls, packages }) {
+export default function Create({ urls, packages }) {
     const [curFlight, setCurFlight] = useState({
         major: '',
         minor: '',
@@ -63,16 +63,14 @@ export default function Create({ can, auth, urls, packages }) {
     return (
         <Admin>
             <form onSubmit={handleSubmit}>
-                <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                    <div className="container">
-                        <InertiaLink href="/admin/flights" className="btn btn-transparent btn-sm me-2">
-                            <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
-                        </InertiaLink>
-                        <span className="navbar-brand">{version || 'New flight'}</span>
-                        <div className="flex-grow-1" />
+                <NaviBar
+                    back="/admin/flights"
+                    actions={
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
-                    </div>
-                </nav>
+                    }
+                >
+                    {version || 'New flight'}
+                </NaviBar>
             
                 <div className="container my-3">
                     {status &&

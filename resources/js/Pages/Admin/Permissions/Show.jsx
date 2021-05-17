@@ -2,23 +2,24 @@ import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+import NaviBar from '../../../Components/NaviBar';
 import Pagination from '../../../Components/Pagination';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEye, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Show({ can, auth, permissions, pagination, createUrl, status = null }) {
+export default function Show({ can, permissions, pagination, createUrl, status = null }) {
     return (
         <Admin>
-            <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                <div className="container">
-                    <span className="navbar-brand">Permissions</span>
-                    <div className="flex-grow-1" />
+            <NaviBar
+                actions={
                     <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
                         <FontAwesomeIcon icon={faPlus} fixedWidth/> New
                     </InertiaLink>
-                </div>
-            </nav>
+                }
+            >
+                Permissions
+            </NaviBar>
         
             <div className="container my-3">
                 {status &&

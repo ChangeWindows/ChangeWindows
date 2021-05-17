@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
-import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+import NaviBar from '../../../Components/NaviBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ can, auth, role, permissions, urls, status = null }) {
+export default function Edit({ can, role, permissions, urls, status = null }) {
     const [curRole, setCurRole] = useState(role);
 
     useEffect(() => {
@@ -47,16 +47,14 @@ export default function Edit({ can, auth, role, permissions, urls, status = null
     return (
         <Admin>
             <form onSubmit={handleSubmit}>
-                <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                    <div className="container">
-                        <InertiaLink href="/admin/roles" className="btn btn-transparent btn-sm me-2">
-                            <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
-                        </InertiaLink>
-                        <span className="navbar-brand">{curRole.name || 'Unnamed role'}</span>
-                        <div className="flex-grow-1" />
+                <NaviBar
+                    back="/admin/roles"
+                    actions={
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
-                    </div>
-                </nav>
+                    }
+                >
+                    {curRole.name || 'Unnamed role'}
+                </NaviBar>
             
                 <div className="container my-3">
                     {status &&

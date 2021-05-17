@@ -1,9 +1,14 @@
 .navbar {
+    min-height: 57px;
+    
     .navbar-brand {
-        margin-right: 1.5rem;
+        margin-right: .5rem;
         font-weight: 500;
         font-family: $headings-font-family;
+        font-size: 1rem;
+        word-break: break-all;
         color: var(--text);
+        flex-grow: 0;
 
         &:hover,
         &:focus {
