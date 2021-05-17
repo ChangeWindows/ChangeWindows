@@ -4,6 +4,8 @@ import { usePage } from '@inertiajs/inertia-react';
 import { faArrowLeft } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { getLocal, setLocal } from '../utils/localStorage';
+
 export default function Auth({ children }) {
     const { app } = usePage().props;
 
@@ -15,6 +17,20 @@ export default function Auth({ children }) {
         });
 
         () => window.removeEventListener('resize');
+    });
+
+    useEffect(() => {
+        const theme = getLocal('theme');
+
+        if (!theme) {
+            setLocal('theme', 'default');
+        } else if (theme === 'light') {
+            document.querySelector('html').classList.add('theme-light');
+            document.querySelector('html').classList.remove('theme-default');
+        } else if (theme === 'dark') {
+            document.querySelector('html').classList.add('theme-dark');
+            document.querySelector('html').classList.remove('theme-default');
+        }
     });
 
     return (
