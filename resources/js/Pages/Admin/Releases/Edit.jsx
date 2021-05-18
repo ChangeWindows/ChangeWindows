@@ -3,13 +3,14 @@ import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+import NaviBar from '../../../Components/NaviBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faPen, faEye, faPlus, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faPlus, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
 
-export default function Edit({ can, auth, urls, platforms, release, channels, release_channels, status = null }) {
+export default function Edit({ can, urls, platforms, release, channels, release_channels, status = null }) {
     const [curRelease, setCurRelease] = useState({
         name: '',
         version: null,
@@ -64,16 +65,14 @@ export default function Edit({ can, auth, urls, platforms, release, channels, re
     return (
         <Admin>
             <form onSubmit={handleSubmit}>
-                <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                    <div className="container">
-                        <InertiaLink href="/admin/releases" className="btn btn-sm me-2">
-                            <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
-                        </InertiaLink>
-                        <span className="navbar-brand">{curRelease.name || 'Unnamed release'}</span>
-                        <div className="flex-grow-1" />
+                <NaviBar
+                    back="/admin/releases"
+                    actions={
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
-                    </div>
-                </nav>
+                    }
+                >
+                    {curRelease.name || 'Unnamed release'}
+                </NaviBar>
             
                 <div className="container my-3">
                     {status &&
@@ -254,7 +253,7 @@ export default function Edit({ can, auth, urls, platforms, release, channels, re
                                 
                                 return (
                                     <div className="col-12 col-sm-6 col-xl-4" key={key}>
-                                        <div className="card border-0 shadow-sm h-100">
+                                        <InertiaLink href={releaseChannel.edit_url} className="card border-0 shadow-sm h-100">
                                             <div className="card-body">
                                                 <div className="d-flex">
                                                     <h3 className="h6 mb-0">
@@ -267,12 +266,7 @@ export default function Edit({ can, auth, urls, platforms, release, channels, re
                                                 </div>
                                                 <div className="flex-grox-1" />
                                             </div>
-                                            <div className="card-footer">
-                                                <InertiaLink href={releaseChannel.edit_url} className="btn btn-link btn-sm">
-                                                    {can.edit_releases ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
-                                                </InertiaLink>
-                                            </div>
-                                        </div>
+                                        </InertiaLink>
                                     </div>
                                 );
                             })}
@@ -281,8 +275,7 @@ export default function Edit({ can, auth, urls, platforms, release, channels, re
                                     <div className="dropdown h-100">
                                         <a href="#" className="card card-add dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                             <div className="card-body py-3">
-                                                <h3 className="h5 fw-normal mb-2">New release channel</h3>
-                                                <h5 className="mb-0"><FontAwesomeIcon icon={faPlus} fixedWidth /></h5>
+                                                <h3 className="h5 fw-normal m-0"><FontAwesomeIcon icon={faPlus} fixedWidth /> New channel</h3>
                                             </div>
                                         </a>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">

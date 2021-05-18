@@ -4,7 +4,16 @@
 
         &:hover,
         &:focus {
-            background-color: darken($light, 8);
+            background-color: var(--card-bg-hover);
+        }
+    }
+
+    &.btn-transparent {
+        color: var(--text);
+
+        &:hover,
+        &:focus {
+            background-color: var(--btn-transparent-bg-hover);
         }
     }
 }

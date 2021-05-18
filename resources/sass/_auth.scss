@@ -8,14 +8,14 @@
     justify-content: center;
     align-items: center;
 
-    @media (max-width: 575px) {
+    @media (max-width: 576px) {
         &:not(.auth-flow) {
             height: calc(100vh - 58px);
         }
     }
 
     .auth-card {
-        background-color: #fff;
+        background-color: var(--card-auth-bg);
         box-shadow: $box-shadow-lg;
         padding: 0 1rem 1rem;
         margin-top: .5rem;
@@ -24,7 +24,7 @@
         border-radius: $border-radius;
 
         @supports (backdrop-filter: blur(15px) saturate(125%)) {
-            background-color: rgba(#fff, .8);
+            background-color: var(--card-auth-bg-acrylic);
             backdrop-filter: blur(15px) saturate(125%);
         }
 

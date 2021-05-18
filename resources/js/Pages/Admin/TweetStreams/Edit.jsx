@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
-import { InertiaLink } from '@inertiajs/inertia-react';
 
 import Admin from '../../../Layouts/Admin';
+import NaviBar from '../../../Components/NaviBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import { faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Edit({ can, auth, urls, tweet_stream, status = null }) {
+export default function Edit({ can, urls, tweet_stream, status = null }) {
     const [curTweetStream, setCurTweetStream] = useState(tweet_stream);
 
     useEffect(() => {
@@ -40,16 +40,14 @@ export default function Edit({ can, auth, urls, tweet_stream, status = null }) {
     return (
         <Admin>
             <form onSubmit={handleSubmit}>
-                <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-                    <div className="container">
-                        <InertiaLink href="/admin/tweet_streams" className="btn btn-sm me-2">
-                            <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
-                        </InertiaLink>
-                        <span className="navbar-brand">{curTweetStream.name || 'Unnamed Twitter Tweet Stream'}</span>
-                        <div className="flex-grow-1" />
+                <NaviBar
+                    back="/admin/tweet_streams"
+                    actions={
                         <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
-                    </div>
-                </nav>
+                    }
+                >
+                    {curTweetStream.name || 'Unnamed Twitter Tweet Stream'}
+                </NaviBar>
             
                 <div className="container my-3">
                     {status &&

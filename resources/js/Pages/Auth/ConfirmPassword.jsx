@@ -15,7 +15,7 @@ export default function ConfirmPassword({ can, status }) {
     }
 
     return (
-        <Auth can={can}>
+        <Auth>
             <form onSubmit={handleSubmit} className="row g-3">
                 <div className="col-12">
                     <p className="text-muted"><small>This is a secure area of the application. Please confirm your password before continuing.</small></p>

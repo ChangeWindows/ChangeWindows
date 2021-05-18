@@ -1,8 +1,18 @@
 .navbar {
+    min-height: 57px;
+    
     .navbar-brand {
-        margin-right: 1.5rem;
+        margin-right: .5rem;
         font-weight: 500;
         font-family: $headings-font-family;
+        word-break: break-all;
+        color: var(--text);
+        flex-grow: 0;
+
+        &:hover,
+        &:focus {
+            color: var(--text);
+        }
     }
     
     .nav-item {
@@ -14,8 +24,16 @@
             position: relative;
             padding-left: 0;
             padding-right: 0;
+            color: var(--text);
+
+            &:hover,
+            &:focus {
+                color: var(--text-hover);
+            }
 
             &.active {
+                color: var(--text);
+
                 svg {
                     color: $primary !important;
                 }

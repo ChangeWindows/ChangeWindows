@@ -4,7 +4,7 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 
-export default function NavigationItem({ title, url, icon, primary, external = false }) {
+export default function NavigationItem({ title, url, icon, primary, external = false, small = false }) {
     const page = usePage();
 
     const Component = useMemo(() => (external ? 'a' : InertiaLink), ['external']);
@@ -14,7 +14,7 @@ export default function NavigationItem({ title, url, icon, primary, external = f
         <Component
             {...mainProps}
             href={`${url}${primary ?? ''}`}
-            className={clsx('sidebar-item', { 'active': page.url.includes(url)})}
+            className={clsx('sidebar-item', { 'active': page.url.includes(url), 'sidebar-item-sm': small })}
         >
             <FontAwesomeIcon icon={icon} fixedWidth /> <span className="sidebar-label">{title}</span>
         </Component>

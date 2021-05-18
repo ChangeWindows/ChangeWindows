@@ -4,5 +4,25 @@
 
     &.alert-success {
         box-shadow: $box-shadow-sm-success;
+        color: var(--alert-success-color);
+        background: var(--alert-success-bg);
+    }
+
+    &.alert-warning {
+        box-shadow: $box-shadow-sm-warning;
+        color: var(--alert-warning-color);
+        background: var(--alert-warning-bg);
+    }
+
+    &.alert-danger {
+        box-shadow: $box-shadow-sm-danger;
+        color: var(--alert-danger-color);
+        background: var(--alert-danger-bg);
+    }
+
+    &.alert-info {
+        box-shadow: $box-shadow-sm-info;
+        color: var(--alert-info-color);
+        background: var(--alert-info-bg);
     }
 }

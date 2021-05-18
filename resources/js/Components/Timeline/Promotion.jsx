@@ -2,8 +2,9 @@ import React, { useMemo } from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import PlatformIcon from '../Platforms/PlatformIcon';
+import clsx from 'clsx';
 
-export default function Promotion({ platform, version, channel, url  }) {
+export default function Promotion({ platform, version, channel, url, overview = false }) {
     const Component = useMemo(() => (url ? InertiaLink : 'div'), ['url']);
     const mainProps = useMemo(() => ({ href: url }), ['url']);
 
@@ -18,7 +19,7 @@ export default function Promotion({ platform, version, channel, url  }) {
             <div className="flight-channels">
                 <span className="badge me-1" style={{ backgroundColor: channel.color }}>{channel.name}</span>
             </div>
-            <div className="flight-version text-muted">{version ?? component}</div>
+            <div className={clsx('flight-version', 'text-muted', { 'd-none': overview, 'd-sm-block': overview })}>{version ?? component}</div>
         </Component>
     )
 };

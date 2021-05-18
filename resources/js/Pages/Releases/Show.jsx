@@ -95,26 +95,26 @@ export default function Show({ release, platform, channels, timeline, pagination
         <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
-                    <InertiaLink href={`/platforms/${platform.slug}`} className="btn btn-sm me-2">
+                    <InertiaLink href={`/platforms/${platform.slug}`} className="btn btn-transparent btn-sm me-2">
                         <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
                     </InertiaLink>
                     <div className="nav nav-lined" id="nav-tab" role="tablist">
                         <button className="nav-link active" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="true">
-                            <FontAwesomeIcon icon={faBarsStaggered} fixedWidth /><span className="d-none d-sm-inline"> Timeline</span>
+                            <FontAwesomeIcon icon={faBarsStaggered} fixedWidth /> Timeline
                         </button>
                         <button className="nav-link" id="nav-releases-tab" data-bs-toggle="tab" data-bs-target="#nav-releases" type="button" role="tab" aria-controls="nav-releases" aria-selected="false">
-                            <FontAwesomeIcon icon={faNotes} fixedWidth /><span className="d-none d-sm-inline"> Release notes</span>
+                            <FontAwesomeIcon icon={faNotes} fixedWidth /> Changelog
                         </button>
                     </div>
                     <div className="flex-grow-1" />
                     {quick_nav.prev &&
-                        <InertiaLink href={quick_nav.prev.url} className="btn btn-sm">
-                            <FontAwesomeIcon icon={faChevronLeft} fixedWidth /> {quick_nav.prev.version}
+                        <InertiaLink href={quick_nav.prev.url} className="btn btn-transparent btn-sm">
+                            <FontAwesomeIcon icon={faChevronLeft} fixedWidth /><span className="d-none d-sm-inline"> {quick_nav.prev.version}</span>
                         </InertiaLink>
                     }
                     {quick_nav.next &&
-                        <InertiaLink href={quick_nav.next.url} className="btn btn-sm ms-2">
-                            {quick_nav.next.version} <FontAwesomeIcon icon={faChevronRight} fixedWidth />
+                        <InertiaLink href={quick_nav.next.url} className="btn btn-transparent btn-sm ms-2">
+                            <span className="d-none d-sm-inline">{quick_nav.next.version} </span><FontAwesomeIcon icon={faChevronRight} fixedWidth />
                         </InertiaLink>
                     }
                 </div>
@@ -128,8 +128,8 @@ export default function Show({ release, platform, channels, timeline, pagination
                                 <h1 className="h4"><PlatformIcon platform={platform} color /></h1>
                             </div>
                             <div>
-                                <h1 className="h4 mb-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
-                                <h2 className="h6 text-muted">Version {release.version}, {release.codename}</h2>
+                                <h1 className="h4 m-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
+                                <h2 className="h6 m-0 text-muted">Version {release.version}, {release.codename}</h2>
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,7 @@ export default function Show({ release, platform, channels, timeline, pagination
                             <div className="tab-pane fade show active" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
 
                                 {(!!preview_duration || !!public_duration || !!extended_duration || !!lts_duration) &&
-                                    <div className="d-flex progress-group flex-column flex-md-row mb-4">
+                                    <div className="d-flex progress-group flex-column flex-md-row mt-3">
                                         {!!preview_duration &&
                                             <Progress
                                                 duration={preview_duration}
@@ -190,7 +190,7 @@ export default function Show({ release, platform, channels, timeline, pagination
                                         }
                                     </div>
                                 }
-                                <div className="row g-2 mt-4">
+                                <div className="row g-2 mt-3">
                                     {channels.map((channel, key) => (
                                         <Channel
                                             key={key}
@@ -214,6 +214,7 @@ export default function Show({ release, platform, channels, timeline, pagination
                                                             channels={flight.release_channel}
                                                             version={flight.version}
                                                             pack={flight.package}
+                                                            overview
                                                         />
                                                     );
                                                 }
@@ -225,6 +226,7 @@ export default function Show({ release, platform, channels, timeline, pagination
                                                             platform={flight.platform}
                                                             channel={flight.release_channel}
                                                             version={flight.version}
+                                                            overview
                                                         />
                                                     );
                                                 }
@@ -235,6 +237,7 @@ export default function Show({ release, platform, channels, timeline, pagination
                                                             key={`${flight.type}-${flight.id}`}
                                                             platform={flight.platform}
                                                             version={flight.version}
+                                                            overview
                                                         />
                                                     );
                                                 }

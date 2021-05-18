@@ -13,7 +13,7 @@ import Timeline from '../../Components/Timeline/Timeline';
 import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
 
-export default function Index({ can, auth, timeline, pagination, platforms, channel_platforms }) {
+export default function Index({ timeline, pagination, platforms, channel_platforms }) {
     return (
         <App>
             <PlatformNavigation home all="/timeline" page="Timeline" platforms={platforms} />

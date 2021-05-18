@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { useMemo } from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import PlatformIcon from '../Platforms/PlatformIcon';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/pro-regular-svg-icons';
-
 import clsx from 'clsx';
 
 export default function ReleaseCard({ name, platform, channels, alts, url, pack = false }) {
+    const Component = useMemo(() => (url ? InertiaLink : 'div'), ['url']);
+    const mainProps = useMemo(() => ({ href: url }), ['url']);
+
     return (
         <div className="col-12 col-sm-6 col-xl-4 col-xxl-3">
-            <div className="card release">
+            <Component {...mainProps} className="card release">
                 <div className="d-flex flex-row">
                     {platform && <h3 className="h6 mb-0"><PlatformIcon platform={platform} color /></h3>}
                     <div className={clsx({ 'ms-2': platform })}>
@@ -27,10 +27,7 @@ export default function ReleaseCard({ name, platform, channels, alts, url, pack 
                         </span>
                     ))}
                 </div>}
-                <div className="release-actions">
-                    <InertiaLink href={url} className="btn btn-link btn-sm stretched-link"><FontAwesomeIcon icon={faArrowRight} fixedWidth /> {pack ? 'View package' : 'View release'}</InertiaLink>
-                </div>
-            </div>
+            </Component>
         </div>
     );
 };

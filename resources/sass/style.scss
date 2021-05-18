@@ -1,20 +1,123 @@
-@import 'variable';
+@import "variable";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
-@import 'alert';
-@import 'button';
-@import 'card';
-@import 'nav';
-@import 'navbar';
-@import 'progress';
-@import 'dropdown';
-@import 'ui';
-@import 'utilities';
+@import "alert";
+@import "button";
+@import "card";
+@import "nav";
+@import "navbar";
+@import "progress";
+@import "dropdown";
+@import "ui";
+@import "utilities";
+@import "form";
 
-@import 'auth';
+@import "auth";
 
+// Dark mode
+@function light-dark($light, $dark) {
+    @return var(--light, #{ $light }) var(--dark, #{ $dark });
+}
+
+:root {
+    --ON: initial;
+    --OFF: ;
+    
+    --text: #{ light-dark($body-color, $gray-100) };
+    --text-inverse: #{ light-dark($gray-100, $body-color) };
+    --text-hover: #{ light-dark(lighten($body-color, 20), darken($gray-100, 25)) };
+
+    --nav-bg: #{ light-dark(darken($light, 6), darken($dark, 6)) };
+    --nav-bg-acrylic: #{ light-dark(rgba(darken($light, 6), .75), rgba(darken($dark, 6), .75)) };
+    --nav-border-color: #{ light-dark(darken($light, 12), darken($dark, 12)) };
+    --nav-mobile-bg: #{ light-dark($light, $dark) };
+    --nav-color-label: #{ light-dark(lighten($body-color, 35), lighten($gray-100, 35)) };
+
+    --nav-item-hover: #{ light-dark(darken($light, 10), darken($dark, 10)) };
+    --nav-bar-item-hover: #{ light-dark(darken($light, 3), darken($dark, 3)) };
+
+    --main-bg: #{ light-dark(darken($light, 2), darken($dark, 4)) };
+    --main-bg-acrylic: #{ light-dark(rgba(darken($light, 2), .75), rgba(darken($dark, 4), .75)) };
+    --main-border-color: #{ light-dark(darken($light, 8), darken($dark, 8)) };
+    
+    --pagination-bg-hover: #{ light-dark(darken($light, 5), darken($dark, 3)) };
+
+    --timeline-bg-nth: #{ light-dark(darken($light, 7), $dark) };
+    --timeline-bg-hover: #{ light-dark(darken($light, 10), lighten($dark, 4)) };
+
+    --card-bg: #{ light-dark($light, $dark) };
+    --card-bg-hover: #{ light-dark(darken($light, 3), lighten($dark, 4)) };
+
+    --card-add-bg-hover: #{ light-dark(rgba(darken($light, 5), .5), rgba(darken($dark, 5), .5)) };
+    --card-add-border: #{ light-dark(darken($light, 10), darken($dark, 7)) };
+    --card-add-border-hover: #{ light-dark(darken($light, 13), darken($dark, 9)) };
+
+    --card-auth-bg: #{ light-dark($light, lighten($dark, 1)) };
+    --card-auth-bg-acrylic: #{ light-dark(rgba($light, .8), rgba($dark, .8)) };
+
+    --dropdown-bg: #{ light-dark($light, $dark) };
+    --dropdown-bg-hover: #{ light-dark(darken($light, 3), lighten($dark, 4)) };
+    
+    --form-disabled-bg: #{ light-dark($light, transparent) };
+    --checkbox-bg: #{ light-dark(#fff, darken($dark, 6)) };
+    --checkbox-disabled-bg: #{ light-dark(#eee, darken($dark, 2)) };
+    
+    --btn-transparent-bg-hover: #{ light-dark(rgba($dark, .2), rgba($light, .1)) };
+
+    --progress-bg: #{ light-dark(#fff, darken($dark, 8)) };
+
+    --scroll-native: #{ light-dark(darken($light, 6), darken($dark, 6)) };
+    --scroll-webkit: #{ light-dark(darken($light, 16), lighten($dark, 12)) };
+
+    --alert-success-bg: #{ light-dark($green-100, $green-800) };
+    --alert-success-color: #{ light-dark($green-700, $green-100) };
+
+    --alert-warning-bg: #{ light-dark($yellow-100, $yellow-800) };
+    --alert-warning-color: #{ light-dark($yellow-800, $yellow-100) };
+
+    --alert-danger-bg: #{ light-dark($red-100, $red-800) };
+    --alert-danger-color: #{ light-dark($red-700, $red-100) };
+
+    --alert-info-bg: #{ light-dark($cyan-100, $cyan-800) };
+    --alert-info-color: #{ light-dark($cyan-700, $cyan-100) };
+
+    --display-light: #{ light-dark(block, none) };
+    --display-dark: #{ light-dark(none, block) };
+}
+
+.theme-default,
+.theme-light {
+    --light: var(--ON);
+    --dark: var(--OFF);
+}
+
+.theme-dark {
+    --light: var(--OFF);
+    --dark: var(--ON);
+}
+
+@media (prefers-color-scheme: dark) {
+    .theme-default {
+        --light: var(--OFF);
+        --dark: var(--ON);
+    }
+}
+
+body {
+    color: var(--text);
+}
+
+.display-light {
+    display: var(--display-light)
+}
+
+.display-dark {
+    display: var(--display-dark)
+}
+
+// Core branding
 .navbar-brand {
     display: flex;
     justify-content: center;
@@ -22,17 +125,17 @@
 }
 
 .app-icon {
-    background: $primary;
+    background: linear-gradient(135deg, rgba(0, 119, 255, 1) 0%, rgba(0, 85, 221, 1) 100%);
     color: #fff;
     width: 30px;
     height: 30px;
     text-align: center;
     font-size: 16px;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: .5rem;
+    margin-right: 0.5rem;
 }
 
 .dot {
@@ -46,11 +149,12 @@
 
 // Scrollbar
 * {
-    @media (min-width: 576px) {
-        scrollbar-color: darken($light, 20);
+    scrollbar-color: var(--scroll-native);
+    scrollbar-width: thin;
 
+    @media (hover: hover) and (pointer: fine) {
         &::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
 
         &::-webkit-scrollbar-track {
@@ -59,11 +163,9 @@
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: darken($light, 20);
-            border-radius: 10px;
+            background-color: var(--scroll-webkit);
+            border-radius: 2px;
         }
-
-        scrollbar-width: thin;
     }
 }
 
@@ -79,9 +181,9 @@
     a.flight {
         text-decoration: none;
         color: inherit;
-        
+
         &:hover {
-            background-color: darken($light, 8);
+            background-color: var(--timeline-bg-hover);
         }
     }
 
@@ -92,7 +194,7 @@
         transition: $transition-base;
 
         &:nth-child(even) {
-            background-color: darken($light, 5);
+            background-color: var(--timeline-bg-nth);
         }
 
         .flight-icon {
@@ -102,19 +204,20 @@
         }
 
         .flight-build {
-            margin-right: .5rem;
+            margin-right: 0.5rem;
             min-width: 150px;
         }
 
         .flight-channels {
             flex: 1;
-            margin-right: .5rem;
-            padding: 0 0 .25rem 0;
+            margin-right: 0.5rem;
+            padding: 0 0 0.25rem 0;
         }
 
         .flight-version {
-            margin-right: .5rem;
+            margin-right: 0.5rem;
             font-size: 90%;
+            text-align: right;
         }
     }
 
@@ -131,11 +234,11 @@
         line-height: 1.2;
 
         &:nth-child(even) {
-            background-color: darken($light, 5);
+            background-color: var(--timeline-bg-nth);
         }
 
         &:hover {
-            background-color: darken($light, 8);
+            background-color: var(--timeline-bg-hover);
         }
 
         .release-icon {
@@ -146,69 +249,76 @@
 
         .release-flight {
             flex: 1;
-            margin-right: .5rem;
+            margin-right: 0.5rem;
             min-width: 100px;
         }
 
         .release-version {
-            margin-right: .5rem;
+            margin-right: 0.5rem;
             font-size: 90%;
-            color: rgba(255,255,255,.7);
+            color: rgba(255, 255, 255, 0.7);
         }
     }
+}
+
+// Badge
+.badge {
+    color: var(--text-inverse);
 }
 
 // Cards
 a.card {
     text-decoration: none;
     color: inherit;
-    
+
     &:hover {
-        background-color: darken($light, 3);
+        background-color: var(--card-bg-hover);
     }
 }
 
 .card {
     .card-footer {
         background: transparent;
-        border-top: 1px solid darken($light, 6);
-        padding: .5rem .75rem;
+        border-top: 1px solid var(--main-border-color);
+        padding: 0.5rem 0.75rem;
     }
-    
+
     &.channel {
         min-width: 150px;
-        background-color: $light;
+        background-color: var(--card-bg);
         border: none;
         box-shadow: $box-shadow-sm;
-        padding: .5rem .75rem;
+        padding: 0.5rem 0.75rem;
 
         &.channel-disabled {
-            filter: grayscale(1);
+            .channel-name {
+                filter: grayscale(1);
+            }
         }
-    
+
         .channel-name {
-            margin-top: -.125rem;
-            margin-bottom: -.375rem;
+            margin-top: -0.125rem;
+            margin-bottom: -0.375rem;
             font-weight: 600;
         }
-    
+
         .channel-build {
-            margin-bottom: .5rem;
+            margin-bottom: 0.5rem;
             font-weight: 700;
             font-size: 1.25rem;
         }
-    
+
         .channel-date {
             color: $text-muted;
-            font-size: .875rem;
+            font-size: 0.875rem;
         }
     }
 
     &.release {
-        background-color: $light;
+        background: var(--card-bg);
         border: none;
         box-shadow: $box-shadow-sm;
-        padding: .5rem .75rem;
+        padding: 0.75rem;
         height: 100%;
 
         h3 {
@@ -216,15 +326,15 @@ a.card {
         }
 
         .release-channels {
-            margin-top: .25rem;
+            margin-top: 0.25rem;
         }
 
         .release-actions {
-            border-top: 1px solid darken($light, 6);
-            padding: .5rem .75rem;
+            border-top: 1px solid var(--nav-bg);
+            padding: 0.5rem 0.75rem;
             border-bottom-left-radius: $border-radius;
             border-bottom-right-radius: $border-radius;
-            margin: .75rem -.75rem -.5rem -.75rem;
+            margin: 0.75rem -0.75rem -0.5rem -0.75rem;
         }
     }
 }
@@ -235,7 +345,7 @@ a.card {
         @extend h5;
         font-weight: 600;
     }
-    
+
     h3 {
         @extend h6;
         font-weight: 600;
@@ -245,10 +355,11 @@ a.card {
 // Branding
 .f-384 {
     font-family: "Century Gothic", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    color: #222;
+    color: var(--text);
+    text-decoration: none;
 
     &:hover {
-        color: #444 !important;
+        color: var(--text-hover) !important;
     }
 }
 

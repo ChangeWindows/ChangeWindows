@@ -97,7 +97,13 @@ Route::prefix('')->name('front')->group(function() {
     Route::middleware(['auth'])->prefix('profile')->name('.profile')->group(function() {
         Route::get('', function () {
             return Inertia::render('Profile/Show');
-        })->name('');
+        })->name('profile');
+    });
+    
+    Route::prefix('settings')->name('.settings')->group(function() {
+        Route::get('', function () {
+            return Inertia::render('Settings/Index');
+        })->name('settings');
     });
 });
 

@@ -18,7 +18,7 @@ export default function VerifyEmail({ can, session, status }) {
     }
 
     return (
-        <Auth can={can}>
+        <Auth>
             <form onSubmit={handleSubmit} className="row g-3">
                 <div className="col-12">
                     <p className="text-muted"><small>Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.</small></p>
