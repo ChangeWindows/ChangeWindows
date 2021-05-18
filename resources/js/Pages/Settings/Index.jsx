@@ -35,14 +35,29 @@ export default function Show() {
                     <span className="navbar-brand">Settings</span>
                 </div>
             </nav>
-        
+
             <div className="container my-3">
                 <div className="row g-3">
                     <div className="col-12 mt-4">
                         <h2 className="h5 mb-3 fw-bold">Theme</h2>
-                        <button className="btn btn-primary btn-sm me-2" disabled={theme === 'default'} onClick={() => toggle('default')}>System</button>
-                        <button className="btn btn-primary btn-sm me-2" disabled={theme === 'dark'} onClick={() => toggle('dark')}>Dark</button>
-                        <button className="btn btn-primary btn-sm me-2" disabled={theme === 'light'} onClick={() => toggle('light')}>Light</button>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="theme" id="system" checked={theme === 'default'} onClick={() => toggle('default')} />
+                                <label class="form-check-label" for="system">
+                                System
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="theme" id="dark" checked={theme === 'dark'} onClick={() => toggle('dark')} />
+                                <label class="form-check-label" for="dark">
+                                Dark
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="theme" id="light" checked={theme === 'light'} onClick={() => toggle('light')} />
+                                <label class="form-check-label" for="light">
+                                Light
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
