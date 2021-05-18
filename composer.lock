@@ -118,16 +118,16 @@
         },
         {
             "name": "atymic/twitter",
-            "version": "3.1.8",
+            "version": "3.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/atymic/twitter.git",
-                "reference": "738a2b58775b9f59765c332fa20b9f40ad530167"
+                "reference": "1ca2b9c245d39c8b1267c73d2cfb18fdb2f90f86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atymic/twitter/zipball/738a2b58775b9f59765c332fa20b9f40ad530167",
-                "reference": "738a2b58775b9f59765c332fa20b9f40ad530167",
+                "url": "https://api.github.com/repos/atymic/twitter/zipball/1ca2b9c245d39c8b1267c73d2cfb18fdb2f90f86",
+                "reference": "1ca2b9c245d39c8b1267c73d2cfb18fdb2f90f86",
                 "shasum": ""
             },
             "require": {
@@ -191,7 +191,7 @@
             ],
             "support": {
                 "issues": "https://github.com/atymic/twitter/issues",
-                "source": "https://github.com/atymic/twitter/tree/3.1.8"
+                "source": "https://github.com/atymic/twitter/tree/3.1.9"
             },
             "funding": [
                 {
@@ -203,7 +203,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-27T20:45:03+00:00"
+            "time": "2021-05-18T00:36:53+00:00"
         },
         {
             "name": "brick/math",
@@ -337,16 +337,16 @@
         },
         {
             "name": "cviebrock/eloquent-sluggable",
-            "version": "8.0.5",
+            "version": "8.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cviebrock/eloquent-sluggable.git",
-                "reference": "69cd660715fc05a7e5a1cd51c88dc56128b0ca7e"
+                "reference": "4538f13fc3131685d10d0814d349bc02a77c67e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cviebrock/eloquent-sluggable/zipball/69cd660715fc05a7e5a1cd51c88dc56128b0ca7e",
-                "reference": "69cd660715fc05a7e5a1cd51c88dc56128b0ca7e",
+                "url": "https://api.github.com/repos/cviebrock/eloquent-sluggable/zipball/4538f13fc3131685d10d0814d349bc02a77c67e7",
+                "reference": "4538f13fc3131685d10d0814d349bc02a77c67e7",
                 "shasum": ""
             },
             "require": {
@@ -398,9 +398,15 @@
             ],
             "support": {
                 "issues": "https://github.com/cviebrock/eloquent-sluggable/issues",
-                "source": "https://github.com/cviebrock/eloquent-sluggable/tree/8.0.5"
+                "source": "https://github.com/cviebrock/eloquent-sluggable/tree/8.0.6"
             },
-            "time": "2021-02-28T20:03:09+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/cviebrock",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-05-18T00:41:44+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -1357,16 +1363,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.41.0",
+            "version": "v8.42.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "05417155d886df8710e55c84e12622b52d83c47c"
+                "reference": "55b886683e0a019bcad0d9d70bb781a3de1a6755"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/05417155d886df8710e55c84e12622b52d83c47c",
-                "reference": "05417155d886df8710e55c84e12622b52d83c47c",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/55b886683e0a019bcad0d9d70bb781a3de1a6755",
+                "reference": "55b886683e0a019bcad0d9d70bb781a3de1a6755",
                 "shasum": ""
             },
             "require": {
@@ -1521,7 +1527,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-05-11T14:00:02+00:00"
+            "time": "2021-05-18T15:37:44+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -6901,16 +6907,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.5.1",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "695f616c228c9df923a10282e4989feeae212c52"
+                "reference": "5d23474cd411b07f46980d05f9c38e7dc0d17460"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/695f616c228c9df923a10282e4989feeae212c52",
-                "reference": "695f616c228c9df923a10282e4989feeae212c52",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/5d23474cd411b07f46980d05f9c38e7dc0d17460",
+                "reference": "5d23474cd411b07f46980d05f9c38e7dc0d17460",
                 "shasum": ""
             },
             "require": {
@@ -6957,7 +6963,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2021-05-11T21:00:37+00:00"
+            "time": "2021-05-18T15:44:02+00:00"
         },
         {
             "name": "mockery/mockery",
