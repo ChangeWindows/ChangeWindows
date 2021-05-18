@@ -10,7 +10,7 @@ import { faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
 
 import { parse, format, isValid, parseISO } from 'date-fns';
 
-export default function Create({ urls, releases }) {
+export default function Create({ urls, releases, platform }) {
     const [showAll, setShowAll] = useState(false);
     const [showEligible, setShowEligible] = useState(true);
     const [curFlight, setCurFlight] = useState({
@@ -97,17 +97,6 @@ export default function Create({ urls, releases }) {
                     }
                 >
                     {version || 'New flight'}
-                </NaviBar>
-            
-                <NaviBar
-                    back="/admin/flights"
-                    actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
-                    }
-                >
-                    <PlatformIcon platform={platform} color className="me-2" />
-                    {version || 'Unnamed flight'}
-                    <span className="badge ms-2" style={{ background: release_channel.color }}>{release_channel.name}</span>
                 </NaviBar>
 
                 <div className="container my-3">
