@@ -70,20 +70,35 @@ Route::prefix('')->name('front')->group(function() {
     Route::prefix('about')->name('.about')->group(function() {
         Route::get('', function () {
             $patreon_api = new \Patreon\API(env('PATREON_API_KEY'));
-            $campaign_response = $patreon_api->fetch_campaign();
-            $campaign_id = $campaign_response->get('data.0.id');
 
-            $pledges_response = $patreon_api->fetch_page_of_pledges($campaign_id, 50);
+            $campaign_id = 1028298;
+
+            $fields = [
+                "page" => [
+                    "size" => 100
+                ],
+                "include" => implode(",",[
+                    "user"
+                ]),
+                "fields" => [
+                    "member" => implode(",",[
+                        "full_name",
+                        "patron_status"
+                    ])
+                ]
+            ];
+            $query = http_build_query($fields);
+
+            $pledges_response = $patreon_api->get_data("campaigns/{$campaign_id}/members?{$query}");
             $patrons = collect();
-            foreach ($pledges_response->get('data')->getKeys() as $pledge_data_key) {
-                $pledge_data = $pledges_response->get('data')->get($pledge_data_key);
 
-                if (!$pledge_data->attribute('declined_since')) {
-                    $patron = $pledge_data->relationship('patron')->resolve($pledges_response);
-    
+            foreach (array_keys($pledges_response['data']) as $pledge_data_key) {
+                $pledge_data = $pledges_response['data'][$pledge_data_key];
+
+                if ($pledge_data['attributes']['patron_status'] === 'active_patron') {
                     $patrons->push([
-                        'name' => $patron->attribute('full_name'),
-                        'avatar' => $patron->attribute('image_url')
+                        'name' => $pledge_data['attributes']['full_name'],
+                        'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}"
                     ]);
                 }
             }
