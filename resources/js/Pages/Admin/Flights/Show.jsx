@@ -36,7 +36,7 @@ export default function Show({ timeline, pagination, createUrl, createPackageUrl
                     {Object.keys(timeline).map((date) => (
                         <Fragment key={date}>
                             <div className="col-12">
-                                <h6 className="m-0">{format(parseISO(timeline[date].date), 'd MMMM yyyy')}</h6>
+                                <h6 className="text-primary m-0">{format(parseISO(timeline[date].date), 'd MMMM yyyy')}</h6>
                             </div>
                             {timeline[date].flights.map((flight, key) => (
                                 <div className="col-6 col-md-4 col-xl-3 col-xxl-2" key={key}>
