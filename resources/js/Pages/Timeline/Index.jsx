@@ -11,7 +11,6 @@ import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
 import { format, parseISO } from 'date-fns';
-import clsx from 'clsx';
 
 export default function Index({ timeline, pagination, platforms, channel_platforms }) {
     return (
@@ -20,11 +19,11 @@ export default function Index({ timeline, pagination, platforms, channel_platfor
         
             <div className="container my-3">
                 <div className="row g-3">
-                    <div className="col-12 mt-4">
-                        <h1 className="h4 mb-2">Timeline</h1>
+                    <div className="col-12 mt-4 mb-n2">
+                        <h1 className="h4 mb-1">Timeline</h1>
                     </div>
                     <div className="col-12 col-md-8 col-lg-7">
-                        <div className="row g-4">
+                        <div className="row g-1">
                             {Object.keys(timeline).map((date, key) => (
                                 <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
                                     {timeline[date].flights.map((flight, _key) => {
@@ -71,10 +70,10 @@ export default function Index({ timeline, pagination, platforms, channel_platfor
                         </div>
                     </div>
                     <div className="d-none d-md-block col-md-4 col-lg-5">
-                        <div className="row g-2">
+                        <div className="row g-1">
                             {channel_platforms.map((platform, key) => (
                                 <Fragment key={key}>
-                                    <div className={clsx('col-12 mb-n1', { 'mt-3': key > 0 })}>
+                                    <div className="col-12 titel">
                                         <h3 className="h6" style={{ color: platform.color }}>
                                             <PlatformIcon platform={platform} color />
                                             <span className="fw-bold ms-2">{platform.name}</span>

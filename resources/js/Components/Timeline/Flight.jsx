@@ -9,17 +9,17 @@ export default function Flight({ platform, build, channels, version = null, pack
     const mainProps = useMemo(() => ({ href: url }), ['url']);
 
     return (
-        <Component {...mainProps} className="flight">
-            <div className="flight-icon">
+        <Component {...mainProps} className="event">
+            <div className="icon">
                 <PlatformIcon platform={platform} color />
             </div>
-            <div className="flight-build">{build}</div>
-            <div className="flight-channels">
+            <div className="revision">{build}</div>
+            <div className="tags">
                 {channels.map((channel, key) => (
                     <span key={key} className="badge me-1" style={{ backgroundColor: channel.color }}>{channel.name}</span>
                 ))}
             </div>
-            <div className={clsx('flight-version', 'text-muted', { 'd-none': overview, 'd-sm-block': overview })}>{platform.tool ? null : version ?? pack}</div>
+            <div className={clsx('version', 'text-muted', { 'd-none': overview, 'd-sm-block': overview })}>{platform.tool ? null : version ?? pack}</div>
         </Component>
     );
 };

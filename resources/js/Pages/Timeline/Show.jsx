@@ -12,20 +12,19 @@ import PlatformNavigation from '../../Components/PlatformNavigation';
 import Pagination from '../../Components/Pagination';
 
 import { format, parseISO } from 'date-fns';
-import clsx from 'clsx';
 
-export default function Show({ can, auth, timeline, pagination, platform, platforms, channel_platforms }) {
+export default function Show({ timeline, pagination, platform, platforms, channel_platforms }) {
     return (
         <App>
             <PlatformNavigation all="/timeline" page="Timeline" platforms={platforms} />
         
             <div className="container my-3">
                 <div className="row g-3">
-                    <div className="col-12 mt-4">
-                        <h1 className="h4 mb-2" style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
+                    <div className="col-12 mt-4 mb-n2">
+                        <h1 className="h4 mb-1" style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
                     </div>
                     <div className="col-12 col-md-8 col-lg-7">
-                        <div className="row g-4">
+                        <div className="row g-1">
                             {Object.keys(timeline).map((date, key) => (
                                 <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
                                     {timeline[date].flights.map((flight, _key) => {
@@ -72,10 +71,10 @@ export default function Show({ can, auth, timeline, pagination, platform, platfo
                         </div>
                     </div>
                     <div className="d-none d-md-block col-md-4 col-lg-5">
-                        <div className="row g-2">
+                        <div className="row g-1">
                             {channel_platforms.map((platform, key) => (
                                 <Fragment key={key}>
-                                    <div className={clsx('col-12 mb-n1', { 'mt-3': key > 0 })}>
+                                    <div className="col-12 titel">
                                         <h3 className="h6" style={{ color: platform.color }}>
                                             <PlatformIcon platform={platform} color />
                                             <span className="fw-bold ms-2">{platform.name}</span>
