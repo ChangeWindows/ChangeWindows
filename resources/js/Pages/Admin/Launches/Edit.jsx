@@ -8,7 +8,7 @@ import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-import { format, isDate, parseISO } from 'date-fns';
+import { parse, format, isValid, parseISO } from 'date-fns';
 
 export default function Edit({ can, urls, launch, release, platform, status = null }) {
     const [curLaunch, setCurLaunch] = useState({
@@ -66,7 +66,7 @@ export default function Edit({ can, urls, launch, release, platform, status = nu
                                     <div className="row g-3">
                                         <div className="col-12 col-sm-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="date" value={isDate(curLaunch.date) ? format(parseISO(curLaunch.date), 'yyyy-MM-dd') : curLaunch.date} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="date" value={isValid(parse(curLaunch.date, 'P', new Date())) ? format(parseISO(curLaunch.date), 'yyyy-MM-dd') : curLaunch.date} onChange={formHandler} />
                                                 <label htmlFor="date">Date</label>
                                             </div>
                                         </div>

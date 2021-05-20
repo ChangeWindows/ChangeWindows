@@ -8,7 +8,7 @@ import NaviBar from '../../../Components/NaviBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPlus, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
 
-import { format, parseISO } from 'date-fns';
+import { parse, format, isValid, parseISO } from 'date-fns';
 
 export default function Edit({ can, urls, platforms, release, channels, release_channels, status = null }) {
     const [curRelease, setCurRelease] = useState({
@@ -164,31 +164,31 @@ export default function Edit({ can, urls, platforms, release, channels, release_
                                     <div className="row g-3">
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="start_preview" value={curRelease.start_preview ? format(parseISO(curRelease.start_preview), 'y-MM-dd') : null} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="start_preview" value={isValid(parse(curRelease.start_preview, 'P', new Date())) ? format(parseISO(curRelease.start_preview), 'yyyy-MM-dd') : curRelease.start_preview} onChange={formHandler} />
                                                 <label htmlFor="start_preview">Start preview</label>
                                             </div>
                                         </div>
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="start_public" value={curRelease.start_public ? format(parseISO(curRelease.start_public), 'y-MM-dd') : null} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="start_public" value={isValid(parse(curRelease.start_public, 'P', new Date())) ? format(parseISO(curRelease.start_public), 'yyyy-MM-dd') : curRelease.start_public} onChange={formHandler} />
                                                 <label htmlFor="start_public">Start public</label>
                                             </div>
                                         </div>
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="start_extended" value={curRelease.start_extended ? format(parseISO(curRelease.start_extended), 'y-MM-dd') : null} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="start_extended" value={isValid(parse(curRelease.start_extended, 'P', new Date())) ? format(parseISO(curRelease.start_extended), 'yyyy-MM-dd') : curRelease.start_extended} onChange={formHandler} />
                                                 <label htmlFor="start_extended">Start extended</label>
                                             </div>
                                         </div>
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="start_lts" value={curRelease.start_lts ? format(parseISO(curRelease.start_lts), 'y-MM-dd') : null} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="start_lts" value={isValid(parse(curRelease.start_lts, 'P', new Date())) ? format(parseISO(curRelease.start_lts), 'yyyy-MM-dd') : curRelease.start_lts} onChange={formHandler} />
                                                 <label htmlFor="start_lts">Start LTS</label>
                                             </div>
                                         </div>
                                         <div className="col-12 col-lg-6">
                                             <div className="form-floating">
-                                                <input type="date" className="form-control" id="end_lts" value={curRelease.end_lts ? format(parseISO(curRelease.end_lts), 'y-MM-dd') : null} onChange={formHandler} />
+                                                <input type="date" className="form-control" id="end_lts" value={isValid(parse(curRelease.end_lts, 'P', new Date())) ? format(parseISO(curRelease.end_lts), 'yyyy-MM-dd') : curRelease.end_lts} onChange={formHandler} />
                                                 <label htmlFor="end_lts">End LTS</label>
                                             </div>
                                         </div>
