@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
+        <meta name="color-scheme" content="light">
         
         <link rel="shortcut icon" href="{{ env('APP_PREVIEW') ? asset('images/logo-preview.svg') : asset('images/logo.svg') }}">
         <link rel="manifest" href="{{ env('APP_PREVIEW') ? asset('manifest-preview.json') : asset('manifest.json') }}">

@@ -63,7 +63,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 					);
 				} else if (item.type === 'socials') {
 					return (
-						<div className="d-flex flex-row flex-sm-column flex-lg-row">
+						<div className="d-flex flex-row flex-sm-column flex-lg-row" key={key}>
 							{socials.map((social, key) => (
 								<NavigationItem url={social.url} icon={social.icon} primary={social.primary} title={social.title} key={key} external small />
 							))}
