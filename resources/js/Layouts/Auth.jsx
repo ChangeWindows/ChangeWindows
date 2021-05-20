@@ -5,11 +5,13 @@ import { faArrowLeft } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getLocal, setLocal } from '../utils/localStorage';
+import useMediaQuery from '../hooks/useMediaQuery';
 
 export default function Auth({ children }) {
     const { app } = usePage().props;
 
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+	const matchesDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
     useEffect(() => {
         window.addEventListener('resize', function() {
@@ -22,14 +24,28 @@ export default function Auth({ children }) {
     useEffect(() => {
         const theme = getLocal('theme');
 
+        if (theme === 'default') {
+            if (matchesDarkMode) {
+                document.head.children['color-scheme'].content = 'dark';
+            } else {
+                document.head.children['color-scheme'].content = 'light';
+            }
+        }
+    }, [matchesDarkMode]);
+
+    useEffect(() => {
+        const theme = getLocal('theme');
+
         if (!theme) {
             setLocal('theme', 'default');
         } else if (theme === 'light') {
             document.querySelector('html').classList.add('theme-light');
             document.querySelector('html').classList.remove('theme-default');
+            document.head.children['color-scheme'].content = 'light';
         } else if (theme === 'dark') {
             document.querySelector('html').classList.add('theme-dark');
             document.querySelector('html').classList.remove('theme-default');
+            document.head.children['color-scheme'].content = 'dark';
         }
     });
 
