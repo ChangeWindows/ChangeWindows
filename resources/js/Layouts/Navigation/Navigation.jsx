@@ -3,8 +3,8 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 
 import NavigationBar from './components/NavigationBar';
 
-import { faBarsStaggered, faLaptopMobile, faFlag, faCircleInfo, faGauge, faCodeBranch, faCubes, faBullhorn } from '@fortawesome/pro-regular-svg-icons';
-import { faGithub, faPatreon, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faBarsStaggered, faLaptopMobile, faGauge, faCodeBranch, faBullhorn } from '@fortawesome/pro-regular-svg-icons';
+import { faPatreon, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function Navigation() {
     const { auth, nav_can, app } = usePage().props;
@@ -27,12 +27,11 @@ export default function Navigation() {
                 main={[
                     { type: 'link', url: '/timeline', icon: faBarsStaggered, title: 'Timeline' },
                     { type: 'link', url: '/platforms', primary: '/pc', icon: faLaptopMobile, title: 'Platforms' },
-                    { type: 'link', url: '/channels', icon: faCodeBranch, title: 'Channels' },
-                    { type: 'link', url: '/releases', icon: faFlag, title: 'Releases' },
-                    { type: 'link', url: '/packages', icon: faCubes, title: 'Packages' }
+                    { type: 'link', url: '/channels', icon: faCodeBranch, title: 'Channels' }
                 ]}
                 overflow={[
                     { type: 'external', url: 'https://medium.com/changewindows', icon: faBullhorn, title: 'Blog' },
+                    { type: 'divider' },
                     { type: 'socials' },
                     { type: 'divider', permission: nav_can.access_dashboard },
                     { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage', permission: nav_can.access_dashboard },

@@ -56,16 +56,14 @@ Route::prefix('')->name('front')->group(function() {
     Route::prefix('platforms')->name('.platforms')->group(function() {
         Route::get('', [PlatformController::class, 'index'])->name('');
         Route::get('/{platform}', [PlatformController::class, 'show'])->name('.show');
-    });
+
+        Route::prefix('{platform}/releases')->name('.releases')->group(function() {
+            Route::get('/{release}', [ReleaseController::class, 'show'])->name('');
+        });
     
-    Route::prefix('releases')->name('.releases')->group(function() {
-        Route::get('', [ReleaseController::class, 'index'])->name('');
-        Route::get('/{release}', [ReleaseController::class, 'show'])->name('.show');
-    });
-    
-    Route::prefix('packages')->name('.packages')->group(function() {
-        Route::get('', [PackageController::class, 'index'])->name('');
-        Route::get('/{release}', [PackageController::class, 'show'])->name('.show');
+        Route::prefix('{platform}/packages')->name('.packages')->group(function() {
+            Route::get('/{release}', [PackageController::class, 'show'])->name('');
+        });
     });
 
     Route::prefix('settings')->name('.settings')->group(function() {

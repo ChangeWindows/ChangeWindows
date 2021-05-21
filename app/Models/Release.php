@@ -62,10 +62,10 @@ class Release extends Model
 
     public function getUrlAttribute() {
         if ($this->package) {
-            return route('front.packages.show', $this, false);
+            return route('front.platforms.packages', ['release' => $this, 'platform' => $this->platform], false);
         }
 
-        return route('front.releases.show', $this, false);
+        return route('front.platforms.releases', ['release' => $this, 'platform' => $this->platform], false);
     }
 
     public function getRouteKeyName() {
