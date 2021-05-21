@@ -36,7 +36,7 @@ export default function Show({ app, patrons }) {
                         <img src={app.preview ? '/images/logo-preview-light.svg' : '/images/logo-light.svg'} width="28px" height="28px" className="me-2 mt-1 display-dark" />
                         ChangeWindows {app.preview && 'Preview'}
                     </h1>
-                    <p className="text-muted mb-5 text-center d-inline">Version {app.version}</p>
+                    <p className="text-muted mb-5 text-center d-inline"><a href="https://github.com/changewindows/horizon/releases" target="_blank">Version {app.version}</a></p>
 
                     <p className="lead mb-5 fw-normal text-center d-inline" style={{ maxWidth: 600 }}>ChangeWindows is a detailed changelog and release history for Windows across all platforms it appears on. With detailed and timely updates, as well as a clean and clear interface, ChangeWindows' goal is to provide a solid resource for anyone interested in knowing what's next for Windows.</p>
                     
