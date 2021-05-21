@@ -68,8 +68,10 @@ Route::prefix('')->name('front')->group(function() {
         Route::get('/{release}', [PackageController::class, 'show'])->name('.show');
     });
 
-    Route::get('/settings', [SettingsController::class, 'index'])->name('.settings');
-    Route::get('/about', [SettingsController::class, 'about'])->name('.about');
+    Route::prefix('settings')->name('.settings')->group(function() {
+        Route::get('', [SettingsController::class, 'index'])->name('');
+        Route::get('/about', [SettingsController::class, 'about'])->name('.about');
+    });
 });
 
 Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {

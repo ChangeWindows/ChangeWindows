@@ -63,7 +63,7 @@ The `node_modules` folder is not required in a production environment as long as
 ## Contributing
 We are open to contributions to ChangeWindows. Do you have a feature that you really want to see but we are not spending any time on it ourselves? Feel free to open a pull request for it!
 
-Not into coding, but like to support us nonetheless? We're always happy with [a donation](https://www.patreon.com/changewindows). Our patrons will be shown on the [About](https://www.changewindows.org/about)-page.
+Not into coding, but like to support us nonetheless? We're always happy with [a donation](https://www.patreon.com/changewindows). Our patrons will be shown on the [About](https://www.changewindows.org/settings/about)-page.
 
 ## Security Vulnerabilities
 If you discover a security vulnerability within ChangeWindows, please contact us through private means. Most successful would probably be to contact us on [Twitter](https://twitter.com/changewindows).

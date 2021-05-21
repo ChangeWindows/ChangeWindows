@@ -44,7 +44,7 @@ export default function Show() {
                                 </InertiaLink>
                             </li>
                             <li className="nav-item">
-                                <InertiaLink className="nav-link" href="/about">
+                                <InertiaLink className="nav-link" href="/settings/about">
                                     <FontAwesomeIcon icon={faCircleInfo} /> About
                                 </InertiaLink>
                             </li>

@@ -156,7 +156,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 			{matchesSmUp &&
 				<>
 					<div className="flex-grow-1 d-none d-sm-block" />
-						<NavigationItem url="/settings" icon={faGear} title="Settings" />
+					<NavigationItem url="/settings" icon={faGear} title="Settings" />
 
 					{auth ?
 						<form onSubmit={handleLogout} className="d-none d-sm-block">

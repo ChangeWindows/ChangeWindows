@@ -20,7 +20,7 @@ export default function Show({ app, patrons }) {
                                 </InertiaLink>
                             </li>
                             <li className="nav-item">
-                                <InertiaLink className="nav-link active" href="/about">
+                                <InertiaLink className="nav-link active" href="/settings/about">
                                     <FontAwesomeIcon icon={faCircleInfo} /> About
                                 </InertiaLink>
                             </li>
