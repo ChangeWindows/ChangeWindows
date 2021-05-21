@@ -33,6 +33,7 @@ export default function AdminNavigation() {
                     { type: 'link', url: '/admin/launches', icon: faRocketLaunch, title: 'Launches', permission: nav_can.show_flights }
                 ]}
                 overflow={[
+                    { type: 'divider' },
                     { type: 'link', url: '/admin/tweet_streams', icon: faTwitter, title: 'Twitter', permission: nav_can.show_tweet_streams },
                     { type: 'divider' },
                     { type: 'link', url: '/admin/users', icon: faUser, title: 'Users', permission: nav_can.show_users },

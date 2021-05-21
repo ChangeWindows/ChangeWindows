@@ -169,6 +169,15 @@ body {
     }
 }
 
+// Titels
+.titlebar {
+    height: 40px;
+    padding-top: .5rem;
+
+    display: flex;
+    align-items: center;
+}
+
 // Forms
 .form-text {
     &:last-child {

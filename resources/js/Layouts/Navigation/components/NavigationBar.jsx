@@ -35,7 +35,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 			return [mainNav, overflowNav];
 		}
 
-		return [[...navigationItems, { type: 'divider' }, ...navigationOverflowItems], []]
+		return [[...navigationItems, ...navigationOverflowItems], []]
 	}, [main, overflow, matchesSmUp, width]);
 
 	const overflowIsActive = useMemo(() => {
@@ -70,7 +70,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 						</div>
 					);
 				} else if (item.type === 'divider') {
-					return (<div className="my-2 border-bottom" key={key} />);
+					return (<div className="sidebar-divider" key={key} />);
 				}
 			})}
 			{!matchesSmUp &&

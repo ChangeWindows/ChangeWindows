@@ -31,10 +31,9 @@ export default function Navigation() {
                 ]}
                 overflow={[
                     { type: 'external', url: 'https://medium.com/changewindows', icon: faBullhorn, title: 'Blog' },
+                    { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage', permission: nav_can.access_dashboard },
                     { type: 'divider' },
                     { type: 'socials' },
-                    { type: 'divider', permission: nav_can.access_dashboard },
-                    { type: 'link', url: '/admin/flights', icon: faGauge, title: 'Backstage', permission: nav_can.access_dashboard },
                 ]}
                 socials={[
                     { type: 'external', url: 'https://twitter.com/changewindows', icon: faTwitter, title: 'Twitter' },
