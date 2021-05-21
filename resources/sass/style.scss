@@ -31,7 +31,7 @@
 
     --nav-bg: #{ light-dark(darken($light, 6), darken($dark, 6)) };
     --nav-bg-acrylic: #{ light-dark(rgba(darken($light, 6), .75), rgba(darken($dark, 6), .75)) };
-    --nav-border-color: #{ light-dark(darken($light, 12), darken($dark, 12)) };
+    --nav-border-color: #{ light-dark(darken($light, 12), darken($dark, 9)) };
     --nav-mobile-bg: #{ light-dark($light, $dark) };
     --nav-color-label: #{ light-dark(lighten($body-color, 35), lighten($gray-100, 35)) };
 
@@ -44,8 +44,8 @@
     
     --pagination-bg-hover: #{ light-dark(darken($light, 5), darken($dark, 3)) };
 
-    --timeline-bg-nth: #{ light-dark(darken($light, 7), $dark) };
-    --timeline-bg-hover: #{ light-dark(darken($light, 10), lighten($dark, 4)) };
+    --timeline-bg-nth: #{ light-dark(darken($light, 6), $dark) };
+    --timeline-bg-hover: #{ light-dark(darken($light, 8), lighten($dark, 4)) };
 
     --card-bg: #{ light-dark($light, $dark) };
     --card-bg-hover: #{ light-dark(darken($light, 3), lighten($dark, 4)) };
