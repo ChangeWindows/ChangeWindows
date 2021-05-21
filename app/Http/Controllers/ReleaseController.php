@@ -49,7 +49,7 @@ class ReleaseController extends Controller
         $prev = Release::where('canonical_version', '<', $release->canonical_version)->where('platform_id', '=', $release->platform_id)->where('package', '=', 0)->orderBy('canonical_version', 'desc')->first();
         $next = Release::where('canonical_version', '>', $release->canonical_version)->where('platform_id', '=', $release->platform_id)->where('package', '=', 0)->orderBy('canonical_version', 'asc')->first();
 
-        return Inertia::render('Releases/Show', [
+        return Inertia::render('Platforms/Release', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
                 return [
                     'id' => $_platform->id,

@@ -16,9 +16,7 @@ import { faBarsStaggered, faNotes, faArrowLeft } from '@fortawesome/pro-regular-
 import { format, parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
 
-export default function Show(props) {
-    const { can, auth, release, platform, channels, timeline, pagination } = props;
-
+export default function Package({ release, platform, channels, timeline, pagination }) {
     return (
         <App>
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">

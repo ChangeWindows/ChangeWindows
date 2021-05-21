@@ -19,7 +19,7 @@ import { differenceInDays } from 'date-fns/esm';
 import { format, isBefore, parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
 
-export default function Show({ release, platform, channels, timeline, pagination, quick_nav }) {
+export default function Release({ release, platform, channels, timeline, pagination, quick_nav }) {
     function max(input) {
         if (toString.call(input) !== "[object Array]") {
             return false;

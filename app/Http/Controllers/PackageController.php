@@ -48,7 +48,7 @@ class PackageController extends Controller
             })
             ->paginate(75);
 
-        return Inertia::render('Packages/Show', [
+        return Inertia::render('Platforms/Package', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
                 return [
                     'id' => $_platform->id,
