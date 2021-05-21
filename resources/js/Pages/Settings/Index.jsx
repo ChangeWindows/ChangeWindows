@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo, faGear } from '@fortawesome/pro-regular-svg-icons';
 
 import { getLocal, setLocal } from '../../utils/localStorage';
 
@@ -30,9 +34,22 @@ export default function Show() {
 
     return (
         <App>
-            <nav className="navbar navbar-expand-xl navbar-light sticky-top">
+            <nav className="navbar navbar-expand navbar-light sticky-top">
                 <div className="container">
-                    <span className="navbar-brand">Settings</span>
+                    <div className="collapse navbar-collapse" id="navbar-page">
+                        <ul className="navbar-nav me-auto">
+                            <li className="nav-item">
+                                <InertiaLink className="nav-link active" href="/settings">
+                                    <FontAwesomeIcon icon={faGear} /> Settings
+                                </InertiaLink>
+                            </li>
+                            <li className="nav-item">
+                                <InertiaLink className="nav-link" href="/about">
+                                    <FontAwesomeIcon icon={faCircleInfo} /> About
+                                </InertiaLink>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
             
