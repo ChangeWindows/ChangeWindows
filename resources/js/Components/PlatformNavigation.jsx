@@ -13,7 +13,7 @@ import { faAngleDown, faEllipsis } from '@fortawesome/pro-regular-svg-icons';
 import useMediaQuery from '../hooks/useMediaQuery';
 import clsx from 'clsx';
 
-export default function Navigation({ home = false, platforms, page, all = false }) {
+export default function Navigation({ home = false, platforms, all = false }) {
 	const matchesSmUp = useMediaQuery('(min-width: 576px)');
     
     const mainPlatforms = useMemo(() => platforms.filter((platform) => matchesSmUp && !platform.legacy || !matchesSmUp && !platform.legacy && !platform.tool), [matchesSmUp, platforms]);
@@ -23,9 +23,6 @@ export default function Navigation({ home = false, platforms, page, all = false 
     return (
         <nav className="navbar navbar-expand navbar-light sticky-top">
             <div className="container">
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-page" aria-controls="navbar-page" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
                 <div className="collapse navbar-collapse" id="navbar-page">
                     <ul className="navbar-nav me-auto">
                         {all &&
@@ -70,5 +67,5 @@ export default function Navigation({ home = false, platforms, page, all = false 
                 </div>
             </div>
         </nav>
-    )
+    );
 }
