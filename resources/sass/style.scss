@@ -171,11 +171,16 @@ body {
 
 // Titels
 .titlebar {
-    height: 40px;
-    padding-top: .5rem;
+    h1 {
+        height: 28px;
+        margin-top: 6px;
+        margin-bottom: 0;
+        @include font-size($h4-font-size);
 
-    display: flex;
-    align-items: center;
+        &:last-child {
+            margin-bottom: 6px;
+        }
+    }
 }
 
 // Forms

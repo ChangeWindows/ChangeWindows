@@ -37,7 +37,6 @@ Route::get('/', function () {
     return redirect()->route('front.timeline');
 });
 
-
 Route::get('/admin', function () {
     return redirect()->route('admin.flights');
 });

@@ -20,7 +20,7 @@ export default function Index({ timeline, pagination, platforms, channel_platfor
             <div className="container">
                 <div className="row g-1">
                     <div className="col-12 titlebar">
-                        <h1 className="h4 m-0">Timeline</h1>
+                        <h1>Timeline</h1>
                     </div>
                     <div class="col">
                         <div class="row g-3">

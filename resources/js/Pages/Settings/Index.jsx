@@ -53,17 +53,21 @@ export default function Show() {
                 </div>
             </nav>
             
-            <div className="container my-3">
-                <fieldset className="row mb-3">
-                    <div className="col-12 col-md-4 my-4 my-md-0">
+            <div className="container">
+                <fieldset className="row g-3">
+                    <div className="col-12 titlebar mb-3">
+                        <h1>Settings</h1>
+                    </div>
+
+                    <div className="col-12 col-md-4 my-3 my-md-0">
                         <h4 className="h5 mb-0">Theme</h4>
                         <p className="text-muted mb-0"><small>Turn off the lights! Or turn them on.</small></p>
                     </div>
-                    <div className="col-12 col-md-8">
+                    <div className="col-12 col-md-8 my-3 my-md-0">
                         <div className="card">
                             <div className="card-body">
                                 <div className="row g-3">
-                                    <div className="col-12 mt-4">
+                                    <div className="col-12 mt-3">
                                         <h6>Theme color</h6>
                                         <div className="form-check">
                                             <input className="form-check-input" type="radio" name="theme" id="system" checked={theme === 'default'} onChange={() => toggle('default')} />

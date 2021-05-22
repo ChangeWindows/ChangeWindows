@@ -7,22 +7,21 @@ import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
 
 import { format, parseISO } from 'date-fns';
-import clsx from 'clsx';
 
-export default function Show({ can, auth, platform, platforms, channel_order, releases }) {
+export default function Show({ platform, platforms, channel_order, releases }) {
     return (
         <App>
             <PlatformNavigation all="/channels" page="Channels" platforms={platforms} />
         
-            <div className="container my-3">
+            <div className="container">
                 <div className="row g-3">
-                    <div className="col-12 mt-4">
-                        <h1 className="h4 mb-2" style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
+                    <div className="col-12 titlebar">
+                        <h1 style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
                     </div>
                     {releases.map((release, key) => (
                         <div className="col-12" key={key}>
-                            <div className="row g-2">
-                                <div className={clsx('col-12 mb-n1', { 'mt-3': key > 0 })}>
+                            <div className="row g-1">
+                                <div className="col-12 titel">
                                     <div className="d-flex flex-row">
                                         <h3 className="h6 mb-0"><PlatformIcon platform={release.platform} color /></h3>
                                         <div className="ms-2">

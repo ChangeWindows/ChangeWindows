@@ -21,7 +21,7 @@ export default function Show({ timeline, pagination, platform, platforms, channe
             <div className="container">
                 <div className="row g-1">
                     <div className="col-12 titlebar">
-                        <h1 className="h4 m-0" style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
+                        <h1 style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
                     </div>
                     <div class="col">
                         <div class="row g-3">

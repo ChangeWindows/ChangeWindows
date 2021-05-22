@@ -21,13 +21,16 @@ export default function Show({ platforms, platform, channels, releases, packages
         <App>
             <PlatformNavigation page="Platforms" platforms={platforms} />
         
-            <div className="container my-3">
+            <div className="container">
                 <div className="row g-3">
-                    <div className="col-12 mt-4">
-                        <h1 className="h4 mb-2" style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
-                        <p>{platform.description}</p>
+                    <div className="col-12 titlebar">
+                        <h1  style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
+                        <p className="mb-0 mt-1">{platform.description}</p>
+                    </div>
 
-                        <div className="row g-2 mt-3">
+                    <div className="col-12">
+                        <h2 className="h5 mb-3 fw-bold">Channels</h2>
+                        <div className="row g-1">
                             {channels.map((channel, key) => (
                                 <Channel
                                     key={key}
@@ -44,7 +47,7 @@ export default function Show({ platforms, platform, channels, releases, packages
                             {currentReleases.length > 0 &&
                                 <div className="col-12 mt-4">
                                     <h2 className="h5 mb-3 fw-bold">Current releases</h2>
-                                    <div className="row g-2">
+                                    <div className="row g-1">
                                         {currentReleases.map((release, key) => {
                                             return (
                                                 <ReleaseCard
@@ -62,7 +65,7 @@ export default function Show({ platforms, platform, channels, releases, packages
                             {packages.length > 0 &&
                                 <div className="col-12 mt-4">
                                     <h2 className="h5 mb-3 fw-bold">Packages</h2>
-                                    <div className="row g-2">
+                                    <div className="row g-1">
                                         {packages.map((pack, key) => {
                                             return (
                                                 <ReleaseCard
@@ -81,7 +84,7 @@ export default function Show({ platforms, platform, channels, releases, packages
                             {legacyReleases.length > 0 &&
                                 <div className="col-12 mt-4">
                                     <h2 className="h5 mb-3 fw-bold">Unsupported releases</h2>
-                                    <div className="row g-2">
+                                    <div className="row g-1">
                                         {legacyReleases.map((release, key) => {
                                             return (
                                                 <ReleaseCard
