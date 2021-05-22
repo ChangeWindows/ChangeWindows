@@ -120,15 +120,15 @@ export default function Release({ release, platform, channels, timeline, paginat
                 </div>
             </nav>
 
-            <div className="container my-3">
-                <div className="row g-3">
-                    <div className="col-12 mt-4">
+            <div className="container">
+                <div className="row g-1">
+                    <div className="col-12 titlebar">
                         <div className="d-flex">
                             <div className="me-3">
-                                <h1 className="h4"><PlatformIcon platform={platform} color /></h1>
+                                <h1><PlatformIcon platform={platform} color /></h1>
                             </div>
                             <div>
-                                <h1 className="h4 m-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
+                                <h1 className="m-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
                                 <h2 className="h6 m-0 text-muted">Version {release.version}, {release.codename}</h2>
                             </div>
                         </div>
@@ -137,119 +137,126 @@ export default function Release({ release, platform, channels, timeline, paginat
                     <div className="col-12">
                         <div className="tab-content" id="nav-tabContent">
                             <div className="tab-pane fade show active" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
-
-                                {(!!preview_duration || !!public_duration || !!extended_duration || !!lts_duration) &&
-                                    <div className="d-flex progress-group flex-column flex-md-row mt-3">
-                                        {!!preview_duration &&
-                                            <Progress
-                                                duration={preview_duration}
-                                                totalDuration={total_duration}
-                                                highestDuration={highest_duration}
-                                                title="Development"
-                                                startDescription={format(parseISO(release.start_preview), "d MMM yyyy")}
-                                                endDescription={format(parseISO(release.start_public), "d MMM yyyy")}
-                                            >
-                                                <ProgressBar progress={preview_progress} />
-                                            </Progress>
-                                        }
-                                        {!!public_duration &&
-                                            <Progress
-                                                duration={public_duration}
-                                                totalDuration={total_duration}
-                                                highestDuration={highest_duration}
-                                                title="Support"
-                                                startDescription={format(parseISO(release.start_public), "d MMM yyyy")}
-                                                endDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
-                                            >
-                                                <ProgressBar progress={public_progress} color="success" />
-                                            </Progress>
-                                        }
-                                        {!!extended_duration &&
-                                            <Progress
-                                                duration={extended_duration}
-                                                totalDuration={total_duration}
-                                                highestDuration={highest_duration}
-                                                title="Extended"
-                                                startDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
-                                                endDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
-                                            >
-                                                <ProgressBar progress={extended_progress} color="warning" />
-                                            </Progress>
-                                        }
-                                        {!!lts_duration &&
-                                            <Progress
-                                                duration={lts_duration}
-                                                totalDuration={total_duration}
-                                                highestDuration={highest_duration}
-                                                title="LTSC"
-                                                startDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
-                                                endDescription={format(parseISO(release.end_lts), "d MMM yyyy")}
-                                            >
-                                                <ProgressBar progress={lts_progress} color="danger" />
-                                            </Progress>
+                                <div className="row">
+                                    <div className="col-12 mt-3">
+                                        {(!!preview_duration || !!public_duration || !!extended_duration || !!lts_duration) &&
+                                            <div className="d-flex progress-group flex-column flex-md-row">
+                                                {!!preview_duration &&
+                                                    <Progress
+                                                        duration={preview_duration}
+                                                        totalDuration={total_duration}
+                                                        highestDuration={highest_duration}
+                                                        title="Development"
+                                                        startDescription={format(parseISO(release.start_preview), "d MMM yyyy")}
+                                                        endDescription={format(parseISO(release.start_public), "d MMM yyyy")}
+                                                    >
+                                                        <ProgressBar progress={preview_progress} />
+                                                    </Progress>
+                                                }
+                                                {!!public_duration &&
+                                                    <Progress
+                                                        duration={public_duration}
+                                                        totalDuration={total_duration}
+                                                        highestDuration={highest_duration}
+                                                        title="Support"
+                                                        startDescription={format(parseISO(release.start_public), "d MMM yyyy")}
+                                                        endDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
+                                                    >
+                                                        <ProgressBar progress={public_progress} color="success" />
+                                                    </Progress>
+                                                }
+                                                {!!extended_duration &&
+                                                    <Progress
+                                                        duration={extended_duration}
+                                                        totalDuration={total_duration}
+                                                        highestDuration={highest_duration}
+                                                        title="Extended"
+                                                        startDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
+                                                        endDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
+                                                    >
+                                                        <ProgressBar progress={extended_progress} color="warning" />
+                                                    </Progress>
+                                                }
+                                                {!!lts_duration &&
+                                                    <Progress
+                                                        duration={lts_duration}
+                                                        totalDuration={total_duration}
+                                                        highestDuration={highest_duration}
+                                                        title="LTSC"
+                                                        startDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
+                                                        endDescription={format(parseISO(release.end_lts), "d MMM yyyy")}
+                                                    >
+                                                        <ProgressBar progress={lts_progress} color="danger" />
+                                                    </Progress>
+                                                }
+                                            </div>
                                         }
                                     </div>
-                                }
-                                <div className="row g-2 mt-3">
-                                    {channels.map((channel, key) => (
-                                        <Channel
-                                            key={key}
-                                            channel={{ color: channel.color, name: channel.name }}
-                                            build={channel.flight.version ?? 'None'}
-                                            date={channel.flight?.date ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : 'No flight'}
-                                            disabled={channel.disabled}
-                                        />
-                                    ))}
-                                </div>
-                                <div className="row g-4 mt-3">
-                                    {Object.keys(timeline).map((date, key) => (
-                                        <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
-                                            {timeline[date].flights.map((flight, _key) => {
-                                                if (flight.type === 'flight') {
-                                                    return (
-                                                        <Flight
-                                                            key={`${flight.type}-${flight.id}`}
-                                                            platform={flight.platform}
-                                                            build={flight.flight}
-                                                            channels={flight.release_channel}
-                                                            version={flight.version}
-                                                            pack={flight.package}
-                                                            overview
-                                                        />
-                                                    );
-                                                }
+                                    <div className="col-12 mt-4">
+                                        <div className="row g-1">
+                                            {channels.map((channel, key) => (
+                                                <Channel
+                                                    key={key}
+                                                    channel={{ color: channel.color, name: channel.name }}
+                                                    build={channel.flight.version ?? 'None'}
+                                                    date={channel.flight?.date ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : 'No flight'}
+                                                    disabled={channel.disabled}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="col-12 mt-4">
+                                        <div className="row g-1">
+                                            {Object.keys(timeline).map((date, key) => (
+                                                <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
+                                                    {timeline[date].flights.map((flight, _key) => {
+                                                        if (flight.type === 'flight') {
+                                                            return (
+                                                                <Flight
+                                                                    key={`${flight.type}-${flight.id}`}
+                                                                    platform={flight.platform}
+                                                                    build={flight.flight}
+                                                                    channels={flight.release_channel}
+                                                                    version={flight.version}
+                                                                    pack={flight.package}
+                                                                    overview
+                                                                />
+                                                            );
+                                                        }
 
-                                                if (flight.type === 'promotion') {
-                                                    return (
-                                                        <Promotion
-                                                            key={`${flight.type}-${flight.id}`}
-                                                            platform={flight.platform}
-                                                            channel={flight.release_channel}
-                                                            version={flight.version}
-                                                            overview
-                                                        />
-                                                    );
-                                                }
+                                                        if (flight.type === 'promotion') {
+                                                            return (
+                                                                <Promotion
+                                                                    key={`${flight.type}-${flight.id}`}
+                                                                    platform={flight.platform}
+                                                                    channel={flight.release_channel}
+                                                                    version={flight.version}
+                                                                    overview
+                                                                />
+                                                            );
+                                                        }
 
-                                                if (flight.type === 'launch') {
-                                                    return (
-                                                        <Launch
-                                                            key={`${flight.type}-${flight.id}`}
-                                                            platform={flight.platform}
-                                                            version={flight.version}
-                                                            overview
-                                                        />
-                                                    );
-                                                }
-                                            })}
-                                        </Timeline>
-                                    ))}
-                                    <Pagination pagination={pagination} />
+                                                        if (flight.type === 'launch') {
+                                                            return (
+                                                                <Launch
+                                                                    key={`${flight.type}-${flight.id}`}
+                                                                    platform={flight.platform}
+                                                                    version={flight.version}
+                                                                    overview
+                                                                />
+                                                            );
+                                                        }
+                                                    })}
+                                                </Timeline>
+                                            ))}
+                                            <Pagination pagination={pagination} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="tab-pane fade" id="nav-releases" role="tabpanel" aria-labelledby="nav-releases-tab">
                                 <div className="row">
-                                    <div className="col-12 mt-4">
+                                    <div className="col-12 mt-3">
                                         <div className="changelog-content">
                                             {release.changelog ? <Markdown>{release.changelog}</Markdown> : null}
                                         </div>

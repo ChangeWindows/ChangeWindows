@@ -36,28 +36,16 @@ export default function Package({ release, platform, channels, timeline, paginat
                 </div>
             </nav>
 
-            <div className="container my-3">
-                <div className="row g-3">
-                    <div className="col-12 mt-4">
+            <div className="container">
+                <div className="row g-1">
+                    <div className="col-12 titlebar">
                         <div className="d-flex">
                             <div className="me-3">
-                                <h1 className="h4"><PlatformIcon platform={platform} color /></h1>
+                                <h1><PlatformIcon platform={platform} color /></h1>
                             </div>
                             <div>
-                                <h1 className="h4 mb-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
+                                <h1 className="m-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
                             </div>
-                        </div>
-
-                        <div className="row g-2 mt-3">
-                            {channels.map((channel, key) => (
-                                <Channel
-                                    key={key}
-                                    channel={{ color: channel.color, name: channel.name }}
-                                    build={channel.flight.version ?? 'None'}
-                                    date={channel.flight?.date ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : 'No flight'}
-                                    disabled={channel.disabled}
-                                />
-                            ))}
                         </div>
                     </div>
 
@@ -65,9 +53,21 @@ export default function Package({ release, platform, channels, timeline, paginat
                         <div className="tab-content" id="nav-tabContent">
                             <div className="tab-pane fade show active" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
                                 <div className="row">
-                                    <div className="col-12 mt-4">
-                                        <h2 className="h5 mb-3 fw-bold">Timeline</h2>
-                                        <div className="row g-4">
+                                    <div className="col-12 mt-3">
+                                        <div className="row g-1">
+                                            {channels.map((channel, key) => (
+                                                <Channel
+                                                    key={key}
+                                                    channel={{ color: channel.color, name: channel.name }}
+                                                    build={channel.flight.version ?? 'None'}
+                                                    date={channel.flight?.date ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : 'No flight'}
+                                                    disabled={channel.disabled}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="col-12 mt-3">
+                                        <div className="row g-1">
                                             {Object.keys(timeline).map((date, key) => (
                                                 <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
                                                     {timeline[date].flights.map((flight, _key) => {
@@ -117,8 +117,7 @@ export default function Package({ release, platform, channels, timeline, paginat
                             </div>
                             <div className="tab-pane fade" id="nav-releases" role="tabpanel" aria-labelledby="nav-releases-tab">
                                 <div className="row">
-                                    <div className="col-12 mt-4">
-                                        <h2 className="h5 mb-3 fw-bold">Changelog</h2>
+                                    <div className="col-12 mt-3">
                                         <div className="changelog-content">
                                             {release.changelog ? <Markdown>{release.changelog}</Markdown> : null}
                                         </div>

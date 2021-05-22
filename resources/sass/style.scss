@@ -171,7 +171,7 @@ body {
 
 // Titels
 .titlebar {
-    h1 {
+    & > h1 {
         height: 28px;
         margin-top: 6px;
         margin-bottom: 0;
@@ -179,6 +179,20 @@ body {
 
         &:last-child {
             margin-bottom: 6px;
+        }
+    }
+
+    & > .d-flex {
+        margin-top: 6px;
+        margin-bottom: 0;
+        
+        h1 {
+            height: 28px;
+            @include font-size($h4-font-size);
+    
+            &:last-child {
+                margin-bottom: 6px;
+            }
         }
     }
 }
