@@ -62,7 +62,7 @@
       }
     ],
     "start_url": "/timeline",
-    "background_color": "#ffffff",
+    "background_color": "#181b1e",
     "display": "standalone",
     "scope": "/",
     "theme_color": "#0066ff",
