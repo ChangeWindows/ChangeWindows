@@ -5,10 +5,9 @@ import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
 import Flight from '../../Components/Timeline/Flight';
 import Launch from '../../Components/Timeline/Launch';
+import LifeCycle from './_LifeCycle';
 import Pagination from '../../Components/Pagination';
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
-import Progress from '../../Components/Progress/Progress';
-import ProgressBar from '../../Components/Progress/ProgressBar';
 import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
@@ -138,60 +137,7 @@ export default function Release({ release, platform, channels, timeline, paginat
                         <div className="tab-content" id="nav-tabContent">
                             <div className="tab-pane fade show active" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
                                 <div className="row">
-                                    <div className="col-12 mt-3">
-                                        {(!!preview_duration || !!public_duration || !!extended_duration || !!lts_duration) &&
-                                            <div className="d-flex progress-group flex-column flex-md-row">
-                                                {!!preview_duration &&
-                                                    <Progress
-                                                        duration={preview_duration}
-                                                        totalDuration={total_duration}
-                                                        highestDuration={highest_duration}
-                                                        title="Development"
-                                                        startDescription={format(parseISO(release.start_preview), "d MMM yyyy")}
-                                                        endDescription={format(parseISO(release.start_public), "d MMM yyyy")}
-                                                    >
-                                                        <ProgressBar progress={preview_progress} />
-                                                    </Progress>
-                                                }
-                                                {!!public_duration &&
-                                                    <Progress
-                                                        duration={public_duration}
-                                                        totalDuration={total_duration}
-                                                        highestDuration={highest_duration}
-                                                        title="Support"
-                                                        startDescription={format(parseISO(release.start_public), "d MMM yyyy")}
-                                                        endDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
-                                                    >
-                                                        <ProgressBar progress={public_progress} color="success" />
-                                                    </Progress>
-                                                }
-                                                {!!extended_duration &&
-                                                    <Progress
-                                                        duration={extended_duration}
-                                                        totalDuration={total_duration}
-                                                        highestDuration={highest_duration}
-                                                        title="Extended"
-                                                        startDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
-                                                        endDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
-                                                    >
-                                                        <ProgressBar progress={extended_progress} color="warning" />
-                                                    </Progress>
-                                                }
-                                                {!!lts_duration &&
-                                                    <Progress
-                                                        duration={lts_duration}
-                                                        totalDuration={total_duration}
-                                                        highestDuration={highest_duration}
-                                                        title="LTSC"
-                                                        startDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
-                                                        endDescription={format(parseISO(release.end_lts), "d MMM yyyy")}
-                                                    >
-                                                        <ProgressBar progress={lts_progress} color="danger" />
-                                                    </Progress>
-                                                }
-                                            </div>
-                                        }
-                                    </div>
+                                    <LifeCycle release={release} />
                                     <div className="col-12 mt-4">
                                         <div className="row g-1">
                                             {channels.map((channel, key) => (
