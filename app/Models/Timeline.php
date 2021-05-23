@@ -11,7 +11,11 @@ class Timeline extends Model
 
     protected $table = 'timeline';
     protected $fillable = ['date', 'item_id', 'item_type'];
-    protected $dates = ['start', 'end'];
+    protected $dates = ['date'];
+
+    protected $casts = [
+        'date' => 'date:Y-m-d'
+    ];
 
     public function item() {
         return $this->morphTo();

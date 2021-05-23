@@ -21,7 +21,12 @@ class Release extends Model
     protected $dates = ['start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts'];
 
     protected $casts = [
-        'package' => 'integer'
+        'package' => 'integer',
+        'start_preview' => 'date:Y-m-d',
+        'start_public' => 'date:Y-m-d',
+        'start_extended' => 'date:Y-m-d',
+        'start_lts' => 'date:Y-m-d',
+        'end_lts' => 'date:Y-m-d'
     ];
 
     public function platform() {
