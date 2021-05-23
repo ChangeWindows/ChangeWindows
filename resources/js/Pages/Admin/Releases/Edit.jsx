@@ -237,14 +237,14 @@ export default function Edit({ can, urls, platforms, release, channels, release_
                     </fieldset>
                 </div>
             </form>
-            <div className="container my-3">
+            <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-4 my-4 my-md-0">
                         <h4 className="h5 mb-0">Release channels</h4>
                         <p className="text-muted mb-0"><small>The channels for this release.</small></p>
                     </div>
                     <div className="col-12 col-md-8">
-                        <div className="row g-3">
+                        <div className="row g-1">
                             {release_channels.map((releaseChannel, key) => {
                                 const releaseChannelstatus = [];
 

@@ -21,11 +21,11 @@ export default function Show({ can, releases, createUrl, status = null }) {
                 Releases
             </NaviBar>
         
-            <div className="container my-3">
+            <div className="container">
                 {status &&
                     <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                 }
-                <div className="row g-3">
+                <div className="row g-1">
                     {releases.map((release, key) => (
                         <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={key}>
                             <div className="card border-0 shadow-sm h-100">

@@ -21,11 +21,11 @@ export default function Show({ packages, createUrl, status = null }) {
                 Packages
             </NaviBar>
         
-            <div className="container my-3">
+            <div className="container">
                 {status &&
                     <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                 }
-                <div className="row g-3">
+                <div className="row g-1">
                     {packages.map((pack, key) => (
                         <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={key}>
                             <InertiaLink href={pack.edit_url} className="card border-0 shadow-sm h-100">

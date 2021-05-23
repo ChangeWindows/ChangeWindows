@@ -21,11 +21,11 @@ export default function Show({ permissions, pagination, createUrl, status = null
                 Permissions
             </NaviBar>
         
-            <div className="container my-3">
+            <div className="container">
                 {status &&
                     <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                 }
-                <div className="row g-3">
+                <div className="row g-1">
                     {permissions.map((permission) => (
                         <div className="col-6 col-xl-4 col-xxl-3" key={permission.id}>
                             <InertiaLink href={permission.editUrl}  className="card border-0 shadow-sm">
