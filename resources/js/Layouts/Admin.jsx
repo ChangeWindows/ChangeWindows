@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { usePage } from '@inertiajs/inertia-react';
 
 import AdminNavigation from './Navigation/AdminNavigation';
 
 import { getLocal, setLocal } from '../utils/localStorage';
 import useMediaQuery from '../hooks/useMediaQuery';
+import { Helmet } from 'react-helmet';
 
 export default function App({ children }) {
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 	const matchesDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+    const { app } = usePage().props;
 
     useEffect(() => {
         window.addEventListener('resize', function() {
@@ -47,6 +50,10 @@ export default function App({ children }) {
 
     return (
         <div className="bg-light">
+            <Helmet>
+                <title>Backstage &middot; {app.name}</title>
+            </Helmet>
+
             <div className="grid" style={{ height: windowHeight }}>
                 <header className="grid-sidebar">
                     <AdminNavigation />

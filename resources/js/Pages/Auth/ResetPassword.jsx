@@ -6,7 +6,9 @@ import Auth from '../../Layouts/Auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/pro-regular-svg-icons';
 
-export default function ResetPassword({ can, token, status }) {
+import { Helmet } from 'react-helmet';
+
+export default function ResetPassword({ app, token, status }) {
     const [form, setForm] = useState({ token, email: '', password: '', password_confirmation: '' });
 
     function handleSubmit(event) {
@@ -16,6 +18,10 @@ export default function ResetPassword({ can, token, status }) {
 
     return (
         <Auth>
+            <Helmet>
+                <title>Reset Password &middot; {app.name}</title>
+            </Helmet>
+            
             <form onSubmit={handleSubmit} className="row g-3">
                 <input type="hidden" name="token" value={token} />
                 {Object.keys(status).length > 0 &&

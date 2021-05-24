@@ -7,7 +7,9 @@ import Auth from '../../Layouts/Auth';
 import { faArrowRightToBracket, faShieldKeyhole } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function Login({ status }) {
+import { Helmet } from 'react-helmet';
+
+export default function Login({ app, status }) {
     const [form, setForm] = useState({ email: '', password: '', remember_me: true });
 
     function handleSubmit(event) {
@@ -17,6 +19,10 @@ export default function Login({ status }) {
 
     return (
         <Auth>
+            <Helmet>
+                <title>Login &middot; {app.name}</title>
+            </Helmet>
+            
             <form onSubmit={handleSubmit} className="row g-3">
                 {Object.keys(status).length > 0 &&
                     <div className="col-12">
