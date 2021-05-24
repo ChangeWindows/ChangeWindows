@@ -37,16 +37,14 @@
                 color: $primary !important;
             }
 
-            @media (min-width: 576px) {
-                &::after {
-                    position: absolute;
-                    background-color: $primary;
-                    left: 0;
-                    top: 25%;
-                    height: 50%;
-                    width: 2px;
-                    content: '';
-                }
+            &::after {
+                position: absolute;
+                background-color: $primary;
+                left: 0;
+                top: 25%;
+                height: 50%;
+                width: 2px;
+                content: '';
             }
         }
     }
