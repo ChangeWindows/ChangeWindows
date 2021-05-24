@@ -15,6 +15,7 @@
         color: var(--text);
         position: relative;
         border-radius: .25rem;
+        transition: $transition-base;
 
         svg {
             margin-right: .5rem;
