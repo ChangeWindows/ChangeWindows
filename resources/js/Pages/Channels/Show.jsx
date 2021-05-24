@@ -62,11 +62,11 @@ export default function Show({ app, platform, platforms, channel_order, releases
                                 <div className="card-body d-flex flex-row">
                                     <div className="flex-grow-1">
                                         <h6 className="m-0">Hide inactive channels &middot; <btn onClick={disableShowChannelSetting} className="btn-link">Close</btn></h6>
-                                        <p className="m-0 text-muted">You can now opt to only show the active channels, you can find this option in your Settings in the future.</p>
+                                        <small className="m-0 text-muted">You can now opt to only show the active channels, you can find this option in your Settings in the future.</small>
                                     </div>
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <div className="form-check form-switch">
-                                            <input className="form-check-input shadow" type="checkbox" onChange={toggleShowActiveOnly} checked={showActiveOnly} />
+                                    <div className="d-flex justify-content-center align-items-center ms-2" onChange={toggleShowActiveOnly}>
+                                        <div className="form-check form-switch p-0 m-0" style={{ minHeight: 16 }}>
+                                            <input className="form-check-input m-0" type="checkbox" onChange={toggleShowActiveOnly} checked={showActiveOnly} />
                                         </div>
                                     </div>
                                 </div>
