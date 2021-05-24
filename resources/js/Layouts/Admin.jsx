@@ -4,8 +4,8 @@ import { usePage } from '@inertiajs/inertia-react';
 import AdminNavigation from './Navigation/AdminNavigation';
 
 import { getLocal, setLocal } from '../utils/localStorage';
-import useMediaQuery from '../hooks/useMediaQuery';
 import { Helmet } from 'react-helmet';
+import useMediaQuery from '../hooks/useMediaQuery';
 
 export default function App({ children }) {
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
