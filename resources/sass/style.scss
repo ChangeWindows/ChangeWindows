@@ -172,7 +172,7 @@ body {
 // Titels
 .titlebar {
     & > h1 {
-        height: 28px;
+        min-height: 28px;
         margin-top: 6px;
         margin-bottom: 0;
         @include font-size($h4-font-size);
