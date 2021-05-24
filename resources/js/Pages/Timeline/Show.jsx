@@ -12,10 +12,15 @@ import PlatformNavigation from '../../Components/PlatformNavigation';
 import Pagination from '../../Components/Pagination';
 
 import { format, parseISO } from 'date-fns';
+import { Helmet } from 'react-helmet';
 
-export default function Show({ timeline, pagination, platform, platforms, channel_platforms }) {
+export default function Show({ app, timeline, pagination, platform, platforms, channel_platforms }) {
     return (
         <App>
+            <Helmet>
+                <title>{platform.name} Timeline &middot; {app.name}</title>
+            </Helmet>
+
             <PlatformNavigation all="/timeline" page="Timeline" platforms={platforms} />
         
             <div className="container">

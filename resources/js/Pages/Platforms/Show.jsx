@@ -8,8 +8,9 @@ import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
 
 import { format, parseISO } from 'date-fns';
+import { Helmet } from 'react-helmet';
 
-export default function Show({ platforms, platform, channels, releases, packages }) {
+export default function Show({ app, platforms, platform, channels, releases, packages }) {
     const [currentReleases, legacyReleases] = useMemo(() => {
         const currentReleases = releases.filter((release) => release.channels.length > 0);
         const legacyReleases = releases.filter((release) => release.channels.length === 0);
@@ -19,6 +20,10 @@ export default function Show({ platforms, platform, channels, releases, packages
 
     return (
         <App>
+            <Helmet>
+                <title>{platform.name} &middot; {app.name}</title>
+            </Helmet>
+
             <PlatformNavigation page="Platforms" platforms={platforms} />
         
             <div className="container">

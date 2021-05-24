@@ -7,9 +7,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faGear } from '@fortawesome/pro-regular-svg-icons';
 import { faGithub, faTwitter, faPatreon } from '@fortawesome/free-brands-svg-icons';
 
+import { Helmet } from 'react-helmet';
+
 export default function Show({ app, patrons }) {
     return (
         <App>
+            <Helmet>
+                <title>About &middot; {app.name}</title>
+            </Helmet>
+
             <nav className="navbar navbar-expand navbar-light sticky-top">
                 <div className="container">
                     <div className="collapse navbar-collapse" id="navbar-page">

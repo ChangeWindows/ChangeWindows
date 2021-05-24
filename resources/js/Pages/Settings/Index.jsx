@@ -7,8 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faGear } from '@fortawesome/pro-regular-svg-icons';
 
 import { getLocal, setLocal } from '../../utils/localStorage';
+import { Helmet } from 'react-helmet';
 
-export default function Show() {
+export default function Show({ app }) {
     const [theme, setTheme] = useState(getLocal('theme'));
     function toggle(mode) {
         if (mode === 'default') {
@@ -34,6 +35,10 @@ export default function Show() {
 
     return (
         <App>
+            <Helmet>
+                <title>Settings &middot; {app.name}</title>
+            </Helmet>
+
             <nav className="navbar navbar-expand navbar-light sticky-top">
                 <div className="container">
                     <div className="collapse navbar-collapse" id="navbar-page">

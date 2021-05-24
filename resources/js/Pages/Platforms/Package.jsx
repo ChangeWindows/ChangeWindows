@@ -14,11 +14,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarsStaggered, faNotes, faArrowLeft } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
+import { Helmet } from 'react-helmet';
 import Markdown from 'markdown-to-jsx';
 
-export default function Package({ release, platform, channels, timeline, pagination }) {
+export default function Package({ app, release, platform, channels, timeline, pagination }) {
     return (
         <App>
+            <Helmet>
+                <title>{release.name} &middot; {app.name}</title>
+            </Helmet>
+
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <InertiaLink href={`/platforms/${platform.slug}`} className="btn btn-transparent btn-sm me-2">

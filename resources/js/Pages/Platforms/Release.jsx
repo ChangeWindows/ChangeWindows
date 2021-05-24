@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
@@ -14,84 +14,17 @@ import Timeline from '../../Components/Timeline/Timeline';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarsStaggered, faNotes, faArrowLeft, faChevronLeft, faChevronRight } from '@fortawesome/pro-regular-svg-icons';
 
-import { differenceInDays } from 'date-fns/esm';
-import { format, isBefore, parseISO } from 'date-fns';
+import { format, parseISO } from 'date-fns';
+import { Helmet } from 'react-helmet';
 import Markdown from 'markdown-to-jsx';
 
-export default function Release({ release, platform, channels, timeline, pagination, quick_nav }) {
-    function max(input) {
-        if (toString.call(input) !== "[object Array]") {
-            return false;
-        }
-
-        return Math.max.apply(null, input);
-    }
-
-    const [total_duration, preview_duration, public_duration, extended_duration, lts_duration, preview_progress, public_progress, extended_progress, lts_progress, highest_duration] = useMemo(() => {
-        const today = new Date();
-        const start_preview = release.start_preview ? parseISO(release.start_preview) : null;
-        const start_public = release.start_public ? parseISO(release.start_public) : null;
-        const start_extended = release.start_extended ? parseISO(release.start_extended) : null;
-        const start_lts = release.start_lts ? parseISO(release.start_lts) : null;
-        const end_lts = release.end_lts ? parseISO(release.end_lts) : null;
-
-        let preview_duration = 0;
-        let public_duration = 0;
-        let extended_duration = 0;
-        let lts_duration = 0;
-        let preview_progress = 0;
-        let public_progress = 0;
-        let extended_progress = 0;
-        let lts_progress = 0;
-
-        if (start_preview && start_public) {
-            preview_duration = differenceInDays(start_public, start_preview);
-
-            if (isBefore(today, start_public)) {
-                preview_progress = differenceInDays(today, start_preview) / preview_duration * 100;
-            } else {
-                preview_progress = 100;
-            }
-        }
-
-        if (start_public && start_extended) {
-            public_duration = differenceInDays(start_extended, start_public);
-
-            if (isBefore(today, start_extended)) {
-                public_progress = differenceInDays(today, start_public) / public_duration * 100;
-            } else {
-                public_progress = 100;
-            }
-        }
-
-        if (start_extended && start_lts) {
-            extended_duration = differenceInDays(start_lts, start_extended);
-
-            if (isBefore(today, start_lts)) {
-                extended_progress = differenceInDays(today, start_extended) / extended_duration * 100;
-            } else {
-                extended_progress = 100;
-            }
-        }
-
-        if (start_lts && end_lts) {
-            lts_duration = differenceInDays(end_lts, start_lts);
-
-            if (isBefore(today, end_lts)) {
-                lts_progress = differenceInDays(today, start_lts) / lts_duration * 100;
-            } else {
-                lts_progress = 100;
-            }
-        }
-
-        const total_duration = preview_duration + public_duration + extended_duration + lts_duration;
-        const highest_duration = max([preview_duration, public_duration, extended_duration, lts_duration]);
-
-        return [total_duration, preview_duration, public_duration, extended_duration, lts_duration, preview_progress, public_progress, extended_progress, lts_progress, highest_duration];
-    }, [release.start_preview, release.start_public, release.start_extended, release.start_lts, release.end_lts]);
-
+export default function Release({ app, release, platform, channels, timeline, pagination, quick_nav }) {
     return (
         <App>
+            <Helmet>
+                <title>{release.name} &middot; {app.name}</title>
+            </Helmet>
+
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <InertiaLink href={`/platforms/${platform.slug}`} className="btn btn-transparent btn-sm me-2">

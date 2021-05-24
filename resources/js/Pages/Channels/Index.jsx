@@ -7,11 +7,16 @@ import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
 
 import { format, parseISO } from 'date-fns';
+import { Helmet } from 'react-helmet';
 import clsx from 'clsx';
 
-export default function Index({ platforms, channel_platforms }) {
+export default function Index({ app, platforms, channel_platforms }) {
     return (
         <App>
+            <Helmet>
+                <title>Channels &middot; {app.name}</title>
+            </Helmet>
+
             <PlatformNavigation home all="/channels" page="Channels" platforms={platforms} />
         
             <div className="container">

@@ -7,10 +7,15 @@ import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
 
 import { format, parseISO } from 'date-fns';
+import { Helmet } from 'react-helmet';
 
-export default function Show({ platform, platforms, channel_order, releases }) {
+export default function Show({ app, platform, platforms, channel_order, releases }) {
     return (
         <App>
+            <Helmet>
+                <title>{platform.name} Channels &middot; {app.name}</title>
+            </Helmet>
+
             <PlatformNavigation all="/channels" page="Channels" platforms={platforms} />
         
             <div className="container">

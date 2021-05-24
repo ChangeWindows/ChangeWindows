@@ -11,10 +11,15 @@ import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
 import { format, parseISO } from 'date-fns';
+import { Helmet } from 'react-helmet';
 
-export default function Index({ timeline, pagination, platforms, channel_platforms }) {
+export default function Index({ app, timeline, pagination, platforms, channel_platforms }) {
     return (
         <App>
+            <Helmet>
+                <title>Timeline &middot; {app.name}</title>
+            </Helmet>
+
             <PlatformNavigation home all="/timeline" page="Timeline" platforms={platforms} />
         
             <div className="container">
