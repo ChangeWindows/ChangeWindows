@@ -187,7 +187,7 @@ body {
         margin-bottom: 0;
         
         h1 {
-            height: 28px;
+            min-height: 28px;
             @include font-size($h4-font-size);
     
             &:last-child {

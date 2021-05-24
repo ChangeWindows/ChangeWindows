@@ -37,6 +37,9 @@
 }
 
 .pagination {
+    margin-bottom: .5rem;
+    margin-top: .75rem;
+
     .page-item {
         &.disabled {
             .page-link {
