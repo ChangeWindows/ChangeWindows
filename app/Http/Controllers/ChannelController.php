@@ -84,7 +84,12 @@ class ChannelController extends Controller
                 'icon' => $platform->icon,
                 'color' => $platform->color
             ],
-            'channel_order' => $platform->channels->sortBy('order')->pluck('id'),
+            'channel_order' => $platform->channels->sortBy('order')->map(function ($channel) {
+                return [
+                    'id' => $channel->id,
+                    'active' => $channel->active
+                ];
+            })->values()->all(),
             'releases' => $platform->releases->sortByDesc('canonical_version')->map(function ($release) {
                 return [
                     'name' => $release->name,

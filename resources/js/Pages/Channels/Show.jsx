@@ -85,8 +85,8 @@ export default function Show({ app, platform, platforms, channel_order, releases
                                         </div>
                                     </div>
                                 </div>
-                                {channel_order.map((_channel_id, _key) => {
-                                    const channel = release.channels.find((_channel) => _channel.channel_id === _channel_id);
+                                {channel_order.filter((_co) => showActiveOnly ? _co.active : true).map((_channel, _key) => {
+                                    const channel = release.channels.find((__channel) => __channel.channel_id === _channel.id);
 
                                     if (channel) {
                                         return (
