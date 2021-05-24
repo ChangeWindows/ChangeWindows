@@ -57,8 +57,8 @@
     --card-auth-bg: #{ light-dark($light, lighten($dark, 1)) };
     --card-auth-bg-acrylic: #{ light-dark(rgba($light, .8), rgba($dark, .8)) };
 
-    --dropdown-bg: #{ light-dark($light, $dark) };
-    --dropdown-bg-hover: #{ light-dark(darken($light, 3), lighten($dark, 4)) };
+    --dropdown-bg: #{ light-dark($light, lighten($dark, 3)) };
+    --dropdown-bg-hover: #{ light-dark(darken($light, 3), darken($dark, 1)) };
     
     --form-disabled-bg: #{ light-dark($light, transparent) };
     --checkbox-bg: #{ light-dark(#fff, darken($dark, 6)) };
