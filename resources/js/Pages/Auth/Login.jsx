@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Helmet } from 'react-helmet';
 
 export default function Login({ app, status }) {
-    const [form, setForm] = useState({ email: '', password: '', remember_me: true });
+    const [form, setForm] = useState({ email: '', password: '', remember: true });
 
     function handleSubmit(event) {
       event.preventDefault();
@@ -53,12 +53,12 @@ export default function Login({ app, status }) {
                             className="form-check-input"
                             type="checkbox"
                             value="1"
-                            id="remember_me"
-                            name="remember_me"
-                            checked={form.remember_me}
-                            onChange={() => setForm((curLogin) => ({ ...curLogin, remember_me: !curLogin.remember_me }))}
+                            id="remember"
+                            name="remember"
+                            checked={form.remember}
+                            onChange={() => setForm((curLogin) => ({ ...curLogin, remember: curLogin.remember ? null : true }))}
                         />
-                        <label className="form-check-label" htmlFor="remember_me">
+                        <label className="form-check-label" htmlFor="remember">
                             <span className="fw-bold">Remember me</span>
                         </label>
                     </div>
