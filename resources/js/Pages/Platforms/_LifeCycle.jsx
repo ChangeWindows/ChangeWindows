@@ -137,7 +137,7 @@ export default function LifeCycle({ release }) {
                         <div className="d-flex flex-column justify-content-center mt-n1">
                             {!!preview_duration && <p className="legend-stage">Development</p>}
                             {!!public_duration && <p className="legend-stage">Support</p>}
-                            {!!extended_duration && <p className="legend-stage">Active</p>}
+                            {!!extended_duration && <p className="legend-stage">Extended</p>}
                             {!!lts_duration && <p className="legend-stage">LTSC</p>}
                         </div>
                         <div className="d-flex flex-column justify-content-center">
