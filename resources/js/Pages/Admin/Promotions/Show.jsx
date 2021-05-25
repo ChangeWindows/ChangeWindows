@@ -23,15 +23,15 @@ export default function Show({ timeline, pagination, createUrl, status = null })
                 Promotions
             </NaviBar>
         
-            <div className="container my-3">
+            <div className="container">
                 {status &&
                     <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                 }
-                <div className="row g-3">
+                <div className="row g-1">
                     {Object.keys(timeline).map((date) => (
                         <Fragment key={date}>
-                            <div className="col-12">
-                                <h6 className="m-0">{format(parseISO(timeline[date].date), 'd MMMM yyyy')}</h6>
+                            <div className="col-12 titel">
+                                <h3 className="h6 text-primary">{format(parseISO(timeline[date].date), 'd MMMM yyyy')}</h3>
                             </div>
                             {timeline[date].promotions.map((promotion, key) => (
                                 <div className="col-6 col-md-4 col-xl-3 col-xxl-2" key={key}>

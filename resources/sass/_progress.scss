@@ -9,22 +9,16 @@
 }
 
 .progress-group {
-    @media (min-width: 768px) {
-        & > :not(:first-child) {
-            margin-left: .5rem;
-        }
+    & > :not(:first-child) {
+        margin-left: .5rem;
     }
 }
 
 .progress-title {
     white-space: nowrap;
-    color: $text-muted;
+    color: var(--text);
     margin-bottom: .25rem;
-    
-    @media (max-width: 767px) {
-        font-weight: 600;
-        color: var(--text);
-    }
+    font-weight: 600;
     
     @media (min-width: 768px) {
         text-align: center;
@@ -40,9 +34,44 @@
 .progress-block {
     &:not(:last-child) {
         .progress-date:last-child {
-            @media (min-width: 768px) {
-                display: none;
-            }
+            display: none;
         }
+    }
+}
+
+.legend-stage {
+    margin: 0;
+    font-size: .9rem;
+    font-weight: 600;
+    color: var(--text);
+    text-align: right;
+}
+
+.legend-dates {
+    margin: 0;
+    font-size: .9rem;
+    color: $text-muted;
+}
+
+.legend-bar {
+    width: 3px;
+    border-radius: 2px;
+    height: 1.125rem;
+    margin: .125rem .5rem;
+
+    &.legend-bar-primary {
+        background-color: $primary;
+    }
+
+    &.legend-bar-success {
+        background-color: $success;
+    }
+
+    &.legend-bar-warning {
+        background-color: $warning;
+    }
+
+    &.legend-bar-danger {
+        background-color: $danger;
     }
 }

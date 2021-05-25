@@ -3,7 +3,7 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 
 import NavigationBar from './components/NavigationBar';
 
-import { faFlag, faCircleInfo, faUser, faUserUnlock, faArrowLeft, faLaptopMobile, faPlane, faUnlockKeyhole, faRocketLaunch, faAnglesUp, faCubes } from '@fortawesome/pro-regular-svg-icons';
+import { faFlag, faUser, faUserUnlock, faArrowLeft, faLaptopMobile, faPlane, faUnlockKeyhole, faRocketLaunch, faAnglesUp, faCubes } from '@fortawesome/pro-regular-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function AdminNavigation() {

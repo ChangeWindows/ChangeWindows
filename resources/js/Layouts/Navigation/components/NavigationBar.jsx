@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 
@@ -6,7 +6,7 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 import NavigationItem from './NavigationItem';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis, faArrowRightFromBracket, faCircleUser, faArrowRightToBracket, faGear } from '@fortawesome/pro-regular-svg-icons';
+import { faEllipsis, faArrowRightFromBracket, faArrowRightToBracket, faGear } from '@fortawesome/pro-regular-svg-icons';
 
 /* -- Utilities -- */
 import useMediaQuery from '../../../hooks/useMediaQuery';
@@ -35,11 +35,11 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 			return [mainNav, overflowNav];
 		}
 
-		return [[...navigationItems, { type: 'divider' }, ...navigationOverflowItems], []]
+		return [[...navigationItems, ...navigationOverflowItems], []]
 	}, [main, overflow, matchesSmUp, width]);
 
 	const overflowIsActive = useMemo(() => {
-		const overflowUrls = [];
+		const overflowUrls = ['/settings'];
 		overflowItems.filter((item) => item.type === 'link').map((item) => overflowUrls.push(item.url));
 
 		return !!overflowUrls.find((url) => page.url.includes(url));
@@ -70,7 +70,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 						</div>
 					);
 				} else if (item.type === 'divider') {
-					return (<div className="my-2 border-bottom" key={key} />);
+					return (<div className="sidebar-divider" key={key} />);
 				}
 			})}
 			{!matchesSmUp &&
@@ -127,11 +127,8 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 						<div className="dropdown-divider" />
 						{auth ?
 							<>
-								<InertiaLink href="/settings" className="dropdown-item" >
+								<InertiaLink href="/settings" className={clsx('dropdown-item', { 'active': page.url.includes('/settings')})}>
 									<FontAwesomeIcon icon={faGear} fixedWidth /> Settings
-								</InertiaLink>
-								<InertiaLink href="/profile" className="dropdown-item" >
-									<FontAwesomeIcon icon={faCircleUser} fixedWidth /> {auth.name}
 								</InertiaLink>
 								<form onSubmit={handleLogout}>
 									<button type="submit" className="dropdown-item">
@@ -141,10 +138,10 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 							</>
 						:
 							<>
-								<InertiaLink href="/settings" className="dropdown-item" >
+								<InertiaLink href="/settings" className="dropdown-item">
 									<FontAwesomeIcon icon={faGear} fixedWidth /> Settings
 								</InertiaLink>
-								<InertiaLink href="/login" className="dropdown-item" >
+								<InertiaLink href="/login" className="dropdown-item">
 									<FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> Sign-in
 								</InertiaLink>
 							</>
@@ -156,24 +153,18 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 			{matchesSmUp &&
 				<>
 					<div className="flex-grow-1 d-none d-sm-block" />
+					<NavigationItem url="/settings" icon={faGear} title="Settings" />
 
 					{auth ?
-						<>
-							<NavigationItem url="/settings" icon={faGear} title="Settings" />
-							<NavigationItem url="/profile" icon={faCircleUser} title={auth.name} />
-							<form onSubmit={handleLogout} className="d-none d-sm-block">
-								<button type="submit" className="sidebar-item">
-									<FontAwesomeIcon icon={faArrowRightFromBracket} fixedWidth /> <span className="sidebar-label">Log out</span>
-								</button>
-							</form>
-						</>
+						<form onSubmit={handleLogout} className="d-none d-sm-block">
+							<button type="submit" className="sidebar-item">
+								<FontAwesomeIcon icon={faArrowRightFromBracket} fixedWidth /> <span className="sidebar-label">Log out</span>
+							</button>
+						</form>
 					:
-						<>
-							<NavigationItem url="/settings" icon={faGear} title="Settings" />
-							<InertiaLink href="/login" className="sidebar-item" >
-								<FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> <span className="sidebar-label">Sign-in</span>
-							</InertiaLink>
-						</>
+						<InertiaLink href="/login" className="sidebar-item">
+							<FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> <span className="sidebar-label">Sign-in</span>
+						</InertiaLink>
 					}
 				</>
 			}

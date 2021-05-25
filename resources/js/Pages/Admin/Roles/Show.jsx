@@ -20,11 +20,11 @@ export default function Show({ roles, createUrl, status = null }) {
                 Roles
             </NaviBar>
         
-            <div className="container my-3">
+            <div className="container">
                 {status &&
                     <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                 }
-                <div className="row g-3">
+                <div className="row g-1">
                     {roles.map((role) => (
                         <div className="col-6 col-xl-4 col-xxl-3" key={role.id}>
                             <InertiaLink href={role.editUrl} className="card border-0 shadow-sm">

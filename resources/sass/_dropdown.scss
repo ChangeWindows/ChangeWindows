@@ -1,8 +1,9 @@
 .dropdown-menu {
     border: none;
-    box-shadow: $box-shadow;
+    box-shadow: $box-shadow-lg;
     min-width: 200px;
     background-color: var(--dropdown-bg);
+    padding: .5rem;
 
     .dropdown-header {
         padding: .5rem .75rem;
@@ -10,8 +11,11 @@
     }
 
     .dropdown-item {
-        padding: .5rem .75rem;
+        padding: .5rem;
         color: var(--text);
+        position: relative;
+        border-radius: .25rem;
+        transition: $transition-base;
 
         svg {
             margin-right: .5rem;
@@ -23,9 +27,25 @@
         }
 
         &.active {
+            background-color: transparent;
+
             &:hover,
             &:focus {
+                background-color: var(--dropdown-bg-hover);
+            }
+
+            svg {
+                color: $primary !important;
+            }
+
+            &::after {
+                position: absolute;
                 background-color: $primary;
+                left: 0;
+                top: 25%;
+                height: 50%;
+                width: 2px;
+                content: '';
             }
         }
     }
