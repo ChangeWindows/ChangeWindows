@@ -60,7 +60,7 @@ class ReleaseController extends Controller
                     'url' => route('front.platforms.show', $_platform, false)
                 ];
             }),
-            'release' => $release->only('name', 'changelog', 'version', 'codename', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts'),
+            'release' => $release->only('name', 'changelog', 'version', 'codename', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts', 'ongoing'),
             'quick_nav' => [
                 'prev' => $prev ? [
                     'url' => $prev->url,

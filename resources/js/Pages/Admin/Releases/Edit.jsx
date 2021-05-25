@@ -24,6 +24,7 @@ export default function Edit({ can, urls, platforms, release, channels, release_
         start_extended: null,
         start_lts: null,
         end_lts: null,
+        ongoing: 0,
         start_build: null,
         start_delta: null,
         end_build: null,
@@ -190,6 +191,22 @@ export default function Edit({ can, urls, platforms, release, channels, release_
                                             <div className="form-floating">
                                                 <input type="date" className="form-control" id="end_lts" value={isValid(parse(curRelease.end_lts, 'P', new Date())) ? format(parseISO(curRelease.end_lts), 'yyyy-MM-dd') : curRelease.end_lts} onChange={formHandler} />
                                                 <label htmlFor="end_lts">End LTS</label>
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-lg-6">
+                                            <div className="form-check">
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    value="1"
+                                                    id="ongoing"
+                                                    checked={curRelease.ongoing === 1}
+                                                    onChange={formHandler}
+                                                />
+                                                <label className="form-check-label" htmlFor="ongoing">
+                                                    Ongoing<br />
+                                                    <p className="form-text">The current phase is undated but ongoing.</p>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>

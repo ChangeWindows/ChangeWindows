@@ -16,7 +16,7 @@ export default function LifeCycle({ release }) {
         return Math.max.apply(null, input);
     }
 
-    const [total_duration, preview_duration, public_duration, extended_duration, lts_duration, preview_progress, public_progress, extended_progress, lts_progress, highest_duration] = useMemo(() => {
+    const [total_duration, preview_duration, public_duration, extended_duration, lts_duration, preview_progress, public_progress, extended_progress, lts_progress, ongoing_phase, highest_duration] = useMemo(() => {
         const today = new Date();
         const start_preview = release.start_preview ? parseISO(release.start_preview) : null;
         const start_public = release.start_public ? parseISO(release.start_public) : null;
@@ -32,6 +32,7 @@ export default function LifeCycle({ release }) {
         let public_progress = 0;
         let extended_progress = 0;
         let lts_progress = 0;
+        let ongoing_phase = false;
 
         if (start_preview && start_public) {
             preview_duration = differenceInDays(start_public, start_preview);
@@ -41,6 +42,10 @@ export default function LifeCycle({ release }) {
             } else {
                 preview_progress = 100;
             }
+        } else if (start_preview && release.ongoing && !start_public) {
+            preview_duration = differenceInDays(today, start_preview);
+            ongoing_phase = 'development';
+            preview_progress = 100;
         }
 
         if (start_public && start_extended) {
@@ -51,6 +56,10 @@ export default function LifeCycle({ release }) {
             } else {
                 public_progress = 100;
             }
+        } else if (start_public && release.ongoing && !start_extended) {
+            public_duration = differenceInDays(today, start_public);
+            ongoing_phase = 'production';
+            public_progress = 100;
         }
 
         if (start_extended && start_lts) {
@@ -61,6 +70,10 @@ export default function LifeCycle({ release }) {
             } else {
                 extended_progress = 100;
             }
+        } else if (start_extended && release.ongoing && !start_lts) {
+            extended_duration = differenceInDays(today, start_extended);
+            ongoing_phase = 'extended';
+            extended_progress = 100;
         }
 
         if (start_lts && end_lts) {
@@ -71,12 +84,16 @@ export default function LifeCycle({ release }) {
             } else {
                 lts_progress = 100;
             }
+        } else if (start_lts && release.ongoing && !end_lts) {
+            lts_duration = differenceInDays(today, start_lts);
+            ongoing_phase = 'lts';
+            lts_progress = 100;
         }
 
         const total_duration = preview_duration + public_duration + extended_duration + lts_duration;
         const highest_duration = max([preview_duration, public_duration, extended_duration, lts_duration]);
 
-        return [total_duration, preview_duration, public_duration, extended_duration, lts_duration, preview_progress, public_progress, extended_progress, lts_progress, highest_duration];
+        return [total_duration, preview_duration, public_duration, extended_duration, lts_duration, preview_progress, public_progress, extended_progress, lts_progress, ongoing_phase, highest_duration];
     }, [release.start_preview, release.start_public, release.start_extended, release.start_lts, release.end_lts]);
 
     return (
@@ -91,7 +108,7 @@ export default function LifeCycle({ release }) {
                                 highestDuration={highest_duration}
                                 title="Development"
                                 startDescription={format(parseISO(release.start_preview), "d MMM yyyy")}
-                                endDescription={format(parseISO(release.start_public), "d MMM yyyy")}
+                                endDescription={ongoing_phase === 'development' ? 'Ongoing' : format(parseISO(release.start_public), "d MMM yyyy")}
                             >
                                 <ProgressBar progress={preview_progress} />
                             </Progress>
@@ -103,7 +120,7 @@ export default function LifeCycle({ release }) {
                                 highestDuration={highest_duration}
                                 title="Support"
                                 startDescription={format(parseISO(release.start_public), "d MMM yyyy")}
-                                endDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
+                                endDescription={ongoing_phase === 'production' ? 'Ongoing' : format(parseISO(release.start_extended), "d MMM yyyy")}
                             >
                                 <ProgressBar progress={public_progress} color="success" />
                             </Progress>
@@ -115,7 +132,7 @@ export default function LifeCycle({ release }) {
                                 highestDuration={highest_duration}
                                 title="Extended"
                                 startDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
-                                endDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
+                                endDescription={ongoing_phase === 'extended' ? 'Ongoing' : format(parseISO(release.start_lts), "d MMM yyyy")}
                             >
                                 <ProgressBar progress={extended_progress} color="warning" />
                             </Progress>
@@ -127,7 +144,7 @@ export default function LifeCycle({ release }) {
                                 highestDuration={highest_duration}
                                 title="LTSC"
                                 startDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
-                                endDescription={format(parseISO(release.end_lts), "d MMM yyyy")}
+                                endDescription={ongoing_phase === 'lts' ? 'Ongoing' : format(parseISO(release.end_lts), "d MMM yyyy")}
                             >
                                 <ProgressBar progress={lts_progress} color="danger" />
                             </Progress>
