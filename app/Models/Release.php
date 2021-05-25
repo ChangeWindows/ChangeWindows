@@ -22,6 +22,7 @@ class Release extends Model
 
     protected $casts = [
         'package' => 'integer',
+        'ongoing' => 'integer',
         'start_preview' => 'date:Y-m-d',
         'start_public' => 'date:Y-m-d',
         'start_extended' => 'date:Y-m-d',
