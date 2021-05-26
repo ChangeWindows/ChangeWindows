@@ -169,6 +169,7 @@ export default function LifeCycle({ release }) {
                             {!!release.start_extended && <p className="legend-dates">{format(parseISO(release.start_extended), "d MMM yyyy")}</p>}
                             {!!release.start_lts && <p className="legend-dates">{format(parseISO(release.start_lts), "d MMM yyyy")}</p>}
                             {!!release.end_lts && <p className="legend-dates">{format(parseISO(release.end_lts), "d MMM yyyy")}</p>}
+                            {!!release.ongoing && <p className="legend-dates">Ongoing</p>}
                         </div>
                     </div>
                 </>
