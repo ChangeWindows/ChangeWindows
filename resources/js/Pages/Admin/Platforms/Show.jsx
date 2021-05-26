@@ -21,11 +21,11 @@ export default function Show({ platforms, createUrl, status = null }) {
                 Platforms
             </NaviBar>
         
-            <div className="container my-3">
+            <div className="container">
                 {status &&
                     <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                 }
-                <div className="row g-3">
+                <div className="row g-1">
                     {platforms.data.map((platform) => {
                         const platformStatus = [];
 

@@ -238,7 +238,7 @@ export default function Edit({ can, urls, platform, channels, tweet_streams, sta
                         <p className="text-muted mb-0"><small>The channels for this platform.</small></p>
                     </div>
                     <div className="col-12 col-md-8">
-                        <div className="row g-3">
+                        <div className="row g-1">
                             {channels.map((channel) => {
                                 const channelstatus = [];
 

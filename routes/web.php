@@ -8,6 +8,7 @@ use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Admin\ChannelController as AdminChannelController;
 use App\Http\Controllers\Admin\FlightController as AdminFlightController;
 use App\Http\Controllers\Admin\PermissionController as AdminPermissionController;
@@ -36,7 +37,6 @@ Route::get('/', function () {
     return redirect()->route('front.timeline');
 });
 
-
 Route::get('/admin', function () {
     return redirect()->route('admin.flights');
 });
@@ -55,55 +55,19 @@ Route::prefix('')->name('front')->group(function() {
     Route::prefix('platforms')->name('.platforms')->group(function() {
         Route::get('', [PlatformController::class, 'index'])->name('');
         Route::get('/{platform}', [PlatformController::class, 'show'])->name('.show');
-    });
-    
-    Route::prefix('releases')->name('.releases')->group(function() {
-        Route::get('', [ReleaseController::class, 'index'])->name('');
-        Route::get('/{release}', [ReleaseController::class, 'show'])->name('.show');
-    });
-    
-    Route::prefix('packages')->name('.packages')->group(function() {
-        Route::get('', [PackageController::class, 'index'])->name('');
-        Route::get('/{release}', [PackageController::class, 'show'])->name('.show');
-    });
-    
-    Route::prefix('about')->name('.about')->group(function() {
-        Route::get('', function () {
-            $patreon_api = new \Patreon\API(env('PATREON_API_KEY'));
-            $campaign_response = $patreon_api->fetch_campaign();
-            $campaign_id = $campaign_response->get('data.0.id');
 
-            $pledges_response = $patreon_api->fetch_page_of_pledges($campaign_id, 50);
-            $patrons = collect();
-            foreach ($pledges_response->get('data')->getKeys() as $pledge_data_key) {
-                $pledge_data = $pledges_response->get('data')->get($pledge_data_key);
-
-                if (!$pledge_data->attribute('declined_since')) {
-                    $patron = $pledge_data->relationship('patron')->resolve($pledges_response);
+        Route::prefix('{platform}/releases')->name('.releases')->group(function() {
+            Route::get('/{release}', [ReleaseController::class, 'show'])->name('');
+        });
     
-                    $patrons->push([
-                        'name' => $patron->attribute('full_name'),
-                        'avatar' => $patron->attribute('image_url')
-                    ]);
-                }
-            }
-
-            return Inertia::render('About/Show', [
-                'patrons' => $patrons
-            ]);
-        })->name('');
+        Route::prefix('{platform}/packages')->name('.packages')->group(function() {
+            Route::get('/{release}', [PackageController::class, 'show'])->name('');
+        });
     });
-    
-    Route::middleware(['auth'])->prefix('profile')->name('.profile')->group(function() {
-        Route::get('', function () {
-            return Inertia::render('Profile/Show');
-        })->name('profile');
-    });
-    
+
     Route::prefix('settings')->name('.settings')->group(function() {
-        Route::get('', function () {
-            return Inertia::render('Settings/Index');
-        })->name('settings');
+        Route::get('', [SettingsController::class, 'index'])->name('');
+        Route::get('/about', [SettingsController::class, 'about'])->name('.about');
     });
 });
 

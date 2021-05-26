@@ -31,7 +31,7 @@
 
     --nav-bg: #{ light-dark(darken($light, 6), darken($dark, 6)) };
     --nav-bg-acrylic: #{ light-dark(rgba(darken($light, 6), .75), rgba(darken($dark, 6), .75)) };
-    --nav-border-color: #{ light-dark(darken($light, 12), darken($dark, 12)) };
+    --nav-border-color: #{ light-dark(darken($light, 12), darken($dark, 9)) };
     --nav-mobile-bg: #{ light-dark($light, $dark) };
     --nav-color-label: #{ light-dark(lighten($body-color, 35), lighten($gray-100, 35)) };
 
@@ -44,8 +44,8 @@
     
     --pagination-bg-hover: #{ light-dark(darken($light, 5), darken($dark, 3)) };
 
-    --timeline-bg-nth: #{ light-dark(darken($light, 7), $dark) };
-    --timeline-bg-hover: #{ light-dark(darken($light, 10), lighten($dark, 4)) };
+    --timeline-bg-nth: #{ light-dark(darken($light, 6), $dark) };
+    --timeline-bg-hover: #{ light-dark(darken($light, 8), lighten($dark, 4)) };
 
     --card-bg: #{ light-dark($light, $dark) };
     --card-bg-hover: #{ light-dark(darken($light, 3), lighten($dark, 4)) };
@@ -57,8 +57,8 @@
     --card-auth-bg: #{ light-dark($light, lighten($dark, 1)) };
     --card-auth-bg-acrylic: #{ light-dark(rgba($light, .8), rgba($dark, .8)) };
 
-    --dropdown-bg: #{ light-dark($light, $dark) };
-    --dropdown-bg-hover: #{ light-dark(darken($light, 3), lighten($dark, 4)) };
+    --dropdown-bg: #{ light-dark($light, lighten($dark, 3)) };
+    --dropdown-bg-hover: #{ light-dark(darken($light, 3), darken($dark, 1)) };
     
     --form-disabled-bg: #{ light-dark($light, transparent) };
     --checkbox-bg: #{ light-dark(#fff, darken($dark, 6)) };
@@ -169,6 +169,34 @@ body {
     }
 }
 
+// Titels
+.titlebar {
+    & > h1 {
+        min-height: 28px;
+        margin-top: 6px;
+        margin-bottom: 0;
+        @include font-size($h4-font-size);
+
+        &:last-child {
+            margin-bottom: 6px;
+        }
+    }
+
+    & > .d-flex {
+        margin-top: 6px;
+        margin-bottom: 0;
+        
+        h1 {
+            min-height: 28px;
+            @include font-size($h4-font-size);
+    
+            &:last-child {
+                margin-bottom: 6px;
+            }
+        }
+    }
+}
+
 // Forms
 .form-text {
     &:last-child {
@@ -177,8 +205,15 @@ body {
 }
 
 // Timeline items
+.titel {
+    min-height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
 .timeline {
-    a.flight {
+    a.event {
         text-decoration: none;
         color: inherit;
 
@@ -187,76 +222,42 @@ body {
         }
     }
 
-    .flight {
+    .event {
         display: flex;
         min-height: 40px;
         align-items: center;
         transition: $transition-base;
+        border-radius: .25rem;
 
-        &:nth-child(even) {
+        &:not(:last-child) {
+            margin-bottom: .25rem;
+        }
+
+        &:nth-child(odd) {
             background-color: var(--timeline-bg-nth);
         }
 
-        .flight-icon {
+        .icon {
             width: 40px;
             text-align: center;
             flex-shrink: 0;
         }
 
-        .flight-build {
+        .revision {
             margin-right: 0.5rem;
             min-width: 150px;
         }
 
-        .flight-channels {
+        .tags {
             flex: 1;
             margin-right: 0.5rem;
-            padding: 0 0 0.25rem 0;
+            padding: 0 0 .1875rem 0;
         }
 
-        .flight-version {
+        .version {
             margin-right: 0.5rem;
             font-size: 90%;
             text-align: right;
-        }
-    }
-
-    a.release {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .release {
-        display: flex;
-        min-height: 40px;
-        align-items: center;
-        transition: $transition-base;
-        line-height: 1.2;
-
-        &:nth-child(even) {
-            background-color: var(--timeline-bg-nth);
-        }
-
-        &:hover {
-            background-color: var(--timeline-bg-hover);
-        }
-
-        .release-icon {
-            width: 40px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .release-flight {
-            flex: 1;
-            margin-right: 0.5rem;
-            min-width: 100px;
-        }
-
-        .release-version {
-            margin-right: 0.5rem;
-            font-size: 90%;
-            color: rgba(255, 255, 255, 0.7);
         }
     }
 }
@@ -289,6 +290,9 @@ a.card {
         border: none;
         box-shadow: $box-shadow-sm;
         padding: 0.5rem 0.75rem;
+        height: 84px;
+        display: flex;
+        flex-direction: column;
 
         &.channel-disabled {
             .channel-name {
@@ -300,12 +304,12 @@ a.card {
             margin-top: -0.125rem;
             margin-bottom: -0.375rem;
             font-weight: 600;
+            font-size: 0.9375rem;
         }
 
         .channel-build {
-            margin-bottom: 0.5rem;
             font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 1.125rem;
         }
 
         .channel-date {

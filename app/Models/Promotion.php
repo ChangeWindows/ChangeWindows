@@ -32,7 +32,7 @@ class Promotion extends Model
     }
 
     public function getUrlAttribute() {
-        return route('front.releases.show', $this->release, false);
+        return route('front.platforms.releases', ['release' => $this->release, 'platform' => $this->release->platform], false);
     }
 
     public function getEditUrlAttribute() {

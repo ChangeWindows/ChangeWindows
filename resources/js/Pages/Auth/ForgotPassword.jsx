@@ -6,8 +6,9 @@ import Auth from '../../Layouts/Auth';
 
 import { faPaperPlane } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Helmet } from 'react-helmet';
 
-export default function ForgotPassword({ can, status }) {
+export default function ForgotPassword({ app, status }) {
     const [form, setForm] = useState({ email: '' });
 
     function handleSubmit(event) {
@@ -17,6 +18,10 @@ export default function ForgotPassword({ can, status }) {
 
     return (
         <Auth>
+            <Helmet>
+                <title>Forgot Password &middot; {app.name}</title>
+            </Helmet>
+
             <form onSubmit={handleSubmit} className="row g-3">
                 <div className="col-12">
                     <p className="text-muted"><small>Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.</small></p>

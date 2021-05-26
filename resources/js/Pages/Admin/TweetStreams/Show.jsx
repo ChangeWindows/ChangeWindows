@@ -20,11 +20,11 @@ export default function Show({ tweet_streams, createUrl, status = null }) {
                 Twitter Tweet Streams
             </NaviBar>
         
-            <div className="container my-3">
+            <div className="container">
                 {status &&
                     <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
                 }
-                <div className="row g-3">
+                <div className="row g-1">
                     {tweet_streams.map((tweet_stream) => (
                         <div className="col-6 col-xl-4 col-xxl-3" key={tweet_stream.id}>
                             <InertiaLink href={tweet_stream.editUrl} className="card border-0 shadow-sm">

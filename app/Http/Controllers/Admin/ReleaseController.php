@@ -34,6 +34,7 @@ class ReleaseController extends Controller
                 return [
                     'name' => $release->name,
                     'version' => $release->version,
+                    'start_public' => $release->start_public,
                     'edit_url' => $release->edit_url,
                     'edit_changelog_url' => $release->edit_changelog_url,
                     'platform' => [

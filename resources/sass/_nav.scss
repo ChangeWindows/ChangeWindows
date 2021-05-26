@@ -12,6 +12,11 @@
                 margin-right: 1.5rem;
             }
 
+            &:hover,
+            &:focus {
+                color: var(--text-hover);
+            }
+
             &.active {
                 svg {
                     color: $primary;
@@ -32,6 +37,9 @@
 }
 
 .pagination {
+    margin-bottom: .5rem;
+    margin-top: .75rem;
+
     .page-item {
         &.disabled {
             .page-link {

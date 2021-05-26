@@ -9,17 +9,17 @@ export default function Promotion({ platform, version, channel, url, overview = 
     const mainProps = useMemo(() => ({ href: url }), ['url']);
 
     return (
-        <Component {...mainProps} className="flight">
-            <div className="flight-icon">
+        <Component {...mainProps} className="event">
+            <div className="icon">
                 <PlatformIcon platform={platform} color />
             </div>
-            <div className="flight-build">
+            <div className="revision">
                 Version <span className="fw-bold">{version}</span>
             </div>
-            <div className="flight-channels">
+            <div className="tags">
                 <span className="badge me-1" style={{ backgroundColor: channel.color }}>{channel.name}</span>
             </div>
-            <div className={clsx('flight-version', 'text-muted', { 'd-none': overview, 'd-sm-block': overview })}>{version ?? component}</div>
+            <div className={clsx('version', 'text-muted', { 'd-none': overview, 'd-sm-block': overview })}>{version ?? component}</div>
         </Component>
     )
 };

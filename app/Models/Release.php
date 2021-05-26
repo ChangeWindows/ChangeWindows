@@ -16,12 +16,18 @@ class Release extends Model
     public $searchableType = 'Releases';
 
     protected $table = 'releases';
-    protected $fillable = ['name', 'version', 'canonical_version', 'package', 'codename', 'description', 'changelog', 'platform_id', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts', 'start_build', 'start_delta', 'end_build', 'end_delta'];
+    protected $fillable = ['name', 'version', 'canonical_version', 'package', 'codename', 'description', 'changelog', 'platform_id', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts', 'ongoing', 'start_build', 'start_delta', 'end_build', 'end_delta'];
     protected $appends = ['url', 'edit_url', 'edit_changelog_url'];
     protected $dates = ['start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts'];
 
     protected $casts = [
-        'package' => 'integer'
+        'package' => 'integer',
+        'ongoing' => 'integer',
+        'start_preview' => 'date:Y-m-d',
+        'start_public' => 'date:Y-m-d',
+        'start_extended' => 'date:Y-m-d',
+        'start_lts' => 'date:Y-m-d',
+        'end_lts' => 'date:Y-m-d'
     ];
 
     public function platform() {
@@ -62,17 +68,17 @@ class Release extends Model
 
     public function getUrlAttribute() {
         if ($this->package) {
-            return route('front.packages.show', $this, false);
+            return route('front.platforms.packages', ['release' => $this, 'platform' => $this->platform], false);
         }
 
-        return route('front.releases.show', $this, false);
+        return route('front.platforms.releases', ['release' => $this, 'platform' => $this->platform], false);
     }
 
     public function getRouteKeyName() {
         return 'slug';
     }
 
-    public function sluggable() {
+    public function sluggable(): array {
         return [
             'slug' => [
                 'source' => 'name'

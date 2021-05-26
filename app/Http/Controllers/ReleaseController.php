@@ -15,43 +15,7 @@ class ReleaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return Inertia::render('Releases/Index', [
-            'releases' => Release::where('package', '=', 0)->orderBy('platform_id', 'asc')->orderBy('canonical_version', 'desc')->get()->map(function ($release) {
-                return [
-                    'name' => $release->name,
-                    'version' => $release->version,
-                    'codename' => $release->codename,
-                    'package' => $release->package,
-                    'start_public' => $release->start_public,
-                    'url' => $release->url,
-                    'platform' => [
-                        'icon' => $release->platform->icon,
-                        'name' => $release->platform->name,
-                        'color' => $release->platform->color,
-                        'tool' => $release->platform->tool
-                    ],
-                    'channels' => $release->releaseChannels->where('supported')->map(function ($channel) {
-                        return [
-                            'id' => $channel->id,
-                            'short_name' => $channel->short_name,
-                            'supported' => $channel->supported,
-                            'color' => $channel->channel->color,
-                            'order' => $channel->channel->order
-                        ];
-                    })->values()->all()
-                ];
-            })->values()->all()
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Release $release)
+    public function show(Platform $platform, Release $release)
     {
         $timeline = Timeline::orderBy('date', 'desc')
             ->whereHas('flight', function (Builder $query) use ($release) {
@@ -85,7 +49,7 @@ class ReleaseController extends Controller
         $prev = Release::where('canonical_version', '<', $release->canonical_version)->where('platform_id', '=', $release->platform_id)->where('package', '=', 0)->orderBy('canonical_version', 'desc')->first();
         $next = Release::where('canonical_version', '>', $release->canonical_version)->where('platform_id', '=', $release->platform_id)->where('package', '=', 0)->orderBy('canonical_version', 'asc')->first();
 
-        return Inertia::render('Releases/Show', [
+        return Inertia::render('Platforms/Release', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
                 return [
                     'id' => $_platform->id,
@@ -96,7 +60,7 @@ class ReleaseController extends Controller
                     'url' => route('front.platforms.show', $_platform, false)
                 ];
             }),
-            'release' => $release->only('name', 'changelog', 'version', 'codename', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts'),
+            'release' => $release->only('name', 'changelog', 'version', 'codename', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts', 'ongoing'),
             'quick_nav' => [
                 'prev' => $prev ? [
                     'url' => $prev->url,

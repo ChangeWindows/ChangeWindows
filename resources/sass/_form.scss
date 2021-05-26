@@ -15,10 +15,16 @@
     }
 }
 
-.form-check-input {
-    background: var(--checkbox-bg);
+.form-check:not(.form-switch) {
+    .form-check-input {
+        background-color: var(--checkbox-bg);
 
-    &:disabled {
-        background: var(--checkbox-disabled-bg);
+        &:checked {
+            background-color: $primary;
+        }
+    
+        &:disabled {
+            background-color: var(--checkbox-disabled-bg);
+        }
     }
 }

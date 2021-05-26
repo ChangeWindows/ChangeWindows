@@ -7,8 +7,10 @@ import Auth from '../../Layouts/Auth';
 import { faArrowRightToBracket, faShieldKeyhole } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function Login({ status }) {
-    const [form, setForm] = useState({ email: '', password: '', remember_me: true });
+import { Helmet } from 'react-helmet';
+
+export default function Login({ app, status }) {
+    const [form, setForm] = useState({ email: '', password: '', remember: true });
 
     function handleSubmit(event) {
       event.preventDefault();
@@ -17,6 +19,10 @@ export default function Login({ status }) {
 
     return (
         <Auth>
+            <Helmet>
+                <title>Login &middot; {app.name}</title>
+            </Helmet>
+            
             <form onSubmit={handleSubmit} className="row g-3">
                 {Object.keys(status).length > 0 &&
                     <div className="col-12">
@@ -47,12 +53,12 @@ export default function Login({ status }) {
                             className="form-check-input"
                             type="checkbox"
                             value="1"
-                            id="remember_me"
-                            name="remember_me"
-                            checked={form.remember_me}
-                            onChange={() => setForm((curLogin) => ({ ...curLogin, remember_me: !curLogin.remember_me }))}
+                            id="remember"
+                            name="remember"
+                            checked={form.remember}
+                            onChange={() => setForm((curLogin) => ({ ...curLogin, remember: curLogin.remember ? null : true }))}
                         />
-                        <label className="form-check-label" htmlFor="remember_me">
+                        <label className="form-check-label" htmlFor="remember">
                             <span className="fw-bold">Remember me</span>
                         </label>
                     </div>
