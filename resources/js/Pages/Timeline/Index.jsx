@@ -27,8 +27,8 @@ export default function Index({ app, timeline, pagination, platforms, channel_pl
                     <div className="col-12 titlebar">
                         <h1>Timeline</h1>
                     </div>
-                    <div class="col">
-                        <div class="row g-3">
+                    <div className="col">
+                        <div className="row g-3">
                             <div className="col-12 col-md-8 col-lg-7">
                                 <div className="row g-1">
                                     {Object.keys(timeline).map((date, key) => (

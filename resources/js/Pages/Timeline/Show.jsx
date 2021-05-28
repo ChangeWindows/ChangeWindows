@@ -28,8 +28,8 @@ export default function Show({ app, timeline, pagination, platform, platforms, c
                     <div className="col-12 titlebar">
                         <h1 style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
                     </div>
-                    <div class="col">
-                        <div class="row g-3">
+                    <div className="col">
+                        <div className="row g-3">
                             <div className="col-12 col-md-8 col-lg-7">
                                 <div className="row g-1">
                                     {Object.keys(timeline).map((date, key) => (
