@@ -33,20 +33,22 @@ export default function Show({ app, platforms, platform, channels, releases, pac
                         <p className="mb-0 mt-1">{platform.description}</p>
                     </div>
 
-                    <div className="col-12">
-                        <h2 className="h5 mb-3 fw-bold">Channels</h2>
-                        <div className="row g-1">
-                            {channels.map((channel, key) => (
-                                <Channel
-                                    key={key}
-                                    channel={{ color: channel.color, name: channel.name }}
-                                    build={channel.flights.length > 0 ? channel.flights[0].version : ''}
-                                    date={channel.flights.length > 0 ? format(parseISO(channel.flights[0].date), 'd MMMM yyyy') : ''}
-                                    url={channel.flights.length > 0 ? channel.flights[0].url : undefined}
-                                />
-                            ))}
+                    {channels.length >= 1 &&
+                        <div className="col-12">
+                            <h2 className="h5 mb-3 fw-bold">Channels</h2>
+                            <div className="row g-1">
+                                {channels.map((channel, key) => (
+                                    <Channel
+                                        key={key}
+                                        channel={{ color: channel.color, name: channel.name }}
+                                        build={channel.flights.length > 0 ? channel.flights[0].version : ''}
+                                        date={channel.flights.length > 0 ? format(parseISO(channel.flights[0].date), 'd MMMM yyyy') : ''}
+                                        url={channel.flights.length > 0 ? channel.flights[0].url : undefined}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    }
                     <div className="col-12">
                         <div className="row">
                             {currentReleases.length > 0 &&
