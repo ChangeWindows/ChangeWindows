@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 
 import DropdownItem from './Navbar/DropdownItem';
 import NavItem from './Navbar/NavItem';
@@ -15,10 +15,19 @@ import clsx from 'clsx';
 
 export default function Navigation({ home = false, platforms, all = false }) {
 	const matchesSmUp = useMediaQuery('(min-width: 576px)');
+    const page = usePage();
     
     const mainPlatforms = useMemo(() => platforms.filter((platform) => matchesSmUp && !platform.legacy || !matchesSmUp && !platform.legacy && !platform.tool), [matchesSmUp, platforms]);
     const legacyPlatforms = useMemo(() => platforms.filter((platform) => platform.legacy), [platforms]);
     const toolPlatforms = useMemo(() => platforms.filter((platform) => platform.tool), [platforms]);
+
+    const isActiveOverflow = useMemo(() => {
+        if (matchesSmUp) {
+            return !!legacyPlatforms.find((platform) => page.url.includes(platform.url));
+        }
+
+        return !![...legacyPlatforms, ...toolPlatforms].find((platform) => page.url.includes(platform.url));
+    }, [matchesSmUp, legacyPlatforms, toolPlatforms]);
 
     return (
         <nav className="navbar navbar-expand navbar-light sticky-top">
@@ -40,7 +49,7 @@ export default function Navigation({ home = false, platforms, all = false }) {
                     </ul>
                     <ul className="navbar-nav">
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="legacyPlatforms" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a className={clsx('nav-link dropdown-toggle', { 'active': isActiveOverflow })} href="#" id="legacyPlatforms" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span className="d-none d-sm-inline-block"><FontAwesomeIcon icon={faAngleDown} /> Legacy</span>
                                 <span className="d-inline-block d-sm-none"><FontAwesomeIcon icon={faEllipsis} /></span>
                             </a>
