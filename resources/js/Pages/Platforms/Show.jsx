@@ -59,6 +59,7 @@ export default function Show({ app, platforms, platform, channels, releases, pac
                                             return (
                                                 <ReleaseCard
                                                     key={key}
+                                                    platform={platform}
                                                     name={release.name}
                                                     alts={[`Version ${release.version}`, release.codename]}
                                                     channels={release.channels}
@@ -78,6 +79,7 @@ export default function Show({ app, platforms, platform, channels, releases, pac
                                                 <ReleaseCard
                                                     key={key}
                                                     pack
+                                                    platform={platform}
                                                     name={pack.name}
                                                     alts={[`Version ${pack.version}`, pack.codename]}
                                                     channels={pack.channels}
@@ -96,6 +98,7 @@ export default function Show({ app, platforms, platform, channels, releases, pac
                                             return (
                                                 <ReleaseCard
                                                     key={key}
+                                                    platform={platform}
                                                     name={release.name}
                                                     alts={[`Version ${release.version}`, release.codename]}
                                                     url={release.url}
