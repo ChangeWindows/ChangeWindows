@@ -27,8 +27,8 @@ export default function Index({ app, timeline, pagination, platforms, channel_pl
                     <div className="col-12 titlebar">
                         <h1>Timeline</h1>
                     </div>
-                    <div class="col">
-                        <div class="row g-3">
+                    <div className="col">
+                        <div className="row g-3">
                             <div className="col-12 col-md-8 col-lg-7">
                                 <div className="row g-1">
                                     {Object.keys(timeline).map((date, key) => (
@@ -90,9 +90,9 @@ export default function Index({ app, timeline, pagination, platforms, channel_pl
                                                 <Channel
                                                     key={_key}
                                                     channel={{ color: channel.color, name: channel.name }}
-                                                    build={channel.flights.length > 0 ? channel.flights[0].version : ''}
-                                                    date={channel.flights.length > 0 ? format(parseISO(channel.flights[0].date), 'd MMMM yyyy') : ''}
-                                                    url={channel.flights.length > 0 ? channel.flights[0].url : undefined}
+                                                    build={channel.flight ? channel.flight.version : ''}
+                                                    date={channel.flight ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : ''}
+                                                    url={channel.flight ? channel.flight.url : undefined}
                                                 />
                                             ))}
                                         </Fragment>

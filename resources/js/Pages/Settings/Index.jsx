@@ -116,7 +116,7 @@ export default function Show({ app }) {
                                     <div className="col-12 mt-3">
                                         <h6>Inactive channels</h6>
                                         <div className="form-check form-switch">
-                                            <input className="form-check-input shadow" type="checkbox" onChange={toggleShowActiveOnly} checked={showActiveOnly} id="showActiveChannelsOnly" />
+                                            <input className="form-check-input" type="checkbox" onChange={toggleShowActiveOnly} checked={showActiveOnly} id="showActiveChannelsOnly" />
                                             <label className="form-check-label" htmlFor="showActiveChannelsOnly">Only show active channels on the Channels-pages.</label>
                                         </div>
                                     </div>
