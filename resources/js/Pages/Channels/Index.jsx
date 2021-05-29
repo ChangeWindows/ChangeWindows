@@ -37,9 +37,9 @@ export default function Index({ app, platforms, channel_platforms }) {
                                     <Channel
                                         key={_key}
                                         channel={{ color: channel.color, name: channel.name }}
-                                        build={channel.flights.length > 0 ? channel.flights[0].version : ''}
-                                        date={channel.flights.length > 0 ? format(parseISO(channel.flights[0].date), 'd MMMM yyyy') : ''}
-                                        url={channel.flights.length > 0 ? channel.flights[0].url : undefined}
+                                        build={channel.flight ? channel.flight.version : ''}
+                                        date={channel.flight ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : ''}
+                                        url={channel.flight ? channel.flight.url : undefined}
                                     />
                                 ))}
                             </div>
