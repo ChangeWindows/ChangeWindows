@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
@@ -8,7 +9,6 @@ import PlatformNavigation from '../../Components/PlatformNavigation';
 
 import { format, parseISO } from 'date-fns';
 import { getLocal } from '../../utils/localStorage';
-import { Helmet } from 'react-helmet';
 
 export default function Show({ app, platform, platforms, channel_order, releases }) {
     const showActiveOnly = getLocal('showActiveOnly');
@@ -34,9 +34,7 @@ export default function Show({ app, platform, platforms, channel_order, releases
     
     return (
         <App>
-            <Helmet>
-                <title>{platform.name} Channels &middot; {app.name}</title>
-            </Helmet>
+            <InertiaHead title={`${platform.name} channels &middot; ${app.name}`} />
 
             <PlatformNavigation all="/channels" page="Channels" platforms={platforms} />
         

@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { InertiaLink, InertiaHead } from '@inertiajs/inertia-react';
 
 import Auth from '../../Layouts/Auth';
 
 import { faArrowRightToBracket, faUserPlus } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { Helmet } from 'react-helmet';
 
 export default function Register({ app, status }) {
     const [form, setForm] = useState({ name: '', email: '', password: '', password_confirmation: '' });
@@ -19,9 +17,7 @@ export default function Register({ app, status }) {
 
     return (
         <Auth>
-            <Helmet>
-                <title>Register &middot; {app.name}</title>
-            </Helmet>
+            <InertiaHead title={`Register &middot; ${app.name}`} />
 
             <form onSubmit={handleSubmit} className="row g-3">
                 {Object.keys(status).length > 0 &&

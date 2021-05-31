@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { InertiaLink, InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 
@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faGear } from '@fortawesome/pro-regular-svg-icons';
 
 import { getLocal, setLocal } from '../../utils/localStorage';
-import { Helmet } from 'react-helmet';
 
 export default function Show({ app }) {
     const [theme, setTheme] = useState(getLocal('theme'));
@@ -42,9 +41,7 @@ export default function Show({ app }) {
 
     return (
         <App>
-            <Helmet>
-                <title>Settings &middot; {app.name}</title>
-            </Helmet>
+            <InertiaHead title={`Settings &middot; ${app.name}`} />
 
             <nav className="navbar navbar-expand navbar-light sticky-top">
                 <div className="container">

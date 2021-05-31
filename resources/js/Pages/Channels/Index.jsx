@@ -1,4 +1,5 @@
 import React from 'react';
+import { InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
@@ -7,15 +8,12 @@ import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
 
 import { format, parseISO } from 'date-fns';
-import { Helmet } from 'react-helmet';
 import clsx from 'clsx';
 
 export default function Index({ app, platforms, channel_platforms }) {
     return (
         <App>
-            <Helmet>
-                <title>Channels &middot; {app.name}</title>
-            </Helmet>
+            <InertiaHead title={`Channels &middot; ${app.name}`} />
 
             <PlatformNavigation home all="/channels" page="Channels" platforms={platforms} />
         

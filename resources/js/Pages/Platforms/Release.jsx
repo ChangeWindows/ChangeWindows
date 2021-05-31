@@ -1,5 +1,5 @@
 import React from 'react';
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { InertiaLink, InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
@@ -15,15 +15,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarsStaggered, faNotes, faArrowLeft, faChevronLeft, faChevronRight } from '@fortawesome/pro-regular-svg-icons';
 
 import { format, parseISO } from 'date-fns';
-import { Helmet } from 'react-helmet';
 import Markdown from 'markdown-to-jsx';
 
 export default function Release({ app, release, platform, channels, timeline, pagination, quick_nav }) {
     return (
         <App>
-            <Helmet>
-                <title>{release.name} &middot; {app.name}</title>
-            </Helmet>
+            <InertiaHead title={`${release.name} &middot; ${app.name}`} />
 
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">

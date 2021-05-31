@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { usePage } from '@inertiajs/inertia-react';
+import { usePage, InertiaHead } from '@inertiajs/inertia-react';
 
 import AdminNavigation from './Navigation/AdminNavigation';
 
 import { getLocal, setLocal } from '../utils/localStorage';
-import { Helmet } from 'react-helmet';
 import useMediaQuery from '../hooks/useMediaQuery';
 
 export default function App({ children }) {
@@ -50,9 +49,7 @@ export default function App({ children }) {
 
     return (
         <div className="bg-light">
-            <Helmet>
-                <title>Backstage &middot; {app.name}</title>
-            </Helmet>
+            <InertiaHead title={`Backstage &middot; ${app.name}`} />
 
             <div className="grid" style={{ height: windowHeight }}>
                 <header className="grid-sidebar">

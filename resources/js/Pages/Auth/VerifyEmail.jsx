@@ -1,12 +1,11 @@
 import React from 'react';
 import { Inertia } from '@inertiajs/inertia';
+import { InertiaHead } from '@inertiajs/inertia-react';
 
 import Auth from '../../Layouts/Auth';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket, faPaperPlane } from '@fortawesome/pro-regular-svg-icons';
-
-import { Helmet } from 'react-helmet';
 
 export default function VerifyEmail({ app, session, status }) {
     function handleSubmit(event) {
@@ -21,9 +20,7 @@ export default function VerifyEmail({ app, session, status }) {
 
     return (
         <Auth>
-            <Helmet>
-                <title>Verify Email &middot; {app.name}</title>
-            </Helmet>
+            <InertiaHead title={`Verify Email &middot; ${app.name}`} />
 
             <form onSubmit={handleSubmit} className="row g-3">
                 <div className="col-12">

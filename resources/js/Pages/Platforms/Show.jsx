@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
@@ -8,7 +9,6 @@ import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
 
 import { format, parseISO } from 'date-fns';
-import { Helmet } from 'react-helmet';
 
 export default function Show({ app, platforms, platform, channels, releases, packages }) {
     const [currentReleases, legacyReleases] = useMemo(() => {
@@ -20,9 +20,7 @@ export default function Show({ app, platforms, platform, channels, releases, pac
 
     return (
         <App>
-            <Helmet>
-                <title>{platform.name} &middot; {app.name}</title>
-            </Helmet>
+            <InertiaHead title={`${platform.name} &middot; ${app.name}`} />
 
             <PlatformNavigation page="Platforms" platforms={platforms} />
         
