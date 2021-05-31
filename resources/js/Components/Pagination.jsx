@@ -5,7 +5,9 @@ import clsx from 'clsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/pro-regular-svg-icons';
 
-export default function Pagination({ prev_page_url, next_page_url }) {
+export default function Pagination(props) {
+    const prev_page_url = props.pagination.prev_page_url ?? '';
+    const next_page_url = props.pagination.next_page_url ?? '';
 
     return (
         <nav aria-label="Pagination" className="d-flex justify-content-center">
