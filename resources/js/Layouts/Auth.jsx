@@ -55,8 +55,8 @@ export default function Auth({ children }) {
                 <a href="javascript:history.back()" className="btn btn-link btn-sm text-white"><FontAwesomeIcon icon={faArrowLeft} /> Back</a>
                 <div className="auth-card">
                     <h1 className="h3 m-0 py-5 d-flex justify-content-center align-items-center">
-                        <img src={app.preview ? '/images/logo-preview-dark.svg' : '/images/logo-dark.svg'} width="28px" height="28px" className="me-2 mt-1 display-light" />
-                        <img src={app.preview ? '/images/logo-preview-light.svg' : '/images/logo-light.svg'} width="28px" height="28px" className="me-2 mt-1 display-dark" />
+                        <img src={app.preview === 'preview' ? '/images/logo-preview-dark.svg' : (app.preview === 'canary' ? '/images/logo-canary-dark.svg' : '/images/logo-dark.svg')} width="28px" height="28px" className="me-2 mt-1 display-light" />
+                        <img src={app.preview === 'preview' ? '/images/logo-preview-light.svg' : (app.preview === 'canary' ? '/images/logo-canary-light.svg' : '/images/logo-light.svg')} width="28px" height="28px" className="me-2 mt-1 display-dark" />
                         ChangeWindows
                     </h1>
                     { children }

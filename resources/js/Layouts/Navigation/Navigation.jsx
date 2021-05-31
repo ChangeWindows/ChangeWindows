@@ -15,7 +15,7 @@ export default function Navigation() {
                 <div className="container-fluid">
                     <InertiaLink className="navbar-brand" href="/">
                         <div className="app-icon">
-                            <img src={app.preview ? '/images/logo-preview-light.svg' : '/images/logo-light.svg'} width="16px" height="16px" />
+                            <img src={app.preview === 'preview' ? '/images/logo-preview-light.svg' : (app.preview === 'canary' ? '/images/logo-canary-light.svg' : '/images/logo-light.svg')} width="16px" height="16px" />
                         </div>
                         <span className="brand-label fw-bold">ChangeWindows</span>
                     </InertiaLink>
