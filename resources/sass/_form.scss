@@ -15,7 +15,7 @@
     }
 }
 
-.form-check:not(.form-switch) {
+.form-check {
     .form-check-input {
         background-color: var(--checkbox-bg);
 
@@ -25,6 +25,12 @@
     
         &:disabled {
             background-color: var(--checkbox-disabled-bg);
+        }
+    }
+
+    &.form-switch {
+        .form-check-input:not(:checked) {
+            background-image: var(--switch-bg-image);
         }
     }
 }

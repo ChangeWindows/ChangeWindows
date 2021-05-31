@@ -36,25 +36,21 @@ class TimelineController extends Controller
                     'name' => $platform->name,
                     'color' => $platform->color,
                     'icon' => $platform->icon,
-                    'channels' => $platform->channels->where('active')->map(function ($channel) {
-                        $release_channels = $channel->releaseChannels
+                    'channels' => $platform->channels->where('active')->where('package', '=', 0)->map(function ($channel) {
+                        $release_channel = $channel->releaseChannels
                             ->sortByDesc(function ($release_channel, $key) {
                                 return $release_channel->release->canonical_version;
-                            })->values()->all();
+                            })->values()->first();
         
                         return [
-                            'name' => $release_channels[0]->short_name,
+                            'name' => $release_channel->short_name,
                             'order' => $channel->order,
                             'color' => $channel->color,
-                            'flights' => collect($release_channels)->map(function ($_channel) {
-                                if ($_channel->latest) {
-                                    return [
-                                        'version' => $_channel->latest->flight,
-                                        'date' => $_channel->latest->timeline->date,
-                                        'url' => $_channel->latest->url
-                                    ];
-                                }
-                            })->where('version', '<>', null)->values()->all()
+                            'flight' => [
+                                'version' => $release_channel->latest->flight,
+                                'date' => $release_channel->latest->timeline->date,
+                                'url' => $release_channel->latest->url
+                            ]
                         ];
                     })->sortBy('order')->values()->all(),
                 ];
@@ -218,25 +214,21 @@ class TimelineController extends Controller
                     'name' => $platform->name,
                     'color' => $platform->color,
                     'icon' => $platform->icon,
-                    'channels' => $platform->channels->where('active')->map(function ($channel) {
-                        $release_channels = $channel->releaseChannels
+                    'channels' => $platform->channels->where('active')->where('package', '=', 0)->map(function ($channel) {
+                        $release_channel = $channel->releaseChannels
                             ->sortByDesc(function ($release_channel, $key) {
                                 return $release_channel->release->canonical_version;
-                            })->values()->all();
+                            })->values()->first();
         
                         return [
-                            'name' => $release_channels[0]->short_name,
+                            'name' => $release_channel->short_name,
                             'order' => $channel->order,
                             'color' => $channel->color,
-                            'flights' => collect($release_channels)->map(function ($_channel) {
-                                if ($_channel->latest) {
-                                    return [
-                                        'version' => $_channel->latest->flight,
-                                        'date' => $_channel->latest->timeline->date,
-                                        'url' => $_channel->latest->url
-                                    ];
-                                }
-                            })->where('version', '<>', null)->values()->all()
+                            'flight' => [
+                                'version' => $release_channel->latest->flight,
+                                'date' => $release_channel->latest->timeline->date,
+                                'url' => $release_channel->latest->url
+                            ]
                         ];
                     })->sortBy('order')->values()->all(),
                 ];
