@@ -213,7 +213,7 @@ class FlightController extends Controller
                                 $release_channel->release->codename,
                                 $flight->version,
                                 $release_channel->name,
-                                'changewindows.org/releases/'.$release_channel->release->slug
+                                route('front.platforms.release', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
                             ),
                             $release_channel->channel->platform->tweet_template
                         )
@@ -224,7 +224,7 @@ class FlightController extends Controller
                         
                         $twitter_re_stream = Twitter::usingCredentials($retweet_stream->access_token, $retweet_stream->access_token_secret, $retweet_stream->consumer_key, $retweet_stream->consumer_secret);
 
-                        $posted_retweet = $twitter_re_stream->postRt($posted_tweet->id);
+                        $twitter_re_stream->postRt($posted_tweet->id);
                     }
                 }
             }
@@ -273,7 +273,7 @@ class FlightController extends Controller
                                 $release_channel->release->name,
                                 $flight->version,
                                 $release_channel->name,
-                                'changewindows.org/packages/'.$release_channel->release->slug
+                                route('front.platforms.packages', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
                             ),
                             $release_channel->channel->platform->tweet_template_package
                         )
@@ -284,7 +284,7 @@ class FlightController extends Controller
                         
                         $twitter_re_stream = Twitter::usingCredentials($retweet_stream->access_token, $retweet_stream->access_token_secret, $retweet_stream->consumer_key, $retweet_stream->consumer_secret);
 
-                        $posted_retweet = $twitter_re_stream->postRt($posted_tweet->id);
+                        $twitter_re_stream->postRt($posted_tweet->id);
                     }
                 }
             }
