@@ -213,7 +213,7 @@ class FlightController extends Controller
                                 $release_channel->release->codename,
                                 $flight->version,
                                 $release_channel->name,
-                                route('front.platforms.release', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
+                                'https://changewindows.org'.route('front.platforms.releases', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
                             ),
                             $release_channel->channel->platform->tweet_template
                         )
@@ -273,7 +273,7 @@ class FlightController extends Controller
                                 $release_channel->release->name,
                                 $flight->version,
                                 $release_channel->name,
-                                route('front.platforms.packages', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
+                                'https://changewindows.org'.route('front.platforms.packages', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
                             ),
                             $release_channel->channel->platform->tweet_template_package
                         )
