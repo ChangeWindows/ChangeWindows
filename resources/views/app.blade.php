@@ -6,9 +6,9 @@
 
         <title>{{ config('app.name', 'ChangeWindows') }}</title>
         
-        <link rel="stylesheet" href="{{ mix('css/style.css') }}">
-        <script src="{{ mix('js/app.js') }}" defer></script>
-        <script src="{{ mix('js/bootstrap.bundle.min.js') }}" defer></script>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
         <meta name="color-scheme" content="light">
         
         <link rel="shortcut icon" href="{{ env('APP_PREVIEW') === 'preview' ? asset('images/logo-preview.svg') : (env('APP_PREVIEW') === 'canary' ? asset('images/logo-canary.svg') : asset('images/logo.svg')) }}">
