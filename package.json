@@ -24,12 +24,12 @@
         "sass-loader": "^11.1.1"
     },
     "dependencies": {
-        "@changewindows/amaranth": "^0.2.0",
+        "@changewindows/amaranth": "^0.4.0",
         "@fortawesome/fontawesome-svg-core": "1.2.35",
         "@fortawesome/free-brands-svg-icons": "^6.0.0-beta1",
         "@fortawesome/pro-regular-svg-icons": "^6.0.0-beta1",
         "@fortawesome/react-fontawesome": "^0.1.14",
-        "@inertiajs/inertia": "^0.9.1",
+        "@inertiajs/inertia": "^0.9.2",
         "@inertiajs/inertia-react": "^0.6.2",
         "@inertiajs/progress": "^0.2.4",
         "@types/react": "17.0.9",

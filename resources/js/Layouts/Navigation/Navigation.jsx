@@ -5,6 +5,7 @@ import NavigationBar from './components/NavigationBar';
 
 import { faBarsStaggered, faLaptopMobile, faGauge, faCodeBranch, faBullhorn } from '@fortawesome/pro-regular-svg-icons';
 import { faPatreon, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import AmaranthIcon, { aiChangewindows, aiChangewindowsCan, aiChangewindowsDev } from '@changewindows/amaranth';
 
 export default function Navigation() {
     const { auth, nav_can, app } = usePage().props;
@@ -15,7 +16,7 @@ export default function Navigation() {
                 <div className="container-fluid">
                     <InertiaLink className="navbar-brand" href="/">
                         <div className="app-icon">
-                            <img src={app.preview === 'preview' ? '/images/logo-preview-light.svg' : (app.preview === 'canary' ? '/images/logo-canary-light.svg' : '/images/logo-light.svg')} width="16px" height="16px" />
+                            <AmaranthIcon icon={app.preview === 'preview' ? aiChangewindowsDev : (app.preview === 'canary' ? aiChangewindowsCan : aiChangewindows)} />
                         </div>
                         <span className="brand-label fw-bold">ChangeWindows</span>
                     </InertiaLink>

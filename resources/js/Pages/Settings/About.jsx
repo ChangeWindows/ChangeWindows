@@ -6,6 +6,7 @@ import App from '../../Layouts/App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faGear } from '@fortawesome/pro-regular-svg-icons';
 import { faGithub, faTwitter, faPatreon } from '@fortawesome/free-brands-svg-icons';
+import AmaranthIcon, { aiChangewindows, aiChangewindowsCan, aiChangewindowsDev } from '@changewindows/amaranth';
 
 export default function Show({ app, patrons }) {
     return (
@@ -34,8 +35,7 @@ export default function Show({ app, patrons }) {
             <div className="container my-3">
                 <div className="d-flex flex-column align-items-center">
                     <h1 className="h3 m-0 pt-5 text-center d-inline-flex justify-content-center">
-                        <img src={app.preview === 'preview' ? '/images/logo-preview-dark.svg' : (app.preview === 'canary' ? '/images/logo-canary-dark.svg' : '/images/logo-dark.svg')} width="28px" height="28px" className="me-2 mt-1 display-light" />
-                        <img src={app.preview === 'preview' ? '/images/logo-preview-light.svg' : (app.preview === 'canary' ? '/images/logo-canary-light.svg' : '/images/logo-light.svg')} width="28px" height="28px" className="me-2 mt-1 display-dark" />
+                        <AmaranthIcon icon={app.preview === 'preview' ? aiChangewindowsDev : (app.preview === 'canary' ? aiChangewindowsCan : aiChangewindows)} className="me-1" />
                         ChangeWindows {app.preview === 'preview' && 'Preview'}{app.preview === 'canary' && 'Canary'}
                     </h1>
                     <p className="text-muted mb-5 text-center d-inline"><a href="https://github.com/changewindows/horizon/releases" target="_blank">Version {app.version}</a></p>
