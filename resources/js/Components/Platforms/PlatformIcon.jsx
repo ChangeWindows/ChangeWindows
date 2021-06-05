@@ -1,29 +1,28 @@
 import React, { useMemo } from 'react';
 import clsx from 'clsx';
 
-import { faCloud, faCode, faCompactDisc, faGamepadModern, faHeadSideGoggles, faLaptop, faMicrochip, faMobile, faServer, faTablet, faTv } from '@fortawesome/pro-regular-svg-icons';
-import { faWindows } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AmaranthIcon, { aiAzure, aiChip, aiCmd, aiCode, aiDisc, aiFoldable, aiGamepad, aiHolographic, aiLaptop, aiPhone, aiServer, aiTeam } from '@changewindows/amaranth';
 
 export default function PlatformIcon({ platform, color = false, className = null }) {
     const icon = useMemo(() => {
         switch (platform.icon) {
-            case 'cloud':               return faCloud;
-            case 'code':                return faCode;
-            case 'compact-disc':        return faCompactDisc;
-            case 'gamepad-modern':      return faGamepadModern;
-            case 'head-side-goggles':   return faHeadSideGoggles;
-            case 'laptop':              return faLaptop;
-            case 'microchip':           return faMicrochip;
-            case 'mobile':              return faMobile;
-            case 'server':              return faServer;
-            case 'tablet':              return faTablet;
-            case 'tv':                  return faTv;
-            default:                    return faWindows;
+            case 'cloud':               return aiAzure;
+            case 'code':                return aiCode;
+            case 'compact-disc':        return aiDisc;
+            case 'gamepad-modern':      return aiGamepad;
+            case 'head-side-goggles':   return aiHolographic;
+            case 'laptop':              return aiLaptop;
+            case 'microchip':           return aiChip;
+            case 'mobile':              return aiPhone;
+            case 'server':              return aiServer;
+            case 'tablet':              return aiFoldable;
+            case 'tv':                  return aiTeam;
+            case 'cmd':                 return aiCmd;
+            default:                    return aiLaptop;
         }
     }, []);
 
     return (
-        <FontAwesomeIcon icon={icon} fixedWidth className={clsx(className)} style={{ color: color ? platform.color : 'inherit' }} />
+        <AmaranthIcon icon={icon} className={clsx(className)} style={{ color: color ? platform.color : 'inherit' }} />
     );
 };
