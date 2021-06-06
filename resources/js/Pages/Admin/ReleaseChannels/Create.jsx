@@ -4,8 +4,7 @@ import { Inertia } from '@inertiajs/inertia';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiCheck, aiFloppyDisc } from '@changewindows/amaranth';
 
 export default function Create({ urls, releases, channels, channel, params }) {
     const [curReleaseChannel, setCurReleaseChannel] = useState({
@@ -43,7 +42,7 @@ export default function Create({ urls, releases, channels, channel, params }) {
                 <NaviBar
                     back="/admin/releases"
                     actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
+                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
                     }
                 >
                     {curReleaseChannel.name || 'Unnamed channel'}
@@ -51,7 +50,7 @@ export default function Create({ urls, releases, channels, channel, params }) {
             
                 <div className="container my-3">
                     {status &&
-                        <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
+                        <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
                     }
                     <fieldset className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">

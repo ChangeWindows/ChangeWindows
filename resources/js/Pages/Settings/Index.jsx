@@ -3,8 +3,7 @@ import { InertiaLink, InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleInfo, faGear } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiGear, aiInfoCircle } from '@changewindows/amaranth';
 
 import { getLocal, setLocal } from '../../utils/localStorage';
 
@@ -49,12 +48,12 @@ export default function Show({ app }) {
                         <ul className="navbar-nav me-auto">
                             <li className="nav-item">
                                 <InertiaLink className="nav-link active" href="/settings">
-                                    <FontAwesomeIcon icon={faGear} /> Settings
+                                    <AmaranthIcon icon={aiGear} /> Settings
                                 </InertiaLink>
                             </li>
                             <li className="nav-item">
                                 <InertiaLink className="nav-link" href="/settings/about">
-                                    <FontAwesomeIcon icon={faCircleInfo} /> About
+                                    <AmaranthIcon icon={aiInfoCircle} /> About
                                 </InertiaLink>
                             </li>
                         </ul>

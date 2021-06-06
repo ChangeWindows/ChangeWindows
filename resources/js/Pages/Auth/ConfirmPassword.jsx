@@ -4,8 +4,7 @@ import { InertiaHead } from '@inertiajs/inertia-react';
 
 import Auth from '../../Layouts/Auth';
 
-import { faCheck } from '@fortawesome/pro-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AmaranthIcon, { aiCheck } from '@changewindows/amaranth';
 
 export default function ConfirmPassword({ app, status }) {
     const [form, setForm] = useState({ password: '' });
@@ -42,7 +41,7 @@ export default function ConfirmPassword({ app, status }) {
                 </div>
                 <div className="col-12 d-flex justify-content-between">
                     <button className="btn btn-primary me-1" type="submit">
-                        <FontAwesomeIcon icon={faCheck} fixedWidth /> Confirm
+                        <AmaranthIcon icon={aiCheck} fixedWidth /> Confirm
                     </button>
                 </div>
             </form>

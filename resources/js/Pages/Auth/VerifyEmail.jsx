@@ -4,8 +4,7 @@ import { InertiaHead } from '@inertiajs/inertia-react';
 
 import Auth from '../../Layouts/Auth';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightFromBracket, faPaperPlane } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiArrowFromBracket, aiPaperPlane } from '@changewindows/amaranth';
 
 export default function VerifyEmail({ app, session, status }) {
     function handleSubmit(event) {
@@ -44,10 +43,10 @@ export default function VerifyEmail({ app, session, status }) {
                 }
                 <div className="col-12 d-flex justify-content-between">
                     <button className="btn btn-primary me-1" type="submit">
-                        <FontAwesomeIcon icon={faPaperPlane} fixedWidth /> Resend verification email
+                        <AmaranthIcon icon={aiPaperPlane} fixedWidth /> Resend verification email
                     </button>
                     <button className="btn btn-primary me-1" onClick={handleLogout}>
-                        <FontAwesomeIcon icon={faArrowRightFromBracket} fixedWidth /> Logout
+                        <AmaranthIcon icon={aiArrowFromBracket} fixedWidth /> Logout
                     </button>
                 </div>
             </form>

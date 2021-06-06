@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
+
+import AmaranthIcon from '@changewindows/amaranth';
 
 export default function NavigationItem({ title, url, icon, primary, external = false, small = false }) {
     const page = usePage();
@@ -16,7 +17,7 @@ export default function NavigationItem({ title, url, icon, primary, external = f
             href={`${url}${primary ?? ''}`}
             className={clsx('sidebar-item', { 'active': page.url.includes(url), 'sidebar-item-sm': small })}
         >
-            <FontAwesomeIcon icon={icon} fixedWidth /> <span className="sidebar-label">{title}</span>
+            <AmaranthIcon icon={icon} /> <span className="sidebar-label">{title}</span>
         </Component>
     )
 }

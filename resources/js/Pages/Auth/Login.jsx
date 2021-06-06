@@ -4,8 +4,7 @@ import { InertiaLink, InertiaHead } from '@inertiajs/inertia-react';
 
 import Auth from '../../Layouts/Auth';
 
-import { faArrowRightToBracket, faShieldKeyhole } from '@fortawesome/pro-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AmaranthIcon, { aiArrowToBracket, aiShieldKey } from '@changewindows/amaranth';
 
 export default function Login({ app, status }) {
     const [form, setForm] = useState({ email: '', password: '', remember: true });
@@ -61,10 +60,10 @@ export default function Login({ app, status }) {
                 </div>
                 <div className="col-12 d-flex justify-content-between">
                     <button className="btn btn-primary me-1" type="submit">
-                        <FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> Login
+                        <AmaranthIcon icon={aiArrowToBracket} /> Login
                     </button>
                     <InertiaLink href="/forgot-password" className="btn btn-link">
-                        <FontAwesomeIcon icon={faShieldKeyhole} fixedWidth /> Forgot password
+                        <AmaranthIcon icon={aiShieldKey} /> Forgot password
                     </InertiaLink>
                 </div>
             </form>

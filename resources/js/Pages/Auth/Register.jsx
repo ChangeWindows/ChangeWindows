@@ -4,8 +4,7 @@ import { InertiaLink, InertiaHead } from '@inertiajs/inertia-react';
 
 import Auth from '../../Layouts/Auth';
 
-import { faArrowRightToBracket, faUserPlus } from '@fortawesome/pro-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AmaranthIcon, { aiArrowToBracket, aiUserPlus } from '@changewindows/amaranth';
 
 export default function Register({ app, status }) {
     const [form, setForm] = useState({ name: '', email: '', password: '', password_confirmation: '' });
@@ -57,10 +56,10 @@ export default function Register({ app, status }) {
                 </div>
                 <div className="col-12 d-flex justify-content-between">
                     <button className="btn btn-primary me-1" type="submit">
-                        <FontAwesomeIcon icon={faUserPlus} fixedWidth /> Register
+                        <AmaranthIcon icon={aiUserPlus} /> Register
                     </button>
                     <InertiaLink href="/login" className="btn btn-link">
-                        <FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> Login
+                        <AmaranthIcon icon={aiArrowToBracket} /> Login
                     </InertiaLink>
                 </div>
             </form>

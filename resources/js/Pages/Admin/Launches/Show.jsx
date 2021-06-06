@@ -6,8 +6,7 @@ import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 import Pagination from '../../../Components/Pagination';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faPlus } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiCheck, aiPlus } from '@changewindows/amaranth';
 import { format, parseISO } from 'date-fns';
 
 export default function Show({ timeline, pagination, createUrl, status = null }) {
@@ -16,7 +15,7 @@ export default function Show({ timeline, pagination, createUrl, status = null })
             <NaviBar
                 actions={
                     <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
-                        <FontAwesomeIcon icon={faPlus} fixedWidth/> New
+                        <AmaranthIcon icon={aiPlus} /> New
                     </InertiaLink>
                 }
             >
@@ -25,7 +24,7 @@ export default function Show({ timeline, pagination, createUrl, status = null })
         
             <div className="container">
                 {status &&
-                    <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
+                    <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
                 }
                 <div className="row g-1">
                     {Object.keys(timeline).map((date) => (

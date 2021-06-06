@@ -3,10 +3,7 @@ import { InertiaLink, InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleInfo, faGear } from '@fortawesome/pro-regular-svg-icons';
-import { faGithub, faTwitter, faPatreon } from '@fortawesome/free-brands-svg-icons';
-import AmaranthIcon, { aiChangewindows, aiChangewindowsCan, aiChangewindowsDev } from '@changewindows/amaranth';
+import AmaranthIcon, { aiChangewindows, aiChangewindowsCan, aiChangewindowsDev, aiGear, aiGithub, aiInfoCircle, aiPatreon, aiTwitter } from '@changewindows/amaranth';
 
 export default function Show({ app, patrons }) {
     return (
@@ -19,12 +16,12 @@ export default function Show({ app, patrons }) {
                         <ul className="navbar-nav me-auto">
                             <li className="nav-item">
                                 <InertiaLink className="nav-link" href="/settings">
-                                    <FontAwesomeIcon icon={faGear} /> Settings
+                                    <AmaranthIcon icon={aiGear} /> Settings
                                 </InertiaLink>
                             </li>
                             <li className="nav-item">
                                 <InertiaLink className="nav-link active" href="/settings/about">
-                                    <FontAwesomeIcon icon={faCircleInfo} /> About
+                                    <AmaranthIcon icon={aiInfoCircle} /> About
                                 </InertiaLink>
                             </li>
                         </ul>
@@ -57,9 +54,9 @@ export default function Show({ app, patrons }) {
                     </div>
 
                     <div className="mt-5">
-                        <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faTwitter} /> Twitter</a>
-                        <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faGithub} /> GitHub</a>
-                        <a href="https://patreon.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faPatreon} /> Patreon</a>
+                        <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><AmaranthIcon icon={aiTwitter} /> Twitter</a>
+                        <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><AmaranthIcon icon={aiGithub} /> GitHub</a>
+                        <a href="https://patreon.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><AmaranthIcon icon={aiPatreon} /> Patreon</a>
                     </div>
 
                     

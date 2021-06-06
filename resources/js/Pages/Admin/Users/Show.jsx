@@ -4,8 +4,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiCheck } from '@changewindows/amaranth';
 
 export default function Show({ users, status = null }) {
     return (
@@ -14,7 +13,7 @@ export default function Show({ users, status = null }) {
         
             <div className="container">
                 {status &&
-                    <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
+                    <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
                 }
                 <div className="row g-1">
                     {users.map((user) => (

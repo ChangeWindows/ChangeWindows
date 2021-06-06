@@ -10,8 +10,7 @@ import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBarsStaggered, faNotes, faArrowLeft } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiArrowLeft, aiNotes, aiTimeline } from '@changewindows/amaranth';
 
 import { format, parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
@@ -24,14 +23,14 @@ export default function Package({ app, release, platform, channels, timeline, pa
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">
                     <InertiaLink href={`/platforms/${platform.slug}`} className="btn btn-transparent btn-sm me-2">
-                        <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
+                        <AmaranthIcon icon={aiArrowLeft} />
                     </InertiaLink>
                     <div className="nav nav-lined" id="nav-tab" role="tablist">
                         <button className="nav-link active" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="true">
-                            <FontAwesomeIcon icon={faBarsStaggered} fixedWidth /> Timeline
+                            <AmaranthIcon icon={aiTimeline} /> Timeline
                         </button>
                         <button className="nav-link" id="nav-releases-tab" data-bs-toggle="tab" data-bs-target="#nav-releases" type="button" role="tab" aria-controls="nav-releases" aria-selected="false">
-                            <FontAwesomeIcon icon={faNotes} fixedWidth /> Changelog
+                            <AmaranthIcon icon={aiNotes} /> Changelog
                         </button>
                     </div>
                     <div className="flex-grow-1" />
