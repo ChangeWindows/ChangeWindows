@@ -32,7 +32,7 @@ export default function Show({ app, patrons }) {
             <div className="container my-3">
                 <div className="d-flex flex-column align-items-center">
                     <h1 className="h3 m-0 pt-5 text-center d-inline-flex justify-content-center">
-                        <AmaranthIcon icon={app.preview === 'preview' ? aiChangewindowsDev : (app.preview === 'canary' ? aiChangewindowsCan : aiChangewindows)} className="me-1" />
+                        <AmaranthIcon icon={app.preview === 'preview' ? aiChangewindowsDev : (app.preview === 'canary' ? aiChangewindowsCan : aiChangewindows)} className="me-1 mt-1" />
                         ChangeWindows {app.preview === 'preview' && 'Preview'}{app.preview === 'canary' && 'Canary'}
                     </h1>
                     <p className="text-muted mb-5 text-center d-inline"><a href="https://github.com/changewindows/horizon/releases" target="_blank">Version {app.version}</a></p>
