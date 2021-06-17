@@ -1,20 +1,14 @@
 import React from 'react';
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { InertiaLink, InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleInfo, faGear } from '@fortawesome/pro-regular-svg-icons';
-import { faGithub, faTwitter, faPatreon } from '@fortawesome/free-brands-svg-icons';
-
-import { Helmet } from 'react-helmet';
+import AmaranthIcon, { aiChangewindows, aiChangewindowsCan, aiChangewindowsDev, aiGear, aiGithub, aiInfoCircle, aiPatreon, aiTwitter } from '@changewindows/amaranth';
 
 export default function Show({ app, patrons }) {
     return (
         <App>
-            <Helmet>
-                <title>About &middot; {app.name}</title>
-            </Helmet>
+            <InertiaHead title={`About &middot; ${app.name}`} />
 
             <nav className="navbar navbar-expand navbar-light sticky-top">
                 <div className="container">
@@ -22,12 +16,12 @@ export default function Show({ app, patrons }) {
                         <ul className="navbar-nav me-auto">
                             <li className="nav-item">
                                 <InertiaLink className="nav-link" href="/settings">
-                                    <FontAwesomeIcon icon={faGear} /> Settings
+                                    <AmaranthIcon icon={aiGear} /> Settings
                                 </InertiaLink>
                             </li>
                             <li className="nav-item">
                                 <InertiaLink className="nav-link active" href="/settings/about">
-                                    <FontAwesomeIcon icon={faCircleInfo} /> About
+                                    <AmaranthIcon icon={aiInfoCircle} /> About
                                 </InertiaLink>
                             </li>
                         </ul>
@@ -38,9 +32,8 @@ export default function Show({ app, patrons }) {
             <div className="container my-3">
                 <div className="d-flex flex-column align-items-center">
                     <h1 className="h3 m-0 pt-5 text-center d-inline-flex justify-content-center">
-                        <img src={app.preview ? '/images/logo-preview-dark.svg' : '/images/logo-dark.svg'} width="28px" height="28px" className="me-2 mt-1 display-light" />
-                        <img src={app.preview ? '/images/logo-preview-light.svg' : '/images/logo-light.svg'} width="28px" height="28px" className="me-2 mt-1 display-dark" />
-                        ChangeWindows {app.preview && 'Preview'}
+                        <AmaranthIcon icon={app.preview === 'preview' ? aiChangewindowsDev : (app.preview === 'canary' ? aiChangewindowsCan : aiChangewindows)} className="me-1 mt-1" />
+                        ChangeWindows {app.preview === 'preview' && 'Preview'}{app.preview === 'canary' && 'Canary'}
                     </h1>
                     <p className="text-muted mb-5 text-center d-inline"><a href="https://github.com/changewindows/horizon/releases" target="_blank">Version {app.version}</a></p>
 
@@ -61,9 +54,9 @@ export default function Show({ app, patrons }) {
                     </div>
 
                     <div className="mt-5">
-                        <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faTwitter} /> Twitter</a>
-                        <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faGithub} /> GitHub</a>
-                        <a href="https://patreon.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><FontAwesomeIcon icon={faPatreon} /> Patreon</a>
+                        <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><AmaranthIcon icon={aiTwitter} /> Twitter</a>
+                        <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><AmaranthIcon icon={aiGithub} /> GitHub</a>
+                        <a href="https://patreon.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1 mb-3"><AmaranthIcon icon={aiPatreon} /> Patreon</a>
                     </div>
 
                     

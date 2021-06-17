@@ -2,6 +2,7 @@
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
+@import "~@changewindows/amaranth/dist/amaranth.scss";
 
 @import "alert";
 @import "button";
@@ -126,17 +127,18 @@ body {
 }
 
 .app-icon {
-    background: linear-gradient(135deg, rgba(0, 119, 255, 1) 0%, rgba(0, 85, 221, 1) 100%);
-    color: #fff;
-    width: 30px;
-    height: 30px;
+    color: $accent;
+    width: 24px;
+    height: 24px;
     text-align: center;
-    font-size: 16px;
-    border-radius: 0.25rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 0.5rem;
+    margin: .1875rem .75rem .0625rem .365rem;
+
+    @media (max-width: 991px) {
+        margin: .1875rem .25rem .0625rem .25rem;
+    }
 }
 
 .dot {

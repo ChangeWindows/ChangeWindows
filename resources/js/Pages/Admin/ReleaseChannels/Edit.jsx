@@ -4,8 +4,7 @@ import { Inertia } from '@inertiajs/inertia';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrash } from '@changewindows/amaranth';
 
 export default function Edit({ can, urls, releaseChannel, releases, channels, status = null }) {
     const [curReleaseChannel, setCurReleaseChannel] = useState(releaseChannel);
@@ -42,7 +41,7 @@ export default function Edit({ can, urls, releaseChannel, releases, channels, st
                 <NaviBar
                     back="/admin/releases"
                     actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
+                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
                     }
                 >
                     {curReleaseChannel.name || 'Unnamed channel'}
@@ -50,7 +49,7 @@ export default function Edit({ can, urls, releaseChannel, releases, channels, st
             
                 <div className="container my-3">
                     {status &&
-                        <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
+                        <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
                     }
                     <fieldset className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
@@ -146,7 +145,7 @@ export default function Edit({ can, urls, releaseChannel, releases, channels, st
                                         <div className="row g-3">
                                             <div className="col-12">
                                                 <p>Deleting a release will remove all the content associated with that release. Are you sure?</p>
-                                                <button className="btn btn-danger btn-sm" type="submit"><FontAwesomeIcon icon={faTrashCan} fixedWidth /> Delete</button>
+                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrash} /> Delete</button>
                                             </div>
                                         </div>
                                     </div>

@@ -3,8 +3,7 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 
 import NavigationBar from './components/NavigationBar';
 
-import { faFlag, faUser, faUserUnlock, faArrowLeft, faLaptopMobile, faPlane, faUnlockKeyhole, faRocketLaunch, faAnglesUp, faCubes } from '@fortawesome/pro-regular-svg-icons';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import AmaranthIcon, { aiArrowLeft, aiBox, aiChangewindows, aiChangewindowsCan, aiChangewindowsDev, aiChannelsUp, aiDevices, aiLock, aiPlane, aiRocket, aiSoftwareBox, aiTwitter, aiUser, aiUserLock } from '@changewindows/amaranth';
 
 export default function AdminNavigation() {
     const { auth, nav_can, app } = usePage().props;
@@ -15,7 +14,7 @@ export default function AdminNavigation() {
                 <div className="container-fluid">
                     <InertiaLink className="navbar-brand" href="/">
                         <div className="app-icon">
-                            <img src={app.preview ? '/images/logo-preview-light.svg' : '/images/logo-light.svg'} width="16px" height="16px" />
+                            <AmaranthIcon icon={app.preview === 'preview' ? aiChangewindowsDev : (app.preview === 'canary' ? aiChangewindowsCan : aiChangewindows)} />
                         </div>
                         <span className="brand-label fw-bold">ChangeWindows</span>
                     </InertiaLink>
@@ -25,21 +24,21 @@ export default function AdminNavigation() {
             <NavigationBar
                 auth={auth}
                 main={[
-                    { type: 'link', url: '/admin/flights', icon: faPlane, title: 'Flights', permission: nav_can.show_flights },
-                    { type: 'link', url: '/admin/releases', icon: faFlag, title: 'Releases', permission: nav_can.show_releases },
-                    { type: 'link', url: '/admin/packages', icon: faCubes, title: 'Packages', permission: nav_can.show_releases },
-                    { type: 'link', url: '/admin/platforms', icon: faLaptopMobile, title: 'Platforms', permission: nav_can.show_platforms },
-                    { type: 'link', url: '/admin/promotions', icon: faAnglesUp, title: 'Promotions', permission: nav_can.show_flights },
-                    { type: 'link', url: '/admin/launches', icon: faRocketLaunch, title: 'Launches', permission: nav_can.show_flights }
+                    { type: 'link', url: '/admin/flights', icon: aiPlane, title: 'Flights', permission: nav_can.show_flights },
+                    { type: 'link', url: '/admin/releases', icon: aiSoftwareBox, title: 'Releases', permission: nav_can.show_releases },
+                    { type: 'link', url: '/admin/packages', icon: aiBox, title: 'Packages', permission: nav_can.show_releases },
+                    { type: 'link', url: '/admin/platforms', icon: aiDevices, title: 'Platforms', permission: nav_can.show_platforms },
+                    { type: 'link', url: '/admin/promotions', icon: aiChannelsUp, title: 'Promotions', permission: nav_can.show_flights },
+                    { type: 'link', url: '/admin/launches', icon: aiRocket, title: 'Launches', permission: nav_can.show_flights }
                 ]}
                 overflow={[
-                    { type: 'link', url: '/admin/tweet_streams', icon: faTwitter, title: 'Twitter', permission: nav_can.show_tweet_streams },
+                    { type: 'link', url: '/admin/tweet_streams', icon: aiTwitter, title: 'Twitter', permission: nav_can.show_tweet_streams },
                     { type: 'divider' },
-                    { type: 'link', url: '/admin/users', icon: faUser, title: 'Users', permission: nav_can.show_users },
-                    { type: 'link', url: '/admin/roles', icon: faUserUnlock, title: 'Roles', permission: nav_can.show_roles },
-                    { type: 'link', url: '/admin/permissions', icon: faUnlockKeyhole, title: 'Permissions', permission: nav_can.show_permissions },
+                    { type: 'link', url: '/admin/users', icon: aiUser, title: 'Users', permission: nav_can.show_users },
+                    { type: 'link', url: '/admin/roles', icon: aiUserLock, title: 'Roles', permission: nav_can.show_roles },
+                    { type: 'link', url: '/admin/permissions', icon: aiLock, title: 'Permissions', permission: nav_can.show_permissions },
                     { type: 'divider' },
-                    { type: 'link', url: '/timeline', icon: faArrowLeft, title: 'Back' }
+                    { type: 'link', url: '/timeline', icon: aiArrowLeft, title: 'Back' }
                 ]}
             />
         </>

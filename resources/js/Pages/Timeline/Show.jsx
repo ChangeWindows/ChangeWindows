@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 import Channel from '../../Components/Cards/Channel';
@@ -12,14 +13,11 @@ import PlatformNavigation from '../../Components/PlatformNavigation';
 import Pagination from '../../Components/Pagination';
 
 import { format, parseISO } from 'date-fns';
-import { Helmet } from 'react-helmet';
 
 export default function Show({ app, timeline, pagination, platform, platforms, channel_platforms }) {
     return (
         <App>
-            <Helmet>
-                <title>{platform.name} Timeline &middot; {app.name}</title>
-            </Helmet>
+            <InertiaHead title={`${platform.name} timeline &middot; ${app.name}`} />
 
             <PlatformNavigation all="/timeline" page="Timeline" platforms={platforms} />
         

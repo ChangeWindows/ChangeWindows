@@ -5,8 +5,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faPlus, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiCheck, aiFloppyDisc, aiPlus, aiTrash } from '@changewindows/amaranth';
 
 import { parse, format, isValid, parseISO } from 'date-fns';
 
@@ -69,7 +68,7 @@ export default function Edit({ can, urls, platforms, release, channels, release_
                 <NaviBar
                     back="/admin/releases"
                     actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
+                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
                     }
                 >
                     {curRelease.name || 'Unnamed release'}
@@ -77,7 +76,7 @@ export default function Edit({ can, urls, platforms, release, channels, release_
             
                 <div className="container my-3">
                     {status &&
-                        <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
+                        <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
                     }
                     <fieldset className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
@@ -292,7 +291,7 @@ export default function Edit({ can, urls, platforms, release, channels, release_
                                     <div className="dropdown h-100">
                                         <a href="#" className="card card-add dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                             <div className="card-body py-3">
-                                                <h3 className="h5 fw-normal m-0"><FontAwesomeIcon icon={faPlus} fixedWidth /> New channel</h3>
+                                                <h3 className="h5 fw-normal m-0"><AmaranthIcon icon={aiPlus} /> New channel</h3>
                                             </div>
                                         </a>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -323,7 +322,7 @@ export default function Edit({ can, urls, platforms, release, channels, release_
                                         <div className="row g-3">
                                             <div className="col-12">
                                                 <p>Deleting a release will remove all the content associated with that release. Are you sure?</p>
-                                                <button className="btn btn-danger btn-sm" type="submit"><FontAwesomeIcon icon={faTrashCan} fixedWidth /> Delete</button>
+                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrash} /> Delete</button>
                                             </div>
                                         </div>
                                     </div>

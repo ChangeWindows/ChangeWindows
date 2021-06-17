@@ -6,8 +6,7 @@ import NavItem from './Navbar/NavItem';
 
 import PlatformIcon from './Platforms/PlatformIcon';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faEllipsis } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiAngleDown, aiEllipsis } from '@changewindows/amaranth';
 
 /* -- Utilities -- */
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -50,8 +49,8 @@ export default function Navigation({ home = false, platforms, all = false }) {
                     <ul className="navbar-nav">
                         <li className="nav-item dropdown">
                             <a className={clsx('nav-link dropdown-toggle', { 'active': isActiveOverflow })} href="#" id="legacyPlatforms" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span className="d-none d-sm-inline-block"><FontAwesomeIcon icon={faAngleDown} /> Legacy</span>
-                                <span className="d-inline-block d-sm-none"><FontAwesomeIcon icon={faEllipsis} /></span>
+                                <span className="d-none d-sm-inline-block"><AmaranthIcon icon={aiAngleDown} /> Legacy</span>
+                                <span className="d-inline-block d-sm-none"><AmaranthIcon icon={aiEllipsis} /></span>
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="legacyPlatforms">
                                 {!matchesSmUp && toolPlatforms.length > 0 &&

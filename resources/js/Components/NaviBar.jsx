@@ -1,8 +1,7 @@
 import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiArrowLeft } from '@changewindows/amaranth';
 
 /* -- Utilities -- */
 
@@ -12,7 +11,7 @@ export default function Navigation({ back = false, children, actions = false }) 
             <div className="container flex-nowrap">
                 {!!back &&
                     <InertiaLink href={back} className="btn btn-transparent btn-sm me-2 flex-shrink-0">
-                        <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
+                        <AmaranthIcon icon={aiArrowLeft} />
                     </InertiaLink>
                 }
                 <span className="navbar-brand text-wrap">

@@ -5,8 +5,7 @@ import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faFloppyDisk, faTrashCan } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrash } from '@changewindows/amaranth';
 
 import { parse, format, isValid, parseISO } from 'date-fns';
 
@@ -44,7 +43,7 @@ export default function Edit({ can, urls, launch, release, platform, status = nu
                 <NaviBar
                     back="/admin/flights"
                     actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
+                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
                     }
                 >
                     <PlatformIcon platform={platform} color className="me-2" />
@@ -53,7 +52,7 @@ export default function Edit({ can, urls, launch, release, platform, status = nu
             
                 <div className="container my-3">
                     {status &&
-                        <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
+                        <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
                     }
                     <fieldset className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">
@@ -91,7 +90,7 @@ export default function Edit({ can, urls, launch, release, platform, status = nu
                                         <div className="row g-3">
                                             <div className="col-12">
                                                 <p>Deleting a launch will remove all the content associated with that launch. Are you sure?</p>
-                                                <button className="btn btn-danger btn-sm" type="submit"><FontAwesomeIcon icon={faTrashCan} fixedWidth /> Delete</button>
+                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrash} /> Delete</button>
                                             </div>
                                         </div>
                                     </div>

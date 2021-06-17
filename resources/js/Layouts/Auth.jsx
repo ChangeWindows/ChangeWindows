@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePage } from '@inertiajs/inertia-react';
 
-import { faArrowLeft } from '@fortawesome/pro-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AmaranthIcon, { aiArrowLeft, aiChangewindows, aiChangewindowsCan, aiChangewindowsDev } from '@changewindows/amaranth';
 
 import { getLocal, setLocal } from '../utils/localStorage';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -52,11 +51,10 @@ export default function Auth({ children }) {
     return (
         <div className="auth auth-flow" style={{ height: windowHeight }}>
             <div className="content">
-                <a href="javascript:history.back()" className="btn btn-link btn-sm text-white"><FontAwesomeIcon icon={faArrowLeft} /> Back</a>
+                <a href="javascript:history.back()" className="btn btn-link btn-sm text-white"><AmaranthIcon icon={aiArrowLeft} /> Back</a>
                 <div className="auth-card">
                     <h1 className="h3 m-0 py-5 d-flex justify-content-center align-items-center">
-                        <img src={app.preview ? '/images/logo-preview-dark.svg' : '/images/logo-dark.svg'} width="28px" height="28px" className="me-2 mt-1 display-light" />
-                        <img src={app.preview ? '/images/logo-preview-light.svg' : '/images/logo-light.svg'} width="28px" height="28px" className="me-2 mt-1 display-dark" />
+                        <AmaranthIcon icon={app.preview === 'preview' ? aiChangewindowsDev : (app.preview === 'canary' ? aiChangewindowsCan : aiChangewindows)} className="me-1" />
                         ChangeWindows
                     </h1>
                     { children }

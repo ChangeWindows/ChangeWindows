@@ -5,8 +5,7 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 /* -- Design -- */
 import NavigationItem from './NavigationItem';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis, faArrowRightFromBracket, faArrowRightToBracket, faGear } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiArrowFromBracket, aiArrowToBracket, aiEllipsis, aiGear } from '@changewindows/amaranth';
 
 /* -- Utilities -- */
 import useMediaQuery from '../../../hooks/useMediaQuery';
@@ -76,7 +75,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 			{!matchesSmUp &&
 				<>
 					<a className={clsx('sidebar-item dropdown', { 'active': overflowIsActive })} href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						<FontAwesomeIcon icon={faEllipsis} fixedWidth />
+						<AmaranthIcon icon={aiEllipsis} fixedWidth />
 						<span className="sidebar-label">
 							More
 						</span>
@@ -95,7 +94,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 										href={`${item.url}${item.primary ?? ''}`}
 										className={clsx('dropdown-item', { 'active': page.url.includes(item.url)})}
 									>
-										<FontAwesomeIcon icon={item.icon} fixedWidth /> {item.title}
+										<AmaranthIcon icon={item.icon} fixedWidth /> {item.title}
 									</Component>
 								);
 							} else if (item.type === 'external') {
@@ -106,7 +105,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 										href={`${item.url}${item.primary ?? ''}`}
 										className={clsx('dropdown-item', { 'active': page.url.includes(item.url)})}
 									>
-										<FontAwesomeIcon icon={item.icon} fixedWidth /> {item.title}
+										<AmaranthIcon icon={item.icon} fixedWidth /> {item.title}
 									</Component>
 								);
 							} else if (item.type === 'socials') {
@@ -117,7 +116,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 										href={`${social.url}${social.primary ?? ''}`}
 										className={clsx('dropdown-item', { 'active': page.url.includes(social.url)})}
 									>
-										<FontAwesomeIcon icon={social.icon} fixedWidth /> {social.title}
+										<AmaranthIcon icon={social.icon} fixedWidth /> {social.title}
 									</Component>
 								));
 							} else if (item.type === 'divider') {
@@ -128,21 +127,21 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 						{auth ?
 							<>
 								<InertiaLink href="/settings" className={clsx('dropdown-item', { 'active': page.url.includes('/settings')})}>
-									<FontAwesomeIcon icon={faGear} fixedWidth /> Settings
+									<AmaranthIcon icon={aiGear} fixedWidth /> Settings
 								</InertiaLink>
 								<form onSubmit={handleLogout}>
 									<button type="submit" className="dropdown-item">
-										<FontAwesomeIcon icon={faArrowRightFromBracket} fixedWidth /> Log out
+										<AmaranthIcon icon={aiArrowFromBracket} fixedWidth /> Log out
 									</button>
 								</form>
 							</>
 						:
 							<>
 								<InertiaLink href="/settings" className="dropdown-item">
-									<FontAwesomeIcon icon={faGear} fixedWidth /> Settings
+									<AmaranthIcon icon={aiGear} fixedWidth /> Settings
 								</InertiaLink>
 								<InertiaLink href="/login" className="dropdown-item">
-									<FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> Sign-in
+									<AmaranthIcon icon={aiArrowToBracket} fixedWidth /> Sign-in
 								</InertiaLink>
 							</>
 						}
@@ -153,17 +152,17 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 			{matchesSmUp &&
 				<>
 					<div className="flex-grow-1 d-none d-sm-block" />
-					<NavigationItem url="/settings" icon={faGear} title="Settings" />
+					<NavigationItem url="/settings" icon={aiGear} title="Settings" />
 
 					{auth ?
 						<form onSubmit={handleLogout} className="d-none d-sm-block">
 							<button type="submit" className="sidebar-item">
-								<FontAwesomeIcon icon={faArrowRightFromBracket} fixedWidth /> <span className="sidebar-label">Log out</span>
+								<AmaranthIcon icon={aiArrowFromBracket} fixedWidth /> <span className="sidebar-label">Log out</span>
 							</button>
 						</form>
 					:
 						<InertiaLink href="/login" className="sidebar-item">
-							<FontAwesomeIcon icon={faArrowRightToBracket} fixedWidth /> <span className="sidebar-label">Sign-in</span>
+							<AmaranthIcon icon={aiArrowToBracket} fixedWidth /> <span className="sidebar-label">Sign-in</span>
 						</InertiaLink>
 					}
 				</>

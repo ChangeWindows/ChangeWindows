@@ -5,8 +5,7 @@ import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faFloppyDisk } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiCheck, aiFloppyDisc } from '@changewindows/amaranth';
 
 export default function Create({ urls, tweet_streams }) {
     const [curPlatform, setCurPlatform] = useState({
@@ -50,7 +49,7 @@ export default function Create({ urls, tweet_streams }) {
                 <NaviBar
                     back="/admin/platforms"
                     actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><FontAwesomeIcon icon={faFloppyDisk} fixedWidth/> Save</button>
+                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
                     }
                 >
                     <PlatformIcon platform={curPlatform} color className="me-2" /> {curPlatform.name || 'Unnamed platform'}
@@ -58,7 +57,7 @@ export default function Create({ urls, tweet_streams }) {
             
                 <div className="container my-3">
                     {status &&
-                        <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
+                        <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
                     }
                     <fieldset className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">

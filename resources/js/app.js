@@ -12,10 +12,11 @@ InertiaProgress.init({
     color: '#0066ff'
 });
 
-render(
-    <App
-        initialPage={JSON.parse(el.dataset.page)}
-        resolveComponent={name => require(`./Pages/${name}`).default}
-    />,
-    el
-)
+import { createInertiaApp } from '@inertiajs/inertia-react'
+
+createInertiaApp({
+    resolve: name => require(`./Pages/${name}`),
+    setup({ el, App, props }) {
+        render(<App {...props} />, el)
+    },
+})

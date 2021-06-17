@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
+import { InertiaHead } from '@inertiajs/inertia-react';
 
 import Auth from '../../Layouts/Auth';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserPlus } from '@fortawesome/pro-regular-svg-icons';
-
-import { Helmet } from 'react-helmet';
+import AmaranthIcon, { aiShieldKey } from '@changewindows/amaranth';
 
 export default function ResetPassword({ app, token, status }) {
     const [form, setForm] = useState({ token, email: '', password: '', password_confirmation: '' });
@@ -18,9 +16,7 @@ export default function ResetPassword({ app, token, status }) {
 
     return (
         <Auth>
-            <Helmet>
-                <title>Reset Password &middot; {app.name}</title>
-            </Helmet>
+            <InertiaHead title={`Reset Password &middot; ${app.name}`} />
             
             <form onSubmit={handleSubmit} className="row g-3">
                 <input type="hidden" name="token" value={token} />
@@ -55,7 +51,7 @@ export default function ResetPassword({ app, token, status }) {
                 </div>
                 <div className="col-12 d-flex justify-content-between">
                     <button className="btn btn-primary me-1" type="submit">
-                        <FontAwesomeIcon icon={faUserPlus} fixedWidth /> Reset password
+                        <AmaranthIcon icon={aiShieldKey} /> Reset password
                     </button>
                 </div>
             </form>

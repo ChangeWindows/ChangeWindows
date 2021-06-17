@@ -6,8 +6,7 @@ import NaviBar from '../../../Components/NaviBar';
 import Pagination from '../../../Components/Pagination';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faPlus } from '@fortawesome/pro-regular-svg-icons';
+import AmaranthIcon, { aiCheck, aiPlus } from '@changewindows/amaranth';
 import { format, parseISO } from 'date-fns';
 
 export default function Show({ timeline, pagination, createUrl, createPackageUrl, status = null }) {
@@ -17,10 +16,10 @@ export default function Show({ timeline, pagination, createUrl, createPackageUrl
                 actions={
                     <>
                         <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
-                            <FontAwesomeIcon icon={faPlus} fixedWidth/> Flight
+                            <AmaranthIcon icon={aiPlus} /> Flight
                         </InertiaLink>
                         <InertiaLink href={createPackageUrl} className="btn btn-primary btn-sm ms-1">
-                            <FontAwesomeIcon icon={faPlus} fixedWidth/> Package
+                            <AmaranthIcon icon={aiPlus} /> Package
                         </InertiaLink>
                     </>
                 }
@@ -30,7 +29,7 @@ export default function Show({ timeline, pagination, createUrl, createPackageUrl
         
             <div className="container">
                 {status &&
-                    <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
+                    <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
                 }
                 <div className="row g-1">
                     {Object.keys(timeline).map((date) => (

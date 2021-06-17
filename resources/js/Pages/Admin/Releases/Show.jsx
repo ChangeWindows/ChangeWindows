@@ -5,10 +5,8 @@ import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEye, faNotes, faPen, faPlus } from '@fortawesome/pro-regular-svg-icons';
-
 import { isAfter, isBefore, parseISO } from 'date-fns';
+import AmaranthIcon, { aiCheck, aiEye, aiNotes, aiPen, aiPlus } from '@changewindows/amaranth';
 
 export default function Show({ can, releases, createUrl, status = null }) {
     const [devReleases, currentReleases, legacyReleases] = useMemo(() => {
@@ -24,7 +22,7 @@ export default function Show({ can, releases, createUrl, status = null }) {
             <NaviBar
                 actions={
                     <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
-                        <FontAwesomeIcon icon={faPlus} fixedWidth/> New
+                        <AmaranthIcon icon={aiPlus} /> New
                     </InertiaLink>
                 }
             >
@@ -33,7 +31,7 @@ export default function Show({ can, releases, createUrl, status = null }) {
         
             <div className="container">
                 {status &&
-                    <div className="alert alert-success"><FontAwesomeIcon icon={faCheck} fixedWidth /> {status}</div>
+                    <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
                 }
                 <div className="row g-1">
                     <div className="col-12 titel">
@@ -61,10 +59,10 @@ export default function Show({ can, releases, createUrl, status = null }) {
                                 </div>
                                 <div className="card-footer">
                                     <InertiaLink href={release.edit_url} className="btn btn-link btn-sm">
-                                        {can.edit_releases ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
+                                        {can.edit_releases ? <><AmaranthIcon icon={aiPen} fixedWidth /> Edit</> : <><AmaranthIcon icon={aiEye} fixedWidth /> Show</>}
                                     </InertiaLink>
                                     <InertiaLink href={release.edit_changelog_url} className="btn btn-link btn-sm">
-                                        {can.edit_releases ? <><FontAwesomeIcon icon={faNotes} fixedWidth /> Changelog</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Changelog</>}
+                                        {can.edit_releases ? <><AmaranthIcon icon={aiNotes} fixedWidth /> Changelog</> : <><AmaranthIcon icon={aiEye} fixedWidth /> Changelog</>}
                                     </InertiaLink>
                                 </div>
                             </div>
@@ -95,10 +93,10 @@ export default function Show({ can, releases, createUrl, status = null }) {
                                 </div>
                                 <div className="card-footer">
                                     <InertiaLink href={release.edit_url} className="btn btn-link btn-sm">
-                                        {can.edit_releases ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
+                                        {can.edit_releases ? <><AmaranthIcon icon={aiPen} fixedWidth /> Edit</> : <><AmaranthIcon icon={aiEye} fixedWidth /> Show</>}
                                     </InertiaLink>
                                     <InertiaLink href={release.edit_changelog_url} className="btn btn-link btn-sm">
-                                        {can.edit_releases ? <><FontAwesomeIcon icon={faNotes} fixedWidth /> Changelog</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Changelog</>}
+                                        {can.edit_releases ? <><AmaranthIcon icon={aiNotes} fixedWidth /> Changelog</> : <><AmaranthIcon icon={aiEye} fixedWidth /> Changelog</>}
                                     </InertiaLink>
                                 </div>
                             </div>
@@ -129,10 +127,10 @@ export default function Show({ can, releases, createUrl, status = null }) {
                                 </div>
                                 <div className="card-footer">
                                     <InertiaLink href={release.edit_url} className="btn btn-link btn-sm">
-                                        {can.edit_releases ? <><FontAwesomeIcon icon={faPen} fixedWidth /> Edit</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Show</>}
+                                        {can.edit_releases ? <><AmaranthIcon icon={aiPen} fixedWidth /> Edit</> : <><AmaranthIcon icon={aiEye} fixedWidth /> Show</>}
                                     </InertiaLink>
                                     <InertiaLink href={release.edit_changelog_url} className="btn btn-link btn-sm">
-                                        {can.edit_releases ? <><FontAwesomeIcon icon={faNotes} fixedWidth /> Changelog</> : <><FontAwesomeIcon icon={faEye} fixedWidth /> Changelog</>}
+                                        {can.edit_releases ? <><AmaranthIcon icon={aiNotes} fixedWidth /> Changelog</> : <><AmaranthIcon icon={aiEye} fixedWidth /> Changelog</>}
                                     </InertiaLink>
                                 </div>
                             </div>
