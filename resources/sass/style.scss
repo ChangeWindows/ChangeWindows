@@ -55,8 +55,8 @@
     --card-add-border: #{ light-dark(darken($light, 10), darken($dark, 7)) };
     --card-add-border-hover: #{ light-dark(darken($light, 13), darken($dark, 9)) };
 
-    --card-auth-bg: #{ light-dark($light, lighten($dark, 1)) };
-    --card-auth-bg-acrylic: #{ light-dark(rgba($light, .8), rgba($dark, .8)) };
+    --auth-bg: #{ light-dark(darken($light, 5), darken($dark, 5)) };
+    --card-auth-bg: #{ light-dark($light, $dark) };
 
     --dropdown-bg: #{ light-dark($light, lighten($dark, 3)) };
     --dropdown-bg-hover: #{ light-dark(darken($light, 3), darken($dark, 1)) };
