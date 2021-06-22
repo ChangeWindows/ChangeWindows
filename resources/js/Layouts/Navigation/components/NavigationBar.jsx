@@ -141,7 +141,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 									<AmaranthIcon icon={aiGear} fixedWidth /> Settings
 								</InertiaLink>
 								<InertiaLink href="/login" className="dropdown-item">
-									<AmaranthIcon icon={aiArrowToBracket} fixedWidth /> Sign-in
+									<AmaranthIcon icon={aiArrowToBracket} fixedWidth /> Sign in
 								</InertiaLink>
 							</>
 						}
@@ -162,7 +162,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 						</form>
 					:
 						<InertiaLink href="/login" className="sidebar-item">
-							<AmaranthIcon icon={aiArrowToBracket} fixedWidth /> <span className="sidebar-label">Sign-in</span>
+							<AmaranthIcon icon={aiArrowToBracket} fixedWidth /> <span className="sidebar-label">Sign in</span>
 						</InertiaLink>
 					}
 				</>
