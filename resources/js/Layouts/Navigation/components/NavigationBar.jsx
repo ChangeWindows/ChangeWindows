@@ -12,7 +12,7 @@ import useMediaQuery from '../../../hooks/useMediaQuery';
 import useWidth from '../../../hooks/useWidth';
 import clsx from 'clsx';
 
-export default function NavigationBar({ auth, main, overflow, socials }) {
+export default function NavigationBar({ auth, main, overflow }) {
 	const matchesSmUp = useMediaQuery('(min-width: 576px)');
 	const ref = useRef(null);
 	const width = useWidth(ref);
@@ -60,14 +60,6 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 					return (
 						<NavigationItem url={item.url} icon={item.icon} primary={item.primary} title={item.title} key={key} external />
 					);
-				} else if (item.type === 'socials') {
-					return (
-						<div className="d-flex flex-row flex-sm-column flex-lg-row" key={key}>
-							{socials.map((social, key) => (
-								<NavigationItem url={social.url} icon={social.icon} primary={social.primary} title={social.title} key={key} external small />
-							))}
-						</div>
-					);
 				} else if (item.type === 'divider') {
 					return (<div className="sidebar-divider" key={key} />);
 				}
@@ -108,17 +100,6 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 										<AmaranthIcon icon={item.icon} fixedWidth /> {item.title}
 									</Component>
 								);
-							} else if (item.type === 'socials') {
-								return socials.map((social, key) => (
-									<Component
-										{...mainProps}
-										key={key}
-										href={`${social.url}${social.primary ?? ''}`}
-										className={clsx('dropdown-item', { 'active': page.url.includes(social.url)})}
-									>
-										<AmaranthIcon icon={social.icon} fixedWidth /> {social.title}
-									</Component>
-								));
 							} else if (item.type === 'divider') {
 								return (<div className="dropdown-divider" key={key} />);
 							}
