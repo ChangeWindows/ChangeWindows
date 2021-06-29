@@ -353,14 +353,31 @@ a.card {
 
 // Changelogs
 .changelog-content {
-    h2 {
-        @extend h5;
+    h1 {
+        font-size: 2.5rem;
         font-weight: 600;
+
+        &:not(:first-child) {
+            margin-top: 2rem;
+        }
+    }
+
+    h2 {
+        @extend h4;
+        font-weight: 600;
+
+        &:not(:first-child) {
+            margin-top: 2rem;
+        }
     }
 
     h3 {
-        @extend h6;
+        @extend h5;
         font-weight: 600;
+
+        &:not(:first-child) {
+            margin-top: 1rem;
+        }
     }
 }
 
