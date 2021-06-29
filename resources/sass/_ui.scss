@@ -147,13 +147,16 @@
                     }
 
                     @media (min-width: 576px) {
+                        background-color: var(--nav-item-hover);
+
                         &::after {
                             position: absolute;
                             background-color: $primary;
                             left: 0;
-                            top: 25%;
-                            height: 50%;
-                            width: 2px;
+                            top: 30%;
+                            height: 40%;
+                            width: 3.5px;
+                            border-radius: 6px;
                             content: '';
                         }
                     }
