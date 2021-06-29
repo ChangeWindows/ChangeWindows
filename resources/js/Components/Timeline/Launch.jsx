@@ -17,7 +17,6 @@ export default function Launch({ platform, version, url = null, overview = false
             <div className={
                 clsx(
                     'version',
-                    'text-muted',
                     {
                         'd-none': overview || sidebar,
                         'd-sm-block': overview && !sidebar || !sidebar
