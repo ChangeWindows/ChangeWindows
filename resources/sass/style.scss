@@ -259,8 +259,14 @@ body {
         .tags {
             display: flex;
             flex: 1;
+            flex-wrap: wrap;
             margin-right: 0.5rem;
+            margin-bottom: .25rem;
             padding: 0;
+
+            & > span {
+              margin: .25rem 0 0 0;
+            }
         }
 
         .version {
