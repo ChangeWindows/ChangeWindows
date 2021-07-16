@@ -11,6 +11,7 @@ InertiaProgress.init({
 import { createInertiaApp } from '@inertiajs/inertia-react'
 
 createInertiaApp({
+    title: title => `${title} - ChangeWindows`,
     resolve: name => require(`./Pages/${name}`),
     setup({ el, App, props }) {
         render(<App {...props} />, el)

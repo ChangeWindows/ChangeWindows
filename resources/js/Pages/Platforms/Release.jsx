@@ -22,7 +22,7 @@ export default function Release({ app, release, platform, channels, timeline, pa
 
     return (
         <App>
-            <InertiaHead title={`${release.name} &middot; ${app.name}`} />
+            <InertiaHead title={release.name} />
 
             <nav className="navbar navbar-expand-xl navbar-light sticky-top">
                 <div className="container">

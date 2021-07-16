@@ -40,7 +40,7 @@ export default function Show({ app, patrons }) {
 
     return (
         <App>
-            <InertiaHead title={`Settings &middot; ${app.name}`} />
+            <InertiaHead title="Settings" />
 
             <nav className="navbar navbar-expand navbar-light sticky-top">
                 <div className="container">
