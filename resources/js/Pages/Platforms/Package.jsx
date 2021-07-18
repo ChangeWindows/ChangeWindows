@@ -12,10 +12,10 @@ import Timeline from '../../Components/Timeline/Timeline';
 
 import AmaranthIcon, { aiArrowLeft, aiNotes, aiTimeline } from '@changewindows/amaranth';
 
-import { format, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
 
-export default function Package({ app, release, platform, channels, timeline, pagination }) {
+export default function Package({ release, platform, channels, timeline, pagination }) {
     return (
         <App>
             <InertiaHead title={release.name} />
@@ -61,7 +61,7 @@ export default function Package({ app, release, platform, channels, timeline, pa
                                                     key={key}
                                                     channel={{ color: channel.color, name: channel.name }}
                                                     build={channel.flight.version ?? 'None'}
-                                                    date={channel.flight?.date ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : 'No flight'}
+                                                    date={channel.flight?.date ? parseISO(channel.flight.date): 'No flight'}
                                                     disabled={channel.disabled}
                                                 />
                                             ))}
@@ -70,7 +70,7 @@ export default function Package({ app, release, platform, channels, timeline, pa
                                     <div className="col-12 mt-3">
                                         <div className="row g-1">
                                             {Object.keys(timeline).map((date, key) => (
-                                                <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
+                                                <Timeline date={parseISO(timeline[date].date)} key={key}>
                                                     {timeline[date].flights.map((flight, _key) => {
                                                         if (flight.type === 'flight') {
                                                             return (

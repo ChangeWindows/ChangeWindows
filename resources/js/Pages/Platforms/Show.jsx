@@ -8,7 +8,7 @@ import ReleaseCard from '../../Components/Cards/ReleaseCard';
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
 
-import { format, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 
 export default function Show({ app, platforms, platform, channels, releases, packages }) {
     const [currentReleases, legacyReleases] = useMemo(() => {
@@ -40,7 +40,7 @@ export default function Show({ app, platforms, platform, channels, releases, pac
                                         key={key}
                                         channel={{ color: channel.color, name: channel.name }}
                                         build={channel.flights.length > 0 ? channel.flights[0].version : ''}
-                                        date={channel.flights.length > 0 ? format(parseISO(channel.flights[0].date), 'd MMMM yyyy') : ''}
+                                        date={channel.flights.length > 0 ? parseISO(channel.flights[0].date) : ''}
                                         url={channel.flights.length > 0 ? channel.flights[0].url : undefined}
                                     />
                                 ))}

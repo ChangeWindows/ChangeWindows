@@ -7,7 +7,7 @@ import Channel from '../../Components/Cards/Channel';
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
 
-import { format, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 import clsx from 'clsx';
 
 export default function Index({ app, platforms, channel_platforms }) {
@@ -36,7 +36,7 @@ export default function Index({ app, platforms, channel_platforms }) {
                                         key={_key}
                                         channel={{ color: channel.color, name: channel.name }}
                                         build={channel.flight ? channel.flight.version : ''}
-                                        date={channel.flight ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : ''}
+                                        date={channel.flight ? parseISO(channel.flight.date) : ''}
                                         url={channel.flight ? channel.flight.url : undefined}
                                     />
                                 ))}

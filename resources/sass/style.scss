@@ -36,7 +36,7 @@
     --nav-mobile-bg: #{ light-dark($light, $dark) };
     --nav-color-label: #{ light-dark(lighten($body-color, 35), lighten($gray-100, 35)) };
 
-    --nav-item-hover: #{ light-dark(darken($light, 10), darken($dark, 10)) };
+    --nav-item-hover: #{ light-dark(darken($light, 9), darken($dark, 9)) };
     --nav-bar-item-hover: #{ light-dark(darken($light, 3), darken($dark, 3)) };
 
     --main-bg: #{ light-dark(darken($light, 2), darken($dark, 4)) };
