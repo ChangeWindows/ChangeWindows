@@ -52,4 +52,14 @@ class SettingsController extends Controller
             'patrons' => $patrons
         ]);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function privacy()
+    {
+        return Inertia::render('Settings/Privacy');
+    }
 }

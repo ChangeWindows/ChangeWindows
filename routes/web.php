@@ -69,6 +69,8 @@ Route::prefix('')->name('front')->group(function() {
         Route::get('', [SettingsController::class, 'index'])->name('');
         Route::get('/about', [SettingsController::class, 'index']);
     });
+    
+    Route::get('/privacy', [SettingsController::class, 'privacy']);
 });
 
 Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
