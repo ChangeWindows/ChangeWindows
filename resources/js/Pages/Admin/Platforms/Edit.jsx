@@ -6,7 +6,7 @@ import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc, aiPlus, aiTrash } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisc, aiPlus, aiTrashCan } from '@changewindows/amaranth';
 
 export default function Edit({ can, urls, platform, channels, tweet_streams, status = null }) {
     const [curPlatform, setCurPlatform] = useState(platform);
@@ -289,7 +289,7 @@ export default function Edit({ can, urls, platform, channels, tweet_streams, sta
                                         <div className="row g-3">
                                             <div className="col-12">
                                                 <p>Deleting a platform will remove all the content associated with that platform. Are you sure?</p>
-                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrash} /> Delete</button>
+                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrashCan} /> Delete</button>
                                             </div>
                                         </div>
                                     </div>

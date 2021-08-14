@@ -3,7 +3,7 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 
 import NavigationBar from './components/NavigationBar';
 
-import AmaranthIcon, { aiAdmin, aiBlog, aiChangewindows, aiChangewindowsCan, aiChangewindowsDev, aiChannels, aiDevices, aiPatreon, aiTimeline, aiTwitter } from '@changewindows/amaranth';
+import AmaranthIcon, { aiDashboard, aiMessagePen, aiChangeWindows, aiChangeWindowsCan, aiChangeWindowsDev, aiBranch, aiDevices, aiPatreon, aiBarsStaggered, aiTwitter } from '@changewindows/amaranth';
 
 export default function Navigation() {
     const { auth, nav_can, app } = usePage().props;
@@ -22,13 +22,13 @@ export default function Navigation() {
             <NavigationBar
                 auth={auth}
                 main={[
-                    { type: 'link', url: '/timeline', icon: aiTimeline, title: 'Timeline' },
+                    { type: 'link', url: '/timeline', icon: aiBarsStaggered, title: 'Timeline' },
                     { type: 'link', url: '/platforms', primary: '/pc', icon: aiDevices, title: 'Platforms' },
-                    { type: 'link', url: '/channels', icon: aiChannels, title: 'Channels' }
+                    { type: 'link', url: '/channels', icon: aiBranch, title: 'Channels' }
                 ]}
                 overflow={[
-                    { type: 'external', url: 'https://medium.com/changewindows', icon: aiBlog, title: 'Blog' },
-                    { type: 'link', url: '/admin/flights', icon: aiAdmin, title: 'Backstage', permission: nav_can.access_dashboard },
+                    { type: 'external', url: 'https://medium.com/changewindows', icon: aiMessagePen, title: 'Blog' },
+                    { type: 'link', url: '/admin/flights', icon: aiDashboard, title: 'Backstage', permission: nav_can.access_dashboard },
                     { type: 'divider' },
                     { type: 'external', url: 'https://twitter.com/changewindows', icon: aiTwitter, title: '@ChangeWindows' },
                     { type: 'external', url: 'https://patreon.com/changewindows', icon: aiPatreon, title: 'Sponsor us' }

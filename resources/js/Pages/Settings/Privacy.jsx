@@ -3,7 +3,7 @@ import { InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 
-import AmaranthIcon, { aiChangewindows, aiChangewindowsCan, aiChangewindowsDev, aiGithub, aiPatreon, aiTwitter } from '@changewindows/amaranth';
+import AmaranthIcon, { aiChangeWindows, aiChangeWindowsCan, aiChangeWindowsDev, aiGitHub, aiPatreon, aiTwitter } from '@changewindows/amaranth';
 
 import { getLocal, setLocal } from '../../utils/localStorage';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePage } from '@inertiajs/inertia-react';
 
-import AmaranthIcon, { aiArrowLeft, aiChangewindows, aiChangewindowsCan, aiChangewindowsDev } from '@changewindows/amaranth';
+import AmaranthIcon, { aiArrowLeft, aiChangeWindows, aiChangeWindowsCan, aiChangeWindowsDev } from '@changewindows/amaranth';
 
 import { getLocal, setLocal } from '../utils/localStorage';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -54,7 +54,7 @@ export default function Auth({ children }) {
                 <a href="javascript:history.back()" className="btn btn-link btn-sm"><AmaranthIcon icon={aiArrowLeft} /> Back</a>
                 <div className="auth-card">
                     <h1 className="h3 m-0 py-5 d-flex justify-content-center align-items-center">
-                        <AmaranthIcon icon={app.preview === 'preview' ? aiChangewindowsDev : (app.preview === 'canary' ? aiChangewindowsCan : aiChangewindows)} className="me-1" />
+                        <AmaranthIcon icon={app.preview === 'preview' ? aiChangeWindowsDev : (app.preview === 'canary' ? aiChangeWindowsCan : aiChangeWindows)} className="me-1" />
                         ChangeWindows
                     </h1>
                     { children }

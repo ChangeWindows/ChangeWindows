@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import clsx from 'clsx';
 
-import AmaranthIcon, { aiAzure, aiChip, aiCmd, aiCode, aiDisc, aiFoldable, aiGamepad, aiHolographic, aiLaptop, aiPhone, aiServer, aiTeam } from '@changewindows/amaranth';
+import AmaranthIcon, { aiAzure, aiChip, aiCmd, aiCode, aiDisc, aiFoldable, aiGamepad, aiHolographic, aiLaptop, aiSmartphone, aiServer, aiScreenWebcam } from '@changewindows/amaranth';
 
 export default function PlatformIcon({ platform, color = false, className = null }) {
     const icon = useMemo(() => {
@@ -13,10 +13,10 @@ export default function PlatformIcon({ platform, color = false, className = null
             case 'head-side-goggles':   return aiHolographic;
             case 'laptop':              return aiLaptop;
             case 'microchip':           return aiChip;
-            case 'mobile':              return aiPhone;
+            case 'mobile':              return aiSmartphone;
             case 'server':              return aiServer;
             case 'tablet':              return aiFoldable;
-            case 'tv':                  return aiTeam;
+            case 'tv':                  return aiScreenWebcam;
             case 'cmd':                 return aiCmd;
             default:                    return aiLaptop;
         }

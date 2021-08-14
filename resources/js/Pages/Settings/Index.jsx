@@ -3,7 +3,7 @@ import { InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 
-import AmaranthIcon, { aiChangewindows, aiChangewindowsCan, aiChangewindowsDev, aiGithub, aiPatreon, aiTwitter } from '@changewindows/amaranth';
+import AmaranthIcon, { aiChangeWindows, aiChangeWindowsCan, aiChangeWindowsDev, aiGitHub, aiPatreon, aiTwitter } from '@changewindows/amaranth';
 
 import { getLocal, setLocal } from '../../utils/localStorage';
 
@@ -142,7 +142,7 @@ export default function Show({ app, patrons }) {
                             <div className="card-body">
                                 <div className="d-flex flex-column">
                                     <h1 className="h3 mb-5 d-inline-flex">
-                                        <AmaranthIcon icon={app.preview === 'preview' ? aiChangewindowsDev : (app.preview === 'canary' ? aiChangewindowsCan : aiChangewindows)} className="me-1 mt-1" />
+                                        <AmaranthIcon icon={app.preview === 'preview' ? aiChangeWindowsDev : (app.preview === 'canary' ? aiChangeWindowsCan : aiChangeWindows)} className="me-1 mt-1" />
                                         ChangeWindows {app.preview === 'preview' && 'Preview'}{app.preview === 'canary' && 'Canary'}
                                     </h1>
 
@@ -150,7 +150,7 @@ export default function Show({ app, patrons }) {
 
                                     <div className="mb-5">
                                         <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1"><AmaranthIcon icon={aiTwitter} /> Twitter</a>
-                                        <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm me-1"><AmaranthIcon icon={aiGithub} /> GitHub</a>
+                                        <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm me-1"><AmaranthIcon icon={aiGitHub} /> GitHub</a>
                                         <a href="https://patreon.com/changewindows" target="_blank" className="btn btn-primary btn-sm me-1"><AmaranthIcon icon={aiPatreon} /> Patreon</a>
                                     </div>
 

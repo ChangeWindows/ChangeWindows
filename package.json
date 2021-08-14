@@ -20,7 +20,7 @@
         "sass-loader": "^12.1.0"
     },
     "dependencies": {
-        "@changewindows/amaranth": "^0.6.0",
+        "@changewindows/amaranth": "^0.7.1",
         "@inertiajs/inertia": "^0.10.1",
         "@inertiajs/inertia-react": "^0.7.1",
         "@inertiajs/progress": "^0.2.6",

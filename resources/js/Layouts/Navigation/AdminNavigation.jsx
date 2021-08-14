@@ -3,7 +3,7 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 
 import NavigationBar from './components/NavigationBar';
 
-import { aiArrowLeft, aiBox, aiChannelsUp, aiDevices, aiLock, aiPlane, aiRocket, aiSoftwareBox, aiTwitter, aiUser, aiUserLock } from '@changewindows/amaranth';
+import { aiArrowLeft, aiBox, aiBranchUp, aiDevices, aiLock, aiPlane, aiRocket, aiSoftwareBox, aiTwitter, aiUser, aiUserLock } from '@changewindows/amaranth';
 
 export default function AdminNavigation() {
     const { auth, nav_can, app } = usePage().props;
@@ -26,7 +26,7 @@ export default function AdminNavigation() {
                     { type: 'link', url: '/admin/releases', icon: aiSoftwareBox, title: 'Releases', permission: nav_can.show_releases },
                     { type: 'link', url: '/admin/packages', icon: aiBox, title: 'Packages', permission: nav_can.show_releases },
                     { type: 'link', url: '/admin/platforms', icon: aiDevices, title: 'Platforms', permission: nav_can.show_platforms },
-                    { type: 'link', url: '/admin/promotions', icon: aiChannelsUp, title: 'Promotions', permission: nav_can.show_flights },
+                    { type: 'link', url: '/admin/promotions', icon: aiBranchUp, title: 'Promotions', permission: nav_can.show_flights },
                     { type: 'link', url: '/admin/launches', icon: aiRocket, title: 'Launches', permission: nav_can.show_flights }
                 ]}
                 overflow={[

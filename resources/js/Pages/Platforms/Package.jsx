@@ -10,7 +10,7 @@ import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
-import AmaranthIcon, { aiArrowLeft, aiNotes, aiTimeline } from '@changewindows/amaranth';
+import AmaranthIcon, { aiArrowLeft, aiNotes, aiBarsStaggered } from '@changewindows/amaranth';
 
 import { parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
@@ -27,7 +27,7 @@ export default function Package({ release, platform, channels, timeline, paginat
                     </InertiaLink>
                     <div className="nav nav-lined" id="nav-tab" role="tablist">
                         <button className="nav-link active" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="true">
-                            <AmaranthIcon icon={aiTimeline} /> Timeline
+                            <AmaranthIcon icon={aiBarsStaggered} /> Timeline
                         </button>
                         <button className="nav-link" id="nav-releases-tab" data-bs-toggle="tab" data-bs-target="#nav-releases" type="button" role="tab" aria-controls="nav-releases" aria-selected="false">
                             <AmaranthIcon icon={aiNotes} /> Changelog
