@@ -24,7 +24,7 @@
         "@inertiajs/inertia": "^0.10.1",
         "@inertiajs/inertia-react": "^0.7.1",
         "@inertiajs/progress": "^0.2.6",
-        "@types/react": "^17.0.17",
+        "@types/react": "17.0.18",
         "bootstrap": "^5.1.0",
         "clsx": "^1.1.1",
         "date-fns": "^2.23.0",
