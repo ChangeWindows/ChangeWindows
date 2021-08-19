@@ -43,10 +43,10 @@ export default function VerifyEmail({ app, session, status }) {
                 }
                 <div className="col-12 d-flex justify-content-between">
                     <button className="btn btn-primary me-1" type="submit">
-                        <AmaranthIcon icon={aiPaperPlane} fixedWidth /> Resend verification email
+                        <AmaranthIcon icon={aiPaperPlane} /> Resend verification email
                     </button>
                     <button className="btn btn-primary me-1" onClick={handleLogout}>
-                        <AmaranthIcon icon={aiArrowFromBracket} fixedWidth /> Logout
+                        <AmaranthIcon icon={aiArrowFromBracket} /> Logout
                     </button>
                 </div>
             </form>

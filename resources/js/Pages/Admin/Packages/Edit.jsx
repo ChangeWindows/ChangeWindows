@@ -160,7 +160,7 @@ export default function Edit({ can, urls, platforms, pack, channels, release_cha
                                     <div className="dropdown h-100">
                                         <a href="#" className="card card-add dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                             <div className="card-body py-3">
-                                                <h3 className="h5 fw-normal m-0"><AmaranthIcon icon={faPlus} fixedWidth /> New channel</h3>
+                                                <h3 className="h5 fw-normal m-0"><AmaranthIcon icon={faPlus} /> New channel</h3>
                                             </div>
                                         </a>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">

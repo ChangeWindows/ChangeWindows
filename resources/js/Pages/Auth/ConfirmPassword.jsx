@@ -41,7 +41,7 @@ export default function ConfirmPassword({ app, status }) {
                 </div>
                 <div className="col-12 d-flex justify-content-between">
                     <button className="btn btn-primary me-1" type="submit">
-                        <AmaranthIcon icon={aiCheck} fixedWidth /> Confirm
+                        <AmaranthIcon icon={aiCheck} /> Confirm
                     </button>
                 </div>
             </form>

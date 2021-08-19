@@ -13,7 +13,7 @@ export default function Show({ packages, createUrl, status = null }) {
             <NaviBar
                 actions={
                     <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
-                        <AmaranthIcon icon={aiPlus} fixedWidth/> New
+                        <AmaranthIcon icon={aiPlus}/> New
                     </InertiaLink>
                 }
             >
@@ -22,7 +22,7 @@ export default function Show({ packages, createUrl, status = null }) {
         
             <div className="container">
                 {status &&
-                    <div className="alert alert-success"><AmaranthIcon icon={aiCheck} fixedWidth /> {status}</div>
+                    <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
                 }
                 <div className="row g-1">
                     {packages.map((pack, key) => (
