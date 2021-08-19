@@ -30,7 +30,7 @@ export default function Show({ timeline, pagination, createUrl, status = null })
                     {Object.keys(timeline).map((date) => (
                         <Fragment key={date}>
                             <div className="col-12 titel">
-                                <h3 className="h6 text-primary">{parseISO(timeline[date].date)}</h3>
+                                <h3 className="h6 text-primary">{format(parseISO(timeline[date].date), 'd MMMM yyyy')}</h3>
                             </div>
                             {timeline[date].promotions.map((promotion, key) => (
                                 <div className="col-6 col-md-4 col-xl-3 col-xxl-2" key={key}>
