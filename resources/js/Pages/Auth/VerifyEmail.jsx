@@ -4,7 +4,7 @@ import { InertiaHead } from '@inertiajs/inertia-react';
 
 import Auth from '../../Layouts/Auth';
 
-import AmaranthIcon, { aiArrowFromBracket, aiPaperPlane } from '@changewindows/amaranth';
+import AmaranthIcon, { aiArrowRightFromBracket, aiPaperPlane } from '@changewindows/amaranth';
 
 export default function VerifyEmail({ app, session, status }) {
     function handleSubmit(event) {
@@ -46,7 +46,7 @@ export default function VerifyEmail({ app, session, status }) {
                         <AmaranthIcon icon={aiPaperPlane} /> Resend verification email
                     </button>
                     <button className="btn btn-primary me-1" onClick={handleLogout}>
-                        <AmaranthIcon icon={aiArrowFromBracket} /> Logout
+                        <AmaranthIcon icon={aiArrowRightFromBracket} /> Logout
                     </button>
                 </div>
             </form>
