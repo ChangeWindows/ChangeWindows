@@ -7,7 +7,6 @@ import clsx from 'clsx';
 export default function Flight({ platform, build, channels, version = null, pack = null, url = null, overview = false, sidebar = false }) {
     const Component = useMemo(() => (url ? InertiaLink : 'div'), ['url']);
     const mainProps = useMemo(() => ({ href: url }), ['url']);
-    console.log(overview, sidebar);
 
     return (
         <Component {...mainProps} className="event">

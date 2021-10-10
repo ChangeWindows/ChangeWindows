@@ -5,7 +5,7 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 /* -- Design -- */
 import NavigationItem from './NavigationItem';
 
-import AmaranthIcon, { aiArrowFromBracket, aiArrowToBracket, aiEllipsis, aiGear } from '@changewindows/amaranth';
+import AmaranthIcon, { aiArrowRightFromBracket, aiArrowRightToBracket, aiEllipsis, aiGear } from '@changewindows/amaranth';
 
 /* -- Utilities -- */
 import useMediaQuery from '../../../hooks/useMediaQuery';
@@ -112,7 +112,7 @@ export default function NavigationBar({ auth, main, overflow }) {
 								</InertiaLink>
 								<form onSubmit={handleLogout}>
 									<button type="submit" className="dropdown-item">
-										<AmaranthIcon icon={aiArrowFromBracket} /> Log out
+										<AmaranthIcon icon={aiArrowRightFromBracket} /> Log out
 									</button>
 								</form>
 							</>
@@ -122,7 +122,7 @@ export default function NavigationBar({ auth, main, overflow }) {
 									<AmaranthIcon icon={aiGear} /> Settings
 								</InertiaLink>
 								<InertiaLink href="/login" className="dropdown-item">
-									<AmaranthIcon icon={aiArrowToBracket} /> Sign in
+									<AmaranthIcon icon={aiArrowRightToBracket} /> Sign in
 								</InertiaLink>
 							</>
 						}
@@ -138,12 +138,12 @@ export default function NavigationBar({ auth, main, overflow }) {
 					{auth ?
 						<form onSubmit={handleLogout} className="d-none d-sm-block">
 							<button type="submit" className="sidebar-item">
-								<AmaranthIcon icon={aiArrowFromBracket} /> <span className="sidebar-label">Log out</span>
+								<AmaranthIcon icon={aiArrowRightFromBracket} /> <span className="sidebar-label">Log out</span>
 							</button>
 						</form>
 					:
 						<InertiaLink href="/login" className="sidebar-item">
-							<AmaranthIcon icon={aiArrowToBracket} /> <span className="sidebar-label">Sign in</span>
+							<AmaranthIcon icon={aiArrowRightToBracket} /> <span className="sidebar-label">Sign in</span>
 						</InertiaLink>
 					}
 				</>
