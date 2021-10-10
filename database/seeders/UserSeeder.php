@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class FlightSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +14,7 @@ class FlightSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $admin = User::factory()->create(['email' => 'horizon@horizon.changewindows.org']);
+        $admin->assignRole('admin');
     }
 }

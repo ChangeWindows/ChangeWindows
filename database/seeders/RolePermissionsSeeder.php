@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -65,10 +64,5 @@ class RolePermissionsSeeder extends Seeder
         $role_admin->givePermissionTo(['profile', 'dashboard', 'platforms', 'channels', 'releases', 'flights', 'users', 'roles', 'settings', 'tweet_streams']);
         $role_editor->givePermissionTo(['profile', 'dashboard', 'platforms.show', 'platforms.edit', 'channels.show', 'channels.edit', 'releases', 'flights']);
         $role_user->givePermissionTo(['profile']);
-
-        // Assign role to admin
-        $admin = User::where('id', 1)->first();
-
-        $admin->assignRole('admin');
     }
 }
