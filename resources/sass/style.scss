@@ -30,13 +30,13 @@
     --text-inverse: #{ light-dark($gray-100, $body-color) };
     --text-hover: #{ light-dark(lighten($body-color, 20), darken($gray-100, 25)) };
 
-    --nav-bg: #{ light-dark(darken($light, 6), darken($dark, 6)) };
+    --nav-bg: #{ light-dark(darken($light, 4.5), darken($dark, 6.5)) };
     --nav-bg-acrylic: #{ light-dark(rgba(darken($light, 6), .75), rgba(darken($dark, 6), .75)) };
     --nav-border-color: #{ light-dark(darken($light, 12), darken($dark, 9)) };
     --nav-mobile-bg: #{ light-dark($light, $dark) };
     --nav-color-label: #{ light-dark(lighten($body-color, 35), lighten($gray-100, 35)) };
 
-    --nav-item-hover: #{ light-dark(darken($light, 9), darken($dark, 9)) };
+    --nav-item-hover: #{ light-dark(darken($light, 9), darken($dark, 3)) };
     --nav-bar-item-hover: #{ light-dark(darken($light, 3), darken($dark, 3)) };
 
     --main-bg: #{ light-dark(darken($light, 2), darken($dark, 4)) };
