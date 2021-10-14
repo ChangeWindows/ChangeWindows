@@ -46,7 +46,7 @@ export default function Show({ can, releases, createUrl, status = null }) {
                                             <PlatformIcon platform={release.platform} color />
                                         </h3>
                                         <div className="ms-2">
-                                            <h3 className="h6 mb-0">{release.name.replace('Windows 10 ', '')}</h3>
+                                            <h3 className="h6 mb-0">{release.name}</h3>
                                             <p className="text-muted mb-0 mt-n1"><small>Version {release.version}</small></p>
                                         </div>
                                     </div>
@@ -80,7 +80,7 @@ export default function Show({ can, releases, createUrl, status = null }) {
                                             <PlatformIcon platform={release.platform} color />
                                         </h3>
                                         <div className="ms-2">
-                                            <h3 className="h6 mb-0">{release.name.replace('Windows 10 ', '')}</h3>
+                                            <h3 className="h6 mb-0">{release.name}</h3>
                                             <p className="text-muted mb-0 mt-n1"><small>Version {release.version}</small></p>
                                         </div>
                                     </div>
@@ -114,7 +114,7 @@ export default function Show({ can, releases, createUrl, status = null }) {
                                             <PlatformIcon platform={release.platform} color />
                                         </h3>
                                         <div className="ms-2">
-                                            <h3 className="h6 mb-0">{release.name.replace('Windows 10 ', '')}</h3>
+                                            <h3 className="h6 mb-0">{release.name}</h3>
                                             <p className="text-muted mb-0 mt-n1"><small>Version {release.version}</small></p>
                                         </div>
                                     </div>
