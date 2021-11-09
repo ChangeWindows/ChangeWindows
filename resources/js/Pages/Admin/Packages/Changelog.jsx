@@ -5,7 +5,6 @@ import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
 import AmaranthIcon, { aiCheck, aiFloppyDisc } from '@changewindows/amaranth';
-import Editor from 'rich-markdown-editor';
 
 export default function Edit({ urls, release, status = null }) {
     const [curRelease, setCurRelease] = useState({
@@ -63,11 +62,11 @@ export default function Edit({ urls, release, status = null }) {
                         <div className="col-12 mt-3">
                             <div className="card">
                                 <div className="card-body ps-editor changelog-content">
-                                    <Editor
+                                    <textarea
                                         autoFocus
-                                        id="changelog"
                                         value={curRelease.changelog}
                                         onChange={(value) => setChangelog(value)}
+                                        className="form-control"
                                     />
                                 </div>
                             </div>
