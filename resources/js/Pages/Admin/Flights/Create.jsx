@@ -11,7 +11,7 @@ import { parse, format, isValid, parseISO } from 'date-fns';
 
 export default function Create({ urls, releases, platform }) {
     const [showAll, setShowAll] = useState(false);
-    const [showEligible, setShowEligible] = useState(true);
+    const [showEligible, setShowEligible] = useState(false);
     const [curFlight, setCurFlight] = useState({
         major: '',
         minor: '',
