@@ -4,7 +4,7 @@ import { InertiaLink, InertiaHead } from '@inertiajs/inertia-react';
 
 import Auth from '../../Layouts/Auth';
 
-import AmaranthIcon, { aiArrowToBracket, aiShieldKey } from '@changewindows/amaranth';
+import AmaranthIcon, { aiArrowRightToBracket, aiShieldKey } from '@changewindows/amaranth';
 
 export default function Login({ app, status }) {
     const [form, setForm] = useState({ email: '', password: '', remember: true });
@@ -16,7 +16,7 @@ export default function Login({ app, status }) {
 
     return (
         <Auth>
-            <InertiaHead title={`Login &middot; ${app.name}`} />
+            <InertiaHead title="Login" />
             
             <form onSubmit={handleSubmit} className="row g-3">
                 {Object.keys(status).length > 0 &&
@@ -60,7 +60,7 @@ export default function Login({ app, status }) {
                 </div>
                 <div className="col-12 d-flex justify-content-between">
                     <button className="btn btn-primary me-1" type="submit">
-                        <AmaranthIcon icon={aiArrowToBracket} /> Login
+                        <AmaranthIcon icon={aiArrowRightToBracket} /> Login
                     </button>
                     <InertiaLink href="/forgot-password" className="btn btn-link">
                         <AmaranthIcon icon={aiShieldKey} /> Forgot password

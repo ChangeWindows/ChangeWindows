@@ -4,7 +4,7 @@ import { Inertia } from '@inertiajs/inertia';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrash } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrashCan } from '@changewindows/amaranth';
 
 export default function Edit({ can, urls, tweet_stream, status = null }) {
     const [curTweetStream, setCurTweetStream] = useState(tweet_stream);
@@ -132,7 +132,7 @@ export default function Edit({ can, urls, tweet_stream, status = null }) {
                                         <div className="row g-3">
                                             <div className="col-12">
                                                 <p>Deleting a tweet stream will remove all the content associated with that tweet stream. Are you sure?</p>
-                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrash} /> Delete</button>
+                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrashCan} /> Delete</button>
                                             </div>
                                         </div>
                                     </div>

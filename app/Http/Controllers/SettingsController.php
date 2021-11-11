@@ -14,17 +14,6 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Settings/Index', [
-        ]);
-    }
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function about()
-    {
         $patreon_api = new \Patreon\API(env('PATREON_API_KEY'));
 
         $campaign_id = 1028298;
@@ -59,8 +48,18 @@ class SettingsController extends Controller
             }
         }
 
-        return Inertia::render('Settings/About', [
+        return Inertia::render('Settings/Index', [
             'patrons' => $patrons
         ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function privacy()
+    {
+        return Inertia::render('Settings/Privacy');
     }
 }

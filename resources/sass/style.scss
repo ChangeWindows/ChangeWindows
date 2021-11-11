@@ -12,7 +12,6 @@
 @import "progress";
 @import "dropdown";
 @import "ui";
-@import "utilities";
 @import "form";
 
 @import "auth";
@@ -30,13 +29,13 @@
     --text-inverse: #{ light-dark($gray-100, $body-color) };
     --text-hover: #{ light-dark(lighten($body-color, 20), darken($gray-100, 25)) };
 
-    --nav-bg: #{ light-dark(darken($light, 6), darken($dark, 6)) };
+    --nav-bg: #{ light-dark(darken($light, 4.5), darken($dark, 6.5)) };
     --nav-bg-acrylic: #{ light-dark(rgba(darken($light, 6), .75), rgba(darken($dark, 6), .75)) };
     --nav-border-color: #{ light-dark(darken($light, 12), darken($dark, 9)) };
     --nav-mobile-bg: #{ light-dark($light, $dark) };
     --nav-color-label: #{ light-dark(lighten($body-color, 35), lighten($gray-100, 35)) };
 
-    --nav-item-hover: #{ light-dark(darken($light, 10), darken($dark, 10)) };
+    --nav-item-hover: #{ light-dark(darken($light, 9), darken($dark, 3)) };
     --nav-bar-item-hover: #{ light-dark(darken($light, 3), darken($dark, 3)) };
 
     --main-bg: #{ light-dark(darken($light, 2), darken($dark, 4)) };
@@ -55,8 +54,8 @@
     --card-add-border: #{ light-dark(darken($light, 10), darken($dark, 7)) };
     --card-add-border-hover: #{ light-dark(darken($light, 13), darken($dark, 9)) };
 
-    --card-auth-bg: #{ light-dark($light, lighten($dark, 1)) };
-    --card-auth-bg-acrylic: #{ light-dark(rgba($light, .8), rgba($dark, .8)) };
+    --auth-bg: #{ light-dark(darken($light, 5), darken($dark, 5)) };
+    --card-auth-bg: #{ light-dark($light, $dark) };
 
     --dropdown-bg: #{ light-dark($light, lighten($dark, 3)) };
     --dropdown-bg-hover: #{ light-dark(darken($light, 3), darken($dark, 1)) };
@@ -152,24 +151,7 @@ body {
 
 // Scrollbar
 * {
-    scrollbar-color: var(--scroll-native);
     scrollbar-width: thin;
-
-    @media (hover: hover) and (pointer: fine) {
-        &::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        &::-webkit-scrollbar-track {
-            margin-bottom: 0;
-            margin-top: 0;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: var(--scroll-webkit);
-            border-radius: 2px;
-        }
-    }
 }
 
 // Titels
@@ -257,9 +239,16 @@ body {
         }
 
         .tags {
+            display: flex;
             flex: 1;
+            flex-wrap: wrap;
             margin-right: 0.5rem;
-            padding: 0 0 .1875rem 0;
+            margin-bottom: .25rem;
+            padding: 0;
+
+            & > span {
+              margin: .25rem 0 0 0;
+            }
         }
 
         .version {
@@ -353,14 +342,31 @@ a.card {
 
 // Changelogs
 .changelog-content {
-    h2 {
-        @extend h5;
+    h1 {
+        font-size: 2.5rem;
         font-weight: 600;
+
+        &:not(:first-child) {
+            margin-top: 2rem;
+        }
+    }
+
+    h2 {
+        @extend h4;
+        font-weight: 600;
+
+        &:not(:first-child) {
+            margin-top: 2rem;
+        }
     }
 
     h3 {
-        @extend h6;
+        @extend h5;
         font-weight: 600;
+
+        &:not(:first-child) {
+            margin-top: 1rem;
+        }
     }
 }
 

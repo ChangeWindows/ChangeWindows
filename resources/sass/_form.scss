@@ -13,6 +13,12 @@
     &:disabled {
         background-color: var(--form-disabled-bg);
     }
+
+    &.changelog-control {
+        height: calc(100vh - 57px - 48px - 16px - 16px - 16px);
+        border-color: transparent;
+        background: none;
+    }
 }
 
 .form-check {

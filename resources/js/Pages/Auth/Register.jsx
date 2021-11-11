@@ -4,7 +4,7 @@ import { InertiaLink, InertiaHead } from '@inertiajs/inertia-react';
 
 import Auth from '../../Layouts/Auth';
 
-import AmaranthIcon, { aiArrowToBracket, aiUserPlus } from '@changewindows/amaranth';
+import AmaranthIcon, { aiArrowRightToBracket, aiUserPlus } from '@changewindows/amaranth';
 
 export default function Register({ app, status }) {
     const [form, setForm] = useState({ name: '', email: '', password: '', password_confirmation: '' });
@@ -16,7 +16,7 @@ export default function Register({ app, status }) {
 
     return (
         <Auth>
-            <InertiaHead title={`Register &middot; ${app.name}`} />
+            <InertiaHead title="Register" />
 
             <form onSubmit={handleSubmit} className="row g-3">
                 {Object.keys(status).length > 0 &&
@@ -59,7 +59,7 @@ export default function Register({ app, status }) {
                         <AmaranthIcon icon={aiUserPlus} /> Register
                     </button>
                     <InertiaLink href="/login" className="btn btn-link">
-                        <AmaranthIcon icon={aiArrowToBracket} /> Login
+                        <AmaranthIcon icon={aiArrowRightToBracket} /> Login
                     </InertiaLink>
                 </div>
             </form>

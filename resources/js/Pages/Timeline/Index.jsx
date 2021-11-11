@@ -11,12 +11,12 @@ import PlatformNavigation from '../../Components/PlatformNavigation';
 import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
-import { format, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 
-export default function Index({ app, timeline, pagination, platforms, channel_platforms }) {
+export default function Index({ timeline, pagination, platforms, channel_platforms }) {
     return (
         <App>
-            <InertiaHead title={`Timeline &middot; ${app.name}`} />
+            <InertiaHead title="Timeline" />
 
             <PlatformNavigation home all="/timeline" page="Timeline" platforms={platforms} />
         
@@ -30,7 +30,7 @@ export default function Index({ app, timeline, pagination, platforms, channel_pl
                             <div className="col-12 col-md-8 col-lg-7">
                                 <div className="row g-1">
                                     {Object.keys(timeline).map((date, key) => (
-                                        <Timeline date={format(parseISO(timeline[date].date), 'd MMMM yyyy')} key={key}>
+                                        <Timeline date={parseISO(timeline[date].date)} key={key}>
                                             {timeline[date].flights.map((flight, _key) => {
                                                 if (flight.type === 'flight') {
                                                     return (
@@ -89,7 +89,7 @@ export default function Index({ app, timeline, pagination, platforms, channel_pl
                                                     key={_key}
                                                     channel={{ color: channel.color, name: channel.name }}
                                                     build={channel.flight ? channel.flight.version : ''}
-                                                    date={channel.flight ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : ''}
+                                                    date={channel.flight ? parseISO(channel.flight.date) : ''}
                                                     url={channel.flight ? channel.flight.url : undefined}
                                                 />
                                             ))}

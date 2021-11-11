@@ -46,7 +46,7 @@ export default function Show({ can, releases, createUrl, status = null }) {
                                             <PlatformIcon platform={release.platform} color />
                                         </h3>
                                         <div className="ms-2">
-                                            <h3 className="h6 mb-0">{release.name.replace('Windows 10 ', '')}</h3>
+                                            <h3 className="h6 mb-0">{release.name}</h3>
                                             <p className="text-muted mb-0 mt-n1"><small>Version {release.version}</small></p>
                                         </div>
                                     </div>
@@ -59,10 +59,10 @@ export default function Show({ can, releases, createUrl, status = null }) {
                                 </div>
                                 <div className="card-footer">
                                     <InertiaLink href={release.edit_url} className="btn btn-link btn-sm">
-                                        {can.edit_releases ? <><AmaranthIcon icon={aiPen} fixedWidth /> Edit</> : <><AmaranthIcon icon={aiEye} fixedWidth /> Show</>}
+                                        {can.edit_releases ? <><AmaranthIcon icon={aiPen} /> Edit</> : <><AmaranthIcon icon={aiEye} /> Show</>}
                                     </InertiaLink>
                                     <InertiaLink href={release.edit_changelog_url} className="btn btn-link btn-sm">
-                                        {can.edit_releases ? <><AmaranthIcon icon={aiNotes} fixedWidth /> Changelog</> : <><AmaranthIcon icon={aiEye} fixedWidth /> Changelog</>}
+                                        {can.edit_releases ? <><AmaranthIcon icon={aiNotes} /> Changelog</> : <><AmaranthIcon icon={aiEye} /> Changelog</>}
                                     </InertiaLink>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@ export default function Show({ can, releases, createUrl, status = null }) {
                                             <PlatformIcon platform={release.platform} color />
                                         </h3>
                                         <div className="ms-2">
-                                            <h3 className="h6 mb-0">{release.name.replace('Windows 10 ', '')}</h3>
+                                            <h3 className="h6 mb-0">{release.name}</h3>
                                             <p className="text-muted mb-0 mt-n1"><small>Version {release.version}</small></p>
                                         </div>
                                     </div>
@@ -93,10 +93,10 @@ export default function Show({ can, releases, createUrl, status = null }) {
                                 </div>
                                 <div className="card-footer">
                                     <InertiaLink href={release.edit_url} className="btn btn-link btn-sm">
-                                        {can.edit_releases ? <><AmaranthIcon icon={aiPen} fixedWidth /> Edit</> : <><AmaranthIcon icon={aiEye} fixedWidth /> Show</>}
+                                        {can.edit_releases ? <><AmaranthIcon icon={aiPen} /> Edit</> : <><AmaranthIcon icon={aiEye} /> Show</>}
                                     </InertiaLink>
                                     <InertiaLink href={release.edit_changelog_url} className="btn btn-link btn-sm">
-                                        {can.edit_releases ? <><AmaranthIcon icon={aiNotes} fixedWidth /> Changelog</> : <><AmaranthIcon icon={aiEye} fixedWidth /> Changelog</>}
+                                        {can.edit_releases ? <><AmaranthIcon icon={aiNotes} /> Changelog</> : <><AmaranthIcon icon={aiEye} /> Changelog</>}
                                     </InertiaLink>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@ export default function Show({ can, releases, createUrl, status = null }) {
                                             <PlatformIcon platform={release.platform} color />
                                         </h3>
                                         <div className="ms-2">
-                                            <h3 className="h6 mb-0">{release.name.replace('Windows 10 ', '')}</h3>
+                                            <h3 className="h6 mb-0">{release.name}</h3>
                                             <p className="text-muted mb-0 mt-n1"><small>Version {release.version}</small></p>
                                         </div>
                                     </div>
@@ -127,10 +127,10 @@ export default function Show({ can, releases, createUrl, status = null }) {
                                 </div>
                                 <div className="card-footer">
                                     <InertiaLink href={release.edit_url} className="btn btn-link btn-sm">
-                                        {can.edit_releases ? <><AmaranthIcon icon={aiPen} fixedWidth /> Edit</> : <><AmaranthIcon icon={aiEye} fixedWidth /> Show</>}
+                                        {can.edit_releases ? <><AmaranthIcon icon={aiPen} /> Edit</> : <><AmaranthIcon icon={aiEye} /> Show</>}
                                     </InertiaLink>
                                     <InertiaLink href={release.edit_changelog_url} className="btn btn-link btn-sm">
-                                        {can.edit_releases ? <><AmaranthIcon icon={aiNotes} fixedWidth /> Changelog</> : <><AmaranthIcon icon={aiEye} fixedWidth /> Changelog</>}
+                                        {can.edit_releases ? <><AmaranthIcon icon={aiNotes} /> Changelog</> : <><AmaranthIcon icon={aiEye} /> Changelog</>}
                                     </InertiaLink>
                                 </div>
                             </div>

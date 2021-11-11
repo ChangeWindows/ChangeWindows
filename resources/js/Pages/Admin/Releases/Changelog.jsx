@@ -6,8 +6,6 @@ import NaviBar from '../../../Components/NaviBar';
 
 import AmaranthIcon, { aiCheck, aiFloppyDisc } from '@changewindows/amaranth';
 
-import Editor from 'rich-markdown-editor';
-
 export default function Edit({ urls, release, status = null }) {
     const [curRelease, setCurRelease] = useState({
         name: '',
@@ -63,12 +61,12 @@ export default function Edit({ urls, release, status = null }) {
                         </div>
                         <div className="col-12 mt-3">
                             <div className="card">
-                                <div className="card-body ps-editor changelog-content">
-                                    <Editor
+                                <div className="card-body p-0 changelog-content">
+                                    <textarea
                                         autoFocus
-                                        id="changelog"
                                         value={curRelease.changelog}
                                         onChange={(value) => setChangelog(value)}
+                                        className="form-control changelog-control"
                                     />
                                 </div>
                             </div>

@@ -154,10 +154,10 @@ class PackageController extends Controller
                         }
                     })->sortByDesc(function ($item, $key) {
                         if ($item['type'] === 'flight') {
-                            return $item['event_priority'].'.'.$item['cversion'].'.'.$item['flight'].'.'.$item['platform']['order'];
+                            return $item['event_priority'].'.'.$item['flight'].'.'.$item['platform']['order'];
                         }
                         
-                        return $item['event_priority'].'.'.$item['cversion'].'.'.$item['platform']['order'];
+                        return $item['event_priority'].'.'.$item['platform']['order'];
                     })->values()->all()
                 ];
             }),

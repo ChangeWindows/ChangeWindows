@@ -5,7 +5,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrash } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrashCan } from '@changewindows/amaranth';
 
 export default function Edit({ can, urls, platforms, pack, channels, release_channels, status = null }) {
     const [curPack, setCurPack] = useState({
@@ -160,7 +160,7 @@ export default function Edit({ can, urls, platforms, pack, channels, release_cha
                                     <div className="dropdown h-100">
                                         <a href="#" className="card card-add dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                             <div className="card-body py-3">
-                                                <h3 className="h5 fw-normal m-0"><AmaranthIcon icon={faPlus} fixedWidth /> New channel</h3>
+                                                <h3 className="h5 fw-normal m-0"><AmaranthIcon icon={faPlus} /> New channel</h3>
                                             </div>
                                         </a>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -191,7 +191,7 @@ export default function Edit({ can, urls, platforms, pack, channels, release_cha
                                         <div className="row g-3">
                                             <div className="col-12">
                                                 <p>Deleting a package will remove all the content associated with that package. Are you sure?</p>
-                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrash} /> Delete</button>
+                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrashCan} /> Delete</button>
                                             </div>
                                         </div>
                                     </div>

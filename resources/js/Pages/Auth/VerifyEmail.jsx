@@ -4,7 +4,7 @@ import { InertiaHead } from '@inertiajs/inertia-react';
 
 import Auth from '../../Layouts/Auth';
 
-import AmaranthIcon, { aiArrowFromBracket, aiPaperPlane } from '@changewindows/amaranth';
+import AmaranthIcon, { aiArrowRightFromBracket, aiPaperPlane } from '@changewindows/amaranth';
 
 export default function VerifyEmail({ app, session, status }) {
     function handleSubmit(event) {
@@ -19,7 +19,7 @@ export default function VerifyEmail({ app, session, status }) {
 
     return (
         <Auth>
-            <InertiaHead title={`Verify Email &middot; ${app.name}`} />
+            <InertiaHead title="Verify Email" />
 
             <form onSubmit={handleSubmit} className="row g-3">
                 <div className="col-12">
@@ -43,10 +43,10 @@ export default function VerifyEmail({ app, session, status }) {
                 }
                 <div className="col-12 d-flex justify-content-between">
                     <button className="btn btn-primary me-1" type="submit">
-                        <AmaranthIcon icon={aiPaperPlane} fixedWidth /> Resend verification email
+                        <AmaranthIcon icon={aiPaperPlane} /> Resend verification email
                     </button>
                     <button className="btn btn-primary me-1" onClick={handleLogout}>
-                        <AmaranthIcon icon={aiArrowFromBracket} fixedWidth /> Logout
+                        <AmaranthIcon icon={aiArrowRightFromBracket} /> Logout
                     </button>
                 </div>
             </form>

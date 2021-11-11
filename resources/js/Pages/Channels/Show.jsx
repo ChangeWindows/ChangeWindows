@@ -7,10 +7,10 @@ import Channel from '../../Components/Cards/Channel';
 import PlatformIcon from '../../Components/Platforms/PlatformIcon';
 import PlatformNavigation from '../../Components/PlatformNavigation';
 
-import { format, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 import { getLocal } from '../../utils/localStorage';
 
-export default function Show({ app, platform, platforms, channel_order, releases }) {
+export default function Show({ platform, platforms, channel_order, releases }) {
     const showActiveOnly = getLocal('showActiveOnly');
 
     const releaseList = useMemo(() => {
@@ -34,7 +34,7 @@ export default function Show({ app, platform, platforms, channel_order, releases
     
     return (
         <App>
-            <InertiaHead title={`${platform.name} channels &middot; ${app.name}`} />
+            <InertiaHead title={`${platform.name} channels`} />
 
             <PlatformNavigation all="/channels" page="Channels" platforms={platforms} />
         
@@ -65,7 +65,7 @@ export default function Show({ app, platform, platforms, channel_order, releases
                                                 disabled={!channel.supported}
                                                 channel={{ color: channel.color, name: channel.name }}
                                                 build={channel.flight ? channel.flight.version : ''}
-                                                date={channel.flight ? format(parseISO(channel.flight.date), 'd MMMM yyyy') : ''}
+                                                date={channel.flight ? parseISO(channel.flight.date) : ''}
                                                 url={channel.flight ? channel.flight.url : undefined}
                                             />
                                         );

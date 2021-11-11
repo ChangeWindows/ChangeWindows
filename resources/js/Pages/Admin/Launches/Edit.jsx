@@ -5,7 +5,7 @@ import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrash } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrashCan } from '@changewindows/amaranth';
 
 import { parse, format, isValid, parseISO } from 'date-fns';
 
@@ -90,7 +90,7 @@ export default function Edit({ can, urls, launch, release, platform, status = nu
                                         <div className="row g-3">
                                             <div className="col-12">
                                                 <p>Deleting a launch will remove all the content associated with that launch. Are you sure?</p>
-                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrash} /> Delete</button>
+                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrashCan} /> Delete</button>
                                             </div>
                                         </div>
                                     </div>

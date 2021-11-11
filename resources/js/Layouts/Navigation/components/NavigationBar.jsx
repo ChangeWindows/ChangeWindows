@@ -5,14 +5,14 @@ import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 /* -- Design -- */
 import NavigationItem from './NavigationItem';
 
-import AmaranthIcon, { aiArrowFromBracket, aiArrowToBracket, aiEllipsis, aiGear } from '@changewindows/amaranth';
+import AmaranthIcon, { aiArrowRightFromBracket, aiArrowRightToBracket, aiEllipsis, aiGear } from '@changewindows/amaranth';
 
 /* -- Utilities -- */
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import useWidth from '../../../hooks/useWidth';
 import clsx from 'clsx';
 
-export default function NavigationBar({ auth, main, overflow, socials }) {
+export default function NavigationBar({ auth, main, overflow }) {
 	const matchesSmUp = useMediaQuery('(min-width: 576px)');
 	const ref = useRef(null);
 	const width = useWidth(ref);
@@ -60,14 +60,6 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 					return (
 						<NavigationItem url={item.url} icon={item.icon} primary={item.primary} title={item.title} key={key} external />
 					);
-				} else if (item.type === 'socials') {
-					return (
-						<div className="d-flex flex-row flex-sm-column flex-lg-row" key={key}>
-							{socials.map((social, key) => (
-								<NavigationItem url={social.url} icon={social.icon} primary={social.primary} title={social.title} key={key} external small />
-							))}
-						</div>
-					);
 				} else if (item.type === 'divider') {
 					return (<div className="sidebar-divider" key={key} />);
 				}
@@ -75,7 +67,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 			{!matchesSmUp &&
 				<>
 					<a className={clsx('sidebar-item dropdown', { 'active': overflowIsActive })} href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						<AmaranthIcon icon={aiEllipsis} fixedWidth />
+						<AmaranthIcon icon={aiEllipsis} />
 						<span className="sidebar-label">
 							More
 						</span>
@@ -94,7 +86,7 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 										href={`${item.url}${item.primary ?? ''}`}
 										className={clsx('dropdown-item', { 'active': page.url.includes(item.url)})}
 									>
-										<AmaranthIcon icon={item.icon} fixedWidth /> {item.title}
+										<AmaranthIcon icon={item.icon} /> {item.title}
 									</Component>
 								);
 							} else if (item.type === 'external') {
@@ -105,20 +97,9 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 										href={`${item.url}${item.primary ?? ''}`}
 										className={clsx('dropdown-item', { 'active': page.url.includes(item.url)})}
 									>
-										<AmaranthIcon icon={item.icon} fixedWidth /> {item.title}
+										<AmaranthIcon icon={item.icon} /> {item.title}
 									</Component>
 								);
-							} else if (item.type === 'socials') {
-								return socials.map((social, key) => (
-									<Component
-										{...mainProps}
-										key={key}
-										href={`${social.url}${social.primary ?? ''}`}
-										className={clsx('dropdown-item', { 'active': page.url.includes(social.url)})}
-									>
-										<AmaranthIcon icon={social.icon} fixedWidth /> {social.title}
-									</Component>
-								));
 							} else if (item.type === 'divider') {
 								return (<div className="dropdown-divider" key={key} />);
 							}
@@ -127,21 +108,21 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 						{auth ?
 							<>
 								<InertiaLink href="/settings" className={clsx('dropdown-item', { 'active': page.url.includes('/settings')})}>
-									<AmaranthIcon icon={aiGear} fixedWidth /> Settings
+									<AmaranthIcon icon={aiGear} /> Settings
 								</InertiaLink>
 								<form onSubmit={handleLogout}>
 									<button type="submit" className="dropdown-item">
-										<AmaranthIcon icon={aiArrowFromBracket} fixedWidth /> Log out
+										<AmaranthIcon icon={aiArrowRightFromBracket} /> Log out
 									</button>
 								</form>
 							</>
 						:
 							<>
 								<InertiaLink href="/settings" className="dropdown-item">
-									<AmaranthIcon icon={aiGear} fixedWidth /> Settings
+									<AmaranthIcon icon={aiGear} /> Settings
 								</InertiaLink>
 								<InertiaLink href="/login" className="dropdown-item">
-									<AmaranthIcon icon={aiArrowToBracket} fixedWidth /> Sign-in
+									<AmaranthIcon icon={aiArrowRightToBracket} /> Sign in
 								</InertiaLink>
 							</>
 						}
@@ -157,12 +138,12 @@ export default function NavigationBar({ auth, main, overflow, socials }) {
 					{auth ?
 						<form onSubmit={handleLogout} className="d-none d-sm-block">
 							<button type="submit" className="sidebar-item">
-								<AmaranthIcon icon={aiArrowFromBracket} fixedWidth /> <span className="sidebar-label">Log out</span>
+								<AmaranthIcon icon={aiArrowRightFromBracket} /> <span className="sidebar-label">Log out</span>
 							</button>
 						</form>
 					:
 						<InertiaLink href="/login" className="sidebar-item">
-							<AmaranthIcon icon={aiArrowToBracket} fixedWidth /> <span className="sidebar-label">Sign-in</span>
+							<AmaranthIcon icon={aiArrowRightToBracket} /> <span className="sidebar-label">Sign in</span>
 						</InertiaLink>
 					}
 				</>
