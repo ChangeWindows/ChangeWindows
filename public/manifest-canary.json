@@ -62,9 +62,12 @@
       }
     ],
     "start_url": "/timeline",
-    "background_color": "#181b1e",
+    "background_color": "#202020",
     "display": "standalone",
+    "display_override": [
+      "window-controls-overlay"
+    ],
     "scope": "/",
-    "theme_color": "#0066ff",
+    "theme_color": "#202020",
     "description": "Changing Windows one build at a time"
   }

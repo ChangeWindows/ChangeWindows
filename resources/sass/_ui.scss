@@ -1,10 +1,12 @@
 .grid {
     display: grid;
     grid-template-columns: 260px auto;
-    grid-template-rows: auto;
-    grid-template-areas: 'sidebar content';
+    grid-template-rows: 48px auto;
+    grid-template-areas: 'header header' 'sidebar content';
     height: 100vh;
     width: 100vw;
+    
+    background-color: var(--nav-bg);
 
     overflow-x: hidden;
     position: relative;
@@ -15,13 +17,15 @@
 
     @media (max-width: 575px) {
         grid-template-columns: auto;
-        grid-template-rows: auto 58px;
-        grid-template-areas: 'content' 'sidebar';
+        grid-template-rows: 48px auto 58px;
+        grid-template-areas: 'header' 'content' 'sidebar';
+    }
+
+    .grid-header {
     }
 
     .grid-sidebar {
         grid-area: sidebar;
-        background-color: var(--nav-bg);
         justify-content: stretch;
         overflow: auto;
         z-index: 5;
@@ -29,7 +33,6 @@
         @media (max-width: 575px) {
             background-color: var(--nav-mobile-bg);
             z-index: 7;
-            box-shadow: $box-shadow;
         }
 
         .navbar {
@@ -56,13 +59,12 @@
         .sidebar {
             display: flex;
             flex-direction: column;
-            padding-top: .5rem;
 
-            padding: .5rem .75rem;
-            height: calc(100% - 57px);
+            padding: 1px .75rem .5rem .75rem;
+            height: 100%;
 
             @media (max-width: 991px) {
-                padding: .5rem;
+                padding: 1px .5rem .5rem;
             }
 
             @media (max-width: 575px) {
@@ -176,10 +178,15 @@
 
     .grid-content {
         grid-area: content;
-        box-shadow: $box-shadow;
         background-color: var(--main-bg);
+        border-top: var(--main-border-color) 1px solid;
         z-index: 6;
         overflow: auto;
+        
+        @media (min-width: 576px) { 
+            border-top-left-radius: .5rem;
+            border-left: var(--main-border-color) 1px solid;
+        }
 
         & > .container {
             padding-top: .5rem;

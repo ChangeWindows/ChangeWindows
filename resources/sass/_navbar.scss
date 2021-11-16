@@ -1,17 +1,45 @@
 .navbar {
-    min-height: 57px;
+    height: 48px;
+    padding: 0;
+
+    .container-fluid {
+    }
     
     .navbar-brand {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-right: .5rem;
+        font-size: 1.1rem;
         font-weight: 500;
         font-family: $headings-font-family;
         word-break: break-all;
         color: var(--text);
         flex-grow: 0;
 
+        .text-sm {
+            font-variant: small-caps;
+            font-weight: 500;
+        }
+
         &:hover,
         &:focus {
             color: var(--text);
+        }
+    }
+
+    .app-icon {
+        color: $accent;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: .1875rem .75rem .0625rem .365rem;
+
+        @media (max-width: 991px) {
+            margin: .1875rem .25rem .0625rem .25rem;
         }
     }
     
