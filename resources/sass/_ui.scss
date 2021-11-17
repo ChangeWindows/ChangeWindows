@@ -22,6 +22,15 @@
     }
 
     .grid-header {
+        grid-area: header;
+        -webkit-app-region: drag;
+        app-region: drag;
+
+        .navbar-brand,
+        .navbar-content {
+            -webkit-app-region: no-drag;
+            app-region: no-drag;
+        }
     }
 
     .grid-sidebar {
