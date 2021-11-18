@@ -110,11 +110,11 @@ export default function Show({ app, patrons }) {
           <div className="col-12 col-lg-4 col-xl-3">
             <p className="h6 pt-3">About ChangeWindows</p>
 
-            <p>ChangeWindows {app.version}<br />
+            <p className="text-md">ChangeWindows {app.preview === 'preview' && 'Preview'}{app.preview === 'canary' && 'Canary'} {app.version}<br />
             &copy; 2014-2021 <a className="m-0 f-384 fw-bold" href="https://studio384.be" target="_blank">Studio <span className="studio-384">384</span></a><br />
             All Right Reserved</p>
 
-            <p>ChangeWindows is a detailed changelog and release history for Windows across all platforms it appears on. With detailed and timely updates, as well as a clean and clear interface, ChangeWindows' goal is to provide a solid resource for anyone interested in knowing what's next for Windows.</p>
+            <p className="text-md">ChangeWindows is a detailed changelog and release history for Windows across all platforms it appears on. With detailed and timely updates, as well as a clean and clear interface, ChangeWindows' goal is to provide a solid resource for anyone interested in knowing what's next for Windows.</p>
             
             <div className="d-flex gap-1 flex-wrap">
               <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm"><AmaranthIcon icon={aiTwitter} /> Twitter</a>

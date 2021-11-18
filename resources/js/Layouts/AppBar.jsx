@@ -54,7 +54,7 @@ export default function AppBar() {
         <div className="container-fluid">
           <InertiaLink className="navbar-brand" href="/">
             <img src={app.preview === 'preview' ? '/images/logo-preview.svg' : (app.preview === 'canary' ? '/images/logo-canary.svg' : '/images/logo.svg')} alt="ChangeWindows" className="app-icon" />
-            <span className="brand-label fw-bold d-none d-md-inline">ChangeWindows{app.preview === 'canary' ? <span className="text-muted text-sm d-none d-lg-inline"> canary</span> : (app.preview === 'preview' ? <span className="text-muted text-sm d-none d-lg-inline"> preview</span> : '')}</span>
+            <span className="brand-label d-none d-md-inline">ChangeWindows{app.preview === 'canary' ? <span className="text-muted text-sm d-none d-lg-inline"> canary</span> : (app.preview === 'preview' ? <span className="text-muted text-sm d-none d-lg-inline"> preview</span> : '')}</span>
           </InertiaLink>
           <div className="navbar-content">
             <InertiaLink
