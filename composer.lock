@@ -1473,16 +1473,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.71.0",
+            "version": "v8.72.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d822426d75ecf8e8ccd3ccd404db7202d1a9875e"
+                "reference": "5168f8589195a5f48b9c41ad2eec77a6c15f14f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d822426d75ecf8e8ccd3ccd404db7202d1a9875e",
-                "reference": "d822426d75ecf8e8ccd3ccd404db7202d1a9875e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/5168f8589195a5f48b9c41ad2eec77a6c15f14f3",
+                "reference": "5168f8589195a5f48b9c41ad2eec77a6c15f14f3",
                 "shasum": ""
             },
             "require": {
@@ -1641,7 +1641,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-11-16T15:00:50+00:00"
+            "time": "2021-11-17T15:15:08+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -4408,28 +4408,28 @@
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "5.3.1",
+            "version": "5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "ee0a50ad174e7f8b14bd17dd2a79ab51ccbac3df"
+                "reference": "e54f376517f698e058c518f73703a0ee59b26521"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/ee0a50ad174e7f8b14bd17dd2a79ab51ccbac3df",
-                "reference": "ee0a50ad174e7f8b14bd17dd2a79ab51ccbac3df",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/e54f376517f698e058c518f73703a0ee59b26521",
+                "reference": "e54f376517f698e058c518f73703a0ee59b26521",
                 "shasum": ""
             },
             "require": {
-                "illuminate/auth": "^6.0|^7.0|^8.0",
-                "illuminate/container": "^6.0|^7.0|^8.0",
-                "illuminate/contracts": "^6.0|^7.0|^8.0",
-                "illuminate/database": "^6.0|^7.0|^8.0",
-                "php": "^7.2.5|^8.0"
+                "illuminate/auth": "^7.0|^8.0",
+                "illuminate/container": "^7.0|^8.0",
+                "illuminate/contracts": "^7.0|^8.0",
+                "illuminate/database": "^7.0|^8.0",
+                "php": "^7.3|^8.0|^8.1"
             },
             "require-dev": {
-                "orchestra/testbench": "^4.0|^5.0|^6.0",
-                "phpunit/phpunit": "^8.0|^9.0",
+                "orchestra/testbench": "^5.0|^6.0",
+                "phpunit/phpunit": "^9.4",
                 "predis/predis": "^1.1"
             },
             "type": "library",
@@ -4478,7 +4478,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-permission/issues",
-                "source": "https://github.com/spatie/laravel-permission/tree/5.3.1"
+                "source": "https://github.com/spatie/laravel-permission/tree/5.4.0"
             },
             "funding": [
                 {
@@ -4486,7 +4486,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-04T11:03:16+00:00"
+            "time": "2021-11-17T11:47:22+00:00"
         },
         {
             "name": "staudenmeir/eloquent-has-many-deep",
