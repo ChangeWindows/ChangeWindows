@@ -17,8 +17,10 @@ export default function AppBar() {
     if (theme === 'default') {
       if (matchesDarkMode) {
         document.head.children['color-scheme'].content = 'dark';
+        document.head.children['theme-color'].content = '#202020';
       } else {
         document.head.children['color-scheme'].content = 'light';
+        document.head.children['theme-color'].content = '#f3f3f3';
       }
     }
   }, [matchesDarkMode]);

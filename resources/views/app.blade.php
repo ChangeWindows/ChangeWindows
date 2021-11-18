@@ -10,6 +10,8 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
         <meta name="color-scheme" content="light">
+
+        <meta name="theme-color" content="#f3f3f3">
         
         <link rel="shortcut icon" href="{{ env('APP_PREVIEW') === 'preview' ? asset('images/logo-preview.svg') : (env('APP_PREVIEW') === 'canary' ? asset('images/logo-canary.svg') : asset('images/logo.svg')) }}">
         <link rel="manifest" href="{{ env('APP_PREVIEW') === 'preview' ? asset('manifest-preview.json') : (env('APP_PREVIEW') === 'canary' ? asset('manifest-canary.json') : asset('manifest.json')) }}">
