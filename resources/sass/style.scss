@@ -340,6 +340,39 @@ a.card {
     }
 }
 
+// Utilities
+.text-sm {
+    font-size: .8rem;
+}
+
+// Settings
+.settings-card {
+    padding: 0 1rem 0 .25rem;
+    height: 64px;
+    background-color: var(--card-bg);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: $border-radius;
+    border: var(--main-border-color) 1px solid;
+
+    & + & {
+        margin-top: .125rem;
+    }
+
+    .settings-icon {
+        width: 56px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form-control {
+        padding: .25rem .5rem;
+    }
+}
+
 // Changelogs
 .changelog-content {
     h1 {
