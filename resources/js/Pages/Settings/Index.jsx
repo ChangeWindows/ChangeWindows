@@ -86,7 +86,7 @@ export default function Show({ app, patrons }) {
                   </div>
                   <div>
                     <div className="form-check form-switch">
-                      <input className="form-check-input" type="checkbox" onChange={toggleShowActiveOnly} checked={showActiveOnly} id="showActiveChannelsOnly" />
+                      <input className="form-check-input" type="checkbox" onChange={toggleShowActiveOnly} checked={!showActiveOnly} id="showActiveChannelsOnly" />
                     </div>
                   </div>
                 </div>
