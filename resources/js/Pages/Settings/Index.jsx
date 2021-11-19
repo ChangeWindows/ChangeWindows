@@ -3,7 +3,7 @@ import { InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 
-import AmaranthIcon, { aiChangeWindows, aiChangeWindowsCan, aiChangeWindowsDev, aiGear, aiGitHub, aiPatreon, aiTwitter } from '@changewindows/amaranth';
+import AmaranthIcon, { aiBranch, aiGitHub, aiPatreon, aiSwatchbook, aiTwitter } from '@changewindows/amaranth';
 
 import { getLocal, setLocal } from '../../utils/localStorage';
 
@@ -58,7 +58,7 @@ export default function Show({ app, patrons }) {
                 <p className="h6 mb-2">Appearance</p>
                 <div className="settings-card">
                   <div className="settings-icon">
-                    <AmaranthIcon icon={aiGear} className="fs-6" />
+                    <AmaranthIcon icon={aiSwatchbook} className="fs-6" />
                   </div>
                   <div className="flex-grow-1">
                     <span className="d-block mb-n1">Choose your theme</span>
@@ -78,7 +78,7 @@ export default function Show({ app, patrons }) {
                 <p className="h6 mb-2">Channels</p>
                 <div className="settings-card">
                   <div className="settings-icon">
-                    <AmaranthIcon icon={aiGear} className="fs-6" />
+                    <AmaranthIcon icon={aiBranch} className="fs-6" />
                   </div>
                   <div className="flex-grow-1">
                     <span className="d-block mb-n1">Show inactive channels</span>
