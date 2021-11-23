@@ -7,6 +7,8 @@
         <title>{{ config('app.name', 'ChangeWindows') }}</title>
         
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <script src="{{ asset('js/manifest.js') }}" defer></script>
+        <script src="{{ asset('js/vendor.js') }}" defer></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
         <meta name="color-scheme" content="light">

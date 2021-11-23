@@ -1,5 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/manifest.js": "/js/manifest.js",
     "/css/style.css": "/css/style.css",
+    "/js/vendor.js": "/js/vendor.js",
     "/js/bootstrap.bundle.min.js": "/js/bootstrap.bundle.min.js"
 }
