@@ -327,7 +327,13 @@ a.card {
         }
 
         .release-channels {
-            margin-top: 0.25rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            
+            .badge {
+                display: inline-block;
+            }
         }
 
         .release-actions {
