@@ -4,8 +4,6 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-        <title>{{ config('app.name', 'ChangeWindows') }}</title>
-        
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <script src="{{ asset('js/manifest.js') }}" defer></script>
         <script src="{{ asset('js/vendor.js') }}" defer></script>
