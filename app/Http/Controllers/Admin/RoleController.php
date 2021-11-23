@@ -26,7 +26,7 @@ class RoleController extends Controller
                 'create_roles' => Auth::user()->can('roles.create'),
                 'edit_roles' => Auth::user()->can('roles.edit')
             ],
-            'roles' => Role::orderBy('name')->paginate(50)->map(function ($role) {
+            'roles' => Role::orderBy('name')->get()->map(function ($role) {
                 return [
                     'id' => $role->id,
                     'name' => $role->name,

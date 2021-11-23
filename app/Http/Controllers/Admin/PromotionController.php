@@ -24,14 +24,17 @@ class PromotionController extends Controller
     {
         $this->authorize('flights.show');
 
-        $timeline = Timeline::where('item_type', Promotion::class)->orderBy('date', 'desc')->paginate(100);
+        $timeline = Timeline::where('item_type', Promotion::class)->orderBy('date', 'desc');
+        $paginator = $timeline->paginate(100)->onEachSide(2)->through(function () {
+            return [];
+        });
 
         return Inertia::render('Admin/Promotions/Show', [
             'can' => [
                 'create_promotions' => Auth::user()->can('flights.create'),
                 'edit_promotions' => Auth::user()->can('flights.edit')
             ],
-            'timeline' => $timeline->groupBy('date')->map(function ($items, $date) {
+            'timeline' => $timeline->paginate(100)->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
                     'promotions' => $items->map(function ($promotion) {
@@ -53,10 +56,7 @@ class PromotionController extends Controller
                     })
                 ];
             }),
-            'pagination' => [
-                'prev_page_url' => $timeline->previousPageUrl(),
-                'next_page_url' => $timeline->nextPageUrl()
-            ],
+            'pagination' => $paginator,
             'createUrl' => route('admin.promotions.create', [], false),
             'status' => session('status')
         ]);

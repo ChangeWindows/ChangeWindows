@@ -45,8 +45,10 @@ class PackageController extends Controller
                     $join->on('lr.id', '=', 'launches.release_id');
                 })
                 ->where('lr.id', '=', $release->id);
-            })
-            ->paginate(75);
+            });
+        $paginator = $timeline->paginate(75)->onEachSide(2)->through(function () {
+            return [];
+        });
 
         return Inertia::render('Platforms/Package', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
@@ -73,7 +75,7 @@ class PackageController extends Controller
                     ] : []
                 ];
             })->sortBy('order')->values()->all(),
-            'timeline' => $timeline->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
+            'timeline' => $timeline->paginate(75)->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function($item) {
@@ -161,10 +163,7 @@ class PackageController extends Controller
                     })->values()->all()
                 ];
             }),
-            'pagination' => [
-                'prev_page_url' => $timeline->previousPageUrl(),
-                'next_page_url' => $timeline->nextPageUrl()
-            ]
+            'pagination' => $paginator
         ]);
     }
 }

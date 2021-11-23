@@ -28,14 +28,17 @@ class FlightController extends Controller
     {
         $this->authorize('flights.show');
 
-        $timeline = Timeline::where('item_type', Flight::class)->orderBy('date', 'desc')->paginate(100);
+        $timeline = Timeline::where('item_type', Flight::class)->orderBy('date', 'desc');
+        $paginator = $timeline->paginate(100)->onEachSide(2)->through(function () {
+            return [];
+        });
 
         return Inertia::render('Admin/Flights/Show', [
             'can' => [
                 'create_flights' => Auth::user()->can('flights.create'),
                 'edit_flights' => Auth::user()->can('flights.edit')
             ],
-            'timeline' => $timeline->groupBy('date')->map(function ($items, $date) {
+            'timeline' => $timeline->paginate(100)->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->map(function ($flight) {
@@ -57,10 +60,7 @@ class FlightController extends Controller
                     })
                 ];
             }),
-            'pagination' => [
-                'prev_page_url' => $timeline->previousPageUrl(),
-                'next_page_url' => $timeline->nextPageUrl()
-            ],
+            'pagination' => $paginator,
             'createUrl' => route('admin.flights.create', [], false),
             'createPackageUrl' => route('admin.flights.createPackage', [], false),
             'status' => session('status')

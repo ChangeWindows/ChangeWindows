@@ -21,24 +21,24 @@ class PermissionController extends Controller
     public function index() {
         $this->authorize('permissions.show');
 
-        $permissions = Permission::orderBy('name')->paginate(100);
+        $permissions = Permission::orderBy('name');
+        $paginator = $permissions->paginate(100)->onEachSide(2)->through(function () {
+            return [];
+        });
 
         return Inertia::render('Admin/Permissions/Show', [
             'can' => [
                 'create_permissions' => Auth::user()->can('permissions.create'),
                 'edit_permissions' => Auth::user()->can('permissions.edit')
             ],
-            'permissions' => $permissions->map(function ($permission) {
+            'permissions' => $permissions->paginate(100)->map(function ($permission) {
                 return [
                     'id' => $permission->id,
                     'name' => $permission->name,
                     'editUrl' => route('admin.permissions.edit', $permission, false)
                 ];
             }),
-            'pagination' => [
-                'prev_page_url' => $permissions->previousPageUrl(),
-                'next_page_url' => $permissions->nextPageUrl()
-            ],
+            'pagination' => $paginator,
             'createUrl' => route('admin.permissions.create', [], false),
             'status' => session('status')
         ]);

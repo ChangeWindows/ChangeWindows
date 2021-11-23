@@ -43,8 +43,10 @@ class ReleaseController extends Controller
                     $join->on('lr.id', '=', 'launches.release_id');
                 })
                 ->where('lr.id', '=', $release->id);
-            })
-            ->paginate(75);
+            });
+        $paginator = $timeline->paginate(75)->onEachSide(2)->through(function () {
+            return [];
+        });
             
         $prev = Release::where('canonical_version', '<', $release->canonical_version)->where('platform_id', '=', $release->platform_id)->where('package', '=', 0)->orderBy('canonical_version', 'desc')->first();
         $next = Release::where('canonical_version', '>', $release->canonical_version)->where('platform_id', '=', $release->platform_id)->where('package', '=', 0)->orderBy('canonical_version', 'asc')->first();
@@ -84,7 +86,7 @@ class ReleaseController extends Controller
                     ] : []
                 ];
             })->sortBy('order')->values()->all(),
-            'timeline' => $timeline->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
+            'timeline' => $timeline->paginate(75)->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function($item, $key) {
@@ -172,10 +174,7 @@ class ReleaseController extends Controller
                     })->values()->all()
                 ];
             }),
-            'pagination' => [
-                'prev_page_url' => $timeline->previousPageUrl(),
-                'next_page_url' => $timeline->nextPageUrl()
-            ]
+            'pagination' => $paginator
         ]);
     }
 }
