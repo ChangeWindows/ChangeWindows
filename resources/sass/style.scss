@@ -42,8 +42,6 @@
     --main-bg-acrylic: #{ light-dark(rgba(darken($light, 2), .75), rgba(darken($dark, 4), .75)) };
     --main-border-color: #{ light-dark(darken($light, 8), darken($dark, 8)) };
     
-    --pagination-bg-hover: #{ light-dark(darken($light, 5), darken($dark, 3)) };
-
     --timeline-bg-nth: #{ light-dark(darken($light, 6), $dark) };
     --timeline-bg-hover: #{ light-dark(darken($light, 8), lighten($dark, 4)) };
 

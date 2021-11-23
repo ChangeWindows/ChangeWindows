@@ -25,7 +25,7 @@ class LaunchController extends Controller
         $this->authorize('flights.show');
 
         $timeline = Timeline::where('item_type', Launch::class)->orderBy('date', 'desc');
-        $paginator = $timeline->paginate(100)->onEachSide(2)->through(function () {
+        $paginator = $timeline->paginate(100)->onEachSide(1)->through(function () {
             return [];
         });
 

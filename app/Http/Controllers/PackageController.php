@@ -46,7 +46,7 @@ class PackageController extends Controller
                 })
                 ->where('lr.id', '=', $release->id);
             });
-        $paginator = $timeline->paginate(75)->onEachSide(2)->through(function () {
+        $paginator = $timeline->paginate(75)->onEachSide(1)->through(function () {
             return [];
         });
 
