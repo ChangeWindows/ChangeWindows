@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 
-import AmaranthIcon, { aiArrowRightFromBracket, aiArrowRightToBracket, aiGear } from '@changewindows/amaranth';
+import AmaranthIcon, { aiArrowRightFromBracket, aiArrowRightToBracket, aiGear, aiUser } from '@changewindows/amaranth';
 
 import { getLocal, setLocal } from '../utils/localStorage';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -48,26 +48,38 @@ export default function AppBar() {
         <div className="container-fluid">
           <InertiaLink className="navbar-brand" href="/">
             <img src={app.preview === 'preview' ? '/images/logo-preview.svg' : (app.preview === 'canary' ? '/images/logo-canary.svg' : '/images/logo.svg')} alt="ChangeWindows" className="app-icon" />
-            <span className="brand-label d-none d-md-inline">ChangeWindows{app.preview === 'canary' ? <span className="text-muted text-sm d-none d-lg-inline"> canary</span> : (app.preview === 'preview' ? <span className="text-muted text-sm d-none d-lg-inline"> preview</span> : '')}</span>
+            <span className="brand-label">ChangeWindows{app.preview === 'canary' ? <span className="text-muted text-sm d-none d-sm-inline"> canary</span> : (app.preview === 'preview' ? <span className="text-muted text-sm d-none d-sm-inline"> preview</span> : '')}</span>
           </InertiaLink>
           <div className="navbar-content">
-            <InertiaLink
-              href="/settings"
-              className="btn btn-transparent btn-sm me-1"
-            >
-              <AmaranthIcon icon={aiGear} /><span className="d-none d-sm-inline"> Settings</span>
-            </InertiaLink>
-            {auth ?
-              <form onSubmit={handleLogout} className="d-inline-block">
-                <button type="submit" className="btn btn-transparent btn-sm">
-                  <AmaranthIcon icon={aiArrowRightFromBracket} /><span className="d-none d-sm-inline"> Log out</span>
-                </button>
-              </form>
-            :
-              <InertiaLink href="/login" className="btn btn-transparent btn-sm">
-                <AmaranthIcon icon={aiArrowRightToBracket} /><span className="d-none d-sm-inline"> Sign in</span>
-              </InertiaLink>
-            }
+            <div className="dropdown d-inline-block">
+              <button className="btn btn-transparent btn-profile rounded-circle dropdown-toggle" type="button" id="dropdown-profile" data-bs-toggle="dropdown" aria-expanded="false">
+                <AmaranthIcon icon={auth ? aiUser : aiGear} />
+              </button>
+              <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-profile">
+                <li>
+                  <InertiaLink
+                    href="/settings"
+                    className="dropdown-item"
+                  >
+                    <AmaranthIcon icon={aiGear} /> Settings
+                  </InertiaLink>
+                </li>
+                
+                <li>
+                  {auth ?
+                    <form onSubmit={handleLogout} className="d-block">
+                      <button type="submit" className="dropdown-item">
+                        <AmaranthIcon icon={aiArrowRightFromBracket} /> Log out
+                      </button>
+                    </form>
+                  :
+                    <InertiaLink href="/login" className="dropdown-item">
+                      <AmaranthIcon icon={aiArrowRightToBracket} /> Sign in
+                    </InertiaLink>
+                  }
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </nav>
