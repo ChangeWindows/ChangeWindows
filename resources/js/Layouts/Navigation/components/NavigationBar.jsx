@@ -39,7 +39,7 @@ export default function NavigationBar({ main, overflow, socials }) {
 	}, [main, overflow, matchesSmUp, width]);
 
 	const overflowIsActive = useMemo(() => {
-		const overflowUrls = ['/settings'];
+		const overflowUrls = [];
 		overflowItems.filter((item) => item.type === 'link').map((item) => overflowUrls.push(item.url));
 
 		return !!overflowUrls.find((url) => page.url.includes(url));
