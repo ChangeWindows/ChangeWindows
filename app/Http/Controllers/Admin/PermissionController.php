@@ -22,7 +22,7 @@ class PermissionController extends Controller
         $this->authorize('permissions.show');
 
         $permissions = Permission::orderBy('name');
-        $paginator = $permissions->paginate(100)->onEachSide(1)->through(function () {
+        $paginator = $permissions->paginate(100)->onEachSide(2)->through(function () {
             return [];
         });
 

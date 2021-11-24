@@ -18,7 +18,7 @@ class TimelineController extends Controller
     {
         $channel_platforms = Platform::orderBy('tool')->orderBy('position')->where('active', '=', '1')->get();
         $timeline = Timeline::orderBy('date', 'desc');
-        $paginator = $timeline->paginate(75)->onEachSide(1)->through(function () {
+        $paginator = $timeline->paginate(75)->onEachSide(2)->through(function () {
             return [];
         });
 
@@ -189,7 +189,7 @@ class TimelineController extends Controller
                 })
                 ->where('lr.platform_id', '=', $platform->id);
             });
-        $paginator = $timeline->paginate(75)->onEachSide(1)->through(function () {
+        $paginator = $timeline->paginate(75)->onEachSide(2)->through(function () {
             return [];
         });
 

@@ -82,6 +82,13 @@
             }
         }
 
+        .pagination-divider {
+            width: 1px;
+            height: 1.25rem;
+            margin-top: .5rem;
+            background: var(--main-bg);
+        }
+
         &.active {
             .page-link {
                 position: relative;

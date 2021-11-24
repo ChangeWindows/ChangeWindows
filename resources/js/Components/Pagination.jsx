@@ -11,14 +11,20 @@ export default function Pagination({ pagination }) {
         {pagination.links.map((link, key) => {
           if (link.label.includes('Previous')) {
             return (
-              <li className={clsx('page-item', { 'active': link.active, 'disabled': !link.url })} key={key}>
+              <li className={clsx('page-item d-none d-md-inline-block', { 'active': link.active, 'disabled': !link.url })} key={key}>
                 <InertiaLink className="page-link" href={link.url}><AmaranthIcon icon={aiArrowLeft} /></InertiaLink>
               </li>
             );
           } else if (link.label.includes('Next')) {
             return (
-              <li className={clsx('page-item', { 'active': link.active, 'disabled': !link.url })} key={key}>
+              <li className={clsx('page-item d-none d-md-inline-block', { 'active': link.active, 'disabled': !link.url })} key={key}>
                 <InertiaLink className="page-link" href={link.url}><AmaranthIcon icon={aiArrowRight} /></InertiaLink>
+              </li>
+            );
+          } else if (link.label === '...') {
+            return (
+              <li className={clsx('page-item', { 'active': link.active, 'disabled': !link.url })} key={key}>
+                <div className="pagination-divider" />
               </li>
             );
           } else {
