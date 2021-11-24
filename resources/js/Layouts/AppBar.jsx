@@ -14,14 +14,12 @@ export default function AppBar() {
   useEffect(() => {
     const theme = getLocal('theme');
 
-    if (theme === 'default') {
-      if (matchesDarkMode) {
-        document.head.children['color-scheme'].content = 'dark';
-        document.head.children['theme-color'].content = '#202020';
-      } else {
-        document.head.children['color-scheme'].content = 'light';
-        document.head.children['theme-color'].content = '#f3f3f3';
-      }
+    if (theme === 'dark' || theme === 'default' && matchesDarkMode) {
+      document.head.children['color-scheme'].content = 'dark';
+      document.head.children['theme-color'].content = '#202020';
+    } else {
+      document.head.children['color-scheme'].content = 'light';
+      document.head.children['theme-color'].content = '#f3f3f3';
     }
   }, [matchesDarkMode]);
 
@@ -33,13 +31,9 @@ export default function AppBar() {
     } else if (theme === 'light') {
       document.querySelector('html').classList.add('theme-light');
       document.querySelector('html').classList.remove('theme-default');
-      document.head.children['color-scheme'].content = 'light';
-      document.head.children['theme-color'].content = '#f3f3f3';
     } else if (theme === 'dark') {
       document.querySelector('html').classList.add('theme-dark');
       document.querySelector('html').classList.remove('theme-default');
-      document.head.children['color-scheme'].content = 'dark';
-      document.head.children['theme-color'].content = '#202020';
     }
   });
 
