@@ -42,6 +42,7 @@
         @media (max-width: 575px) {
             background-color: var(--nav-mobile-bg);
             z-index: 7;
+            box-shadow: $box-shadow;
         }
 
         .navbar {
