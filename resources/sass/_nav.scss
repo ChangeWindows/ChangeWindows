@@ -83,10 +83,11 @@
         }
 
         .pagination-divider {
-            width: 1px;
             height: 1.25rem;
             margin-top: .5rem;
-            background: var(--main-bg);
+            margin-left: .25rem;
+            margin-right: .25rem;
+            border-left: 1px solid var(--main-border-color);
         }
 
         &.active {
