@@ -70,11 +70,11 @@
             display: flex;
             flex-direction: column;
 
-            padding: 1px .25rem .5rem .25rem;
+            padding: 0 .25rem .5rem .25rem;
             height: 100%;
 
             @media (max-width: 991px) {
-                padding: 1px .5rem .5rem;
+                padding: 0 .5rem .5rem;
             }
 
             @media (max-width: 575px) {
@@ -100,7 +100,7 @@
                 padding: 0;
                 border-radius: $border-radius;
                 background-color: transparent;
-                border: none;
+                border: transparent 1px solid;
                 width: 100%;
                 height: 60px;
 
@@ -170,12 +170,13 @@
                     }
 
                     @media (min-width: 576px) {
-                        background-color: var(--nav-item-hover);
+                        background-color: var(--main-bg);
+                        border-color: var(--main-border-color);
 
                         &::after {
                             position: absolute;
                             background-color: $primary;
-                            left: 0;
+                            left: -1px;
                             top: 30%;
                             height: 40%;
                             width: 4px;
@@ -186,7 +187,7 @@
                 }
 
                 &:hover {
-                    background-color: var(--nav-item-hover);
+                    background-color: var(--main-bg);
                     color: var(--text);
 
                     @media (max-width: 575px) {
@@ -205,7 +206,7 @@
         overflow: auto;
         
         @media (min-width: 576px) { 
-            border-top-left-radius: .5rem;
+            border-top-left-radius: .75rem;
             border-left: var(--main-border-color) 1px solid;
         }
 
