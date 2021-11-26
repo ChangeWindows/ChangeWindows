@@ -1,25 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { InertiaHead } from '@inertiajs/inertia-react';
 
 import AppBar from './AppBar';
 import AdminNavigation from './Navigation/AdminNavigation';
 
 export default function App({ children }) {
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-
-  useEffect(() => {
-    window.addEventListener('resize', function() {
-      setWindowHeight(window.innerHeight);
-    });
-
-    () => window.removeEventListener('resize');
-  });
-
   return (
     <div className="bg-light">
       <InertiaHead title="Backstage" />
 
-      <div className="grid" style={{ height: windowHeight }}>
+      <div className="grid">
         <header className="grid-sidebar">
           <AdminNavigation />
         </header>
