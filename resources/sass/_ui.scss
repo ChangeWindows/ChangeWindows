@@ -1,6 +1,6 @@
 .grid {
     display: grid;
-    grid-template-columns: 260px auto;
+    grid-template-columns: 88px auto;
     grid-template-rows: 48px auto;
     grid-template-areas: 'header header' 'sidebar content';
     height: 100vh;
@@ -91,27 +91,30 @@
 
             .sidebar-item {
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 position: relative;
 
                 transition: $transition-base;
 
-                padding: .5rem;
+                padding: 0;
                 border-radius: $border-radius;
                 background-color: transparent;
                 border: none;
                 width: 100%;
-                height: 40px;
+                height: 64px;
 
                 text-decoration: none;
                 color: var(--text);
+                justify-content: center;
 
                 &:not(:last-child) {
                     margin-bottom: .25rem;
                 }
 
-                @media (max-width: 991px) {
-                    justify-content: center;
+                .ai {
+                    font-size: 18px;
+                    margin-top: .125rem;
                 }
 
                 @media (max-width: 575px) {
@@ -125,13 +128,9 @@
                     width: 100%;
                     text-align: center;
                 }
-
-                .ai {
-                    margin-right: .5rem;
-
-                    @media (max-width: 991px) {
-                        margin-right: 0;
-                    }
+                
+                @media (max-width: 991px) {
+                    height: 40px;
                 }
 
                 .sidebar-label {
@@ -139,17 +138,19 @@
                         display: none;
                     }
 
+                    display: block;
+                    font-size: 70%;
+                    font-weight: 400;
+                    color: var(--nav-color-label);
+                    margin: .25rem auto 0;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    line-height: 1.25;
+                    max-width: 56px;
+                    
                     @media (max-width: 575px) {
-                        display: block;
-                        font-size: 80%;
-                        font-weight: 500;
-                        color: var(--nav-color-label);
-                        margin: .25rem auto 0;
                         max-width: 65px;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        line-height: 1;
                     }
                 }
 
@@ -167,7 +168,7 @@
                             left: 0;
                             top: 30%;
                             height: 40%;
-                            width: 3.5px;
+                            width: 4px;
                             border-radius: 6px;
                             content: '';
                         }

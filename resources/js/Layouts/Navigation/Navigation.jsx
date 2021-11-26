@@ -20,8 +20,8 @@ export default function Navigation() {
         { type: 'link', url: '/admin/flights', icon: aiDashboard, title: 'Backstage', permission: nav_can.access_dashboard }
       ]}
       socials={[
-        { type: 'external', url: 'https://twitter.com/changewindows', icon: aiTwitter, title: '@ChangeWindows' },
-        { type: 'external', url: 'https://patreon.com/changewindows', icon: aiPatreon, title: 'Sponsor us' }
+        { type: 'external', url: 'https://twitter.com/changewindows', icon: aiTwitter, title: 'Follow' },
+        { type: 'external', url: 'https://patreon.com/changewindows', icon: aiPatreon, title: 'Sponsor' }
       ]}
     />
   )
