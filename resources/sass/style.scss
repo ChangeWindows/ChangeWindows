@@ -62,7 +62,7 @@
     
     --btn-transparent-bg-hover: #{ light-dark(rgba($dark, .2), rgba($light, .1)) };
 
-    --progress-bg: #{ light-dark(#fff, darken($dark, 8)) };
+    --progress-bg: #{ light-dark(#fff, darken($dark, 6)) };
 
     --scroll-native: #{ light-dark(darken($light, 6), darken($dark, 6)) };
     --scroll-webkit: #{ light-dark(darken($light, 16), lighten($dark, 12)) };
