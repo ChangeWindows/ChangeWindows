@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 
-import AmaranthIcon, { aiArrowRightFromBracket, aiArrowRightToBracket, aiGear, aiUser } from '@changewindows/amaranth';
+import AmaranthIcon, { aiArrowRightFromBracket, aiArrowRightToBracket, aiGear, aiMagnifyingGlass, aiUser } from '@changewindows/amaranth';
 
 import { getLocal, setLocal } from '../utils/localStorage';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -46,10 +46,18 @@ export default function AppBar() {
     <div className="grid-header">
       <nav className="navbar navbar-dark navbar-main">
         <div className="container-fluid">
-          <InertiaLink className="navbar-brand" href="/">
-            <img src={app.preview === 'preview' ? '/images/logo-preview.svg' : (app.preview === 'canary' ? '/images/logo-canary.svg' : '/images/logo.svg')} alt="ChangeWindows" className="app-icon" />
-            <span className="brand-label">ChangeWindows{app.preview === 'canary' ? <span className="text-muted text-sm d-none d-sm-inline"> canary</span> : (app.preview === 'preview' ? <span className="text-muted text-sm d-none d-sm-inline"> preview</span> : '')}</span>
-          </InertiaLink>
+          <div className="navbar-main">
+            <InertiaLink className="navbar-brand" href="/">
+              <img src={app.preview === 'preview' ? '/images/logo-preview.svg' : (app.preview === 'canary' ? '/images/logo-canary.svg' : '/images/logo.svg')} alt="ChangeWindows" className="app-icon" />
+              <span className="brand-label d-none d-sm-inline">ChangeWindows{app.preview === 'canary' ? <span className="text-muted text-sm"> canary</span> : (app.preview === 'preview' ? <span className="text-muted text-sm"> preview</span> : '')}</span>
+            </InertiaLink>
+          </div>
+          <div className="navbar-search">
+            <div className="input-group input-group-search">
+              <span className="input-group-text" id="search"><AmaranthIcon icon={aiMagnifyingGlass} /></span>
+              <input type="text" className="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search" />
+            </div>
+          </div>
           <div className="navbar-content">
             <div className="dropdown d-inline-block">
               <button className="btn btn-transparent btn-profile rounded-circle dropdown-toggle" type="button" id="dropdown-profile" data-bs-toggle="dropdown" aria-expanded="false">
