@@ -17,7 +17,6 @@ export default function NavigationBar({ main, overflow, socials }) {
 	const ref = useRef(null);
 	const width = useWidth(ref);
 	const page = usePage();
-  const { auth } = usePage().props;
 
 	const [mainItems, overflowItems] = useMemo(() => {
 		const maxVisibleItems = Math.floor(width / 65);
@@ -26,10 +25,10 @@ export default function NavigationBar({ main, overflow, socials }) {
 
 		if (!matchesSmUp) {
 			const mainNav = navigationItems.slice(0, maxVisibleItems - 1);
-			let overflowNav = [...navigationItems.slice(maxVisibleItems - 1), ...navigationOverflowItems];
+			let overflowNav = [...navigationItems.slice(maxVisibleItems - 1), ...navigationOverflowItems, ...socials];
 
 			if (mainNav.length < navigationItems.length) {
-				overflowNav = [...navigationItems.slice(maxVisibleItems - 1), { type: 'divider' }, ...navigationOverflowItems];
+				overflowNav = [...navigationItems.slice(maxVisibleItems - 1), { type: 'divider' }, ...navigationOverflowItems, ...socials];
 			}
 
 			return [mainNav, overflowNav];
