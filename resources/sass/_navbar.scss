@@ -112,6 +112,8 @@
         flex-grow: 2;
 
         .input-group-search {
+            -webkit-app-region: no-drag;
+            app-region: no-drag;
             border: var(--nav-border-color) 1px solid;
             background-color: var(--nav-search-bg);
             border-radius: $border-radius;
