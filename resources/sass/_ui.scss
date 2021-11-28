@@ -116,6 +116,10 @@
                     font-size: 18px;
                     margin-top: .125rem;
                 }
+                
+                @media (max-width: 991px) {
+                    height: 40px;
+                }
 
                 @media (max-width: 575px) {
                     background-color: transparent;
@@ -128,16 +132,8 @@
                     width: 100%;
                     text-align: center;
                 }
-                
-                @media (max-width: 991px) {
-                    height: 40px;
-                }
 
                 .sidebar-label {
-                    @media (max-width: 991px) {
-                        display: none;
-                    }
-
                     display: block;
                     font-size: 70%;
                     font-weight: 400;
@@ -149,7 +145,12 @@
                     line-height: 1.25;
                     max-width: 52px;
                     
+                    @media (max-width: 991px) {
+                        display: none;
+                    }
+                    
                     @media (max-width: 575px) {
+                        display: block;
                         max-width: 65px;
                     }
                 }
