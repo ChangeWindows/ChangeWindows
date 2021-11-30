@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 
@@ -9,7 +9,9 @@ import useMediaQuery from '../hooks/useMediaQuery';
 
 export default function AppBar() {
   const { app, auth } = usePage().props;
-	const matchesDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const matchesDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const theme = getLocal('theme');
@@ -38,8 +40,13 @@ export default function AppBar() {
   });
 
   function handleLogout(e) {
-      e.preventDefault();
-      Inertia.post('/logout');
+    e.preventDefault();
+    Inertia.post('/logout');
+  }
+
+  function handleSearch(e) {
+    e.preventDefault();
+    Inertia.post('/search', { search });
   }
 
   return (
@@ -53,10 +60,12 @@ export default function AppBar() {
             </InertiaLink>
           </div>
           <div className="navbar-search">
-            <div className="input-group input-group-search">
-              <span className="input-group-text" id="search"><AmaranthIcon icon={aiMagnifyingGlass} /></span>
-              <input type="text" className="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search" />
-            </div>
+            <form onSubmit={handleSearch} className="input-group input-group-search">
+              <span className="input-group-text">
+                <AmaranthIcon icon={aiMagnifyingGlass} />
+              </span>
+              <input type="text" id="search" name="search" className="form-control" placeholder="Search..." onChange={(event) => setSearch(event.target.value)} aria-label="Search" aria-describedby="search" />
+            </form>
           </div>
           <div className="navbar-content">
             <div className="dropdown d-inline-block">
@@ -72,7 +81,7 @@ export default function AppBar() {
                     <AmaranthIcon icon={aiGear} /> Settings
                   </InertiaLink>
                 </li>
-                
+
                 <li>
                   {auth ?
                     <form onSubmit={handleLogout} className="d-block">
@@ -80,7 +89,7 @@ export default function AppBar() {
                         <AmaranthIcon icon={aiArrowRightFromBracket} /> Log out
                       </button>
                     </form>
-                  :
+                    :
                     <InertiaLink href="/login" className="dropdown-item">
                       <AmaranthIcon icon={aiArrowRightToBracket} /> Sign in
                     </InertiaLink>
