@@ -110,6 +110,7 @@
         justify-content: center;
         max-width: 470px;
         flex-grow: 2;
+        margin-left: calc((100vw - env(titlebar-area-width, 0)) / 2);
 
         .input-group-search {
             -webkit-app-region: no-drag;
