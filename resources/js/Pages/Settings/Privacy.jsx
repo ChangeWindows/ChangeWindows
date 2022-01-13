@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
-
-import AmaranthIcon, { aiChangeWindows, aiChangeWindowsCan, aiChangeWindowsDev, aiGitHub, aiPatreon, aiTwitter } from '@changewindows/amaranth';
-
-import { getLocal, setLocal } from '../../utils/localStorage';
 
 export default function Show({ app }) {
     return (
