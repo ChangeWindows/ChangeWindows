@@ -3,7 +3,7 @@ import { usePage } from '@inertiajs/inertia-react';
 
 import NavigationBar from './components/NavigationBar';
 
-import { aiDashboard, aiMessagePen, aiBranch, aiDevices, aiPatreon, aiBarsStaggered, aiTwitter } from '@changewindows/amaranth';
+import { aiDashboard, aiMessagePen, aiBranch, aiDevices, aiPatreon, aiBarsStaggered, aiTwitter, aiGear } from '@changewindows/amaranth';
 
 export default function Navigation() {
   const { nav_can } = usePage().props;
@@ -13,7 +13,8 @@ export default function Navigation() {
       main={[
         { type: 'link', url: '/timeline', icon: aiBarsStaggered, title: 'Timeline' },
         { type: 'link', url: '/platforms', primary: '/pc', icon: aiDevices, title: 'Platforms' },
-        { type: 'link', url: '/channels', icon: aiBranch, title: 'Channels' }
+        { type: 'link', url: '/channels', icon: aiBranch, title: 'Channels' },
+        { type: 'link', url: '/settings', icon: aiGear, title: 'Settings' }
       ]}
       overflow={[
         { type: 'external', url: 'https://medium.com/changewindows', icon: aiMessagePen, title: 'Blog' },
