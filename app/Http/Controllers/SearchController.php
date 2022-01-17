@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Release;
 use Illuminate\Http\Request;
 use Spatie\Searchable\Search;
+use Spatie\Searchable\ModelSearchAspect;
 
 class SearchController extends Controller
 {
@@ -19,7 +20,11 @@ class SearchController extends Controller
         }
 
         $search_results = (new Search())
-            ->registerModel(Release::class, 'name', 'version', 'canonical_version', 'codename')
+            ->registerModel(Release::class, function(ModelSearchAspect $modelSearchAspect) {
+                $modelSearchAspect
+                   ->addSearchableAttribute('name', 'codename', 'description', 'changelog')
+                   ->addExactSearchableAttribute('version', 'canonical_version');
+            })
             ->perform($request->input('search'));
 
         return Inertia::render('Search/Results', [
