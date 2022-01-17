@@ -1,5 +1,6 @@
 .btn {
     &.btn-link {
+        color: var(--text);
         text-decoration: none;
 
         &:hover,
