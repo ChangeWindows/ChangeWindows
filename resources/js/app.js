@@ -8,12 +8,26 @@ InertiaProgress.init({
     color: '#0066ff'
 });
 
-import { createInertiaApp } from '@inertiajs/inertia-react'
+import { createInertiaApp } from '@inertiajs/inertia-react';
 
 createInertiaApp({
     title: title => `${title} &middot; ChangeWindows`,
     resolve: name => require(`./Pages/${name}`),
     setup({ el, App, props }) {
-        render(<App {...props} />, el)
-    },
-})
+        render(<App {...props} />, el);
+    }
+});
+
+function appHeight() {
+    const doc = document.documentElement
+    doc.style.setProperty('--vh', (window.innerHeight * .01) + 'px');
+}
+
+window.addEventListener('resize', appHeight);
+appHeight();
+
+if (navigator.platform == 'iPad') {
+    window.onorientationchange = function() {
+        appHeight();
+    }       
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { usePage } from '@inertiajs/inertia-react';
 
 import AmaranthIcon, { aiArrowLeft, aiChangeWindows, aiChangeWindowsCan, aiChangeWindowsDev } from '@changewindows/amaranth';
@@ -9,16 +9,7 @@ import useMediaQuery from '../hooks/useMediaQuery';
 export default function Auth({ children }) {
   const { app } = usePage().props;
 
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const matchesDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
-  useEffect(() => {
-    window.addEventListener('resize', function() {
-      setWindowHeight(window.innerHeight);
-    });
-
-    () => window.removeEventListener('resize');
-  });
 
   useEffect(() => {
     const theme = getLocal('theme');
@@ -47,7 +38,7 @@ export default function Auth({ children }) {
   });
 
   return (
-    <div className="auth auth-flow" style={{ height: windowHeight }}>
+    <div className="auth auth-flow">
       <div className="content">
         <a href="javascript:history.back()" className="btn btn-link btn-sm"><AmaranthIcon icon={aiArrowLeft} /> Back</a>
         <div className="auth-card">

@@ -4,6 +4,7 @@
     grid-template-rows: 48px auto;
     grid-template-areas: 'header header' 'sidebar content';
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     width: 100vw;
     
     background-color: var(--nav-bg);
@@ -12,7 +13,7 @@
     position: relative;
 
     @media (max-width: 991px) {
-        grid-template-columns: 56px auto;
+        grid-template-columns: 64px auto;
     }
 
     @media (max-width: 575px) {
@@ -116,9 +117,10 @@
                     font-size: 18px;
                     margin-top: .125rem;
                 }
-                
+
                 @media (max-width: 991px) {
-                    height: 40px;
+                    height: 48px;
+                    justify-content: center;
                 }
 
                 @media (max-width: 575px) {
