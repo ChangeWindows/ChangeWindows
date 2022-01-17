@@ -364,6 +364,21 @@ a.card {
     }
 }
 
+a.settings-card {
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+        transition: $transition-base;
+        background-color: var(--card-bg-hover);
+    }
+}
+
+// Utils
+.mw-0 {
+    min-width: 0;
+}
+
 // Changelogs
 .changelog-content {
     h1 {

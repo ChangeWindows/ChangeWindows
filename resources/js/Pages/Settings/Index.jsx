@@ -38,8 +38,6 @@ export default function Show({ app, patrons }) {
     setShowActiveOnly(showActiveOnly ? 0 : 1);
   }
 
-  console.log(patrons);
-
   return (
     <App>
       <InertiaHead title="Settings" />
