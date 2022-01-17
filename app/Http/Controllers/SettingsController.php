@@ -22,11 +22,12 @@ class SettingsController extends Controller
             "page" => [
                 "size" => 100
             ],
-            "include" => implode(",",[
-                "user"
+            "include" => implode(",", [
+                "user",
+                "currently_entitled_tiers"
             ]),
             "fields" => [
-                "member" => implode(",",[
+                "member" => implode(",", [
                     "full_name",
                     "patron_status"
                 ])
@@ -43,10 +44,13 @@ class SettingsController extends Controller
             if ($pledge_data['attributes']['patron_status'] === 'active_patron') {
                 $patrons->push([
                     'name' => $pledge_data['attributes']['full_name'],
-                    'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}"
+                    'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}",
+                    'tier' => $pledge_data['relationships']['currently_entitled_tiers']['data'][0]['id']
                 ]);
             }
         }
+
+        //1965775
 
         return Inertia::render('Settings/Index', [
             'patrons' => $patrons

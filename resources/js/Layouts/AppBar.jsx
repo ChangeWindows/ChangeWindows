@@ -70,18 +70,9 @@ export default function AppBar() {
           <div className="navbar-content">
             <div className="dropdown d-inline-block">
               <button className="btn btn-transparent btn-profile rounded-circle dropdown-toggle" type="button" id="dropdown-profile" data-bs-toggle="dropdown" aria-expanded="false">
-                <AmaranthIcon icon={auth ? aiUser : aiGear} />
+                <AmaranthIcon icon={auth ? aiUser : aiArrowRightToBracket} />
               </button>
               <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-profile">
-                <li>
-                  <InertiaLink
-                    href="/settings"
-                    className="dropdown-item"
-                  >
-                    <AmaranthIcon icon={aiGear} /> Settings
-                  </InertiaLink>
-                </li>
-
                 <li>
                   {auth ?
                     <form onSubmit={handleLogout} className="d-block">

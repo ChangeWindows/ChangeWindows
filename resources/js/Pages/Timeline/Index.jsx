@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import { InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
@@ -12,8 +12,9 @@ import Promotion from '../../Components/Timeline/Promotion';
 import Timeline from '../../Components/Timeline/Timeline';
 
 import { parseISO } from 'date-fns';
+import AmaranthIcon, { aiPatreon } from '@changewindows/amaranth';
 
-export default function Index({ timeline, pagination, platforms, channel_platforms }) {
+export default function Index({ timeline, pagination, platforms, channel_platforms, patron }) {
     return (
         <App>
             <InertiaHead title="Timeline" />
@@ -78,6 +79,22 @@ export default function Index({ timeline, pagination, platforms, channel_platfor
                                 <div className="row g-1">
                                     {channel_platforms.map((platform, key) => (
                                         <Fragment key={key}>
+                                            {key === 2 && patron &&
+                                                <div className="col-12 mt-3">
+                                                    <a href="https://www.patreon.com/changewindows" className="settings-card" key={key}>
+                                                        <div className="settings-icon ms-1 me-2 ms-lg-0 me-lg-0">
+                                                            <img src={patron.avatar} alt={patron.name} style={{ width: 32, height: 32 }} className="rounded-circle" />
+                                                        </div>
+                                                        <div className="flex-grow-1 mw-0">
+                                                            <span className="d-block text-truncate">Join <b>{patron.name}</b></span>
+                                                            <small className="d-block mt-n1 text-muted text-truncate">in supporting ChangeWindows</small>
+                                                        </div>
+                                                        <div className="ms-2 d-block d-md-none d-lg-block">
+                                                            <AmaranthIcon icon={aiPatreon} />
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            }
                                             <div className="col-12 titel">
                                                 <h3 className="h6" style={{ color: platform.color }}>
                                                     <PlatformIcon platform={platform} color />
