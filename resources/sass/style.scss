@@ -34,6 +34,7 @@
     --nav-border-color: #{ light-dark(darken($light, 12), darken($dark, 9)) };
     --nav-mobile-bg: #{ light-dark($light, $dark) };
     --nav-color-label: #{ light-dark(lighten($body-color, 35), lighten($gray-100, 35)) };
+    --nav-search-bg: #{ light-dark(#fff, darken($dark, 4)) };
 
     --nav-item-hover: #{ light-dark(darken($light, 9), darken($dark, 3)) };
     --nav-bar-item-hover: #{ light-dark(darken($light, 3), darken($dark, 3)) };
@@ -118,21 +119,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.app-icon {
-    color: $accent;
-    width: 24px;
-    height: 24px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: .1875rem .75rem .0625rem .365rem;
-
-    @media (max-width: 991px) {
-        margin: .1875rem .25rem .0625rem .25rem;
-    }
 }
 
 .dot {

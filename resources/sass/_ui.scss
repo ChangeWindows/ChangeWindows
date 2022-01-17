@@ -27,7 +27,7 @@
         app-region: drag;
 
         .navbar-brand,
-        .navbar-content {
+        .navbar-content > button {
             -webkit-app-region: no-drag;
             app-region: no-drag;
         }

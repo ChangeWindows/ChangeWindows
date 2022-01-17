@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
-class Release extends Model
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+
+class Release extends Model implements Searchable
 {
     use HasFactory;
     use Sluggable;
@@ -84,5 +87,13 @@ class Release extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function getSearchResult(): SearchResult {
+        return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->name,
+            $this->getUrlAttribute()
+        );
     }
 }

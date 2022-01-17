@@ -8,6 +8,7 @@ use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Admin\ChannelController as AdminChannelController;
 use App\Http\Controllers\Admin\FlightController as AdminFlightController;
 use App\Http\Controllers\Admin\PermissionController as AdminPermissionController;
@@ -44,6 +45,11 @@ Route::prefix('')->name('front')->group(function() {
     Route::prefix('timeline')->name('.timeline')->group(function() {
         Route::get('', [TimelineController::class, 'index'])->name('');
         Route::get('/{platform}', [TimelineController::class, 'show'])->name('.show');
+    });
+    
+    Route::prefix('search')->name('.search')->group(function() {
+        Route::get('', [SearchController::class, 'index'])->name('');
+        Route::post('', [SearchController::class, 'results'])->name('.find');
     });
     
     Route::prefix('channels')->name('.channels')->group(function() {
