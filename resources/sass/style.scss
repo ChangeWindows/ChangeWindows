@@ -34,6 +34,7 @@
     --nav-border-color: #{ light-dark(darken($light, 12), darken($dark, 9)) };
     --nav-mobile-bg: #{ light-dark($light, $dark) };
     --nav-color-label: #{ light-dark(lighten($body-color, 35), lighten($gray-100, 35)) };
+    --nav-search-bg: #{ light-dark(#fff, darken($dark, 4)) };
 
     --nav-item-hover: #{ light-dark(darken($light, 9), darken($dark, 3)) };
     --nav-bar-item-hover: #{ light-dark(darken($light, 3), darken($dark, 3)) };
@@ -42,8 +43,6 @@
     --main-bg-acrylic: #{ light-dark(rgba(darken($light, 2), .75), rgba(darken($dark, 4), .75)) };
     --main-border-color: #{ light-dark(darken($light, 8), darken($dark, 8)) };
     
-    --pagination-bg-hover: #{ light-dark(darken($light, 5), darken($dark, 3)) };
-
     --timeline-bg-nth: #{ light-dark(darken($light, 6), $dark) };
     --timeline-bg-hover: #{ light-dark(darken($light, 8), lighten($dark, 4)) };
 
@@ -53,9 +52,6 @@
     --card-add-bg-hover: #{ light-dark(rgba(darken($light, 5), .5), rgba(darken($dark, 5), .5)) };
     --card-add-border: #{ light-dark(darken($light, 10), darken($dark, 7)) };
     --card-add-border-hover: #{ light-dark(darken($light, 13), darken($dark, 9)) };
-
-    --auth-bg: #{ light-dark(darken($light, 5), darken($dark, 5)) };
-    --card-auth-bg: #{ light-dark($light, $dark) };
 
     --dropdown-bg: #{ light-dark($light, lighten($dark, 3)) };
     --dropdown-bg-hover: #{ light-dark(darken($light, 3), darken($dark, 1)) };
@@ -67,7 +63,7 @@
     
     --btn-transparent-bg-hover: #{ light-dark(rgba($dark, .2), rgba($light, .1)) };
 
-    --progress-bg: #{ light-dark(#fff, darken($dark, 8)) };
+    --progress-bg: #{ light-dark(#fff, darken($dark, 6)) };
 
     --scroll-native: #{ light-dark(darken($light, 6), darken($dark, 6)) };
     --scroll-webkit: #{ light-dark(darken($light, 16), lighten($dark, 12)) };
@@ -123,21 +119,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.app-icon {
-    color: $accent;
-    width: 24px;
-    height: 24px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: .1875rem .75rem .0625rem .365rem;
-
-    @media (max-width: 991px) {
-        margin: .1875rem .25rem .0625rem .25rem;
-    }
 }
 
 .dot {
@@ -327,7 +308,13 @@ a.card {
         }
 
         .release-channels {
-            margin-top: 0.25rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            
+            .badge {
+                display: inline-block;
+            }
         }
 
         .release-actions {
@@ -337,6 +324,43 @@ a.card {
             border-bottom-right-radius: $border-radius;
             margin: 0.75rem -0.75rem -0.5rem -0.75rem;
         }
+    }
+}
+
+// Utilities
+.text-sm {
+    font-size: .8rem;
+}
+
+.text-md {
+    font-size: .9rem;
+}
+
+// Settings
+.settings-card {
+    padding: 0 1rem 0 .25rem;
+    height: 64px;
+    background-color: var(--card-bg);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: $border-radius;
+    border: var(--main-border-color) 1px solid;
+
+    & + & {
+        margin-top: .125rem;
+    }
+
+    .settings-icon {
+        width: 56px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form-control {
+        padding: .25rem .5rem;
     }
 }
 

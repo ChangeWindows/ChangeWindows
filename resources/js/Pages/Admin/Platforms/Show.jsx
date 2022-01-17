@@ -25,7 +25,7 @@ export default function Show({ platforms, createUrl, status = null }) {
                     <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
                 }
                 <div className="row g-1">
-                    {platforms.data.map((platform) => {
+                    {platforms.map((platform) => {
                         const platformStatus = [];
 
                         platform.active && platformStatus.push('Active');

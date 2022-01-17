@@ -7,59 +7,57 @@ import { getLocal, setLocal } from '../utils/localStorage';
 import useMediaQuery from '../hooks/useMediaQuery';
 
 export default function Auth({ children }) {
-    const { app } = usePage().props;
+  const { app } = usePage().props;
 
-    const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-	const matchesDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const matchesDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
-    useEffect(() => {
-        window.addEventListener('resize', function() {
-            setWindowHeight(window.innerHeight);
-        });
-
-        () => window.removeEventListener('resize');
+  useEffect(() => {
+    window.addEventListener('resize', function() {
+      setWindowHeight(window.innerHeight);
     });
 
-    useEffect(() => {
-        const theme = getLocal('theme');
+    () => window.removeEventListener('resize');
+  });
 
-        if (theme === 'default') {
-            if (matchesDarkMode) {
-                document.head.children['color-scheme'].content = 'dark';
-            } else {
-                document.head.children['color-scheme'].content = 'light';
-            }
-        }
-    }, [matchesDarkMode]);
+  useEffect(() => {
+    const theme = getLocal('theme');
 
-    useEffect(() => {
-        const theme = getLocal('theme');
+    if (theme === 'dark' || theme === 'default' && matchesDarkMode) {
+      document.head.children['color-scheme'].content = 'dark';
+      document.head.children['theme-color'].content = '#202020';
+    } else {
+      document.head.children['color-scheme'].content = 'light';
+      document.head.children['theme-color'].content = '#f3f3f3';
+    }
+  }, [matchesDarkMode]);
 
-        if (!theme) {
-            setLocal('theme', 'default');
-        } else if (theme === 'light') {
-            document.querySelector('html').classList.add('theme-light');
-            document.querySelector('html').classList.remove('theme-default');
-            document.head.children['color-scheme'].content = 'light';
-        } else if (theme === 'dark') {
-            document.querySelector('html').classList.add('theme-dark');
-            document.querySelector('html').classList.remove('theme-default');
-            document.head.children['color-scheme'].content = 'dark';
-        }
-    });
+  useEffect(() => {
+    const theme = getLocal('theme');
 
-    return (
-        <div className="auth auth-flow" style={{ height: windowHeight }}>
-            <div className="content">
-                <a href="javascript:history.back()" className="btn btn-link btn-sm"><AmaranthIcon icon={aiArrowLeft} /> Back</a>
-                <div className="auth-card">
-                    <h1 className="h3 m-0 py-5 d-flex justify-content-center align-items-center">
-                        <AmaranthIcon icon={app.preview === 'preview' ? aiChangeWindowsDev : (app.preview === 'canary' ? aiChangeWindowsCan : aiChangeWindows)} className="me-1" />
-                        ChangeWindows
-                    </h1>
-                    { children }
-                </div>
-            </div>
+    if (!theme) {
+      setLocal('theme', 'default');
+    } else if (theme === 'light') {
+      document.querySelector('html').classList.add('theme-light');
+      document.querySelector('html').classList.remove('theme-default');
+    } else if (theme === 'dark') {
+      document.querySelector('html').classList.add('theme-dark');
+      document.querySelector('html').classList.remove('theme-default');
+    }
+  });
+
+  return (
+    <div className="auth auth-flow" style={{ height: windowHeight }}>
+      <div className="content">
+        <a href="javascript:history.back()" className="btn btn-link btn-sm"><AmaranthIcon icon={aiArrowLeft} /> Back</a>
+        <div className="auth-card">
+          <h1 className="h3 m-0 py-5 d-flex justify-content-center align-items-center">
+            <AmaranthIcon icon={app.preview === 'preview' ? aiChangeWindowsDev : (app.preview === 'canary' ? aiChangeWindowsCan : aiChangeWindows)} className="me-1" />
+            ChangeWindows
+          </h1>
+          { children }
         </div>
-    )
+      </div>
+    </div>
+  )
 }

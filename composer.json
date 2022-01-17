@@ -18,7 +18,8 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "patreon/patreon": "^1.0",
-        "spatie/laravel-permission": "^4.0",
+        "spatie/laravel-permission": "^5.3",
+        "spatie/laravel-searchable": "^1.10",
         "staudenmeir/eloquent-has-many-deep": "^1.13"
     },
     "require-dev": {

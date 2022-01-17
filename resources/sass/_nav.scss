@@ -40,6 +40,12 @@
 .pagination {
     margin-bottom: .5rem;
     margin-top: .75rem;
+    background-color: var(--card-bg);
+    box-shadow: $box-shadow-sm;
+    border: none;
+    border-radius: $border-radius;
+    flex-wrap: wrap;
+    justify-content: center;
 
     .page-item {
         &.disabled {
@@ -47,15 +53,63 @@
                 background: transparent;
             }
         }
-    }
 
-    .page-link {
-        background: transparent;
-        border-color: var(--nav-border-color) !important;
+        &:not(:first-child) {
+            .page-link {
+                margin-left: 0;
+            }
+        }
 
-        &:hover {
-            background: var(--pagination-bg-hover);
-            border-color: var(--main-border-color);
+        &:not(.disabled) {
+            .page-link {
+                color: var(--text);
+            }
+        }
+
+        .page-link {
+            padding: 0;
+            border: none;
+            background: transparent;
+            width: 2.25rem;
+            height: 2.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: .25rem;
+    
+            &:hover {
+                background: var(--card-bg-hover);
+            }
+        }
+
+        .pagination-divider {
+            height: 1.25rem;
+            margin-top: .5rem;
+            margin-left: .25rem;
+            margin-right: .25rem;
+            border-left: 1px solid var(--main-border-color);
+        }
+
+        &.active {
+            .page-link {
+                position: relative;
+                background: transparent;
+    
+                &:hover {
+                    background: var(--card-bg-hover);
+                }
+                
+                &::after {
+                    position: absolute;
+                    background-color: $primary;
+                    left: calc(50% - 8px);
+                    bottom: 0;
+                    height: 3.5px;
+                    border-radius: 6px;
+                    width: 16px;
+                    content: '';
+                }
+            }
         }
     }
 }

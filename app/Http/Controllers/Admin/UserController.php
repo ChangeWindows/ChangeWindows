@@ -26,7 +26,7 @@ class UserController extends Controller
                 'create_users' => Auth::user()->can('users.create'),
                 'edit_users' => Auth::user()->can('users.edit')
             ],
-            'users' => User::orderBy('name')->paginate(50)->map(function ($user) {
+            'users' => User::orderBy('name')->get()->map(function ($user) {
                 return [
                     'id' => $user->id,
                     'name' => $user->name,

@@ -22,6 +22,8 @@
 }
 
 .form-check {
+    min-height: auto;
+
     .form-check-input {
         background-color: var(--checkbox-bg);
 
@@ -35,6 +37,12 @@
     }
 
     &.form-switch {
+        .form-check-input {
+            margin-left: 0;
+            width: 2.5rem;
+            float: initial;
+            height: 1.25rem;
+        }
         .form-check-input:not(:checked) {
             background-image: var(--switch-bg-image);
         }

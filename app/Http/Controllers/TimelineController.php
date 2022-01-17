@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Platform;
 use App\Models\Timeline;
@@ -18,7 +17,10 @@ class TimelineController extends Controller
     public function index()
     {
         $channel_platforms = Platform::orderBy('tool')->orderBy('position')->where('active', '=', '1')->get();
-        $timeline = Timeline::orderBy('date', 'desc')->paginate(75);
+        $timeline = Timeline::orderBy('date', 'desc');
+        $paginator = $timeline->paginate(75)->onEachSide(2)->through(function () {
+            return [];
+        });
 
         return Inertia::render('Timeline/Index', [
             'platforms' => Platform::orderBy('position')->get()->map(function ($platform) {
@@ -55,7 +57,7 @@ class TimelineController extends Controller
                     })->sortBy('order')->values()->all(),
                 ];
             }),
-            'timeline' => $timeline->groupBy('date')->map(function ($items, $date) {
+            'timeline' => $timeline->paginate(75)->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function($item, $key) {
@@ -146,10 +148,7 @@ class TimelineController extends Controller
                     })->values()->all()
                 ];
             }),
-            'pagination' => [
-                'prev_page_url' => $timeline->previousPageUrl(),
-                'next_page_url' => $timeline->nextPageUrl()
-            ],
+            'pagination' => $paginator,
             'status' => session('status')
         ]);
     }
@@ -189,8 +188,10 @@ class TimelineController extends Controller
                     $join->on('lr.id', '=', 'launches.release_id');
                 })
                 ->where('lr.platform_id', '=', $platform->id);
-            })
-            ->paginate(75);
+            });
+        $paginator = $timeline->paginate(75)->onEachSide(2)->through(function () {
+            return [];
+        });
 
         return Inertia::render('Timeline/Show', [
             'platforms' => Platform::orderBy('position')->get()->map(function ($_platform) {
@@ -233,7 +234,7 @@ class TimelineController extends Controller
                     })->sortBy('order')->values()->all(),
                 ];
             }),
-            'timeline' => $timeline->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
+            'timeline' => $timeline->paginate(75)->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function($item, $key) {
@@ -324,10 +325,7 @@ class TimelineController extends Controller
                     })->values()->all()
                 ];
             }),
-            'pagination' => [
-                'prev_page_url' => $timeline->previousPageUrl(),
-                'next_page_url' => $timeline->nextPageUrl()
-            ],
+            'pagination' => $paginator,
             'status' => session('status')
         ]);
     }

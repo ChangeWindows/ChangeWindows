@@ -23,7 +23,7 @@ class PackageController extends Controller
     {
         $this->authorize('releases.show');
 
-        $packages = Release::where('package', '=', 1)->orderBy('platform_id')->paginate(100);
+        $packages = Release::where('package', '=', 1)->orderBy('platform_id')->get();
 
         return Inertia::render('Admin/Packages/Show', [
             'can' => [

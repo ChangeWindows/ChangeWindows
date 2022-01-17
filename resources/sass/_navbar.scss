@@ -1,17 +1,53 @@
 .navbar {
-    min-height: 57px;
+    height: 48px;
+    padding: 0;
+
+    &.navbar-main {
+        left: env(titlebar-area-x, 0);
+        width: env(titlebar-area-width, 100%);
+        transition: $transition-base;
+    }
+
+    .container-fluid {
+        flex-direction: row;
+        justify-content: space-between;
+    }
     
     .navbar-brand {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-right: .5rem;
-        font-weight: 500;
+        font-size: 1rem;
+        font-weight: 600;
         font-family: $headings-font-family;
         word-break: break-all;
         color: var(--text);
         flex-grow: 0;
 
+        .text-sm {
+            font-variant: small-caps;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
         &:hover,
         &:focus {
             color: var(--text);
+        }
+    }
+
+    .app-icon {
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: .1875rem .75rem .0625rem .365rem;
+    
+        @media (max-width: 575px) {
+            margin: .1875rem 0 .0625rem .365rem;
         }
     }
     
@@ -49,6 +85,67 @@
                     content: '';
                 }
             }
+        }
+    }
+
+    .navbar-main {
+        display: flex;
+        max-width: 240px;
+        flex-grow: 1;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .navbar-content {
+        display: flex;
+        max-width: 240px;
+        flex-grow: 1;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .navbar-search {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        max-width: 470px;
+        flex-grow: 2;
+        margin-left: calc((100vw - env(titlebar-area-width, 0)) / 2);
+
+        .input-group-search {
+            -webkit-app-region: no-drag;
+            app-region: no-drag;
+            border: var(--nav-border-color) 1px solid;
+            background-color: var(--nav-search-bg);
+            border-radius: $border-radius;
+            width: 100%;
+
+            &:focus-within {
+                border-color: $primary;
+            }
+            
+            @media (max-width: 991px) {
+                flex-grow: 2;
+            }
+        }
+
+        .form-control {
+            background: transparent;
+            border: none;
+            height: 34px;
+            padding: .125rem .75rem .125rem 0;
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
+
+        .input-group-text {
+            height: 34px;
+            background: transparent;
+            border: none;
+            padding: .125rem .5rem .125rem .75rem;
+            color: $input-placeholder-color;
         }
     }
 }

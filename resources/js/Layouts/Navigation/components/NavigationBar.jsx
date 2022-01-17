@@ -12,11 +12,11 @@ import useMediaQuery from '../../../hooks/useMediaQuery';
 import useWidth from '../../../hooks/useWidth';
 import clsx from 'clsx';
 
-export default function NavigationBar({ auth, main, overflow }) {
+export default function NavigationBar({ main, overflow, socials }) {
 	const matchesSmUp = useMediaQuery('(min-width: 576px)');
 	const ref = useRef(null);
 	const width = useWidth(ref);
-    const page = usePage();
+	const page = usePage();
 
 	const [mainItems, overflowItems] = useMemo(() => {
 		const maxVisibleItems = Math.floor(width / 65);
@@ -25,10 +25,10 @@ export default function NavigationBar({ auth, main, overflow }) {
 
 		if (!matchesSmUp) {
 			const mainNav = navigationItems.slice(0, maxVisibleItems - 1);
-			let overflowNav = [...navigationItems.slice(maxVisibleItems - 1), ...navigationOverflowItems];
+			let overflowNav = [...navigationItems.slice(maxVisibleItems - 1), ...navigationOverflowItems, ...socials];
 
 			if (mainNav.length < navigationItems.length) {
-				overflowNav = [...navigationItems.slice(maxVisibleItems - 1), { type: 'divider' }, ...navigationOverflowItems];
+				overflowNav = [...navigationItems.slice(maxVisibleItems - 1), { type: 'divider' }, ...navigationOverflowItems, ...socials];
 			}
 
 			return [mainNav, overflowNav];
@@ -38,16 +38,11 @@ export default function NavigationBar({ auth, main, overflow }) {
 	}, [main, overflow, matchesSmUp, width]);
 
 	const overflowIsActive = useMemo(() => {
-		const overflowUrls = ['/settings'];
+		const overflowUrls = [];
 		overflowItems.filter((item) => item.type === 'link').map((item) => overflowUrls.push(item.url));
 
 		return !!overflowUrls.find((url) => page.url.includes(url));
 	}, [overflowItems]);
-
-    function handleLogout(e) {
-        e.preventDefault();
-        Inertia.post('/logout');
-    }
 
 	return (
 		<div className="sidebar" ref={ref}>
@@ -75,7 +70,7 @@ export default function NavigationBar({ auth, main, overflow }) {
 
 					<ul className="dropdown-menu">
 						{overflowItems.map((item, key) => {
-    						const Component = item.type === 'external' ? 'a' : InertiaLink;
+							const Component = item.type === 'external' ? 'a' : InertiaLink;
 							const mainProps = item.type === 'external' ? { target: '_blank' } : {};
 
 							if (item.type === 'link') {
@@ -84,7 +79,7 @@ export default function NavigationBar({ auth, main, overflow }) {
 										{...mainProps}
 										key={key}
 										href={`${item.url}${item.primary ?? ''}`}
-										className={clsx('dropdown-item', { 'active': page.url.includes(item.url)})}
+										className={clsx('dropdown-item', { 'active': page.url.includes(item.url) })}
 									>
 										<AmaranthIcon icon={item.icon} /> {item.title}
 									</Component>
@@ -95,7 +90,7 @@ export default function NavigationBar({ auth, main, overflow }) {
 										{...mainProps}
 										key={key}
 										href={`${item.url}${item.primary ?? ''}`}
-										className={clsx('dropdown-item', { 'active': page.url.includes(item.url)})}
+										className={clsx('dropdown-item', { 'active': page.url.includes(item.url) })}
 									>
 										<AmaranthIcon icon={item.icon} /> {item.title}
 									</Component>
@@ -104,28 +99,6 @@ export default function NavigationBar({ auth, main, overflow }) {
 								return (<div className="dropdown-divider" key={key} />);
 							}
 						})}
-						<div className="dropdown-divider" />
-						{auth ?
-							<>
-								<InertiaLink href="/settings" className={clsx('dropdown-item', { 'active': page.url.includes('/settings')})}>
-									<AmaranthIcon icon={aiGear} /> Settings
-								</InertiaLink>
-								<form onSubmit={handleLogout}>
-									<button type="submit" className="dropdown-item">
-										<AmaranthIcon icon={aiArrowRightFromBracket} /> Log out
-									</button>
-								</form>
-							</>
-						:
-							<>
-								<InertiaLink href="/settings" className="dropdown-item">
-									<AmaranthIcon icon={aiGear} /> Settings
-								</InertiaLink>
-								<InertiaLink href="/login" className="dropdown-item">
-									<AmaranthIcon icon={aiArrowRightToBracket} /> Sign in
-								</InertiaLink>
-							</>
-						}
 					</ul>
 				</>
 			}
@@ -133,19 +106,9 @@ export default function NavigationBar({ auth, main, overflow }) {
 			{matchesSmUp &&
 				<>
 					<div className="flex-grow-1 d-none d-sm-block" />
-					<NavigationItem url="/settings" icon={aiGear} title="Settings" />
-
-					{auth ?
-						<form onSubmit={handleLogout} className="d-none d-sm-block">
-							<button type="submit" className="sidebar-item">
-								<AmaranthIcon icon={aiArrowRightFromBracket} /> <span className="sidebar-label">Log out</span>
-							</button>
-						</form>
-					:
-						<InertiaLink href="/login" className="sidebar-item">
-							<AmaranthIcon icon={aiArrowRightToBracket} /> <span className="sidebar-label">Sign in</span>
-						</InertiaLink>
-					}
+					{socials.map((item, key) => (
+						<NavigationItem url={item.url} icon={item.icon} primary={item.primary} title={item.title} key={key} external />
+					))}
 				</>
 			}
 		</div>

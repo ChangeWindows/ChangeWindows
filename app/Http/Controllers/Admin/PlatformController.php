@@ -27,7 +27,7 @@ class PlatformController extends Controller
                 'create_platforms' => Auth::user()->can('platforms.create'),
                 'edit_platforms' => Auth::user()->can('platforms.edit')
             ],
-            'platforms' => Platform::orderBy('position')->paginate(50),
+            'platforms' => Platform::orderBy('position')->get(),
             'createUrl' => route('admin.platforms.create', [], false),
             'status' => session('status')
         ]);

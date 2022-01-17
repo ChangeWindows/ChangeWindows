@@ -16,4 +16,9 @@
             background-color: var(--btn-transparent-bg-hover);
         }
     }
+
+    &.btn-profile {
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
 }

@@ -11,40 +11,40 @@ import { parseISO } from 'date-fns';
 import clsx from 'clsx';
 
 export default function Index({ app, platforms, channel_platforms }) {
-    return (
-        <App>
-            <InertiaHead title="Channels" />
+  return (
+    <App>
+      <InertiaHead title="Channels" />
 
-            <PlatformNavigation home all="/channels" page="Channels" platforms={platforms} />
-        
-            <div className="container">
-                <div className="row g-1">
-                    <div className="col-12 titlebar">
-                        <h1>Channels</h1>
-                    </div>
-                    {channel_platforms.map((platform, key) => (
-                        <div className={clsx({ 'col-12': platform.channels.length >= 3, 'col-12 col-md-6': platform.channels.length <= 2 })} key={key}>
-                            <div className="row g-1">
-                                <div className="col-12 titel">
-                                    <h3 className="h6" style={{ color: platform.color }}>
-                                        <PlatformIcon platform={platform} color />
-                                        <span className="fw-bold ms-2">{platform.name}</span>
-                                    </h3>
-                                </div>
-                                {platform.channels.map((channel, _key) => (
-                                    <Channel
-                                        key={_key}
-                                        channel={{ color: channel.color, name: channel.name }}
-                                        build={channel.flight ? channel.flight.version : ''}
-                                        date={channel.flight ? parseISO(channel.flight.date) : ''}
-                                        url={channel.flight ? channel.flight.url : undefined}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    ))}
+      <PlatformNavigation home all="/channels" page="Channels" platforms={platforms} />
+    
+      <div className="container">
+        <div className="row g-1">
+          <div className="col-12 titlebar">
+            <h1>Channels</h1>
+          </div>
+          {channel_platforms.map((platform, key) => (
+            <div className={clsx({ 'col-12': platform.channels.length >= 3, 'col-12 col-md-6': platform.channels.length <= 2 })} key={key}>
+              <div className="row g-1">
+                <div className="col-12 titel">
+                  <h3 className="h6" style={{ color: platform.color }}>
+                    <PlatformIcon platform={platform} color />
+                    <span className="fw-bold ms-2">{platform.name}</span>
+                  </h3>
                 </div>
+                {platform.channels.map((channel, _key) => (
+                  <Channel
+                    key={_key}
+                    channel={{ color: channel.color, name: channel.name }}
+                    build={channel.flight ? channel.flight.version : ''}
+                    date={channel.flight ? parseISO(channel.flight.date) : ''}
+                    url={channel.flight ? channel.flight.url : undefined}
+                  />
+                ))}
+              </div>
             </div>
-        </App>
-    )
+          ))}
+        </div>
+      </div>
+    </App>
+  )
 }
