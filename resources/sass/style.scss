@@ -365,8 +365,10 @@ a.card {
 }
 
 a.settings-card {
-    color: #fff;
+    color: inherit;
     text-decoration: none;
+    border: none;
+    box-shadow: $box-shadow-sm;
 
     &:hover {
         transition: $transition-base;
