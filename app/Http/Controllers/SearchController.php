@@ -22,8 +22,12 @@ class SearchController extends Controller
         $search_results = (new Search())
             ->registerModel(Release::class, function(ModelSearchAspect $modelSearchAspect) {
                 $modelSearchAspect
-                   ->addSearchableAttribute('name', 'codename', 'description', 'changelog')
-                   ->addExactSearchableAttribute('version', 'canonical_version');
+                   ->addSearchableAttribute('name')
+                   ->addSearchableAttribute('codename')
+                   ->addSearchableAttribute('description')
+                   ->addSearchableAttribute('changelog')
+                   ->addExactSearchableAttribute('version')
+                   ->addExactSearchableAttribute('canonical_version');
             })
             ->perform($request->input('search'));
 
