@@ -49,7 +49,7 @@ class TimelineController extends Controller
         foreach (array_keys($pledges_response['data']) as $pledge_data_key) {
             $pledge_data = $pledges_response['data'][$pledge_data_key];
 
-            if ($pledge_data['attributes']['patron_status'] === 'active_patron' && $pledge_data['relationships']['currently_entitled_tiers']['data'][0]['id'] === $tier_id) {
+            if ($pledge_data['attributes']['patron_status'] === 'active_patron' && $pledge_data['relationships']['currently_entitled_tiers']['data'] && $pledge_data['relationships']['currently_entitled_tiers']['data'][0]['id'] === $tier_id) {
                 $patrons->push([
                     'name' => $pledge_data['attributes']['full_name'],
                     'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}",
@@ -79,7 +79,7 @@ class TimelineController extends Controller
                             ->sortByDesc(function ($release_channel, $key) {
                                 return $release_channel->release->canonical_version;
                             })->values()->first();
-        
+
                         return [
                             'name' => $release_channel->short_name,
                             'order' => $channel->order,
@@ -133,7 +133,7 @@ class TimelineController extends Controller
                                 'url' => $_cur_flight->item->url
                             ];
                         }
-                        
+
                         if ($flights->first()->item_type === \App\Models\Promotion::class) {
                             $_cur_promotion = $flights->first();
                             return [
@@ -154,9 +154,9 @@ class TimelineController extends Controller
                                     'color' => $_cur_promotion->item->platform->color
                                 ],
                                 'url' => $_cur_promotion->item->url
-                            ]; 
+                            ];
                         }
-                        
+
                         if ($flights->first()->item_type === \App\Models\Launch::class) {
                             $_cur_launch = $flights->first();
                             return [
@@ -179,7 +179,7 @@ class TimelineController extends Controller
                         if ($item['type'] === 'flight') {
                             return $item['event_priority'].'.'.$item['flight'].'.'.$item['platform']['order'];
                         }
-                        
+
                         return $item['event_priority'].'.'.$item['platform']['order'];
                     })->values()->all()
                 ];
@@ -203,7 +203,7 @@ class TimelineController extends Controller
             ->whereHas('flight', function (Builder $query) use ($platform) {
                 $query->join('release_channels as frs', function ($join) {
                     $join->on('frs.id', '=', 'flights.release_channel_id')
-                
+
                     ->join('channels as fc', function ($join) {
                         $join->on('fc.id', '=', 'frs.channel_id');
                     });
@@ -213,7 +213,7 @@ class TimelineController extends Controller
             ->orWhereHas('promotion', function (Builder $query) use ($platform) {
                 $query->join('release_channels as prs', function ($join) {
                     $join->on('prs.id', '=', 'promotions.release_channel_id')
-                
+
                     ->join('channels as pc', function ($join) {
                         $join->on('pc.id', '=', 'prs.channel_id');
                     });
@@ -257,7 +257,7 @@ class TimelineController extends Controller
                             ->sortByDesc(function ($release_channel, $key) {
                                 return $release_channel->release->canonical_version;
                             })->values()->first();
-        
+
                         return [
                             'name' => $release_channel->short_name,
                             'order' => $channel->order,
@@ -311,7 +311,7 @@ class TimelineController extends Controller
                                 'url' => $_cur_flight->item->url
                             ];
                         }
-                        
+
                         if ($flights->first()->item_type === \App\Models\Promotion::class) {
                             $_cur_promotion = $flights->first();
                             return [
@@ -332,9 +332,9 @@ class TimelineController extends Controller
                                     'color' => $_cur_promotion->item->platform->color
                                 ],
                                 'url' => $_cur_promotion->item->url
-                            ]; 
+                            ];
                         }
-                        
+
                         if ($flights->first()->item_type === \App\Models\Launch::class) {
                             $_cur_launch = $flights->first();
                             return [
@@ -357,7 +357,7 @@ class TimelineController extends Controller
                         if ($item['type'] === 'flight') {
                             return $item['event_priority'].'.'.$item['flight'].'.'.$item['platform']['order'];
                         }
-                        
+
                         return $item['event_priority'].'.'.$item['platform']['order'];
                     })->values()->all()
                 ];
