@@ -24,7 +24,7 @@
 :root {
     --ON: initial;
     --OFF: ;
-    
+
     --text: #{ light-dark($body-color, $gray-100) };
     --text-inverse: #{ light-dark($gray-100, $body-color) };
     --text-hover: #{ light-dark(lighten($body-color, 20), darken($gray-100, 25)) };
@@ -42,7 +42,7 @@
     --main-bg: #{ light-dark(darken($light, 2), darken($dark, 4)) };
     --main-bg-acrylic: #{ light-dark(rgba(darken($light, 2), .75), rgba(darken($dark, 4), .75)) };
     --main-border-color: #{ light-dark(darken($light, 8), darken($dark, 8)) };
-    
+
     --timeline-bg-nth: #{ light-dark(darken($light, 6), $dark) };
     --timeline-bg-hover: #{ light-dark(darken($light, 8), lighten($dark, 4)) };
 
@@ -55,12 +55,12 @@
 
     --dropdown-bg: #{ light-dark($light, lighten($dark, 3)) };
     --dropdown-bg-hover: #{ light-dark(darken($light, 3), darken($dark, 1)) };
-    
+
     --form-disabled-bg: #{ light-dark($light, transparent) };
     --checkbox-bg: #{ light-dark(#fff, darken($dark, 6)) };
     --checkbox-disabled-bg: #{ light-dark(#eee, darken($dark, 2)) };
     --switch-bg-image: #{ light-dark(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%28255, 255, 255, 0.25%29'/%3e%3c/svg%3e")) };
-    
+
     --btn-transparent-bg-hover: #{ light-dark(rgba($dark, .2), rgba($light, .1)) };
 
     --progress-bg: #{ light-dark(#fff, darken($dark, 6)) };
@@ -151,11 +151,11 @@ body {
     & > .d-flex {
         margin-top: 6px;
         margin-bottom: 0;
-        
+
         h1 {
             min-height: 28px;
             @include font-size($h4-font-size);
-    
+
             &:last-child {
                 margin-bottom: 6px;
             }
@@ -209,22 +209,29 @@ body {
             flex-shrink: 0;
         }
 
+        &.full-timeline {
+            .revision {
+                min-width: 150px;
+            }
+        }
+
         .revision {
-            margin-right: 0.5rem;
-            min-width: 150px;
+            margin-right: .5rem;
+            flex-shrink: 0;
         }
 
         .message {
             flex: 1;
-            margin-right: 0.5rem;
+            margin-right: .5rem;
         }
 
         .tags {
             display: flex;
             flex: 1;
             flex-wrap: wrap;
-            margin-right: 0.5rem;
-            margin-bottom: .25rem;
+            margin-right: .5rem;
+            margin-bottom: .5rem;
+            margin-top: .25rem;
             padding: 0;
 
             & > span {
@@ -233,7 +240,7 @@ body {
         }
 
         .version {
-            margin-right: 0.5rem;
+            margin-right: .5rem;
             font-size: 90%;
             text-align: right;
         }
@@ -259,7 +266,7 @@ a.card {
     .card-footer {
         background: transparent;
         border-top: 1px solid var(--main-border-color);
-        padding: 0.5rem 0.75rem;
+        padding: .5rem 0.75rem;
     }
 
     &.channel {
@@ -267,7 +274,7 @@ a.card {
         background-color: var(--card-bg);
         border: none;
         box-shadow: $box-shadow-sm;
-        padding: 0.5rem 0.75rem;
+        padding: .5rem 0.75rem;
         height: 84px;
         display: flex;
         flex-direction: column;
@@ -311,7 +318,7 @@ a.card {
             display: flex;
             flex-direction: row;
             align-items: center;
-            
+
             .badge {
                 display: inline-block;
             }
@@ -319,7 +326,7 @@ a.card {
 
         .release-actions {
             border-top: 1px solid var(--nav-bg);
-            padding: 0.5rem 0.75rem;
+            padding: .5rem 0.75rem;
             border-bottom-left-radius: $border-radius;
             border-bottom-right-radius: $border-radius;
             margin: 0.75rem -0.75rem -0.5rem -0.75rem;
@@ -382,29 +389,33 @@ a.settings-card {
 // Changelogs
 .changelog-content {
     h1 {
-        font-size: 2.5rem;
-        font-weight: 600;
+        font-size: 2.25rem;
+        font-weight: 700;
 
         &:not(:first-child) {
-            margin-top: 2rem;
+            margin-top: 3.5rem;
+        }
+
+        & + h2 {
+            margin-top: 1rem !important;
         }
     }
 
     h2 {
-        @extend h4;
+        @extend h2;
         font-weight: 600;
 
         &:not(:first-child) {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
     }
 
     h3 {
         @extend h5;
-        font-weight: 600;
+        font-weight: 700;
 
         &:not(:first-child) {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
     }
 }
