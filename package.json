@@ -24,6 +24,8 @@
         "@inertiajs/inertia": "0.11.0",
         "@inertiajs/inertia-react": "0.8.0",
         "@inertiajs/progress": "0.2.7",
+        "@tiptap/react": "^2.0.0-beta.108",
+        "@tiptap/starter-kit": "^2.0.0-beta.183",
         "@types/react": "17.0.39",
         "bootstrap": "5.1.3",
         "clsx": "1.1.1",

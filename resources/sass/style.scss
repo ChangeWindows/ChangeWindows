@@ -252,6 +252,24 @@ body {
     color: var(--text-inverse);
 }
 
+.editor {
+    .editor-toolbar {
+        border: 1px solid var(--main-border-color);
+        border-radius: $border-radius $border-radius 0 0;
+    }
+
+    .editor-content {
+        padding: 1rem;
+        border: 1px solid var(--main-border-color);
+        border-radius: 0 0 $border-radius $border-radius;
+        border-top: none;
+
+        li > p {
+            margin: 0;
+        }
+    }
+}
+
 // Cards
 a.card {
     text-decoration: none;
@@ -417,6 +435,10 @@ a.settings-card {
         &:not(:first-child) {
             margin-top: 1.5rem;
         }
+    }
+
+    li > p {
+        margin: 0;
     }
 }
 

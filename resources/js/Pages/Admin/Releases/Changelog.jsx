@@ -5,6 +5,7 @@ import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
 import AmaranthIcon, { aiCheck, aiFloppyDisc } from '@changewindows/amaranth';
+import Editor from '../../../Components/Editor';
 
 export default function Edit({ urls, release, status = null }) {
   const [curRelease, setCurRelease] = useState({
@@ -46,7 +47,7 @@ export default function Edit({ urls, release, status = null }) {
         >
           {curRelease.name}
         </NaviBar>
-      
+
         <div className="container my-3">
           {status &&
             <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
@@ -59,12 +60,7 @@ export default function Edit({ urls, release, status = null }) {
             <div className="col-12 mt-3">
               <div className="card">
                 <div className="card-body p-0 changelog-content">
-                  <textarea
-                    autoFocus
-                    value={curRelease.changelog}
-                    onChange={(event) => setCurRelease((curRelease) => ({ ...curRelease, changelog: event.target.value }))}
-                    className="form-control changelog-control"
-                  />
+                  <Editor content={curRelease.changelog} />
                 </div>
               </div>
             </div>

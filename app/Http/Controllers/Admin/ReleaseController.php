@@ -11,6 +11,7 @@ use Auth;
 use Redirect;
 use Illuminate\Support\Collection;
 use App\Http\Requests\ReleaseRequest;
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class ReleaseController extends Controller
 {
@@ -165,6 +166,7 @@ class ReleaseController extends Controller
     {
         $this->authorize('releases.show');
 
+
         return Inertia::render('Admin/Releases/Changelog', [
             'can' => [
                 'edit_releases' => Auth::user()->can('releases.edit'),
@@ -173,7 +175,25 @@ class ReleaseController extends Controller
             'urls' => [
                 'update_release' => route('admin.releases.changelog.update', $release, false)
             ],
-            'release' => $release,
+            'release' => [
+                'name' => $release->name,
+                'version' => $release->version,
+                'canonical_version' => $release->canonical_version,
+                'codename' => $release->codename,
+                'description' => $release->description,
+                'changelog' => $release->changelog,
+                'platform_id' => $release->platform_id,
+                'start_preview' => $release->start_preview,
+                'start_public' => $release->start_public,
+                'start_extended' => $release->start_extended,
+                'start_lts' => $release->start_lts,
+                'end_lts' => $release->end_lts,
+                'start_build' => $release->start_build,
+                'start_delta' => $release->start_delta,
+                'end_build' => $release->end_build,
+                'end_delta' => $release->end_delta,
+                'changelog' => Markdown::convertToHtml($release->changelog)->getContent()
+            ],
             'status' => session('status')
         ]);
     }
