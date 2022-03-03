@@ -6,7 +6,7 @@
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
     width: 100vw;
-    
+
     background-color: var(--nav-bg);
 
     overflow-x: hidden;
@@ -39,7 +39,7 @@
         justify-content: stretch;
         overflow: auto;
         z-index: 5;
-        
+
         @media (max-width: 575px) {
             background-color: var(--nav-mobile-bg);
             z-index: 7;
@@ -55,11 +55,11 @@
                 background-color: var(--nav-bg-acrylic);
                 backdrop-filter: blur(10px) saturate(120%);
             }
-            
+
             @media (max-width: 575px) {
                 display: none;
             }
-            
+
             @media (max-width: 991px) {
                 .brand-label {
                     display: none;
@@ -114,8 +114,7 @@
                 }
 
                 .ai {
-                    font-size: 18px;
-                    margin-top: .125rem;
+                    margin-top: 0;
                 }
 
                 @media (max-width: 991px) {
@@ -146,11 +145,11 @@
                     text-overflow: ellipsis;
                     line-height: 1.25;
                     max-width: 52px;
-                    
+
                     @media (max-width: 991px) {
                         display: none;
                     }
-                    
+
                     @media (max-width: 575px) {
                         display: block;
                         max-width: 65px;
@@ -166,7 +165,7 @@
                         @media (min-width: 992px) {
                             display: none;
                         }
-                    
+
                         @media (max-width: 575px) {
                             display: block;
                         }
@@ -207,8 +206,8 @@
         border-top: var(--main-border-color) 1px solid;
         z-index: 6;
         overflow: auto;
-        
-        @media (min-width: 576px) { 
+
+        @media (min-width: 576px) {
             border-top-left-radius: .75rem;
             border-left: var(--main-border-color) 1px solid;
         }

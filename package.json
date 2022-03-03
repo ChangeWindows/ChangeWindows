@@ -14,9 +14,9 @@
         "@babel/preset-react": "7.16.7",
         "autoprefixer": "10.4.2",
         "laravel-mix": "6.0.43",
-        "postcss": "8.4.6",
+        "postcss": "8.4.7",
         "resolve-url-loader": "5.0.0",
-        "sass": "1.49.8",
+        "sass": "1.49.9",
         "sass-loader": "12.6.0"
     },
     "dependencies": {
