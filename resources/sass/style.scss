@@ -372,7 +372,7 @@ a.card {
 }
 
 a.settings-card {
-    color: #fff;
+    color: var(--text);
     text-decoration: none;
 
     &:hover {
