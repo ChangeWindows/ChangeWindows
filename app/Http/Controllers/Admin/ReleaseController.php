@@ -118,7 +118,8 @@ class ReleaseController extends Controller
             'urls' => [
                 'update_release' => route('admin.releases.update', $release, false),
                 'destroy_release' => route('admin.releases.destroy', $release, false),
-                'create_release_channel' => route('admin.releasechannels.create', ['release' => $release->id, 'platform' => $release->platform->id], false)
+                'create_release_channel' => route('admin.releasechannels.create', ['release' => $release->id, 'platform' => $release->platform->id], false),
+                'edit_changelog_url' => $release->edit_changelog_url
             ],
             'release' => $release,
             'platforms' => Platform::orderBy('position')->get(),
