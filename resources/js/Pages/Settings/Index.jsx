@@ -32,7 +32,7 @@ export default function Show({ app, patrons }) {
       document.querySelector('html').classList.remove('theme-default');
     }
   }
-  
+
   function toggleShowActiveOnly() {
     setLocal('showActiveOnly', showActiveOnly ? 0 : 1);
     setShowActiveOnly(showActiveOnly ? 0 : 1);
@@ -49,7 +49,7 @@ export default function Show({ app, patrons }) {
           </span>
         </div>
       </nav>
-      
+
       <div className="container">
         <fieldset className="row g-3">
           <div className="col-12 col-lg-8 col-xl-9">
@@ -73,7 +73,7 @@ export default function Show({ app, patrons }) {
                   </div>
                 </div>
               </div>
-              
+
               <div className="col-12 pt-2">
                 <p className="h6 mb-2">Channels</p>
                 <div className="settings-card">
@@ -111,11 +111,11 @@ export default function Show({ app, patrons }) {
             <p className="h6 pt-3">About ChangeWindows</p>
 
             <p className="text-md">ChangeWindows {app.preview === 'preview' && 'Preview'}{app.preview === 'canary' && 'Canary'} {app.version}<br />
-            &copy; 2014-2021 <a className="m-0 f-384 fw-bold" href="https://studio384.be" target="_blank">Studio <span className="studio-384">384</span></a><br />
+            &copy; 2014-2022 <a className="m-0 f-384 fw-bold" href="https://studio384.be" target="_blank">Studio <span className="studio-384">384</span></a><br />
             All Right Reserved</p>
 
             <p className="text-md">ChangeWindows is a detailed changelog and release history for Windows across all platforms it appears on. With detailed and timely updates, as well as a clean and clear interface, ChangeWindows' goal is to provide a solid resource for anyone interested in knowing what's next for Windows.</p>
-            
+
             <div className="d-flex gap-1 flex-wrap">
               <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm"><AmaranthIcon icon={aiTwitter} /> Twitter</a>
               <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm"><AmaranthIcon icon={aiGitHub} /> GitHub</a>
