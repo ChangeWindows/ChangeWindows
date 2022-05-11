@@ -28,6 +28,10 @@ class Channel extends Model
         return $this->hasMany(ReleaseChannel::class);
     }
 
+    public function activeReleaseChannels() {
+        return $this->hasMany(ReleaseChannel::class)->whereHas('flights');
+    }
+
     public function getBgColorAttribute() {
         return 'background-color: '.$this->color;
     }
