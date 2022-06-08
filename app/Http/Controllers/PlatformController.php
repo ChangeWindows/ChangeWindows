@@ -68,12 +68,21 @@ class PlatformController extends Controller
                     'version' => $release->version,
                     'codename' => $release->codename,
                     'url' => $release->url,
+                    'dates' => [
+                        'start_preview' => $release->start_preview,
+                        'start_public' => $release->start_public,
+                        'start_extended' => $release->start_extended,
+                        'start_lts' => $release->start_lts,
+                        'end_lts' => $release->end_lts,
+                        'ongoing' => $release->ongoing
+                    ],
                     'platform' => [
                         'icon' => $release->platform->icon,
                         'name' => $release->platform->name,
                         'color' => $release->platform->color,
                         'tool' => $release->platform->tool
                     ],
+                    'latest_flight' => $release->flights()->first()->flight,
                     'channels' => $release->releaseChannels->where('supported')->map(function ($channel) {
                         return [
                             'id' => $channel->id,
