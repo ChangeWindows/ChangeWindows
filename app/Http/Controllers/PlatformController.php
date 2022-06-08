@@ -82,7 +82,7 @@ class PlatformController extends Controller
                         'color' => $release->platform->color,
                         'tool' => $release->platform->tool
                     ],
-                    'latest_flight' => $release->flights()->first()->flight,
+                    'latest_flight' => $release->latest->flight,
                     'channels' => $release->releaseChannels->where('supported')->map(function ($channel) {
                         return [
                             'id' => $channel->id,
