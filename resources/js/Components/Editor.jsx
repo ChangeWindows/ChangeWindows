@@ -1,6 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import Typography from "@tiptap/extension-typography";
+import Underline from "@tiptap/extension-underline";
+import Link from "@tiptap/extension-link";
 import clsx from "clsx";
 import AmaranthIcon, {
   aiBold,
@@ -16,6 +19,8 @@ import AmaranthIcon, {
   aiHeading6,
   aiHorizontalRule,
   aiItalic,
+  aiLink,
+  aiLinkSlash,
   aiList,
   aiListOl,
   aiParagraph,
@@ -26,18 +31,22 @@ import AmaranthIcon, {
   aiUndo,
 } from "@changewindows/amaranth";
 
-export default function Editor({ content }) {
+export default function Editor({ content = null, setData }) {
   console.log(content);
   const editor = useEditor({
-    extensions: [StarterKit],
-    content: `${content}`,
-  });
-
-  useEffect(() => {
-    if (content) {
-      editor.commands.setContent(content);
+    extensions: [
+      StarterKit,
+      Typography,
+      Underline,
+      Link.configure({
+        openOnClick: false,
+      }),
+    ],
+    content,
+    onUpdate: ({ editor }) => {
+      setData(_content => ({ ..._content, changelog: editor.getHTML() }));
     }
-  }, [content]);
+  });
 
   return (
     <div className="editor">
@@ -51,6 +60,23 @@ function MenuBar({ editor }) {
   if (!editor) {
     return null;
   }
+
+  const setLink = useCallback(() => {
+    const previousUrl = editor.getAttributes("link").href;
+    const url = window.prompt("URL", previousUrl);
+
+    if (url === null) {
+      return;
+    }
+
+    if (url === "") {
+      editor.chain().focus().extendMarkRange("link").unsetLink().run();
+
+      return;
+    }
+
+    editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+  }, [editor]);
 
   return (
     <div className="editor-toolbar btn-toolbar p-3">
@@ -70,6 +96,14 @@ function MenuBar({ editor }) {
           })}
         >
           <AmaranthIcon icon={aiItalic} />
+        </button>
+        <button
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          className={clsx("btn btn-primary btn-sm fst-italic", {
+            active: editor.isActive("underline"),
+          })}
+        >
+          <AmaranthIcon icon={aiUnderline} />
         </button>
         <button
           onClick={() => editor.chain().focus().toggleStrike().run()}
@@ -163,6 +197,26 @@ function MenuBar({ editor }) {
           })}
         >
           <AmaranthIcon icon={aiHeading6} />
+        </button>
+      </div>
+      <div className="btn-group ms-2">
+        <button
+          type="button"
+          onClick={setLink}
+          className={clsx("btn btn-primary btn-sm", {
+            active: editor.isActive("link"),
+          })}
+        >
+          <AmaranthIcon icon={aiLink} />
+        </button>
+        <button
+          type="button"
+          onClick={() => editor.chain().focus().unsetLink().run()}
+          className={clsx("btn btn-primary btn-sm", {
+            disabled: !editor.isActive("link"),
+          })}
+        >
+          <AmaranthIcon icon={aiLinkSlash} />
         </button>
       </div>
       <div className="btn-group ms-2">
