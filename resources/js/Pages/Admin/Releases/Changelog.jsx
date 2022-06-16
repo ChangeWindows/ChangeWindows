@@ -54,10 +54,6 @@ export default function Edit({ urls, release, status = null }) {
           }
           <fieldset className="row mb-3">
             <div className="col-12">
-              <h4 className="h5 mb-0">Changelog</h4>
-              <p className="text-muted mb-0"><small>What's new?</small></p>
-            </div>
-            <div className="col-12 mt-3">
               <div className="card">
                 <div className="card-body p-0 changelog-content">
                   <Editor content={curRelease.changelog} />
