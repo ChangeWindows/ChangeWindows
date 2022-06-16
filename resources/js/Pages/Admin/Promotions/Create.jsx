@@ -4,7 +4,7 @@ import { Inertia } from '@inertiajs/inertia';
 import Admin from '../../../Layouts/Admin';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisk } from '@changewindows/amaranth';
 
 import { parse, format, isValid, parseISO } from 'date-fns';
 
@@ -41,12 +41,12 @@ export default function Create({ urls, releases }) {
                 <NaviBar
                     back="/admin/promotions"
                     actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
+                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
                     }
                 >
                     New promotion
                 </NaviBar>
-            
+
                 <div className="container my-3">
                     {status &&
                         <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
@@ -111,7 +111,7 @@ export default function Create({ urls, releases }) {
                                                 ))}
                                             </div>
                                         ))}
-                                        {releases.length === 0 && 
+                                        {releases.length === 0 &&
                                             <div className="col-12">
                                                 {version === '10.0.' ?
                                                     <p className="mb-0">Enter a string to get started...</p>

@@ -4,7 +4,7 @@ import { Inertia } from "@inertiajs/inertia";
 import Admin from "../../../Layouts/Admin";
 import NaviBar from "../../../Components/NaviBar";
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc } from "@changewindows/amaranth";
+import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
 
 import { parse, format, isValid, parseISO } from "date-fns";
 
@@ -56,7 +56,7 @@ export default function Create({ urls, platforms }) {
           back="/admin/releases"
           actions={
             <button className="btn btn-primary btn-sm" type="submit">
-              <AmaranthIcon icon={aiFloppyDisc} /> Save
+              <AmaranthIcon icon={aiFloppyDisk} /> Save
             </button>
           }
         >

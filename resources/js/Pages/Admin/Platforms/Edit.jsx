@@ -6,7 +6,7 @@ import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc, aiPlus, aiTrashCan } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisk, aiPlus, aiTrashCan } from '@changewindows/amaranth';
 
 export default function Edit({ can, urls, platform, channels, tweet_streams, status = null }) {
     const [curPlatform, setCurPlatform] = useState(platform);
@@ -47,12 +47,12 @@ export default function Edit({ can, urls, platform, channels, tweet_streams, sta
                 <NaviBar
                     back="/admin/platforms"
                     actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
+                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
                     }
                 >
                     <PlatformIcon platform={curPlatform} color className="me-2" /> {curPlatform.name || 'Unnamed platform'}
                 </NaviBar>
-            
+
                 <div className="container my-3">
                     {status &&
                         <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
@@ -242,7 +242,7 @@ export default function Edit({ can, urls, platform, channels, tweet_streams, sta
                                 const channelstatus = [];
 
                                 channel.active && channelstatus.push('Active');
-                                
+
                                 return (
                                     <div className="col-12 col-sm-6 col-xl-4" key={channel.id}>
                                         <InertiaLink href={channel.edit_url} className="card border-0 shadow-sm h-100">

@@ -4,7 +4,7 @@ import { InertiaHead } from '@inertiajs/inertia-react';
 
 import Auth from '../../Layouts/Auth';
 
-import AmaranthIcon, { aiShieldKey } from '@changewindows/amaranth';
+import AmaranthIcon, { aiShieldKeyhole } from '@changewindows/amaranth';
 
 export default function ResetPassword({ app, token, status }) {
     const [form, setForm] = useState({ token, email: '', password: '', password_confirmation: '' });
@@ -17,7 +17,7 @@ export default function ResetPassword({ app, token, status }) {
     return (
         <Auth>
             <InertiaHead title="Reset Password" />
-            
+
             <form onSubmit={handleSubmit} className="row g-3">
                 <input type="hidden" name="token" value={token} />
                 {Object.keys(status).length > 0 &&
@@ -51,7 +51,7 @@ export default function ResetPassword({ app, token, status }) {
                 </div>
                 <div className="col-12 d-flex justify-content-between">
                     <button className="btn btn-primary me-1" type="submit">
-                        <AmaranthIcon icon={aiShieldKey} /> Reset password
+                        <AmaranthIcon icon={aiShieldKeyhole} /> Reset password
                     </button>
                 </div>
             </form>

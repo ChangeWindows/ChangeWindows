@@ -4,7 +4,7 @@ import { Inertia } from '@inertiajs/inertia';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisk } from '@changewindows/amaranth';
 import Editor from '../../../Components/Editor';
 
 export default function Edit({ urls, release, status = null }) {
@@ -42,7 +42,7 @@ export default function Edit({ urls, release, status = null }) {
         <NaviBar
           back="/admin/releases"
           actions={
-            <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
+            <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
           }
         >
           {curRelease.name}

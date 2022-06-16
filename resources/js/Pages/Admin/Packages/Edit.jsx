@@ -5,7 +5,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrashCan } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisk, aiTrashCan } from '@changewindows/amaranth';
 
 export default function Edit({ can, urls, platforms, pack, channels, release_channels, status = null }) {
     const [curPack, setCurPack] = useState({
@@ -53,12 +53,12 @@ export default function Edit({ can, urls, platforms, pack, channels, release_cha
                 <NaviBar
                     back="/admin/packages"
                     actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
+                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
                     }
                 >
                     {curPack.name || 'Unnamed package'}
                 </NaviBar>
-            
+
                 <div className="container my-3">
                     {status &&
                         <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
@@ -135,7 +135,7 @@ export default function Edit({ can, urls, platforms, pack, channels, release_cha
 
                                 releaseChannelstatus.push(releaseChannel.short_name)
                                 releaseChannel.supported && releaseChannelstatus.push('Supported');
-                                
+
                                 return (
                                     <div className="col-12 col-sm-6 col-xl-4" key={key}>
                                         <InertiaLink href={releaseChannel.edit_url} className="card border-0 shadow-sm h-100">
