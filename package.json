@@ -10,15 +10,6 @@
         "production": "mix --production",
         "start": "npm run watch"
     },
-    "devDependencies": {
-        "@babel/preset-react": "7.16.7",
-        "autoprefixer": "10.4.2",
-        "laravel-mix": "6.0.43",
-        "postcss": "8.4.6",
-        "resolve-url-loader": "5.0.0",
-        "sass": "1.49.8",
-        "sass-loader": "12.6.0"
-    },
     "dependencies": {
         "@changewindows/amaranth": "0.9.2",
         "@inertiajs/inertia": "0.11.0",
@@ -26,13 +17,22 @@
         "@inertiajs/progress": "0.2.7",
         "@tiptap/react": "^2.0.0-beta.108",
         "@tiptap/starter-kit": "^2.0.0-beta.183",
-        "@types/react": "17.0.39",
-        "bootstrap": "5.1.3",
+        "@types/react": "18.0.13",
+        "bootstrap": "5.2.0-beta1",
         "clsx": "1.1.1",
         "date-fns": "2.28.0",
-        "markdown-to-jsx": "7.1.6",
-        "react": "17.0.2",
-        "react-dom": "17.0.2",
-        "styled-components": "5.3.3"
+        "markdown-to-jsx": "7.1.7",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "styled-components": "5.3.5"
+    },
+    "devDependencies": {
+        "@babel/preset-react": "7.17.12",
+        "autoprefixer": "10.4.7",
+        "laravel-mix": "6.0.49",
+        "postcss": "8.4.14",
+        "resolve-url-loader": "5.0.0",
+        "sass": "1.52.3",
+        "sass-loader": "13.0.0"
     }
 }

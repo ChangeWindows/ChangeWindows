@@ -49,6 +49,13 @@ class Release extends Model implements Searchable
         return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->flights());
     }
 
+    public function getLatestAttribute() {
+        return Flight::whereIn('release_channel_id', $this->releaseChannels->pluck('id'))
+            ->orderBy('build', 'desc')
+            ->orderBy('delta', 'desc')
+            ->first();
+    }
+
     public function timeline() {
         return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->timeline());
     }

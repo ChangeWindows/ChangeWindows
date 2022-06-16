@@ -66,7 +66,9 @@ export default function Release({ release, platform, channels, timeline, paginat
             <div className="tab-content" id="nav-tabContent">
               <div className="tab-pane fade show active" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
                 <div className="row">
-                  <LifeCycle release={release} />
+                  <div className="col-12 mt-3">
+                    <LifeCycle release={release} />
+                  </div>
                   <div className="col-12 mt-4">
                     <div className="row g-1">
                       {channels.map((channel, key) => (

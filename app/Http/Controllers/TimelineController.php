@@ -75,7 +75,7 @@ class TimelineController extends Controller
                     'color' => $platform->color,
                     'icon' => $platform->icon,
                     'channels' => $platform->channels->where('active')->where('package', '=', 0)->map(function ($channel) {
-                        $release_channel = $channel->releaseChannels
+                        $release_channel = $channel->activeReleaseChannels
                             ->sortByDesc(function ($release_channel, $key) {
                                 return $release_channel->release->canonical_version;
                             })->values()->first();
@@ -253,7 +253,7 @@ class TimelineController extends Controller
                     'color' => $platform->color,
                     'icon' => $platform->icon,
                     'channels' => $platform->channels->where('active')->where('package', '=', 0)->map(function ($channel) {
-                        $release_channel = $channel->releaseChannels
+                        $release_channel = $channel->activeReleaseChannels
                             ->sortByDesc(function ($release_channel, $key) {
                                 return $release_channel->release->canonical_version;
                             })->values()->first();
