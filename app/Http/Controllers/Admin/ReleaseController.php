@@ -193,7 +193,8 @@ class ReleaseController extends Controller
                 'start_delta' => $release->start_delta,
                 'end_build' => $release->end_build,
                 'end_delta' => $release->end_delta,
-                'changelog' => Markdown::convertToHtml($release->changelog)->getContent()
+                'changelog' => $release->changelog,
+                //'changelog' => Markdown::convertToHtml($release->changelog)->getContent()
             ],
             'status' => session('status')
         ]);
@@ -210,7 +211,9 @@ class ReleaseController extends Controller
     {
         $this->authorize('releases.edit');
 
-        $release->update($request->validated());
+        $release->update([
+            'changelog' => $request->get('changelog')
+        ]);
 
         return Redirect::route('admin.releases.changelog.edit', $release)->with('status', 'Succesfully updated this release.');
     }
