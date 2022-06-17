@@ -211,7 +211,6 @@ function MenuBar({ editor }) {
       <div className="btn-group">
         <button
           type="button"
-          type="button"
           onClick={setLink}
           className={clsx("editor-btn", {
             active: editor.isActive("link"),
@@ -220,7 +219,6 @@ function MenuBar({ editor }) {
           <AmaranthIcon icon={aiLink} />
         </button>
         <button
-          type="button"
           type="button"
           onClick={() => editor.chain().focus().unsetLink().run()}
           className={clsx("editor-btn", {

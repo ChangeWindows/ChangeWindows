@@ -16,7 +16,23 @@ import AmaranthIcon, { aiAngleLeft, aiAngleRight, aiArrowLeft, aiNotes, aiBarsSt
 import { parseISO } from 'date-fns';
 import Markdown from 'markdown-to-jsx';
 
+import { useEditor, EditorContent } from "@tiptap/react";
+import Typography from "@tiptap/extension-typography";
+import Underline from "@tiptap/extension-underline";
+import Link from "@tiptap/extension-link";
+import StarterKit from "@tiptap/starter-kit";
+
 export default function Release({ release, platform, channels, timeline, pagination, quick_nav }) {
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Typography,
+      Underline,
+      Link
+    ],
+    content: release.changelog
+  });
+
   return (
     <App>
       <InertiaHead title={release.name} />
@@ -143,7 +159,7 @@ export default function Release({ release, platform, channels, timeline, paginat
                 <div className="row">
                   <div className="col-12 mt-3">
                     <div className="changelog-content">
-                      {release.changelog ? <Markdown>{release.changelog}</Markdown> : null}
+                      <EditorContent editor={editor} className="editor-content" />
                     </div>
                   </div>
                 </div>

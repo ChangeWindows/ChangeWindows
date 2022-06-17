@@ -182,7 +182,6 @@ class ReleaseController extends Controller
                 'canonical_version' => $release->canonical_version,
                 'codename' => $release->codename,
                 'description' => $release->description,
-                'changelog' => $release->changelog,
                 'platform_id' => $release->platform_id,
                 'start_preview' => $release->start_preview,
                 'start_public' => $release->start_public,
@@ -193,8 +192,7 @@ class ReleaseController extends Controller
                 'start_delta' => $release->start_delta,
                 'end_build' => $release->end_build,
                 'end_delta' => $release->end_delta,
-                'changelog' => $release->changelog,
-                //'changelog' => Markdown::convertToHtml($release->changelog)->getContent()
+                'changelog' => $release->changelog[0] === '<' ? $release->changelog : Markdown::convertToHtml($release->changelog)->getContent()
             ],
             'status' => session('status')
         ]);
