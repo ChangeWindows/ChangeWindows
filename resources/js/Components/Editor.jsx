@@ -32,7 +32,6 @@ import AmaranthIcon, {
 } from "@changewindows/amaranth";
 
 export default function Editor({ content = null, setData }) {
-  console.log(content);
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -44,8 +43,8 @@ export default function Editor({ content = null, setData }) {
     ],
     content,
     onUpdate: ({ editor }) => {
-      setData(_content => ({ ..._content, changelog: editor.getHTML() }));
-    }
+      setData((_content) => ({ ..._content, changelog: editor.getHTML() }));
+    },
   });
 
   return (
@@ -79,131 +78,142 @@ function MenuBar({ editor }) {
   }, [editor]);
 
   return (
-    <div className="editor-toolbar btn-toolbar p-3">
+    <div className="editor-toolbar btn-toolbar">
       <div className="btn-group">
         <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.chain().focus().undo().run()}
+        >
+          <AmaranthIcon icon={aiUndo} />
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.chain().focus().redo().run()}
+        >
+          <AmaranthIcon icon={aiRedo} />
+        </button>
+      </div>
+      <div className="btn-group">
+        <button
+          type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className={clsx("btn btn-primary btn-sm fw-bold", {
+          className={clsx("editor-btn", {
             active: editor.isActive("bold"),
           })}
         >
           <AmaranthIcon icon={aiBold} />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={clsx("btn btn-primary btn-sm fst-italic", {
+          className={clsx("editor-btn", {
             active: editor.isActive("italic"),
           })}
         >
           <AmaranthIcon icon={aiItalic} />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleUnderline().run()}
-          className={clsx("btn btn-primary btn-sm fst-italic", {
+          className={clsx("editor-btn", {
             active: editor.isActive("underline"),
           })}
         >
           <AmaranthIcon icon={aiUnderline} />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleStrike().run()}
-          className={clsx(
-            "btn btn-primary btn-sm text-decoration-line-through",
-            { active: editor.isActive("strike") }
-          )}
+          className={clsx("editor-btn", { active: editor.isActive("strike") })}
         >
           <AmaranthIcon icon={aiStrikethrough} />
         </button>
       </div>
-      <div className="btn-group ms-2">
+      <div className="btn-group">
         <button
-          className="btn btn-primary btn-sm"
-          onClick={() => editor.chain().focus().unsetAllMarks().run()}
-        >
-          <AmaranthIcon icon={aiClearFormatting} />
-        </button>
-        <button
-          className="btn btn-primary btn-sm"
-          onClick={() => editor.chain().focus().clearNodes().run()}
-        >
-          <AmaranthIcon icon={aiClearNode} />
-        </button>
-      </div>
-      <div className="btn-group ms-2">
-        <button
+          type="button"
           onClick={() => editor.chain().focus().setParagraph().run()}
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("paragraph"),
           })}
         >
           <AmaranthIcon icon={aiParagraph} />
         </button>
         <button
+          type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 1 }).run()
           }
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("heading", { level: 1 }),
           })}
         >
           <AmaranthIcon icon={aiHeading1} />
         </button>
         <button
+          type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 2 }).run()
           }
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("heading", { level: 2 }),
           })}
         >
           <AmaranthIcon icon={aiHeading2} />
         </button>
         <button
+          type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 3 }).run()
           }
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("heading", { level: 3 }),
           })}
         >
           <AmaranthIcon icon={aiHeading3} />
         </button>
         <button
+          type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 4 }).run()
           }
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("heading", { level: 4 }),
           })}
         >
           <AmaranthIcon icon={aiHeading4} />
         </button>
         <button
+          type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 5 }).run()
           }
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("heading", { level: 5 }),
           })}
         >
           <AmaranthIcon icon={aiHeading5} />
         </button>
         <button
+          type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 6 }).run()
           }
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("heading", { level: 6 }),
           })}
         >
           <AmaranthIcon icon={aiHeading6} />
         </button>
       </div>
-      <div className="btn-group ms-2">
+      <div className="btn-group">
         <button
           type="button"
+          type="button"
           onClick={setLink}
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("link"),
           })}
         >
@@ -211,78 +221,88 @@ function MenuBar({ editor }) {
         </button>
         <button
           type="button"
+          type="button"
           onClick={() => editor.chain().focus().unsetLink().run()}
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             disabled: !editor.isActive("link"),
           })}
         >
           <AmaranthIcon icon={aiLinkSlash} />
         </button>
       </div>
-      <div className="btn-group ms-2">
+      <div className="btn-group">
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("bulletList"),
           })}
         >
           <AmaranthIcon icon={aiList} />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("orderedList"),
           })}
         >
           <AmaranthIcon icon={aiListOl} />
         </button>
       </div>
-      <div className="btn-group ms-2">
+      <div className="btn-group">
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleCode().run()}
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("code"),
           })}
         >
           <AmaranthIcon icon={aiCode} />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("codeBlock"),
           })}
         >
           <AmaranthIcon icon={aiCodeblock} />
         </button>
       </div>
-      <div className="btn-group ms-2">
+      <div className="btn-group">
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={clsx("btn btn-primary btn-sm", {
+          className={clsx("editor-btn", {
             active: editor.isActive("blockquote"),
           })}
         >
           <AmaranthIcon icon={aiQuote} />
         </button>
         <button
-          className="btn btn-primary btn-sm"
+          className="editor-btn"
+          type="button"
           onClick={() => editor.chain().focus().setHorizontalRule().run()}
         >
           <AmaranthIcon icon={aiHorizontalRule} />
         </button>
       </div>
-      <div className="btn-group ms-2">
+      <div className="flex-grow-1" />
+      <div className="btn-group">
         <button
-          className="btn btn-primary btn-sm"
-          onClick={() => editor.chain().focus().undo().run()}
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.chain().focus().unsetAllMarks().run()}
         >
-          <AmaranthIcon icon={aiUndo} />
+          <AmaranthIcon icon={aiClearFormatting} />
         </button>
         <button
-          className="btn btn-primary btn-sm"
-          onClick={() => editor.chain().focus().redo().run()}
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.chain().focus().clearNodes().run()}
         >
-          <AmaranthIcon icon={aiRedo} />
+          <AmaranthIcon icon={aiClearNode} />
         </button>
       </div>
     </div>

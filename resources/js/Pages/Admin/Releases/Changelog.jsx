@@ -36,12 +36,8 @@ export default function Edit({ urls, release, status = null }) {
             <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
           }
           <fieldset className="row mb-3">
-            <div className="col-12">
-              <div className="card">
-                <div className="card-body p-0 changelog-content">
-                  <Editor content={editor} setData={setCurRelease} />
-                </div>
-              </div>
+            <div className="col-12 position-relative">
+              <Editor content={editor} setData={setCurRelease} />
             </div>
           </fieldset>
         </div>
