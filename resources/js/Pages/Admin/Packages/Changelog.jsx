@@ -58,7 +58,7 @@ export default function Edit({ urls, release, status = null }) {
             </div>
             <div className="col-12 mt-3">
               <div className="card">
-                <div className="card-body p-0 changelog-content">
+                <div className="card-body p-0">
                   <textarea
                     autoFocus
                     value={curRelease.changelog}

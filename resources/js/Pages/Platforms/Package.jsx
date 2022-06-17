@@ -186,9 +186,7 @@ export default function Package({
               >
                 <div className="row">
                   <div className="col-12 mt-3">
-                    <div className="changelog-content">
-                      <EditorContent editor={editor} className="editor-content" />
-                    </div>
+                    <EditorContent editor={editor} className="editor-content" />
                   </div>
                 </div>
               </div>
