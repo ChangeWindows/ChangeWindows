@@ -374,6 +374,8 @@ a.card {
 a.settings-card {
     color: var(--text);
     text-decoration: none;
+    border: none;
+    box-shadow: $box-shadow-sm;
 
     &:hover {
         transition: $transition-base;
