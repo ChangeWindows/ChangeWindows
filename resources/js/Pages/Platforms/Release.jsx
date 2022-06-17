@@ -1,20 +1,25 @@
-import React from 'react';
-import { InertiaLink, InertiaHead } from '@inertiajs/inertia-react';
+import React from "react";
+import { InertiaLink, InertiaHead } from "@inertiajs/inertia-react";
 
-import App from '../../Layouts/App';
-import Channel from '../../Components/Cards/Channel';
-import Flight from '../../Components/Timeline/Flight';
-import Launch from '../../Components/Timeline/Launch';
-import LifeCycle from './_LifeCycle';
-import Pagination from '../../Components/Pagination';
-import PlatformIcon from '../../Components/Platforms/PlatformIcon';
-import Promotion from '../../Components/Timeline/Promotion';
-import Timeline from '../../Components/Timeline/Timeline';
+import App from "../../Layouts/App";
+import Channel from "../../Components/Cards/Channel";
+import Flight from "../../Components/Timeline/Flight";
+import Launch from "../../Components/Timeline/Launch";
+import LifeCycle from "./_LifeCycle";
+import Pagination from "../../Components/Pagination";
+import PlatformIcon from "../../Components/Platforms/PlatformIcon";
+import Promotion from "../../Components/Timeline/Promotion";
+import Timeline from "../../Components/Timeline/Timeline";
 
-import AmaranthIcon, { aiAngleLeft, aiAngleRight, aiArrowLeft, aiNotes, aiBarsStaggered } from '@changewindows/amaranth';
+import AmaranthIcon, {
+  aiAngleLeft,
+  aiAngleRight,
+  aiArrowLeft,
+  aiNotes,
+  aiBarsStaggered,
+} from "@changewindows/amaranth";
 
-import { parseISO } from 'date-fns';
-import Markdown from 'markdown-to-jsx';
+import { parseISO } from "date-fns";
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import Typography from "@tiptap/extension-typography";
@@ -22,15 +27,17 @@ import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import StarterKit from "@tiptap/starter-kit";
 
-export default function Release({ release, platform, channels, timeline, pagination, quick_nav }) {
+export default function Release({
+  release,
+  platform,
+  channels,
+  timeline,
+  pagination,
+  quick_nav,
+}) {
   const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Typography,
-      Underline,
-      Link
-    ],
-    content: release.changelog
+    extensions: [StarterKit, Typography, Underline, Link],
+    content: release.changelog,
   });
 
   return (
@@ -39,28 +46,66 @@ export default function Release({ release, platform, channels, timeline, paginat
 
       <nav className="navbar navbar-expand-xl navbar-light sticky-top">
         <div className="container">
-          <InertiaLink href={`/platforms/${platform.slug}`} className="btn btn-transparent btn-sm me-2">
+          <InertiaLink
+            href={`/platforms/${platform.slug}`}
+            className="btn btn-transparent btn-sm me-2"
+          >
             <AmaranthIcon icon={aiArrowLeft} />
           </InertiaLink>
-          <div className="nav nav-lined d-flex d-xl-none" id="nav-tab" role="tablist">
-            <button className="nav-link active" id="nav-timeline-tab" data-bs-toggle="tab" data-bs-target="#nav-timeline" type="button" role="tab" aria-controls="nav-timeline" aria-selected="true">
+          <div
+            className="nav nav-lined d-flex d-xl-none"
+            id="nav-tab"
+            role="tablist"
+          >
+            <button
+              className="nav-link active"
+              id="nav-timeline-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#nav-timeline"
+              type="button"
+              role="tab"
+              aria-controls="nav-timeline"
+              aria-selected="true"
+            >
               <AmaranthIcon icon={aiBarsStaggered} /> Timeline
             </button>
-            <button className="nav-link" id="nav-releases-tab" data-bs-toggle="tab" data-bs-target="#nav-releases" type="button" role="tab" aria-controls="nav-releases" aria-selected="false">
+            <button
+              className="nav-link"
+              id="nav-releases-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#nav-releases"
+              type="button"
+              role="tab"
+              aria-controls="nav-releases"
+              aria-selected="false"
+            >
               <AmaranthIcon icon={aiNotes} /> Changelog
             </button>
           </div>
           <div className="flex-grow-1" />
-          {quick_nav.prev &&
-            <InertiaLink href={quick_nav.prev.url} className="btn btn-transparent btn-sm">
-              <AmaranthIcon icon={aiAngleLeft} /><span className="d-none d-sm-inline"> {quick_nav.prev.version}</span>
+          {quick_nav.prev && (
+            <InertiaLink
+              href={quick_nav.prev.url}
+              className="btn btn-transparent btn-sm"
+            >
+              <AmaranthIcon icon={aiAngleLeft} />
+              <span className="d-none d-sm-inline">
+                {" "}
+                {quick_nav.prev.version}
+              </span>
             </InertiaLink>
-          }
-          {quick_nav.next &&
-            <InertiaLink href={quick_nav.next.url} className="btn btn-transparent btn-sm ms-2">
-              <span className="d-none d-sm-inline">{quick_nav.next.version} </span><AmaranthIcon icon={aiAngleRight} />
+          )}
+          {quick_nav.next && (
+            <InertiaLink
+              href={quick_nav.next.url}
+              className="btn btn-transparent btn-sm ms-2"
+            >
+              <span className="d-none d-sm-inline">
+                {quick_nav.next.version}{" "}
+              </span>
+              <AmaranthIcon icon={aiAngleRight} />
             </InertiaLink>
-          }
+          )}
         </div>
       </nav>
 
@@ -69,18 +114,29 @@ export default function Release({ release, platform, channels, timeline, paginat
           <div className="col-12 titlebar">
             <div className="d-flex">
               <div className="me-3">
-                <h1><PlatformIcon platform={platform} color /></h1>
+                <h1>
+                  <PlatformIcon platform={platform} color />
+                </h1>
               </div>
               <div>
-                <h1 className="m-0 fw-bold" style={{ color: platform.color }}>{release.name}</h1>
-                <h2 className="h6 m-0 text-muted">Version {release.version}, {release.codename}</h2>
+                <h1 className="m-0 fw-bold" style={{ color: platform.color }}>
+                  {release.name}
+                </h1>
+                <h2 className="h6 m-0 text-muted">
+                  Version {release.version}, {release.codename}
+                </h2>
               </div>
             </div>
           </div>
 
           <div className="col-12">
             <div className="tab-content" id="nav-tabContent">
-              <div className="tab-pane fade show active" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
+              <div
+                className="tab-pane fade show active"
+                id="nav-timeline"
+                role="tabpanel"
+                aria-labelledby="nav-timeline-tab"
+              >
                 <div className="row">
                   <div className="col-12 mt-3">
                     <LifeCycle release={release} />
@@ -91,8 +147,12 @@ export default function Release({ release, platform, channels, timeline, paginat
                         <Channel
                           key={key}
                           channel={{ color: channel.color, name: channel.name }}
-                          build={channel.flight.version ?? 'None'}
-                          date={channel.flight?.date ? parseISO(channel.flight.date) : 'No flight'}
+                          build={channel.flight.version ?? "None"}
+                          date={
+                            channel.flight?.date
+                              ? parseISO(channel.flight.date)
+                              : "No flight"
+                          }
                           disabled={channel.disabled}
                         />
                       ))}
@@ -100,15 +160,21 @@ export default function Release({ release, platform, channels, timeline, paginat
                   </div>
                   <div className="d-none d-xl-block col-xl-8 col-xxl-9 mt-4">
                     <div className="changelog-content">
-                      {release.changelog ? <Markdown>{release.changelog}</Markdown> : null}
+                      <EditorContent
+                        editor={editor}
+                        className="editor-content"
+                      />
                     </div>
                   </div>
                   <div className="col-12 col-xl-4 col-xxl-3 mt-4">
                     <div className="row g-1">
                       {Object.keys(timeline).map((date, key) => (
-                        <Timeline date={parseISO(timeline[date].date)} key={key}>
+                        <Timeline
+                          date={parseISO(timeline[date].date)}
+                          key={key}
+                        >
                           {timeline[date].flights.map((flight, _key) => {
-                            if (flight.type === 'flight') {
+                            if (flight.type === "flight") {
                               return (
                                 <Flight
                                   key={`${flight.type}-${flight.id}`}
@@ -123,7 +189,7 @@ export default function Release({ release, platform, channels, timeline, paginat
                               );
                             }
 
-                            if (flight.type === 'promotion') {
+                            if (flight.type === "promotion") {
                               return (
                                 <Promotion
                                   key={`${flight.type}-${flight.id}`}
@@ -136,7 +202,7 @@ export default function Release({ release, platform, channels, timeline, paginat
                               );
                             }
 
-                            if (flight.type === 'launch') {
+                            if (flight.type === "launch") {
                               return (
                                 <Launch
                                   key={`${flight.type}-${flight.id}`}
@@ -155,11 +221,19 @@ export default function Release({ release, platform, channels, timeline, paginat
                   </div>
                 </div>
               </div>
-              <div className="tab-pane fade" id="nav-releases" role="tabpanel" aria-labelledby="nav-releases-tab">
+              <div
+                className="tab-pane fade"
+                id="nav-releases"
+                role="tabpanel"
+                aria-labelledby="nav-releases-tab"
+              >
                 <div className="row">
                   <div className="col-12 mt-3">
                     <div className="changelog-content">
-                      <EditorContent editor={editor} className="editor-content" />
+                      <EditorContent
+                        editor={editor}
+                        className="editor-content"
+                      />
                     </div>
                   </div>
                 </div>
@@ -169,5 +243,5 @@ export default function Release({ release, platform, channels, timeline, paginat
         </div>
       </div>
     </App>
-  )
+  );
 }
