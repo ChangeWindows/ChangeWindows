@@ -5,7 +5,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrashCan } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiPlus, aiTrashCan } from '@changewindows/amaranth';
 
 export default function Edit({ can, urls, platforms, pack, channels, release_channels, status = null }) {
     const [curPack, setCurPack] = useState({
@@ -58,7 +58,7 @@ export default function Edit({ can, urls, platforms, pack, channels, release_cha
                 >
                     {curPack.name || 'Unnamed package'}
                 </NaviBar>
-            
+
                 <div className="container my-3">
                     {status &&
                         <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
@@ -135,7 +135,7 @@ export default function Edit({ can, urls, platforms, pack, channels, release_cha
 
                                 releaseChannelstatus.push(releaseChannel.short_name)
                                 releaseChannel.supported && releaseChannelstatus.push('Supported');
-                                
+
                                 return (
                                     <div className="col-12 col-sm-6 col-xl-4" key={key}>
                                         <InertiaLink href={releaseChannel.edit_url} className="card border-0 shadow-sm h-100">
@@ -160,7 +160,7 @@ export default function Edit({ can, urls, platforms, pack, channels, release_cha
                                     <div className="dropdown h-100">
                                         <a href="#" className="card card-add dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                             <div className="card-body py-3">
-                                                <h3 className="h5 fw-normal m-0"><AmaranthIcon icon={faPlus} /> New channel</h3>
+                                                <h3 className="h5 fw-normal m-0"><AmaranthIcon icon={aiPlus} /> New channel</h3>
                                             </div>
                                         </a>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
