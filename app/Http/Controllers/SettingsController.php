@@ -50,8 +50,6 @@ class SettingsController extends Controller
             }
         }
 
-        //1965775
-
         return Inertia::render('Settings/Index', [
             'patrons' => $patrons
         ]);
