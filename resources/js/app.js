@@ -1,5 +1,5 @@
 import React from "react";
-import { createRoot } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { InertiaProgress } from "@inertiajs/progress";
 import { App } from "@inertiajs/inertia-react";
 
