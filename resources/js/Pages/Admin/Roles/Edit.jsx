@@ -4,7 +4,7 @@ import { Inertia } from '@inertiajs/inertia';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrashCan } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisk, aiTrashCan } from '@changewindows/amaranth';
 
 export default function Edit({ can, role, permissions, urls, status = null }) {
   const [curRole, setCurRole] = useState(role);
@@ -49,12 +49,12 @@ export default function Edit({ can, role, permissions, urls, status = null }) {
         <NaviBar
           back="/admin/roles"
           actions={
-            <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
+            <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
           }
         >
           {curRole.name || 'Unnamed role'}
         </NaviBar>
-      
+
         <div className="container my-3">
           {status &&
             <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>

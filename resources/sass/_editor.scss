@@ -1,0 +1,93 @@
+.editor {
+    .editor-toolbar {
+        display: flex;
+        border: 1px solid var(--nav-border-color);
+        border-radius: $border-radius;
+        position: sticky;
+        top: 4rem;
+        left: 0;
+        right: 0;
+        padding: .5rem;
+        background-color: var(--nav-bg-acrylic);
+        backdrop-filter: blur(10px) saturate(120%);
+        z-index: 100;
+    }
+
+    .editor-btn {
+        all: unset;
+        cursor: pointer;
+        padding: .375rem .5rem;
+        border-radius: $border-radius;
+
+        &:hover {
+            background-color: var(--btn-transparent-bg-hover);
+        }
+
+        &.active {
+            position: relative;
+
+            &::after {
+                position: absolute;
+                background-color: $primary;
+                left: calc(50% - 8px);
+                bottom: 0;
+                height: 3.5px;
+                border-radius: 6px;
+                width: 16px;
+                content: '';
+            }
+        }
+    }
+
+    .btn-group {
+        border: 1px solid var(--nav-border-color);
+
+        &:not(:last-child) {
+            margin-right: .5rem;
+        }
+    }
+
+    .editor-content {
+        padding-top: 1rem;
+        border-top: none;
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+
+            &:not(:first-child) {
+                margin-top: 3.5rem;
+            }
+
+            & + h2 {
+                margin-top: 1rem !important;
+            }
+        }
+
+        h2 {
+            @extend h2;
+            font-weight: 600;
+
+            &:not(:first-child) {
+                margin-top: 2.5rem;
+            }
+        }
+
+        h3 {
+            @extend h5;
+            font-weight: 700;
+
+            &:not(:first-child) {
+                margin-top: 1.5rem;
+            }
+        }
+
+        li > p {
+            margin: 0;
+        }
+
+        & > div:focus-visible {
+            outline: none;
+        }
+    }
+}

@@ -59,8 +59,10 @@ export default function Show({ app, platforms, platform, channels, releases, pac
                         platform={platform}
                         name={release.name}
                         alts={[`Version ${release.version}`, release.codename]}
+                        flight={release.latest_flight}
                         channels={release.channels}
                         url={release.url}
+                        dates={release.dates}
                       />
                     ))}
                   </div>
@@ -94,7 +96,9 @@ export default function Show({ app, platforms, platform, channels, releases, pac
                         platform={platform}
                         name={release.name}
                         alts={[`Version ${release.version}`, release.codename]}
+                        flight={release.latest_flight}
                         url={release.url}
+                        dates={release.dates}
                       />
                     ))}
                   </div>

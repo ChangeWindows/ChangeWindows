@@ -1,33 +1,34 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { InertiaProgress } from '@inertiajs/progress';
-import { App } from '@inertiajs/inertia-react';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { InertiaProgress } from "@inertiajs/progress";
+import { App } from "@inertiajs/inertia-react";
 
-const el = document.getElementById('app');
+const el = document.getElementById("app");
 InertiaProgress.init({
-    color: '#0066ff'
+  color: "#0066ff",
 });
 
-import { createInertiaApp } from '@inertiajs/inertia-react';
+import { createInertiaApp } from "@inertiajs/inertia-react";
 
 createInertiaApp({
-    title: title => `${title} &middot; ChangeWindows`,
-    resolve: name => require(`./Pages/${name}`),
-    setup({ el, App, props }) {
-        render(<App {...props} />, el);
-    }
+  title: (title) => `${title} &middot; ChangeWindows`,
+  resolve: (name) => require(`./Pages/${name}`),
+  setup({ el, App, props }) {
+    const root = createRoot(el);
+    root.render(<App {...props} />);
+  },
 });
 
 function appHeight() {
-    const doc = document.documentElement
-    doc.style.setProperty('--vh', (window.innerHeight * .01) + 'px');
+  const doc = document.documentElement;
+  doc.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
 }
 
-window.addEventListener('resize', appHeight);
+window.addEventListener("resize", appHeight);
 appHeight();
 
-if (navigator.platform == 'iPad') {
-    window.onorientationchange = function() {
-        appHeight();
-    }       
+if (navigator.platform == "iPad") {
+  window.onorientationchange = function () {
+    appHeight();
+  };
 }

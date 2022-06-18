@@ -4,7 +4,7 @@ import { Inertia } from '@inertiajs/inertia';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisk } from '@changewindows/amaranth';
 
 export default function Edit({ urls, status = null }) {
     const [curTweetStream, setCurTweetStream] = useState({
@@ -40,12 +40,12 @@ export default function Edit({ urls, status = null }) {
                 <NaviBar
                     back="/admin/tweet_streams"
                     actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
+                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
                     }
                 >
                     {curTweetStream.name || 'Unnamed Twitter Tweet Stream'}
                 </NaviBar>
-            
+
                 <div className="container my-3">
                     {status &&
                         <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
