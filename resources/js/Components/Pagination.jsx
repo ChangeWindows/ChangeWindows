@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import AmaranthIcon, { aiArrowLeft, aiArrowRight } from '@changewindows/amaranth';
 
 export default function Pagination({ pagination }) {
+  if (pagination.links.length <= 3) return;
+
   return (
     <nav aria-label="Pagination" className="d-flex justify-content-center">
       <ul className="pagination">

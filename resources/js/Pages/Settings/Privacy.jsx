@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
-
-import AmaranthIcon, { aiChangeWindows, aiChangeWindowsCan, aiChangeWindowsDev, aiGitHub, aiPatreon, aiTwitter } from '@changewindows/amaranth';
-
-import { getLocal, setLocal } from '../../utils/localStorage';
 
 export default function Show({ app }) {
     return (
@@ -19,14 +15,14 @@ export default function Show({ app }) {
                     </span>
                 </div>
             </nav>
-            
+
             <div className="container">
                 <fieldset className="row g-3">
                     <div className="col-12 titlebar">
                         <h1>Privacy Policy</h1>
                         <h6 className="fw-normal">Last updated on 31 August 2021</h6>
                     </div>
-                    
+
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">

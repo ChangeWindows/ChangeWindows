@@ -4,7 +4,7 @@ import { Inertia } from '@inertiajs/inertia';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrashCan } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisk, aiTrashCan } from '@changewindows/amaranth';
 
 export default function Edit({ can, permission, urls, status = null }) {
   const [curPermission, setCurPermission] = useState(permission);
@@ -42,12 +42,12 @@ export default function Edit({ can, permission, urls, status = null }) {
         <NaviBar
           back="/admin/permissions"
           actions={
-            <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
+            <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
           }
         >
           {curPermission.name || 'Unnamed permisison'}
         </NaviBar>
-      
+
         <div className="container my-3">
           {status &&
             <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>

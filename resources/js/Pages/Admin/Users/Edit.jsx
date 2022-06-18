@@ -4,7 +4,7 @@ import { Inertia } from '@inertiajs/inertia';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrashCan } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisk, aiTrashCan } from '@changewindows/amaranth';
 
 export default function Edit({ can, user, roles, urls, status = null }) {
   const [curUser, setCurUser] = useState(user);
@@ -49,7 +49,7 @@ export default function Edit({ can, user, roles, urls, status = null }) {
         <NaviBar
           back="/admin/users"
           actions={
-            <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
+            <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
           }
         >
           {curUser.name || 'Unnamed user'}

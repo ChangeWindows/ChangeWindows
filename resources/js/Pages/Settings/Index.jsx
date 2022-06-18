@@ -3,7 +3,7 @@ import { InertiaHead } from '@inertiajs/inertia-react';
 
 import App from '../../Layouts/App';
 
-import AmaranthIcon, { aiBranch, aiGitHub, aiPatreon, aiSwatchbook, aiTwitter } from '@changewindows/amaranth';
+import AmaranthIcon, { aiBranch, aiGithub, aiPatreon, aiSwatchbook, aiTwitter } from '@changewindows/amaranth';
 
 import { getLocal, setLocal } from '../../utils/localStorage';
 
@@ -118,7 +118,7 @@ export default function Show({ app, patrons }) {
 
             <div className="d-flex gap-1 flex-wrap">
               <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm"><AmaranthIcon icon={aiTwitter} /> Twitter</a>
-              <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm"><AmaranthIcon icon={aiGitHub} /> GitHub</a>
+              <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm"><AmaranthIcon icon={aiGithub} /> GitHub</a>
               <a href="https://patreon.com/changewindows" target="_blank" className="btn btn-primary btn-sm"><AmaranthIcon icon={aiPatreon} /> Patreon</a>
             </div>
           </div>

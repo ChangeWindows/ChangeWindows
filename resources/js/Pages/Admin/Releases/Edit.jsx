@@ -8,7 +8,7 @@ import NaviBar from "../../../Components/NaviBar";
 import AmaranthIcon, {
   aiCheck,
   aiEye,
-  aiFloppyDisc,
+  aiFloppyDisk,
   aiNotes,
   aiPlus,
   aiTrashCan,
@@ -92,7 +92,7 @@ export default function Edit({
           back="/admin/releases"
           actions={
             <button className="btn btn-primary btn-sm" type="submit">
-              <AmaranthIcon icon={aiFloppyDisc} /> Save
+              <AmaranthIcon icon={aiFloppyDisk} /> Save
             </button>
           }
         >

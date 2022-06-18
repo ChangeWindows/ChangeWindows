@@ -11,15 +11,19 @@
         "start": "npm run watch"
     },
     "dependencies": {
-        "@changewindows/amaranth": "0.9.2",
+        "@changewindows/amaranth": "0.10.0-alpha.1",
         "@inertiajs/inertia": "0.11.0",
         "@inertiajs/inertia-react": "0.8.0",
         "@inertiajs/progress": "0.2.7",
-        "@types/react": "18.0.13",
+        "@tiptap/extension-link": "^2.0.0-beta.38",
+        "@tiptap/extension-typography": "^2.0.0-beta.20",
+        "@tiptap/extension-underline": "^2.0.0-beta.23",
+        "@tiptap/react": "^2.0.0-beta.109",
+        "@tiptap/starter-kit": "2.0.0-beta.185",
+        "@types/react": "^18.0.13",
         "bootstrap": "5.2.0-beta1",
         "clsx": "1.1.1",
         "date-fns": "2.28.0",
-        "markdown-to-jsx": "7.1.7",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "styled-components": "5.3.5"

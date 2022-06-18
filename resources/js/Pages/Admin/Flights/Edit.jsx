@@ -5,7 +5,7 @@ import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc, aiTrashCan } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisk, aiTrashCan } from '@changewindows/amaranth';
 
 import { parse, format, isValid, parseISO } from 'date-fns';
 
@@ -63,14 +63,14 @@ export default function Edit({ can, urls, flight, date, platform, release_channe
                 <NaviBar
                     back="/admin/flights"
                     actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
+                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
                     }
                 >
                     <PlatformIcon platform={platform} color className="me-2" />
                     {version || 'Unnamed flight'}
                     <span className="badge ms-2" style={{ background: release_channel.color }}>{release_channel.name}</span>
                 </NaviBar>
-            
+
                 <div className="container my-3">
                     {status &&
                         <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>

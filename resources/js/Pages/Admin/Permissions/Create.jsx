@@ -4,7 +4,7 @@ import { Inertia } from '@inertiajs/inertia';
 import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 
-import AmaranthIcon, { aiFloppyDisc } from '@changewindows/amaranth';
+import AmaranthIcon, { aiFloppyDisk } from '@changewindows/amaranth';
 
 export default function Create({ urls }) {
     const [curPermission, setCurPermission] = useState({ name: '', variants: [] });
@@ -40,12 +40,12 @@ export default function Create({ urls }) {
                 <NaviBar
                     back="/admin/permissions"
                     actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
+                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
                     }
                 >
                     {curPermission.name || 'Unnamed permission'}
                 </NaviBar>
-            
+
                 <div className="container my-3">
                     <div className="row mb-3">
                         <div className="col-12 col-md-4 my-4 my-md-0">

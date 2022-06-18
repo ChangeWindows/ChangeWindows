@@ -5,7 +5,7 @@ import Admin from '../../../Layouts/Admin';
 import NaviBar from '../../../Components/NaviBar';
 import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
 
-import AmaranthIcon, { aiCheck, aiFloppyDisc } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCheck, aiFloppyDisk } from '@changewindows/amaranth';
 
 import { parse, format, isValid, parseISO } from 'date-fns';
 
@@ -35,19 +35,19 @@ export default function Create({ urls, releases }) {
       event.preventDefault();
       Inertia.post(urls.store_launch, curLaunch);
     }
-    
+
     return (
         <Admin>
             <form onSubmit={handleSubmit}>
                 <NaviBar
                     back="/admin/launches"
                     actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisc} /> Save</button>
+                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
                     }
                 >
                     New launch
                 </NaviBar>
-            
+
                 <div className="container my-3">
                     {status &&
                         <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
@@ -100,7 +100,7 @@ export default function Create({ urls, releases }) {
                                                 </div>
                                             </div>
                                         ))}
-                                        {releases.length === 0 && 
+                                        {releases.length === 0 &&
                                             <div className="col-12">
                                                 <p className="mb-0">There are no releases without a launch.</p>
                                             </div>

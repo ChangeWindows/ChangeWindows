@@ -13,6 +13,7 @@
 @import "dropdown";
 @import "ui";
 @import "form";
+@import "editor";
 
 @import "auth";
 
@@ -386,40 +387,6 @@ a.settings-card {
 // Utils
 .mw-0 {
     min-width: 0;
-}
-
-// Changelogs
-.changelog-content {
-    h1 {
-        font-size: 2.25rem;
-        font-weight: 700;
-
-        &:not(:first-child) {
-            margin-top: 3.5rem;
-        }
-
-        & + h2 {
-            margin-top: 1rem !important;
-        }
-    }
-
-    h2 {
-        @extend h2;
-        font-weight: 600;
-
-        &:not(:first-child) {
-            margin-top: 2.5rem;
-        }
-    }
-
-    h3 {
-        @extend h5;
-        font-weight: 700;
-
-        &:not(:first-child) {
-            margin-top: 1.5rem;
-        }
-    }
 }
 
 // Branding
