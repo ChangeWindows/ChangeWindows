@@ -1,54 +1,92 @@
-import React from 'react';
-import { InertiaLink } from '@inertiajs/inertia-react';
+import React from "react";
+import { InertiaLink } from "@inertiajs/inertia-react";
 
-import Admin from '../../../Layouts/Admin';
-import NaviBar from '../../../Components/NaviBar';
-import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
+import Admin from "../../../Layouts/Admin";
+import NaviBar from "../../../Components/NaviBar";
+import PlatformIcon from "../../../Components/Platforms/PlatformIcon";
 
-import AmaranthIcon, { aiCheck, aiPlus } from '@changewindows/amaranth';
+import AmaranthIcon, {
+  aiCheck,
+  aiEye,
+  aiNotes,
+  aiPen,
+  aiPlus,
+} from "@changewindows/amaranth";
 
-export default function Show({ packages, createUrl, status = null }) {
-    return (
-        <Admin>
-            <NaviBar
-                actions={
-                    <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
-                        <AmaranthIcon icon={aiPlus}/> New
+export default function Show({ packages, createUrl, can, status = null }) {
+  return (
+    <Admin>
+      <NaviBar
+        actions={
+          <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
+            <AmaranthIcon icon={aiPlus} /> New
+          </InertiaLink>
+        }
+      >
+        Packages
+      </NaviBar>
+
+      <div className="container">
+        {status && (
+          <div className="alert alert-success">
+            <AmaranthIcon icon={aiCheck} /> {status}
+          </div>
+        )}
+        <div className="row g-1">
+          {packages.map((pack, key) => (
+            <div className="col-12" key={key}>
+              <div className="card release d-flex flex-row align-items-start align-items-md-center">
+                <h3 className="h6 mb-0">
+                  <PlatformIcon platform={pack.platform} color />
+                </h3>
+                <div className="ms-0 row flex-grow-1 h-100">
+                  <div className="col-12 col-md-7 d-flex flex-row align-items-center">
+                    <h3 className="h6 mb-0">{pack.name}</h3>
+                  </div>
+                  <div className="col-12 col-md-5 release-channels d-flex flex-row justify-content-start justify-content-md-end mt-2 mt-md-0 gap-1">
+                    {pack.channels && pack.channels.length > 0 && (
+                      <div className="release-channels">
+                        {pack.channels.map((channel, _key) => (
+                          <span
+                            key={_key}
+                            className="badge me-1"
+                            style={{ background: channel.color }}
+                          >
+                            {channel.short_name}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <div className="flex-grow-1 flex-grow-md-0" />
+                    <InertiaLink
+                      href={pack.edit_url}
+                      className="btn btn-link btn-sm my-n1"
+                    >
+                      {can.edit_packages ? (
+                        <>
+                          <AmaranthIcon icon={aiPen} /> Edit
+                        </>
+                      ) : (
+                        <>
+                          <AmaranthIcon icon={aiEye} /> Show
+                        </>
+                      )}
                     </InertiaLink>
-                }
-            >
-                Packages
-            </NaviBar>
-        
-            <div className="container">
-                {status &&
-                    <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
-                }
-                <div className="row g-1">
-                    {packages.map((pack, key) => (
-                        <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={key}>
-                            <InertiaLink href={pack.edit_url} className="card border-0 shadow-sm h-100">
-                                <div className="card-body d-flex flex-column">
-                                    <div className="d-flex flex-row">
-                                        <h3 className="h6 mb-0">
-                                            <PlatformIcon platform={pack.platform} color />
-                                        </h3>
-                                        <div className="ms-2">
-                                            <h3 className="h6 mb-0">{pack.name}</h3>
-                                        </div>
-                                    </div>
-                                    <div className="flex-grow-1" />
-                                    {pack.channels.length > 0 && <div className="release-channels mt-3">
-                                        {pack.channels.map((channel, _key) => (
-                                            <span key={_key} className="badge me-1" style={{ background: channel.color }}>{channel.short_name}</span>
-                                        ))}
-                                    </div>}
-                                </div>
-                            </InertiaLink>
-                        </div>
-                    ))}
+                    <InertiaLink
+                      href={pack.edit_changelog_url}
+                      className="btn btn-link btn-sm my-n1"
+                    >
+                      <AmaranthIcon
+                        icon={can.edit_packages ? aiNotes : aiEye}
+                      />
+                    </InertiaLink>
+                  </div>
                 </div>
+              </div>
             </div>
-        </Admin>
-    )
+          ))}
+        </div>
+      </div>
+    </Admin>
+  );
 }

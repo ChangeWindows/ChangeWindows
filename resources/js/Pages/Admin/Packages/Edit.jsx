@@ -7,8 +7,10 @@ import NaviBar from "../../../Components/NaviBar";
 
 import AmaranthIcon, {
   aiCheck,
-  aiPlus,
+  aiEye,
   aiFloppyDisk,
+  aiNotes,
+  aiPlus,
   aiTrashCan,
 } from "@changewindows/amaranth";
 
@@ -159,24 +161,16 @@ export default function Edit({
               </p>
             </div>
             <div className="col-12 col-md-8">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row g-3">
-                    <div className="col-12">
-                      <div className="form-floating">
-                        <textarea
-                          className="form-control"
-                          id="changelog"
-                          style={{ minHeight: 240 }}
-                          defaultValue={curPack.changelog}
-                          onChange={formHandler}
-                        ></textarea>
-                        <label htmlFor="changelog">Changelog</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <InertiaLink
+                href={urls.edit_changelog_url}
+                className="btn btn-primary btn-sm"
+              >
+                <AmaranthIcon
+                  icon={can.edit_releases ? aiNotes : aiEye}
+                  className="me-2"
+                />
+                {can.edit_releases ? 'Edit changelog' : 'View changelog'}
+              </InertiaLink>
             </div>
           </fieldset>
         </div>

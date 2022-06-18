@@ -34,6 +34,7 @@ class PackageController extends Controller
                 return [
                     'name' => $release->name,
                     'edit_url' => $release->edit_url,
+                    'edit_changelog_url' => $release->edit_changelog_url,
                     'platform' => [
                         'icon' => $release->platform->icon,
                         'name' => $release->platform->name,
@@ -121,7 +122,8 @@ class PackageController extends Controller
             'urls' => [
                 'update_package' => route('admin.packages.update', $package, false),
                 'destroy_package' => route('admin.packages.destroy', $package, false),
-                'create_package_channel' => route('admin.releasechannels.create', ['release' => $package->id, 'platform' => $package->platform->id, 'package' => true], false)
+                'create_package_channel' => route('admin.releasechannels.create', ['release' => $package->id, 'platform' => $package->platform->id, 'package' => true], false),
+                'edit_changelog_url' => $package->edit_changelog_url
             ],
             'pack' => $package,
             'platforms' => Platform::orderBy('position')->get(),
@@ -176,7 +178,24 @@ class PackageController extends Controller
             'urls' => [
                 'update_package' => route('admin.packages.changelog.update', $package, false)
             ],
-            'package' => $package,
+            'release' => [
+                'name' => $package->name,
+                'version' => $package->version,
+                'canonical_version' => $package->canonical_version,
+                'codename' => $package->codename,
+                'description' => $package->description,
+                'platform_id' => $package->platform_id,
+                'start_preview' => $package->start_preview,
+                'start_public' => $package->start_public,
+                'start_extended' => $package->start_extended,
+                'start_lts' => $package->start_lts,
+                'end_lts' => $package->end_lts,
+                'start_build' => $package->start_build,
+                'start_delta' => $package->start_delta,
+                'end_build' => $package->end_build,
+                'end_delta' => $package->end_delta,
+                'changelog' => $package->changelog
+            ],
             'status' => session('status')
         ]);
     }
@@ -192,7 +211,9 @@ class PackageController extends Controller
     {
         $this->authorize('releases.edit');
 
-        $package->update($request->validated());
+        $package->update([
+            'changelog' => $request->get('changelog')
+        ]);
 
         return Redirect::route('admin.packages.changelog.edit', $package)->with('status', 'Succesfully updated this package.');
     }

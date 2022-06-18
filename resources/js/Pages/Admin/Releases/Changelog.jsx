@@ -10,8 +10,6 @@ import Editor from '../../../Components/Editor';
 export default function Edit({ urls, release, status = null }) {
   const [curRelease, setCurRelease] = useState(release);
 
-  console.log(curRelease);
-
   function handleSubmit(event) {
     event.preventDefault();
     Inertia.patch(urls.update_release, curRelease);

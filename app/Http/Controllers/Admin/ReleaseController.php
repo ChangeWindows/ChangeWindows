@@ -169,8 +169,7 @@ class ReleaseController extends Controller
 
         return Inertia::render('Admin/Releases/Changelog', [
             'can' => [
-                'edit_releases' => Auth::user()->can('releases.edit'),
-                'delete_releases' => Auth::user()->can('releases.delete')
+                'edit_releases' => Auth::user()->can('releases.edit')
             ],
             'urls' => [
                 'update_release' => route('admin.releases.changelog.update', $release, false)
