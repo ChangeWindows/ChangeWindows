@@ -11,7 +11,6 @@ use Auth;
 use Redirect;
 use Illuminate\Support\Collection;
 use App\Http\Requests\ReleaseRequest;
-use GrahamCampbell\Markdown\Facades\Markdown;
 
 class ReleaseController extends Controller
 {
@@ -192,7 +191,7 @@ class ReleaseController extends Controller
                 'start_delta' => $release->start_delta,
                 'end_build' => $release->end_build,
                 'end_delta' => $release->end_delta,
-                'changelog' => $release->changelog[0] === '<' ? $release->changelog : Markdown::convertToHtml($release->changelog)->getContent()
+                'changelog' => $release->changelog
             ],
             'status' => session('status')
         ]);
