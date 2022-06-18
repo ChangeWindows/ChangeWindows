@@ -32,6 +32,7 @@ export default function Package({
   pagination,
 }) {
   const editor = useEditor({
+    editable: false,
     extensions: [
       StarterKit,
       Typography,

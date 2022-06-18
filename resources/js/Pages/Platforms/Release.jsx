@@ -36,6 +36,7 @@ export default function Release({
   quick_nav,
 }) {
   const editor = useEditor({
+    editable: false,
     extensions: [StarterKit, Typography, Underline, Link],
     content: release.changelog,
   });
