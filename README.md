@@ -22,7 +22,7 @@ After ChangeWindows viv, we've decided to bring ChangeWindows Horizon - our 7th 
 ## Using
 To run ChangeWindows, you'll need the following:
 
-* PHP 7.4.0 or higher, including extensions required by Laravel 8.x
+* PHP 8.1.0 or higher, including extensions required by Laravel 9.x
 * MySQL
 * Composer
 * npm
