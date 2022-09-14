@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { usePage } from '@inertiajs/inertia-react';
 
+import '../../sass/style.scss';
+
 import AmaranthIcon, { aiArrowLeft, aiChangewindows } from '@changewindows/amaranth';
 
 import { getLocal, setLocal } from '../utils/localStorage';

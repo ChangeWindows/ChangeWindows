@@ -4,11 +4,10 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <script src="{{ asset('js/manifest.js') }}" defer></script>
-        <script src="{{ asset('js/vendor.js') }}" defer></script>
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
+        @viteReactRefresh
+        @vite('resources/js/app.jsx')
+        @inertiaHead
+
         <meta name="color-scheme" content="light">
 
         <meta name="theme-color" content="#f3f3f3">
