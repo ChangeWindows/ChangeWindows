@@ -8,6 +8,8 @@
         @vite('resources/js/app.jsx')
         @inertiaHead
 
+        @routes
+
         <meta name="color-scheme" content="light">
 
         <meta name="theme-color" content="#f3f3f3">
