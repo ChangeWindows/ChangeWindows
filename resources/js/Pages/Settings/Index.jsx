@@ -121,6 +121,9 @@ export default function Show({ app, patrons }) {
               <a href="https://github.com/changewindows/horizon" target="_blank" className="btn btn-primary btn-sm"><AmaranthIcon icon={aiGithub} /> GitHub</a>
               <a href="https://patreon.com/changewindows" target="_blank" className="btn btn-primary btn-sm"><AmaranthIcon icon={aiPatreon} /> Patreon</a>
             </div>
+            <div className="mt-3">
+            <a className="h1 m-0 f-384 fw-bold" href="https://studio384.be" target="_blank">Studio <span className="studio-384">384</span></a>
+            </div>
           </div>
         </fieldset>
       </div>

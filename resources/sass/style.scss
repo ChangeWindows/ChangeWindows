@@ -465,9 +465,9 @@ a.settings-card {
 .bg-orag
 
 // Branding
-.f-384 {
+.f-384, a.f-384 {
     font-family: "Century Gothic", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
-        sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
     color: var(--text);
     text-decoration: none;
 
@@ -479,5 +479,6 @@ a.settings-card {
 .studio-384 {
     background-image: linear-gradient(-45deg, #00b573 0%, #78b500 100%);
     background-clip: text;
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
