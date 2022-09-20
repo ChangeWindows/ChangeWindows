@@ -27,17 +27,17 @@ export default function FlagStatus({ flagStatus, hideBuild = false }) {
       <span className="d-inline-block px-2 py-1 h-100">
       {
         flagStatus.status === "unknown"
-          ? "Unknown"
+          ? <>U<span className="d-none d-lg-inline">nknown</span></>
           : flagStatus.status === "always-enabled"
-          ? "Always Enabled"
+          ? <>A<span className="d-none d-lg-inline">lways </span>E<span className="d-none d-lg-inline">nabled</span></>
           : flagStatus.status === "enabled-by-default"
-          ? "Enabled by Default"
+          ? <>E<span className="d-none d-lg-inline">nabled </span>b<span className="d-none d-lg-inline">y </span>D<span className="d-none d-lg-inline">efault</span></>
           : flagStatus.status === "disabled-by-default"
-          ? "Disabled by Default"
+          ? <>D<span className="d-none d-lg-inline">isabled </span>b<span className="d-none d-lg-inline">y </span>D<span className="d-none d-lg-inline">efault</span></>
           : flagStatus.status === "always-disabled"
-          ? "Always Disabled"
+          ? <>A<span className="d-none d-lg-inline">lways </span>D<span className="d-none d-lg-inline">isabled</span></>
           : flagStatus.status === "removed"
-          ? "Removed"
+          ? <>R<span className="d-none d-lg-inline">emoved</span></>
           : ""
       }
       </span>

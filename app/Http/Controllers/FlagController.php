@@ -21,7 +21,7 @@ class FlagController extends Controller
     public function index()
     {
         $flags = Flag::orderBy('feature_name', 'asc')->where('removed', null)->with('latestStatus');
-        $paginator = $flags->paginate(100)->onEachSide(2)->through(function () {
+        $paginator = $flags->paginate(100)->onEachSide(1)->through(function () {
             return [];
         });
 
@@ -39,7 +39,7 @@ class FlagController extends Controller
     public function history()
     {
         $flag_status = FlagStatus::orderBy('build', 'desc')->with('flag', 'flag.latestStatusChange', 'flag.flagStatus');
-        $paginator = $flag_status->paginate(100)->onEachSide(2)->through(function () {
+        $paginator = $flag_status->paginate(100)->onEachSide(1)->through(function () {
             return [];
         });
 
@@ -72,7 +72,7 @@ class FlagController extends Controller
     public function removed()
     {
         $flags = Flag::orderBy('feature_name', 'asc')->where('removed', '<>', null)->with('latestStatus');
-        $paginator = $flags->paginate(100)->onEachSide(2)->through(function () {
+        $paginator = $flags->paginate(100)->onEachSide(1)->through(function () {
             return [];
         });
 

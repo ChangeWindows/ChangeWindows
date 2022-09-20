@@ -19,70 +19,73 @@
 
 // Dark mode
 @function light-dark($light, $dark) {
-    @return var(--light, #{ $light }) var(--dark, #{ $dark });
+    @return var(--light, #{$light}) var(--dark, #{$dark});
 }
 
 :root {
     --ON: initial;
     --OFF: ;
 
-    --text: #{ light-dark($body-color, $gray-100) };
-    --text-inverse: #{ light-dark($gray-100, $body-color) };
-    --text-hover: #{ light-dark(lighten($body-color, 20), darken($gray-100, 25)) };
+    --text: #{light-dark($body-color, $gray-100)};
+    --text-inverse: #{light-dark($gray-100, $body-color)};
+    --text-hover: #{light-dark(lighten($body-color, 20), darken($gray-100, 25))};
 
-    --nav-bg: #{ light-dark(darken($light, 4.5), darken($dark, 6.5)) };
-    --nav-bg-acrylic: #{ light-dark(rgba(darken($light, 6), .75), rgba(darken($dark, 6), .75)) };
-    --nav-border-color: #{ light-dark(darken($light, 12), darken($dark, 9)) };
-    --nav-mobile-bg: #{ light-dark($light, $dark) };
-    --nav-color-label: #{ light-dark(lighten($body-color, 35), lighten($gray-100, 35)) };
-    --nav-search-bg: #{ light-dark(#fff, darken($dark, 4)) };
+    --nav-bg: #{light-dark(darken($light, 4.5), darken($dark, 6.5))};
+    --nav-bg-acrylic: #{light-dark(rgba(darken($light, 6), 0.75), rgba(darken($dark, 6), 0.75))};
+    --nav-border-color: #{light-dark(darken($light, 12), darken($dark, 9))};
+    --nav-mobile-bg: #{light-dark($light, $dark)};
+    --nav-color-label: #{light-dark(lighten($body-color, 35), lighten($gray-100, 35))};
+    --nav-search-bg: #{light-dark(#fff, darken($dark, 4))};
 
-    --nav-item-hover: #{ light-dark(darken($light, 9), darken($dark, 3)) };
-    --nav-bar-item-hover: #{ light-dark(darken($light, 3), darken($dark, 3)) };
+    --nav-item-hover: #{light-dark(darken($light, 9), darken($dark, 3))};
+    --nav-bar-item-hover: #{light-dark(darken($light, 3), darken($dark, 3))};
 
-    --main-bg: #{ light-dark(darken($light, 2), darken($dark, 4)) };
-    --main-bg-acrylic: #{ light-dark(rgba(darken($light, 2), .75), rgba(darken($dark, 4), .75)) };
-    --main-border-color: #{ light-dark(darken($light, 8), darken($dark, 8)) };
+    --main-bg: #{light-dark(darken($light, 2), darken($dark, 4))};
+    --main-bg-acrylic: #{light-dark(rgba(darken($light, 2), 0.75), rgba(darken($dark, 4), 0.75))};
+    --main-border-color: #{light-dark(darken($light, 8), darken($dark, 8))};
 
-    --timeline-bg-nth: #{ light-dark(darken($light, 6), $dark) };
-    --timeline-bg-hover: #{ light-dark(darken($light, 8), lighten($dark, 4)) };
+    --timeline-bg-nth: #{light-dark(darken($light, 6), $dark)};
+    --timeline-bg-hover: #{light-dark(darken($light, 8), lighten($dark, 4))};
 
-    --card-bg: #{ light-dark($light, $dark) };
-    --card-bg-hover: #{ light-dark(darken($light, 3), lighten($dark, 4)) };
+    --card-bg: #{light-dark($light, $dark)};
+    --card-bg-hover: #{light-dark(darken($light, 3), lighten($dark, 4))};
 
-    --card-add-bg-hover: #{ light-dark(rgba(darken($light, 5), .5), rgba(darken($dark, 5), .5)) };
-    --card-add-border: #{ light-dark(darken($light, 10), darken($dark, 7)) };
-    --card-add-border-hover: #{ light-dark(darken($light, 13), darken($dark, 9)) };
+    --card-add-bg-hover: #{light-dark(rgba(darken($light, 5), 0.5), rgba(darken($dark, 5), 0.5))};
+    --card-add-border: #{light-dark(darken($light, 10), darken($dark, 7))};
+    --card-add-border-hover: #{light-dark(darken($light, 13), darken($dark, 9))};
 
-    --dropdown-bg: #{ light-dark($light, lighten($dark, 3)) };
-    --dropdown-bg-hover: #{ light-dark(darken($light, 3), darken($dark, 1)) };
+    --dropdown-bg: #{light-dark($light, lighten($dark, 3))};
+    --dropdown-bg-hover: #{light-dark(darken($light, 3), darken($dark, 1))};
 
-    --form-disabled-bg: #{ light-dark($light, transparent) };
-    --checkbox-bg: #{ light-dark(#fff, darken($dark, 6)) };
-    --checkbox-disabled-bg: #{ light-dark(#eee, darken($dark, 2)) };
-    --switch-bg-image: #{ light-dark(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%28255, 255, 255, 0.25%29'/%3e%3c/svg%3e")) };
+    --form-disabled-bg: #{light-dark($light, transparent)};
+    --checkbox-bg: #{light-dark(#fff, darken($dark, 6))};
+    --checkbox-disabled-bg: #{light-dark(#eee, darken($dark, 2))};
+    --switch-bg-image: #{light-dark(
+            url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e"),
+            url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%28255, 255, 255, 0.25%29'/%3e%3c/svg%3e")
+        )};
 
-    --btn-transparent-bg-hover: #{ light-dark(rgba($dark, .2), rgba($light, .1)) };
+    --btn-transparent-bg-hover: #{light-dark(rgba($dark, 0.2), rgba($light, 0.1))};
 
-    --progress-bg: #{ light-dark(#fff, darken($dark, 6)) };
+    --progress-bg: #{light-dark(#fff, darken($dark, 6))};
 
-    --scroll-native: #{ light-dark(darken($light, 6), darken($dark, 6)) };
-    --scroll-webkit: #{ light-dark(darken($light, 16), lighten($dark, 12)) };
+    --scroll-native: #{light-dark(darken($light, 6), darken($dark, 6))};
+    --scroll-webkit: #{light-dark(darken($light, 16), lighten($dark, 12))};
 
-    --alert-success-bg: #{ light-dark($green-100, $green-800) };
-    --alert-success-color: #{ light-dark($green-700, $green-100) };
+    --alert-success-bg: #{light-dark($green-100, $green-800)};
+    --alert-success-color: #{light-dark($green-700, $green-100)};
 
-    --alert-warning-bg: #{ light-dark($yellow-100, $yellow-800) };
-    --alert-warning-color: #{ light-dark($yellow-800, $yellow-100) };
+    --alert-warning-bg: #{light-dark($yellow-100, $yellow-800)};
+    --alert-warning-color: #{light-dark($yellow-800, $yellow-100)};
 
-    --alert-danger-bg: #{ light-dark($red-100, $red-800) };
-    --alert-danger-color: #{ light-dark($red-700, $red-100) };
+    --alert-danger-bg: #{light-dark($red-100, $red-800)};
+    --alert-danger-color: #{light-dark($red-700, $red-100)};
 
-    --alert-info-bg: #{ light-dark($cyan-100, $cyan-800) };
-    --alert-info-color: #{ light-dark($cyan-700, $cyan-100) };
+    --alert-info-bg: #{light-dark($cyan-100, $cyan-800)};
+    --alert-info-color: #{light-dark($cyan-700, $cyan-100)};
 
-    --display-light: #{ light-dark(block, none) };
-    --display-dark: #{ light-dark(none, block) };
+    --display-light: #{light-dark(block, none)};
+    --display-dark: #{light-dark(none, block)};
 }
 
 .theme-default,
@@ -108,11 +111,11 @@ body {
 }
 
 .display-light {
-    display: var(--display-light)
+    display: var(--display-light);
 }
 
 .display-dark {
-    display: var(--display-dark)
+    display: var(--display-dark);
 }
 
 // Core branding
@@ -180,7 +183,8 @@ body {
 }
 
 .timeline {
-    a.event {
+    a.event,
+    a.flag {
         text-decoration: none;
         color: inherit;
 
@@ -194,10 +198,10 @@ body {
         min-height: 40px;
         align-items: center;
         transition: $transition-base;
-        border-radius: .25rem;
+        border-radius: 0.25rem;
 
         &:not(:last-child) {
-            margin-bottom: .25rem;
+            margin-bottom: 0.25rem;
         }
 
         &:nth-child(odd) {
@@ -217,33 +221,72 @@ body {
         }
 
         .revision {
-            margin-right: .5rem;
+            margin-right: 0.5rem;
             flex-shrink: 0;
         }
 
         .message {
             flex: 1;
-            margin-right: .5rem;
+            margin-right: 0.5rem;
         }
 
         .tags {
             display: flex;
             flex: 1;
             flex-wrap: wrap;
-            margin-right: .5rem;
-            margin-bottom: .5rem;
-            margin-top: .25rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            margin-top: 0.25rem;
             padding: 0;
 
             & > span {
-              margin: .25rem 0 0 0;
+                margin: 0.25rem 0 0 0;
             }
         }
 
         .version {
-            margin-right: .5rem;
+            margin-right: 0.5rem;
             font-size: 90%;
             text-align: right;
+        }
+    }
+
+    .flag {
+        width: 100%;
+        gap: 0.5rem 1rem;
+        padding: 0.25rem 0.5rem;
+        display: grid;
+        grid-template-columns: fit-content(100%) auto auto;
+        grid-template-rows: auto;
+        grid-template-areas: "flag-name flag-id flag-status";
+        transition: $transition-base;
+        border-radius: 0.25rem;
+        height: 40px;
+        align-items: center;
+
+        .flag-name {
+            grid-area: flag-name;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .flag-id {
+            grid-area: flag-id;
+        }
+
+        .flag-status {
+            grid-area: flag-status;
+
+            justify-self: flex-end;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 0.25rem;
+        }
+
+        &:nth-child(odd) {
+            background-color: var(--timeline-bg-nth);
         }
     }
 }
@@ -267,7 +310,7 @@ a.card {
     .card-footer {
         background: transparent;
         border-top: 1px solid var(--main-border-color);
-        padding: .5rem 0.75rem;
+        padding: 0.5rem 0.75rem;
     }
 
     &.channel {
@@ -275,7 +318,7 @@ a.card {
         background-color: var(--card-bg);
         border: none;
         box-shadow: $box-shadow-sm;
-        padding: .5rem 0.75rem;
+        padding: 0.5rem 0.75rem;
         height: 84px;
         display: flex;
         flex-direction: column;
@@ -327,7 +370,7 @@ a.card {
 
         .release-actions {
             border-top: 1px solid var(--nav-bg);
-            padding: .5rem 0.75rem;
+            padding: 0.5rem 0.75rem;
             border-bottom-left-radius: $border-radius;
             border-bottom-right-radius: $border-radius;
             margin: 0.75rem -0.75rem -0.5rem -0.75rem;
@@ -337,16 +380,16 @@ a.card {
 
 // Utilities
 .text-sm {
-    font-size: .8rem;
+    font-size: 0.8rem;
 }
 
 .text-md {
-    font-size: .9rem;
+    font-size: 0.9rem;
 }
 
 // Settings
 .settings-card {
-    padding: 0 1rem 0 .25rem;
+    padding: 0 1rem 0 0.25rem;
     height: 64px;
     background-color: var(--card-bg);
     display: flex;
@@ -356,7 +399,7 @@ a.card {
     border: var(--main-border-color) 1px solid;
 
     & + & {
-        margin-top: .125rem;
+        margin-top: 0.125rem;
     }
 
     .settings-icon {
@@ -368,7 +411,7 @@ a.card {
     }
 
     .form-control {
-        padding: .25rem .5rem;
+        padding: 0.25rem 0.5rem;
     }
 }
 
@@ -382,6 +425,12 @@ a.settings-card {
         transition: $transition-base;
         background-color: var(--card-bg-hover);
     }
+}
+
+// Tables
+.table {
+    --bs-table-color: var(--text);
+    --bs-border-color: var(--main-border-color);
 }
 
 // Utils
@@ -417,7 +466,8 @@ a.settings-card {
 
 // Branding
 .f-384 {
-    font-family: "Century Gothic", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Century Gothic", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+        sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     color: var(--text);
     text-decoration: none;
 

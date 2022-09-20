@@ -22,17 +22,17 @@ export default function Index({ flags, pagination }) {
           <ul className="navbar-nav me-auto d-flex">
             <li className="nav-item">
               <InertiaLink className="nav-link active" href="/flags">
-                <AmaranthIcon icon={aiStar} /> Current
+                <AmaranthIcon icon={aiStar} /> <span className="d-none d-sm-inline-block ms-1">Current</span>
               </InertiaLink>
             </li>
             <li className="nav-item">
               <InertiaLink className="nav-link" href="/flags/history">
-                <AmaranthIcon icon={aiClockRotateLeft} /> History
+                <AmaranthIcon icon={aiClockRotateLeft} />  <span className="d-none d-sm-inline-block ms-1">History</span>
               </InertiaLink>
             </li>
             <li className="nav-item">
               <InertiaLink className="nav-link" href="/flags/removed">
-                <AmaranthIcon icon={aiTrashCan} /> Removed
+                <AmaranthIcon icon={aiTrashCan} />  <span className="d-none d-sm-inline-block ms-1">Removed</span>
               </InertiaLink>
             </li>
           </ul>
@@ -54,6 +54,7 @@ export default function Index({ flags, pagination }) {
           <div className="col-12 timeline">
             {flags.data.map((flag) => (
               <FlagCurrent
+                hideBuild
                 flag={flag}
                 key={flag.id}
                 url={route("front.flags.show", flag)}
