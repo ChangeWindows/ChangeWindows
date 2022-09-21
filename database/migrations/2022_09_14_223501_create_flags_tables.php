@@ -43,9 +43,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('flag_id')->constrained('flags')->onDelete('cascade');
             $table->string('name')->required();
-            $table->string('feature_name')->required();
-            $table->integer('feature_id')->required();
             $table->text('description')->nullable();
+            $table->integer('status')->required();
             $table->timestamps();
         });
     }

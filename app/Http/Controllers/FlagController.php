@@ -10,6 +10,7 @@ use Auth;
 use Redirect;
 use File;
 use Illuminate\Support\Str;
+use App\Http\Requests\FlagSuggestionRequest;
 
 class FlagController extends Controller
 {
@@ -102,5 +103,22 @@ class FlagController extends Controller
     public function about()
     {
         return Inertia::render('Flags/About');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function suggestion(Flag $flag, FlagSuggestionRequest $request)
+    {
+        $flag->flagSuggestions()->create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'status' => 1,
+            'user_id' => auth()->user() ? auth()->user()->id : null
+        ]);
+
+        return Redirect::route('front.flags.show', $flag)->with('status', 'Your suggestion has been saved.');
     }
 }

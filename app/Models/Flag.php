@@ -26,6 +26,11 @@ class Flag extends Model implements Searchable
         return $this->hasMany(FlagStatus::class);
     }
 
+    public function flagSuggestions()
+    {
+        return $this->hasMany(FlagSuggestion::class);
+    }
+
     public function latestStatus()
     {
         return $this->hasOne(FlagStatus::class)->orderBy('build', 'desc')->latest();

@@ -24,9 +24,15 @@ export default function Show({ flag }) {
 
   function submit(e) {
     e.preventDefault();
-    post(route("front.flags.suggestion", { flag: data }));
-    reset();
-    setShow(false);
+    post(route("front.flags.suggestion", flag), {
+      onSuccess: () => {
+        reset();
+        setShow(false);
+      },
+      onError: () => {
+        console.log("error");
+      }
+    });
   }
 
   const handleClose = () => setShow(false);
