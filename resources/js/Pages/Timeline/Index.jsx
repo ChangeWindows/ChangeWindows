@@ -3,13 +3,12 @@ import { InertiaHead } from "@inertiajs/inertia-react";
 
 import App from "../../Layouts/App";
 import Channel from "../../Components/Cards/Channel";
-import Flight from "../../Components/Timeline/Flight";
-import Launch from "../../Components/Timeline/Launch";
 import Pagination from "../../Components/Pagination";
 import PlatformIcon from "../../Components/Platforms/PlatformIcon";
 import PlatformNavigation from "../../Components/PlatformNavigation";
-import Promotion from "../../Components/Timeline/Promotion";
 import Timeline from "../../Components/Timeline/Timeline";
+
+import PlatformTimelineCard from "./_PlatformTimelineCard";
 
 import { parseISO } from "date-fns";
 import AmaranthIcon, { aiPatreon } from "@changewindows/amaranth";
@@ -43,44 +42,9 @@ export default function Index({
                 <div className="row g-1">
                   {Object.keys(timeline).map((date, key) => (
                     <Timeline date={parseISO(timeline[date].date)} key={key}>
-                      {timeline[date].flights.map((flight, _key) => {
-                        if (flight.type === "flight") {
-                          return (
-                            <Flight
-                              key={`${flight.type}-${flight.id}`}
-                              platform={flight.platform}
-                              build={flight.flight}
-                              channels={flight.release_channel}
-                              version={flight.version}
-                              pack={flight.package}
-                              url={flight.url}
-                            />
-                          );
-                        }
-
-                        if (flight.type === "promotion") {
-                          return (
-                            <Promotion
-                              key={`${flight.type}-${flight.id}`}
-                              platform={flight.platform}
-                              channel={flight.release_channel}
-                              version={flight.version}
-                              url={flight.url}
-                            />
-                          );
-                        }
-
-                        if (flight.type === "launch") {
-                          return (
-                            <Launch
-                              key={`${flight.type}-${flight.id}`}
-                              platform={flight.platform}
-                              version={flight.version}
-                              url={flight.url}
-                            />
-                          );
-                        }
-                      })}
+                      {timeline[date].flights.map((platform, _key) => (
+                        <PlatformTimelineCard platform={platform} />
+                      ))}
                     </Timeline>
                   ))}
                   <Pagination pagination={pagination} />

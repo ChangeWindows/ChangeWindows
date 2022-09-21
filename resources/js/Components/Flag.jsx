@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { InertiaLink } from "@inertiajs/inertia-react";
 
-import clsx from "clsx";
 import FlagStatus from "./_FlagStatus";
 
 import AmaranthIcon, { aiAngleRight } from "@changewindows/amaranth";

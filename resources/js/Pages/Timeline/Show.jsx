@@ -1,30 +1,42 @@
-import React, { Fragment } from 'react';
-import { InertiaHead } from '@inertiajs/inertia-react';
+import React, { Fragment } from "react";
+import { InertiaHead } from "@inertiajs/inertia-react";
 
-import App from '../../Layouts/App';
-import Channel from '../../Components/Cards/Channel';
-import Flight from '../../Components/Timeline/Flight';
-import Launch from '../../Components/Timeline/Launch';
-import Promotion from '../../Components/Timeline/Promotion';
-import Timeline from '../../Components/Timeline/Timeline';
+import App from "../../Layouts/App";
+import Channel from "../../Components/Cards/Channel";
+import Timeline from "../../Components/Timeline/Timeline";
 
-import PlatformIcon from '../../Components/Platforms/PlatformIcon';
-import PlatformNavigation from '../../Components/PlatformNavigation';
-import Pagination from '../../Components/Pagination';
+import PlatformIcon from "../../Components/Platforms/PlatformIcon";
+import PlatformNavigation from "../../Components/PlatformNavigation";
+import Pagination from "../../Components/Pagination";
 
-import { parseISO } from 'date-fns';
+import PlatformTimelineCard from "./_PlatformTimelineCard";
 
-export default function Show({ timeline, pagination, platform, platforms, channel_platforms }) {
+import { parseISO } from "date-fns";
+
+export default function Show({
+  timeline,
+  pagination,
+  platform,
+  platforms,
+  channel_platforms,
+}) {
   return (
     <App>
       <InertiaHead title={`${platform.name} timeline`} />
 
-      <PlatformNavigation all="/timeline" page="Timeline" platforms={platforms} />
+      <PlatformNavigation
+        all="/timeline"
+        page="Timeline"
+        platforms={platforms}
+      />
 
       <div className="container">
         <div className="row g-1">
           <div className="col-12 titlebar">
-            <h1 style={{ color: platform.color }}><PlatformIcon platform={platform} color className="me-2" /> {platform.name}</h1>
+            <h1 style={{ color: platform.color }}>
+              <PlatformIcon platform={platform} color className="me-2" />{" "}
+              {platform.name}
+            </h1>
           </div>
           <div className="col">
             <div className="row g-3">
@@ -32,44 +44,9 @@ export default function Show({ timeline, pagination, platform, platforms, channe
                 <div className="row g-1">
                   {Object.keys(timeline).map((date, key) => (
                     <Timeline date={parseISO(timeline[date].date)} key={key}>
-                      {timeline[date].flights.map((flight, _key) => {
-                        if (flight.type === 'flight') {
-                          return (
-                            <Flight
-                              key={`${flight.type}-${flight.id}`}
-                              platform={flight.platform}
-                              build={flight.flight}
-                              channels={flight.release_channel}
-                              version={flight.version}
-                              pack={flight.package}
-                              url={flight.url}
-                            />
-                          );
-                        }
-
-                        if (flight.type === 'promotion') {
-                          return (
-                            <Promotion
-                              key={`${flight.type}-${flight.id}`}
-                              platform={flight.platform}
-                              channel={flight.release_channel}
-                              version={flight.version}
-                              url={flight.url}
-                            />
-                          );
-                        }
-
-                        if (flight.type === 'launch') {
-                          return (
-                            <Launch
-                              key={`${flight.type}-${flight.id}`}
-                              platform={flight.platform}
-                              version={flight.version}
-                              url={flight.url}
-                            />
-                          );
-                        }
-                      })}
+                      {timeline[date].flights.map((_platform, _key) => (
+                        <PlatformTimelineCard platform={_platform} />
+                      ))}
                     </Timeline>
                   ))}
                   <Pagination pagination={pagination} />
@@ -89,8 +66,10 @@ export default function Show({ timeline, pagination, platform, platforms, channe
                         <Channel
                           key={_key}
                           channel={{ color: channel.color, name: channel.name }}
-                          build={channel.flight ? channel.flight.version : ''}
-                          date={channel.flight ? parseISO(channel.flight.date) : ''}
+                          build={channel.flight ? channel.flight.version : ""}
+                          date={
+                            channel.flight ? parseISO(channel.flight.date) : ""
+                          }
                           url={channel.flight ? channel.flight.url : undefined}
                         />
                       ))}
@@ -103,5 +82,5 @@ export default function Show({ timeline, pagination, platform, platforms, channe
         </div>
       </div>
     </App>
-  )
+  );
 }

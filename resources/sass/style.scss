@@ -184,6 +184,8 @@ body {
 
 .timeline {
     a.event,
+    a.platform-event,
+    a.subevent,
     a.flag {
         text-decoration: none;
         color: inherit;
@@ -206,6 +208,153 @@ body {
 
         &:nth-child(odd) {
             background-color: var(--timeline-bg-nth);
+        }
+
+        .icon {
+            width: 40px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        &.full-timeline {
+            .revision {
+                min-width: 150px;
+            }
+        }
+
+        .revision {
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .message {
+            flex: 1;
+            margin-right: 0.5rem;
+        }
+
+        .tags {
+            display: flex;
+            flex: 1;
+            flex-wrap: wrap;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            margin-top: 0.25rem;
+            padding: 0;
+
+            & > span {
+                margin: 0.25rem 0 0 0;
+            }
+        }
+
+        .version {
+            margin-right: 0.5rem;
+            font-size: 90%;
+            text-align: right;
+        }
+    }
+
+    .platform-event {
+        --event-border-radius: 0.375rem;
+
+        width: 100%;
+        padding: 0 0 0 0.75rem;
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: 20px auto;
+        grid-template-areas: "platform-event-icon platform-event-events";
+        min-height: 40px;
+        align-items: flex-start;
+
+        transition: $transition-base;
+
+        box-shadow: $box-shadow-sm;
+        background-color: var(--timeline-bg-nth);
+        border-radius: var(--event-border-radius);
+
+        .platform-event-icon {
+            grid-area: platform-event-icon;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .platform-event-events {
+            grid-area: platform-event-events;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 0.25rem;
+        }
+
+        .subevent {
+            padding: 0 0.5rem;
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: 32px 120px auto;
+            grid-template-areas: "subevent-version subevent-build subevent-tags";
+            height: 40px;
+            align-content: center;
+
+            transition: background-color .2s ease-in-out;
+
+            &:first-child {
+                border-top-left-radius: 0 !important;
+                border-top-right-radius: var(--event-border-radius) !important;
+            }
+
+            &:last-child {
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: var(--event-border-radius) !important;
+            }
+
+            &.subevent-colored {
+                grid-template-columns: 32px auto;
+                grid-template-areas: "subevent-version subevent-build subevent-build";
+
+                border-top-color: transparent;
+                border-radius: var(--event-border-radius) 0 0 var(--event-border-radius);
+
+                & + .subevent {
+                    border-top-color: transparent;
+                }
+
+                .subevent-version {
+                    color: #fff;
+                }
+            }
+
+            &:not(:first-child) {
+                border-top: 1px solid var(--nav-border-color);
+            }
+
+            &:hover {
+                border-top: none;
+                border-radius: var(--event-border-radius) 0 0 var(--event-border-radius);
+            }
+
+            &:hover + .subevent {
+                border-top: none;
+            }
+
+            .subevent-version {
+                grid-area: subevent-version;
+                font-family: $font-family-monospace;
+                color: $text-muted;
+            }
+
+            .subevent-build {
+                grid-area: subevent-build;
+            }
+
+            .subevent-tags {
+                grid-area: subevent-tags;
+                display: flex;
+                align-items: center;
+
+                .badge {
+                    display: block;
+                }
+            }
         }
 
         .icon {
