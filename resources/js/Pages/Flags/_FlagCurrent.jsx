@@ -10,13 +10,16 @@ export default function FlagCurrent({ flag, url = null, hideBuild = false }) {
   const mainProps = useMemo(() => ({ href: url }), ["url"]);
 
   return (
-    <Component {...mainProps} className={clsx("event px-2")}>
-      <div className="revision">{flag.feature_name}</div>
+    <Component {...mainProps} className="flag">
+      <div className="flag-name">{flag.feature_name}</div>
       {flag.latest_status.feature_id !== null && (
-        <div className="text-muted font-monospace">{flag.latest_status.feature_id}</div>
+        <div className="flag-id text-muted font-monospace">
+          {flag.latest_status.feature_id}
+        </div>
       )}
-      <div className="flex-grow-1" />
-      <FlagStatus flagStatus={flag.latest_status} hideBuild />
+      <div className="flag-status">
+        <FlagStatus flagStatus={flag.latest_status} hideBuild />
+      </div>
     </Component>
   );
 }
