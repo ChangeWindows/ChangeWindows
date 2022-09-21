@@ -21,7 +21,7 @@
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="https://changewindows.org" />
         <meta name="twitter:title" content="ChangeWindows" />
-        <meta name="twitter:description" content="Follow the latest flight on all Windows paltforms." />
+        <meta name="twitter:description" content="Follow the latest flight on all Windows platforms." />
         <meta name="twitter:image" content="{{ asset('images/logo-mask-512.png') }}" />
     </head>
     <body>
