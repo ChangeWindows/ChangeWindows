@@ -611,7 +611,24 @@ a.settings-card {
     background: $purple;
 }
 
-.bg-orag
+// Modal
+.modal-content {
+    background-color: var(--card-bg);
+
+    .btn-close {
+        color: var(--text);
+    }
+
+    .modal-header,
+    .modal-footer {
+        border: none;
+    }
+
+    .modal-footer {
+        justify-content: space-between;
+    }
+}
+
 
 // Branding
 .f-384, a.f-384 {

@@ -60,6 +60,7 @@ Route::prefix('')->as('front')->group(function() {
         Route::get('/removed', 'removed')->name('.removed');
         Route::get('/about', 'about')->name('.about');
         Route::get('/{flag}', 'show')->name('.show');
+        Route::post('/{flag}/suggestion', 'suggestion')->name('.suggestion');
     });
 
     Route::controller(ChannelController::class)->prefix('channels')->as('.channels')->group(function() {
