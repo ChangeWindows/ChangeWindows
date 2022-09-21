@@ -21,7 +21,7 @@ class FlagController extends Controller
      */
     public function index()
     {
-        $this->authorize('flights.show');
+        $this->authorize('flags.show');
 
         $flag_status = FlagStatus::orderBy('build', 'desc')->with('flag', 'flag.latestStatusChange', 'flag.flagStatus');
         $paginator = $flag_status->paginate(150)->onEachSide(2)->through(function () {
@@ -30,8 +30,8 @@ class FlagController extends Controller
 
         return Inertia::render('Admin/Flags/Show', [
             'can' => [
-                'create_flights' => Auth::user()->can('flights.create'),
-                'edit_flights' => Auth::user()->can('flights.edit')
+                'createFlags' => Auth::user()->can('flags.create'),
+                'editFlags' => Auth::user()->can('flags.edit')
             ],
             'flagStatus' => $flag_status->paginate(150)->map(function ($flag_status) {
                 $flag_status->flag->setRelation('latestStatusChange', $flag_status->flag->latestStatusChange->take(2));
@@ -51,7 +51,7 @@ class FlagController extends Controller
      */
     public function batch(Request $request)
     {
-        $this->authorize('flights.edit');
+        $this->authorize('flags.edit');
 
         $this->validate(request(), [
             'build' => ['required']

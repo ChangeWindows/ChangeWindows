@@ -12,7 +12,7 @@ export default function AdminNavigation() {
     <NavigationBar
       main={[
         { type: 'link', url: '/admin/flights', icon: aiPlane, title: 'Flights', permission: nav_can.show_flights },
-        { type: 'link', url: '/admin/flags', icon: aiFlag, title: 'Flags', permission: nav_can.show_flights },
+        { type: 'link', url: '/admin/flags', icon: aiFlag, title: 'Flags', permission: nav_can.show_flags },
         { type: 'link', url: '/admin/releases', icon: aiSoftwareBox, title: 'Releases', permission: nav_can.show_flights },
         { type: 'link', url: '/admin/packages', icon: aiBox, title: 'Packages', permission: nav_can.show_releases },
         { type: 'link', url: '/admin/platforms', icon: aiDevices, title: 'Platforms', permission: nav_can.show_platforms },
