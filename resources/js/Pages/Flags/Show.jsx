@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { InertiaHead, InertiaLink } from "@inertiajs/inertia-react";
 import { useForm } from "@inertiajs/inertia-react";
 
 import App from "../../Layouts/App";
 import FlagStatus from "../../Components/_FlagStatus";
+import NaviBar from "../../Components/NaviBar";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -31,7 +32,7 @@ export default function Show({ flag }) {
       },
       onError: () => {
         console.log("error");
-      }
+      },
     });
   }
 
@@ -41,11 +42,22 @@ export default function Show({ flag }) {
   return (
     <App>
       <InertiaHead title="Flags" />
+      <NaviBar
+        actions={
+          <Button variant="primary" size="sm" onClick={handleShow}>
+            <AmaranthIcon icon={aiPen} /> Submit a suggestion
+          </Button>
+        }
+      >
+        {flag.latest_contents?.name || flag.feature_name}
+      </NaviBar>
 
       <div className="container">
         <div className="row g-1">
           <div className="col-12 titlebar">
-            <h2 className="h1 mb-1">{flag.latest_contents?.name || flag.feature_name}</h2>
+            <h2 className="h1 mb-1">
+              {flag.latest_contents?.name || flag.feature_name}
+            </h2>
             <h3 className="h5 fw-normal mb-3">
               {flag.feature_name}{" "}
               {flag.flag_status[0].feature_id && (
@@ -63,14 +75,6 @@ export default function Show({ flag }) {
                 </i>
               )}
             </p>
-            <Button
-              variant="primary"
-              size="sm"
-              className="mb-3"
-              onClick={handleShow}
-            >
-              <AmaranthIcon icon={aiPen} /> Submit a suggestion
-            </Button>
           </div>
           <div className="col-12 titlebar">
             <p className="h5 fw-bold">Flag history</p>

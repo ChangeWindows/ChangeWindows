@@ -10,7 +10,6 @@ import AmaranthIcon, {
   aiArrowUp,
   aiClockRotateLeft,
   aiFlag,
-  aiTrashCan,
 } from "@changewindows/amaranth";
 
 import clsx from "clsx";
