@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('flags', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->required();
             $table->string('feature_name')->charset('utf8')->collate('utf8_cs')->required();
-            $table->text('description')->nullable();
             $table->string('added')->required();
             $table->string('removed')->nullable();
             $table->string('slug')->required();
@@ -33,18 +31,13 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('flag_authors', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('flag_id')->constrained('flags')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-        });
-
-        Schema::create('flag_suggestions', function (Blueprint $table) {
+        Schema::create('flag_contents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('flag_id')->constrained('flags')->onDelete('cascade');
             $table->string('name')->required();
             $table->text('description')->nullable();
             $table->integer('status')->required();
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -56,8 +49,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('flag_suggestions');
-        Schema::dropIfExists('flag_authors');
+        Schema::dropIfExists('flag_contents');
         Schema::dropIfExists('flag_status');
         Schema::dropIfExists('flags');
     }

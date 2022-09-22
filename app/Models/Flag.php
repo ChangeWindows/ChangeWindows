@@ -19,16 +19,21 @@ class Flag extends Model implements Searchable
     public $searchableType = 'Flag';
 
     protected $table = 'flags';
-    protected $fillable = ['name', 'feature_name', 'description', 'added', 'removed'];
+    protected $fillable = ['feature_name', 'added', 'removed'];
 
     public function flagStatus()
     {
         return $this->hasMany(FlagStatus::class);
     }
 
-    public function flagSuggestions()
+    public function flagContents()
     {
-        return $this->hasMany(FlagSuggestion::class);
+        return $this->hasMany(FlagContent::class);
+    }
+
+    public function latestContents()
+    {
+        return $this->hasOne(FlagContent::class)->where('status', 2)->orderBy('updated_at', 'desc')->latest();
     }
 
     public function latestStatus()

@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FlagSuggestion extends Model
+class FlagContent extends Model
 {
     use HasFactory;
 
-    protected $table = 'flag_suggestions';
-    protected $fillable = ['name', 'flag_id', 'description', 'status'];
+    protected $table = 'flag_contents';
+    protected $fillable = ['name', 'flag_id', 'description', 'status', 'user_id'];
 
     public function flag()
     {

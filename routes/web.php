@@ -116,6 +116,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
 
     Route::controller(AdminFlagController::class)->prefix('flags')->as('.flags')->group(function() {
         Route::get('', 'index')->name('');
+        Route::get('/history', 'history')->name('history');
         Route::post('', 'store')->name('.store');
         Route::post('/batch', 'batch')->name('.batch');
         Route::delete('{flag}', 'destroy')->name('.destroy');

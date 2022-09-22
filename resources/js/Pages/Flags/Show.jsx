@@ -17,6 +17,8 @@ import AmaranthIcon, {
 export default function Show({ flag }) {
   const [show, setShow] = useState(false);
 
+  console.log(flag);
+
   const { data, setData, post, progress, reset } = useForm({
     name: flag.name,
     description: flag.description,
@@ -45,7 +47,7 @@ export default function Show({ flag }) {
       <div className="container">
         <div className="row g-1">
           <div className="col-12 titlebar">
-            <h2 className="h1 mb-1">{flag.name}</h2>
+            <h2 className="h1 mb-1">{flag.latest_content?.name || flag.feature_name}</h2>
             <h3 className="h5 fw-normal mb-3">
               {flag.feature_name}{" "}
               {flag.flag_status[0].feature_id && (
@@ -57,7 +59,7 @@ export default function Show({ flag }) {
           </div>
           <div className="col-12">
             <p className="">
-              {flag.description || (
+              {flag.latest_content?.description || (
                 <i className="text-muted">
                   This feature flag doesn't have a description yet.
                 </i>

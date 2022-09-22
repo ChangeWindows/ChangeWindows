@@ -1,24 +1,21 @@
-import React, { Fragment, useEffect } from "react";
-import { useForm } from "@inertiajs/inertia-react";
+import React, { useEffect } from "react";
+import { InertiaLink, useForm } from "@inertiajs/inertia-react";
 
 import Admin from "../../../Layouts/Admin";
 import NaviBar from "../../../Components/NaviBar";
-import Pagination from "../../../Components/Pagination";
 
 import AmaranthIcon, {
   aiCheck,
-  aiAngleRight,
   aiSpinnerThird,
   aiArrowUp,
+  aiClockRotateLeft,
+  aiFlag,
 } from "@changewindows/amaranth";
 
 import clsx from "clsx";
-import FlagStatus from "../../../Components/_FlagStatus";
 
-export default function Show({
+export default function Index({
   can,
-  flagStatus,
-  pagination,
   status = null,
   errors,
 }) {
@@ -43,9 +40,28 @@ export default function Show({
 
   return (
     <Admin>
-      <NaviBar>Flags</NaviBar>
+      <NaviBar>
+        <nav className="navbar navbar-expand navbar-light sticky-top">
+          <div className="container">
+            <ul className="navbar-nav me-auto">
+              <li className="nav-item">
+                <InertiaLink className="nav-link active" href="/admin/flags">
+                  <AmaranthIcon icon={aiFlag} />{" "}
+                  <span className="d-none d-sm-inline-block ms-1">Manage</span>
+                </InertiaLink>
+              </li>
+              <li className="nav-item">
+                <InertiaLink className="nav-link" href="/admin/flags/history">
+                  <AmaranthIcon icon={aiClockRotateLeft} />{" "}
+                  <span className="d-none d-sm-inline-block ms-1">History</span>
+                </InertiaLink>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </NaviBar>
 
-      <div className="container">
+      <div className="container my-2">
         {status && (
           <div className="alert alert-success">
             <AmaranthIcon icon={aiCheck} /> {status}
@@ -108,35 +124,7 @@ export default function Show({
               </form>
             </>
           )}
-          <h4>Flags</h4>
-          {flagStatus.map((flag) => (
-            <Fragment key={flag.id}>
-              <div className="px-3 py-2 bg-dark rounded-2 d-flex flex-row align-items-center">
-                <div className="text-muted font-monospace me-2">
-                  {flag.feature_id}
-                </div>
-                <div>
-                  {flag.flag?.feature_name} &middot;{" "}
-                  {flag.flag.flag_status.length}
-                </div>
-                <div className="flex-grow-1" />
-                {flag.flag.latest_status_change.length > 1 ? (
-                  <>
-                    <FlagStatus
-                      flagStatus={flag.flag.latest_status_change[1]}
-                    />
-                    <AmaranthIcon icon={aiAngleRight} />
-                    <FlagStatus
-                      flagStatus={flag.flag.latest_status_change[0]}
-                    />
-                  </>
-                ) : (
-                  <FlagStatus flagStatus={flag.flag.latest_status_change[0]} />
-                )}
-              </div>
-            </Fragment>
-          ))}
-          <Pagination pagination={pagination} />
+          <h4>Moderate suggestions</h4>
         </div>
       </div>
     </Admin>

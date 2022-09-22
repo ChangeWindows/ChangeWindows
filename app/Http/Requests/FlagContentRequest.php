@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FlagSuggestionRequest extends FormRequest
+class FlagContentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +32,8 @@ class FlagSuggestionRequest extends FormRequest
 
         return [
             'name' => ['required', 'string'],
-            'description' => ['string']
+            'description' => ['string'],
+            'user_id' => []
         ];
     }
 }

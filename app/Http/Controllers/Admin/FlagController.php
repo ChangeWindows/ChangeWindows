@@ -23,12 +23,31 @@ class FlagController extends Controller
     {
         $this->authorize('flags.show');
 
+        return Inertia::render('Admin/Flags/Index', [
+            'can' => [
+                'createFlags' => Auth::user()->can('flags.create'),
+                'editFlags' => Auth::user()->can('flags.edit')
+            ],
+            'createUrl' => route('admin.flags.create', [], false),
+            'status' => session('status')
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function history()
+    {
+        $this->authorize('flags.show');
+
         $flag_status = FlagStatus::orderBy('build', 'desc')->with('flag', 'flag.latestStatusChange', 'flag.flagStatus');
         $paginator = $flag_status->paginate(150)->onEachSide(2)->through(function () {
             return [];
         });
 
-        return Inertia::render('Admin/Flags/Show', [
+        return Inertia::render('Admin/Flags/History', [
             'can' => [
                 'createFlags' => Auth::user()->can('flags.create'),
                 'editFlags' => Auth::user()->can('flags.edit')
@@ -83,8 +102,6 @@ class FlagController extends Controller
                 $flag = Flag::firstOrCreate([
                     'feature_name' => $flag_id_pair[0]
                 ], [
-                    'name' => $flag_id_pair[0],
-                    'description' => '',
                     'added' => request('build'),
                     'removed' => null
                 ]);

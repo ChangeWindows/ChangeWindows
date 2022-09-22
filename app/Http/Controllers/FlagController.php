@@ -10,7 +10,7 @@ use Auth;
 use Redirect;
 use File;
 use Illuminate\Support\Str;
-use App\Http\Requests\FlagSuggestionRequest;
+use App\Http\Requests\FlagContentRequest;
 
 class FlagController extends Controller
 {
@@ -91,7 +91,7 @@ class FlagController extends Controller
     public function show(Flag $flag)
     {
         return Inertia::render('Flags/Show', [
-            'flag' => Flag::where('feature_name', $flag->feature_name)->with('flagStatus')->first()
+            'flag' => Flag::where('feature_name', $flag->feature_name)->with('flagStatus', 'latestContents')->first()
         ]);
     }
 
@@ -110,9 +110,9 @@ class FlagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function suggestion(Flag $flag, FlagSuggestionRequest $request)
+    public function suggestion(Flag $flag, FlagContentRequest $request)
     {
-        $flag->flagSuggestions()->create([
+        $flag->flagContents()->create([
             'name' => $request->name,
             'description' => $request->description,
             'status' => 1,
