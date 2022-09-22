@@ -37,6 +37,8 @@
     --nav-color-label: #{light-dark(lighten($body-color, 35), lighten($gray-100, 35))};
     --nav-search-bg: #{light-dark(#fff, darken($dark, 4))};
 
+    --bs-border-color: var(--nav-border-color);
+
     --nav-item-hover: #{light-dark(darken($light, 9), darken($dark, 3))};
     --nav-bar-item-hover: #{light-dark(darken($light, 3), darken($dark, 3))};
 

@@ -123,6 +123,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/create', 'create')->name('.create');
         Route::get('/{flag}/edit', 'edit')->name('.edit');
         Route::patch('/{flag}/edit', 'update')->name('.update');
+        Route::patch('/{flag_content}/moderateApprove', 'moderateApprove')->name('.moderate.approve');
+        Route::patch('/{flag_content}/moderateDiscard', 'moderateDiscard')->name('.moderate.discard');
     });
 
     Route::controller(AdminReleaseController::class)->prefix('releases')->as('.releases')->group(function() {

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Flag;
 use App\Models\FlagStatus;
+use App\Models\FlagContent;
 use Auth;
 use Redirect;
 use File;
@@ -28,6 +29,7 @@ class FlagController extends Controller
                 'createFlags' => Auth::user()->can('flags.create'),
                 'editFlags' => Auth::user()->can('flags.edit')
             ],
+            'suggestion' => FlagContent::where('status', 1)->orderBy('created_at', 'asc')->with('flag', 'flag.latestContents')->first(),
             'createUrl' => route('admin.flags.create', [], false),
             'status' => session('status')
         ]);
@@ -42,7 +44,7 @@ class FlagController extends Controller
     {
         $this->authorize('flags.show');
 
-        $flag_status = FlagStatus::orderBy('build', 'desc')->with('flag', 'flag.latestStatusChange', 'flag.flagStatus');
+        $flag_status = FlagStatus::orderBy('build', 'desc')->with('user', 'flag', 'flag.latestStatusChange', 'flag.flagStatus');
         $paginator = $flag_status->paginate(150)->onEachSide(2)->through(function () {
             return [];
         });
@@ -142,5 +144,39 @@ class FlagController extends Controller
         }
 
         return Redirect::route('admin.flags')->with('status', 'Succesfully created flags.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Permission  $permission
+     * @return \Illuminate\Http\Response
+     */
+    public function moderateApprove(Request $request, FlagContent $flag_content) {
+        $this->authorize('flags.edit');
+
+        $flag_content->update([
+            'status' => 2,
+        ]);
+
+        return Redirect::route('admin.flags')->with('status', 'Succesfully applied content suggestion.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Permission  $permission
+     * @return \Illuminate\Http\Response
+     */
+    public function moderateDiscard(Request $request, FlagContent $flag_content) {
+        $this->authorize('flags.edit');
+
+        $flag_content->update([
+            'status' => 0,
+        ]);
+
+        return Redirect::route('admin.flags')->with('status', 'Succesfully applied content suggestion.');
     }
 }

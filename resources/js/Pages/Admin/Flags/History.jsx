@@ -24,7 +24,7 @@ export default function Show({
   status = null,
   errors,
 }) {
-  const { data, setData, post, progress } = useForm({
+  const { data, setData, post, processing } = useForm({
     build: "",
     file: "",
   });
@@ -114,13 +114,13 @@ export default function Show({
                         <button
                           type="submit"
                           className="btn btn-primary btn-sm"
-                          disabled={progress}
+                          disabled={processing}
                         >
                           <AmaranthIcon
-                            icon={progress ? aiSpinnerThird : aiArrowUp}
-                            spin={progress}
+                            icon={processing ? aiSpinnerThird : aiArrowUp}
+                            spin={processing}
                           />{" "}
-                          {progress ? "Processing..." : "Upload"}
+                          {processing ? "Processing..." : "Upload"}
                         </button>
                       </div>
                     </div>

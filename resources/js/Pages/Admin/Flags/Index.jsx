@@ -10,16 +10,19 @@ import AmaranthIcon, {
   aiArrowUp,
   aiClockRotateLeft,
   aiFlag,
+  aiTrashCan,
 } from "@changewindows/amaranth";
 
 import clsx from "clsx";
+import Suggestion from "./_Suggestion";
 
 export default function Index({
   can,
   status = null,
   errors,
+  suggestion,
 }) {
-  const { data, setData, post, progress } = useForm({
+  const { data, setData, post, processing } = useForm({
     build: "",
     file: "",
   });
@@ -109,13 +112,13 @@ export default function Index({
                         <button
                           type="submit"
                           className="btn btn-primary btn-sm"
-                          disabled={progress}
+                          disabled={processing}
                         >
                           <AmaranthIcon
-                            icon={progress ? aiSpinnerThird : aiArrowUp}
-                            spin={progress}
+                            icon={processing ? aiSpinnerThird : aiArrowUp}
+                            spin={processing}
                           />{" "}
-                          {progress ? "Processing..." : "Upload"}
+                          {processing ? "Processing..." : "Upload"}
                         </button>
                       </div>
                     </div>
@@ -125,6 +128,7 @@ export default function Index({
             </>
           )}
           <h4>Moderate suggestions</h4>
+          {suggestion ? <Suggestion suggestion={suggestion} /> : <i>No suggestions...</i>}
         </div>
       </div>
     </Admin>

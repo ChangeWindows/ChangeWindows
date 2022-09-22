@@ -116,7 +116,7 @@ class FlagController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'status' => 1,
-            'user_id' => auth()->user() ? auth()->user()->id : null
+            'user_id' => Auth::user() ? Auth::user()->id : null
         ]);
 
         return Redirect::route('front.flags.show', $flag)->with('status', 'Your suggestion has been saved.');
