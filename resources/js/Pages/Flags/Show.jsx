@@ -9,32 +9,51 @@ import NaviBar from "../../Components/NaviBar";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import AmaranthIcon, {
+  aiCheck,
   aiFloppyDisk,
   aiPen,
   aiSpinnerThird,
   aiXmark,
 } from "@changewindows/amaranth";
 
-export default function Show({ flag }) {
+import clsx from "clsx";
+
+export default function Show({ flag, flagContent, status = null }) {
   const [show, setShow] = useState(false);
 
-  const { data, setData, post, processing, reset } = useForm({
-    name: flag.name,
-    description: flag.description,
-  });
+  console.log(flagContent);
+
+  const { data, setData, post, patch, processing, errors } = useForm(
+    flagContent ?? {
+      name: flag.latest_contents?.name,
+      description: flag.latest_contents?.description,
+    }
+  );
 
   function submit(e) {
     e.preventDefault();
-    post(route("front.flags.suggestion", flag), {
-      onSuccess: () => {
-        reset();
-        setShow(false);
-      },
-      onError: () => {
-        console.log("error");
-      },
-    });
+    if (flagContent) {
+      patch(route("front.flags.suggestionPatch", [flag, flagContent]), {
+        onSuccess: () => {
+          setShow(false);
+        },
+        onError: () => {
+          console.log("error");
+        },
+      });
+    } else {
+      post(route("front.flags.suggestion", flag), {
+        onSuccess: () => {
+          setShow(false);
+        },
+        onError: () => {
+          console.log("error");
+        },
+      });
+    }
   }
+
+  console.log(errors);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -43,9 +62,11 @@ export default function Show({ flag }) {
     <App>
       <InertiaHead title="Flags" />
       <NaviBar
+        back="/flags"
         actions={
           <Button variant="primary" size="sm" onClick={handleShow}>
-            <AmaranthIcon icon={aiPen} /> Submit a suggestion
+            <AmaranthIcon icon={aiPen} />{" "}
+            {flagContent ? "Edit your suggestion" : "Submit a suggestion"}
           </Button>
         }
       >
@@ -53,6 +74,11 @@ export default function Show({ flag }) {
       </NaviBar>
 
       <div className="container">
+        {status && (
+          <div className="alert alert-success">
+            <AmaranthIcon icon={aiCheck} /> {status}
+          </div>
+        )}
         <div className="row g-1">
           <div className="col-12 titlebar">
             <h2 className="h1 mb-1">
@@ -110,8 +136,13 @@ export default function Show({ flag }) {
               </p>
             </div>
             <div className="col-12">
-              <div className="form-floating">
+              <div
+                className={clsx("form-floating", {
+                  "is-invalid": errors.name,
+                })}
+              >
                 <input
+                  required
                   className="form-control"
                   placeholder="Feature name"
                   id="name"
@@ -120,18 +151,30 @@ export default function Show({ flag }) {
                 />
                 <label htmlFor="email">Feature Name</label>
               </div>
+              {errors.name && (
+                <div className="invalid-feedback">{errors.name}</div>
+              )}
             </div>
             <div className="col-12">
-              <div className="form-floating">
+              <div
+                className={clsx("form-floating", {
+                  "is-invalid": errors.description,
+                })}
+              >
                 <textarea
-                  className="form-control"
                   id="description"
+                  className="form-control"
                   style={{ minHeight: 160 }}
                   defaultValue={data.description}
                   onChange={(e) => setData("description", e.target.value)}
                 />
-                <label htmlFor="description">Description</label>
+                <label htmlFor="description">
+                  Description <small className="text-muted">- optional</small>
+                </label>
               </div>
+              {errors.description && (
+                <div className="invalid-feedback">{errors.description}</div>
+              )}
             </div>
           </div>
         </Modal.Body>

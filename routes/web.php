@@ -61,6 +61,7 @@ Route::prefix('')->as('front')->group(function() {
         Route::get('/about', 'about')->name('.about');
         Route::get('/{flag}', 'show')->name('.show');
         Route::post('/{flag}/suggestion', 'suggestion')->name('.suggestion');
+        Route::patch('/{flag}/suggestion/{flag_content}', 'suggestionPatch')->name('.suggestionPatch');
     });
 
     Route::controller(ChannelController::class)->prefix('channels')->as('.channels')->group(function() {

@@ -25,15 +25,14 @@ class FlagContentRequest extends FormRequest
     {
         if ($this->isMethod('PATCH')) {
             return [
-                'name' => ['required', 'string'],
+                'name' => ['required', 'min:5', 'string'],
                 'description' => ['string']
             ];
         }
 
         return [
-            'name' => ['required', 'string'],
-            'description' => ['string'],
-            'user_id' => []
+            'name' => ['required', 'string', 'min:5'],
+            'description' => ['string']
         ];
     }
 }
