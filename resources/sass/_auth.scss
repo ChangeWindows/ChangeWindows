@@ -1,40 +1,53 @@
 .auth {
-    background: var(--nav-bg);
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: var(--nav-bg);
     flex-direction: row;
     display: flex;
     justify-content: center;
     align-items: center;
 
     @media (max-width: 575px) {
-        &:not(.auth-flow) {
-            height: calc(100vh - 58px);
-        }
+      &:not(.auth-flow) {
+        height: calc(100vh - 58px);
+        height: calc(var(--vh, 1vh) * 100 - 58px);
+      }
     }
 
     .auth-card {
-        background-color: var(--card-bg);
-        box-shadow: $box-shadow-lg;
-        padding: 0 1rem 1rem;
-        margin-top: .5rem;
-        width: 320px;
-        max-width: 100%;
-        border-radius: $border-radius;
+      box-shadow: $box-shadow-lg;
+      padding: 1rem;
+      border-radius: $border-radius-lg;
+      background-image: url('/images/auth.png');
+      background-size: cover;
+      background-position: bottom right;
+      display: flex;
 
-        &.auth-card-lg {
-            width: 600px;
-            max-width: 100%;
-            margin-left: .5rem;
-            margin-right: .5rem;
+      width: 100%;
+      max-width: 960px;
+      margin: 1rem;
+
+      .auth-card-content {
+        flex-grow: 1;
+        max-width: 360px;
+        padding: 1.5rem;
+        border-radius: $border-radius;
+        box-shadow: $box-shadow-lg;
+        background-color: var(--nav-bg);
+
+        @supports (backdrop-filter: blur(15px) saturate(125%)) {
+            background-color: var(--nav-bg-acrylic);
+            backdrop-filter: blur(20px) saturate(350%);
         }
+      }
     }
 
     .btn-link {
-        color: var(--text);
+      color: inherit;
 
-        &:hover,
-        &:focus {
-            background-color: rgba($dark, .2);
-        }
+      &:hover,
+      &:focus {
+        background-color: rgba($dark, .1);
+      }
     }
-}
+  }
