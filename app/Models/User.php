@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -44,6 +45,14 @@ class User extends Authenticatable
 
     public function flagContents() {
         return $this->hasMany(FlagContent::class);
+    }
+
+    public function setPasswordAttribute($value) {
+        if (Hash::needsRehash($value)) {
+            return $this->attributes['password'] = bcrypt($value);
+        } else {
+            return $this->attributes['password'] = $value;
+        }
     }
 
     public function getAllPermissionsAttribute() {

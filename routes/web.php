@@ -10,6 +10,7 @@ use App\Http\Controllers\FlagController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ChannelController as AdminChannelController;
 use App\Http\Controllers\Admin\FlightController as AdminFlightController;
 use App\Http\Controllers\Admin\FlagController as AdminFlagController;
@@ -80,6 +81,13 @@ Route::prefix('')->as('front')->group(function() {
         Route::prefix('{platform}/packages')->name('.packages')->group(function() {
             Route::get('/{release}', [PackageController::class, 'show'])->name('');
         });
+    });
+
+    Route::middleware(['auth'])->prefix('profile')->name('.profile')->group(function() {
+        Route::get('', [ProfileController::class, 'index'])->name('');
+        Route::get('/password', [ProfileController::class, 'password'])->name('.password');
+        Route::patch('/{user}', [ProfileController::class, 'update'])->name('.update');
+        Route::patch('/{user}/password', [ProfileController::class, 'updatePassword'])->name('.password.update');
     });
 
     Route::controller(SettingsController::class)->prefix('settings')->as('.settings')->group(function() {
