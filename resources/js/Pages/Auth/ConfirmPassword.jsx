@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { InertiaHead } from "@inertiajs/inertia-react";
 
-import Auth from "../../Layouts/Auth";
+import Auth from "@/Layouts/Auth";
 
 import AmaranthIcon, { aiCheck } from "@changewindows/amaranth";
 

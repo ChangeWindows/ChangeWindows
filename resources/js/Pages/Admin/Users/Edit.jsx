@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Inertia } from '@inertiajs/inertia';
+import React, { useEffect, useState } from "react";
+import { Inertia } from "@inertiajs/inertia";
 
-import Admin from '../../../Layouts/Admin';
-import NaviBar from '../../../Components/NaviBar';
+import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
 
-import AmaranthIcon, { aiCheck, aiFloppyDisk, aiTrashCan } from '@changewindows/amaranth';
+import AmaranthIcon, {
+  aiCheck,
+  aiFloppyDisk,
+  aiTrashCan,
+} from "@changewindows/amaranth";
 
 export default function Edit({ can, user, roles, urls, status = null }) {
   const [curUser, setCurUser] = useState(user);
@@ -18,7 +22,7 @@ export default function Edit({ can, user, roles, urls, status = null }) {
     const _user = Object.assign({}, curUser);
 
     switch (name) {
-      case 'role':
+      case "role":
         if (_user.roles.find((role) => role === id)) {
           _user.roles = _user.roles.filter((role) => role !== id);
         } else {
@@ -49,20 +53,26 @@ export default function Edit({ can, user, roles, urls, status = null }) {
         <NaviBar
           back="/admin/users"
           actions={
-            <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
+            <button className="btn btn-primary btn-sm" type="submit">
+              <AmaranthIcon icon={aiFloppyDisk} /> Save
+            </button>
           }
         >
-          {curUser.name || 'Unnamed user'}
+          {curUser.name || "Unnamed user"}
         </NaviBar>
 
         <div className="container my-3">
-          {status &&
-            <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
-          }
+          {status && (
+            <div className="alert alert-success">
+              <AmaranthIcon icon={aiCheck} /> {status}
+            </div>
+          )}
           <fieldset className="row mb-3" disabled={!can.edit_users}>
             <div className="col-12 col-md-4 my-4 my-md-0">
               <h4 className="h5 mb-0">Identity</h4>
-              <p className="text-muted mb-0"><small>Hello! Who are you?</small></p>
+              <p className="text-muted mb-0">
+                <small>Hello! Who are you?</small>
+              </p>
             </div>
             <div className="col-12 col-md-8">
               <div className="card">
@@ -70,13 +80,26 @@ export default function Edit({ can, user, roles, urls, status = null }) {
                   <div className="row g-3">
                     <div className="col-12 col-sm-6">
                       <div className="form-floating">
-                        <input type="text" className="form-control" id="name" value={curUser.name} onChange={formHandler} />
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="name"
+                          value={curUser.name}
+                          onChange={formHandler}
+                        />
                         <label htmlFor="name">Name</label>
                       </div>
                     </div>
                     <div className="col-12 col-sm-6">
                       <div className="form-floating">
-                        <input type="email" className="form-control" id="email" placeholder="name@example.com" value={curUser.email} onChange={formHandler} />
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="email"
+                          placeholder="name@example.com"
+                          value={curUser.email}
+                          onChange={formHandler}
+                        />
                         <label htmlFor="email">Email address</label>
                       </div>
                     </div>
@@ -88,7 +111,9 @@ export default function Edit({ can, user, roles, urls, status = null }) {
           <fieldset className="row mb-3" disabled={!can.edit_users}>
             <div className="col-12 col-md-4 my-4 my-md-0">
               <h4 className="h5 mb-0">Permissions</h4>
-              <p className="text-muted mb-0"><small>What you can do.</small></p>
+              <p className="text-muted mb-0">
+                <small>What you can do.</small>
+              </p>
             </div>
             <div className="col-12 col-md-8">
               <div className="card">
@@ -103,10 +128,17 @@ export default function Edit({ can, user, roles, urls, status = null }) {
                             value="1"
                             id={role.name}
                             name="role"
-                            checked={curUser.roles.filter((_role) => _role === role.name).length === 1}
+                            checked={
+                              curUser.roles.filter(
+                                (_role) => _role === role.name
+                              ).length === 1
+                            }
                             onChange={formHandler}
                           />
-                          <label className="form-check-label" htmlFor={role.name}>
+                          <label
+                            className="form-check-label"
+                            htmlFor={role.name}
+                          >
                             {role.name}
                           </label>
                         </div>
@@ -119,21 +151,28 @@ export default function Edit({ can, user, roles, urls, status = null }) {
           </fieldset>
         </div>
       </form>
-      {can.delete_users &&
+      {can.delete_users && (
         <form onSubmit={handleDelete}>
           <div className="container my-3">
             <div className="row">
               <div className="col-12 col-md-4 my-4 my-md-0">
                 <h4 className="h5 mb-0 text-danger">Danger zone</h4>
-                <p className="text-muted mb-0"><small>All alone in the danger zone.</small></p>
+                <p className="text-muted mb-0">
+                  <small>All alone in the danger zone.</small>
+                </p>
               </div>
               <div className="col-12 col-md-8">
                 <div className="card">
                   <div className="card-body">
                     <div className="row g-3">
                       <div className="col-12">
-                        <p>Deleting a user will remove all the content associated with that user. Are you sure?</p>
-                        <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrashCan} /> Delete</button>
+                        <p>
+                          Deleting a user will remove all the content associated
+                          with that user. Are you sure?
+                        </p>
+                        <button className="btn btn-danger btn-sm" type="submit">
+                          <AmaranthIcon icon={aiTrashCan} /> Delete
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -142,7 +181,7 @@ export default function Edit({ can, user, roles, urls, status = null }) {
             </div>
           </div>
         </form>
-      }
+      )}
     </Admin>
-  )
+  );
 }

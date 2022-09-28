@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect } from "react";
 import { InertiaLink, useForm } from "@inertiajs/inertia-react";
 
-import Admin from "../../../Layouts/Admin";
-import NaviBar from "../../../Components/NaviBar";
-import Pagination from "../../../Components/Pagination";
+import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
+import Pagination from "@/Components/Pagination";
 
 import AmaranthIcon, {
   aiCheck,
@@ -15,7 +15,7 @@ import AmaranthIcon, {
 } from "@changewindows/amaranth";
 
 import clsx from "clsx";
-import FlagStatus from "../../../Components/_FlagStatus";
+import FlagStatus from "@/Components/_FlagStatus";
 
 export default function Show({
   can,
@@ -56,7 +56,10 @@ export default function Show({
                 </InertiaLink>
               </li>
               <li className="nav-item">
-                <InertiaLink className="nav-link active" href="/admin/flags/history">
+                <InertiaLink
+                  className="nav-link active"
+                  href="/admin/flags/history"
+                >
                   <AmaranthIcon icon={aiClockRotateLeft} />{" "}
                   <span className="d-none d-sm-inline-block ms-1">History</span>
                 </InertiaLink>

@@ -1,11 +1,11 @@
 import React from "react";
 import { InertiaHead, InertiaLink } from "@inertiajs/inertia-react";
 
-import App from "../../Layouts/App";
-import Pagination from "../../Components/Pagination";
+import App from "@/Layouts/App";
+import Pagination from "@/Components/Pagination";
 
-import Flag from "../../Components/Flag";
-import FlagTimeline from "../../Components/_FlagsTimeline";
+import Flag from "@/Components/Flag";
+import FlagTimeline from "@/Components/_FlagsTimeline";
 
 import AmaranthIcon, {
   aiCircleInfo,
@@ -23,24 +23,28 @@ export default function History({ flagStatus, pagination }) {
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
               <InertiaLink className="nav-link" href="/flags">
-                <AmaranthIcon icon={aiStar} /> <span className="d-none d-sm-inline-block ms-1">Current</span>
+                <AmaranthIcon icon={aiStar} />{" "}
+                <span className="d-none d-sm-inline-block ms-1">Current</span>
               </InertiaLink>
             </li>
             <li className="nav-item">
               <InertiaLink className="nav-link active" href="/flags/history">
-                <AmaranthIcon icon={aiClockRotateLeft} />  <span className="d-none d-sm-inline-block ms-1">History</span>
+                <AmaranthIcon icon={aiClockRotateLeft} />{" "}
+                <span className="d-none d-sm-inline-block ms-1">History</span>
               </InertiaLink>
             </li>
             <li className="nav-item">
               <InertiaLink className="nav-link" href="/flags/removed">
-                <AmaranthIcon icon={aiTrashCan} />  <span className="d-none d-sm-inline-block ms-1">Removed</span>
+                <AmaranthIcon icon={aiTrashCan} />{" "}
+                <span className="d-none d-sm-inline-block ms-1">Removed</span>
               </InertiaLink>
             </li>
           </ul>
           <ul className="navbar-nav d-flex">
             <li className="nav-item">
               <InertiaLink className="nav-link" href="/flags/about">
-                <AmaranthIcon icon={aiCircleInfo} /> <span className="d-none d-md-inline-block ms-1">About</span>
+                <AmaranthIcon icon={aiCircleInfo} />{" "}
+                <span className="d-none d-md-inline-block ms-1">About</span>
               </InertiaLink>
             </li>
           </ul>

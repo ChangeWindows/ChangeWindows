@@ -1,7 +1,7 @@
 import React from "react";
 import { InertiaHead, InertiaLink } from "@inertiajs/inertia-react";
 
-import App from "../../Layouts/App";
+import App from "@/Layouts/App";
 
 import AmaranthIcon, {
   aiCircleInfo,
@@ -9,7 +9,7 @@ import AmaranthIcon, {
   aiStar,
   aiTrashCan,
 } from "@changewindows/amaranth";
-import FlagStatus from "../../Components/_FlagStatus";
+import FlagStatus from "@/Components/_FlagStatus";
 
 export default function About() {
   return (
@@ -86,9 +86,7 @@ export default function About() {
                       flagStatus={{ status: "always-enabled", build: 22621 }}
                     />
                   </td>
-                  <td>
-                    This entry is always enabled regardless of its state.
-                  </td>
+                  <td>This entry is always enabled regardless of its state.</td>
                 </tr>
                 <tr>
                   <td>

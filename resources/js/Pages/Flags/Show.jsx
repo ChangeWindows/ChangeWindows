@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { InertiaHead, InertiaLink } from "@inertiajs/inertia-react";
 import { useForm } from "@inertiajs/inertia-react";
 
-import App from "../../Layouts/App";
-import FlagStatus from "../../Components/_FlagStatus";
-import NaviBar from "../../Components/NaviBar";
+import App from "@/Layouts/App";
+import FlagStatus from "@/Components/_FlagStatus";
+import NaviBar from "@/Components/NaviBar";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";

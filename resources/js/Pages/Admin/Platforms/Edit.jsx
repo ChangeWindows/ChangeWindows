@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { InertiaLink } from "@inertiajs/inertia-react";
 
-import Admin from "../../../Layouts/Admin";
-import NaviBar from "../../../Components/NaviBar";
-import PlatformIcon from "../../../Components/Platforms/PlatformIcon";
+import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
 import AmaranthIcon, {
   aiCheck,

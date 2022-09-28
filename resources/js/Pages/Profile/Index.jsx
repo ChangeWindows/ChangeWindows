@@ -1,9 +1,9 @@
 import React from "react";
 import { InertiaHead, Link, useForm } from "@inertiajs/inertia-react";
 
-import App from "../../Layouts/App";
-import TextField from "../../Components/UI/Forms/TextField";
-import NaviBar from "../../Components/NaviBar";
+import App from "@/Layouts/App";
+import TextField from "@/Components/UI/Forms/TextField";
+import NaviBar from "@/Components/NaviBar";
 
 import AmaranthIcon, {
   aiCheck,
@@ -18,7 +18,7 @@ export default function Index({ status, user }) {
 
   function submitPatch(event) {
     event.preventDefault();
-    patch(route('front.profile.update', user), {
+    patch(route("front.profile.update", user), {
       preserveScroll: true,
     });
   }
@@ -109,7 +109,7 @@ export default function Index({ status, user }) {
                   </div>
                   <div>
                     <Link
-                      href={route('front.profile.password')}
+                      href={route("front.profile.password")}
                       className="btn btn-primary btn-sm"
                     >
                       <AmaranthIcon icon={aiShieldKeyhole} /> Change password

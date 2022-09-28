@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { InertiaLink, useForm } from "@inertiajs/inertia-react";
 
-import Admin from "../../../Layouts/Admin";
-import NaviBar from "../../../Components/NaviBar";
+import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
 
 import AmaranthIcon, {
   aiCheck,
@@ -15,12 +15,7 @@ import AmaranthIcon, {
 import clsx from "clsx";
 import Suggestion from "./_Suggestion";
 
-export default function Index({
-  can,
-  status = null,
-  errors,
-  suggestion,
-}) {
+export default function Index({ can, status = null, errors, suggestion }) {
   const { data, setData, post, processing } = useForm({
     build: "",
     file: "",
@@ -127,7 +122,11 @@ export default function Index({
             </>
           )}
           <h4>Moderate suggestions</h4>
-          {suggestion ? <Suggestion suggestion={suggestion} /> : <i>No suggestions...</i>}
+          {suggestion ? (
+            <Suggestion suggestion={suggestion} />
+          ) : (
+            <i>No suggestions...</i>
+          )}
         </div>
       </div>
     </Admin>

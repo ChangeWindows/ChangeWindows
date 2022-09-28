@@ -2,8 +2,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { InertiaLink } from "@inertiajs/inertia-react";
 
-import Admin from "../../../Layouts/Admin";
-import NaviBar from "../../../Components/NaviBar";
+import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
 
 import AmaranthIcon, {
   aiCheck,
@@ -221,7 +221,7 @@ export default function Edit({
                   icon={can.edit_releases ? aiNotes : aiEye}
                   className="me-2"
                 />
-                {can.edit_releases ? 'Edit changelog' : 'View changelog'}
+                {can.edit_releases ? "Edit changelog" : "View changelog"}
               </InertiaLink>
             </div>
           </fieldset>

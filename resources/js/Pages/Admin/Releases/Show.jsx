@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import { InertiaLink } from "@inertiajs/inertia-react";
 
-import Admin from "../../../Layouts/Admin";
-import NaviBar from "../../../Components/NaviBar";
-import PlatformIcon from "../../../Components/Platforms/PlatformIcon";
+import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
 import { isAfter, isBefore, parseISO } from "date-fns";
 import AmaranthIcon, {

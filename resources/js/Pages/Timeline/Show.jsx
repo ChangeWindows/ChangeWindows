@@ -1,13 +1,13 @@
 import React, { Fragment } from "react";
 import { InertiaHead } from "@inertiajs/inertia-react";
 
-import App from "../../Layouts/App";
-import Channel from "../../Components/Cards/Channel";
-import Timeline from "../../Components/Timeline/Timeline";
+import App from "@/Layouts/App";
+import Channel from "@/Components/Cards/Channel";
+import Timeline from "@/Components/Timeline/Timeline";
 
-import PlatformIcon from "../../Components/Platforms/PlatformIcon";
-import PlatformNavigation from "../../Components/PlatformNavigation";
-import Pagination from "../../Components/Pagination";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import PlatformNavigation from "@/Components/PlatformNavigation";
+import Pagination from "@/Components/Pagination";
 
 import PlatformTimelineCard from "./_PlatformTimelineCard";
 

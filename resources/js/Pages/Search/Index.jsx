@@ -1,9 +1,7 @@
-import React from 'react';
-import { InertiaHead } from '@inertiajs/inertia-react';
+import React from "react";
+import { InertiaHead } from "@inertiajs/inertia-react";
 
-import App from '../../Layouts/App';
-
-import ReleaseCard from '../../Components/Cards/ReleaseCard';
+import App from "@/Layouts/App";
 
 export default function Index() {
   return (
@@ -16,10 +14,13 @@ export default function Index() {
             <h1>Search</h1>
           </div>
           <div className="col-12 my-3">
-            <p>You can search through our release list by name, version, canonical version, and codename.</p>
+            <p>
+              You can search through our release list by name, version,
+              canonical version, and codename.
+            </p>
           </div>
         </div>
       </div>
     </App>
-  )
+  );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-import PlatformIcon from "../../Components/Platforms/PlatformIcon";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import Flight from "./Flight";
 import Promotion from "./Promotion";
 import Launch from "./Launch";

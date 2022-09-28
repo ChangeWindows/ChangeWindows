@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 
-import Admin from "../../../Layouts/Admin";
-import NaviBar from "../../../Components/NaviBar";
+import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
 
 import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
 

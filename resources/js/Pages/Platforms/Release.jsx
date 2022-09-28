@@ -1,15 +1,15 @@
 import React from "react";
 import { InertiaLink, InertiaHead } from "@inertiajs/inertia-react";
 
-import App from "../../Layouts/App";
-import Channel from "../../Components/Cards/Channel";
-import Flight from "../../Components/Timeline/Flight";
-import Launch from "../../Components/Timeline/Launch";
+import App from "@/Layouts/App";
+import Channel from "@/Components/Cards/Channel";
+import Flight from "@/Components/Timeline/Flight";
+import Launch from "@/Components/Timeline/Launch";
 import LifeCycle from "./_LifeCycle";
-import Pagination from "../../Components/Pagination";
-import PlatformIcon from "../../Components/Platforms/PlatformIcon";
-import Promotion from "../../Components/Timeline/Promotion";
-import Timeline from "../../Components/Timeline/Timeline";
+import Pagination from "@/Components/Pagination";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Promotion from "@/Components/Timeline/Promotion";
+import Timeline from "@/Components/Timeline/Timeline";
 
 import AmaranthIcon, {
   aiAngleLeft,
@@ -160,10 +160,7 @@ export default function Release({
                     </div>
                   </div>
                   <div className="d-none d-xl-block col-xl-8 col-xxl-9 mt-4">
-                    <EditorContent
-                      editor={editor}
-                      className="editor-content"
-                    />
+                    <EditorContent editor={editor} className="editor-content" />
                   </div>
                   <div className="col-12 col-xl-4 col-xxl-3 mt-4">
                     <div className="row g-1">
@@ -228,10 +225,7 @@ export default function Release({
               >
                 <div className="row">
                   <div className="col-12 mt-3">
-                    <EditorContent
-                      editor={editor}
-                      className="editor-content"
-                    />
+                    <EditorContent editor={editor} className="editor-content" />
                   </div>
                 </div>
               </div>

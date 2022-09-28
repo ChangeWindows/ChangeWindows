@@ -1,11 +1,10 @@
 import React, { useMemo } from "react";
 
-import Progress from "../../Components/Progress/Progress";
-import ProgressBar from "../../Components/Progress/ProgressBar";
+import Progress from "@/Components/Progress/Progress";
+import ProgressBar from "@/Components/Progress/ProgressBar";
 
 import { differenceInDays } from "date-fns/esm";
 import { format, isBefore, parseISO } from "date-fns";
-import clsx from "clsx";
 
 export default function LifeCycle({ release, small }) {
   function max(input) {
@@ -231,14 +230,16 @@ export default function LifeCycle({ release, small }) {
               </Progress>
             )}
           </div>
-          {!small &&
+          {!small && (
             <div className="d-flex d-lg-none flex-row justify-content-center mt-2">
               <div className="d-flex flex-column justify-content-center mt-n1">
                 {!!preview_duration && (
                   <p className="legend-stage">Development</p>
                 )}
                 {!!public_duration && <p className="legend-stage">Support</p>}
-                {!!extended_duration && <p className="legend-stage">Extended</p>}
+                {!!extended_duration && (
+                  <p className="legend-stage">Extended</p>
+                )}
                 {!!lts_duration && <p className="legend-stage">LTSC</p>}
               </div>
               <div className="d-flex flex-column justify-content-center">
@@ -284,7 +285,7 @@ export default function LifeCycle({ release, small }) {
                 {!!release.ongoing && <p className="legend-dates">Ongoing</p>}
               </div>
             </div>
-          }
+          )}
         </>
       )}
     </>

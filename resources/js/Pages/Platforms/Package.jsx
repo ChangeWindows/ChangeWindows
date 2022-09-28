@@ -1,14 +1,14 @@
 import React from "react";
 import { InertiaLink, InertiaHead } from "@inertiajs/inertia-react";
 
-import App from "../../Layouts/App";
-import Channel from "../../Components/Cards/Channel";
-import Flight from "../../Components/Timeline/Flight";
-import Launch from "../../Components/Timeline/Launch";
-import Pagination from "../../Components/Pagination";
-import PlatformIcon from "../../Components/Platforms/PlatformIcon";
-import Promotion from "../../Components/Timeline/Promotion";
-import Timeline from "../../Components/Timeline/Timeline";
+import App from "@/Layouts/App";
+import Channel from "@/Components/Cards/Channel";
+import Flight from "@/Components/Timeline/Flight";
+import Launch from "@/Components/Timeline/Launch";
+import Pagination from "@/Components/Pagination";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Promotion from "@/Components/Timeline/Promotion";
+import Timeline from "@/Components/Timeline/Timeline";
 
 import AmaranthIcon, {
   aiArrowLeft,
@@ -33,13 +33,8 @@ export default function Package({
 }) {
   const editor = useEditor({
     editable: false,
-    extensions: [
-      StarterKit,
-      Typography,
-      Underline,
-      Link
-    ],
-    content: release.changelog
+    extensions: [StarterKit, Typography, Underline, Link],
+    content: release.changelog,
   });
 
   return (

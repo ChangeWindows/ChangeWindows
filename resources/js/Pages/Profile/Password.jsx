@@ -1,9 +1,9 @@
 import React from "react";
 import { InertiaHead, useForm } from "@inertiajs/inertia-react";
 
-import App from "../../Layouts/App";
-import TextField from "../../Components/UI/Forms/TextField";
-import NaviBar from "../../Components/NaviBar";
+import App from "@/Layouts/App";
+import TextField from "@/Components/UI/Forms/TextField";
+import NaviBar from "@/Components/NaviBar";
 import AmaranthIcon, {
   aiCheck,
   aiShieldKeyhole,
