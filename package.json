@@ -11,11 +11,11 @@
         "@inertiajs/inertia": "0.11.0",
         "@inertiajs/inertia-react": "0.8.1",
         "@inertiajs/progress": "0.2.7",
-        "@tiptap/extension-link": "2.0.0-beta.197",
-        "@tiptap/extension-typography": "2.0.0-beta.197",
-        "@tiptap/extension-underline": "2.0.0-beta.197",
-        "@tiptap/react": "2.0.0-beta.197",
-        "@tiptap/starter-kit": "2.0.0-beta.197",
+        "@tiptap/extension-link": "2.0.0-beta.198",
+        "@tiptap/extension-typography": "2.0.0-beta.198",
+        "@tiptap/extension-underline": "2.0.0-beta.198",
+        "@tiptap/react": "2.0.0-beta.198",
+        "@tiptap/starter-kit": "2.0.0-beta.198",
         "@types/react": "18.0.21",
         "bootstrap": "5.2.1",
         "clsx": "1.2.1",
@@ -23,7 +23,7 @@
         "react": "18.2.0",
         "react-bootstrap": "2.5.0",
         "react-dom": "18.2.0",
-        "styled-components": "5.3.5"
+        "styled-components": "5.3.6"
     },
     "devDependencies": {
         "@babel/preset-react": "7.18.6",
