@@ -71,7 +71,7 @@ export default function AppBar() {
                 alt="ChangeWindows"
                 className="app-icon"
               />
-              <span className="brand-label d-none d-sm-inline">
+              <span className="brand-label d-none d-md-inline">
                 ChangeWindows
                 {app.preview === "canary" ? (
                   <span className="text-muted text-sm"> canary</span>
@@ -103,7 +103,7 @@ export default function AppBar() {
               />
             </form>
           </div>
-          <div className="navbar-content">
+          <div className="navbar-actions">
             {auth ? (
               <>
                 <InertiaLink

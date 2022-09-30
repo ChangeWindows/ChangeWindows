@@ -14,7 +14,6 @@ use Inertia\Inertia;
 use Auth;
 use Redirect;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Twitter;
 
 class FlightController extends Controller
@@ -159,12 +158,12 @@ class FlightController extends Controller
 
         foreach($request->releaseChannels as $releaseChannel) {
             $release_channel = ReleaseChannel::find($releaseChannel);
-            
+
             if ($release_channel->release->flights->count() === 0) {
                 $launch = Launch::create([
                     'release_id' => $release_channel->release->id
                 ]);
-    
+
                 Timeline::create([
                     'date' => (new Carbon(request('date'))),
                     'item_type' => Launch::class,
@@ -176,7 +175,7 @@ class FlightController extends Controller
                 $promotion = Promotion::create([
                     'release_channel_id' => $release_channel->id
                 ]);
-    
+
                 Timeline::create([
                     'date' => (new Carbon(request('date'))),
                     'item_type' => Promotion::class,
@@ -221,7 +220,7 @@ class FlightController extends Controller
 
                     if ($posted_tweet && $release_channel->channel->platform->retweetStream) {
                         $retweet_stream = $release_channel->channel->platform->retweetStream;
-                        
+
                         $twitter_re_stream = Twitter::usingCredentials($retweet_stream->access_token, $retweet_stream->access_token_secret, $retweet_stream->consumer_key, $retweet_stream->consumer_secret);
 
                         $twitter_re_stream->postRt($posted_tweet->id);
@@ -281,7 +280,7 @@ class FlightController extends Controller
 
                     if ($posted_tweet && $release_channel->channel->platform->retweetStream) {
                         $retweet_stream = $release_channel->channel->platform->retweetStream;
-                        
+
                         $twitter_re_stream = Twitter::usingCredentials($retweet_stream->access_token, $retweet_stream->access_token_secret, $retweet_stream->consumer_key, $retweet_stream->consumer_secret);
 
                         $twitter_re_stream->postRt($posted_tweet->id);
