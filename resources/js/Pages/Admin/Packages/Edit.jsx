@@ -166,10 +166,10 @@ export default function Edit({
                 className="btn btn-primary btn-sm"
               >
                 <AmaranthIcon
-                  icon={can.edit_releases ? aiNotes : aiEye}
+                  icon={can.edit_packages ? aiNotes : aiEye}
                   className="me-2"
                 />
-                {can.edit_releases ? "Edit changelog" : "View changelog"}
+                {can.edit_packages ? "Edit changelog" : "View changelog"}
               </InertiaLink>
             </div>
           </fieldset>
