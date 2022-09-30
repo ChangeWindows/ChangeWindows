@@ -52,7 +52,7 @@ export default function Edit({
     <Admin>
       <form onSubmit={handleSubmit}>
         <NaviBar
-          back="/admin/flights"
+          back={route('admin.launches')}
           actions={
             <button className="btn btn-primary btn-sm" type="submit">
               <AmaranthIcon icon={aiFloppyDisk} /> Save
