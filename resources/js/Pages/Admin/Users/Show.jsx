@@ -21,7 +21,7 @@ export default function Show({ users, status = null }) {
           {users.map((user) => (
             <div className="col-12 col-sm-6 col-xl-4 col-xxl-3" key={user.id}>
               <InertiaLink
-                href={user.editUrl}
+                href={route('admin.users.edit', user)}
                 className="card border-0 shadow-sm"
               >
                 <div className="card-body">

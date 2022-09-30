@@ -6,7 +6,7 @@ import NaviBar from "@/Components/NaviBar";
 
 import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
 
-export default function Create({ urls, releases, channels, channel, params }) {
+export default function Create({ releases, channels, channel, params }) {
   const [curReleaseChannel, setCurReleaseChannel] = useState({
     name: channel.name,
     short_name: channel.name.split(" ")[0],
@@ -33,7 +33,7 @@ export default function Create({ urls, releases, channels, channel, params }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post(urls.store_release_channel, curReleaseChannel);
+    Inertia.post(route('admin.releasechannels.store'), curReleaseChannel);
   }
 
   return (

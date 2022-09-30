@@ -33,10 +33,9 @@ class ReleaseController extends Controller
             'releases' => $releases->map(function ($release) {
                 return [
                     'name' => $release->name,
+                    'slug' => $release->slug,
                     'version' => $release->version,
                     'start_public' => $release->start_public,
-                    'edit_url' => $release->edit_url,
-                    'edit_changelog_url' => $release->edit_changelog_url,
                     'platform' => [
                         'icon' => $release->platform->icon,
                         'name' => $release->platform->name,
@@ -52,7 +51,6 @@ class ReleaseController extends Controller
                     })
                 ];
             }),
-            'createUrl' => route('admin.releases.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -67,9 +65,6 @@ class ReleaseController extends Controller
         $this->authorize('releases.create');
 
         return Inertia::render('Admin/Releases/Create', [
-            'urls' => [
-                'store_release' => route('admin.releases.store', [], false),
-            ],
             'platforms' => Platform::orderBy('position')->get()
         ]);
     }
@@ -115,12 +110,6 @@ class ReleaseController extends Controller
                 'edit_releases' => Auth::user()->can('releases.edit'),
                 'delete_releases' => Auth::user()->can('releases.delete')
             ],
-            'urls' => [
-                'update_release' => route('admin.releases.update', $release, false),
-                'destroy_release' => route('admin.releases.destroy', $release, false),
-                'create_release_channel' => route('admin.releasechannels.create', ['release' => $release->id, 'platform' => $release->platform->id], false),
-                'edit_changelog_url' => $release->edit_changelog_url
-            ],
             'release' => $release,
             'platforms' => Platform::orderBy('position')->get(),
             'channels' => $release->platform->channels->sortBy('order')->values()->all(),
@@ -132,8 +121,7 @@ class ReleaseController extends Controller
                     'supported' => $channel->supported,
                     'color' => $channel->channel->color,
                     'order' => $channel->channel->order,
-                    'channel_id' => $channel->channel_id,
-                    'edit_url' => $channel->edit_url
+                    'channel_id' => $channel->channel_id
                 ];
             }),
             'status' => session('status')
@@ -170,25 +158,9 @@ class ReleaseController extends Controller
             'can' => [
                 'edit_releases' => Auth::user()->can('releases.edit')
             ],
-            'urls' => [
-                'update_release' => route('admin.releases.changelog.update', $release, false)
-            ],
             'release' => [
                 'name' => $release->name,
-                'version' => $release->version,
-                'canonical_version' => $release->canonical_version,
-                'codename' => $release->codename,
-                'description' => $release->description,
-                'platform_id' => $release->platform_id,
-                'start_preview' => $release->start_preview,
-                'start_public' => $release->start_public,
-                'start_extended' => $release->start_extended,
-                'start_lts' => $release->start_lts,
-                'end_lts' => $release->end_lts,
-                'start_build' => $release->start_build,
-                'start_delta' => $release->start_delta,
-                'end_build' => $release->end_build,
-                'end_delta' => $release->end_delta,
+                'slug' => $release->slug,
                 'changelog' => $release->changelog
             ],
             'status' => session('status')

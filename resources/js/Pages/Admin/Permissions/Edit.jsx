@@ -10,7 +10,7 @@ import AmaranthIcon, {
   aiTrashCan,
 } from "@changewindows/amaranth";
 
-export default function Edit({ can, permission, urls, status = null }) {
+export default function Edit({ can, permission, status = null }) {
   const [curPermission, setCurPermission] = useState(permission);
 
   useEffect(() => {
@@ -32,12 +32,12 @@ export default function Edit({ can, permission, urls, status = null }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(urls.update_permission, curPermission);
+    Inertia.patch(route('admin.permissions.update', permission), curPermission);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(urls.destroy_permission, curPermission);
+    Inertia.delete(route('admin.permissions.destroy', permission), curPermission);
   }
 
   return (

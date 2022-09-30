@@ -18,7 +18,6 @@ import { parse, format, isValid, parseISO } from "date-fns";
 
 export default function Edit({
   can,
-  urls,
   platforms,
   release,
   channels,
@@ -66,12 +65,12 @@ export default function Edit({
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(urls.update_release, curRelease);
+    Inertia.patch(route('admin.releases.update', release), curRelease);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(urls.destroy_release, curRelease);
+    Inertia.delete(route('admin.releases.destroy', release), curRelease);
   }
 
   const availablePlatformChannels = useMemo(
@@ -214,7 +213,7 @@ export default function Edit({
             </div>
             <div className="col-12 col-md-8">
               <InertiaLink
-                href={urls.edit_changelog_url}
+                href={route('admin.releases.changelog.edit', release)}
                 className="btn btn-primary btn-sm"
               >
                 <AmaranthIcon
@@ -451,7 +450,7 @@ export default function Edit({
                 return (
                   <div className="col-12 col-sm-6 col-xl-4" key={key}>
                     <InertiaLink
-                      href={releaseChannel.edit_url}
+                      href={route('admin.releasechannels.edit', releaseChannel)}
                       className="card border-0 shadow-sm h-100"
                     >
                       <div className="card-body">
@@ -499,7 +498,7 @@ export default function Edit({
                       {availablePlatformChannels.map((channel, key) => (
                         <InertiaLink
                           key={key}
-                          href={`${urls.create_release_channel}&channel=${channel.id}`}
+                          href={route('admin.releasechannels.create', { release: release.id, platform: release.platform.id, channel: channel.id })}
                           className="dropdown-item d-flex align-items-center"
                         >
                           <div

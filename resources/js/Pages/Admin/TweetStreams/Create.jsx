@@ -6,7 +6,7 @@ import NaviBar from "@/Components/NaviBar";
 
 import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
 
-export default function Edit({ urls, status = null }) {
+export default function Edit({ status = null }) {
   const [curTweetStream, setCurTweetStream] = useState({
     name: "",
     account: "",
@@ -31,7 +31,7 @@ export default function Edit({ urls, status = null }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post(urls.store_tweet_stream, curTweetStream);
+    Inertia.post(route('admin.tweet_streams.store'), curTweetStream);
   }
 
   return (

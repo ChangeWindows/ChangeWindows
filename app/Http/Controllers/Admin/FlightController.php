@@ -53,15 +53,12 @@ class FlightController extends Controller
                                 'icon' => $flight->item->platform->icon,
                                 'name' => $flight->item->platform->name,
                                 'color' => $flight->item->platform->color
-                            ],
-                            'edit_url' => $flight->item->edit_url
+                            ]
                         ];
                     })
                 ];
             }),
             'pagination' => $paginator,
-            'createUrl' => route('admin.flights.create', [], false),
-            'createPackageUrl' => route('admin.flights.createPackage', [], false),
             'status' => session('status')
         ]);
     }
@@ -78,9 +75,6 @@ class FlightController extends Controller
         $releases = Release::where('package', '=', 0)->orderBy('canonical_version')->orderBy('platform_id')->get();
 
         return Inertia::render('Admin/Flights/Create', [
-            'urls' => [
-                'store_flight' => route('admin.flights.store', [], false),
-            ],
             'releases' => $releases->map(function ($release) {
                 return [
                     'id' => $release->id,
@@ -120,9 +114,6 @@ class FlightController extends Controller
         $packages = Release::where('package', '=', 1)->orderBy('platform_id')->orderBy('name')->get();
 
         return Inertia::render('Admin/Flights/CreatePackage', [
-            'urls' => [
-                'store_package_flight' => route('admin.flights.storePackage', [], false),
-            ],
             'packages' => $packages->map(function ($package) {
                 return [
                     'id' => $package->id,
@@ -156,7 +147,7 @@ class FlightController extends Controller
     {
         $this->authorize('flights.create');
 
-        foreach($request->releaseChannels as $releaseChannel) {
+        foreach ($request->releaseChannels as $releaseChannel) {
             $release_channel = ReleaseChannel::find($releaseChannel);
 
             if ($release_channel->release->flights->count() === 0) {
@@ -212,7 +203,7 @@ class FlightController extends Controller
                                 $release_channel->release->codename,
                                 $flight->version,
                                 $release_channel->name,
-                                'https://changewindows.org'.route('front.platforms.releases', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
+                                'https://changewindows.org' . route('front.platforms.releases', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
                             ),
                             $release_channel->channel->platform->tweet_template
                         )
@@ -242,7 +233,7 @@ class FlightController extends Controller
     {
         $this->authorize('flights.create');
 
-        foreach($request->packageChannels as $packageChannel) {
+        foreach ($request->packageChannels as $packageChannel) {
             $release_channel = ReleaseChannel::find($packageChannel);
 
             $flight = Flight::create([
@@ -272,7 +263,7 @@ class FlightController extends Controller
                                 $release_channel->release->name,
                                 $flight->version,
                                 $release_channel->name,
-                                'https://changewindows.org'.route('front.platforms.packages', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
+                                'https://changewindows.org' . route('front.platforms.packages', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
                             ),
                             $release_channel->channel->platform->tweet_template_package
                         )
@@ -317,10 +308,6 @@ class FlightController extends Controller
             'can' => [
                 'edit_flights' => Auth::user()->can('flights.edit'),
                 'delete_flights' => Auth::user()->can('flights.delete')
-            ],
-            'urls' => [
-                'update_flight' => route('admin.flights.update', $flight, false),
-                'destroy_flight' => route('admin.flights.destroy', $flight, false)
             ],
             'flight' => $flight,
             'platform' => [

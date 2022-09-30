@@ -7,12 +7,12 @@ import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
 import AmaranthIcon, { aiCheck, aiPlus } from "@changewindows/amaranth";
 
-export default function Show({ platforms, createUrl, status = null }) {
+export default function Show({ platforms, status = null }) {
   return (
     <Admin>
       <NaviBar
         actions={
-          <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
+          <InertiaLink href={route('admin.platforms.create')} className="btn btn-primary btn-sm">
             <AmaranthIcon icon={aiPlus} /> New
           </InertiaLink>
         }

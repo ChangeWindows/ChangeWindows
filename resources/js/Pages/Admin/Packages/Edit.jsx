@@ -16,7 +16,6 @@ import AmaranthIcon, {
 
 export default function Edit({
   can,
-  urls,
   platforms,
   pack,
   channels,
@@ -52,13 +51,15 @@ export default function Edit({
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(urls.update_package, curPack);
+    Inertia.patch(route('admin.packages.update', pack), curPack);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(urls.destroy_package, curPack);
+    Inertia.delete(route('admin.packages.destroy', pack), curPack);
   }
+
+  console.log(pack);
 
   const availablePlatformChannels = useMemo(
     () =>
@@ -162,7 +163,7 @@ export default function Edit({
             </div>
             <div className="col-12 col-md-8">
               <InertiaLink
-                href={urls.edit_changelog_url}
+                href={route('admin.packages.changelog.edit', pack)}
                 className="btn btn-primary btn-sm"
               >
                 <AmaranthIcon
@@ -195,7 +196,7 @@ export default function Edit({
                 return (
                   <div className="col-12 col-sm-6 col-xl-4" key={key}>
                     <InertiaLink
-                      href={releaseChannel.edit_url}
+                      href={route('admin.releasechannels.edit', releaseChannel)}
                       className="card border-0 shadow-sm h-100"
                     >
                       <div className="card-body">
@@ -243,7 +244,7 @@ export default function Edit({
                       {availablePlatformChannels.map((channel, key) => (
                         <InertiaLink
                           key={key}
-                          href={`${urls.create_package_channel}&channel=${channel.id}`}
+                          href={route('admin.releasechannels.create', { release: pack, platform: pack.platform })}
                           className="dropdown-item d-flex align-items-center"
                         >
                           <div

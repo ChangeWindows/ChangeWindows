@@ -12,14 +12,13 @@ import { format, parseISO } from "date-fns";
 export default function Show({
   timeline,
   pagination,
-  createUrl,
   status = null,
 }) {
   return (
     <Admin>
       <NaviBar
         actions={
-          <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
+          <InertiaLink href={route('admin.promotions.create')} className="btn btn-primary btn-sm">
             <AmaranthIcon icon={aiPlus} /> New
           </InertiaLink>
         }
@@ -44,7 +43,7 @@ export default function Show({
               {timeline[date].promotions.map((promotion, key) => (
                 <div className="col-6 col-md-4 col-xl-3 col-xxl-2" key={key}>
                   <InertiaLink
-                    href={promotion.edit_url}
+                    href={route('admin.promotions.edit', promotion)}
                     className="card border-0 shadow-sm h-100"
                   >
                     <div className="card-body d-flex flex-column">

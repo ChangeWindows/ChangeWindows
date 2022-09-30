@@ -7,7 +7,7 @@ import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
 import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
 
-export default function Create({ urls, tweet_streams }) {
+export default function Create({ tweet_streams }) {
   const [curPlatform, setCurPlatform] = useState({
     name: "",
     description: "",
@@ -40,7 +40,7 @@ export default function Create({ urls, tweet_streams }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post(urls.store_platform, curPlatform);
+    Inertia.post(route('admin.platforms.store'), curPlatform);
   }
 
   return (

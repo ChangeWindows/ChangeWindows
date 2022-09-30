@@ -7,12 +7,12 @@ import NaviBar from "@/Components/NaviBar";
 import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
 import Editor from "@/Components/Editor";
 
-export default function Edit({ urls, release, status = null }) {
+export default function Edit({ release, status = null }) {
   const [curRelease, setCurRelease] = useState(release);
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(urls.update_release, curRelease);
+    Inertia.patch(route('admin.releases.changelog.update', release), curRelease);
   }
 
   const editor = useMemo(() => release.changelog, []);

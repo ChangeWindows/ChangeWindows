@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Auth;
 use Redirect;
-use Illuminate\Support\Collection;
 
 class PlatformController extends Controller
 {
@@ -28,7 +27,6 @@ class PlatformController extends Controller
                 'edit_platforms' => Auth::user()->can('platforms.edit')
             ],
             'platforms' => Platform::orderBy('position')->get(),
-            'createUrl' => route('admin.platforms.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -43,10 +41,7 @@ class PlatformController extends Controller
         $this->authorize('platforms.create');
 
         return Inertia::render('Admin/Platforms/Create', [
-            'tweet_streams' => TweetStream::all(),
-            'urls' => [
-                'store_platform' => route('admin.platforms.store', [], false),
-            ]
+            'tweet_streams' => TweetStream::all()
         ]);
     }
 
@@ -104,11 +99,6 @@ class PlatformController extends Controller
                 'delete_platforms' => Auth::user()->can('platforms.delete'),
                 'create_channels' => Auth::user()->can('channels.create'),
                 'edit_channels' => Auth::user()->can('channels.edit')
-            ],
-            'urls' => [
-                'update_platform' => route('admin.platforms.update', $platform, false),
-                'destroy_platform' => route('admin.platforms.destroy', $platform, false),
-                'create_channel' => route('admin.channels.create', ['platform' => $platform->id], false)
             ],
             'platform' => $platform,
             'tweet_streams' => TweetStream::all(),

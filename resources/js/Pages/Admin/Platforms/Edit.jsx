@@ -45,12 +45,12 @@ export default function Edit({
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(urls.update_platform, curPlatform);
+    Inertia.patch(route('admin.platforms.update', platform), curPlatform);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(urls.destroy_platform, curPlatform);
+    Inertia.delete(route('admin.platforms.destroy', platform), curPlatform);
   }
 
   return (
@@ -388,7 +388,7 @@ export default function Edit({
               {can.create_channels && (
                 <div className="col-12 col-sm-6 col-xl-4">
                   <InertiaLink
-                    href={urls.create_channel}
+                    href={route('admin.channels.create', { platform: platform.id })}
                     className="card card-add"
                   >
                     <div className="card-body py-3">

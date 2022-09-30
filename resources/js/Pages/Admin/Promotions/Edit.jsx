@@ -15,7 +15,6 @@ import { parse, format, isValid, parseISO } from "date-fns";
 
 export default function Edit({
   can,
-  urls,
   promotion,
   release,
   platform,
@@ -41,12 +40,12 @@ export default function Edit({
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(urls.update_promotion, curPromotion);
+    Inertia.patch(route('admin.promotions.update', promotion), curPromotion);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(urls.destroy_promotion, curPromotion);
+    Inertia.delete(route('admin.promotions.destroy', promotion), curPromotion);
   }
 
   return (

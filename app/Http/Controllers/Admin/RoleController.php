@@ -29,11 +29,9 @@ class RoleController extends Controller
             'roles' => Role::orderBy('name')->get()->map(function ($role) {
                 return [
                     'id' => $role->id,
-                    'name' => $role->name,
-                    'editUrl' => route('admin.roles.edit', $role, false)
+                    'name' => $role->name
                 ];
             }),
-            'createUrl' => route('admin.roles.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -47,10 +45,7 @@ class RoleController extends Controller
         $this->authorize('roles.create');
 
         return Inertia::render('Admin/Roles/Create', [
-            'permissions' => Permission::get(),
-            'urls' => [
-                'store_role' => route('admin.roles.store', [], false),
-            ]
+            'permissions' => Permission::get()
         ]);
     }
 
@@ -66,7 +61,7 @@ class RoleController extends Controller
         $role = $role->create([
             'name' => request('name'),
         ]);
-        
+
         $role_permissions = new Collection(request('permissions'));
 
         foreach($role_permissions as $permission) {
@@ -100,10 +95,6 @@ class RoleController extends Controller
             'can' => [
                 'edit_roles' => Auth::user()->can('roles.edit'),
                 'delete_roles' => Auth::user()->can('roles.delete')
-            ],
-            'urls' => [
-                'update_role' => route('admin.roles.update', $role, false),
-                'destroy_role' => route('admin.roles.destroy', $role, false)
             ],
             'role' => [
                 'id' => $role->id,

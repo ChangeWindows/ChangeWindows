@@ -12,7 +12,6 @@ import AmaranthIcon, {
 
 export default function Edit({
   can,
-  urls,
   releaseChannel,
   releases,
   channels,
@@ -38,12 +37,12 @@ export default function Edit({
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(urls.update_release_channel, curReleaseChannel);
+    Inertia.patch(route('admin.releasechannels.update', releaseChannel), curReleaseChannel);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(urls.destroy_release_channel, curReleaseChannel);
+    Inertia.delete(route('admin.releasechannels.destroy', releaseChannel), curReleaseChannel);
   }
 
   return (

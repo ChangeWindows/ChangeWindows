@@ -13,12 +13,12 @@ import AmaranthIcon, {
   aiPlus,
 } from "@changewindows/amaranth";
 
-export default function Show({ packages, createUrl, can, status = null }) {
+export default function Show({ packages, can, status = null }) {
   return (
     <Admin>
       <NaviBar
         actions={
-          <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
+          <InertiaLink href={route('admin.packages.create')} className="btn btn-primary btn-sm">
             <AmaranthIcon icon={aiPlus} /> New
           </InertiaLink>
         }
@@ -59,7 +59,7 @@ export default function Show({ packages, createUrl, can, status = null }) {
                     )}
                     <div className="flex-grow-1 flex-grow-md-0" />
                     <InertiaLink
-                      href={pack.edit_url}
+                      href={route('admin.packages.edit', pack)}
                       className="btn btn-link btn-sm my-n1"
                     >
                       {can.edit_packages ? (
@@ -73,7 +73,7 @@ export default function Show({ packages, createUrl, can, status = null }) {
                       )}
                     </InertiaLink>
                     <InertiaLink
-                      href={pack.edit_changelog_url}
+                      href={route('admin.packages.changelog.edit', pack)}
                       className="btn btn-link btn-sm my-n1"
                     >
                       <AmaranthIcon

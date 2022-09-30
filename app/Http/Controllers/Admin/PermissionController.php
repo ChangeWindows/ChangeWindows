@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Auth;
 use Redirect;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Collection;
 
@@ -34,12 +33,10 @@ class PermissionController extends Controller
             'permissions' => $permissions->paginate(100)->map(function ($permission) {
                 return [
                     'id' => $permission->id,
-                    'name' => $permission->name,
-                    'editUrl' => route('admin.permissions.edit', $permission, false)
+                    'name' => $permission->name
                 ];
             }),
             'pagination' => $paginator,
-            'createUrl' => route('admin.permissions.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -52,11 +49,7 @@ class PermissionController extends Controller
     public function create() {
         $this->authorize('permissions.create');
 
-        return Inertia::render('Admin/Permissions/Create', [
-            'urls' => [
-                'store_permission' => route('admin.permissions.store', [], false),
-            ]
-        ]);
+        return Inertia::render('Admin/Permissions/Create');
     }
 
     /**
@@ -67,7 +60,7 @@ class PermissionController extends Controller
      */
     public function store(Request $request) {
         $this->authorize('permissions.create');
-        
+
         $permissions = new Collection(request('variants'));
 
         foreach($permissions as $permission) {
@@ -103,10 +96,6 @@ class PermissionController extends Controller
             'can' => [
                 'edit_permissions' => Auth::user()->can('permissions.edit'),
                 'delete_permissions' => Auth::user()->can('permissions.delete')
-            ],
-            'urls' => [
-                'update_permission' => route('admin.permissions.update', $permission, false),
-                'delete_permission' => route('admin.permissions.destroy', $permission, false)
             ],
             'permission' => [
                 'id' => $permission->id,

@@ -14,7 +14,7 @@ import AmaranthIcon, {
   aiPlus,
 } from "@changewindows/amaranth";
 
-export default function Show({ can, releases, createUrl, status = null }) {
+export default function Show({ can, releases, status = null }) {
   const [devReleases, currentReleases, legacyReleases] = useMemo(() => {
     const devReleases = releases.filter((release) =>
       release.start_public
@@ -37,7 +37,7 @@ export default function Show({ can, releases, createUrl, status = null }) {
     <Admin>
       <NaviBar
         actions={
-          <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
+          <InertiaLink href={route('admin.releases.create')} className="btn btn-primary btn-sm">
             <AmaranthIcon icon={aiPlus} /> New
           </InertiaLink>
         }
@@ -88,7 +88,7 @@ export default function Show({ can, releases, createUrl, status = null }) {
                     )}
                     <div className="flex-grow-1 flex-grow-md-0" />
                     <InertiaLink
-                      href={release.edit_url}
+                      href={route('admin.releases.edit', release)}
                       className="btn btn-link btn-sm my-n1"
                     >
                       {can.edit_releases ? (
@@ -102,7 +102,7 @@ export default function Show({ can, releases, createUrl, status = null }) {
                       )}
                     </InertiaLink>
                     <InertiaLink
-                      href={release.edit_changelog_url}
+                      href={route('admin.releases.changelog.edit', release)}
                       className="btn btn-link btn-sm my-n1"
                     >
                       <AmaranthIcon

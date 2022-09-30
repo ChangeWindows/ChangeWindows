@@ -10,7 +10,7 @@ import AmaranthIcon, {
   aiTrashCan,
 } from "@changewindows/amaranth";
 
-export default function Edit({ can, urls, tweet_stream, status = null }) {
+export default function Edit({ can, tweet_stream, status = null }) {
   const [curTweetStream, setCurTweetStream] = useState(tweet_stream);
 
   useEffect(() => {
@@ -32,12 +32,12 @@ export default function Edit({ can, urls, tweet_stream, status = null }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(urls.update_tweet_stream, curTweetStream);
+    Inertia.patch(route('admin.tweet_streams.update', tweet_stream), curTweetStream);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(urls.destroy_tweet_stream, curTweetStream);
+    Inertia.delete(route('admin.tweet_streams.destroy', tweet_stream), curTweetStream);
   }
 
   return (

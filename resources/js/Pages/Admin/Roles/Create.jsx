@@ -31,7 +31,7 @@ export default function Create({ permissions, urls }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post(urls.store_role, curRole);
+    Inertia.post(route('admin.roles.store'), curRole);
   }
 
   return (

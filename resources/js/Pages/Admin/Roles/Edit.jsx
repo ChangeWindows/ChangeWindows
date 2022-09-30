@@ -10,7 +10,7 @@ import AmaranthIcon, {
   aiTrashCan,
 } from "@changewindows/amaranth";
 
-export default function Edit({ can, role, permissions, urls, status = null }) {
+export default function Edit({ can, role, permissions, status = null }) {
   const [curRole, setCurRole] = useState(role);
 
   useEffect(() => {
@@ -39,12 +39,12 @@ export default function Edit({ can, role, permissions, urls, status = null }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(urls.update_role, curRole);
+    Inertia.patch(route('admin.roles.update', role), curRole);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(urls.destroy_role, curRole);
+    Inertia.delete(route('admin.roles.destroy', role), curRole);
   }
 
   return (

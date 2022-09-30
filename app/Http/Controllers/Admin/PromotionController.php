@@ -50,14 +50,12 @@ class PromotionController extends Controller
                                 'icon' => $promotion->item->platform->icon,
                                 'name' => $promotion->item->platform->name,
                                 'color' => $promotion->item->platform->color
-                            ],
-                            'edit_url' => $promotion->item->edit_url
+                            ]
                         ];
                     })
                 ];
             }),
             'pagination' => $paginator,
-            'createUrl' => route('admin.promotions.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -74,9 +72,6 @@ class PromotionController extends Controller
         $releases = Release::orderBy('platform_id')->orderBy('canonical_version')->get();
 
         return Inertia::render('Admin/Promotions/Create', [
-            'urls' => [
-                'store_promotion' => route('admin.promotions.store', [], false),
-            ],
             'releases' => $releases->map(function ($release) {
                 return [
                     'id' => $release->id,
@@ -153,11 +148,8 @@ class PromotionController extends Controller
                 'edit_promotions' => Auth::user()->can('flights.edit'),
                 'delete_promotions' => Auth::user()->can('flights.delete')
             ],
-            'urls' => [
-                'update_promotion' => route('admin.promotions.update', $promotion, false),
-                'destroy_promotion' => route('admin.promotions.destroy', $promotion, false)
-            ],
             'promotion' => [
+                'promotion', $promotion->id,
                 'date' => $promotion->timeline->date
             ],
             'release' => [

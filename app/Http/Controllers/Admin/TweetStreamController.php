@@ -32,11 +32,9 @@ class TweetStreamController extends Controller
                 return [
                     'id' => $tweet_stream->id,
                     'name' => $tweet_stream->name,
-                    'account' => $tweet_stream->account,
-                    'editUrl' => route('admin.tweet_streams.edit', $tweet_stream, false)
+                    'account' => $tweet_stream->account
                 ];
             }),
-            'createUrl' => route('admin.tweet_streams.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -50,11 +48,7 @@ class TweetStreamController extends Controller
     {
         $this->authorize('tweet_streams.create');
 
-        return Inertia::render('Admin/TweetStreams/Create', [
-            'urls' => [
-                'store_tweet_stream' => route('admin.tweet_streams.store', [], false),
-            ]
-        ]);
+        return Inertia::render('Admin/TweetStreams/Create');
     }
 
     /**
@@ -104,10 +98,6 @@ class TweetStreamController extends Controller
             'can' => [
                 'edit_tweet_streams' => Auth::user()->can('tweet_streams.edit'),
                 'delete_tweet_streams' => Auth::user()->can('tweet_streams.delete')
-            ],
-            'urls' => [
-                'update_tweet_stream' => route('admin.tweet_streams.update', $tweetStream, false),
-                'destroy_tweet_stream' => route('admin.tweet_streams.destroy', $tweetStream, false)
             ],
             'tweet_stream' => $tweetStream,
             'status' => session('status')

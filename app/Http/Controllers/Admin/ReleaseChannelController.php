@@ -39,9 +39,6 @@ class ReleaseChannelController extends Controller
         $release = Release::find($request->release);
 
         return Inertia::render('Admin/ReleaseChannels/Create', [
-            'urls' => [
-                'store_release_channel' => route('admin.releasechannels.store', [], false)
-            ],
             'params' => [
                 'platform' => $request->platform,
                 'release' => $request->release,
@@ -104,10 +101,6 @@ class ReleaseChannelController extends Controller
             'can' => [
                 'edit_releases' => Auth::user()->can('releases.edit'),
                 'delete_releases' => Auth::user()->can('releases.delete')
-            ],
-            'urls' => [
-                'update_release_channel' => route('admin.releasechannels.update', $releaseChannel, false),
-                'destroy_release_channel' => route('admin.releasechannels.destroy', $releaseChannel, false)
             ],
             'releaseChannel' => $releaseChannel,
             'releases' => $releaseChannel->release->platform->releases,

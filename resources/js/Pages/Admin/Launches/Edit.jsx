@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 
-import Admin from ".@/Layouts/Admin";
-import NaviBar from ".@/Components/NaviBar";
-import PlatformIcon from ".@/Components/Platforms/PlatformIcon";
+import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
 import AmaranthIcon, {
   aiCheck,
@@ -15,7 +15,6 @@ import { parse, format, isValid, parseISO } from "date-fns";
 
 export default function Edit({
   can,
-  urls,
   launch,
   release,
   platform,
@@ -40,12 +39,12 @@ export default function Edit({
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(urls.update_launch, curLaunch);
+    Inertia.patch(route('admin.launches.update', launch), curLaunch);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(urls.destroy_launch, curLaunch);
+    Inertia.delete(route('admin.launches.destroy', launch), curLaunch);
   }
 
   return (

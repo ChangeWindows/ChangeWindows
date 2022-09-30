@@ -9,7 +9,7 @@ import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
 
 import { parse, format, isValid, parseISO } from "date-fns";
 
-export default function Create({ urls, releases }) {
+export default function Create({ releases }) {
   const [curPromotion, setCurPromotion] = useState({
     channel: null,
     date: format(new Date(), "yyyy-MM-dd"),
@@ -33,7 +33,7 @@ export default function Create({ urls, releases }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post(urls.store_promotion, curPromotion);
+    Inertia.post(route('admin.promotions.store'), curPromotion);
   }
 
   return (

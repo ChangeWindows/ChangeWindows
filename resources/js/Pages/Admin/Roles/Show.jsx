@@ -11,7 +11,7 @@ export default function Show({ roles, createUrl, status = null }) {
     <Admin>
       <NaviBar
         actions={
-          <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
+          <InertiaLink href={route('admin.roles.create')} className="btn btn-primary btn-sm">
             <AmaranthIcon icon={aiPlus} /> New
           </InertiaLink>
         }
@@ -29,7 +29,7 @@ export default function Show({ roles, createUrl, status = null }) {
           {roles.map((role) => (
             <div className="col-6 col-xl-4 col-xxl-3" key={role.id}>
               <InertiaLink
-                href={role.editUrl}
+                href={route('admin.roles.edit', role)}
                 className="card border-0 shadow-sm"
               >
                 <div className="card-body">

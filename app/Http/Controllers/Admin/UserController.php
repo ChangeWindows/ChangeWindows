@@ -30,8 +30,7 @@ class UserController extends Controller
                 return [
                     'id' => $user->id,
                     'name' => $user->name,
-                    'email' => $user->email,
-                    'editUrl' => route('admin.users.edit', $user, false)
+                    'email' => $user->email
                 ];
             })
         ]);
@@ -82,10 +81,6 @@ class UserController extends Controller
             'can' => [
                 'edit_users' => Auth::user()->can('users.edit'),
                 'delete_users' => Auth::user()->can('users.delete')
-            ],
-            'urls' => [
-                'update_user' => route('admin.users.update', $user, false),
-                'destroy_user' => route('admin.users.destroy', $user, false)
             ],
             'user' => [
                 'id' => $user->id,

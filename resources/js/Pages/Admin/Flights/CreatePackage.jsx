@@ -9,7 +9,7 @@ import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
 
 import { parse, format, isValid, parseISO } from "date-fns";
 
-export default function Create({ urls, packages }) {
+export default function Create({ packages }) {
   const [curFlight, setCurFlight] = useState({
     major: "",
     minor: "",
@@ -70,7 +70,7 @@ export default function Create({ urls, packages }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post(urls.store_package_flight, curFlight);
+    Inertia.post(route('admin.flights.storePackage'), curFlight);
   }
 
   return (

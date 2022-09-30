@@ -6,7 +6,7 @@ import NaviBar from "@/Components/NaviBar";
 
 import AmaranthIcon, { aiFloppyDisk } from "@changewindows/amaranth";
 
-export default function Create({ urls }) {
+export default function Create() {
   const [curPermission, setCurPermission] = useState({
     name: "",
     variants: [],
@@ -36,7 +36,7 @@ export default function Create({ urls }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post(urls.store_permission, curPermission);
+    Inertia.post(route('admin.permissions.store'), curPermission);
   }
 
   return (

@@ -6,7 +6,7 @@ import NaviBar from "@/Components/NaviBar";
 
 import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
 
-export default function Create({ urls, platforms }) {
+export default function Create({ platforms }) {
   const [curPack, setCurPack] = useState({
     name: "",
     description: "",
@@ -31,7 +31,7 @@ export default function Create({ urls, platforms }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post(urls.store_package, curPack);
+    Inertia.post(route('admin.packages.store'), curPack);
   }
 
   return (

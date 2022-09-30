@@ -8,7 +8,7 @@ import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
 
 import { parse, format, isValid, parseISO } from "date-fns";
 
-export default function Create({ urls, platforms }) {
+export default function Create({ platforms }) {
   const [curRelease, setCurRelease] = useState({
     name: "",
     version: null,
@@ -46,7 +46,7 @@ export default function Create({ urls, platforms }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post(urls.store_release, curRelease);
+    Inertia.post(route('admin.releases.store'), curRelease);
   }
 
   return (

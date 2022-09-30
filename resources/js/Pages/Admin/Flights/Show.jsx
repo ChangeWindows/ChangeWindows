@@ -12,8 +12,6 @@ import { format, parseISO } from "date-fns";
 export default function Show({
   timeline,
   pagination,
-  createUrl,
-  createPackageUrl,
   status = null,
 }) {
   return (
@@ -21,11 +19,14 @@ export default function Show({
       <NaviBar
         actions={
           <>
-            <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
+            <InertiaLink
+              href={route("admin.flights.create")}
+              className="btn btn-primary btn-sm"
+            >
               <AmaranthIcon icon={aiPlus} /> Flight
             </InertiaLink>
             <InertiaLink
-              href={createPackageUrl}
+              href={route("admin.flights.createPackage")}
               className="btn btn-primary btn-sm ms-1"
             >
               <AmaranthIcon icon={aiPlus} /> Package
@@ -53,7 +54,7 @@ export default function Show({
               {timeline[date].flights.map((flight, key) => (
                 <div className="col-6 col-md-4 col-xl-3 col-xxl-2" key={key}>
                   <InertiaLink
-                    href={flight.edit_url}
+                    href={route('admin.flights.edit', flight)}
                     className="card border-0 shadow-sm h-100"
                   >
                     <div className="card-body d-flex flex-column">

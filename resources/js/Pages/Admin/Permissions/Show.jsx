@@ -10,14 +10,13 @@ import AmaranthIcon, { aiCheck, aiPlus } from "@changewindows/amaranth";
 export default function Show({
   permissions,
   pagination,
-  createUrl,
   status = null,
 }) {
   return (
     <Admin>
       <NaviBar
         actions={
-          <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
+          <InertiaLink href={route('admin.permissions.create')} className="btn btn-primary btn-sm">
             <AmaranthIcon icon={aiPlus} /> New
           </InertiaLink>
         }
@@ -35,7 +34,7 @@ export default function Show({
           {permissions.map((permission) => (
             <div className="col-6 col-xl-4 col-xxl-3" key={permission.id}>
               <InertiaLink
-                href={permission.editUrl}
+                href={route('admin.permissions.edit', permission)}
                 className="card border-0 shadow-sm"
               >
                 <div className="card-body">

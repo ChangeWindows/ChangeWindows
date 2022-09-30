@@ -30,16 +30,15 @@ class ChannelController extends Controller
     public function create(Request $request)
     {
         $this->authorize('channels.create');
-        
+
         $platform = Platform::find($request->platform);
 
         return Inertia::render('Admin/Channels/Create', [
-            'urls' => [
-                'edit_platform' => route('admin.platforms.edit', $platform, false),
-                'store_channel' => route('admin.channels.store', [], false),
-            ],
             'params' => [
-                'platform' => $request->platform
+                'platform' => [
+                    'slug' => $platform->slug,
+                    'id' => $platform->id,
+                ]
             ],
             'platforms' => Platform::orderBy('position')->get()
         ]);
@@ -91,11 +90,6 @@ class ChannelController extends Controller
             'can' => [
                 'edit_channels' => Auth::user()->can('channels.edit'),
                 'delete_channels' => Auth::user()->can('channels.delete')
-            ],
-            'urls' => [
-                'edit_platform' => route('admin.platforms.edit', $channel->platform, false),
-                'update_channel' => route('admin.channels.update', $channel, false),
-                'destroy_channel' => route('admin.channels.destroy', $channel, false)
             ],
             'channel' => $channel,
             'platforms' => Platform::orderBy('position')->get(),

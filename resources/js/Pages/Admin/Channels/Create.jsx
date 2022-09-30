@@ -6,13 +6,13 @@ import NaviBar from "@/Components/NaviBar";
 
 import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
 
-export default function Create({ urls, platforms, params }) {
+export default function Create({ platforms, params }) {
   const [curChannel, setCurChannel] = useState({
     name: "",
     color: "#",
     order: 0,
     active: 1,
-    platform_id: params.platform,
+    platform_id: params.platform.id,
   });
 
   function formHandler(event) {
@@ -33,14 +33,14 @@ export default function Create({ urls, platforms, params }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post(urls.store_channel, curChannel);
+    Inertia.post(route('admin.channels.create'), curChannel);
   }
 
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
         <NaviBar
-          back={urls.edit_platform}
+          back={route('admin.platforms.edit', params.platform)}
           actions={
             <button className="btn btn-primary btn-sm" type="submit">
               <AmaranthIcon icon={aiFloppyDisk} /> Save

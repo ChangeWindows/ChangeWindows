@@ -10,7 +10,7 @@ import AmaranthIcon, {
   aiTrashCan,
 } from "@changewindows/amaranth";
 
-export default function Edit({ can, urls, channel, platforms, status = null }) {
+export default function Edit({ can, channel, platforms, status = null }) {
   const [curChannel, setCurChannel] = useState(channel);
 
   useEffect(() => {
@@ -35,19 +35,19 @@ export default function Edit({ can, urls, channel, platforms, status = null }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(urls.update_channel, curChannel);
+    Inertia.patch(route('admin.channels.update', channel), curChannel);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(urls.destroy_channel, curChannel);
+    Inertia.delete(route('admin.channels.destroy', channel), curChannel);
   }
 
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
         <NaviBar
-          back={urls.edit_platform}
+          back={route('admin.platforms.edit', channel.platform)}
           actions={
             <button className="btn btn-primary btn-sm" type="submit">
               <AmaranthIcon icon={aiFloppyDisk} /> Save

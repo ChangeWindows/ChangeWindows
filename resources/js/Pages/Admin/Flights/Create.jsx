@@ -9,7 +9,7 @@ import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
 
 import { parse, format, isValid, parseISO } from "date-fns";
 
-export default function Create({ urls, releases, platform }) {
+export default function Create({ releases }) {
   const [showAll, setShowAll] = useState(false);
   const [showEligible, setShowEligible] = useState(false);
   const [curFlight, setCurFlight] = useState({
@@ -104,7 +104,7 @@ export default function Create({ urls, releases, platform }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post(urls.store_flight, curFlight);
+    Inertia.post(route('admin.flights.store'), curFlight);
   }
 
   return (

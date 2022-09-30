@@ -46,14 +46,12 @@ class LaunchController extends Controller
                                 'icon' => $launch->item->release->platform->icon,
                                 'name' => $launch->item->release->platform->name,
                                 'color' => $launch->item->release->platform->color
-                            ],
-                            'edit_url' => $launch->item->edit_url
+                            ]
                         ];
                     })
                 ];
             }),
             'pagination' => $paginator,
-            'createUrl' => route('admin.launches.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -70,9 +68,6 @@ class LaunchController extends Controller
         $releases = Release::orderBy('platform_id')->orderBy('canonical_version')->get();
 
         return Inertia::render('Admin/Launches/Create', [
-            'urls' => [
-                'store_launch' => route('admin.launches.store', [], false),
-            ],
             'releases' => $releases->whereNull('launch')->values()->map(function ($release) {
                 return [
                     'id' => $release->id,
@@ -142,11 +137,8 @@ class LaunchController extends Controller
                 'edit_launches' => Auth::user()->can('flights.edit'),
                 'delete_launches' => Auth::user()->can('flights.delete')
             ],
-            'urls' => [
-                'update_launch' => route('admin.launches.update', $launch, false),
-                'destroy_launch' => route('admin.launches.destroy', $launch, false)
-            ],
             'launch' => [
+                'id' => $launch->id,
                 'date' => $launch->timeline->date
             ],
             'release' => [
