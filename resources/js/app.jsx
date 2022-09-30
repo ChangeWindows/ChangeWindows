@@ -5,6 +5,8 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 
 import { createInertiaApp } from "@inertiajs/inertia-react";
 
+import 'bootstrap';
+
 createInertiaApp({
   title: (title) => `${title} &middot; ChangeWindows`,
   resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
