@@ -18,7 +18,7 @@
     }
 
     .navbar-brand {
-        grid-area: title;
+        grid-area: 'title';
 
         display: flex;
         justify-content: center;
@@ -103,7 +103,7 @@
     }
 
     .navbar-actions {
-        grid-area: actions;
+        grid-area: 'actions';
 
         app-region: no-drag;
         display: flex;
@@ -114,7 +114,7 @@
     }
 
     .navbar-search {
-        grid-area: search;
+        grid-area: 'search';
 
         display: flex;
         flex-direction: row;
