@@ -11,7 +11,6 @@ import PlatformNavigation from "@/Components/PlatformNavigation";
 import { parseISO } from "date-fns";
 
 export default function Show({
-  app,
   platforms,
   platform,
   channels,
@@ -65,7 +64,7 @@ export default function Show({
                     }
                     url={
                       channel.flights.length > 0
-                        ? channel.flights[0].url
+                        ? route('front.platforms.releases', { release: channel.flights[0].release, platform })
                         : undefined
                     }
                   />
@@ -87,7 +86,7 @@ export default function Show({
                         alts={[`Version ${release.version}`, release.codename]}
                         flight={release.latest_flight}
                         channels={release.channels}
-                        url={release.url}
+                        url={route('front.platforms.releases', [platform, release])}
                         dates={release.dates}
                       />
                     ))}
@@ -106,7 +105,7 @@ export default function Show({
                         name={pack.name}
                         alts={[`Version ${pack.version}`, pack.codename]}
                         channels={pack.channels}
-                        url={pack.url}
+                        url={route('front.platforms.packages', { platform, release: pack })}
                       />
                     ))}
                   </div>
@@ -123,7 +122,7 @@ export default function Show({
                         name={release.name}
                         alts={[`Version ${release.version}`, release.codename]}
                         flight={release.latest_flight}
-                        url={release.url}
+                        url={route('front.platforms.releases', [platform, release])}
                         dates={release.dates}
                       />
                     ))}

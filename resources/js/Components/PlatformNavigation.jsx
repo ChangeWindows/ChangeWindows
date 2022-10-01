@@ -15,7 +15,7 @@ import clsx from 'clsx';
 export default function Navigation({ home = false, platforms, all = false }) {
   const matchesSmUp = useMediaQuery('(min-width: 576px)');
   const page = usePage();
-  
+
   const mainPlatforms = useMemo(() => platforms.filter((platform) => matchesSmUp && !platform.legacy || !matchesSmUp && !platform.legacy && !platform.tool), [matchesSmUp, platforms]);
   const legacyPlatforms = useMemo(() => platforms.filter((platform) => platform.legacy), [platforms]);
   const toolPlatforms = useMemo(() => platforms.filter((platform) => platform.tool), [platforms]);
@@ -41,7 +41,7 @@ export default function Navigation({ home = false, platforms, all = false }) {
               </li>
             }
             {mainPlatforms.map((platform, key) => (
-              <NavItem url={platform.url} key={key}>
+              <NavItem url={route('front.channels.show', { platform })} key={key}>
                 <PlatformIcon platform={platform} /> <span className="d-none d-xl-inline-block">{platform.name}</span>
               </NavItem>
             ))}
@@ -57,7 +57,7 @@ export default function Navigation({ home = false, platforms, all = false }) {
                   <>
                     <li><h6 className="dropdown-header">Tools</h6></li>
                     {toolPlatforms.map((platform, key) => (
-                      <DropdownItem url={platform.url} key={key}>
+                      <DropdownItem url={route('front.channels.show', { platform })} key={key}>
                         <PlatformIcon platform={platform} /> {platform.name}
                       </DropdownItem>
                     ))}
@@ -65,7 +65,7 @@ export default function Navigation({ home = false, platforms, all = false }) {
                 }
                 {!matchesSmUp && legacyPlatforms.length > 0 && <li><h6 className="dropdown-header">Legacy</h6></li>}
                 {legacyPlatforms.map((platform, key) => (
-                  <DropdownItem url={platform.url} key={key}>
+                  <DropdownItem url={route('front.channels.show', { platform })} key={key}>
                     <PlatformIcon platform={platform} /> {platform.name}
                   </DropdownItem>
                 ))}

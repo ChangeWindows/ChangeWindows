@@ -87,7 +87,7 @@ export default function Show({ platform, platforms, channel_order, releases }) {
                           date={
                             channel.flight ? parseISO(channel.flight.date) : ""
                           }
-                          url={channel.flight ? channel.flight.url : undefined}
+                          url={channel.flight ? route('front.platforms.releases', { release, platform }) : undefined}
                         />
                       );
                     } else {

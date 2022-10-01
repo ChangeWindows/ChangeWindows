@@ -6,7 +6,7 @@ import NaviBar from "@/Components/NaviBar";
 
 import AmaranthIcon, { aiCheck, aiPlus } from "@changewindows/amaranth";
 
-export default function Show({ roles, createUrl, status = null }) {
+export default function Show({ roles, status = null }) {
   return (
     <Admin>
       <NaviBar

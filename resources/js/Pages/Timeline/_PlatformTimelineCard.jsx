@@ -20,9 +20,9 @@ export default function PlatformTimelineCard({ platform }) {
                 platform={flight.platform}
                 build={flight.flight}
                 channels={flight.release_channel}
-                version={flight.version}
-                pack={flight.package}
-                url={flight.url}
+                version={flight.release.version}
+                pack={flight.release.package}
+                url={route(flight.release.package ? 'front.platforms.packages' : 'front.platforms.releases', { release: flight.release, platform: flight.platform })}
               />
             );
           }
@@ -33,8 +33,8 @@ export default function PlatformTimelineCard({ platform }) {
                 key={`${flight.type}-${flight.id}`}
                 platform={flight.platform}
                 channel={flight.release_channel}
-                version={flight.version}
-                url={flight.url}
+                version={flight.release.version}
+                url={route(flight.release.package ? 'front.platforms.packages' : 'front.platforms.releases', { release: flight.release, platform: flight.platform })}
               />
             );
           }
@@ -44,8 +44,8 @@ export default function PlatformTimelineCard({ platform }) {
               <Launch
                 key={`${flight.type}-${flight.id}`}
                 platform={flight.platform}
-                version={flight.version}
-                url={flight.url}
+                version={flight.release.version}
+                url={route(flight.release.package ? 'front.platforms.packages' : 'front.platforms.releases', { release: flight.release, platform: flight.platform })}
               />
             );
           }

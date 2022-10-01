@@ -30,7 +30,6 @@ class FlagController extends Controller
                 'editFlags' => Auth::user()->can('flags.edit')
             ],
             'suggestion' => FlagContent::where('status', 1)->orderBy('created_at', 'asc')->with('flag', 'flag.latestContents')->first(),
-            'createUrl' => route('admin.flags.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -59,7 +58,6 @@ class FlagController extends Controller
                 return $flag_status;
             }),
             'pagination' => $paginator,
-            'createUrl' => route('admin.flags.create', [], false),
             'status' => session('status')
         ]);
     }

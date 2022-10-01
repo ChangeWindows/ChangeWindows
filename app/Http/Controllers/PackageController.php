@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Redirect;
 use App\Models\Platform;
 use App\Models\Release;
 use App\Models\Timeline;
@@ -23,7 +21,7 @@ class PackageController extends Controller
             ->whereHas('flight', function (Builder $query) use ($release) {
                 $query->join('release_channels as frs', function ($join) {
                     $join->on('frs.id', '=', 'flights.release_channel_id')
-                
+
                     ->join('channels as fc', function ($join) {
                         $join->on('fc.id', '=', 'frs.channel_id');
                     });
@@ -33,7 +31,7 @@ class PackageController extends Controller
             ->orWhereHas('promotion', function (Builder $query) use ($release) {
                 $query->join('release_channels as prs', function ($join) {
                     $join->on('prs.id', '=', 'promotions.release_channel_id')
-                
+
                     ->join('channels as pc', function ($join) {
                         $join->on('pc.id', '=', 'prs.channel_id');
                     });
@@ -54,11 +52,11 @@ class PackageController extends Controller
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
                 return [
                     'id' => $_platform->id,
+                    'slug' => $_platform->slug,
                     'name' => $_platform->name,
                     'color' => $_platform->color,
                     'icon' => $_platform->icon,
-                    'legacy' => $_platform->legacy,
-                    'url' => route('front.platforms.show', $_platform, false)
+                    'legacy' => $_platform->legacy
                 ];
             }),
             'release' => $release->only('name', 'changelog'),
@@ -114,7 +112,7 @@ class PackageController extends Controller
                                 ]
                             ];
                         }
-                        
+
                         if ($flights->first()->item_type === \App\Models\Promotion::class) {
                             $_cur_promotion = $flights->first();
                             return [
@@ -134,9 +132,9 @@ class PackageController extends Controller
                                     'name' => $_cur_promotion->item->platform->name,
                                     'color' => $_cur_promotion->item->platform->color
                                 ]
-                            ]; 
+                            ];
                         }
-                        
+
                         if ($flights->first()->item_type === \App\Models\Launch::class) {
                             $_cur_launch = $flights->first();
                             return [
@@ -158,7 +156,7 @@ class PackageController extends Controller
                         if ($item['type'] === 'flight') {
                             return $item['event_priority'].'.'.$item['flight'].'.'.$item['platform']['order'];
                         }
-                        
+
                         return $item['event_priority'].'.'.$item['platform']['order'];
                     })->values()->all()
                 ];

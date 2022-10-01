@@ -48,7 +48,7 @@ export default function Release({
       <nav className="navbar navbar-expand-xl navbar-light sticky-top">
         <div className="container">
           <InertiaLink
-            href={`/platforms/${platform.slug}`}
+            href={route('front.platforms.show', platform)}
             className="btn btn-transparent btn-sm me-2"
           >
             <AmaranthIcon icon={aiArrowLeft} />

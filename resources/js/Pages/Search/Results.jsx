@@ -28,7 +28,7 @@ export default function Index({ results, query }) {
                       result.searchable.codename,
                     ]}
                     channels={result.searchable.channels}
-                    url={result.searchable.url}
+                    url={route('front.platforms.releases', { platform: result.searchable.platform, release: result.searchable })}
                   />
                 ))}
               </div>

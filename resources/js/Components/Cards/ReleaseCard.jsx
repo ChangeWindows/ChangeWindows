@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import { InertiaLink } from "@inertiajs/inertia-react";
 
-import PlatformIcon from "@/Platforms/PlatformIcon";
 import LifeCycle from "@/Pages/Platforms/_LifeCycle";
 import clsx from "clsx";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
 export default function ReleaseCard({
   name,

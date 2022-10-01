@@ -36,14 +36,14 @@ class SearchController extends Controller
             'results' => $search_results->map(function ($result) {
                 return [
                     'title' => $result->title,
-                    'url' => $result->url,
                     'type' => $result->type,
                     'searchable' => [
+                        'slug' => $result->searchable->slug,
                         'name' => $result->searchable->name,
                         'version' => $result->searchable->version,
                         'codename' => $result->searchable->codename,
-                        'url' => $result->searchable->url,
                         'platform' => [
+                            'slug' => $result->searchable->platform->slug,
                             'icon' => $result->searchable->platform->icon,
                             'name' => $result->searchable->platform->name,
                             'color' => $result->searchable->platform->color,

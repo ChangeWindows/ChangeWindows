@@ -10,7 +10,7 @@ import PlatformNavigation from "@/Components/PlatformNavigation";
 import { parseISO } from "date-fns";
 import clsx from "clsx";
 
-export default function Index({ app, platforms, channel_platforms }) {
+export default function Index({ platforms, channel_platforms }) {
   return (
     <App>
       <InertiaHead title="Channels" />
@@ -48,7 +48,7 @@ export default function Index({ app, platforms, channel_platforms }) {
                     channel={{ color: channel.color, name: channel.name }}
                     build={channel.flight ? channel.flight.version : ""}
                     date={channel.flight ? parseISO(channel.flight.date) : ""}
-                    url={channel.flight ? channel.flight.url : undefined}
+                    url={channel.flight ? route('front.platforms.releases', { release: channel.release, platform }) : undefined}
                   />
                 ))}
               </div>

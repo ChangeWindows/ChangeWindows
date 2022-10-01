@@ -70,7 +70,7 @@ export default function Show({
                           date={
                             channel.flight ? parseISO(channel.flight.date) : ""
                           }
-                          url={channel.flight ? channel.flight.url : undefined}
+                          url={channel.flight ? route('front.platforms.releases', { release: channel.release, platform }) : undefined}
                         />
                       ))}
                     </Fragment>

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Platform;
-use App\Models\Timeline;
 
 class ChannelController extends Controller
 {
@@ -22,15 +20,16 @@ class ChannelController extends Controller
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
                 return [
                     'id' => $_platform->id,
+                    'slug' => $_platform->slug,
                     'name' => $_platform->name,
                     'color' => $_platform->color,
                     'icon' => $_platform->icon,
                     'legacy' => $_platform->legacy,
-                    'url' => route('front.channels.show', $_platform, false)
                 ];
             }),
             'channel_platforms' => $channel_platforms->map(function ($platform) {
                 return [
+                    'slug' => $platform->slug,
                     'name' => $platform->name,
                     'color' => $platform->color,
                     'icon' => $platform->icon,
@@ -46,8 +45,11 @@ class ChannelController extends Controller
                             'color' => $channel->color,
                             'flight' => [
                                 'version' => $release_channel->latest->flight,
-                                'date' => $release_channel->latest->timeline->date,
-                                'url' => $release_channel->latest->url
+                                'date' => $release_channel->latest->timeline->date
+                            ],
+                            'release' => [
+                                'id' => $release_channel->release->id,
+                                'slug' => $release_channel->release->slug,
                             ]
                         ];
                     })->sortBy('order')->values()->all(),
@@ -68,14 +70,15 @@ class ChannelController extends Controller
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
                 return [
                     'id' => $_platform->id,
+                    'slug' => $_platform->slug,
                     'name' => $_platform->name,
                     'color' => $_platform->color,
                     'icon' => $_platform->icon,
                     'legacy' => $_platform->legacy,
-                    'url' => route('front.channels.show', $_platform, false)
                 ];
             }),
             'platform' => [
+                'slug' => $platform->slug,
                 'name' => $platform->name,
                 'icon' => $platform->icon,
                 'color' => $platform->color
@@ -89,9 +92,9 @@ class ChannelController extends Controller
             'releases' => $platform->releases->sortByDesc('canonical_version')->map(function ($release) {
                 return [
                     'name' => $release->name,
+                    'slug' => $release->slug,
                     'version' => $release->version,
                     'codename' => $release->codename,
-                    'url' => $release->url,
                     'platform' => [
                         'icon' => $release->platform->icon,
                         'name' => $release->platform->name,
@@ -108,8 +111,7 @@ class ChannelController extends Controller
                             'channel_id' => $channel->channel->id,
                             'flight' => $channel->latest ? [
                                 'version' => $channel->latest->flight,
-                                'date' => $channel->latest->timeline->date,
-                                'url' => $channel->latest->url
+                                'date' => $channel->latest->timeline->date
                             ] : null
                         ];
                     })->values()->all()
