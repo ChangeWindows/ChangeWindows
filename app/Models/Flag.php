@@ -76,7 +76,7 @@ class Flag extends Model implements Searchable
         return new \Spatie\Searchable\SearchResult(
             $this,
             $this->feature_name,
-            $this->getUrlAttribute()
+            route('front.flags.show', $this)
         );
     }
 }

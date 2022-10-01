@@ -13,8 +13,7 @@ class Launch extends Model
 
     protected $table = 'launches';
     protected $fillable = ['release_id'];
-    protected $appends = ['edit_url', 'url'];
-    
+
     public function timeline() {
         return $this->morphOne(Timeline::class, 'item');
     }
@@ -25,13 +24,5 @@ class Launch extends Model
 
     public function getPlatformAttribute() {
         return $this->release->platform;
-    }
-
-    public function getUrlAttribute() {
-        return route('front.platforms.releases', ['release' => $this->release, 'platform' => $this->release->platform], false);
-    }
-
-    public function getEditUrlAttribute() {
-        return route('admin.launches.edit', $this, false);
     }
 }

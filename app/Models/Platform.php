@@ -17,7 +17,7 @@ class Platform extends Model
 
     protected $table = 'platforms';
     protected $fillable = ['name', 'description', 'color', 'icon', 'position', 'legacy', 'active', 'tool', 'tweet_template', 'tweet_template_package', 'tweet_stream_id', 'retweet_stream_id', 'slug'];
-    protected $appends = ['plain_icon', 'colored_icon', 'bg_color', 'edit_url'];
+    protected $appends = ['plain_icon', 'colored_icon', 'bg_color'];
 
     protected $casts = [
         'legacy' => 'integer',
@@ -68,10 +68,6 @@ class Platform extends Model
 
     public function getBgColorAttribute() {
         return 'background-color: '.$this->color;
-    }
-
-    public function getEditUrlAttribute() {
-        return route('admin.platforms.edit', $this, false);
     }
 
     public function getRouteKeyName() {
