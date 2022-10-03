@@ -4,22 +4,16 @@ import { Inertia } from "@inertiajs/inertia";
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, {
-  aiCheck,
   aiFloppyDisk,
   aiTrashCan,
 } from "@changewindows/amaranth";
 
 import { parse, format, isValid, parseISO } from "date-fns";
 
-export default function Edit({
-  can,
-  launch,
-  release,
-  platform,
-  status = null,
-}) {
+export default function Edit({ can, launch, release, platform, status }) {
   const [curLaunch, setCurLaunch] = useState({
     date: format(parseISO(launch.date), "yyyy-MM-dd"),
   });
@@ -39,19 +33,19 @@ export default function Edit({
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(route('admin.launches.update', launch), curLaunch);
+    Inertia.patch(route("admin.launches.update", launch), curLaunch);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(route('admin.launches.destroy', launch), curLaunch);
+    Inertia.delete(route("admin.launches.destroy", launch), curLaunch);
   }
 
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
         <NaviBar
-          back={route('admin.launches')}
+          back={route("admin.launches")}
           actions={
             <button className="btn btn-primary btn-sm" type="submit">
               <AmaranthIcon icon={aiFloppyDisk} /> Save
@@ -63,11 +57,7 @@ export default function Edit({
         </NaviBar>
 
         <div className="container my-3">
-          {status && (
-            <div className="alert alert-success">
-              <AmaranthIcon icon={aiCheck} /> {status}
-            </div>
-          )}
+          <Status status={status} />
           <fieldset className="row mb-3">
             <div className="col-12 col-md-4 my-4 my-md-0">
               <h4 className="h5 mb-0">Identity</h4>

@@ -3,8 +3,9 @@ import { Inertia } from "@inertiajs/inertia";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
+import AmaranthIcon, { aiFloppyDisk } from "@changewindows/amaranth";
 
 export default function Create({ platforms, params }) {
   const [curChannel, setCurChannel] = useState({
@@ -51,11 +52,6 @@ export default function Create({ platforms, params }) {
         </NaviBar>
 
         <div className="container my-3">
-          {status && (
-            <div className="alert alert-success">
-              <AmaranthIcon icon={aiCheck} /> {status}
-            </div>
-          )}
           <fieldset className="row mb-3">
             <div className="col-12 col-md-4 my-4 my-md-0">
               <h4 className="h5 mb-0">Identity</h4>

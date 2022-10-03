@@ -3,10 +3,11 @@ import { Inertia } from "@inertiajs/inertia";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
+import AmaranthIcon, { aiFloppyDisk } from "@changewindows/amaranth";
 
-export default function Edit({ status = null }) {
+export default function Edit({ status }) {
   const [curTweetStream, setCurTweetStream] = useState({
     name: "",
     account: "",
@@ -31,7 +32,7 @@ export default function Edit({ status = null }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post(route('admin.tweet_streams.store'), curTweetStream);
+    Inertia.post(route("admin.tweet_streams.store"), curTweetStream);
   }
 
   return (
@@ -49,11 +50,7 @@ export default function Edit({ status = null }) {
         </NaviBar>
 
         <div className="container my-3">
-          {status && (
-            <div className="alert alert-success">
-              <AmaranthIcon icon={aiCheck} /> {status}
-            </div>
-          )}
+          <Status status={status} />
           <fieldset className="row mb-3">
             <div className="col-12 col-md-4 my-4 my-md-0">
               <h4 className="h5 mb-0">Identity</h4>

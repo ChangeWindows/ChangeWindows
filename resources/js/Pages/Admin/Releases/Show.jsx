@@ -4,17 +4,17 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Status from "@/Components/Status";
 
 import { isAfter, isBefore, parseISO } from "date-fns";
 import AmaranthIcon, {
-  aiCheck,
   aiEye,
   aiNotes,
   aiPen,
   aiPlus,
 } from "@changewindows/amaranth";
 
-export default function Show({ can, releases, status = null }) {
+export default function Show({ can, releases, status }) {
   const [devReleases, currentReleases, legacyReleases] = useMemo(() => {
     const devReleases = releases.filter((release) =>
       release.start_public
@@ -37,7 +37,10 @@ export default function Show({ can, releases, status = null }) {
     <Admin>
       <NaviBar
         actions={
-          <InertiaLink href={route('admin.releases.create')} className="btn btn-primary btn-sm">
+          <InertiaLink
+            href={route("admin.releases.create")}
+            className="btn btn-primary btn-sm"
+          >
             <AmaranthIcon icon={aiPlus} /> New
           </InertiaLink>
         }
@@ -46,11 +49,7 @@ export default function Show({ can, releases, status = null }) {
       </NaviBar>
 
       <div className="container">
-        {status && (
-          <div className="alert alert-success">
-            <AmaranthIcon icon={aiCheck} /> {status}
-          </div>
-        )}
+        <Status status={status} />
         <div className="row g-1">
           <div className="col-12 titel">
             <h3 className="h6">Development</h3>
@@ -88,7 +87,7 @@ export default function Show({ can, releases, status = null }) {
                     )}
                     <div className="flex-grow-1 flex-grow-md-0" />
                     <InertiaLink
-                      href={route('admin.releases.edit', release)}
+                      href={route("admin.releases.edit", release)}
                       className="btn btn-link btn-sm my-n1"
                     >
                       {can.edit_releases ? (
@@ -102,7 +101,7 @@ export default function Show({ can, releases, status = null }) {
                       )}
                     </InertiaLink>
                     <InertiaLink
-                      href={route('admin.releases.changelog.edit', release)}
+                      href={route("admin.releases.changelog.edit", release)}
                       className="btn btn-link btn-sm my-n1"
                     >
                       <AmaranthIcon

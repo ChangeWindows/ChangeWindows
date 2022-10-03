@@ -5,7 +5,7 @@ import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
-import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
+import AmaranthIcon, { aiFloppyDisk } from "@changewindows/amaranth";
 
 import { parse, format, isValid, parseISO } from "date-fns";
 
@@ -51,11 +51,6 @@ export default function Create({ releases }) {
         </NaviBar>
 
         <div className="container my-3">
-          {status && (
-            <div className="alert alert-success">
-              <AmaranthIcon icon={aiCheck} /> {status}
-            </div>
-          )}
           <fieldset className="row mb-3">
             <div className="col-12 col-md-4 my-4 my-md-0">
               <h4 className="h5 mb-0">Launch date</h4>

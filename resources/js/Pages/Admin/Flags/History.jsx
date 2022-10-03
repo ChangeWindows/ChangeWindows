@@ -4,9 +4,9 @@ import { InertiaLink, useForm } from "@inertiajs/inertia-react";
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import Pagination from "@/Components/Pagination";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, {
-  aiCheck,
   aiAngleRight,
   aiSpinnerThird,
   aiArrowUp,
@@ -17,13 +17,7 @@ import AmaranthIcon, {
 import clsx from "clsx";
 import FlagStatus from "@/Components/_FlagStatus";
 
-export default function Show({
-  can,
-  flagStatus,
-  pagination,
-  status = null,
-  errors,
-}) {
+export default function Show({ can, flagStatus, pagination, status, errors }) {
   const { data, setData, post, processing } = useForm({
     build: "",
     file: "",
@@ -70,11 +64,7 @@ export default function Show({
       </NaviBar>
 
       <div className="container my-2">
-        {status && (
-          <div className="alert alert-success">
-            <AmaranthIcon icon={aiCheck} /> {status}
-          </div>
-        )}
+        <Status status={status} />
         <div className="row g-1">
           {can.createFlags && (
             <>

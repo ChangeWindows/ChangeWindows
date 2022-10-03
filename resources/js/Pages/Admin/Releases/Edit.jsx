@@ -4,9 +4,9 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, {
-  aiCheck,
   aiEye,
   aiFloppyDisk,
   aiNotes,
@@ -22,7 +22,7 @@ export default function Edit({
   release,
   channels,
   release_channels,
-  status = null,
+  status,
 }) {
   const [curRelease, setCurRelease] = useState({
     name: "",
@@ -65,12 +65,12 @@ export default function Edit({
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(route('admin.releases.update', release), curRelease);
+    Inertia.patch(route("admin.releases.update", release), curRelease);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(route('admin.releases.destroy', release), curRelease);
+    Inertia.delete(route("admin.releases.destroy", release), curRelease);
   }
 
   const availablePlatformChannels = useMemo(
@@ -99,11 +99,7 @@ export default function Edit({
         </NaviBar>
 
         <div className="container my-3">
-          {status && (
-            <div className="alert alert-success">
-              <AmaranthIcon icon={aiCheck} /> {status}
-            </div>
-          )}
+          <Status status={status} />
           <fieldset className="row mb-3">
             <div className="col-12 col-md-4 my-4 my-md-0">
               <h4 className="h5 mb-0">Identity</h4>
@@ -213,7 +209,7 @@ export default function Edit({
             </div>
             <div className="col-12 col-md-8">
               <InertiaLink
-                href={route('admin.releases.changelog.edit', release)}
+                href={route("admin.releases.changelog.edit", release)}
                 className="btn btn-primary btn-sm"
               >
                 <AmaranthIcon
@@ -450,7 +446,7 @@ export default function Edit({
                 return (
                   <div className="col-12 col-sm-6 col-xl-4" key={key}>
                     <InertiaLink
-                      href={route('admin.releasechannels.edit', releaseChannel)}
+                      href={route("admin.releasechannels.edit", releaseChannel)}
                       className="card border-0 shadow-sm h-100"
                     >
                       <div className="card-body">
@@ -498,7 +494,11 @@ export default function Edit({
                       {availablePlatformChannels.map((channel, key) => (
                         <InertiaLink
                           key={key}
-                          href={route('admin.releasechannels.create', { release: release.id, platform: release.platform.id, channel: channel.id })}
+                          href={route("admin.releasechannels.create", {
+                            release: release.id,
+                            platform: release.platform.id,
+                            channel: channel.id,
+                          })}
                           className="dropdown-item d-flex align-items-center"
                         >
                           <div

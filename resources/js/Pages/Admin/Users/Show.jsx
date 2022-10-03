@@ -3,20 +3,17 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, { aiCheck } from "@changewindows/amaranth";
 
-export default function Show({ users, status = null }) {
+export default function Show({ users, status }) {
   return (
     <Admin>
       <NaviBar>Users</NaviBar>
 
       <div className="container">
-        {status && (
-          <div className="alert alert-success">
-            <AmaranthIcon icon={aiCheck} /> {status}
-          </div>
-        )}
+          <Status status={status} />
         <div className="row g-1">
           {users.map((user) => (
             <div className="col-12 col-sm-6 col-xl-4 col-xxl-3" key={user.id}>

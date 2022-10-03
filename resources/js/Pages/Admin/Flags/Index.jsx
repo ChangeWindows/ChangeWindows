@@ -3,9 +3,9 @@ import { InertiaLink, useForm } from "@inertiajs/inertia-react";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, {
-  aiCheck,
   aiSpinnerThird,
   aiArrowUp,
   aiClockRotateLeft,
@@ -15,7 +15,7 @@ import AmaranthIcon, {
 import clsx from "clsx";
 import Suggestion from "./_Suggestion";
 
-export default function Index({ can, status = null, errors, suggestion }) {
+export default function Index({ can, status, errors, suggestion }) {
   const { data, setData, post, processing } = useForm({
     build: "",
     file: "",
@@ -59,11 +59,7 @@ export default function Index({ can, status = null, errors, suggestion }) {
       </NaviBar>
 
       <div className="container my-2">
-        {status && (
-          <div className="alert alert-success">
-            <AmaranthIcon icon={aiCheck} /> {status}
-          </div>
-        )}
+        <Status status={status} />
         <div className="row g-1">
           {can.createFlags && (
             <>

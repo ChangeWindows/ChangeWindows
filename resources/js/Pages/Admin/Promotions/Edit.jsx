@@ -4,9 +4,9 @@ import { Inertia } from "@inertiajs/inertia";
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, {
-  aiCheck,
   aiFloppyDisk,
   aiTrashCan,
 } from "@changewindows/amaranth";
@@ -19,7 +19,7 @@ export default function Edit({
   release,
   platform,
   release_channel,
-  status = null,
+  status,
 }) {
   const [curPromotion, setCurPromotion] = useState({
     date: format(parseISO(promotion.date), "yyyy-MM-dd"),
@@ -40,12 +40,12 @@ export default function Edit({
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(route('admin.promotions.update', promotion), curPromotion);
+    Inertia.patch(route("admin.promotions.update", promotion), curPromotion);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(route('admin.promotions.destroy', promotion), curPromotion);
+    Inertia.delete(route("admin.promotions.destroy", promotion), curPromotion);
   }
 
   return (
@@ -70,11 +70,7 @@ export default function Edit({
         </NaviBar>
 
         <div className="container my-3">
-          {status && (
-            <div className="alert alert-success">
-              <AmaranthIcon icon={aiCheck} /> {status}
-            </div>
-          )}
+          <Status status={status} />
           <fieldset className="row mb-3">
             <div className="col-12 col-md-4 my-4 my-md-0">
               <h4 className="h5 mb-0">Identity</h4>

@@ -4,15 +4,19 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiCheck, aiPlus } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 
-export default function Show({ platforms, status = null }) {
+export default function Show({ platforms, status }) {
   return (
     <Admin>
       <NaviBar
         actions={
-          <InertiaLink href={route('admin.platforms.create')} className="btn btn-primary btn-sm">
+          <InertiaLink
+            href={route("admin.platforms.create")}
+            className="btn btn-primary btn-sm"
+          >
             <AmaranthIcon icon={aiPlus} /> New
           </InertiaLink>
         }
@@ -21,11 +25,7 @@ export default function Show({ platforms, status = null }) {
       </NaviBar>
 
       <div className="container">
-        {status && (
-          <div className="alert alert-success">
-            <AmaranthIcon icon={aiCheck} /> {status}
-          </div>
-        )}
+        <Status status={status} />
         <div className="row g-1">
           {platforms.map((platform) => {
             const platformStatus = [];

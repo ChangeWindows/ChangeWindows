@@ -3,11 +3,12 @@ import { Inertia } from "@inertiajs/inertia";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiCheck, aiFloppyDisk } from "@changewindows/amaranth";
+import AmaranthIcon, { aiFloppyDisk } from "@changewindows/amaranth";
 import Editor from "@/Components/Editor";
 
-export default function Edit({ release, status = null }) {
+export default function Edit({ release, status }) {
   const [curRelease, setCurRelease] = useState(release);
 
   function handleSubmit(event) {
@@ -32,11 +33,7 @@ export default function Edit({ release, status = null }) {
         </NaviBar>
 
         <div className="container my-3">
-          {status && (
-            <div className="alert alert-success">
-              <AmaranthIcon icon={aiCheck} /> {status}
-            </div>
-          )}
+          <Status status={status} />
           <fieldset className="row mb-3">
             <div className="col-12 position-relative">
               <Editor content={editor} setData={setCurRelease} />

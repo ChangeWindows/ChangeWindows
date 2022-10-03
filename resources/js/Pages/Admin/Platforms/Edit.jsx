@@ -5,9 +5,9 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, {
-  aiCheck,
   aiFloppyDisk,
   aiPlus,
   aiTrashCan,
@@ -15,11 +15,10 @@ import AmaranthIcon, {
 
 export default function Edit({
   can,
-  urls,
   platform,
   channels,
   tweet_streams,
-  status = null,
+  status,
 }) {
   const [curPlatform, setCurPlatform] = useState(platform);
 
@@ -45,12 +44,12 @@ export default function Edit({
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(route('admin.platforms.update', platform), curPlatform);
+    Inertia.patch(route("admin.platforms.update", platform), curPlatform);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(route('admin.platforms.destroy', platform), curPlatform);
+    Inertia.delete(route("admin.platforms.destroy", platform), curPlatform);
   }
 
   return (
@@ -69,11 +68,7 @@ export default function Edit({
         </NaviBar>
 
         <div className="container my-3">
-          {status && (
-            <div className="alert alert-success">
-              <AmaranthIcon icon={aiCheck} /> {status}
-            </div>
-          )}
+          <Status status={status} />
           <fieldset className="row mb-3" disabled={!can.edit_platforms}>
             <div className="col-12 col-md-4 my-4 my-md-0">
               <h4 className="h5 mb-0">Identity</h4>
@@ -388,7 +383,9 @@ export default function Edit({
               {can.create_channels && (
                 <div className="col-12 col-sm-6 col-xl-4">
                   <InertiaLink
-                    href={route('admin.channels.create', { platform: platform.id })}
+                    href={route("admin.channels.create", {
+                      platform: platform.id,
+                    })}
                     className="card card-add"
                   >
                     <div className="card-body py-3">

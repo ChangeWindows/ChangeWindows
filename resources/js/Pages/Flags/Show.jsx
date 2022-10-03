@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { InertiaHead, InertiaLink } from "@inertiajs/inertia-react";
+import { InertiaHead } from "@inertiajs/inertia-react";
 import { useForm } from "@inertiajs/inertia-react";
 
 import App from "@/Layouts/App";
 import FlagStatus from "@/Components/_FlagStatus";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import AmaranthIcon, {
-  aiCheck,
   aiFloppyDisk,
   aiPen,
   aiSpinnerThird,
@@ -18,10 +18,8 @@ import AmaranthIcon, {
 
 import clsx from "clsx";
 
-export default function Show({ flag, flagContent, status = null }) {
+export default function Show({ flag, flagContent, status }) {
   const [show, setShow] = useState(false);
-
-  console.log(flagContent);
 
   const { data, setData, post, patch, processing, errors } = useForm(
     flagContent ?? {
@@ -37,23 +35,15 @@ export default function Show({ flag, flagContent, status = null }) {
         onSuccess: () => {
           setShow(false);
         },
-        onError: () => {
-          console.log("error");
-        },
       });
     } else {
       post(route("front.flags.suggestion", flag), {
         onSuccess: () => {
           setShow(false);
         },
-        onError: () => {
-          console.log("error");
-        },
       });
     }
   }
-
-  console.log(errors);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -74,11 +64,7 @@ export default function Show({ flag, flagContent, status = null }) {
       </NaviBar>
 
       <div className="container">
-        {status && (
-          <div className="alert alert-success">
-            <AmaranthIcon icon={aiCheck} /> {status}
-          </div>
-        )}
+        <Status status={status} />
         <div className="row g-1">
           <div className="col-12 titlebar">
             <h2 className="h1 mb-1">

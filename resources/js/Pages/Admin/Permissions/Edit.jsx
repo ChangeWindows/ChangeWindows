@@ -3,14 +3,14 @@ import { Inertia } from "@inertiajs/inertia";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, {
-  aiCheck,
   aiFloppyDisk,
   aiTrashCan,
 } from "@changewindows/amaranth";
 
-export default function Edit({ can, permission, status = null }) {
+export default function Edit({ can, permission, status }) {
   const [curPermission, setCurPermission] = useState(permission);
 
   useEffect(() => {
@@ -32,12 +32,15 @@ export default function Edit({ can, permission, status = null }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(route('admin.permissions.update', permission), curPermission);
+    Inertia.patch(route("admin.permissions.update", permission), curPermission);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(route('admin.permissions.destroy', permission), curPermission);
+    Inertia.delete(
+      route("admin.permissions.destroy", permission),
+      curPermission
+    );
   }
 
   return (
@@ -55,11 +58,7 @@ export default function Edit({ can, permission, status = null }) {
         </NaviBar>
 
         <div className="container my-3">
-          {status && (
-            <div className="alert alert-success">
-              <AmaranthIcon icon={aiCheck} /> {status}
-            </div>
-          )}
+          <Status status={status} />
           <fieldset className="row mb-3" disabled={!can.edit_permissions}>
             <div className="col-12 col-md-4 my-4 my-md-0">
               <h4 className="h5 mb-0">General</h4>

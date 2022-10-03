@@ -3,14 +3,14 @@ import { Inertia } from "@inertiajs/inertia";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, {
-  aiCheck,
   aiFloppyDisk,
   aiTrashCan,
 } from "@changewindows/amaranth";
 
-export default function Edit({ can, user, roles, status = null }) {
+export default function Edit({ can, user, roles, status }) {
   const [curUser, setCurUser] = useState(user);
 
   useEffect(() => {
@@ -62,11 +62,7 @@ export default function Edit({ can, user, roles, status = null }) {
         </NaviBar>
 
         <div className="container my-3">
-          {status && (
-            <div className="alert alert-success">
-              <AmaranthIcon icon={aiCheck} /> {status}
-            </div>
-          )}
+          <Status status={status} />
           <fieldset className="row mb-3" disabled={!can.edit_users}>
             <div className="col-12 col-md-4 my-4 my-md-0">
               <h4 className="h5 mb-0">Identity</h4>

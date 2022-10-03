@@ -3,15 +3,19 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, { aiCheck, aiPlus } from "@changewindows/amaranth";
 
-export default function Show({ roles, status = null }) {
+export default function Show({ roles, status }) {
   return (
     <Admin>
       <NaviBar
         actions={
-          <InertiaLink href={route('admin.roles.create')} className="btn btn-primary btn-sm">
+          <InertiaLink
+            href={route("admin.roles.create")}
+            className="btn btn-primary btn-sm"
+          >
             <AmaranthIcon icon={aiPlus} /> New
           </InertiaLink>
         }
@@ -20,16 +24,12 @@ export default function Show({ roles, status = null }) {
       </NaviBar>
 
       <div className="container">
-        {status && (
-          <div className="alert alert-success">
-            <AmaranthIcon icon={aiCheck} /> {status}
-          </div>
-        )}
+        <Status status={status} />
         <div className="row g-1">
           {roles.map((role) => (
             <div className="col-6 col-xl-4 col-xxl-3" key={role.id}>
               <InertiaLink
-                href={route('admin.roles.edit', role)}
+                href={route("admin.roles.edit", role)}
                 className="card border-0 shadow-sm"
               >
                 <div className="card-body">

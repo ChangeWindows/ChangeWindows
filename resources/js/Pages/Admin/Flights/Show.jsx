@@ -5,15 +5,12 @@ import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import Pagination from "@/Components/Pagination";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiCheck, aiPlus } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 import { format, parseISO } from "date-fns";
 
-export default function Show({
-  timeline,
-  pagination,
-  status = null,
-}) {
+export default function Show({ timeline, pagination, status }) {
   return (
     <Admin>
       <NaviBar
@@ -38,11 +35,7 @@ export default function Show({
       </NaviBar>
 
       <div className="container">
-        {status && (
-          <div className="alert alert-success">
-            <AmaranthIcon icon={aiCheck} /> {status}
-          </div>
-        )}
+        <Status status={status} />
         <div className="row g-1">
           {Object.keys(timeline).map((date) => (
             <Fragment key={date}>
@@ -54,7 +47,7 @@ export default function Show({
               {timeline[date].flights.map((flight, key) => (
                 <div className="col-6 col-md-4 col-xl-3 col-xxl-2" key={key}>
                   <InertiaLink
-                    href={route('admin.flights.edit', flight)}
+                    href={route("admin.flights.edit", flight)}
                     className="card border-0 shadow-sm h-100"
                   >
                     <div className="card-body d-flex flex-column">

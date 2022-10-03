@@ -3,14 +3,14 @@ import { Inertia } from "@inertiajs/inertia";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, {
-  aiCheck,
   aiFloppyDisk,
   aiTrashCan,
 } from "@changewindows/amaranth";
 
-export default function Edit({ can, channel, platforms, status = null }) {
+export default function Edit({ can, channel, platforms, status }) {
   const [curChannel, setCurChannel] = useState(channel);
 
   useEffect(() => {
@@ -35,19 +35,19 @@ export default function Edit({ can, channel, platforms, status = null }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(route('admin.channels.update', channel), curChannel);
+    Inertia.patch(route("admin.channels.update", channel), curChannel);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(route('admin.channels.destroy', channel), curChannel);
+    Inertia.delete(route("admin.channels.destroy", channel), curChannel);
   }
 
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
         <NaviBar
-          back={route('admin.platforms.edit', channel.platform)}
+          back={route("admin.platforms.edit", channel.platform)}
           actions={
             <button className="btn btn-primary btn-sm" type="submit">
               <AmaranthIcon icon={aiFloppyDisk} /> Save
@@ -58,11 +58,7 @@ export default function Edit({ can, channel, platforms, status = null }) {
         </NaviBar>
 
         <div className="container my-3">
-          {status && (
-            <div className="alert alert-success">
-              <AmaranthIcon icon={aiCheck} /> {status}
-            </div>
-          )}
+          <Status status={status} />
           <fieldset className="row mb-3" disabled={!can.edit_channels}>
             <div className="col-12 col-md-4 my-4 my-md-0">
               <h4 className="h5 mb-0">Identity</h4>

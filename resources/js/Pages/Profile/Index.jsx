@@ -4,6 +4,7 @@ import { InertiaHead, Link, useForm } from "@inertiajs/inertia-react";
 import App from "@/Layouts/App";
 import TextField from "@/Components/UI/Forms/TextField";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, {
   aiCheck,
@@ -47,11 +48,7 @@ export default function Index({ status, user }) {
       </NaviBar>
 
       <form className="container" onSubmit={submitPatch}>
-        {status && (
-          <div className="alert alert-success">
-            <AmaranthIcon icon={aiCheck} /> {status}
-          </div>
-        )}
+        <Status status={status} />
         <fieldset className="row g-3">
           <div className="col-12 col-lg-8 col-xl-9">
             <div className="row g-3">

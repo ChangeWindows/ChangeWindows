@@ -4,21 +4,25 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Status from "@/Components/Status";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, {
-  aiCheck,
   aiEye,
   aiNotes,
   aiPen,
   aiPlus,
 } from "@changewindows/amaranth";
 
-export default function Show({ packages, can, status = null }) {
+export default function Show({ packages, can, status }) {
   return (
     <Admin>
       <NaviBar
         actions={
-          <InertiaLink href={route('admin.packages.create')} className="btn btn-primary btn-sm">
+          <InertiaLink
+            href={route("admin.packages.create")}
+            className="btn btn-primary btn-sm"
+          >
             <AmaranthIcon icon={aiPlus} /> New
           </InertiaLink>
         }
@@ -27,11 +31,7 @@ export default function Show({ packages, can, status = null }) {
       </NaviBar>
 
       <div className="container">
-        {status && (
-          <div className="alert alert-success">
-            <AmaranthIcon icon={aiCheck} /> {status}
-          </div>
-        )}
+        <Status status={status} />
         <div className="row g-1">
           {packages.map((pack, key) => (
             <div className="col-12" key={key}>
@@ -59,7 +59,7 @@ export default function Show({ packages, can, status = null }) {
                     )}
                     <div className="flex-grow-1 flex-grow-md-0" />
                     <InertiaLink
-                      href={route('admin.packages.edit', pack)}
+                      href={route("admin.packages.edit", pack)}
                       className="btn btn-link btn-sm my-n1"
                     >
                       {can.edit_packages ? (
@@ -73,7 +73,7 @@ export default function Show({ packages, can, status = null }) {
                       )}
                     </InertiaLink>
                     <InertiaLink
-                      href={route('admin.packages.changelog.edit', pack)}
+                      href={route("admin.packages.changelog.edit", pack)}
                       className="btn btn-link btn-sm my-n1"
                     >
                       <AmaranthIcon

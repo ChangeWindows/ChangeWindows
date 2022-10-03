@@ -3,15 +3,19 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiCheck, aiPlus } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 
-export default function Show({ tweet_streams, status = null }) {
+export default function Show({ tweet_streams, status }) {
   return (
     <Admin>
       <NaviBar
         actions={
-          <InertiaLink href={route('admin.tweet_streams.create')} className="btn btn-primary btn-sm">
+          <InertiaLink
+            href={route("admin.tweet_streams.create")}
+            className="btn btn-primary btn-sm"
+          >
             <AmaranthIcon icon={aiPlus} /> New
           </InertiaLink>
         }
@@ -20,16 +24,12 @@ export default function Show({ tweet_streams, status = null }) {
       </NaviBar>
 
       <div className="container">
-        {status && (
-          <div className="alert alert-success">
-            <AmaranthIcon icon={aiCheck} /> {status}
-          </div>
-        )}
+        <Status status={status} />
         <div className="row g-1">
           {tweet_streams.map((tweet_stream) => (
             <div className="col-6 col-xl-4 col-xxl-3" key={tweet_stream.id}>
               <InertiaLink
-                href={route('admin.tweet_streams.edit', tweet_stream)}
+                href={route("admin.tweet_streams.edit", tweet_stream)}
                 className="card border-0 shadow-sm"
               >
                 <div className="card-body">
