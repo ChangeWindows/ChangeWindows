@@ -70,9 +70,15 @@ class ReleaseChannelController extends Controller
         ]);
 
         if ($releaseChannel->release->package) {
-            return Redirect::route('admin.packages.edit', $releaseChannel->release)->with('status', 'Succesfully created this package channel.');
+            return Redirect::route('admin.packages.edit', $releaseChannel->release)->with('status', [
+                'message' => 'Succesfully created this package channel.',
+                'type' => 'success'
+            ]);
         } else {
-            return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully created this release channel.');
+            return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', [
+                'message' => 'Succesfully created this release channel.',
+                'type' => 'success'
+            ]);
         }
     }
 
@@ -127,9 +133,15 @@ class ReleaseChannelController extends Controller
         ]);
 
         if ($releaseChannel->release->package) {
-            return Redirect::route('admin.packages.edit', $releaseChannel->release)->with('status', 'Succesfully updated this package channel.');
+            return Redirect::route('admin.packages.edit', $releaseChannel->release)->with('status', [
+                'message' => 'Succesfully updated this package channel.',
+                'type' => 'success'
+            ]);
         } else {
-            return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully updated this release channel.');
+            return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', [
+                'message' => 'Succesfully updated this release channel.',
+                'type' => 'success'
+            ]);
         }
     }
 
@@ -145,6 +157,9 @@ class ReleaseChannelController extends Controller
 
         $releaseChannel->delete();
 
-        return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully deleted release channel.');
+        return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', [
+            'message' => 'Succesfully deleted release channel.',
+            'type' => 'success'
+        ]);
     }
 }

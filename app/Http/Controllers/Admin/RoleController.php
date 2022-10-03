@@ -18,7 +18,8 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $this->authorize('roles.show');
 
         return Inertia::render('Admin/Roles/Show', [
@@ -41,7 +42,8 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         $this->authorize('roles.create');
 
         return Inertia::render('Admin/Roles/Create', [
@@ -55,7 +57,8 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $this->authorize('roles.create');
 
         $role = $role->create([
@@ -64,11 +67,14 @@ class RoleController extends Controller
 
         $role_permissions = new Collection(request('permissions'));
 
-        foreach($role_permissions as $permission) {
+        foreach ($role_permissions as $permission) {
             $role->givePermissionTo($permission);
         }
 
-        return Redirect::route('admin.roles.edit', ['role' => $role->id])->with('status', 'Succesfully created this role.');
+        return Redirect::route('admin.roles.edit', ['role' => $role->id])->with('status', [
+            'message' => 'Succesfully created this role.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -88,7 +94,8 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role) {
+    public function edit(Role $role)
+    {
         $this->authorize('roles.show');
 
         return Inertia::render('Admin/Roles/Edit', [
@@ -113,7 +120,8 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role) {
+    public function update(Request $request, Role $role)
+    {
         $this->authorize('roles.edit');
 
         $role->update([
@@ -122,7 +130,7 @@ class RoleController extends Controller
 
         $role_permissions = new Collection(request('permissions'));
 
-        foreach(Permission::get() as $permission) {
+        foreach (Permission::get() as $permission) {
             if ($role_permissions->contains($permission->name)) {
                 $role->givePermissionTo($permission->name);
             } else {
@@ -130,7 +138,10 @@ class RoleController extends Controller
             }
         }
 
-        return Redirect::route('admin.roles.edit', $role)->with('status', 'Succesfully updated this role.');
+        return Redirect::route('admin.roles.edit', $role)->with('status', [
+            'message' => 'Succesfully updated this role.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -139,11 +150,15 @@ class RoleController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role) {
+    public function destroy(Role $role)
+    {
         $this->authorize('roles.delete');
 
         $role->delete();
 
-        return Redirect::route('admin.roles')->with('status', 'Succesfully deleted role.');
+        return Redirect::route('admin.roles')->with('status', [
+            'message' => 'Succesfully deleted role.',
+            'type' => 'success'
+        ]);
     }
 }

@@ -17,7 +17,8 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $this->authorize('permissions.show');
 
         $permissions = Permission::orderBy('name');
@@ -46,7 +47,8 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         $this->authorize('permissions.create');
 
         return Inertia::render('Admin/Permissions/Create');
@@ -58,18 +60,22 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $this->authorize('permissions.create');
 
         $permissions = new Collection(request('variants'));
 
-        foreach($permissions as $permission) {
+        foreach ($permissions as $permission) {
             Permission::create([
                 'name' => $permission,
             ]);
         }
 
-        return Redirect::route('admin.permissions')->with('status', 'Succesfully created this permission.');
+        return Redirect::route('admin.permissions')->with('status', [
+            'message' => 'Succesfully created this permission.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -89,7 +95,8 @@ class PermissionController extends Controller
      * @param  \App\Models\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function edit(Permission $permission) {
+    public function edit(Permission $permission)
+    {
         $this->authorize('permissions.show');
 
         return Inertia::render('Admin/Permissions/Edit', [
@@ -113,14 +120,18 @@ class PermissionController extends Controller
      * @param  \App\Models\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permission $permission) {
+    public function update(Request $request, Permission $permission)
+    {
         $this->authorize('permissions.edit');
 
         $permission->update([
             'name' => request('name'),
         ]);
 
-        return Redirect::route('admin.permissions.edit', $permission)->with('status', 'Succesfully updated this permission.');
+        return Redirect::route('admin.permissions.edit', $permission)->with('status', [
+            'message' => 'Succesfully updated this permission.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -129,11 +140,15 @@ class PermissionController extends Controller
      * @param  \App\Models\Permission  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Permission $permission) {
+    public function destroy(Permission $permission)
+    {
         $this->authorize('permissions.delete');
 
         $permission->delete();
 
-        return Redirect::route('admin.permissions')->with('status', 'Succesfully deleted permission.');
+        return Redirect::route('admin.permissions')->with('status', [
+            'message' => 'Succesfully deleted permission.',
+            'type' => 'success'
+        ]);
     }
 }

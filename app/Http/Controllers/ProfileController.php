@@ -56,7 +56,10 @@ class ProfileController extends Controller
             'email' => request('email')
         ]);
 
-        return Redirect::route('front.profile')->with('status', 'Your profile has been saved.');
+        return Redirect::route('front.profile')->with('status', [
+            'message' => 'Your profile has been saved.',
+        'type' => 'success'
+    ]);
     }
 
     public function updatePassword(User $user) {
@@ -76,6 +79,9 @@ class ProfileController extends Controller
             'password' => request('password')
         ]);
 
-        return Redirect::route('front.profile')->with('status', 'Your password has been updated.');
+        return Redirect::route('front.profile')->with('status', [
+            'message' => 'Your password has been updated.',
+            'type' => 'success'
+        ]);
     }
 }

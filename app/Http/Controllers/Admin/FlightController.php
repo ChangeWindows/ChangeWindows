@@ -220,7 +220,10 @@ class FlightController extends Controller
             }
         }
 
-        return Redirect::route('admin.flights')->with('status', 'Succesfully created these flights.');
+        return Redirect::route('admin.flights')->with('status', [
+            'message' => 'Succesfully created these flights.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -280,7 +283,10 @@ class FlightController extends Controller
             }
         }
 
-        return Redirect::route('admin.flights')->with('status', 'Succesfully created these package flights.');
+        return Redirect::route('admin.flights')->with('status', [
+            'message' => 'Succesfully created these package flights.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -346,7 +352,10 @@ class FlightController extends Controller
             'date' => (new Carbon(request('date')))
         ]);
 
-        return Redirect::route('admin.flights.edit', $flight)->with('status', 'Succesfully updated the flight.');
+        return Redirect::route('admin.flights.edit', $flight)->with('status', [
+            'message' => 'Succesfully updated the flight.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -362,6 +371,9 @@ class FlightController extends Controller
         $flight->timeline->delete();
         $flight->delete();
 
-        return Redirect::route('admin.flights')->with('status', 'Succesfully deleted flight.');
+        return Redirect::route('admin.flights')->with('status', [
+            'message' => 'Succesfully deleted flight.',
+            'type' => 'success'
+        ]);
     }
 }

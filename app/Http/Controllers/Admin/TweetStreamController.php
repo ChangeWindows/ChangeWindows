@@ -70,7 +70,10 @@ class TweetStreamController extends Controller
             'access_token_secret' => request('access_token_secret')
         ]);
 
-        return Redirect::route('admin.tweet_streams.edit', $tweet_stream)->with('status', 'Succesfully created this tweet stream.');
+        return Redirect::route('admin.tweet_streams.edit', $tweet_stream)->with('status', [
+            'message' => 'Succesfully created this tweet stream.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -124,7 +127,10 @@ class TweetStreamController extends Controller
             'access_token_secret' => request('access_token_secret')
         ]);
 
-        return Redirect::route('admin.tweet_streams.edit', $tweetStream)->with('status', 'Succesfully updated the tweet stream.');
+        return Redirect::route('admin.tweet_streams.edit', $tweetStream)->with('status', [
+            'message' => 'Succesfully updated the tweet stream.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -139,6 +145,9 @@ class TweetStreamController extends Controller
 
         $tweetStream->delete();
 
-        return Redirect::route('admin.tweet_streams')->with('status', 'Succesfully deleted tweet stream.');
+        return Redirect::route('admin.tweet_streams')->with('status', [
+            'message' => 'Succesfully deleted tweet stream.',
+            'type' => 'success'
+        ]);
     }
 }

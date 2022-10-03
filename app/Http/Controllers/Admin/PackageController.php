@@ -83,7 +83,10 @@ class PackageController extends Controller
             'package' => 1
         ]);
 
-        return Redirect::route('admin.packages.edit', $package)->with('status', 'Succesfully created this package.');
+        return Redirect::route('admin.packages.edit', $package)->with('status', [
+            'message' => 'Succesfully created this package.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -149,7 +152,10 @@ class PackageController extends Controller
 
         $package->update($request->validated());
 
-        return Redirect::route('admin.packages.edit', $package)->with('status', 'Succesfully updated this package.');
+        return Redirect::route('admin.packages.edit', $package)->with('status', [
+            'message' => 'Succesfully updated this package.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -191,7 +197,10 @@ class PackageController extends Controller
             'changelog' => $request->get('changelog')
         ]);
 
-        return Redirect::route('admin.packages.changelog.edit', $package)->with('status', 'Succesfully updated this package.');
+        return Redirect::route('admin.packages.changelog.edit', $package)->with('status', [
+            'message' => 'Succesfully updated this package.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -206,6 +215,9 @@ class PackageController extends Controller
 
         $package->delete();
 
-        return Redirect::route('admin.packages')->with('status', 'Succesfully deleted package.');
+        return Redirect::route('admin.packages')->with('status', [
+            'message' => 'Succesfully deleted package.',
+            'type' => 'success'
+        ]);
     }
 }

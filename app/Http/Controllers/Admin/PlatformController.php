@@ -69,7 +69,10 @@ class PlatformController extends Controller
             'active' => request('active') ? 1 : 0
         ]);
 
-        return Redirect::route('admin.platforms.edit', $platform)->with('status', 'Succesfully created this platform.');
+        return Redirect::route('admin.platforms.edit', $platform)->with('status', [
+            'message' => 'Succesfully created this platform.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -132,7 +135,10 @@ class PlatformController extends Controller
             'active' => request('active') ? 1 : 0
         ]);
 
-        return Redirect::route('admin.platforms.edit', $platform)->with('status', 'Succesfully updated the platform.');
+        return Redirect::route('admin.platforms.edit', $platform)->with('status', [
+            'message' => 'Succesfully updated the platform.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -147,6 +153,9 @@ class PlatformController extends Controller
 
         $platform->delete();
 
-        return Redirect::route('admin.platforms')->with('status', 'Succesfully deleted platform.');
+        return Redirect::route('admin.platforms')->with('status', [
+            'message' => 'Succesfully deleted platform.',
+            'type' => 'success'
+        ]);
     }
 }

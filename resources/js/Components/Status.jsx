@@ -5,6 +5,7 @@ import AmaranthIcon, { aiCircleCheck, aiCircleInfo, aiCircleExclamation } from '
 import clsx from 'clsx';
 
 export default function Status({ status }) {
+  console.log(status);
   return (
     <>
       {!!status &&

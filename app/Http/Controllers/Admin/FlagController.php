@@ -106,7 +106,7 @@ class FlagController extends Controller
                     'removed' => null
                 ]);
 
-                $active_flags = $active_flags->filter(function ($value, $key) use($flag) {
+                $active_flags = $active_flags->filter(function ($value, $key) use ($flag) {
                     return $value !== $flag->id;
                 });
 
@@ -127,7 +127,7 @@ class FlagController extends Controller
             }
         }
 
-        foreach($active_flags as $key => $flag_id) {
+        foreach ($active_flags as $key => $flag_id) {
             $flag = Flag::find($flag_id);
 
             $flag->update([
@@ -141,7 +141,10 @@ class FlagController extends Controller
             ]);
         }
 
-        return Redirect::route('admin.flags')->with('status', 'Succesfully created flags.');
+        return Redirect::route('admin.flags')->with('status', [
+            'message' => 'Succesfully created flags.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -151,14 +154,18 @@ class FlagController extends Controller
      * @param  \App\Models\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function moderateApprove(Request $request, FlagContent $flag_content) {
+    public function moderateApprove(Request $request, FlagContent $flag_content)
+    {
         $this->authorize('flags.edit');
 
         $flag_content->update([
             'status' => 2,
         ]);
 
-        return Redirect::route('admin.flags')->with('status', 'Succesfully applied content suggestion.');
+        return Redirect::route('admin.flags')->with('status', [
+            'message' => 'Succesfully applied content suggestion.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -168,13 +175,17 @@ class FlagController extends Controller
      * @param  \App\Models\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function moderateDiscard(Request $request, FlagContent $flag_content) {
+    public function moderateDiscard(Request $request, FlagContent $flag_content)
+    {
         $this->authorize('flags.edit');
 
         $flag_content->update([
             'status' => 0,
         ]);
 
-        return Redirect::route('admin.flags')->with('status', 'Succesfully applied content suggestion.');
+        return Redirect::route('admin.flags')->with('status', [
+            'message' => 'Succesfully applied content suggestion.',
+            'type' => 'success'
+        ]);
     }
 }

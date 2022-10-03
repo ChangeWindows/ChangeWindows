@@ -81,7 +81,10 @@ class ReleaseController extends Controller
 
         $release = Release::create($request->validated());
 
-        return Redirect::route('admin.releases.edit', $release)->with('status', 'Succesfully created this release.');
+        return Redirect::route('admin.releases.edit', $release)->with('status', [
+            'message' => 'Succesfully created this release.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -141,7 +144,10 @@ class ReleaseController extends Controller
 
         $release->update($request->validated());
 
-        return Redirect::route('admin.releases.edit', $release)->with('status', 'Succesfully updated this release.');
+        return Redirect::route('admin.releases.edit', $release)->with('status', [
+            'message' => 'Succesfully updated this release.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -153,6 +159,8 @@ class ReleaseController extends Controller
     public function editChangelog(Release $release)
     {
         $this->authorize('releases.show');
+
+        dd(session());
 
         return Inertia::render('Admin/Releases/Changelog', [
             'can' => [
@@ -182,7 +190,10 @@ class ReleaseController extends Controller
             'changelog' => $request->get('changelog')
         ]);
 
-        return Redirect::route('admin.releases.changelog.edit', $release)->with('status', 'Succesfully updated this release.');
+        return Redirect::route('admin.releases.changelog.edit', $release)->with('status', [
+            'message' => 'Succesfully updated this release.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -197,6 +208,9 @@ class ReleaseController extends Controller
 
         $release->delete();
 
-        return Redirect::route('admin.releases')->with('status', 'Succesfully deleted release.');
+        return Redirect::route('admin.releases')->with('status', [
+            'message' => 'Succesfully deleted this release.',
+            'type' => 'success'
+        ]);
     }
 }

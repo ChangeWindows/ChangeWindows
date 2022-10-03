@@ -108,7 +108,10 @@ class LaunchController extends Controller
             'item_id' => $launch->id
         ]);
 
-        return Redirect::route('admin.launches')->with('status', 'Succesfully created this launch.');
+        return Redirect::route('admin.launches')->with('status', [
+            'message' => 'Succesfully created this launch.',
+            'type' =>  'success'
+        ]);
     }
 
     /**
@@ -169,7 +172,10 @@ class LaunchController extends Controller
             'date' => (new Carbon(request('date')))
         ]);
 
-        return Redirect::route('admin.launches.edit', $launch)->with('status', 'Succesfully updated the launch.');
+        return Redirect::route('admin.launches.edit', $launch)->with('status', [
+            'message' => 'Succesfully updated the launch.',
+            'type' =>  'success'
+        ]);
     }
 
     /**
@@ -185,6 +191,9 @@ class LaunchController extends Controller
         $launch->timeline->delete();
         $launch->delete();
 
-        return Redirect::route('admin.launches')->with('status', 'Succesfully deleted launch.');
+        return Redirect::route('admin.launches')->with('status', [
+            'message' => 'Succesfully deleted launch.',
+            'type' =>  'success'
+        ]);
     }
 }

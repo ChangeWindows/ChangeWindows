@@ -62,7 +62,10 @@ class ChannelController extends Controller
             'active' => request('active') ? 1 : 0
         ]);
 
-        return Redirect::route('admin.channels.edit', $channel)->with('status', 'Succesfully created this channel.');
+        return Redirect::route('admin.channels.edit', $channel)->with('status', [
+            'message' => 'Succesfully created this channel.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -116,7 +119,10 @@ class ChannelController extends Controller
             'active' => request('active') ? 1 : 0
         ]);
 
-        return Redirect::route('admin.channels.edit', $channel)->with('status', 'Succesfully updated the channel.');
+        return Redirect::route('admin.channels.edit', $channel)->with('status', [
+            'message' => 'Succesfully updated the channel.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -131,6 +137,9 @@ class ChannelController extends Controller
 
         $channel->delete();
 
-        return Redirect::route('admin.channels')->with('status', 'Succesfully deleted channel.');
+        return Redirect::route('admin.channels')->with('status', [
+            'message' => 'Succesfully deleted channel.',
+            'type' => 'success'
+        ]);
     }
 }

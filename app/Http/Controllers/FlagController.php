@@ -125,7 +125,10 @@ class FlagController extends Controller
             )
         );
 
-        return Redirect::route('front.flags.show', $flag)->with('status', 'Your suggestion has been saved.');
+        return Redirect::route('front.flags.show', $flag)->with('status', [
+            'message' => 'Your suggestion has been saved.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -146,11 +149,17 @@ class FlagController extends Controller
                 )
             );
 
-            return Redirect::route('front.flags.show', $flag)->with('status', 'The suggestion your are trying to edit was already moderated. We created a new suggestion instead.');
+            return Redirect::route('front.flags.show', $flag)->with('status', [
+                'message' => 'The suggestion your are trying to edit was already moderated. We created a new suggestion instead.',
+                'type' => 'success'
+            ]);
         }
 
         $flag_content->update($flag_content_request->validated());
 
-        return Redirect::route('front.flags.show', $flag)->with('status', 'Your suggestion has been saved.');
+        return Redirect::route('front.flags.show', $flag)->with('status', [
+            'message' => 'Your suggestion has been saved.',
+            'type' => 'success'
+        ]);
     }
 }

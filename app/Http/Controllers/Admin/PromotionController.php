@@ -119,7 +119,10 @@ class PromotionController extends Controller
             'item_id' => $promotion->id
         ]);
 
-        return Redirect::route('admin.promotions')->with('status', 'Succesfully created this promotion.');
+        return Redirect::route('admin.promotions')->with('status', [
+            'message' => 'Succesfully created this promotion.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -184,7 +187,10 @@ class PromotionController extends Controller
             'date' => (new Carbon(request('date')))
         ]);
 
-        return Redirect::route('admin.promotions.edit', $promotion)->with('status', 'Succesfully updated the promotion.');
+        return Redirect::route('admin.promotions.edit', $promotion)->with('status', [
+            'message' => 'Succesfully updated the promotion.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -200,6 +206,9 @@ class PromotionController extends Controller
         $promotion->timeline->delete();
         $promotion->delete();
 
-        return Redirect::route('admin.promotions')->with('status', 'Succesfully deleted promotion.');
+        return Redirect::route('admin.promotions')->with('status', [
+            'message' => 'Succesfully deleted promotion.',
+            'type' => 'success'
+        ]);
     }
 }
