@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Release;
 use App\Models\Platform;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Auth;
 use Redirect;
-use Illuminate\Support\Collection;
 use App\Http\Requests\ReleaseRequest;
 
 class ReleaseController extends Controller
@@ -25,7 +23,7 @@ class ReleaseController extends Controller
 
         $releases = Release::where('package', '=', 0)->orderBy('platform_id')->orderBy('canonical_version')->get();
 
-        return Inertia::render('Admin/Releases/Show', [
+        return Inertia::render('Admin/Releases/Index', [
             'can' => [
                 'create_releases' => Auth::user()->can('releases.create'),
                 'edit_releases' => Auth::user()->can('releases.edit')
