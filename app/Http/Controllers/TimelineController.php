@@ -207,7 +207,7 @@ class TimelineController extends Controller
                 ];
             }),
             'pagination' => $paginator,
-            'patron' => $patrons->random(),
+            'patron' => [],
             'status' => session('status')
         ]);
     }
