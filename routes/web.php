@@ -191,6 +191,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/create', 'create')->name('.create');
         Route::get('/{release_channel}/edit', 'edit')->name('.edit');
         Route::patch('/{release_channel}/edit', 'update')->name('.update');
+        Route::patch('/{release_channel}/toggle', 'toggleSupported')->name('.toggleSupported');
     });
 
     Route::controller(AdminFlightController::class)->prefix('flights')->as('.flights')->group(function() {

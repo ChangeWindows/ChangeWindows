@@ -162,4 +162,24 @@ class ReleaseChannelController extends Controller
             'type' => 'success'
         ]);
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\ReleaseChannel  $releaseChannel
+     * @return \Illuminate\Http\Response
+     */
+    public function toggleSupported(ReleaseChannel $releaseChannel)
+    {
+        $this->authorize('releases.show');
+
+        $releaseChannel->update([
+            'supported' => $releaseChannel->supported ? 0 : 1
+        ]);
+
+        return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', [
+            'message' => 'Succesfully toggled this release channel support state.',
+            'type' => 'success'
+        ]);
+    }
 }

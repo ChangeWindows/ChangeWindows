@@ -149,7 +149,7 @@ export default function Show({ can, releases, status }) {
                     )}
                     <div className="flex-grow-1 flex-grow-md-0" />
                     <InertiaLink
-                      href={release.edit_url}
+                      href={route("admin.releases.edit", release)}
                       className="btn btn-link btn-sm my-n1"
                     >
                       {can.edit_releases ? (
@@ -211,7 +211,7 @@ export default function Show({ can, releases, status }) {
                     )}
                     <div className="flex-grow-1 flex-grow-md-0" />
                     <InertiaLink
-                      href={release.edit_url}
+                      href={route("admin.releases.edit", release)}
                       className="btn btn-link btn-sm my-n1"
                     >
                       {can.edit_releases ? (

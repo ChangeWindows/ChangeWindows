@@ -5,6 +5,7 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
+import ReleaseChannel from "./_ReleaseChannel";
 
 import AmaranthIcon, {
   aiEye,
@@ -436,40 +437,9 @@ export default function Edit({
           </div>
           <div className="col-12 col-md-8">
             <div className="row g-1">
-              {release_channels.map((releaseChannel, key) => {
-                const releaseChannelstatus = [];
-
-                releaseChannelstatus.push(releaseChannel.short_name);
-                releaseChannel.supported &&
-                  releaseChannelstatus.push("Supported");
-
-                return (
-                  <div className="col-12 col-sm-6 col-xl-4" key={key}>
-                    <InertiaLink
-                      href={route("admin.releasechannels.edit", releaseChannel)}
-                      className="card border-0 shadow-sm h-100"
-                    >
-                      <div className="card-body">
-                        <div className="d-flex">
-                          <h3 className="h6 mb-0">
-                            <div
-                              className="dot"
-                              style={{ backgroundColor: releaseChannel.color }}
-                            />
-                          </h3>
-                          <div className="ms-2">
-                            <h3 className="h6 mb-0">{releaseChannel.name}</h3>
-                            <p className="text-muted mb-0">
-                              <small>{releaseChannelstatus.join(", ")}</small>
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex-grox-1" />
-                      </div>
-                    </InertiaLink>
-                  </div>
-                );
-              })}
+              {release_channels.map((releaseChannel, key) => (
+                <ReleaseChannel key={key} releaseChannel={releaseChannel} />
+              ))}
               {can.edit_releases && availablePlatformChannels.length > 0 && (
                 <div className="col-12 col-sm-6 col-xl-4">
                   <div className="dropdown h-100">
