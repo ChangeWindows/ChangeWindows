@@ -5,7 +5,6 @@ import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import Status from "@/Components/Status";
-import Status from "@/Components/Status";
 
 import AmaranthIcon, {
   aiEye,

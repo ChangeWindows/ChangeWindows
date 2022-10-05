@@ -299,6 +299,11 @@ body {
 
             transition: background-color .2s ease-in-out;
 
+            &.subevent-extended {
+                grid-template-columns: 32px 1fr 1fr auto;
+                grid-template-areas: "subevent-version subevent-build subevent-tags subevent-actions";
+            }
+
             &:first-child {
                 border-top-left-radius: 0 !important;
                 border-top-right-radius: var(--event-border-radius) !important;
@@ -329,15 +334,6 @@ body {
                 border-top: 1px solid var(--nav-border-color);
             }
 
-            &:hover {
-                border-top: none;
-                border-radius: var(--event-border-radius) 0 0 var(--event-border-radius);
-            }
-
-            &:hover + .subevent {
-                border-top: none;
-            }
-
             .subevent-version {
                 grid-area: subevent-version;
                 font-family: $font-family-monospace;
@@ -346,6 +342,10 @@ body {
 
             .subevent-build {
                 grid-area: subevent-build;
+
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .subevent-tags {
@@ -356,6 +356,24 @@ body {
                 .badge {
                     display: block;
                 }
+            }
+
+            .subevent-actions {
+                grid-area: subevent-actions;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+        }
+
+        a.subevent {
+            &:hover {
+                border-top: none;
+                border-radius: var(--event-border-radius) 0 0 var(--event-border-radius);
+            }
+
+            &:hover + .subevent {
+                border-top: none;
             }
         }
 

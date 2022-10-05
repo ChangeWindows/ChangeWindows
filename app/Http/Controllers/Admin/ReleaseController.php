@@ -28,25 +28,37 @@ class ReleaseController extends Controller
                 'create_releases' => Auth::user()->can('releases.create'),
                 'edit_releases' => Auth::user()->can('releases.edit')
             ],
-            'releases' => $releases->map(function ($release) {
+            'releases' => $releases->groupBy(function($item) {
+                return $item->platform->slug;
+            })->map(function ($platform) {
                 return [
-                    'name' => $release->name,
-                    'slug' => $release->slug,
-                    'version' => $release->version,
-                    'start_public' => $release->start_public,
                     'platform' => [
-                        'icon' => $release->platform->icon,
-                        'name' => $release->platform->name,
-                        'color' => $release->platform->color
+                        'icon' => $platform[0]->platform->icon,
+                        'name' => $platform[0]->platform->name,
+                        'color' => $platform[0]->platform->color,
+                        'position' => $platform[0]->platform->position,
                     ],
-                    'channels' => $release->releaseChannels->where('supported', '=', 1)->values()->map(function ($channel) {
+                    'releases' => $platform->map((function ($release) {
                         return [
-                            'id' => $channel->id,
-                            'short_name' => $channel->short_name,
-                            'color' => $channel->channel->color,
-                            'order' => $channel->channel->order
+                            'name' => $release->name,
+                            'slug' => $release->slug,
+                            'version' => $release->version,
+                            'start_public' => $release->start_public,
+                            'platform' => [
+                                'icon' => $release->platform->icon,
+                                'name' => $release->platform->name,
+                                'color' => $release->platform->color
+                            ],
+                            'channels' => $release->releaseChannels->where('supported', '=', 1)->values()->map(function ($channel) {
+                                return [
+                                    'id' => $channel->id,
+                                    'short_name' => $channel->short_name,
+                                    'color' => $channel->channel->color,
+                                    'order' => $channel->channel->order
+                                ];
+                            })
                         ];
-                    })
+                    }))
                 ];
             }),
             'status' => session('status')
