@@ -49,7 +49,7 @@ class TimelineController extends Controller
         foreach (array_keys($pledges_response['data']) as $pledge_data_key) {
             $pledge_data = $pledges_response['data'][$pledge_data_key];
 
-            if ($pledge_data['attributes']['patron_status'] === 'active_patron' && $pledge_data['relationships']['currently_entitled_tiers']['data'] && $pledge_data['relationships']['currently_entitled_tiers']['data'][0]['id'] === $tier_id) {
+            if ($pledge_data['attributes']['patron_status'] === 'active_patron') {
                 $patrons->push([
                     'name' => $pledge_data['attributes']['full_name'],
                     'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}",
@@ -207,7 +207,7 @@ class TimelineController extends Controller
                 ];
             }),
             'pagination' => $paginator,
-            'patron' => [],
+            'patron' => $patrons->random(),
             'status' => session('status')
         ]);
     }
