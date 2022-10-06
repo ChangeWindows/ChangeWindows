@@ -43,7 +43,7 @@ class FlagController extends Controller
     {
         $this->authorize('flags.show');
 
-        $flag_status = FlagStatus::orderBy('build', 'desc')->with('user', 'flag', 'flag.latestStatusChange', 'flag.flagStatus');
+        $flag_status = FlagStatus::orderBy('build', 'desc')->with('flag', 'flag.latestStatusChange', 'flag.flagStatus');
         $paginator = $flag_status->paginate(150)->onEachSide(2)->through(function () {
             return [];
         });
