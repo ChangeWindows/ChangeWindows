@@ -46,7 +46,7 @@ php artisan serve
 This will launch a server at `127.0.0.1:8000`. Also run this NPM command.
 
 ```
-npm run watch
+npm start
 ```
 
 This will compile various files, mostly SCSS and keep an eye out for changes.
@@ -55,7 +55,7 @@ For a production build, execute the following commands:
 
 ```
 composer install --prefer-dist --no-scripts --no-dev -o
-npm run prod
+npm run build
 ```
 
 The `node_modules` folder is not required in a production environment as long as the production-script has been run. All relevant JavaScript will be compiled to the `public`-folder.
