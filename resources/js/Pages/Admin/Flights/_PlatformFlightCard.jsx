@@ -14,7 +14,11 @@ export default function PlatformFlightCard({ platform }) {
         </div>
         <div className="platform-event-events">
           {platform.map((flight, key) => (
-            <div className="subevent subevent-flight" key={key}>
+            <InertiaLink
+              className="subevent subevent-flight"
+              href={route("admin.flights.edit", flight)}
+              key={key}
+            >
               <div className="subevent-build">{flight.version}</div>
               <div className="subevent-tags">
                 <span
@@ -25,15 +29,7 @@ export default function PlatformFlightCard({ platform }) {
                   {flight.release_channel.name}
                 </span>
               </div>
-              <div className="subevent-actions">
-                <InertiaLink
-                  href={route("admin.flights.edit", flight)}
-                  className="btn btn-link btn-sm my-n1"
-                >
-                  <AmaranthIcon icon={aiPen} /> Edit
-                </InertiaLink>
-              </div>
-            </div>
+            </InertiaLink>
           ))}
         </div>
       </div>

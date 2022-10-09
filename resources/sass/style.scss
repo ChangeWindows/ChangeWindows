@@ -305,8 +305,8 @@ body {
             }
 
             &.subevent-flight {
-                grid-template-columns: 1fr 1fr auto;
-                grid-template-areas: "subevent-build subevent-tags subevent-actions";
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas: "subevent-build subevent-tags";
             }
 
             &:first-child {
@@ -659,9 +659,13 @@ a.settings-card {
 // Columns
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: masonry;
     gap: .5rem;
+
+    @media (max-width: 1400px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
 
     @media (max-width: 1200px) {
         grid-template-columns: repeat(2, 1fr);
