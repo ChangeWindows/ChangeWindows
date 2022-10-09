@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 
 import { format, isToday, isYesterday } from 'date-fns';
+import clsx from 'clsx';
 
-export default function Timeline({ date, children }) {
+export default function Timeline({ date, children, className }) {
   const formatedDate = useMemo(() => {
     if (isToday(date)) {
       return 'Today';
@@ -18,7 +19,7 @@ export default function Timeline({ date, children }) {
       <div className="col-12 titel">
         <h3 className="h6 text-primary">{formatedDate}</h3>
       </div>
-      <div className="col-12 timeline">
+      <div className={clsx('timeline', className, { 'col-12': !className })}>
         {children}
       </div>
     </>

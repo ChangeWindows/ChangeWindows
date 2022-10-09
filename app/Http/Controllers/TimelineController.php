@@ -24,7 +24,6 @@ class TimelineController extends Controller
 
         $patreon_api = new \Patreon\API(env('PATREON_API_KEY'));
         $campaign_id = 1028298;
-        $tier_id = '1965775';
 
         $fields = [
             "page" => [

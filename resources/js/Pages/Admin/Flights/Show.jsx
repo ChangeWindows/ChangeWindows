@@ -1,14 +1,15 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { InertiaLink } from "@inertiajs/inertia-react";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import Pagination from "@/Components/Pagination";
-import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import Status from "@/Components/Status";
+import Timeline from "@/Components/Timeline/Timeline";
 
 import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
-import { format, parseISO } from "date-fns";
+import { parseISO } from "date-fns";
+import PlatformFlightCard from "./_PlatformFlightCard";
 
 export default function Show({ timeline, pagination, status }) {
   return (
@@ -37,40 +38,16 @@ export default function Show({ timeline, pagination, status }) {
       <div className="container">
         <Status status={status} />
         <div className="row g-1">
-          {Object.keys(timeline).map((date) => (
-            <Fragment key={date}>
-              <div className="col-12 titel">
-                <h3 className="h6 text-primary">
-                  {format(parseISO(timeline[date].date), "d MMMM yyyy")}
-                </h3>
+          {Object.keys(timeline).map((date, key) => (
+            <Timeline date={parseISO(timeline[date].date)} key={key}>
+              <div
+                className="card-grid"
+              >
+                {timeline[date].flights.map((platform, _key) => (
+                  <PlatformFlightCard platform={platform} />
+                ))}
               </div>
-              {timeline[date].flights.map((flight, key) => (
-                <div className="col-6 col-md-4 col-xl-3 col-xxl-2" key={key}>
-                  <InertiaLink
-                    href={route("admin.flights.edit", flight)}
-                    className="card border-0 shadow-sm h-100"
-                  >
-                    <div className="card-body d-flex flex-column">
-                      <div className="d-flex flex-row">
-                        <h3 className="h6 mb-0">
-                          <PlatformIcon platform={flight.platform} color />
-                        </h3>
-                        <div className="ms-2">
-                          <h3 className="h6 mb-1">{flight.version}</h3>
-                          <span
-                            key={key}
-                            className="badge me-1"
-                            style={{ background: flight.release_channel.color }}
-                          >
-                            {flight.release_channel.name}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </InertiaLink>
-                </div>
-              ))}
-            </Fragment>
+            </Timeline>
           ))}
           <Pagination pagination={pagination} />
         </div>

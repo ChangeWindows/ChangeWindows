@@ -50,12 +50,18 @@ class FlightController extends Controller
                                 'color' => $flight->item->releaseChannel->channel->color
                             ],
                             'platform' => [
+                                'id' => $flight->item->platform->id,
                                 'icon' => $flight->item->platform->icon,
                                 'name' => $flight->item->platform->name,
+                                'position' => $flight->item->platform->position,
                                 'color' => $flight->item->platform->color
                             ]
                         ];
-                    })
+                    })->groupBy(function($item, $key) {
+                        return $item['platform']['id'];
+                    })->sortBy(function($item, $key) {
+                        return $item[0]['platform']['position'];
+                    })->values()->all()
                 ];
             }),
             'pagination' => $paginator,

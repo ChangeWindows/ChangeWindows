@@ -304,6 +304,11 @@ body {
                 grid-template-areas: "subevent-version subevent-build subevent-tags subevent-actions";
             }
 
+            &.subevent-flight {
+                grid-template-columns: 1fr 1fr auto;
+                grid-template-areas: "subevent-build subevent-tags subevent-actions";
+            }
+
             &:first-child {
                 border-top-left-radius: 0 !important;
                 border-top-right-radius: var(--event-border-radius) !important;
@@ -651,6 +656,21 @@ a.settings-card {
     }
 }
 
+// Columns
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: masonry;
+    gap: .5rem;
+
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
 
 // Branding
 .f-384, a.f-384 {
