@@ -77,12 +77,12 @@ export default function Edit({
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.patch(route("admin.flights.update", flight), curFlight);
+    Inertia.patch(route("admin.flights.update", { flight: flight.id }), curFlight);
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    Inertia.delete(route("admin.flights.destroy", flight), curFlight);
+    Inertia.delete(route("admin.flights.destroy", { flight: flight.id }), curFlight);
   }
 
   return (
