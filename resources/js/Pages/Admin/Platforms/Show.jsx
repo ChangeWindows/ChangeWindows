@@ -36,7 +36,7 @@ export default function Show({ platforms, status }) {
             return (
               <div className="col-6 col-xl-4 col-xxl-3" key={platform.id}>
                 <InertiaLink
-                  href={platform.edit_url}
+                  href={route('admin.platforms.edit', platform)}
                   className="card border-0 shadow-sm"
                 >
                   <div className="card-body">
