@@ -61,7 +61,7 @@ class RoleController extends Controller
     {
         $this->authorize('roles.create');
 
-        $role = $role->create([
+        $role = Role::create([
             'name' => request('name'),
         ]);
 
