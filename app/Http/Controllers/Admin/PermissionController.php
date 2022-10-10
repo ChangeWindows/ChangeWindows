@@ -26,7 +26,7 @@ class PermissionController extends Controller
             return [];
         });
 
-        return Inertia::render('Admin/Permissions/Show', [
+        return Inertia::render('Admin/Permissions/Index', [
             'can' => [
                 'create_permissions' => Auth::user()->can('permissions.create'),
                 'edit_permissions' => Auth::user()->can('permissions.edit')
