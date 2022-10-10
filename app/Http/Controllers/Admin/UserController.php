@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         $this->authorize('users.show');
 
-        return Inertia::render('Admin/Users/Show', [
+        return Inertia::render('Admin/Users/Index', [
             'can' => [
                 'create_users' => Auth::user()->can('users.create'),
                 'edit_users' => Auth::user()->can('users.edit')
