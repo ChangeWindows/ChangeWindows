@@ -22,7 +22,7 @@ class RoleController extends Controller
     {
         $this->authorize('roles.show');
 
-        return Inertia::render('Admin/Roles/Show', [
+        return Inertia::render('Admin/Roles/Index', [
             'can' => [
                 'create_roles' => Auth::user()->can('roles.create'),
                 'edit_roles' => Auth::user()->can('roles.edit')

@@ -14,8 +14,8 @@ export default function Create() {
     variants: [],
   });
 
-  function variantHandler(event) {
-    const id = event.target.id;
+  function variantHandler(e) {
+    const id = e.target.id;
 
     if (data.variants.find((permission) => permission === id)) {
       setData(
@@ -27,8 +27,8 @@ export default function Create() {
     }
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault();
     post(route("admin.permissions.store"));
   }
 
