@@ -29,7 +29,7 @@ class LaunchController extends Controller
             return [];
         });
 
-        return Inertia::render('Admin/Launches/Show', [
+        return Inertia::render('Admin/Launches/Index', [
             'can' => [
                 'create_launches' => Auth::user()->can('flights.create'),
                 'edit_launches' => Auth::user()->can('flights.edit')
