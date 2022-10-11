@@ -33,7 +33,7 @@ export default function Release({
   channels,
   timeline,
   pagination,
-  quick_nav,
+  quickNav,
 }) {
   const editor = useEditor({
     editable: false,
@@ -48,7 +48,7 @@ export default function Release({
       <nav className="navbar navbar-expand-xl navbar-light sticky-top">
         <div className="container">
           <InertiaLink
-            href={route('front.platforms.show', platform)}
+            href={route("front.platforms.show", platform)}
             className="btn btn-transparent btn-sm me-2"
           >
             <AmaranthIcon icon={aiArrowLeft} />
@@ -84,25 +84,25 @@ export default function Release({
             </button>
           </div>
           <div className="flex-grow-1" />
-          {quick_nav.prev && (
+          {quickNav.prev && (
             <InertiaLink
-              href={quick_nav.prev.url}
+              href={route("front.platforms.releases", [platform, quickNav.prev])}
               className="btn btn-transparent btn-sm"
             >
               <AmaranthIcon icon={aiAngleLeft} />
               <span className="d-none d-sm-inline">
                 {" "}
-                {quick_nav.prev.version}
+                {quickNav.prev.version}
               </span>
             </InertiaLink>
           )}
-          {quick_nav.next && (
+          {quickNav.next && (
             <InertiaLink
-              href={quick_nav.next.url}
+              href={route("front.platforms.releases", [platform, quickNav.next])}
               className="btn btn-transparent btn-sm ms-2"
             >
               <span className="d-none d-sm-inline">
-                {quick_nav.next.version}{" "}
+                {quickNav.next.version}{" "}
               </span>
               <AmaranthIcon icon={aiAngleRight} />
             </InertiaLink>

@@ -63,13 +63,13 @@ class ReleaseController extends Controller
                 ];
             }),
             'release' => $release->only('name', 'changelog', 'version', 'codename', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts', 'ongoing'),
-            'quick_nav' => [
+            'quickNav' => [
                 'prev' => $prev ? [
-                    'url' => $prev->url,
+                    'slug' => $prev->slug,
                     'version' => $prev->version
                 ] : null,
                 'next' => $next ? [
-                    'url' => $next->url,
+                    'slug' => $next->slug,
                     'version' => $next->version
                 ] : null
             ],
