@@ -62,7 +62,7 @@ export default function Create({ releases }) {
                     id={release.id}
                     name="release"
                     checked={data.release === release.id}
-                    onChange={(e) => setData('release', Number(e.target.value))}
+                    onChange={(e) => setData("release", Number(e.target.value))}
                   />
                   <label className="form-check-label" htmlFor={release.id}>
                     <span className="fw-bold">

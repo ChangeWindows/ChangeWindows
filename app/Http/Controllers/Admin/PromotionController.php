@@ -10,7 +10,6 @@ use Inertia\Inertia;
 use Auth;
 use Redirect;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 
 class PromotionController extends Controller
@@ -29,7 +28,7 @@ class PromotionController extends Controller
             return [];
         });
 
-        return Inertia::render('Admin/Promotions/Show', [
+        return Inertia::render('Admin/Promotions/Index', [
             'can' => [
                 'create_promotions' => Auth::user()->can('flights.create'),
                 'edit_promotions' => Auth::user()->can('flights.edit')
@@ -152,7 +151,7 @@ class PromotionController extends Controller
                 'delete_promotions' => Auth::user()->can('flights.delete')
             ],
             'promotion' => [
-                'promotion', $promotion->id,
+                'id' => $promotion->id,
                 'date' => $promotion->timeline->date
             ],
             'release' => [

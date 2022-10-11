@@ -10,7 +10,7 @@ import Status from "@/Components/Status";
 import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 import { format, parseISO } from "date-fns";
 
-export default function Show({ timeline, pagination, status }) {
+export default function Index({ timeline, pagination, status }) {
   return (
     <Admin>
       <NaviBar

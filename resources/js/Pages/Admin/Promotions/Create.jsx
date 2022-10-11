@@ -1,39 +1,24 @@
-import React, { useState } from "react";
-import { Inertia } from "@inertiajs/inertia";
+import React from "react";
+import { useForm } from "@inertiajs/inertia-react";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
-
-import AmaranthIcon, { aiFloppyDisk } from "@changewindows/amaranth";
+import TextField from "@/Components/UI/Forms/TextField";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
+import Fieldset from "@/Components/UI/Forms/Fieldset";
 
 import { parse, format, isValid, parseISO } from "date-fns";
 
 export default function Create({ releases }) {
-  const [curPromotion, setCurPromotion] = useState({
+  const { data, setData, post, processing, errors } = useForm({
     channel: null,
     date: format(new Date(), "yyyy-MM-dd"),
   });
 
-  function formHandler(event) {
-    const { id, value, name } = event.target;
-    const _promotion = Object.assign({}, curPromotion);
-
-    switch (name) {
-      case "channel":
-        _promotion.channel = Number(id);
-        break;
-      default:
-        _promotion[id] = value;
-        break;
-    }
-
-    setCurPromotion(_promotion);
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    Inertia.post(route('admin.promotions.store'), curPromotion);
+  function handleSubmit(e) {
+    e.preventDefault();
+    post(route("admin.promotions.store"));
   }
 
   return (
@@ -41,119 +26,78 @@ export default function Create({ releases }) {
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/promotions"
-          actions={
-            <button className="btn btn-primary btn-sm" type="submit">
-              <AmaranthIcon icon={aiFloppyDisk} /> Save
-            </button>
-          }
+          actions={<SaveButton loading={processing} />}
         >
           New promotion
         </NaviBar>
 
         <div className="container my-3">
-          <fieldset className="row mb-3">
-            <div className="col-12 col-md-4 my-4 my-md-0">
-              <h4 className="h5 mb-0">Build string</h4>
-              <p className="text-muted mb-0">
-                <small>The build string for this flight.</small>
-              </p>
+          <Fieldset title="Promotion date" description="T-minus.">
+            <div className="col-12 col-sm-6">
+              <TextField
+                type="date"
+                id="date"
+                label="date"
+                value={
+                  isValid(parse(data.date, "P", new Date()))
+                    ? format(parseISO(data.date), "yyyy-MM-dd")
+                    : data.date
+                }
+                errors={errors.date}
+                onChange={setData}
+              />
             </div>
-            <div className="col-12 col-md-8">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row g-3">
-                    <div className="col-12 col-sm-6">
-                      <div className="form-floating">
-                        <input
-                          type="date"
-                          className="form-control"
-                          id="date"
-                          value={
-                            isValid(parse(curPromotion.date, "P", new Date()))
-                              ? format(
-                                  parseISO(curPromotion.date),
-                                  "yyyy-MM-dd"
-                                )
-                              : curPromotion.date
-                          }
-                          onChange={formHandler}
-                        />
-                        <label htmlFor="date">Date</label>
-                      </div>
+          </Fieldset>
+          <Fieldset
+            title="Release channel"
+            description="All release channels with no promotion date."
+          >
+            {releases
+              .filter((release) => release.channels.length !== 0)
+              .map((release, key) => (
+                <div className="col-12 col-lg-6" key={key}>
+                  <div className="d-flex mb-1">
+                    <div className="me-2">
+                      <PlatformIcon platform={release.platform} color />
+                    </div>
+                    <div className="d-flex flex-column">
+                      <span className="fw-bold">{release.name}</span>
+                      <small className="text-muted mt-n1">
+                        {`${release.start_build}.${release.start_delta}`} -{" "}
+                        {`${release.end_build}.${release.end_delta}`}
+                      </small>
                     </div>
                   </div>
+                  {release.channels.map((channel, key) => (
+                    <div className="form-check" key={key}>
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        value={channel.id}
+                        id={channel.id}
+                        name="channel"
+                        checked={data.channel === channel.id}
+                        onChange={(e) =>
+                          setData("channel", Number(e.target.value))
+                        }
+                      />
+                      <label className="form-check-label" htmlFor={channel.id}>
+                        <span style={{ color: channel.color }}>
+                          {channel.name}
+                        </span>
+                      </label>
+                    </div>
+                  ))}
                 </div>
+              ))}
+            {releases.length === 0 && (
+              <div className="col-12">
+                <p className="mb-0">
+                  There are no releases channels without a promotion.
+                </p>
               </div>
-            </div>
-          </fieldset>
-          <fieldset className="row mb-3">
-            <div className="col-12 col-md-4 my-4 my-md-0">
-              <h4 className="h5 mb-0">Release channels</h4>
-              <p className="text-muted mb-0">
-                <small>All channels without a promotion.</small>
-              </p>
-            </div>
-            <div className="col-12 col-md-8">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row g-3">
-                    {releases
-                      .filter((release) => release.channels.length !== 0)
-                      .map((release, key) => (
-                        <div className="col-12 col-lg-6" key={key}>
-                          <div className="d-flex mb-1">
-                            <div className="me-2">
-                              <PlatformIcon platform={release.platform} color />
-                            </div>
-                            <div className="d-flex flex-column">
-                              <span className="fw-bold">{release.name}</span>
-                              <small className="text-muted mt-n1">
-                                {`${release.start_build}.${release.start_delta}`}{" "}
-                                - {`${release.end_build}.${release.end_delta}`}
-                              </small>
-                            </div>
-                          </div>
-                          {release.channels.map((channel, key) => (
-                            <div className="form-check" key={key}>
-                              <input
-                                className="form-check-input"
-                                type="radio"
-                                value="1"
-                                id={channel.id}
-                                name="channel"
-                                checked={curPromotion.channel === channel.id}
-                                onChange={formHandler}
-                              />
-                              <label
-                                className="form-check-label"
-                                htmlFor={channel.id}
-                              >
-                                <span style={{ color: channel.color }}>
-                                  {channel.name}
-                                </span>
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      ))}
-                    {releases.length === 0 && (
-                      <div className="col-12">
-                        {version === "10.0." ? (
-                          <p className="mb-0">
-                            Enter a string to get started...
-                          </p>
-                        ) : (
-                          <p className="mb-0">
-                            This build doesn't seem to match any release...
-                          </p>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </fieldset>
+            )}
+          </Fieldset>
         </div>
       </form>
     </Admin>
