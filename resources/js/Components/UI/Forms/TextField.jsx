@@ -14,7 +14,7 @@ export default function TextField({
   errors,
   onChange,
   prefix,
-  minHeight = 200,
+  minHeight = 120,
   className,
   disableFloating,
 }) {

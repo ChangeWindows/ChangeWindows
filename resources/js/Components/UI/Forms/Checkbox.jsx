@@ -27,13 +27,13 @@ export default function Checkbox({
         id={id}
         name={name ?? id}
         checked={checked}
-        onChange={onChange}
+        onChange={(e) => onChange(name ?? id, e.target.checked)}
         disabled={disabled}
       />
-      <label className="form-check-label" htmlFor={id}>
+      <label className="form-check-label d-block" htmlFor={id}>
         {label}
         {!!helper &&
-          <small className="form-text">{helper}</small>
+          <small className="form-text d-block">{helper}</small>
         }
       </label>
       {errors &&

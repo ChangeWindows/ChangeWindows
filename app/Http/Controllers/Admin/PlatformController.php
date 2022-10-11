@@ -21,7 +21,7 @@ class PlatformController extends Controller
     {
         $this->authorize('platforms.show');
 
-        return Inertia::render('Admin/Platforms/Show', [
+        return Inertia::render('Admin/Platforms/Index', [
             'can' => [
                 'create_platforms' => Auth::user()->can('platforms.create'),
                 'edit_platforms' => Auth::user()->can('platforms.edit')
@@ -66,7 +66,8 @@ class PlatformController extends Controller
             'tweet_stream_id' => request('tweet_stream_id'),
             'retweet_stream_id' => request('retweet_stream_id'),
             'legacy' => request('legacy') ? 1 : 0,
-            'active' => request('active') ? 1 : 0
+            'active' => request('active') ? 1 : 0,
+            'tool' => request('tool') ? 1 : 0
         ]);
 
         return Redirect::route('admin.platforms.edit', $platform)->with('status', [
@@ -132,7 +133,8 @@ class PlatformController extends Controller
             'tweet_stream_id' => request('tweet_stream_id'),
             'retweet_stream_id' => request('retweet_stream_id'),
             'legacy' => request('legacy') ? 1 : 0,
-            'active' => request('active') ? 1 : 0
+            'active' => request('active') ? 1 : 0,
+            'tool' => request('tool') ? 1 : 0
         ]);
 
         return Redirect::route('admin.platforms.edit', $platform)->with('status', [

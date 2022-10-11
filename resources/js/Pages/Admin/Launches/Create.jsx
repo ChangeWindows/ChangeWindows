@@ -37,7 +37,7 @@ export default function Create({ releases }) {
               <TextField
                 type="date"
                 id="date"
-                label="date"
+                label="Date"
                 value={
                   isValid(parse(data.date, "P", new Date()))
                     ? format(parseISO(data.date), "yyyy-MM-dd")

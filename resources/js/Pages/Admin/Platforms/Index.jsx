@@ -8,7 +8,7 @@ import Status from "@/Components/Status";
 
 import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 
-export default function Show({ platforms, status }) {
+export default function Index({ platforms, status }) {
   return (
     <Admin>
       <NaviBar
