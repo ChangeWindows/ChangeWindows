@@ -17,8 +17,9 @@ export default function Index({ platforms, channel_platforms }) {
 
       <PlatformNavigation
         home
-        all="/channels"
+        all="front.channels"
         page="Channels"
+        routeName="front.channels.show"
         platforms={platforms}
       />
 

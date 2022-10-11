@@ -25,8 +25,9 @@ export default function Show({
       <InertiaHead title={`${platform.name} timeline`} />
 
       <PlatformNavigation
-        all="/timeline"
+        all="front.timeline"
         page="Timeline"
+        routeName="front.timeline.show"
         platforms={platforms}
       />
 

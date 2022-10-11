@@ -26,8 +26,9 @@ export default function Index({
 
       <PlatformNavigation
         home
-        all="/timeline"
+        all="front.timeline"
         page="Timeline"
+        routeName="front.timeline.show"
         platforms={platforms}
       />
 

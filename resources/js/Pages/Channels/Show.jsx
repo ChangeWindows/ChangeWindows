@@ -39,8 +39,9 @@ export default function Show({ platform, platforms, channel_order, releases }) {
       <InertiaHead title={`${platform.name} channels`} />
 
       <PlatformNavigation
-        all="/channels"
+        all="front.channels"
         page="Channels"
+        routeName="front.channels.show"
         platforms={platforms}
       />
 

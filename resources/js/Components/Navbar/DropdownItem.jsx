@@ -1,19 +1,17 @@
-import React from 'react';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import React from "react";
+import { InertiaLink } from "@inertiajs/inertia-react";
 
-import clsx from 'clsx';
+import clsx from "clsx";
 
-export default function DropdownItem({ children, url }) {
-    const page = usePage();
-
-    return (
-        <li>
-            <InertiaLink
-                className={clsx('dropdown-item', { 'active': page.url.includes(url)})}
-                href={url}
-            >
-                {children}
-            </InertiaLink>
-        </li>
-    )
+export default function DropdownItem({ children, url, active }) {
+  return (
+    <li>
+      <InertiaLink
+        className={clsx("dropdown-item", { active: active })}
+        href={url}
+      >
+        {children}
+      </InertiaLink>
+    </li>
+  );
 }

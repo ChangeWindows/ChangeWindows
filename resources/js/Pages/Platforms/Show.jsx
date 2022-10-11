@@ -32,7 +32,11 @@ export default function Show({
     <App>
       <InertiaHead title={platform.name} />
 
-      <PlatformNavigation page="Platforms" platforms={platforms} />
+      <PlatformNavigation
+        page="Platforms"
+        platforms={platforms}
+        routeName="front.platforms.show"
+      />
 
       <div className="container">
         <div className="row g-3">
@@ -64,7 +68,10 @@ export default function Show({
                     }
                     url={
                       channel.flights.length > 0
-                        ? route('front.platforms.releases', { release: channel.flights[0].release, platform })
+                        ? route("front.platforms.releases", {
+                            release: channel.flights[0].release,
+                            platform,
+                          })
                         : undefined
                     }
                   />
@@ -86,7 +93,10 @@ export default function Show({
                         alts={[`Version ${release.version}`, release.codename]}
                         flight={release.latest_flight}
                         channels={release.channels}
-                        url={route('front.platforms.releases', [platform, release])}
+                        url={route("front.platforms.releases", [
+                          platform,
+                          release,
+                        ])}
                         dates={release.dates}
                       />
                     ))}
@@ -105,7 +115,10 @@ export default function Show({
                         name={pack.name}
                         alts={[`Version ${pack.version}`, pack.codename]}
                         channels={pack.channels}
-                        url={route('front.platforms.packages', { platform, release: pack })}
+                        url={route("front.platforms.packages", {
+                          platform,
+                          release: pack,
+                        })}
                       />
                     ))}
                   </div>
@@ -122,7 +135,10 @@ export default function Show({
                         name={release.name}
                         alts={[`Version ${release.version}`, release.codename]}
                         flight={release.latest_flight}
-                        url={route('front.platforms.releases', [platform, release])}
+                        url={route("front.platforms.releases", [
+                          platform,
+                          release,
+                        ])}
                         dates={release.dates}
                       />
                     ))}

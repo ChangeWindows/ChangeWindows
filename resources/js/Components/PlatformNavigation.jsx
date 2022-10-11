@@ -8,11 +8,10 @@ import PlatformIcon from './Platforms/PlatformIcon';
 
 import AmaranthIcon, { aiAngleDown, aiEllipsis } from '@changewindows/amaranth';
 
-/* -- Utilities -- */
 import useMediaQuery from '../hooks/useMediaQuery';
 import clsx from 'clsx';
 
-export default function Navigation({ home = false, platforms, all = false }) {
+export default function Navigation({ home = false, platforms, routeName, all = false }) {
   const matchesSmUp = useMediaQuery('(min-width: 576px)');
   const page = usePage();
 
@@ -35,13 +34,13 @@ export default function Navigation({ home = false, platforms, all = false }) {
           <ul className="navbar-nav me-auto">
             {all &&
               <li className="nav-item">
-                <InertiaLink className={clsx('nav-link', { 'active': home })} href={all}>
+                <InertiaLink className={clsx('nav-link', { 'active': route().current(all) })} href={route(all)}>
                   All
                 </InertiaLink>
               </li>
             }
             {mainPlatforms.map((platform, key) => (
-              <NavItem url={route('front.channels.show', { platform })} key={key}>
+              <NavItem url={route(routeName, { platform })} active={route().current(routeName, platform)} key={key}>
                 <PlatformIcon platform={platform} /> <span className="d-none d-xl-inline-block">{platform.name}</span>
               </NavItem>
             ))}
@@ -57,7 +56,7 @@ export default function Navigation({ home = false, platforms, all = false }) {
                   <>
                     <li><h6 className="dropdown-header">Tools</h6></li>
                     {toolPlatforms.map((platform, key) => (
-                      <DropdownItem url={route('front.channels.show', { platform })} key={key}>
+                      <DropdownItem url={route(routeName, { platform })} active={route().current(routeName, platform)} key={key}>
                         <PlatformIcon platform={platform} /> {platform.name}
                       </DropdownItem>
                     ))}
@@ -65,7 +64,7 @@ export default function Navigation({ home = false, platforms, all = false }) {
                 }
                 {!matchesSmUp && legacyPlatforms.length > 0 && <li><h6 className="dropdown-header">Legacy</h6></li>}
                 {legacyPlatforms.map((platform, key) => (
-                  <DropdownItem url={route('front.channels.show', { platform })} key={key}>
+                  <DropdownItem url={route(routeName, { platform })} active={route().current(routeName, platform)} key={key}>
                     <PlatformIcon platform={platform} /> {platform.name}
                   </DropdownItem>
                 ))}
