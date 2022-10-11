@@ -7,7 +7,7 @@ import Status from "@/Components/Status";
 
 import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 
-export default function Show({ tweet_streams, status }) {
+export default function Index({ tweet_streams, status }) {
   return (
     <Admin>
       <NaviBar

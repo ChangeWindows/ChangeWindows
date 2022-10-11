@@ -1,49 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { Inertia } from "@inertiajs/inertia";
+import React from "react";
+import { useForm } from "@inertiajs/inertia-react";
 
 import Admin from "@/Layouts/Admin";
+import Fieldset from "@/Components/UI/Forms/Fieldset";
 import NaviBar from "@/Components/NaviBar";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Status from "@/Components/Status";
+import TextField from "@/Components/UI/Forms/TextField";
 
-import AmaranthIcon, {
-  aiFloppyDisk,
-  aiTrashCan,
-} from "@changewindows/amaranth";
+import AmaranthIcon, { aiTrashCan } from "@changewindows/amaranth";
 
 export default function Edit({ can, tweet_stream, status }) {
-  const [curTweetStream, setCurTweetStream] = useState(tweet_stream);
+  const {
+    data,
+    setData,
+    patch,
+    delete: destroy,
+    processing,
+    errors,
+  } = useForm(tweet_stream);
 
-  useEffect(() => {
-    setCurTweetStream(tweet_stream);
-  }, [tweet_stream]);
-
-  function formHandler(event) {
-    const { id, value, type } = event.target;
-    const _tweet_stream = Object.assign({}, curTweetStream);
-
-    switch (type) {
-      default:
-        _tweet_stream[id] = value;
-        break;
-    }
-
-    setCurTweetStream(_tweet_stream);
+  function handleSubmit(e) {
+    e.preventDefault();
+    patch(route("admin.tweet_streams.update", tweet_stream));
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    Inertia.patch(
-      route("admin.tweet_streams.update", tweet_stream),
-      curTweetStream
-    );
-  }
-
-  function handleDelete(event) {
-    event.preventDefault();
-    Inertia.delete(
-      route("admin.tweet_streams.destroy", tweet_stream),
-      curTweetStream
-    );
+  function handleDelete(e) {
+    e.preventDefault();
+    destroy(route("admin.tweet_streams.destroy", tweet_stream));
   }
 
   return (
@@ -51,154 +35,98 @@ export default function Edit({ can, tweet_stream, status }) {
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/tweet_streams"
-          actions={
-            <button className="btn btn-primary btn-sm" type="submit">
-              <AmaranthIcon icon={aiFloppyDisk} /> Save
-            </button>
-          }
+          actions={<SaveButton loading={processing} />}
         >
-          {curTweetStream.name || "Unnamed Twitter Tweet Stream"}
+          {data.name || "Unnamed Twitter Tweet Stream"}
         </NaviBar>
 
         <div className="container my-3">
           <Status status={status} />
-          <fieldset className="row mb-3" disabled={!can.edit_tweet_streams}>
-            <div className="col-12 col-md-4 my-4 my-md-0">
-              <h4 className="h5 mb-0">Identity</h4>
-              <p className="text-muted mb-0">
-                <small>About this feed.</small>
-              </p>
+          <Fieldset
+            title="Identity"
+            description="About this feed."
+            disabled={!can.edit_tweet_streams}
+          >
+            <div className="col-12 col-lg-6">
+              <TextField
+                id="name"
+                label="Name"
+                value={data.name}
+                errors={errors.name}
+                onChange={setData}
+              />
             </div>
-            <div className="col-12 col-md-8">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row g-3">
-                    <div className="col-12 col-lg-6">
-                      <div className="form-floating">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="name"
-                          value={curTweetStream.name}
-                          onChange={formHandler}
-                        />
-                        <label htmlFor="name">Name</label>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-6">
-                      <div className="form-floating">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="account"
-                          value={curTweetStream.account}
-                          onChange={formHandler}
-                        />
-                        <label htmlFor="account">Account</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="col-12 col-lg-6">
+              <TextField
+                id="account"
+                label="Account"
+                value={data.account}
+                errors={errors.account}
+                onChange={setData}
+              />
             </div>
-          </fieldset>
-          <fieldset className="row mb-3" disabled={!can.edit_tweet_streams}>
-            <div className="col-12 col-md-4 my-4 my-md-0">
-              <h4 className="h5 mb-0">Authentication</h4>
-              <p className="text-muted mb-0">
-                <small>Connecting to the Twitter API.</small>
-              </p>
+          </Fieldset>
+          <Fieldset
+            title="Authentication"
+            description="Connecting to the Twitter API."
+            disabled={!can.edit_tweet_streams}
+          >
+            <div className="col-12">
+              <TextField
+                id="consumer_key"
+                label="Consumer Key"
+                value={data.consumer_key}
+                errors={errors.consumer_key}
+                onChange={setData}
+              />
             </div>
-            <div className="col-12 col-md-8">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row g-3">
-                    <div className="col-12">
-                      <div className="form-floating">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="consumer_key"
-                          value={curTweetStream.consumer_key}
-                          onChange={formHandler}
-                        />
-                        <label htmlFor="consumer_key">Consumer Key</label>
-                      </div>
-                    </div>
-                    <div className="col-12">
-                      <div className="form-floating">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="consumer_secret"
-                          value={curTweetStream.consumer_secret}
-                          onChange={formHandler}
-                        />
-                        <label htmlFor="consumer_secret">Consumer Secret</label>
-                      </div>
-                    </div>
-                    <div className="col-12">
-                      <div className="form-floating">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="access_token"
-                          value={curTweetStream.access_token}
-                          onChange={formHandler}
-                        />
-                        <label htmlFor="access_token">Access Token</label>
-                      </div>
-                    </div>
-                    <div className="col-12">
-                      <div className="form-floating">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="access_token_secret"
-                          value={curTweetStream.access_token_secret}
-                          onChange={formHandler}
-                        />
-                        <label htmlFor="access_token_secret">
-                          Access Token Secret
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="col-12">
+              <TextField
+                id="consumer_secret"
+                label="Consumer Secret"
+                value={data.consumer_secret}
+                errors={errors.consumer_secret}
+                onChange={setData}
+              />
             </div>
-          </fieldset>
+            <div className="col-12">
+              <TextField
+                id="access_token"
+                label="Access Token"
+                value={data.access_token}
+                errors={errors.access_token}
+                onChange={setData}
+              />
+            </div>
+            <div className="col-12">
+              <TextField
+                id="access_token_secret"
+                label="Access Token Secret"
+                value={data.access_token_secret}
+                errors={errors.access_token_secret}
+                onChange={setData}
+              />
+            </div>
+          </Fieldset>
         </div>
       </form>
       {can.delete_tweet_streams && (
-        <form onSubmit={handleDelete}>
-          <div className="container my-3">
-            <div className="row">
-              <div className="col-12 col-md-4 my-4 my-md-0">
-                <h4 className="h5 mb-0 text-danger">Danger zone</h4>
-                <p className="text-muted mb-0">
-                  <small>All alone in the danger zone.</small>
-                </p>
-              </div>
-              <div className="col-12 col-md-8">
-                <div className="card">
-                  <div className="card-body">
-                    <div className="row g-3">
-                      <div className="col-12">
-                        <p>
-                          Deleting a tweet stream will remove all the content
-                          associated with that tweet stream. Are you sure?
-                        </p>
-                        <button className="btn btn-danger btn-sm" type="submit">
-                          <AmaranthIcon icon={aiTrashCan} /> Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <form onSubmit={handleDelete} className="container my-3 py-0">
+          <Fieldset
+            title="Danger zone"
+            description="All alone in the danger zone."
+            danger
+          >
+            <div className="col-12">
+              <p>
+                Deleting a tweet stream will remove all the content associated
+                with that tweet stream. Are you sure?
+              </p>
+              <button className="btn btn-danger btn-sm" type="submit">
+                <AmaranthIcon icon={aiTrashCan} /> Delete
+              </button>
             </div>
-          </div>
+          </Fieldset>
         </form>
       )}
     </Admin>

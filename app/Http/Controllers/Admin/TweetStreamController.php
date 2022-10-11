@@ -23,7 +23,7 @@ class TweetStreamController extends Controller
     {
         $this->authorize('tweet_streams.show');
 
-        return Inertia::render('Admin/TweetStreams/Show', [
+        return Inertia::render('Admin/TweetStreams/Index', [
             'can' => [
                 'create_tweet_streams' => Auth::user()->can('tweet_streams.create'),
                 'edit_tweet_streams' => Auth::user()->can('tweet_streams.edit')
