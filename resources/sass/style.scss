@@ -270,7 +270,7 @@ body {
         transition: $transition-base;
 
         box-shadow: $box-shadow-sm;
-        background-color: var(--timeline-bg-nth);
+        background-color: var(--card-bg);
         border-radius: var(--event-border-radius);
 
         .platform-event-icon {
@@ -375,6 +375,7 @@ body {
             &:hover {
                 border-top: none;
                 border-radius: var(--event-border-radius) 0 0 var(--event-border-radius);
+                background-color: var(--card-bg-hover)
             }
 
             &:hover + .subevent {
