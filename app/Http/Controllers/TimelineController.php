@@ -271,6 +271,7 @@ class TimelineController extends Controller
             'channel_platforms' => $channel_platforms->map(function ($platform) {
                 return [
                     'name' => $platform->name,
+                    'slug' => $platform->slug,
                     'color' => $platform->color,
                     'icon' => $platform->icon,
                     'channels' => $platform->channels->where('active')->where('package', '=', 0)->map(function ($channel) {
@@ -318,6 +319,7 @@ class TimelineController extends Controller
                                 'release' => [
                                     'slug' => $_cur_flight->item->releaseChannel->release->slug,
                                     'version' => $_cur_flight->item->releaseChannel->release->version,
+                                    'cversion' => $_cur_flight->item->releaseChannel->release->canonical_version,
                                     'package' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->releaseChannel->release->name : false,
                                 ],
                                 'release_channel' => $flights->map(function ($channels) {
@@ -329,6 +331,7 @@ class TimelineController extends Controller
                                 })->sortBy('order')->values()->all(),
                                 'platform' => [
                                     'id' => $_cur_flight->item->platform->id,
+                                    'slug' => $_cur_flight->item->platform->slug,
                                     'position' => $_cur_flight->item->platform->position,
                                     'icon' => $_cur_flight->item->platform->icon,
                                     'name' => $_cur_flight->item->platform->name,
@@ -356,6 +359,7 @@ class TimelineController extends Controller
                                 ],
                                 'platform' => [
                                     'id' => $_cur_promotion->item->platform->id,
+                                    'slug' => $_cur_promotion->item->platform->slug,
                                     'position' => $_cur_promotion->item->platform->position,
                                     'icon' => $_cur_promotion->item->platform->icon,
                                     'name' => $_cur_promotion->item->platform->name,
@@ -372,12 +376,13 @@ class TimelineController extends Controller
                                 'id' => $_cur_launch->item->id,
                                 'date' => $_cur_launch->item->timeline->date,
                                 'release' => [
-                                    'slug' => $_cur_launch->item->releaseChannel->release->slug,
-                                    'version' => $_cur_launch->item->releaseChannel->release->version,
-                                    'package' => $_cur_launch->item->releaseChannel->release->package ? $_cur_launch->item->releaseChannel->release->name : false,
+                                    'slug' => $_cur_launch->item->release->slug,
+                                    'version' => $_cur_launch->item->release->version,
+                                    'package' => $_cur_launch->item->release->package ? $_cur_launch->item->release->name : false,
                                 ],
                                 'platform' => [
                                     'id' => $_cur_launch->item->platform->id,
+                                    'slug' => $_cur_launch->item->platform->slug,
                                     'position' => $_cur_launch->item->platform->position,
                                     'icon' => $_cur_launch->item->platform->icon,
                                     'name' => $_cur_launch->item->platform->name,
