@@ -23,7 +23,7 @@ class PackageController extends Controller
 
         $packages = Release::where('package', '=', 1)->orderBy('platform_id')->get();
 
-        return Inertia::render('Admin/Packages/Show', [
+        return Inertia::render('Admin/Packages/Index', [
             'can' => [
                 'create_packages' => Auth::user()->can('releases.create'),
                 'edit_packages' => Auth::user()->can('releases.edit')

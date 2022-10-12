@@ -1,37 +1,23 @@
-import React, { useState } from "react";
-import { Inertia } from "@inertiajs/inertia";
+import React from "react";
+import { useForm } from "@inertiajs/inertia-react";
 
 import Admin from "@/Layouts/Admin";
+import Fieldset from "@/Components/UI/Forms/Fieldset";
 import NaviBar from "@/Components/NaviBar";
-
-import AmaranthIcon, { aiFloppyDisk } from "@changewindows/amaranth";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
+import Select from "@/Components/UI/Forms/Select";
+import TextField from "@/Components/UI/Forms/TextField";
 
 export default function Create({ platforms }) {
-  const [curPack, setCurPack] = useState({
+  const { data, setData, post, processing, errors } = useForm({
     name: "",
     description: "",
     platform_id: "",
   });
 
-  function formHandler(event) {
-    const { id, value, type } = event.target;
-    const _pack = Object.assign({}, curPack);
-
-    switch (type) {
-      case "checkbox":
-        _pack[id] = _pack[id] === 0 ? 1 : 0;
-        break;
-      default:
-        _pack[id] = value;
-        break;
-    }
-
-    setCurPack(_pack);
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    Inertia.post(route('admin.packages.store'), curPack);
+  function handleSubmit(e) {
+    e.preventDefault();
+    post(route("admin.packages.store"));
   }
 
   return (
@@ -39,77 +25,45 @@ export default function Create({ platforms }) {
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/packages"
-          actions={
-            <button className="btn btn-primary btn-sm" type="submit">
-              <AmaranthIcon icon={aiFloppyDisk} /> Save
-            </button>
-          }
+          actions={<SaveButton loading={processing} />}
         >
-          {curPack.name || "Unnamed package"}
+          {data.name || "Unnamed package"}
         </NaviBar>
 
         <div className="container my-3">
-          <fieldset className="row mb-3">
-            <div className="col-12 col-md-4 my-4 my-md-0">
-              <h4 className="h5 mb-0">Identity</h4>
-              <p className="text-muted mb-0">
-                <small>About this package.</small>
-              </p>
+          <Fieldset title="Identity" description="About this package.">
+            <div className="col-12 col-lg-6">
+              <Select
+                id="platform_id"
+                label="Platform"
+                value={data.platform_id}
+                selects={platforms}
+                selectLabel={(x) => x.name}
+                selectValue={(x) => x.id}
+                errors={errors.platform_id}
+                onChange={(e) => setData("platform_id", e.target.value)}
+              />
             </div>
-            <div className="col-12 col-md-8">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row g-3">
-                    <div className="col-12 col-lg-6">
-                      <div className="form-floating">
-                        <select
-                          className="form-select"
-                          id="platform_id"
-                          aria-label="Platform"
-                          value={curPack.platform_id ?? ""}
-                          onChange={formHandler}
-                        >
-                          <option style={{ display: "none" }}>
-                            Select platform
-                          </option>
-                          {platforms.map((platform, key) => (
-                            <option value={platform.id} key={key}>
-                              {platform.name}
-                            </option>
-                          ))}
-                        </select>
-                        <label htmlFor="platform_id">Platform</label>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-6">
-                      <div className="form-floating">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="name"
-                          value={curPack.name}
-                          onChange={formHandler}
-                        />
-                        <label htmlFor="name">Name</label>
-                      </div>
-                    </div>
-                    <div className="col-12">
-                      <div className="form-floating">
-                        <textarea
-                          className="form-control"
-                          id="description"
-                          style={{ minHeight: 80 }}
-                          defaultValue={curPack.description}
-                          onChange={formHandler}
-                        ></textarea>
-                        <label htmlFor="description">Description</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="col-12 col-lg-6">
+              <TextField
+                id="name"
+                label="Name"
+                value={data.name}
+                errors={errors.name}
+                onChange={setData}
+              />
             </div>
-          </fieldset>
+            <div className="col-12">
+              <TextField
+                type="textarea"
+                id="description"
+                label="Description"
+                value={data.description}
+                errors={errors.description}
+                onChange={setData}
+              />
+            </div>
+          </Fieldset>
         </div>
       </form>
     </Admin>

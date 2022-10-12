@@ -13,7 +13,7 @@ import AmaranthIcon, {
   aiPlus,
 } from "@changewindows/amaranth";
 
-export default function Show({ packages, can, status }) {
+export default function Index({ packages, can, status }) {
   return (
     <Admin>
       <NaviBar
