@@ -221,7 +221,7 @@ export default function Edit({
             return (
               <div className="col-12 col-sm-6 col-xl-4" key={channel.id}>
                 <InertiaLink
-                  href={channel.edit_url}
+                  href={route('admin.channels.edit', channel)}
                   className="card border-0 shadow-sm h-100"
                 >
                   <div className="card-body">

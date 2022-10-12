@@ -94,7 +94,15 @@ class ChannelController extends Controller
                 'edit_channels' => Auth::user()->can('channels.edit'),
                 'delete_channels' => Auth::user()->can('channels.delete')
             ],
-            'channel' => $channel,
+            'channel' => [
+                'slug' => $channel->slug,
+                'name' => $channel->name,
+                'order' => $channel->order,
+                'color' => $channel->color,
+                'active' => $channel->active,
+                'platform' => $channel->platform,
+                'platform_id' => $channel->platform_id
+            ],
             'platforms' => Platform::orderBy('position')->get(),
             'status' => session('status')
         ]);
@@ -135,9 +143,10 @@ class ChannelController extends Controller
     {
         $this->authorize('channels.delete');
 
+        $platform = $channel->platform;
         $channel->delete();
 
-        return Redirect::route('admin.channels')->with('status', [
+        return Redirect::route('admin.platforms.edit', $platform)->with('status', [
             'message' => 'Succesfully deleted channel.',
             'type' => 'success'
         ]);
