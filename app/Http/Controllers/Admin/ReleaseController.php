@@ -170,8 +170,6 @@ class ReleaseController extends Controller
     {
         $this->authorize('releases.show');
 
-        dd(session());
-
         return Inertia::render('Admin/Releases/Changelog', [
             'can' => [
                 'edit_releases' => Auth::user()->can('releases.edit')
