@@ -1,8 +1,8 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 import clsx from "clsx";
 
-export default function TextField({
+const TextField = forwardRef(({
   type = "text",
   disabled,
   value,
@@ -17,7 +17,8 @@ export default function TextField({
   minHeight = 120,
   className,
   disableFloating,
-}) {
+  onFocus
+}, ref) => {
   return (
     <>
       <div className={clsx("input-group w-100", className)}>
@@ -36,8 +37,10 @@ export default function TextField({
               value={value || ""}
               placeholder={placeholder}
               onChange={(event) => onChange(id, event.target.value)}
+              onFocus={onFocus}
               style={{ minHeight }}
               disabled={disabled}
+              ref={ref}
             />
           ) : (
             <input
@@ -48,7 +51,9 @@ export default function TextField({
               value={value || ""}
               placeholder={placeholder}
               onChange={(event) => onChange(id, event.target.value)}
+              onFocus={onFocus}
               disabled={disabled}
+              ref={ref}
             />
           )}
           <label htmlFor={id} className={clsx(disableFloating && 'd-none')}>{label}</label>
@@ -58,4 +63,6 @@ export default function TextField({
       {!!helper && <small className="form-text">{helper}</small>}
     </>
   );
-}
+});
+
+export default TextField;

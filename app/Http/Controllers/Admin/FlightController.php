@@ -32,7 +32,7 @@ class FlightController extends Controller
             return [];
         });
 
-        return Inertia::render('Admin/Flights/Show', [
+        return Inertia::render('Admin/Flights/Index', [
             'can' => [
                 'create_flights' => Auth::user()->can('flights.create'),
                 'edit_flights' => Auth::user()->can('flights.edit')

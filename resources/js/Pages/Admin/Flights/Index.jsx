@@ -11,7 +11,7 @@ import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 import { parseISO } from "date-fns";
 import PlatformFlightCard from "./_PlatformFlightCard";
 
-export default function Show({ timeline, pagination, status }) {
+export default function Index({ timeline, pagination, status }) {
   return (
     <Admin>
       <NaviBar
