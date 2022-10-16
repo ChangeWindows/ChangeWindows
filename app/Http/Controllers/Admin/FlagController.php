@@ -97,8 +97,6 @@ class FlagController extends Controller
                     continue;
                 }
 
-                $flag = Flag::where('feature_name', $flag_id_pair[0])->first();
-
                 $flag = Flag::firstOrCreate([
                     'feature_name' => $flag_id_pair[0]
                 ], [
@@ -110,7 +108,7 @@ class FlagController extends Controller
                     return $value !== $flag->id;
                 });
 
-                if (!$flag->latestStatus || $flag->latestStatus && ($flag->latestStatus->status !== $flag_status_type || $flag->latestStatus->feature_id !== intval($flag_id_pair[1]))) {
+                if (!$flag->latestStatus || $flag->latestStatus && ($flag->latestStatus->status !== $flag_status_type || intval($flag->latestStatus->feature_id) !== intval($flag_id_pair[1]))) {
                     $flag->flagStatus()->create([
                         'build' => request('build'),
                         'feature_id' => intval($flag_id_pair[1]),
@@ -142,7 +140,7 @@ class FlagController extends Controller
         }
 
         return Redirect::route('admin.flags')->with('status', [
-            'message' => 'Succesfully created flags.',
+            'message' => 'Succesfully created flags for build '.request('build').'.',
             'type' => 'success'
         ]);
     }
