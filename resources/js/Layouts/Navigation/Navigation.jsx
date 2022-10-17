@@ -15,6 +15,7 @@ export default function Navigation() {
         { type: 'link', url: '/flags', icon: aiFlag, title: 'Flags' },
         { type: 'link', url: '/platforms', primary: '/pc', icon: aiDevices, title: 'Platforms' },
         { type: 'link', url: '/channels', icon: aiBranch, title: 'Channels' },
+        { type: 'divider' },
         { type: 'link', url: '/settings', icon: aiGear, title: 'Settings' }
       ]}
       overflow={[
