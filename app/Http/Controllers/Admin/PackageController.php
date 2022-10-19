@@ -189,12 +189,12 @@ class PackageController extends Controller
      * @param  \App\Models\Release  $release
      * @return \Illuminate\Http\Response
      */
-    public function updateChangelog(PackageRequest $request, Release $package)
+    public function updateChangelog(Release $package)
     {
         $this->authorize('releases.edit');
 
         $package->update([
-            'changelog' => $request->get('changelog')
+            'changelog' => request('changelog')
         ]);
 
         return Redirect::route('admin.packages.changelog.edit', $package)->with('status', [

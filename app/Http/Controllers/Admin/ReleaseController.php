@@ -190,12 +190,12 @@ class ReleaseController extends Controller
      * @param  \App\Models\Release  $release
      * @return \Illuminate\Http\Response
      */
-    public function updateChangelog(ReleaseRequest $request, Release $release)
+    public function updateChangelog(Release $release)
     {
         $this->authorize('releases.edit');
 
         $release->update([
-            'changelog' => $request->get('changelog')
+            'changelog' => request('changelog')
         ]);
 
         return Redirect::route('admin.releases.changelog.edit', $release)->with('status', [
