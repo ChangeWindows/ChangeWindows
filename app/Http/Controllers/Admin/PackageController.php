@@ -25,8 +25,10 @@ class PackageController extends Controller
 
         return Inertia::render('Admin/Packages/Index', [
             'can' => [
-                'create_packages' => Auth::user()->can('releases.create'),
-                'edit_packages' => Auth::user()->can('releases.edit')
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit'),
+                    'create' => Auth::user()->can('releases.create')
+                ],
             ],
             'packages' => $packages->map(function ($release) {
                 return [
@@ -112,8 +114,10 @@ class PackageController extends Controller
 
         return Inertia::render('Admin/Packages/Edit', [
             'can' => [
-                'edit_packages' => Auth::user()->can('releases.edit'),
-                'delete_packages' => Auth::user()->can('releases.delete')
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit'),
+                    'delete' => Auth::user()->can('releases.delete')
+                ],
             ],
             'pack' => [
                 'id' => $package->id,
@@ -170,8 +174,10 @@ class PackageController extends Controller
 
         return Inertia::render('Admin/Packages/Changelog', [
             'can' => [
-                'edit_packages' => Auth::user()->can('releases.edit'),
-                'delete_packages' => Auth::user()->can('releases.delete')
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit'),
+                    'delete' => Auth::user()->can('releases.delete')
+                ],
             ],
             'release' => [
                 'name' => $package->name,

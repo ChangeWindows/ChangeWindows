@@ -28,8 +28,10 @@ class PermissionController extends Controller
 
         return Inertia::render('Admin/Permissions/Index', [
             'can' => [
-                'create_permissions' => Auth::user()->can('permissions.create'),
-                'edit_permissions' => Auth::user()->can('permissions.edit')
+                'permissions' => [
+                    'create' => Auth::user()->can('permissions.create'),
+                    'edit' => Auth::user()->can('permissions.edit')
+                ],
             ],
             'permissions' => $permissions->paginate(100)->map(function ($permission) {
                 return [
@@ -101,8 +103,10 @@ class PermissionController extends Controller
 
         return Inertia::render('Admin/Permissions/Edit', [
             'can' => [
-                'edit_permissions' => Auth::user()->can('permissions.edit'),
-                'delete_permissions' => Auth::user()->can('permissions.delete')
+                'permissions' => [
+                    'delete' => Auth::user()->can('permissions.delete'),
+                    'edit' => Auth::user()->can('permissions.edit')
+                ],
             ],
             'permission' => [
                 'id' => $permission->id,

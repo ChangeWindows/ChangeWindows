@@ -44,16 +44,16 @@ class HandleInertiaRequests extends Middleware
                 'version' => config('app.version'),
                 'preview' => env('APP_PREVIEW')
             ],
-            'nav_can' => [
-                'access_dashboard' => Auth::check() ? Auth::user()->can('dashboard') : false,
-                'show_flights' => Auth::check() ? Auth::user()->can('flights.show') : false,
-                'show_flags' => Auth::check() ? Auth::user()->can('flags.show') : false,
-                'show_releases' => Auth::check() ? Auth::user()->can('releases.show') : false,
-                'show_platforms' => Auth::check() ? Auth::user()->can('platforms.show') : false,
-                'show_tweet_streams' => Auth::check() ? Auth::user()->can('tweet_streams.show') : false,
-                'show_users' => Auth::check() ? Auth::user()->can('users.show') : false,
-                'show_roles' => Auth::check() ? Auth::user()->can('roles.show') : false,
-                'show_permissions' => Auth::check() ? Auth::user()->can('permissions.show') : false
+            'navCan' => [
+                'dashboard' => Auth::check() ? Auth::user()->can('dashboard') : false,
+                'flights' => ['show' => Auth::check() ? Auth::user()->can('flights.show') : false],
+                'flags' => ['show' => Auth::check() ? Auth::user()->can('flags.show') : false],
+                'releases' => ['show' => Auth::check() ? Auth::user()->can('releases.show') : false],
+                'platforms' => ['show' => Auth::check() ? Auth::user()->can('platforms.show') : false],
+                'tweetStreams' => ['show' => Auth::check() ? Auth::user()->can('tweet_streams.show') : false],
+                'users' => ['show' => Auth::check() ? Auth::user()->can('users.show') : false],
+                'roles' => ['show' => Auth::check() ? Auth::user()->can('roles.show') : false],
+                'permissions' => ['show' => Auth::check() ? Auth::user()->can('permissions.show') : false]
             ]
         ]);
     }

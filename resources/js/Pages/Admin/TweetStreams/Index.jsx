@@ -7,11 +7,11 @@ import Status from "@/Components/Status";
 
 import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 
-export default function Index({ tweet_streams, status }) {
+export default function Index({ can, tweet_streams, status }) {
   return (
     <Admin>
       <NaviBar
-        actions={
+        actions={can.tweetStreams.create &&
           <InertiaLink
             href={route("admin.tweet_streams.create")}
             className="btn btn-primary btn-sm"

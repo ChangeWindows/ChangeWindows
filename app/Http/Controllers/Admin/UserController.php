@@ -24,8 +24,10 @@ class UserController extends Controller
 
         return Inertia::render('Admin/Users/Index', [
             'can' => [
-                'create_users' => Auth::user()->can('users.create'),
-                'edit_users' => Auth::user()->can('users.edit')
+                'users' => [
+                    'create' => Auth::user()->can('users.create'),
+                    'edit' => Auth::user()->can('users.edit')
+                ],
             ],
             'users' => User::orderBy('name')->get()->map(function ($user) {
                 return [
@@ -81,8 +83,10 @@ class UserController extends Controller
 
         return Inertia::render('Admin/Users/Edit', [
             'can' => [
-                'edit_users' => Auth::user()->can('users.edit'),
-                'delete_users' => Auth::user()->can('users.delete')
+                'users' => [
+                    'delete' => Auth::user()->can('users.delete'),
+                    'edit' => Auth::user()->can('users.edit')
+                ],
             ],
             'user' => [
                 'id' => $user->id,

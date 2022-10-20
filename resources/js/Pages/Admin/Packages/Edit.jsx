@@ -69,7 +69,7 @@ export default function Edit({
           <Fieldset
             title="Identity"
             description="About this release."
-            disabled={!can.edit_packages}
+            disabled={!can.releases.edit}
           >
             <div className="col-12 col-lg-6">
               <Select
@@ -111,10 +111,10 @@ export default function Edit({
                 className="btn btn-primary btn-sm"
               >
                 <AmaranthIcon
-                  icon={can.edit_packages ? aiNotes : aiEye}
+                  icon={can.releases.edit ? aiNotes : aiEye}
                   className="me-2"
                 />
-                {can.edit_packages ? "Edit changelog" : "View changelog"}
+                {can.releases.edit ? "Edit changelog" : "View changelog"}
               </InertiaLink>
             </div>
           </Fieldset>
@@ -162,7 +162,7 @@ export default function Edit({
                   </div>
                 );
               })}
-              {can.edit_packages && availablePlatformChannels.length > 0 && (
+              {can.releases.edit && availablePlatformChannels.length > 0 && (
                 <div className="col-12 col-sm-6 col-xl-4">
                   <div className="dropdown h-100">
                     <a
@@ -211,7 +211,7 @@ export default function Edit({
           </div>
         </Fieldset>
       </div>
-      {can.delete_packages && (
+      {can.releases.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
           <Fieldset
             title="Danger zone"

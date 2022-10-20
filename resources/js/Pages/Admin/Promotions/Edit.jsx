@@ -48,7 +48,7 @@ export default function Edit({
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/promotions"
-          actions={<SaveButton loading={processing} />}
+          actions={can.promotions.edit && <SaveButton loading={processing} />}
         >
           <PlatformIcon platform={platform} color className="me-2" />
           Version {release.version}
@@ -80,7 +80,7 @@ export default function Edit({
           </Fieldset>
         </div>
       </form>
-      {can.delete_promotions && (
+      {can.promotions.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
           <Fieldset
             title="Danger zone"

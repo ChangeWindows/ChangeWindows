@@ -8,7 +8,7 @@ import SaveButton from "@/Components/UI/Forms/SaveButton";
 
 import Editor from "@/Components/Editor";
 
-export default function Edit({ release, status }) {
+export default function Changelog({ can, release, status }) {
   const { data, setData, patch, processing } = useForm(release);
 
   function handleSubmit(e) {
@@ -21,7 +21,7 @@ export default function Edit({ release, status }) {
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/packages"
-          actions={<SaveButton loading={processing} />}
+          actions={can.releases.edit && <SaveButton loading={processing} />}
         >
           {data.name}
         </NaviBar>

@@ -25,8 +25,10 @@ class ReleaseController extends Controller
 
         return Inertia::render('Admin/Releases/Index', [
             'can' => [
-                'create_releases' => Auth::user()->can('releases.create'),
-                'edit_releases' => Auth::user()->can('releases.edit')
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit'),
+                    'create' => Auth::user()->can('releases.create')
+                ],
             ],
             'releases' => $releases->groupBy(function($item) {
                 return $item->platform->slug;
@@ -120,8 +122,10 @@ class ReleaseController extends Controller
 
         return Inertia::render('Admin/Releases/Edit', [
             'can' => [
-                'edit_releases' => Auth::user()->can('releases.edit'),
-                'delete_releases' => Auth::user()->can('releases.delete')
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit'),
+                    'delete' => Auth::user()->can('releases.delete')
+                ],
             ],
             'release' => $release,
             'platforms' => Platform::orderBy('position')->get(),
@@ -172,7 +176,9 @@ class ReleaseController extends Controller
 
         return Inertia::render('Admin/Releases/Changelog', [
             'can' => [
-                'edit_releases' => Auth::user()->can('releases.edit')
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit')
+                ],
             ],
             'release' => [
                 'name' => $release->name,

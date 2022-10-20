@@ -21,16 +21,14 @@ export default function Edit({ can, user, roles, status }) {
     errors,
   } = useForm(user);
 
-  function roleHandler(e) {
-    const id = e.target.id;
-
-    if (data.roles.find((permission) => permission === id)) {
+  function roleHandler(role) {
+    if (data.roles.find((_role) => _role === role)) {
       setData(
         "roles",
-        data.roles.filter((permission) => permission !== id)
+        data.roles.filter((_role) => _role !== role)
       );
     } else {
-      setData("roles", [...data.roles, id]);
+      setData("roles", [...data.roles, role]);
     }
   }
 
@@ -59,7 +57,7 @@ export default function Edit({ can, user, roles, status }) {
           <Fieldset
             title="Identity"
             description="Hello! Who are you?"
-            disabled={!can.edit_users}
+            disabled={!can.users.edit}
           >
             <div className="col-12 col-sm-6">
               <TextField
@@ -84,13 +82,13 @@ export default function Edit({ can, user, roles, status }) {
           <Fieldset
             title="Permissions"
             description="What you can do."
-            disabled={!can.edit_users}
+            disabled={!can.users.edit}
           >
             {roles.map((role, key) => (
               <div className="col-12 col-sm-6" key={key}>
                 <Checkbox
                   id={role.name}
-                  name="role"
+                  name={role.name}
                   label={role.name}
                   checked={
                     data.roles.filter((_role) => _role === role.name)
@@ -103,7 +101,7 @@ export default function Edit({ can, user, roles, status }) {
           </Fieldset>
         </div>
       </form>
-      {can.delete_users && (
+      {can.users.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
           <Fieldset
             title="Danger zone"

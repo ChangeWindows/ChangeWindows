@@ -7,11 +7,11 @@ import Status from "@/Components/Status";
 
 import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 
-export default function Show({ roles, status }) {
+export default function Show({ can, roles, status }) {
   return (
     <Admin>
       <NaviBar
-        actions={
+        actions={can.roles.create &&
           <InertiaLink
             href={route("admin.roles.create")}
             className="btn btn-primary btn-sm"

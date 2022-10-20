@@ -105,8 +105,10 @@ class ReleaseChannelController extends Controller
 
         return Inertia::render('Admin/ReleaseChannels/Edit', [
             'can' => [
-                'edit_releases' => Auth::user()->can('releases.edit'),
-                'delete_releases' => Auth::user()->can('releases.delete')
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit'),
+                    'delete' => Auth::user()->can('releases.delete')
+                ],
             ],
             'releaseChannel' => $releaseChannel,
             'releases' => $releaseChannel->release->platform->releases,

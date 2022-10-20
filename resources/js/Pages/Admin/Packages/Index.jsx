@@ -17,7 +17,7 @@ export default function Index({ packages, can, status }) {
   return (
     <Admin>
       <NaviBar
-        actions={
+        actions={can.releases.create &&
           <InertiaLink
             href={route("admin.packages.create")}
             className="btn btn-primary btn-sm"
@@ -61,13 +61,13 @@ export default function Index({ packages, can, status }) {
                       href={route("admin.packages.edit", pack)}
                       className="btn btn-link btn-sm my-n1"
                     >
-                      {can.edit_packages ? (
+                      {can.releases.edit ? (
                         <>
                           <AmaranthIcon icon={aiPen} /> Edit
                         </>
                       ) : (
                         <>
-                          <AmaranthIcon icon={aiEye} /> Show
+                          <AmaranthIcon icon={aiEye} /> View
                         </>
                       )}
                     </InertiaLink>
@@ -76,7 +76,7 @@ export default function Index({ packages, can, status }) {
                       className="btn btn-link btn-sm my-n1"
                     >
                       <AmaranthIcon
-                        icon={can.edit_packages ? aiNotes : aiEye}
+                        icon={aiNotes}
                       />
                     </InertiaLink>
                   </div>

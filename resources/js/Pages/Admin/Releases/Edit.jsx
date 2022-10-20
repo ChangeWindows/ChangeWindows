@@ -64,7 +64,7 @@ export default function Edit({
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/releases"
-          actions={<SaveButton loading={processing} />}
+          actions={can.releases.edit && <SaveButton loading={processing} />}
         >
           {data.name || "Unnamed release"}
         </NaviBar>
@@ -74,7 +74,7 @@ export default function Edit({
           <Fieldset
             title="Identity"
             description="About this release."
-            disabled={!can.edit_releases}
+            disabled={!can.releases.edit}
           >
             <div className="col-12 col-lg-6">
               <Select
@@ -143,16 +143,17 @@ export default function Edit({
                 className="btn btn-primary btn-sm"
               >
                 <AmaranthIcon
-                  icon={can.edit_releases ? aiNotes : aiEye}
+                  icon={can.releases.edit ? aiNotes : aiEye}
                   className="me-2"
                 />
-                {can.edit_releases ? "Edit changelog" : "View changelog"}
+                {can.releases.edit ? "Edit changelog" : "View changelog"}
               </InertiaLink>
             </div>
           </Fieldset>
           <Fieldset
             title="Life cycle"
             description="Dates relate to the life cycle of the release."
+            disabled={!can.releases.edit}
           >
             <div className="col-12 col-lg-6">
               <TextField
@@ -237,6 +238,7 @@ export default function Edit({
           <Fieldset
             title="Flight range"
             description="The range within all flights of this release fall."
+            disabled={!can.releases.edit}
           >
             <div className="col-12 col-lg-6">
               <TextField
@@ -290,9 +292,9 @@ export default function Edit({
           <div className="col-12">
             <div className="row g-1">
               {release_channels.map((releaseChannel, key) => (
-                <ReleaseChannel key={key} releaseChannel={releaseChannel} />
+                <ReleaseChannel key={key} releaseChannel={releaseChannel} can={can} />
               ))}
-              {can.edit_releases && availablePlatformChannels.length > 0 && (
+              {can.releases.edit && availablePlatformChannels.length > 0 && (
                 <div className="col-12 col-sm-6 col-xl-4">
                   <div className="dropdown h-100">
                     <a

@@ -44,7 +44,7 @@ export default function Edit({
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/platforms"
-          actions={<SaveButton loading={processing} />}
+          actions={can.platforms.edit && <SaveButton loading={processing} />}
         >
           <PlatformIcon platform={data} color className="me-2" />{" "}
           {data.name || "Unnamed platform"}
@@ -55,7 +55,7 @@ export default function Edit({
           <Fieldset
             title="Identity"
             description="About this platform."
-            disabled={!can.edit_platforms}
+            disabled={!can.platforms.edit}
           >
             <div className="col-12 col-lg-6">
               <TextField
@@ -77,7 +77,11 @@ export default function Edit({
               />
             </div>
           </Fieldset>
-          <Fieldset title="Appearance" description="The way it will look.">
+          <Fieldset
+            title="Appearance"
+            description="The way it will look."
+            disabled={!can.platforms.edit}
+          >
             <div className="col-12 col-lg-6">
               <TextField
                 type="number"
@@ -111,7 +115,7 @@ export default function Edit({
           <Fieldset
             title="Status"
             description="The platform's current status."
-            disabled={!can.edit_platforms}
+            disabled={!can.platforms.edit}
           >
             <div className="col-12 col-lg-6">
               <Checkbox
@@ -144,7 +148,7 @@ export default function Edit({
           <Fieldset
             title="Tweet Stream"
             description="Keeping people up-to-date with Twitter."
-            disabled={!can.edit_platforms}
+            disabled={!can.platforms.edit}
           >
             <div className="col-12 col-lg-6">
               <Select
@@ -210,7 +214,7 @@ export default function Edit({
         <Fieldset
           title="Channels"
           description="The channels for this platform."
-          disabled={!can.edit_platforms}
+          disabled={!can.platforms.edit}
           disabledCard
         >
           {channels.map((channel) => {
@@ -221,7 +225,7 @@ export default function Edit({
             return (
               <div className="col-12 col-sm-6 col-xl-4" key={channel.id}>
                 <InertiaLink
-                  href={route('admin.channels.edit', channel)}
+                  href={route("admin.channels.edit", channel)}
                   className="card border-0 shadow-sm h-100"
                 >
                   <div className="card-body">
@@ -245,7 +249,7 @@ export default function Edit({
               </div>
             );
           })}
-          {can.create_channels && (
+          {can.channels.create && (
             <div className="col-12 col-sm-6 col-xl-4">
               <InertiaLink
                 href={route("admin.channels.create", {
@@ -263,7 +267,7 @@ export default function Edit({
           )}
         </Fieldset>
       </div>
-      {can.delete_platforms && (
+      {can.platforms.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
           <Fieldset
             title="Danger zone"

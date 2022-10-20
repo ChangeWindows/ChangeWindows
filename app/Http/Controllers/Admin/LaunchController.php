@@ -31,8 +31,10 @@ class LaunchController extends Controller
 
         return Inertia::render('Admin/Launches/Index', [
             'can' => [
-                'create_launches' => Auth::user()->can('flights.create'),
-                'edit_launches' => Auth::user()->can('flights.edit')
+                'launches' => [
+                    'create' => Auth::user()->can('flights.create'),
+                    'edit' => Auth::user()->can('flights.edit')
+                ]
             ],
             'timeline' => $timeline->paginate(100)->groupBy('date')->map(function ($items, $date) {
                 return [
@@ -137,8 +139,10 @@ class LaunchController extends Controller
 
         return Inertia::render('Admin/Launches/Edit', [
             'can' => [
-                'edit_launches' => Auth::user()->can('flights.edit'),
-                'delete_launches' => Auth::user()->can('flights.delete')
+                'launches' => [
+                    'delete' => Auth::user()->can('flights.delete'),
+                    'edit' => Auth::user()->can('flights.edit')
+                ]
             ],
             'launch' => [
                 'id' => $launch->id,

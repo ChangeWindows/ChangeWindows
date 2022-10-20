@@ -33,8 +33,6 @@ export default function Edit({
     date: format(parseISO(date.date), "yyyy-MM-dd"),
   });
 
-  console.log(data);
-
   const refMajor = useRef(null);
   const refMinor = useRef(null);
   const refBuild = useRef(null);
@@ -84,7 +82,7 @@ export default function Edit({
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/flights"
-          actions={<SaveButton loading={processing} />}
+          actions={can.flights.edit && <SaveButton loading={processing} />}
         >
           <PlatformIcon platform={platform} color className="me-2" />
           {`${data.major}.${data.minor}.${data.build}.${data.delta}`}
@@ -101,7 +99,7 @@ export default function Edit({
           <Fieldset
             title="Build string"
             description="The build string for this flight."
-            disabled={!can.edit_flights}
+            disabled={!can.flights.edit}
           >
             <div className="col-6">
               <div className="row g-1">
@@ -164,7 +162,7 @@ export default function Edit({
           </Fieldset>
         </div>
       </form>
-      {can.delete_flights && (
+      {can.flights.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
           <Fieldset
             title="Danger zone"

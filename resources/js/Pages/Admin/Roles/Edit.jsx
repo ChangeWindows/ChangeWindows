@@ -21,26 +21,24 @@ export default function Edit({ can, role, permissions, status }) {
     errors,
   } = useForm(role);
 
-  function permissionHandler(e) {
-    const id = e.target.id;
-
-    if (data.permissions.find((permission) => permission === id)) {
+  function permissionHandler(permission) {
+    if (data.permissions.find((_permission) => _permission === permission)) {
       setData(
         "permissions",
-        data.permissions.filter((permission) => permission !== id)
+        data.permissions.filter((_permission) => _permission !== permission)
       );
     } else {
-      setData("permissions", [...data.permissions, id]);
+      setData("permissions", [...data.permissions, permission]);
     }
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault();
     patch(route("admin.roles.update", role));
   }
 
-  function handleDelete(event) {
-    event.preventDefault();
+  function handleDelete(e) {
+    e.preventDefault();
     destroy(route("admin.roles.destroy", role));
   }
 
@@ -49,7 +47,7 @@ export default function Edit({ can, role, permissions, status }) {
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/roles"
-          actions={<SaveButton loading={processing} />}
+          actions={can.roles.edit && <SaveButton loading={processing} />}
         >
           {data.name || "Unnamed role"}
         </NaviBar>
@@ -59,7 +57,7 @@ export default function Edit({ can, role, permissions, status }) {
           <Fieldset
             title="General"
             description="Basic settings."
-            disabled={!can.edit_roles}
+            disabled={!can.roles.edit}
           >
             <div className="col-12 col-sm-6">
               <TextField
@@ -74,13 +72,13 @@ export default function Edit({ can, role, permissions, status }) {
           <Fieldset
             title="Permissions"
             description="What this role can do."
-            disabled={!can.edit_roles}
+            disabled={!can.roles.edit}
           >
             {permissions.map((permission, key) => (
               <div className="col-12 col-sm-6 col-md-4" key={key}>
                 <Checkbox
                   id={permission.name}
-                  name="permission"
+                  name={permission.name}
                   label={permission.name}
                   checked={
                     data.permissions.filter(
@@ -99,7 +97,7 @@ export default function Edit({ can, role, permissions, status }) {
           </Fieldset>
         </div>
       </form>
-      {can.delete_roles && (
+      {can.roles.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
           <Fieldset
             title="Danger zone"

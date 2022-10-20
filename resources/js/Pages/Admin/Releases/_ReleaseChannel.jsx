@@ -8,7 +8,7 @@ import AmaranthIcon, {
 } from "@changewindows/amaranth";
 import clsx from "clsx";
 
-export default function ReleaseChannel({ releaseChannel }) {
+export default function ReleaseChannel({ can, releaseChannel }) {
   const { data, patch, processing } = useForm(releaseChannel);
 
   function toggleSupported(e) {
@@ -44,6 +44,7 @@ export default function ReleaseChannel({ releaseChannel }) {
                 "btn-primary": releaseChannel.supported,
                 "btn-transparent": !releaseChannel.supported,
               })}
+              disabled={!can.releases.edit}
               onClick={toggleSupported}
             >
               <AmaranthIcon

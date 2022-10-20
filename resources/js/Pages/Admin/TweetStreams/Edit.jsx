@@ -35,7 +35,7 @@ export default function Edit({ can, tweet_stream, status }) {
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/tweet_streams"
-          actions={<SaveButton loading={processing} />}
+          actions={can.tweetStrems.edit && <SaveButton loading={processing} />}
         >
           {data.name || "Unnamed Twitter Tweet Stream"}
         </NaviBar>
@@ -45,7 +45,7 @@ export default function Edit({ can, tweet_stream, status }) {
           <Fieldset
             title="Identity"
             description="About this feed."
-            disabled={!can.edit_tweet_streams}
+            disabled={!can.tweetStreams.edit}
           >
             <div className="col-12 col-lg-6">
               <TextField
@@ -69,7 +69,7 @@ export default function Edit({ can, tweet_stream, status }) {
           <Fieldset
             title="Authentication"
             description="Connecting to the Twitter API."
-            disabled={!can.edit_tweet_streams}
+            disabled={!can.tweetStreams.edit}
           >
             <div className="col-12">
               <TextField
@@ -110,7 +110,7 @@ export default function Edit({ can, tweet_stream, status }) {
           </Fieldset>
         </div>
       </form>
-      {can.delete_tweet_streams && (
+      {can.tweetStreams.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
           <Fieldset
             title="Danger zone"

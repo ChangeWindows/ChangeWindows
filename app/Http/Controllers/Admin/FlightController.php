@@ -34,8 +34,10 @@ class FlightController extends Controller
 
         return Inertia::render('Admin/Flights/Index', [
             'can' => [
-                'create_flights' => Auth::user()->can('flights.create'),
-                'edit_flights' => Auth::user()->can('flights.edit')
+                'flights' => [
+                    'create' => Auth::user()->can('flights.create'),
+                    'edit' => Auth::user()->can('flights.edit')
+                ]
             ],
             'timeline' => $timeline->paginate(100)->groupBy('date')->map(function ($items, $date) {
                 return [
@@ -318,8 +320,10 @@ class FlightController extends Controller
 
         return Inertia::render('Admin/Flights/Edit', [
             'can' => [
-                'edit_flights' => Auth::user()->can('flights.edit'),
-                'delete_flights' => Auth::user()->can('flights.delete')
+                'flights' => [
+                    'delete' => Auth::user()->can('flights.delete'),
+                    'edit' => Auth::user()->can('flights.edit')
+                ]
             ],
             'flight' => $flight,
             'platform' => [

@@ -30,8 +30,10 @@ class PromotionController extends Controller
 
         return Inertia::render('Admin/Promotions/Index', [
             'can' => [
-                'create_promotions' => Auth::user()->can('flights.create'),
-                'edit_promotions' => Auth::user()->can('flights.edit')
+                'promotions' => [
+                    'create' => Auth::user()->can('flights.create'),
+                    'edit' => Auth::user()->can('flights.edit')
+                ],
             ],
             'timeline' => $timeline->paginate(100)->groupBy('date')->map(function ($items, $date) {
                 return [
@@ -147,8 +149,10 @@ class PromotionController extends Controller
 
         return Inertia::render('Admin/Promotions/Edit', [
             'can' => [
-                'edit_promotions' => Auth::user()->can('flights.edit'),
-                'delete_promotions' => Auth::user()->can('flights.delete')
+                'promotions' => [
+                    'delete' => Auth::user()->can('flights.delete'),
+                    'edit' => Auth::user()->can('flights.edit')
+                ],
             ],
             'promotion' => [
                 'id' => $promotion->id,

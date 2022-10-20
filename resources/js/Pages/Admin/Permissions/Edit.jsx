@@ -35,7 +35,7 @@ export default function Edit({ can, permission, status }) {
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/permissions"
-          actions={<SaveButton loading={processing} />}
+          actions={can.permissions.edit && <SaveButton loading={processing} />}
         >
           {data.name || "Unnamed permisison"}
         </NaviBar>
@@ -45,7 +45,7 @@ export default function Edit({ can, permission, status }) {
           <Fieldset
             title="General"
             description="Basic settings."
-            disabled={!can.edit_permissions}
+            disabled={!can.permissions.edit}
           >
             <div className="col-12 col-sm-6">
               <TextField
@@ -59,7 +59,7 @@ export default function Edit({ can, permission, status }) {
           </Fieldset>
         </div>
       </form>
-      {can.delete_permissions && (
+      {can.permissions.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
           <Fieldset
             title="Danger zone"

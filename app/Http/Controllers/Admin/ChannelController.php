@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Auth;
 use Redirect;
-use Illuminate\Support\Collection;
 
 class ChannelController extends Controller
 {
@@ -91,8 +90,10 @@ class ChannelController extends Controller
 
         return Inertia::render('Admin/Channels/Edit', [
             'can' => [
-                'edit_channels' => Auth::user()->can('channels.edit'),
-                'delete_channels' => Auth::user()->can('channels.delete')
+                'channels' => [
+                    'edit' => Auth::user()->can('channels.edit'),
+                    'delete' => Auth::user()->can('channels.delete')
+                ]
             ],
             'channel' => [
                 'slug' => $channel->slug,

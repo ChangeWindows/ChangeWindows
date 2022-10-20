@@ -23,7 +23,7 @@ export default function Edit({ can, launch, release, platform, status }) {
     errors,
   } = useForm({
     ...launch,
-    date: format(parseISO(launch.date), "yyyy-MM-dd")
+    date: format(parseISO(launch.date), "yyyy-MM-dd"),
   });
 
   function handleSubmit(e) {
@@ -41,7 +41,7 @@ export default function Edit({ can, launch, release, platform, status }) {
       <form onSubmit={handleSubmit}>
         <NaviBar
           back={route("admin.launches")}
-          actions={<SaveButton loading={processing} />}
+          actions={can.launches.edit && <SaveButton loading={processing} />}
         >
           <PlatformIcon platform={platform} color className="me-2" />
           Version {release.version}
@@ -49,7 +49,11 @@ export default function Edit({ can, launch, release, platform, status }) {
 
         <div className="container my-3">
           <Status status={status} />
-          <Fieldset title="Launch date" description="T-minus.">
+          <Fieldset
+            title="Launch date"
+            description="T-minus."
+            disabled={!can.launches.edit}
+          >
             <div className="col-12 col-sm-6">
               <TextField
                 type="date"
@@ -67,7 +71,7 @@ export default function Edit({ can, launch, release, platform, status }) {
           </Fieldset>
         </div>
       </form>
-      {can.delete_launches && (
+      {can.launches.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
           <Fieldset
             title="Danger zone"

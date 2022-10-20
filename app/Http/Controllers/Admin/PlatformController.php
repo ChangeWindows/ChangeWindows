@@ -23,8 +23,9 @@ class PlatformController extends Controller
 
         return Inertia::render('Admin/Platforms/Index', [
             'can' => [
-                'create_platforms' => Auth::user()->can('platforms.create'),
-                'edit_platforms' => Auth::user()->can('platforms.edit')
+                'platforms' => [
+                    'create' => Auth::user()->can('platforms.create')
+                ],
             ],
             'platforms' => Platform::orderBy('position')->get(),
             'status' => session('status')
@@ -99,10 +100,14 @@ class PlatformController extends Controller
 
         return Inertia::render('Admin/Platforms/Edit', [
             'can' => [
-                'edit_platforms' => Auth::user()->can('platforms.edit'),
-                'delete_platforms' => Auth::user()->can('platforms.delete'),
-                'create_channels' => Auth::user()->can('channels.create'),
-                'edit_channels' => Auth::user()->can('channels.edit')
+                'platforms' => [
+                    'edit' => Auth::user()->can('platforms.edit'),
+                    'delete' => Auth::user()->can('platforms.delete')
+                ],
+                'channels' => [
+                    'create' => Auth::user()->can('channels.create'),
+                    'edit' => Auth::user()->can('channels.edit')
+                ],
             ],
             'platform' => $platform,
             'tweet_streams' => TweetStream::all(),

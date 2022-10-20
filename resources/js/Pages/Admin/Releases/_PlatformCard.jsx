@@ -33,13 +33,13 @@ export default function PlatformCard({ can, platform }) {
                 href={route("admin.releases.edit", release)}
                 className="btn btn-link btn-sm my-n1"
               >
-                {can.edit_releases ? (
+                {can.releases.edit ? (
                   <>
                     <AmaranthIcon icon={aiPen} /> Edit
                   </>
                 ) : (
                   <>
-                    <AmaranthIcon icon={aiEye} /> Show
+                    <AmaranthIcon icon={aiEye} /> View
                   </>
                 )}
               </InertiaLink>
@@ -47,7 +47,7 @@ export default function PlatformCard({ can, platform }) {
                 href={route("admin.releases.changelog.edit", release)}
                 className="btn btn-link btn-sm my-n1"
               >
-                <AmaranthIcon icon={can.edit_releases ? aiNotes : aiEye} />
+                <AmaranthIcon icon={aiNotes} />
               </InertiaLink>
             </div>
           </div>

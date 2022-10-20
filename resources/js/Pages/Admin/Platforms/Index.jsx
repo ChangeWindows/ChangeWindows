@@ -8,11 +8,11 @@ import Status from "@/Components/Status";
 
 import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 
-export default function Index({ platforms, status }) {
+export default function Index({ can, platforms, status }) {
   return (
     <Admin>
       <NaviBar
-        actions={
+        actions={can.platforms.create &&
           <InertiaLink
             href={route("admin.platforms.create")}
             className="btn btn-primary btn-sm"

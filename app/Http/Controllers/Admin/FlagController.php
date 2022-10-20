@@ -26,8 +26,10 @@ class FlagController extends Controller
 
         return Inertia::render('Admin/Flags/Index', [
             'can' => [
-                'createFlags' => Auth::user()->can('flags.create'),
-                'editFlags' => Auth::user()->can('flags.edit')
+                'flags' => [
+                    'create' => Auth::user()->can('flags.create'),
+                    'edit' => Auth::user()->can('flags.edit')
+                ]
             ],
             'suggestion' => FlagContent::where('status', 1)->orderBy('created_at', 'asc')->with('flag', 'flag.latestContents')->first(),
             'status' => session('status')
@@ -50,8 +52,10 @@ class FlagController extends Controller
 
         return Inertia::render('Admin/Flags/History', [
             'can' => [
-                'createFlags' => Auth::user()->can('flags.create'),
-                'editFlags' => Auth::user()->can('flags.edit')
+                'flags' => [
+                    'create' => Auth::user()->can('flags.create'),
+                    'edit' => Auth::user()->can('flags.edit')
+                ]
             ],
             'flagStatus' => $flag_status->paginate(150)->map(function ($flag_status) {
                 $flag_status->flag->setRelation('latestStatusChange', $flag_status->flag->latestStatusChange->take(2));

@@ -22,6 +22,8 @@ export default function Edit({ can, channel, platforms, status }) {
     errors,
   } = useForm(channel);
 
+  console.log(can);
+
   function handleSubmit(e) {
     e.preventDefault();
     patch(route("admin.channels.update", channel));
@@ -37,7 +39,7 @@ export default function Edit({ can, channel, platforms, status }) {
       <form onSubmit={handleSubmit}>
         <NaviBar
           back={route("admin.platforms.edit", channel.platform)}
-          actions={<SaveButton loading={processing} />}
+          actions={can.channels.edit && <SaveButton loading={processing} />}
         >
           {data.name || "Unnamed channel"}
         </NaviBar>
@@ -47,7 +49,7 @@ export default function Edit({ can, channel, platforms, status }) {
           <Fieldset
             title="Identity"
             description="About this channel."
-            disabled={!can.edit_channels}
+            disabled={!can.channels.edit}
           >
             <div className="col-12 col-lg-6">
               <TextField
@@ -75,7 +77,7 @@ export default function Edit({ can, channel, platforms, status }) {
           <Fieldset
             title="Appearance"
             description="The way it will look."
-            disabled={!can.edit_channels}
+            disabled={!can.channels.edit}
           >
             <div className="col-12 col-lg-6">
               <TextField
@@ -100,7 +102,7 @@ export default function Edit({ can, channel, platforms, status }) {
           <Fieldset
             title="Status"
             description="The paltform's current status."
-            disabled={!can.edit_channels}
+            disabled={!can.channels.edit}
           >
             <div className="col-12 col-lg-6">
               <Checkbox
@@ -114,7 +116,7 @@ export default function Edit({ can, channel, platforms, status }) {
           </Fieldset>
         </div>
       </form>
-      {can.delete_channels && (
+      {can.channels.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
           <Fieldset
             title="Danger zone"

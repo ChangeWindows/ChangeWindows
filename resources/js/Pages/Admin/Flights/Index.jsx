@@ -11,11 +11,11 @@ import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 import { parseISO } from "date-fns";
 import PlatformFlightCard from "./_PlatformFlightCard";
 
-export default function Index({ timeline, pagination, status }) {
+export default function Index({ can, timeline, pagination, status }) {
   return (
     <Admin>
       <NaviBar
-        actions={
+        actions={can.flights.create &&
           <>
             <InertiaLink
               href={route("admin.flights.create")}

@@ -24,8 +24,10 @@ class RoleController extends Controller
 
         return Inertia::render('Admin/Roles/Index', [
             'can' => [
-                'create_roles' => Auth::user()->can('roles.create'),
-                'edit_roles' => Auth::user()->can('roles.edit')
+                'roles' => [
+                    'create' => Auth::user()->can('roles.create'),
+                    'edit' => Auth::user()->can('roles.edit')
+                ],
             ],
             'roles' => Role::orderBy('name')->get()->map(function ($role) {
                 return [
@@ -100,8 +102,10 @@ class RoleController extends Controller
 
         return Inertia::render('Admin/Roles/Edit', [
             'can' => [
-                'edit_roles' => Auth::user()->can('roles.edit'),
-                'delete_roles' => Auth::user()->can('roles.delete')
+                'roles' => [
+                    'delete' => Auth::user()->can('roles.delete'),
+                    'edit' => Auth::user()->can('roles.edit')
+                ],
             ],
             'role' => [
                 'id' => $role->id,

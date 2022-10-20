@@ -44,7 +44,7 @@ export default function Index({ can, releases, status }) {
   return (
     <Admin>
       <NaviBar
-        actions={
+        actions={can.releases.create &&
           <InertiaLink
             href={route("admin.releases.create")}
             className="btn btn-primary btn-sm"

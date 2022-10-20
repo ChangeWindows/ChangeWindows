@@ -25,8 +25,10 @@ class TweetStreamController extends Controller
 
         return Inertia::render('Admin/TweetStreams/Index', [
             'can' => [
-                'create_tweet_streams' => Auth::user()->can('tweet_streams.create'),
-                'edit_tweet_streams' => Auth::user()->can('tweet_streams.edit')
+                'tweetStreams' => [
+                    'create' => Auth::user()->can('tweet_streams.create'),
+                    'edit' => Auth::user()->can('tweet_streams.edit')
+                ],
             ],
             'tweet_streams' => TweetStream::orderBy('created_at')->get()->map(function ($tweet_stream) {
                 return [
@@ -99,8 +101,10 @@ class TweetStreamController extends Controller
 
         return Inertia::render('Admin/TweetStreams/Edit', [
             'can' => [
-                'edit_tweet_streams' => Auth::user()->can('tweet_streams.edit'),
-                'delete_tweet_streams' => Auth::user()->can('tweet_streams.delete')
+                'tweetStreams' => [
+                    'delete' => Auth::user()->can('tweet_streams.delete'),
+                    'edit' => Auth::user()->can('tweet_streams.edit')
+                ],
             ],
             'tweet_stream' => $tweetStream,
             'status' => session('status')

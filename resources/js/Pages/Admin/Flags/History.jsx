@@ -66,7 +66,7 @@ export default function Show({ can, flagStatus, pagination, status, errors }) {
       <div className="container my-2">
         <Status status={status} />
         <div className="row g-1">
-          {can.createFlags && (
+          {can.flags.create && (
             <>
               <div className="col-12 col-md-4 my-4 my-md-0">
                 <h4 className="h5 mb-0">Upload flags</h4>

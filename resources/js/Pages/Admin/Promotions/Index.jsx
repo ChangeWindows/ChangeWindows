@@ -10,11 +10,11 @@ import Status from "@/Components/Status";
 import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 import { format, parseISO } from "date-fns";
 
-export default function Index({ timeline, pagination, status }) {
+export default function Index({ can, timeline, pagination, status }) {
   return (
     <Admin>
       <NaviBar
-        actions={
+        actions={can.promotions.create &&
           <InertiaLink
             href={route("admin.promotions.create")}
             className="btn btn-primary btn-sm"
