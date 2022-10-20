@@ -6,7 +6,7 @@ import NavigationBar from './components/NavigationBar';
 import { aiDashboard, aiMessagePen, aiBranch, aiDevices, aiPatreon, aiBarsStaggered, aiTwitter, aiGear, aiFlag } from '@changewindows/amaranth';
 
 export default function Navigation() {
-  const { nav_can } = usePage().props;
+  const { navCan } = usePage().props;
 
   return (
     <NavigationBar
@@ -20,7 +20,7 @@ export default function Navigation() {
       ]}
       overflow={[
         { type: 'external', url: 'https://medium.com/changewindows', icon: aiMessagePen, title: 'Blog' },
-        { type: 'link', url: '/admin/flights', icon: aiDashboard, title: 'Backstage', permission: nav_can.access_dashboard }
+        { type: 'link', url: '/admin/flights', icon: aiDashboard, title: 'Backstage', permission: navCan.dashboard }
       ]}
       socials={[
         { type: 'external', url: 'https://twitter.com/changewindows', icon: aiTwitter, title: 'Follow' },
