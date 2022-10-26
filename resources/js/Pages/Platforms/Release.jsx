@@ -52,168 +52,183 @@ export default function Release({
       <InertiaHead title={release.name} />
 
       <Tab.Container defaultActiveKey="timeline">
-      <nav className="navbar navbar-expand-xl navbar-light sticky-top">
-        <div className="container">
-          <InertiaLink
-            href={route("front.platforms.show", platform)}
-            className="btn btn-transparent btn-sm me-2"
-          >
-            <AmaranthIcon icon={aiArrowLeft} />
-          </InertiaLink>
-          <Nav
-            className="d-flex d-xl-none"
-          >
-            <Nav.Item>
-              <Nav.Link eventKey="timeline">
-                <AmaranthIcon icon={aiBarsStaggered} /> Timeline
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="changelog">
-                <AmaranthIcon icon={aiNotes} /> Changelog
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-          <div className="flex-grow-1" />
-          {quickNav.prev && (
+        <nav className="navbar navbar-expand-xl navbar-light sticky-top">
+          <div className="container">
             <InertiaLink
-              href={route("front.platforms.releases", [platform, quickNav.prev])}
-              className="btn btn-transparent btn-sm"
+              href={route("front.platforms.show", platform)}
+              className="btn btn-transparent btn-sm me-2"
             >
-              <AmaranthIcon icon={aiAngleLeft} />
-              <span className="d-none d-sm-inline">
-                {" "}
-                {quickNav.prev.version}
-              </span>
+              <AmaranthIcon icon={aiArrowLeft} />
             </InertiaLink>
-          )}
-          {quickNav.next && (
-            <InertiaLink
-              href={route("front.platforms.releases", [platform, quickNav.next])}
-              className="btn btn-transparent btn-sm ms-2"
-            >
-              <span className="d-none d-sm-inline">
-                {quickNav.next.version}{" "}
-              </span>
-              <AmaranthIcon icon={aiAngleRight} />
-            </InertiaLink>
-          )}
-        </div>
-      </nav>
+            <Nav className="d-flex d-xl-none">
+              <Nav.Item>
+                <Nav.Link eventKey="timeline">
+                  <AmaranthIcon icon={aiBarsStaggered} /> Timeline
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="changelog">
+                  <AmaranthIcon icon={aiNotes} /> Changelog
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+            <div className="flex-grow-1" />
+            {quickNav.prev && (
+              <InertiaLink
+                href={route("front.platforms.releases", [
+                  platform,
+                  quickNav.prev,
+                ])}
+                className="btn btn-transparent btn-sm"
+              >
+                <AmaranthIcon icon={aiAngleLeft} />
+                <span className="d-none d-sm-inline">
+                  {" "}
+                  {quickNav.prev.version}
+                </span>
+              </InertiaLink>
+            )}
+            {quickNav.next && (
+              <InertiaLink
+                href={route("front.platforms.releases", [
+                  platform,
+                  quickNav.next,
+                ])}
+                className="btn btn-transparent btn-sm ms-2"
+              >
+                <span className="d-none d-sm-inline">
+                  {quickNav.next.version}{" "}
+                </span>
+                <AmaranthIcon icon={aiAngleRight} />
+              </InertiaLink>
+            )}
+          </div>
+        </nav>
 
-      <div className="container">
-        <div className="row g-1">
-          <div className="col-12 titlebar">
-            <div className="d-flex">
-              <div className="me-3">
-                <h1>
-                  <PlatformIcon platform={platform} color />
-                </h1>
-              </div>
-              <div>
-                <h1 className="m-0 fw-bold" style={{ color: platform.color }}>
-                  {release.name}
-                </h1>
-                <h2 className="h6 m-0 text-muted">
-                  Version {release.version}, {release.codename}
-                </h2>
+        <div className="container">
+          <div className="row g-1">
+            <div className="col-12 titlebar">
+              <div className="d-flex">
+                <div className="me-3">
+                  <h1>
+                    <PlatformIcon platform={platform} color />
+                  </h1>
+                </div>
+                <div>
+                  <h1 className="m-0 fw-bold" style={{ color: platform.color }}>
+                    {release.name}
+                  </h1>
+                  <h2 className="h6 m-0 text-muted">
+                    Version {release.version}, {release.codename}
+                  </h2>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="col-12">
-            <Tab.Content>
-              <Tab.Pane eventKey="timeline">
-                <div className="row">
-                  <div className="col-12 mt-3">
-                    <LifeCycle release={release} />
-                  </div>
-                  <div className="col-12 mt-4">
-                    <div className="row g-1">
-                      {channels.map((channel, key) => (
-                        <Channel
-                          key={key}
-                          channel={{ color: channel.color, name: channel.name }}
-                          build={channel.flight.version ?? "None"}
-                          date={
-                            channel.flight?.date
-                              ? parseISO(channel.flight.date)
-                              : "No flight"
-                          }
-                          disabled={channel.disabled}
-                        />
-                      ))}
+            <div className="col-12">
+              <Tab.Content>
+                <Tab.Pane eventKey="timeline">
+                  <div className="row">
+                    <div className="col-12 mt-3">
+                      <LifeCycle release={release} />
+                    </div>
+                    <div className="col-12 mt-4">
+                      <div className="row g-1">
+                        {channels.map((channel, key) => (
+                          <Channel
+                            key={key}
+                            channel={{
+                              color: channel.color,
+                              name: channel.name,
+                            }}
+                            build={channel.flight.version ?? "None"}
+                            date={
+                              channel.flight?.date
+                                ? parseISO(channel.flight.date)
+                                : "No flight"
+                            }
+                            disabled={channel.disabled}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="d-none d-xl-block col-xl-8 col-xxl-9 mt-4">
+                      <EditorContent
+                        editor={editor}
+                        className="editor-content"
+                        key="main"
+                      />
+                    </div>
+                    <div className="col-12 col-xl-4 col-xxl-3 mt-4">
+                      <div className="row g-1">
+                        {Object.keys(timeline).map((date, key) => (
+                          <Timeline
+                            date={parseISO(timeline[date].date)}
+                            key={key}
+                          >
+                            {timeline[date].flights.map((flight, _key) => {
+                              if (flight.type === "flight") {
+                                return (
+                                  <Flight
+                                    key={`${flight.type}-${flight.id}`}
+                                    platform={flight.platform}
+                                    build={flight.flight}
+                                    channels={flight.release_channel}
+                                    version={flight.version}
+                                    pack={flight.package}
+                                    sidebar={true}
+                                    overview
+                                  />
+                                );
+                              }
+
+                              if (flight.type === "promotion") {
+                                return (
+                                  <Promotion
+                                    key={`${flight.type}-${flight.id}`}
+                                    platform={flight.platform}
+                                    channel={flight.release_channel}
+                                    version={flight.version}
+                                    sidebar={true}
+                                    overview
+                                  />
+                                );
+                              }
+
+                              if (flight.type === "launch") {
+                                return (
+                                  <Launch
+                                    key={`${flight.type}-${flight.id}`}
+                                    platform={flight.platform}
+                                    version={flight.version}
+                                    sidebar={true}
+                                    overview
+                                  />
+                                );
+                              }
+                            })}
+                          </Timeline>
+                        ))}
+                        <Pagination pagination={pagination} />
+                      </div>
                     </div>
                   </div>
-                  <div className="d-none d-xl-block col-xl-8 col-xxl-9 mt-4">
-                    <EditorContent editor={editor} className="editor-content" key="main" />
-                  </div>
-                  <div className="col-12 col-xl-4 col-xxl-3 mt-4">
-                    <div className="row g-1">
-                      {Object.keys(timeline).map((date, key) => (
-                        <Timeline
-                          date={parseISO(timeline[date].date)}
-                          key={key}
-                        >
-                          {timeline[date].flights.map((flight, _key) => {
-                            if (flight.type === "flight") {
-                              return (
-                                <Flight
-                                  key={`${flight.type}-${flight.id}`}
-                                  platform={flight.platform}
-                                  build={flight.flight}
-                                  channels={flight.release_channel}
-                                  version={flight.version}
-                                  pack={flight.package}
-                                  sidebar={true}
-                                  overview
-                                />
-                              );
-                            }
-
-                            if (flight.type === "promotion") {
-                              return (
-                                <Promotion
-                                  key={`${flight.type}-${flight.id}`}
-                                  platform={flight.platform}
-                                  channel={flight.release_channel}
-                                  version={flight.version}
-                                  sidebar={true}
-                                  overview
-                                />
-                              );
-                            }
-
-                            if (flight.type === "launch") {
-                              return (
-                                <Launch
-                                  key={`${flight.type}-${flight.id}`}
-                                  platform={flight.platform}
-                                  version={flight.version}
-                                  sidebar={true}
-                                  overview
-                                />
-                              );
-                            }
-                          })}
-                        </Timeline>
-                      ))}
-                      <Pagination pagination={pagination} />
+                </Tab.Pane>
+                <Tab.Pane eventKey="changelog">
+                  <div className="row">
+                    <div className="col-12 mt-3">
+                      <EditorContent
+                        editor={editorTwo}
+                        className="editor-content"
+                        key="secondary"
+                      />
                     </div>
                   </div>
-                </div>
-              </Tab.Pane>
-              <Tab.Pane eventKey="changelog">
-                <div className="row">
-                  <div className="col-12 mt-3">
-                    <EditorContent editor={editorTwo} className="editor-content" key="secondary" />
-                  </div>
-                </div>
-              </Tab.Pane>
-            </Tab.Content>
+                </Tab.Pane>
+              </Tab.Content>
+            </div>
           </div>
         </div>
-      </div>
       </Tab.Container>
     </App>
   );
