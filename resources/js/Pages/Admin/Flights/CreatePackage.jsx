@@ -89,7 +89,7 @@ export default function Create({ packages }) {
             title="Build string"
             description="The build string for this flight."
           >
-            <div className="col-6">
+            <div className="col-12 col-xl-6">
               <div className="row g-1">
                 <div className="col-3">
                   <TextField
@@ -133,7 +133,7 @@ export default function Create({ packages }) {
                 </div>
               </div>
             </div>
-            <div className="col-12 col-sm-6">
+            <div className="col-12 col-xl-6">
               <TextField
                 type="date"
                 id="date"
