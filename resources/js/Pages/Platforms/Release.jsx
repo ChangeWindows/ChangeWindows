@@ -26,6 +26,7 @@ import Typography from "@tiptap/extension-typography";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import StarterKit from "@tiptap/starter-kit";
+import { Nav, Tab } from "react-bootstrap";
 
 export default function Release({
   release,
@@ -40,11 +41,17 @@ export default function Release({
     extensions: [StarterKit, Typography, Underline, Link],
     content: release.changelog,
   });
+  const editorTwo = useEditor({
+    editable: false,
+    extensions: [StarterKit, Typography, Underline, Link],
+    content: release.changelog,
+  });
 
   return (
     <App>
       <InertiaHead title={release.name} />
 
+      <Tab.Container defaultActiveKey="timeline">
       <nav className="navbar navbar-expand-xl navbar-light sticky-top">
         <div className="container">
           <InertiaLink
@@ -53,36 +60,20 @@ export default function Release({
           >
             <AmaranthIcon icon={aiArrowLeft} />
           </InertiaLink>
-          <div
-            className="nav nav-lined d-flex d-xl-none"
-            id="nav-tab"
-            role="tablist"
+          <Nav
+            className="d-flex d-xl-none"
           >
-            <button
-              className="nav-link active"
-              id="nav-timeline-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-timeline"
-              type="button"
-              role="tab"
-              aria-controls="nav-timeline"
-              aria-selected="true"
-            >
-              <AmaranthIcon icon={aiBarsStaggered} /> Timeline
-            </button>
-            <button
-              className="nav-link"
-              id="nav-releases-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-releases"
-              type="button"
-              role="tab"
-              aria-controls="nav-releases"
-              aria-selected="false"
-            >
-              <AmaranthIcon icon={aiNotes} /> Changelog
-            </button>
-          </div>
+            <Nav.Item>
+              <Nav.Link eventKey="timeline">
+                <AmaranthIcon icon={aiBarsStaggered} /> Timeline
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="changelog">
+                <AmaranthIcon icon={aiNotes} /> Changelog
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
           <div className="flex-grow-1" />
           {quickNav.prev && (
             <InertiaLink
@@ -131,13 +122,8 @@ export default function Release({
           </div>
 
           <div className="col-12">
-            <div className="tab-content" id="nav-tabContent">
-              <div
-                className="tab-pane fade show active"
-                id="nav-timeline"
-                role="tabpanel"
-                aria-labelledby="nav-timeline-tab"
-              >
+            <Tab.Content>
+              <Tab.Pane eventKey="timeline">
                 <div className="row">
                   <div className="col-12 mt-3">
                     <LifeCycle release={release} />
@@ -160,7 +146,7 @@ export default function Release({
                     </div>
                   </div>
                   <div className="d-none d-xl-block col-xl-8 col-xxl-9 mt-4">
-                    <EditorContent editor={editor} className="editor-content" />
+                    <EditorContent editor={editor} className="editor-content" key="main" />
                   </div>
                   <div className="col-12 col-xl-4 col-xxl-3 mt-4">
                     <div className="row g-1">
@@ -216,23 +202,19 @@ export default function Release({
                     </div>
                   </div>
                 </div>
-              </div>
-              <div
-                className="tab-pane fade"
-                id="nav-releases"
-                role="tabpanel"
-                aria-labelledby="nav-releases-tab"
-              >
+              </Tab.Pane>
+              <Tab.Pane eventKey="changelog">
                 <div className="row">
                   <div className="col-12 mt-3">
-                    <EditorContent editor={editor} className="editor-content" />
+                    <EditorContent editor={editorTwo} className="editor-content" key="secondary" />
                   </div>
                 </div>
-              </div>
-            </div>
+              </Tab.Pane>
+            </Tab.Content>
           </div>
         </div>
       </div>
+      </Tab.Container>
     </App>
   );
 }
