@@ -7,7 +7,6 @@ import { aiBox, aiBranchUp, aiDevices, aiFlag, aiLock, aiPlane, aiRocket, aiSoft
 
 export default function AdminNavigation() {
   const { navCan } = usePage().props;
-  console.log(navCan);
 
   return (
     <NavigationBar

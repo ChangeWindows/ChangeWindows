@@ -22,8 +22,6 @@ export default function Edit({ can, channel, platforms, status }) {
     errors,
   } = useForm(channel);
 
-  console.log(can);
-
   function handleSubmit(e) {
     e.preventDefault();
     patch(route("admin.channels.update", channel));
