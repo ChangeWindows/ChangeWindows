@@ -53,6 +53,8 @@ Route::prefix('')->as('front')->group(function() {
     Route::controller(SearchController::class)->prefix('search')->as('.search')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'results')->name('.find');
+        Route::get('/flags', 'index')->name('.flags');
+        Route::post('/flags', 'flagResults')->name('.find.flags');
     });
 
     Route::controller(FlagController::class)->prefix('flags')->as('.flags')->group(function() {

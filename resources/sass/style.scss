@@ -428,7 +428,7 @@ body {
 
     .flag {
         width: 100%;
-        gap: 0.5rem 1rem;
+        gap: 0.25rem 1rem;
         padding: 0.25rem 0.5rem;
         display: grid;
         grid-template-columns: fit-content(100%) auto auto;
@@ -438,6 +438,17 @@ body {
         border-radius: 0.25rem;
         height: 40px;
         align-items: center;
+
+        &.flag-descripted {
+            grid-template-areas: "flag-name flag-id flag-status" "flag-description flag-description flag-description";
+            padding: 0.25rem 0.5rem 0.5rem;
+            height: auto;
+
+            .flag-description {
+                color: $text-muted;
+                font-size: .875rem;
+            }
+        }
 
         .flag-name {
             grid-area: flag-name;
@@ -454,6 +465,10 @@ body {
             grid-area: flag-status;
 
             justify-self: flex-end;
+        }
+
+        .flag-description {
+            grid-area: flag-description;
         }
 
         &:not(:last-child) {

@@ -1,9 +1,11 @@
 import React from "react";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { InertiaHead, usePage } from "@inertiajs/inertia-react";
 
 import App from "@/Layouts/App";
 
 export default function Index() {
+  const { url } = usePage();
+
   return (
     <App>
       <InertiaHead title="Search" />
@@ -14,10 +16,17 @@ export default function Index() {
             <h1>Search</h1>
           </div>
           <div className="col-12 my-3">
-            <p>
-              You can search through our release list by name, version,
-              canonical version, and codename.
-            </p>
+            {url.includes("/flags") ? (
+              <p>
+                You can search through our flags by their name, readable name,
+                feature id or description.
+              </p>
+            ) : (
+              <p>
+                You can search through our release list by name, version,
+                canonical version, and codename.
+              </p>
+            )}
           </div>
         </div>
       </div>

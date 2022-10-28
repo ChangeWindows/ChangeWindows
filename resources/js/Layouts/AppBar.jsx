@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
-import { InertiaLink, Link, usePage } from "@inertiajs/inertia-react";
+import { InertiaLink, usePage } from "@inertiajs/inertia-react";
 
 import AmaranthIcon, {
   aiArrowRightFromBracket,
@@ -13,7 +13,7 @@ import { getLocal, setLocal } from "../utils/localStorage";
 import useMediaQuery from "../hooks/useMediaQuery";
 
 export default function AppBar() {
-  const { app, auth } = usePage().props;
+  const { props, url } = usePage();
   const matchesDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const [search, setSearch] = useState("");
@@ -51,7 +51,7 @@ export default function AppBar() {
 
   function handleSearch(e) {
     e.preventDefault();
-    Inertia.post("/search", { search });
+    Inertia.post(url.includes("/flags") ? "/search/flags" : "/search", { search });
   }
 
   return (
@@ -62,9 +62,9 @@ export default function AppBar() {
             <InertiaLink className="navbar-brand" href="/">
               <img
                 src={
-                  app.preview === "preview"
+                  props.app.preview === "preview"
                     ? "/images/logo-preview.svg"
-                    : app.preview === "canary"
+                    : props.app.preview === "canary"
                     ? "/images/logo-canary.svg"
                     : "/images/logo.svg"
                 }
@@ -73,9 +73,9 @@ export default function AppBar() {
               />
               <span className="brand-label d-none d-md-inline">
                 ChangeWindows
-                {app.preview === "canary" ? (
+                {props.app.preview === "canary" ? (
                   <span className="text-muted text-sm"> canary</span>
-                ) : app.preview === "preview" ? (
+                ) : props.app.preview === "preview" ? (
                   <span className="text-muted text-sm"> preview</span>
                 ) : (
                   ""
@@ -96,7 +96,7 @@ export default function AppBar() {
                 id="search"
                 name="search"
                 className="form-control"
-                placeholder="Search..."
+                placeholder={url.includes('/flags') ? "Search flags..." : "Search releases..."}
                 onChange={(event) => setSearch(event.target.value)}
                 aria-label="Search"
                 aria-describedby="search"
@@ -104,7 +104,7 @@ export default function AppBar() {
             </form>
           </div>
           <div className="navbar-actions">
-            {auth ? (
+            {props.auth ? (
               <>
                 <InertiaLink
                   href="/profile"

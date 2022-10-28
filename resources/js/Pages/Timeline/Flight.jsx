@@ -1,8 +1,6 @@
 import React, { useMemo } from "react";
 import { InertiaLink } from "@inertiajs/inertia-react";
 
-import clsx from "clsx";
-
 export default function Flight({
   platform,
   build,
