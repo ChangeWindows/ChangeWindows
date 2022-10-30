@@ -26,8 +26,8 @@
     },
     "devDependencies": {
         "@babel/preset-react": "7.18.6",
-        "@types/react": "18.0.23",
-        "autoprefixer": "10.4.12",
+        "@types/react": "18.0.24",
+        "autoprefixer": "10.4.13",
         "laravel-vite-plugin": "0.7.0",
         "postcss": "8.4.18"
     }
