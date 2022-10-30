@@ -172,12 +172,12 @@ export default function About() {
               every build be covered in the future.
             </p>
             <p>
-              Editorial content (the "readable" flag names and their
-              description) is provided by ChangeWindows, unless stated
-              otherwise.
+              Editorialised content (the "readable" flag names, their
+              description, etc.) is provided by ChangeWindows or has been
+              submitted by contributors.
             </p>
             <p>
-              ChangeWindows and any sources listed are not responsible for the
+              ChangeWindows and any contributors are not responsible for the
               accuracy of the content and what the information provided on
               ChangeWindows.org is used for. The goal of this project is solely
               to indicate the evolution of the Windows Feature Store from one
