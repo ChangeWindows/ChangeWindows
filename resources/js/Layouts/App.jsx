@@ -1,6 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
 
+import '../../sass/style.scss';
+
 import AppBar from './AppBar';
 import Navigation from './Navigation/Navigation';
 

@@ -18,20 +18,22 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $this->authorize('users.show');
 
-        return Inertia::render('Admin/Users/Show', [
+        return Inertia::render('Admin/Users/Index', [
             'can' => [
-                'create_users' => Auth::user()->can('users.create'),
-                'edit_users' => Auth::user()->can('users.edit')
+                'users' => [
+                    'create' => Auth::user()->can('users.create'),
+                    'edit' => Auth::user()->can('users.edit')
+                ],
             ],
             'users' => User::orderBy('name')->get()->map(function ($user) {
                 return [
                     'id' => $user->id,
                     'name' => $user->name,
-                    'email' => $user->email,
-                    'editUrl' => route('admin.users.edit', $user, false)
+                    'email' => $user->email
                 ];
             })
         ]);
@@ -75,17 +77,16 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user) {
+    public function edit(User $user)
+    {
         $this->authorize('users.show');
 
         return Inertia::render('Admin/Users/Edit', [
             'can' => [
-                'edit_users' => Auth::user()->can('users.edit'),
-                'delete_users' => Auth::user()->can('users.delete')
-            ],
-            'urls' => [
-                'update_user' => route('admin.users.update', $user, false),
-                'destroy_user' => route('admin.users.destroy', $user, false)
+                'users' => [
+                    'delete' => Auth::user()->can('users.delete'),
+                    'edit' => Auth::user()->can('users.edit')
+                ],
             ],
             'user' => [
                 'id' => $user->id,
@@ -104,7 +105,8 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user) {
+    public function update(Request $request, User $user)
+    {
         $this->authorize('users.edit');
 
         $user->update([
@@ -114,7 +116,7 @@ class UserController extends Controller
 
         $user_roles = new Collection(request('roles'));
 
-        foreach(Role::get() as $role) {
+        foreach (Role::get() as $role) {
             if ($user_roles->contains($role->name)) {
                 $user->assignRole($role->name);
             } else {
@@ -124,7 +126,10 @@ class UserController extends Controller
             }
         }
 
-        return Redirect::route('admin.users.edit', $user)->with('status', 'Succesfully updated this user.');
+        return Redirect::route('admin.users.edit', $user)->with('status', [
+            'message' => 'Succesfully updated this user.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -139,6 +144,9 @@ class UserController extends Controller
 
         $user->delete();
 
-        return Redirect::route('admin.users')->with('status', 'Succesfully deleted user.');
+        return Redirect::route('admin.users')->with('status', [
+            'message' => 'Succesfully deleted user.',
+            'type' => 'success'
+        ]);
     }
 }

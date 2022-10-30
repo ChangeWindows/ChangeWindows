@@ -33,14 +33,14 @@ class PlatformController extends Controller
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
                 return [
                     'id' => $_platform->id,
+                    'slug' => $_platform->slug,
                     'name' => $_platform->name,
                     'color' => $_platform->color,
                     'icon' => $_platform->icon,
                     'legacy' => $_platform->legacy,
-                    'url' => route('front.platforms.show', $_platform, false)
                 ];
             }),
-            'platform' => $platform->only('name', 'description', 'icon', 'color'),
+            'platform' => $platform->only('name', 'description', 'icon', 'color', 'slug'),
             'channels' => $platform->channels->where('active')->map(function ($channel) {
                 $release_channels = $channel->releaseChannels
                     ->sortByDesc(function ($release_channel, $key) {
@@ -56,7 +56,9 @@ class PlatformController extends Controller
                             return [
                                 'version' => $_channel->latest->flight,
                                 'date' => $_channel->latest->timeline->date,
-                                'url' => $_channel->latest->url
+                                'release' => [
+                                    'slug' => $_channel->release->slug
+                                ]
                             ];
                         }
                     })->where('version', '<>', null)->values()->all()
@@ -65,9 +67,9 @@ class PlatformController extends Controller
             'releases' => $platform->releases->sortByDesc('canonical_version')->map(function ($release) {
                 return [
                     'name' => $release->name,
+                    'slug' => $release->slug,
                     'version' => $release->version,
                     'codename' => $release->codename,
-                    'url' => $release->url,
                     'dates' => [
                         'start_preview' => $release->start_preview,
                         'start_public' => $release->start_public,
@@ -97,7 +99,7 @@ class PlatformController extends Controller
             'packages' => $platform->packages->sortBy('name')->map(function ($release) {
                 return [
                     'name' => $release->name,
-                    'url' => $release->url,
+                    'slug' => $release->slug,
                     'platform' => [
                         'icon' => $release->platform->icon,
                         'name' => $release->platform->name,

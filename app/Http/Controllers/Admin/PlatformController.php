@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Auth;
 use Redirect;
-use Illuminate\Support\Collection;
 
 class PlatformController extends Controller
 {
@@ -22,13 +21,13 @@ class PlatformController extends Controller
     {
         $this->authorize('platforms.show');
 
-        return Inertia::render('Admin/Platforms/Show', [
+        return Inertia::render('Admin/Platforms/Index', [
             'can' => [
-                'create_platforms' => Auth::user()->can('platforms.create'),
-                'edit_platforms' => Auth::user()->can('platforms.edit')
+                'platforms' => [
+                    'create' => Auth::user()->can('platforms.create')
+                ],
             ],
             'platforms' => Platform::orderBy('position')->get(),
-            'createUrl' => route('admin.platforms.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -43,10 +42,7 @@ class PlatformController extends Controller
         $this->authorize('platforms.create');
 
         return Inertia::render('Admin/Platforms/Create', [
-            'tweet_streams' => TweetStream::all(),
-            'urls' => [
-                'store_platform' => route('admin.platforms.store', [], false),
-            ]
+            'tweet_streams' => TweetStream::all()
         ]);
     }
 
@@ -71,10 +67,14 @@ class PlatformController extends Controller
             'tweet_stream_id' => request('tweet_stream_id'),
             'retweet_stream_id' => request('retweet_stream_id'),
             'legacy' => request('legacy') ? 1 : 0,
-            'active' => request('active') ? 1 : 0
+            'active' => request('active') ? 1 : 0,
+            'tool' => request('tool') ? 1 : 0
         ]);
 
-        return Redirect::route('admin.platforms.edit', $platform)->with('status', 'Succesfully created this platform.');
+        return Redirect::route('admin.platforms.edit', $platform)->with('status', [
+            'message' => 'Succesfully created this platform.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -100,15 +100,14 @@ class PlatformController extends Controller
 
         return Inertia::render('Admin/Platforms/Edit', [
             'can' => [
-                'edit_platforms' => Auth::user()->can('platforms.edit'),
-                'delete_platforms' => Auth::user()->can('platforms.delete'),
-                'create_channels' => Auth::user()->can('channels.create'),
-                'edit_channels' => Auth::user()->can('channels.edit')
-            ],
-            'urls' => [
-                'update_platform' => route('admin.platforms.update', $platform, false),
-                'destroy_platform' => route('admin.platforms.destroy', $platform, false),
-                'create_channel' => route('admin.channels.create', ['platform' => $platform->id], false)
+                'platforms' => [
+                    'edit' => Auth::user()->can('platforms.edit'),
+                    'delete' => Auth::user()->can('platforms.delete')
+                ],
+                'channels' => [
+                    'create' => Auth::user()->can('channels.create'),
+                    'edit' => Auth::user()->can('channels.edit')
+                ],
             ],
             'platform' => $platform,
             'tweet_streams' => TweetStream::all(),
@@ -139,10 +138,14 @@ class PlatformController extends Controller
             'tweet_stream_id' => request('tweet_stream_id'),
             'retweet_stream_id' => request('retweet_stream_id'),
             'legacy' => request('legacy') ? 1 : 0,
-            'active' => request('active') ? 1 : 0
+            'active' => request('active') ? 1 : 0,
+            'tool' => request('tool') ? 1 : 0
         ]);
 
-        return Redirect::route('admin.platforms.edit', $platform)->with('status', 'Succesfully updated the platform.');
+        return Redirect::route('admin.platforms.edit', $platform)->with('status', [
+            'message' => 'Succesfully updated the platform.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -157,6 +160,9 @@ class PlatformController extends Controller
 
         $platform->delete();
 
-        return Redirect::route('admin.platforms')->with('status', 'Succesfully deleted platform.');
+        return Redirect::route('admin.platforms')->with('status', [
+            'message' => 'Succesfully deleted platform.',
+            'type' => 'success'
+        ]);
     }
 }

@@ -6,11 +6,14 @@ use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\FlagController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ChannelController as AdminChannelController;
 use App\Http\Controllers\Admin\FlightController as AdminFlightController;
+use App\Http\Controllers\Admin\FlagController as AdminFlagController;
 use App\Http\Controllers\Admin\PermissionController as AdminPermissionController;
 use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
 use App\Http\Controllers\Admin\ReleaseChannelController as AdminReleaseChannelController;
@@ -46,17 +49,29 @@ Route::prefix('')->as('front')->group(function() {
         Route::get('', 'index')->name('');
         Route::get('/{platform}', 'show')->name('.show');
     });
-    
+
     Route::controller(SearchController::class)->prefix('search')->as('.search')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'results')->name('.find');
+        Route::get('/flags', 'index')->name('.flags');
+        Route::post('/flags', 'flagResults')->name('.find.flags');
     });
-    
+
+    Route::controller(FlagController::class)->prefix('flags')->as('.flags')->group(function() {
+        Route::get('', 'index')->name('');
+        Route::get('/history', 'history')->name('.history');
+        Route::get('/removed', 'removed')->name('.removed');
+        Route::get('/about', 'about')->name('.about');
+        Route::get('/{flag}', 'show')->name('.show');
+        Route::post('/{flag}/suggestion', 'suggestion')->name('.suggestion');
+        Route::patch('/{flag}/suggestion/{flag_content}', 'suggestionPatch')->name('.suggestionPatch');
+    });
+
     Route::controller(ChannelController::class)->prefix('channels')->as('.channels')->group(function() {
         Route::get('', 'index')->name('');
         Route::get('/{platform}', 'show')->name('.show');
     });
-    
+
     Route::prefix('platforms')->as('.platforms')->group(function() {
         Route::get('', [PlatformController::class, 'index'])->name('');
         Route::get('/{platform}', [PlatformController::class, 'show'])->name('.show');
@@ -64,10 +79,17 @@ Route::prefix('')->as('front')->group(function() {
         Route::prefix('{platform}/releases')->name('.releases')->group(function() {
             Route::get('/{release}', [ReleaseController::class, 'show'])->name('');
         });
-    
+
         Route::prefix('{platform}/packages')->name('.packages')->group(function() {
             Route::get('/{release}', [PackageController::class, 'show'])->name('');
         });
+    });
+
+    Route::middleware(['auth'])->prefix('profile')->name('.profile')->group(function() {
+        Route::get('', [ProfileController::class, 'index'])->name('');
+        Route::get('/password', [ProfileController::class, 'password'])->name('.password');
+        Route::patch('/{user}', [ProfileController::class, 'update'])->name('.update');
+        Route::patch('/{user}/password', [ProfileController::class, 'updatePassword'])->name('.password.update');
     });
 
     Route::controller(SettingsController::class)->prefix('settings')->as('.settings')->group(function() {
@@ -84,7 +106,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::patch('/edit/{user}', 'update')->name('.update');
         Route::delete('{user}', 'destroy')->name('.destroy');
     });
-    
+
     Route::controller(AdminRoleController::class)->prefix('roles')->as('.roles')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'store')->name('.store');
@@ -93,7 +115,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/{role}/edit', 'edit')->name('.edit');
         Route::patch('/{role}/edit', 'update')->name('.update');
     });
-    
+
     Route::controller(AdminPermissionController::class)->prefix('permissions')->as('.permissions')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'store')->name('.store');
@@ -102,7 +124,20 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/{permission}/edit', 'edit')->name('.edit');
         Route::patch('/{permission}/edit', 'update')->name('.update');
     });
-    
+
+    Route::controller(AdminFlagController::class)->prefix('flags')->as('.flags')->group(function() {
+        Route::get('', 'index')->name('');
+        Route::get('/history', 'history')->name('history');
+        Route::post('', 'store')->name('.store');
+        Route::post('/batch', 'batch')->name('.batch');
+        Route::delete('{flag}', 'destroy')->name('.destroy');
+        Route::get('/create', 'create')->name('.create');
+        Route::get('/{flag}/edit', 'edit')->name('.edit');
+        Route::patch('/{flag}/edit', 'update')->name('.update');
+        Route::patch('/{flag_content}/moderateApprove', 'moderateApprove')->name('.moderate.approve');
+        Route::patch('/{flag_content}/moderateDiscard', 'moderateDiscard')->name('.moderate.discard');
+    });
+
     Route::controller(AdminReleaseController::class)->prefix('releases')->as('.releases')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'store')->name('.store');
@@ -113,7 +148,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/{release}/changelog/edit', 'editChangelog')->name('.changelog.edit');
         Route::patch('/{release}/changelog/edit', 'updateChangelog')->name('.changelog.update');
     });
-    
+
     Route::controller(AdminPackageController::class)->prefix('packages')->as('.packages')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'store')->name('.store');
@@ -124,7 +159,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/{package}/changelog/edit', 'editChangelog')->name('.changelog.edit');
         Route::patch('/{package}/changelog/edit', 'updateChangelog')->name('.changelog.update');
     });
-    
+
     Route::controller(AdminPlatformController::class)->prefix('platforms')->as('.platforms')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'store')->name('.store');
@@ -133,7 +168,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/{platform}/edit', 'edit')->name('.edit');
         Route::patch('/{platform}/edit', 'update')->name('.update');
     });
-    
+
     Route::controller(AdminTweetStreamController::class)->prefix('tweet_streams')->as('.tweet_streams')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'store')->name('.store');
@@ -142,7 +177,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/{tweet_stream}/edit', 'edit')->name('.edit');
         Route::patch('/{tweet_stream}/edit', 'update')->name('.update');
     });
-    
+
     Route::controller(AdminChannelController::class)->prefix('channels')->as('.channels')->group(function() {
         Route::post('', 'store')->name('.store');
         Route::delete('{channel}', 'destroy')->name('.destroy');
@@ -150,7 +185,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/{channel}/edit', 'edit')->name('.edit');
         Route::patch('/{channel}/edit', 'update')->name('.update');
     });
-    
+
     Route::controller(AdminReleaseChannelController::class)->prefix('releasechannels')->as('.releasechannels')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'store')->name('.store');
@@ -158,8 +193,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/create', 'create')->name('.create');
         Route::get('/{release_channel}/edit', 'edit')->name('.edit');
         Route::patch('/{release_channel}/edit', 'update')->name('.update');
+        Route::patch('/{release_channel}/toggle', 'toggleSupported')->name('.toggleSupported');
     });
-    
+
     Route::controller(AdminFlightController::class)->prefix('flights')->as('.flights')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'store')->name('.store');
@@ -170,7 +206,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/{flight}/edit', 'edit')->name('.edit');
         Route::patch('/{flight}/edit', 'update')->name('.update');
     });
-    
+
     Route::controller(AdminPromotionController::class)->prefix('promotions')->as('.promotions')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'store')->name('.store');
@@ -179,7 +215,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/{promotion}/edit', 'edit')->name('.edit');
         Route::patch('/{promotion}/edit', 'update')->name('.update');
     });
-    
+
     Route::controller(AdminLaunchController::class)->prefix('launches')->as('.launches')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'store')->name('.store');

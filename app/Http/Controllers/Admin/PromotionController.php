@@ -10,7 +10,6 @@ use Inertia\Inertia;
 use Auth;
 use Redirect;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 
 class PromotionController extends Controller
@@ -29,10 +28,12 @@ class PromotionController extends Controller
             return [];
         });
 
-        return Inertia::render('Admin/Promotions/Show', [
+        return Inertia::render('Admin/Promotions/Index', [
             'can' => [
-                'create_promotions' => Auth::user()->can('flights.create'),
-                'edit_promotions' => Auth::user()->can('flights.edit')
+                'promotions' => [
+                    'create' => Auth::user()->can('flights.create'),
+                    'edit' => Auth::user()->can('flights.edit')
+                ],
             ],
             'timeline' => $timeline->paginate(100)->groupBy('date')->map(function ($items, $date) {
                 return [
@@ -50,14 +51,12 @@ class PromotionController extends Controller
                                 'icon' => $promotion->item->platform->icon,
                                 'name' => $promotion->item->platform->name,
                                 'color' => $promotion->item->platform->color
-                            ],
-                            'edit_url' => $promotion->item->edit_url
+                            ]
                         ];
                     })
                 ];
             }),
             'pagination' => $paginator,
-            'createUrl' => route('admin.promotions.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -74,9 +73,6 @@ class PromotionController extends Controller
         $releases = Release::orderBy('platform_id')->orderBy('canonical_version')->get();
 
         return Inertia::render('Admin/Promotions/Create', [
-            'urls' => [
-                'store_promotion' => route('admin.promotions.store', [], false),
-            ],
             'releases' => $releases->map(function ($release) {
                 return [
                     'id' => $release->id,
@@ -124,7 +120,10 @@ class PromotionController extends Controller
             'item_id' => $promotion->id
         ]);
 
-        return Redirect::route('admin.promotions')->with('status', 'Succesfully created this promotion.');
+        return Redirect::route('admin.promotions')->with('status', [
+            'message' => 'Succesfully created this promotion.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -150,14 +149,13 @@ class PromotionController extends Controller
 
         return Inertia::render('Admin/Promotions/Edit', [
             'can' => [
-                'edit_promotions' => Auth::user()->can('flights.edit'),
-                'delete_promotions' => Auth::user()->can('flights.delete')
-            ],
-            'urls' => [
-                'update_promotion' => route('admin.promotions.update', $promotion, false),
-                'destroy_promotion' => route('admin.promotions.destroy', $promotion, false)
+                'promotions' => [
+                    'delete' => Auth::user()->can('flights.delete'),
+                    'edit' => Auth::user()->can('flights.edit')
+                ],
             ],
             'promotion' => [
+                'id' => $promotion->id,
                 'date' => $promotion->timeline->date
             ],
             'release' => [
@@ -192,7 +190,10 @@ class PromotionController extends Controller
             'date' => (new Carbon(request('date')))
         ]);
 
-        return Redirect::route('admin.promotions.edit', $promotion)->with('status', 'Succesfully updated the promotion.');
+        return Redirect::route('admin.promotions.edit', $promotion)->with('status', [
+            'message' => 'Succesfully updated the promotion.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -208,6 +209,9 @@ class PromotionController extends Controller
         $promotion->timeline->delete();
         $promotion->delete();
 
-        return Redirect::route('admin.promotions')->with('status', 'Succesfully deleted promotion.');
+        return Redirect::route('admin.promotions')->with('status', [
+            'message' => 'Succesfully deleted promotion.',
+            'type' => 'success'
+        ]);
     }
 }

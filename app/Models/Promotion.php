@@ -13,8 +13,7 @@ class Promotion extends Model
 
     protected $table = 'promotions';
     protected $fillable = ['release_channel_id'];
-    protected $appends = ['edit_url', 'url'];
-    
+
     public function timeline() {
         return $this->morphOne(Timeline::class, 'item');
     }
@@ -29,13 +28,5 @@ class Promotion extends Model
 
     public function getPlatformAttribute() {
         return $this->releaseChannel->release->platform;
-    }
-
-    public function getUrlAttribute() {
-        return route('front.platforms.releases', ['release' => $this->release, 'platform' => $this->release->platform], false);
-    }
-
-    public function getEditUrlAttribute() {
-        return route('admin.promotions.edit', $this, false);
     }
 }

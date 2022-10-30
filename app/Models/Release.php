@@ -20,7 +20,6 @@ class Release extends Model implements Searchable
 
     protected $table = 'releases';
     protected $fillable = ['name', 'version', 'canonical_version', 'package', 'codename', 'description', 'changelog', 'platform_id', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts', 'ongoing', 'start_build', 'start_delta', 'end_build', 'end_delta'];
-    protected $appends = ['url', 'edit_url', 'edit_changelog_url'];
     protected $dates = ['start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts'];
 
     protected $casts = [
@@ -60,30 +59,6 @@ class Release extends Model implements Searchable
         return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->timeline());
     }
 
-    public function getEditUrlAttribute() {
-        if ($this->package) {
-            return route('admin.packages.edit', $this, false);
-        }
-
-        return route('admin.releases.edit', $this, false);
-    }
-
-    public function getEditChangelogUrlAttribute() {
-        if ($this->package) {
-            return route('admin.packages.changelog.edit', $this, false);
-        }
-
-        return route('admin.releases.changelog.edit', $this, false);
-    }
-
-    public function getUrlAttribute() {
-        if ($this->package) {
-            return route('front.platforms.packages', ['release' => $this, 'platform' => $this->platform], false);
-        }
-
-        return route('front.platforms.releases', ['release' => $this, 'platform' => $this->platform], false);
-    }
-
     public function getRouteKeyName() {
         return 'slug';
     }
@@ -100,7 +75,7 @@ class Release extends Model implements Searchable
         return new \Spatie\Searchable\SearchResult(
             $this,
             $this->name,
-            $this->getUrlAttribute()
+            route('front.platforms.releases', [$this->platform, $this])
         );
     }
 }

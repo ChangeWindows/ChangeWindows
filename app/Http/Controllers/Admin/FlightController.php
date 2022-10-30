@@ -14,7 +14,6 @@ use Inertia\Inertia;
 use Auth;
 use Redirect;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Twitter;
 
 class FlightController extends Controller
@@ -33,10 +32,12 @@ class FlightController extends Controller
             return [];
         });
 
-        return Inertia::render('Admin/Flights/Show', [
+        return Inertia::render('Admin/Flights/Index', [
             'can' => [
-                'create_flights' => Auth::user()->can('flights.create'),
-                'edit_flights' => Auth::user()->can('flights.edit')
+                'flights' => [
+                    'create' => Auth::user()->can('flights.create'),
+                    'edit' => Auth::user()->can('flights.edit')
+                ]
             ],
             'timeline' => $timeline->paginate(100)->groupBy('date')->map(function ($items, $date) {
                 return [
@@ -51,18 +52,21 @@ class FlightController extends Controller
                                 'color' => $flight->item->releaseChannel->channel->color
                             ],
                             'platform' => [
+                                'id' => $flight->item->platform->id,
                                 'icon' => $flight->item->platform->icon,
                                 'name' => $flight->item->platform->name,
+                                'position' => $flight->item->platform->position,
                                 'color' => $flight->item->platform->color
-                            ],
-                            'edit_url' => $flight->item->edit_url
+                            ]
                         ];
-                    })
+                    })->groupBy(function($item, $key) {
+                        return $item['platform']['id'];
+                    })->sortBy(function($item, $key) {
+                        return $item[0]['platform']['position'];
+                    })->values()->all()
                 ];
             }),
             'pagination' => $paginator,
-            'createUrl' => route('admin.flights.create', [], false),
-            'createPackageUrl' => route('admin.flights.createPackage', [], false),
             'status' => session('status')
         ]);
     }
@@ -79,9 +83,6 @@ class FlightController extends Controller
         $releases = Release::where('package', '=', 0)->orderBy('canonical_version')->orderBy('platform_id')->get();
 
         return Inertia::render('Admin/Flights/Create', [
-            'urls' => [
-                'store_flight' => route('admin.flights.store', [], false),
-            ],
             'releases' => $releases->map(function ($release) {
                 return [
                     'id' => $release->id,
@@ -121,9 +122,6 @@ class FlightController extends Controller
         $packages = Release::where('package', '=', 1)->orderBy('platform_id')->orderBy('name')->get();
 
         return Inertia::render('Admin/Flights/CreatePackage', [
-            'urls' => [
-                'store_package_flight' => route('admin.flights.storePackage', [], false),
-            ],
             'packages' => $packages->map(function ($package) {
                 return [
                     'id' => $package->id,
@@ -157,14 +155,14 @@ class FlightController extends Controller
     {
         $this->authorize('flights.create');
 
-        foreach($request->releaseChannels as $releaseChannel) {
+        foreach ($request->releaseChannels as $releaseChannel) {
             $release_channel = ReleaseChannel::find($releaseChannel);
-            
+
             if ($release_channel->release->flights->count() === 0) {
                 $launch = Launch::create([
                     'release_id' => $release_channel->release->id
                 ]);
-    
+
                 Timeline::create([
                     'date' => (new Carbon(request('date'))),
                     'item_type' => Launch::class,
@@ -176,7 +174,7 @@ class FlightController extends Controller
                 $promotion = Promotion::create([
                     'release_channel_id' => $release_channel->id
                 ]);
-    
+
                 Timeline::create([
                     'date' => (new Carbon(request('date'))),
                     'item_type' => Promotion::class,
@@ -213,7 +211,7 @@ class FlightController extends Controller
                                 $release_channel->release->codename,
                                 $flight->version,
                                 $release_channel->name,
-                                'https://changewindows.org'.route('front.platforms.releases', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
+                                'https://changewindows.org' . route('front.platforms.releases', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
                             ),
                             $release_channel->channel->platform->tweet_template
                         )
@@ -221,7 +219,7 @@ class FlightController extends Controller
 
                     if ($posted_tweet && $release_channel->channel->platform->retweetStream) {
                         $retweet_stream = $release_channel->channel->platform->retweetStream;
-                        
+
                         $twitter_re_stream = Twitter::usingCredentials($retweet_stream->access_token, $retweet_stream->access_token_secret, $retweet_stream->consumer_key, $retweet_stream->consumer_secret);
 
                         $twitter_re_stream->postRt($posted_tweet->id);
@@ -230,7 +228,10 @@ class FlightController extends Controller
             }
         }
 
-        return Redirect::route('admin.flights')->with('status', 'Succesfully created these flights.');
+        return Redirect::route('admin.flights')->with('status', [
+            'message' => 'Succesfully created these flights.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -243,7 +244,7 @@ class FlightController extends Controller
     {
         $this->authorize('flights.create');
 
-        foreach($request->packageChannels as $packageChannel) {
+        foreach ($request->packageChannels as $packageChannel) {
             $release_channel = ReleaseChannel::find($packageChannel);
 
             $flight = Flight::create([
@@ -273,7 +274,7 @@ class FlightController extends Controller
                                 $release_channel->release->name,
                                 $flight->version,
                                 $release_channel->name,
-                                'https://changewindows.org'.route('front.platforms.packages', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
+                                'https://changewindows.org' . route('front.platforms.packages', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
                             ),
                             $release_channel->channel->platform->tweet_template_package
                         )
@@ -281,7 +282,7 @@ class FlightController extends Controller
 
                     if ($posted_tweet && $release_channel->channel->platform->retweetStream) {
                         $retweet_stream = $release_channel->channel->platform->retweetStream;
-                        
+
                         $twitter_re_stream = Twitter::usingCredentials($retweet_stream->access_token, $retweet_stream->access_token_secret, $retweet_stream->consumer_key, $retweet_stream->consumer_secret);
 
                         $twitter_re_stream->postRt($posted_tweet->id);
@@ -290,7 +291,10 @@ class FlightController extends Controller
             }
         }
 
-        return Redirect::route('admin.flights')->with('status', 'Succesfully created these package flights.');
+        return Redirect::route('admin.flights')->with('status', [
+            'message' => 'Succesfully created these package flights.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -316,12 +320,10 @@ class FlightController extends Controller
 
         return Inertia::render('Admin/Flights/Edit', [
             'can' => [
-                'edit_flights' => Auth::user()->can('flights.edit'),
-                'delete_flights' => Auth::user()->can('flights.delete')
-            ],
-            'urls' => [
-                'update_flight' => route('admin.flights.update', $flight, false),
-                'destroy_flight' => route('admin.flights.destroy', $flight, false)
+                'flights' => [
+                    'delete' => Auth::user()->can('flights.delete'),
+                    'edit' => Auth::user()->can('flights.edit')
+                ]
             ],
             'flight' => $flight,
             'platform' => [
@@ -360,7 +362,10 @@ class FlightController extends Controller
             'date' => (new Carbon(request('date')))
         ]);
 
-        return Redirect::route('admin.flights.edit', $flight)->with('status', 'Succesfully updated the flight.');
+        return Redirect::route('admin.flights.edit', $flight)->with('status', [
+            'message' => 'Succesfully updated the flight.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -376,6 +381,9 @@ class FlightController extends Controller
         $flight->timeline->delete();
         $flight->delete();
 
-        return Redirect::route('admin.flights')->with('status', 'Succesfully deleted flight.');
+        return Redirect::route('admin.flights')->with('status', [
+            'message' => 'Succesfully deleted flight.',
+            'type' => 'success'
+        ]);
     }
 }

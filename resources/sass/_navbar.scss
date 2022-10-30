@@ -11,13 +11,19 @@
     .container-fluid {
         flex-direction: row;
         justify-content: space-between;
+        display: grid;
+        grid-template-columns: fit-content(240px) minmax(auto, 500px) fit-content(240px);
+        grid-template-rows: auto;
+        grid-template-areas: 'title' 'search' 'actions';
     }
-    
+
     .navbar-brand {
+        grid-area: 'title';
+
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: .5rem;
+        margin-right: 1rem;
         font-size: 1rem;
         font-weight: 600;
         font-family: $headings-font-family;
@@ -44,13 +50,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: .1875rem .75rem .0625rem .365rem;
-    
+        margin: .1875rem 1rem .0625rem .625rem;
+
         @media (max-width: 575px) {
             margin: .1875rem 0 .0625rem .365rem;
         }
     }
-    
+
     .nav-item {
         &:not(:last-child) {
             margin-right: 1.5rem;
@@ -73,7 +79,7 @@
                 svg {
                     color: $primary !important;
                 }
-                
+
                 &::after {
                     position: absolute;
                     background-color: $primary;
@@ -96,7 +102,10 @@
         justify-content: flex-start;
     }
 
-    .navbar-content {
+    .navbar-actions {
+        grid-area: 'actions';
+
+        app-region: no-drag;
         display: flex;
         max-width: 240px;
         flex-grow: 1;
@@ -105,12 +114,18 @@
     }
 
     .navbar-search {
+        grid-area: 'search';
+
         display: flex;
         flex-direction: row;
         justify-content: center;
         max-width: 470px;
         flex-grow: 2;
-        margin-left: calc((100vw - env(titlebar-area-width, 0)) / 2);
+        margin-right: 1rem;
+
+        @media (min-width: 991px) {
+            margin-left: calc((100vw - env(titlebar-area-width, 0)) / 2);
+        }
 
         .input-group-search {
             -webkit-app-region: no-drag;
@@ -119,11 +134,12 @@
             background-color: var(--nav-search-bg);
             border-radius: $border-radius;
             width: 100%;
+            flex-wrap: nowrap;
 
             &:focus-within {
                 border-color: $primary;
             }
-            
+
             @media (max-width: 991px) {
                 flex-grow: 2;
             }

@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Release;
 use App\Models\Platform;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Auth;
 use Redirect;
-use Illuminate\Support\Collection;
 use App\Http\Requests\ReleaseRequest;
 
 class ReleaseController extends Controller
@@ -25,34 +23,46 @@ class ReleaseController extends Controller
 
         $releases = Release::where('package', '=', 0)->orderBy('platform_id')->orderBy('canonical_version')->get();
 
-        return Inertia::render('Admin/Releases/Show', [
+        return Inertia::render('Admin/Releases/Index', [
             'can' => [
-                'create_releases' => Auth::user()->can('releases.create'),
-                'edit_releases' => Auth::user()->can('releases.edit')
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit'),
+                    'create' => Auth::user()->can('releases.create')
+                ],
             ],
-            'releases' => $releases->map(function ($release) {
+            'releases' => $releases->groupBy(function($item) {
+                return $item->platform->slug;
+            })->map(function ($platform) {
                 return [
-                    'name' => $release->name,
-                    'version' => $release->version,
-                    'start_public' => $release->start_public,
-                    'edit_url' => $release->edit_url,
-                    'edit_changelog_url' => $release->edit_changelog_url,
                     'platform' => [
-                        'icon' => $release->platform->icon,
-                        'name' => $release->platform->name,
-                        'color' => $release->platform->color
+                        'icon' => $platform[0]->platform->icon,
+                        'name' => $platform[0]->platform->name,
+                        'color' => $platform[0]->platform->color,
+                        'position' => $platform[0]->platform->position,
                     ],
-                    'channels' => $release->releaseChannels->where('supported', '=', 1)->values()->map(function ($channel) {
+                    'releases' => $platform->map((function ($release) {
                         return [
-                            'id' => $channel->id,
-                            'short_name' => $channel->short_name,
-                            'color' => $channel->channel->color,
-                            'order' => $channel->channel->order
+                            'name' => $release->name,
+                            'slug' => $release->slug,
+                            'version' => $release->version,
+                            'start_public' => $release->start_public,
+                            'platform' => [
+                                'icon' => $release->platform->icon,
+                                'name' => $release->platform->name,
+                                'color' => $release->platform->color
+                            ],
+                            'channels' => $release->releaseChannels->where('supported', '=', 1)->values()->map(function ($channel) {
+                                return [
+                                    'id' => $channel->id,
+                                    'short_name' => $channel->short_name,
+                                    'color' => $channel->channel->color,
+                                    'order' => $channel->channel->order
+                                ];
+                            })
                         ];
-                    })
+                    }))
                 ];
             }),
-            'createUrl' => route('admin.releases.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -67,9 +77,6 @@ class ReleaseController extends Controller
         $this->authorize('releases.create');
 
         return Inertia::render('Admin/Releases/Create', [
-            'urls' => [
-                'store_release' => route('admin.releases.store', [], false),
-            ],
             'platforms' => Platform::orderBy('position')->get()
         ]);
     }
@@ -86,7 +93,10 @@ class ReleaseController extends Controller
 
         $release = Release::create($request->validated());
 
-        return Redirect::route('admin.releases.edit', $release)->with('status', 'Succesfully created this release.');
+        return Redirect::route('admin.releases.edit', $release)->with('status', [
+            'message' => 'Succesfully created this release.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -112,14 +122,10 @@ class ReleaseController extends Controller
 
         return Inertia::render('Admin/Releases/Edit', [
             'can' => [
-                'edit_releases' => Auth::user()->can('releases.edit'),
-                'delete_releases' => Auth::user()->can('releases.delete')
-            ],
-            'urls' => [
-                'update_release' => route('admin.releases.update', $release, false),
-                'destroy_release' => route('admin.releases.destroy', $release, false),
-                'create_release_channel' => route('admin.releasechannels.create', ['release' => $release->id, 'platform' => $release->platform->id], false),
-                'edit_changelog_url' => $release->edit_changelog_url
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit'),
+                    'delete' => Auth::user()->can('releases.delete')
+                ],
             ],
             'release' => $release,
             'platforms' => Platform::orderBy('position')->get(),
@@ -132,8 +138,7 @@ class ReleaseController extends Controller
                     'supported' => $channel->supported,
                     'color' => $channel->channel->color,
                     'order' => $channel->channel->order,
-                    'channel_id' => $channel->channel_id,
-                    'edit_url' => $channel->edit_url
+                    'channel_id' => $channel->channel_id
                 ];
             }),
             'status' => session('status')
@@ -153,7 +158,10 @@ class ReleaseController extends Controller
 
         $release->update($request->validated());
 
-        return Redirect::route('admin.releases.edit', $release)->with('status', 'Succesfully updated this release.');
+        return Redirect::route('admin.releases.edit', $release)->with('status', [
+            'message' => 'Succesfully updated this release.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -166,30 +174,15 @@ class ReleaseController extends Controller
     {
         $this->authorize('releases.show');
 
-
         return Inertia::render('Admin/Releases/Changelog', [
             'can' => [
-                'edit_releases' => Auth::user()->can('releases.edit')
-            ],
-            'urls' => [
-                'update_release' => route('admin.releases.changelog.update', $release, false)
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit')
+                ],
             ],
             'release' => [
                 'name' => $release->name,
-                'version' => $release->version,
-                'canonical_version' => $release->canonical_version,
-                'codename' => $release->codename,
-                'description' => $release->description,
-                'platform_id' => $release->platform_id,
-                'start_preview' => $release->start_preview,
-                'start_public' => $release->start_public,
-                'start_extended' => $release->start_extended,
-                'start_lts' => $release->start_lts,
-                'end_lts' => $release->end_lts,
-                'start_build' => $release->start_build,
-                'start_delta' => $release->start_delta,
-                'end_build' => $release->end_build,
-                'end_delta' => $release->end_delta,
+                'slug' => $release->slug,
                 'changelog' => $release->changelog
             ],
             'status' => session('status')
@@ -203,15 +196,18 @@ class ReleaseController extends Controller
      * @param  \App\Models\Release  $release
      * @return \Illuminate\Http\Response
      */
-    public function updateChangelog(ReleaseRequest $request, Release $release)
+    public function updateChangelog(Release $release)
     {
         $this->authorize('releases.edit');
 
         $release->update([
-            'changelog' => $request->get('changelog')
+            'changelog' => request('changelog')
         ]);
 
-        return Redirect::route('admin.releases.changelog.edit', $release)->with('status', 'Succesfully updated this release.');
+        return Redirect::route('admin.releases.changelog.edit', $release)->with('status', [
+            'message' => 'Succesfully updated this release.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -226,6 +222,9 @@ class ReleaseController extends Controller
 
         $release->delete();
 
-        return Redirect::route('admin.releases')->with('status', 'Succesfully deleted release.');
+        return Redirect::route('admin.releases')->with('status', [
+            'message' => 'Succesfully deleted this release.',
+            'type' => 'success'
+        ]);
     }
 }

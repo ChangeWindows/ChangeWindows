@@ -13,7 +13,7 @@ class Channel extends Model
 
     protected $table = 'channels';
     protected $fillable = ['name', 'color', 'order', 'active', 'platform_id', 'slug'];
-    protected $appends = ['bg_color', 'edit_url'];
+    protected $appends = ['bg_color'];
 
     protected $casts = [
         'active' => 'integer',
@@ -34,10 +34,6 @@ class Channel extends Model
 
     public function getBgColorAttribute() {
         return 'background-color: '.$this->color;
-    }
-
-    public function getEditUrlAttribute() {
-        return route('admin.channels.edit', $this, false);
     }
 
     public function getRouteKeyName() {

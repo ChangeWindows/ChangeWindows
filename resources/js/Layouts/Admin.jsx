@@ -1,6 +1,8 @@
 import React from 'react';
 import { InertiaHead } from '@inertiajs/inertia-react';
 
+import '../../sass/style.scss';
+
 import AppBar from './AppBar';
 import AdminNavigation from './Navigation/AdminNavigation';
 

@@ -13,7 +13,6 @@ class ReleaseChannel extends Model
 
     protected $table = 'release_channels';
     protected $fillable = ['name', 'short_name', 'supported', 'channel_id', 'release_id'];
-    protected $appends = ['edit_url'];
 
     protected $casts = [
         'supported' => 'integer'
@@ -48,13 +47,5 @@ class ReleaseChannel extends Model
             ->orderBy('build', 'desc')
             ->orderBy('delta', 'desc')
             ->first();
-    }
-
-    public function getEditUrlAttribute() {
-        if ($this->release->package) {
-            return route('admin.releasechannels.edit', ['release_channel' => $this, 'package' => true], false);
-        } else {
-            return route('admin.releasechannels.edit', $this, false);
-        }
     }
 }

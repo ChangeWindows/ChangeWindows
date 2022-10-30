@@ -1,24 +1,27 @@
 import React from "react";
 import { InertiaLink } from "@inertiajs/inertia-react";
 
-import Admin from "../../../Layouts/Admin";
-import NaviBar from "../../../Components/NaviBar";
-import PlatformIcon from "../../../Components/Platforms/PlatformIcon";
+import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Status from "@/Components/Status";
 
 import AmaranthIcon, {
-  aiCheck,
   aiEye,
   aiNotes,
   aiPen,
   aiPlus,
 } from "@changewindows/amaranth";
 
-export default function Show({ packages, createUrl, can, status = null }) {
+export default function Index({ packages, can, status }) {
   return (
     <Admin>
       <NaviBar
-        actions={
-          <InertiaLink href={createUrl} className="btn btn-primary btn-sm">
+        actions={can.releases.create &&
+          <InertiaLink
+            href={route("admin.packages.create")}
+            className="btn btn-primary btn-sm"
+          >
             <AmaranthIcon icon={aiPlus} /> New
           </InertiaLink>
         }
@@ -27,11 +30,7 @@ export default function Show({ packages, createUrl, can, status = null }) {
       </NaviBar>
 
       <div className="container">
-        {status && (
-          <div className="alert alert-success">
-            <AmaranthIcon icon={aiCheck} /> {status}
-          </div>
-        )}
+        <Status status={status} />
         <div className="row g-1">
           {packages.map((pack, key) => (
             <div className="col-12" key={key}>
@@ -59,25 +58,25 @@ export default function Show({ packages, createUrl, can, status = null }) {
                     )}
                     <div className="flex-grow-1 flex-grow-md-0" />
                     <InertiaLink
-                      href={pack.edit_url}
+                      href={route("admin.packages.edit", pack)}
                       className="btn btn-link btn-sm my-n1"
                     >
-                      {can.edit_packages ? (
+                      {can.releases.edit ? (
                         <>
                           <AmaranthIcon icon={aiPen} /> Edit
                         </>
                       ) : (
                         <>
-                          <AmaranthIcon icon={aiEye} /> Show
+                          <AmaranthIcon icon={aiEye} /> View
                         </>
                       )}
                     </InertiaLink>
                     <InertiaLink
-                      href={pack.edit_changelog_url}
+                      href={route("admin.packages.changelog.edit", pack)}
                       className="btn btn-link btn-sm my-n1"
                     >
                       <AmaranthIcon
-                        icon={can.edit_packages ? aiNotes : aiEye}
+                        icon={aiNotes}
                       />
                     </InertiaLink>
                   </div>

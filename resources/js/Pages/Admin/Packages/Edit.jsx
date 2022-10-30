@@ -1,14 +1,16 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Inertia } from "@inertiajs/inertia";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import React, { useMemo } from "react";
+import { InertiaLink, useForm } from "@inertiajs/inertia-react";
 
-import Admin from "../../../Layouts/Admin";
-import NaviBar from "../../../Components/NaviBar";
+import Admin from "@/Layouts/Admin";
+import Fieldset from "@/Components/UI/Forms/Fieldset";
+import NaviBar from "@/Components/NaviBar";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
+import Select from "@/Components/UI/Forms/Select";
+import Status from "@/Components/Status";
+import TextField from "@/Components/UI/Forms/TextField";
 
 import AmaranthIcon, {
-  aiCheck,
   aiEye,
-  aiFloppyDisk,
   aiNotes,
   aiPlus,
   aiTrashCan,
@@ -16,48 +18,29 @@ import AmaranthIcon, {
 
 export default function Edit({
   can,
-  urls,
   platforms,
   pack,
   channels,
   release_channels,
-  status = null,
+  status,
 }) {
-  const [curPack, setCurPack] = useState({
-    name: "",
-    description: "",
-    changelog: "",
-    platform_id: null,
-  });
+  const {
+    data,
+    setData,
+    patch,
+    delete: destroy,
+    processing,
+    errors,
+  } = useForm(pack);
 
-  useEffect(() => {
-    setCurPack(pack);
-  }, [pack]);
-
-  function formHandler(event) {
-    const { id, value, type } = event.target;
-    const _package = Object.assign({}, curPack);
-
-    switch (type) {
-      case "checkbox":
-        _package[id] = _package[id] === 0 ? 1 : 0;
-        break;
-      default:
-        _package[id] = value;
-        break;
-    }
-
-    setCurPack(_package);
+  function handleSubmit(e) {
+    e.preventDefault();
+    patch(route("admin.packages.update", pack));
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    Inertia.patch(urls.update_package, curPack);
-  }
-
-  function handleDelete(event) {
-    event.preventDefault();
-    Inertia.delete(urls.destroy_package, curPack);
+  function handleDelete(e) {
+    e.preventDefault();
+    destroy(route("admin.packages.destroy", pack));
   }
 
   const availablePlatformChannels = useMemo(
@@ -76,113 +59,73 @@ export default function Edit({
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/packages"
-          actions={
-            <button className="btn btn-primary btn-sm" type="submit">
-              <AmaranthIcon icon={aiFloppyDisk} /> Save
-            </button>
-          }
+          actions={<SaveButton loading={processing} />}
         >
-          {curPack.name || "Unnamed package"}
+          {data.name || "Unnamed package"}
         </NaviBar>
 
         <div className="container my-3">
-          {status && (
-            <div className="alert alert-success">
-              <AmaranthIcon icon={aiCheck} /> {status}
+          <Status status={status} />
+          <Fieldset
+            title="Identity"
+            description="About this release."
+            disabled={!can.releases.edit}
+          >
+            <div className="col-12 col-lg-6">
+              <Select
+                disabled
+                id="platform_id"
+                label="Platform"
+                value={data.platform_id}
+                selects={platforms}
+                selectLabel={(x) => x.name}
+                selectValue={(x) => x.id}
+                errors={errors.platform_id}
+                onChange={(e) => setData("platform_id", e.target.value)}
+              />
             </div>
-          )}
-          <fieldset className="row mb-3">
-            <div className="col-12 col-md-4 my-4 my-md-0">
-              <h4 className="h5 mb-0">Identity</h4>
-              <p className="text-muted mb-0">
-                <small>About this package.</small>
-              </p>
+            <div className="col-12 col-lg-6">
+              <TextField
+                id="name"
+                label="Name"
+                value={data.name}
+                errors={errors.name}
+                onChange={setData}
+              />
             </div>
-            <div className="col-12 col-md-8">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row g-3">
-                    <div className="col-12 col-lg-6">
-                      <div className="form-floating">
-                        <select
-                          className="form-select"
-                          disabled
-                          id="platform_id"
-                          aria-label="Platform"
-                          value={curPack.platform_id ?? ""}
-                          onChange={formHandler}
-                        >
-                          <option style={{ display: "none" }}>
-                            Select platform
-                          </option>
-                          {platforms.map((platform, key) => (
-                            <option value={platform.id} key={key}>
-                              {platform.name}
-                            </option>
-                          ))}
-                        </select>
-                        <label htmlFor="platform_id">Platform</label>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-6">
-                      <div className="form-floating">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="name"
-                          value={curPack.name}
-                          onChange={formHandler}
-                        />
-                        <label htmlFor="name">Name</label>
-                      </div>
-                    </div>
-                    <div className="col-12">
-                      <div className="form-floating">
-                        <textarea
-                          className="form-control"
-                          id="description"
-                          style={{ minHeight: 80 }}
-                          defaultValue={curPack.description}
-                          onChange={formHandler}
-                        ></textarea>
-                        <label htmlFor="description">Description</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="col-12">
+              <TextField
+                type="textarea"
+                id="description"
+                label="Description"
+                value={data.description}
+                errors={errors.description}
+                onChange={setData}
+              />
             </div>
-          </fieldset>
-          <fieldset className="row mb-3">
-            <div className="col-12 col-md-4 my-4 my-md-0">
-              <h4 className="h5 mb-0">Changelog</h4>
-              <p className="text-muted mb-0">
-                <small>What's new?</small>
-              </p>
-            </div>
-            <div className="col-12 col-md-8">
+          </Fieldset>
+          <Fieldset title="Changelog" description="What's new?" disabledCard>
+            <div className="col-12">
               <InertiaLink
-                href={urls.edit_changelog_url}
+                href={route("admin.packages.changelog.edit", pack)}
                 className="btn btn-primary btn-sm"
               >
                 <AmaranthIcon
-                  icon={can.edit_releases ? aiNotes : aiEye}
+                  icon={can.releases.edit ? aiNotes : aiEye}
                   className="me-2"
                 />
-                {can.edit_releases ? 'Edit changelog' : 'View changelog'}
+                {can.releases.edit ? "Edit changelog" : "View changelog"}
               </InertiaLink>
             </div>
-          </fieldset>
+          </Fieldset>
         </div>
       </form>
-      <div className="container my-3">
-        <div className="row">
-          <div className="col-12 col-md-4 my-4 my-md-0">
-            <h4 className="h5 mb-0">Package channels</h4>
-            <p className="text-muted mb-0">
-              <small>The channels for this package.</small>
-            </p>
-          </div>
+      <div className="container mb-0">
+        <Fieldset
+          title="PAckage channels"
+          description="The channels for this package."
+          disabledCard
+        >
           <div className="col-12 col-md-8">
             <div className="row g-3">
               {release_channels.map((releaseChannel, key) => {
@@ -195,7 +138,7 @@ export default function Edit({
                 return (
                   <div className="col-12 col-sm-6 col-xl-4" key={key}>
                     <InertiaLink
-                      href={releaseChannel.edit_url}
+                      href={route("admin.releasechannels.edit", releaseChannel)}
                       className="card border-0 shadow-sm h-100"
                     >
                       <div className="card-body">
@@ -219,7 +162,7 @@ export default function Edit({
                   </div>
                 );
               })}
-              {can.edit_packages && availablePlatformChannels.length > 0 && (
+              {can.releases.edit && availablePlatformChannels.length > 0 && (
                 <div className="col-12 col-sm-6 col-xl-4">
                   <div className="dropdown h-100">
                     <a
@@ -243,7 +186,10 @@ export default function Edit({
                       {availablePlatformChannels.map((channel, key) => (
                         <InertiaLink
                           key={key}
-                          href={`${urls.create_package_channel}&channel=${channel.id}`}
+                          href={route("admin.releasechannels.create", {
+                            release: pack,
+                            platform: pack.platform,
+                          })}
                           className="dropdown-item d-flex align-items-center"
                         >
                           <div
@@ -263,37 +209,25 @@ export default function Edit({
               )}
             </div>
           </div>
-        </div>
+        </Fieldset>
       </div>
-      {can.delete_packages && (
-        <form onSubmit={handleDelete}>
-          <div className="container my-3">
-            <div className="row">
-              <div className="col-12 col-md-4 my-4 my-md-0">
-                <h4 className="h5 mb-0 text-danger">Danger zone</h4>
-                <p className="text-muted mb-0">
-                  <small>All alone in the danger zone.</small>
-                </p>
-              </div>
-              <div className="col-12 col-md-8">
-                <div className="card">
-                  <div className="card-body">
-                    <div className="row g-3">
-                      <div className="col-12">
-                        <p>
-                          Deleting a package will remove all the content
-                          associated with that package. Are you sure?
-                        </p>
-                        <button className="btn btn-danger btn-sm" type="submit">
-                          <AmaranthIcon icon={aiTrashCan} /> Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      {can.releases.delete && (
+        <form onSubmit={handleDelete} className="container my-3 py-0">
+          <Fieldset
+            title="Danger zone"
+            description="All alone in the danger zone."
+            danger
+          >
+            <div className="col-12">
+              <p>
+                Deleting a package will remove all the content associated with
+                that package. Are you sure?
+              </p>
+              <button className="btn btn-danger btn-sm" type="submit">
+                <AmaranthIcon icon={aiTrashCan} /> Delete
+              </button>
             </div>
-          </div>
+          </Fieldset>
         </form>
       )}
     </Admin>

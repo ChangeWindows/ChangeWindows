@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Auth;
 use Redirect;
-use Illuminate\Support\Collection;
 
 class ChannelController extends Controller
 {
@@ -30,16 +29,15 @@ class ChannelController extends Controller
     public function create(Request $request)
     {
         $this->authorize('channels.create');
-        
+
         $platform = Platform::find($request->platform);
 
         return Inertia::render('Admin/Channels/Create', [
-            'urls' => [
-                'edit_platform' => route('admin.platforms.edit', $platform, false),
-                'store_channel' => route('admin.channels.store', [], false),
-            ],
             'params' => [
-                'platform' => $request->platform
+                'platform' => [
+                    'slug' => $platform->slug,
+                    'id' => $platform->id,
+                ]
             ],
             'platforms' => Platform::orderBy('position')->get()
         ]);
@@ -63,7 +61,10 @@ class ChannelController extends Controller
             'active' => request('active') ? 1 : 0
         ]);
 
-        return Redirect::route('admin.channels.edit', $channel)->with('status', 'Succesfully created this channel.');
+        return Redirect::route('admin.channels.edit', $channel)->with('status', [
+            'message' => 'Succesfully created this channel.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -89,15 +90,20 @@ class ChannelController extends Controller
 
         return Inertia::render('Admin/Channels/Edit', [
             'can' => [
-                'edit_channels' => Auth::user()->can('channels.edit'),
-                'delete_channels' => Auth::user()->can('channels.delete')
+                'channels' => [
+                    'edit' => Auth::user()->can('channels.edit'),
+                    'delete' => Auth::user()->can('channels.delete')
+                ]
             ],
-            'urls' => [
-                'edit_platform' => route('admin.platforms.edit', $channel->platform, false),
-                'update_channel' => route('admin.channels.update', $channel, false),
-                'destroy_channel' => route('admin.channels.destroy', $channel, false)
+            'channel' => [
+                'slug' => $channel->slug,
+                'name' => $channel->name,
+                'order' => $channel->order,
+                'color' => $channel->color,
+                'active' => $channel->active,
+                'platform' => $channel->platform,
+                'platform_id' => $channel->platform_id
             ],
-            'channel' => $channel,
             'platforms' => Platform::orderBy('position')->get(),
             'status' => session('status')
         ]);
@@ -122,7 +128,10 @@ class ChannelController extends Controller
             'active' => request('active') ? 1 : 0
         ]);
 
-        return Redirect::route('admin.channels.edit', $channel)->with('status', 'Succesfully updated the channel.');
+        return Redirect::route('admin.channels.edit', $channel)->with('status', [
+            'message' => 'Succesfully updated the channel.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -135,8 +144,12 @@ class ChannelController extends Controller
     {
         $this->authorize('channels.delete');
 
+        $platform = $channel->platform;
         $channel->delete();
 
-        return Redirect::route('admin.channels')->with('status', 'Succesfully deleted channel.');
+        return Redirect::route('admin.platforms.edit', $platform)->with('status', [
+            'message' => 'Succesfully deleted channel.',
+            'type' => 'success'
+        ]);
     }
 }

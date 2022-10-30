@@ -29,10 +29,12 @@ class LaunchController extends Controller
             return [];
         });
 
-        return Inertia::render('Admin/Launches/Show', [
+        return Inertia::render('Admin/Launches/Index', [
             'can' => [
-                'create_launches' => Auth::user()->can('flights.create'),
-                'edit_launches' => Auth::user()->can('flights.edit')
+                'launches' => [
+                    'create' => Auth::user()->can('flights.create'),
+                    'edit' => Auth::user()->can('flights.edit')
+                ]
             ],
             'timeline' => $timeline->paginate(100)->groupBy('date')->map(function ($items, $date) {
                 return [
@@ -46,14 +48,12 @@ class LaunchController extends Controller
                                 'icon' => $launch->item->release->platform->icon,
                                 'name' => $launch->item->release->platform->name,
                                 'color' => $launch->item->release->platform->color
-                            ],
-                            'edit_url' => $launch->item->edit_url
+                            ]
                         ];
                     })
                 ];
             }),
             'pagination' => $paginator,
-            'createUrl' => route('admin.launches.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -70,9 +70,6 @@ class LaunchController extends Controller
         $releases = Release::orderBy('platform_id')->orderBy('canonical_version')->get();
 
         return Inertia::render('Admin/Launches/Create', [
-            'urls' => [
-                'store_launch' => route('admin.launches.store', [], false),
-            ],
             'releases' => $releases->whereNull('launch')->values()->map(function ($release) {
                 return [
                     'id' => $release->id,
@@ -113,7 +110,10 @@ class LaunchController extends Controller
             'item_id' => $launch->id
         ]);
 
-        return Redirect::route('admin.launches')->with('status', 'Succesfully created this launch.');
+        return Redirect::route('admin.launches')->with('status', [
+            'message' => 'Succesfully created this launch.',
+            'type' =>  'success'
+        ]);
     }
 
     /**
@@ -139,14 +139,13 @@ class LaunchController extends Controller
 
         return Inertia::render('Admin/Launches/Edit', [
             'can' => [
-                'edit_launches' => Auth::user()->can('flights.edit'),
-                'delete_launches' => Auth::user()->can('flights.delete')
-            ],
-            'urls' => [
-                'update_launch' => route('admin.launches.update', $launch, false),
-                'destroy_launch' => route('admin.launches.destroy', $launch, false)
+                'launches' => [
+                    'delete' => Auth::user()->can('flights.delete'),
+                    'edit' => Auth::user()->can('flights.edit')
+                ]
             ],
             'launch' => [
+                'id' => $launch->id,
                 'date' => $launch->timeline->date
             ],
             'release' => [
@@ -177,7 +176,10 @@ class LaunchController extends Controller
             'date' => (new Carbon(request('date')))
         ]);
 
-        return Redirect::route('admin.launches.edit', $launch)->with('status', 'Succesfully updated the launch.');
+        return Redirect::route('admin.launches.edit', $launch)->with('status', [
+            'message' => 'Succesfully updated the launch.',
+            'type' =>  'success'
+        ]);
     }
 
     /**
@@ -193,6 +195,9 @@ class LaunchController extends Controller
         $launch->timeline->delete();
         $launch->delete();
 
-        return Redirect::route('admin.launches')->with('status', 'Succesfully deleted launch.');
+        return Redirect::route('admin.launches')->with('status', [
+            'message' => 'Succesfully deleted launch.',
+            'type' =>  'success'
+        ]);
     }
 }

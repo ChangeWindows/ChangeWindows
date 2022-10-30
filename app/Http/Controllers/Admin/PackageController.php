@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Release;
 use App\Models\Platform;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Auth;
 use Redirect;
-use Illuminate\Support\Collection;
 use App\Http\Requests\PackageRequest;
 
 class PackageController extends Controller
@@ -25,16 +23,17 @@ class PackageController extends Controller
 
         $packages = Release::where('package', '=', 1)->orderBy('platform_id')->get();
 
-        return Inertia::render('Admin/Packages/Show', [
+        return Inertia::render('Admin/Packages/Index', [
             'can' => [
-                'create_packages' => Auth::user()->can('releases.create'),
-                'edit_packages' => Auth::user()->can('releases.edit')
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit'),
+                    'create' => Auth::user()->can('releases.create')
+                ],
             ],
             'packages' => $packages->map(function ($release) {
                 return [
                     'name' => $release->name,
-                    'edit_url' => $release->edit_url,
-                    'edit_changelog_url' => $release->edit_changelog_url,
+                    'slug' => $release->slug,
                     'platform' => [
                         'icon' => $release->platform->icon,
                         'name' => $release->platform->name,
@@ -50,7 +49,6 @@ class PackageController extends Controller
                     })
                 ];
             }),
-            'createUrl' => route('admin.packages.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -65,9 +63,6 @@ class PackageController extends Controller
         $this->authorize('releases.create');
 
         return Inertia::render('Admin/Packages/Create', [
-            'urls' => [
-                'store_package' => route('admin.packages.store', [], false),
-            ],
             'platforms' => Platform::orderBy('position')->get()
         ]);
     }
@@ -90,7 +85,10 @@ class PackageController extends Controller
             'package' => 1
         ]);
 
-        return Redirect::route('admin.packages.edit', $package)->with('status', 'Succesfully created this package.');
+        return Redirect::route('admin.packages.edit', $package)->with('status', [
+            'message' => 'Succesfully created this package.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -116,16 +114,18 @@ class PackageController extends Controller
 
         return Inertia::render('Admin/Packages/Edit', [
             'can' => [
-                'edit_packages' => Auth::user()->can('releases.edit'),
-                'delete_packages' => Auth::user()->can('releases.delete')
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit'),
+                    'delete' => Auth::user()->can('releases.delete')
+                ],
             ],
-            'urls' => [
-                'update_package' => route('admin.packages.update', $package, false),
-                'destroy_package' => route('admin.packages.destroy', $package, false),
-                'create_package_channel' => route('admin.releasechannels.create', ['release' => $package->id, 'platform' => $package->platform->id, 'package' => true], false),
-                'edit_changelog_url' => $package->edit_changelog_url
+            'pack' => [
+                'id' => $package->id,
+                'name' => $package->name,
+                'description' => $package->description,
+                'platform_id' => $package->platform_id,
+                'slug' => $package->slug,
             ],
-            'pack' => $package,
             'platforms' => Platform::orderBy('position')->get(),
             'channels' => $package->platform->channels->sortBy('order')->values()->all(),
             'release_channels' => $package->releaseChannels->map(function ($channel) {
@@ -136,8 +136,7 @@ class PackageController extends Controller
                     'supported' => $channel->supported,
                     'color' => $channel->channel->color,
                     'order' => $channel->channel->order,
-                    'channel_id' => $channel->channel_id,
-                    'edit_url' => $channel->edit_url
+                    'channel_id' => $channel->channel_id
                 ];
             }),
             'status' => session('status')
@@ -157,7 +156,10 @@ class PackageController extends Controller
 
         $package->update($request->validated());
 
-        return Redirect::route('admin.packages.edit', $package)->with('status', 'Succesfully updated this package.');
+        return Redirect::route('admin.packages.edit', $package)->with('status', [
+            'message' => 'Succesfully updated this package.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -172,28 +174,14 @@ class PackageController extends Controller
 
         return Inertia::render('Admin/Packages/Changelog', [
             'can' => [
-                'edit_packages' => Auth::user()->can('releases.edit'),
-                'delete_packages' => Auth::user()->can('releases.delete')
-            ],
-            'urls' => [
-                'update_package' => route('admin.packages.changelog.update', $package, false)
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit'),
+                    'delete' => Auth::user()->can('releases.delete')
+                ],
             ],
             'release' => [
                 'name' => $package->name,
-                'version' => $package->version,
-                'canonical_version' => $package->canonical_version,
-                'codename' => $package->codename,
-                'description' => $package->description,
-                'platform_id' => $package->platform_id,
-                'start_preview' => $package->start_preview,
-                'start_public' => $package->start_public,
-                'start_extended' => $package->start_extended,
-                'start_lts' => $package->start_lts,
-                'end_lts' => $package->end_lts,
-                'start_build' => $package->start_build,
-                'start_delta' => $package->start_delta,
-                'end_build' => $package->end_build,
-                'end_delta' => $package->end_delta,
+                'slug' => $package->slug,
                 'changelog' => $package->changelog
             ],
             'status' => session('status')
@@ -207,15 +195,18 @@ class PackageController extends Controller
      * @param  \App\Models\Release  $release
      * @return \Illuminate\Http\Response
      */
-    public function updateChangelog(PackageRequest $request, Release $package)
+    public function updateChangelog(Release $package)
     {
         $this->authorize('releases.edit');
 
         $package->update([
-            'changelog' => $request->get('changelog')
+            'changelog' => request('changelog')
         ]);
 
-        return Redirect::route('admin.packages.changelog.edit', $package)->with('status', 'Succesfully updated this package.');
+        return Redirect::route('admin.packages.changelog.edit', $package)->with('status', [
+            'message' => 'Succesfully updated this package.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -230,6 +221,9 @@ class PackageController extends Controller
 
         $package->delete();
 
-        return Redirect::route('admin.packages')->with('status', 'Succesfully deleted package.');
+        return Redirect::route('admin.packages')->with('status', [
+            'message' => 'Succesfully deleted package.',
+            'type' => 'success'
+        ]);
     }
 }

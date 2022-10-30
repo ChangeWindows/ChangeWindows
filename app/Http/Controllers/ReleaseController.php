@@ -21,7 +21,7 @@ class ReleaseController extends Controller
             ->whereHas('flight', function (Builder $query) use ($release) {
                 $query->join('release_channels as frs', function ($join) {
                     $join->on('frs.id', '=', 'flights.release_channel_id')
-                
+
                     ->join('channels as fc', function ($join) {
                         $join->on('fc.id', '=', 'frs.channel_id');
                     });
@@ -31,7 +31,7 @@ class ReleaseController extends Controller
             ->orWhereHas('promotion', function (Builder $query) use ($release) {
                 $query->join('release_channels as prs', function ($join) {
                     $join->on('prs.id', '=', 'promotions.release_channel_id')
-                
+
                     ->join('channels as pc', function ($join) {
                         $join->on('pc.id', '=', 'prs.channel_id');
                     });
@@ -47,7 +47,7 @@ class ReleaseController extends Controller
         $paginator = $timeline->paginate(75)->onEachSide(2)->through(function () {
             return [];
         });
-            
+
         $prev = Release::where('canonical_version', '<', $release->canonical_version)->where('platform_id', '=', $release->platform_id)->where('package', '=', 0)->orderBy('canonical_version', 'desc')->first();
         $next = Release::where('canonical_version', '>', $release->canonical_version)->where('platform_id', '=', $release->platform_id)->where('package', '=', 0)->orderBy('canonical_version', 'asc')->first();
 
@@ -55,21 +55,21 @@ class ReleaseController extends Controller
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
                 return [
                     'id' => $_platform->id,
+                    'slug' => $_platform->slug,
                     'name' => $_platform->name,
                     'color' => $_platform->color,
                     'icon' => $_platform->icon,
-                    'legacy' => $_platform->legacy,
-                    'url' => route('front.platforms.show', $_platform, false)
+                    'legacy' => $_platform->legacy
                 ];
             }),
             'release' => $release->only('name', 'changelog', 'version', 'codename', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts', 'ongoing'),
-            'quick_nav' => [
+            'quickNav' => [
                 'prev' => $prev ? [
-                    'url' => $prev->url,
+                    'slug' => $prev->slug,
                     'version' => $prev->version
                 ] : null,
                 'next' => $next ? [
-                    'url' => $next->url,
+                    'slug' => $next->slug,
                     'version' => $next->version
                 ] : null
             ],
@@ -125,7 +125,7 @@ class ReleaseController extends Controller
                                 ]
                             ];
                         }
-                        
+
                         if ($flights->first()->item_type === \App\Models\Promotion::class) {
                             $_cur_promotion = $flights->first();
                             return [
@@ -145,9 +145,9 @@ class ReleaseController extends Controller
                                     'name' => $_cur_promotion->item->platform->name,
                                     'color' => $_cur_promotion->item->platform->color
                                 ]
-                            ]; 
+                            ];
                         }
-                        
+
                         if ($flights->first()->item_type === \App\Models\Launch::class) {
                             $_cur_launch = $flights->first();
                             return [
@@ -169,7 +169,7 @@ class ReleaseController extends Controller
                         if ($item['type'] === 'flight') {
                             return $item['event_priority'].'.'.$item['flight'].'.'.$item['platform']['order'];
                         }
-                        
+
                         return $item['event_priority'].'.'.$item['platform']['order'];
                     })->values()->all()
                 ];

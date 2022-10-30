@@ -1,146 +1,96 @@
-import React, { useState } from 'react';
-import { Inertia } from '@inertiajs/inertia';
+import React from "react";
+import { useForm } from "@inertiajs/inertia-react";
 
-import Admin from '../../../Layouts/Admin';
-import NaviBar from '../../../Components/NaviBar';
+import Admin from "@/Layouts/Admin";
+import Checkbox from "@/Components/UI/Forms/Checkbox";
+import Fieldset from "@/Components/UI/Forms/Fieldset";
+import NaviBar from "@/Components/NaviBar";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
+import Select from "@/Components/UI/Forms/Select";
+import TextField from "@/Components/UI/Forms/TextField";
 
-import AmaranthIcon, { aiCheck, aiFloppyDisk } from '@changewindows/amaranth';
+export default function Create({ platforms, params }) {
+  const { data, setData, post, processing, errors } = useForm({
+    name: "",
+    color: "#",
+    order: 0,
+    active: 1,
+    platform_id: params.platform.id,
+  });
 
-export default function Create({ urls, platforms, params }) {
-    const [curChannel, setCurChannel] = useState({
-        name: '',
-        color: '#',
-        order: 0,
-        active: 1,
-        platform_id: params.platform
-    });
+  function handleSubmit(e) {
+    e.preventDefault();
+    post(route("admin.channels.store"));
+  }
 
-    function formHandler(event) {
-        const { id, value, type } = event.target;
-        const _channel = Object.assign({}, curChannel);
+  return (
+    <Admin>
+      <form onSubmit={handleSubmit}>
+        <NaviBar
+          back={route("admin.platforms.edit", params.platform)}
+          actions={<SaveButton loading={processing} />}
+        >
+          {data.name || "Unnamed channel"}
+        </NaviBar>
 
-        switch (type) {
-            case 'checkbox':
-                _channel[id] = _channel[id] === 0 ? 1 : 0;
-                break;
-            default:
-                _channel[id] = value;
-                break;
-        }
-
-        setCurChannel(_channel);
-    }
-
-    function handleSubmit(event) {
-      event.preventDefault();
-      Inertia.post(urls.store_channel, curChannel);
-    }
-
-    return (
-        <Admin>
-            <form onSubmit={handleSubmit}>
-                <NaviBar
-                    back={urls.edit_platform}
-                    actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk}/> Save</button>
-                    }
-                >
-                    {curChannel.name || 'Unnamed channel'}
-                </NaviBar>
-
-                <div className="container my-3">
-                    {status &&
-                        <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
-                    }
-                    <fieldset className="row mb-3">
-                        <div className="col-12 col-md-4 my-4 my-md-0">
-                            <h4 className="h5 mb-0">Identity</h4>
-                            <p className="text-muted mb-0"><small>About this platform.</small></p>
-                        </div>
-                        <div className="col-12 col-md-8">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="row g-3">
-                                        <div className="col-12 col-lg-6">
-                                            <div className="form-floating">
-                                                <input type="text" className="form-control" id="name" value={curChannel.name} onChange={formHandler} />
-                                                <label htmlFor="name">Name</label>
-                                            </div>
-                                        </div>
-                                        <div className="col-12 col-lg-6">
-                                            <div className="form-floating">
-                                                <select className="form-select" id="platform_id" aria-label="Platform" value={curChannel.platform_id} onChange={formHandler}>
-                                                    <option style={{ display: 'none' }}>Select platform</option>
-                                                    {platforms.map((platform, key) => (
-                                                        <option value={platform.id} key={key}>{platform.name}</option>
-                                                    ))}
-                                                </select>
-                                                <label htmlFor="platform_id">Platform</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset className="row mb-3">
-                        <div className="col-12 col-md-4 my-4 my-md-0">
-                            <h4 className="h5 mb-0">Appearance</h4>
-                            <p className="text-muted mb-0"><small>The way it will look.</small></p>
-                        </div>
-                        <div className="col-12 col-md-8">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="row g-3">
-                                        <div className="col-12 col-lg-6">
-                                            <div className="form-floating">
-                                                <input type="number" className="form-control" id="order" value={curChannel.order} onChange={formHandler} />
-                                                <label htmlFor="order">Order</label>
-                                            </div>
-                                        </div>
-                                        <div className="col-12 col-lg-6">
-                                            <div className="form-floating">
-                                                <input type="text" className="form-control" id="color" value={curChannel.color} onChange={formHandler} />
-                                                <label htmlFor="color">Color</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset className="row mb-3">
-                        <div className="col-12 col-md-4 my-4 my-md-0">
-                            <h4 className="h5 mb-0">Status</h4>
-                            <p className="text-muted mb-0"><small>The platform's current status.</small></p>
-                        </div>
-                        <div className="col-12 col-md-8">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="row g-2">
-                                        <div className="col-12 col-lg-6">
-                                            <div className="form-check">
-                                                <input
-                                                    className="form-check-input"
-                                                    type="checkbox"
-                                                    value="1"
-                                                    id="active"
-                                                    checked={curChannel.active === 1}
-                                                    onChange={formHandler}
-                                                />
-                                                <label className="form-check-label" htmlFor="active">
-                                                    Active<br />
-                                                    <p className="form-text">This platform is still receiving updates.</p>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </form>
-        </Admin>
-    )
+        <div className="container my-3">
+          <Fieldset title="Identity" description="About this channel.">
+            <div className="col-12 col-lg-6">
+              <TextField
+                id="name"
+                label="Name"
+                value={data.name}
+                errors={errors.name}
+                onChange={setData}
+              />
+            </div>
+            <div className="col-12 col-lg-6">
+              <Select
+                id="platform_id"
+                label="Platform"
+                value={data.platform_id}
+                selects={platforms}
+                selectLabel={(x) => x.name}
+                selectValue={(x) => x.id}
+                errors={errors.platform_id}
+                onChange={setData}
+              />
+            </div>
+          </Fieldset>
+          <Fieldset title="Appearance" description="The way it will look.">
+            <div className="col-12 col-lg-6">
+              <TextField
+                type="number"
+                id="order"
+                label="Order"
+                value={data.order}
+                errors={errors.order}
+                onChange={setData}
+              />
+            </div>
+            <div className="col-12 col-lg-6">
+              <TextField
+                id="color"
+                label="Color"
+                value={data.color}
+                errors={errors.color}
+                onChange={setData}
+              />
+            </div>
+          </Fieldset>
+          <Fieldset title="Status" description="The paltform's current status.">
+            <div className="col-12 col-lg-6">
+              <Checkbox
+                id="active"
+                label="Active"
+                helper="This channel is still receiving updates."
+                checked={data.active}
+                onChange={setData}
+              />
+            </div>
+          </Fieldset>
+        </div>
+      </form>
+    </Admin>
+  );
 }

@@ -39,9 +39,6 @@ class ReleaseChannelController extends Controller
         $release = Release::find($request->release);
 
         return Inertia::render('Admin/ReleaseChannels/Create', [
-            'urls' => [
-                'store_release_channel' => route('admin.releasechannels.store', [], false)
-            ],
             'params' => [
                 'platform' => $request->platform,
                 'release' => $request->release,
@@ -73,9 +70,15 @@ class ReleaseChannelController extends Controller
         ]);
 
         if ($releaseChannel->release->package) {
-            return Redirect::route('admin.packages.edit', $releaseChannel->release)->with('status', 'Succesfully created this package channel.');
+            return Redirect::route('admin.packages.edit', $releaseChannel->release)->with('status', [
+                'message' => 'Succesfully created this package channel.',
+                'type' => 'success'
+            ]);
         } else {
-            return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully created this release channel.');
+            return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', [
+                'message' => 'Succesfully created this release channel.',
+                'type' => 'success'
+            ]);
         }
     }
 
@@ -102,12 +105,10 @@ class ReleaseChannelController extends Controller
 
         return Inertia::render('Admin/ReleaseChannels/Edit', [
             'can' => [
-                'edit_releases' => Auth::user()->can('releases.edit'),
-                'delete_releases' => Auth::user()->can('releases.delete')
-            ],
-            'urls' => [
-                'update_release_channel' => route('admin.releasechannels.update', $releaseChannel, false),
-                'destroy_release_channel' => route('admin.releasechannels.destroy', $releaseChannel, false)
+                'releases' => [
+                    'edit' => Auth::user()->can('releases.edit'),
+                    'delete' => Auth::user()->can('releases.delete')
+                ],
             ],
             'releaseChannel' => $releaseChannel,
             'releases' => $releaseChannel->release->platform->releases,
@@ -134,9 +135,15 @@ class ReleaseChannelController extends Controller
         ]);
 
         if ($releaseChannel->release->package) {
-            return Redirect::route('admin.packages.edit', $releaseChannel->release)->with('status', 'Succesfully updated this package channel.');
+            return Redirect::route('admin.packages.edit', $releaseChannel->release)->with('status', [
+                'message' => 'Succesfully updated this package channel.',
+                'type' => 'success'
+            ]);
         } else {
-            return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully updated this release channel.');
+            return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', [
+                'message' => 'Succesfully updated this release channel.',
+                'type' => 'success'
+            ]);
         }
     }
 
@@ -152,6 +159,29 @@ class ReleaseChannelController extends Controller
 
         $releaseChannel->delete();
 
-        return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', 'Succesfully deleted release channel.');
+        return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', [
+            'message' => 'Succesfully deleted release channel.',
+            'type' => 'success'
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\ReleaseChannel  $releaseChannel
+     * @return \Illuminate\Http\Response
+     */
+    public function toggleSupported(ReleaseChannel $releaseChannel)
+    {
+        $this->authorize('releases.show');
+
+        $releaseChannel->update([
+            'supported' => $releaseChannel->supported ? 0 : 1
+        ]);
+
+        return Redirect::route('admin.releases.edit', $releaseChannel->release)->with('status', [
+            'message' => 'Succesfully toggled this release channel support state.',
+            'type' => 'success'
+        ]);
     }
 }

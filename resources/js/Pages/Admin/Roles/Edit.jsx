@@ -1,46 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { Inertia } from '@inertiajs/inertia';
+import React from "react";
+import { useForm } from "@inertiajs/inertia-react";
 
-import Admin from '../../../Layouts/Admin';
-import NaviBar from '../../../Components/NaviBar';
+import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
+import TextField from "@/Components/UI/Forms/TextField";
+import Checkbox from "@/Components/UI/Forms/Checkbox";
+import Fieldset from "@/Components/UI/Forms/Fieldset";
 
-import AmaranthIcon, { aiCheck, aiFloppyDisk, aiTrashCan } from '@changewindows/amaranth';
+import AmaranthIcon, { aiTrashCan } from "@changewindows/amaranth";
 
-export default function Edit({ can, role, permissions, urls, status = null }) {
-  const [curRole, setCurRole] = useState(role);
+export default function Edit({ can, role, permissions, status }) {
+  const {
+    data,
+    setData,
+    patch,
+    delete: destroy,
+    processing,
+    errors,
+  } = useForm(role);
 
-  useEffect(() => {
-    setCurRole(role);
-  }, [role]);
-
-  function formHandler(event) {
-    const { id, value, name } = event.target;
-    const _role = Object.assign({}, curRole);
-
-    switch (name) {
-      case 'permission':
-        if (_role.permissions.find((role) => role === id)) {
-          _role.permissions = _role.permissions.filter((role) => role !== id);
-        } else {
-          _role.permissions = [..._role.permissions, id];
-        }
-        break;
-      default:
-        _role[id] = value;
-        break;
+  function permissionHandler(permission) {
+    if (data.permissions.find((_permission) => _permission === permission)) {
+      setData(
+        "permissions",
+        data.permissions.filter((_permission) => _permission !== permission)
+      );
+    } else {
+      setData("permissions", [...data.permissions, permission]);
     }
-
-    setCurRole(_role);
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    Inertia.patch(urls.update_role, curRole);
+  function handleSubmit(e) {
+    e.preventDefault();
+    patch(route("admin.roles.update", role));
   }
 
-  function handleDelete(event) {
-    event.preventDefault();
-    Inertia.delete(urls.destroy_role, curRole);
+  function handleDelete(e) {
+    e.preventDefault();
+    destroy(route("admin.roles.destroy", role));
   }
 
   return (
@@ -48,96 +47,75 @@ export default function Edit({ can, role, permissions, urls, status = null }) {
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/roles"
-          actions={
-            <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
-          }
+          actions={can.roles.edit && <SaveButton loading={processing} />}
         >
-          {curRole.name || 'Unnamed role'}
+          {data.name || "Unnamed role"}
         </NaviBar>
 
         <div className="container my-3">
-          {status &&
-            <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
-          }
-          <fieldset className="row mb-3" disabled={!can.edit_roles}>
-            <div className="col-12 col-md-4 my-4 my-md-0">
-              <h4 className="h5 mb-0">General</h4>
-              <p className="text-muted mb-0"><small>Basic role settings.</small></p>
+          <Status status={status} />
+          <Fieldset
+            title="General"
+            description="Basic settings."
+            disabled={!can.roles.edit}
+          >
+            <div className="col-12 col-sm-6">
+              <TextField
+                id="name"
+                label="Name"
+                value={data.name}
+                errors={errors.name}
+                onChange={setData}
+              />
             </div>
-            <div className="col-12 col-md-8">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row g-3">
-                    <div className="col-12 col-sm-6">
-                      <div className="form-floating">
-                        <input type="text" className="form-control" id="name" value={curRole.name} onChange={formHandler} />
-                        <label htmlFor="name">Name</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          </Fieldset>
+          <Fieldset
+            title="Permissions"
+            description="What this role can do."
+            disabled={!can.roles.edit}
+          >
+            {permissions.map((permission, key) => (
+              <div className="col-12 col-sm-6 col-md-4" key={key}>
+                <Checkbox
+                  id={permission.name}
+                  name={permission.name}
+                  label={permission.name}
+                  checked={
+                    data.permissions.filter(
+                      (_permission) => _permission === permission.name
+                    ).length === 1
+                  }
+                  disabled={data.permissions.find(
+                    (_permission) =>
+                      _permission ===
+                      permission.name.substr(0, permission.name.indexOf("."))
+                  )}
+                  onChange={permissionHandler}
+                />
               </div>
-            </div>
-          </fieldset>
-          <fieldset className="row mb-3" disabled={!can.edit_roles}>
-            <div className="col-12 col-md-4 my-4 my-md-0">
-              <h4 className="h5 mb-0">Permissions</h4>
-              <p className="text-muted mb-0"><small>What this role can do.</small></p>
-            </div>
-            <div className="col-12 col-md-8">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row g-2">
-                    {permissions.map((permission, key) => (
-                      <div className="col-12 col-sm-6 col-md-4" key={key}>
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            value="1"
-                            id={permission.name}
-                            name="permission"
-                            checked={curRole.permissions.filter((_permission) => _permission === permission.name).length === 1}
-                            onChange={formHandler}
-                            disabled={curRole.permissions.find((_permission) => _permission === permission.name.substr(0, permission.name.indexOf('.')))}
-                          />
-                          <label className="form-check-label" htmlFor={permission.name}>
-                            {permission.name}
-                          </label>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </fieldset>
+            ))}
+          </Fieldset>
         </div>
       </form>
-      {can.delete_roles &&
-        <form onSubmit={handleDelete}>
-          <div className="container my-3">
-            <div className="row">
-              <div className="col-12 col-md-4 my-4 my-md-0">
-                <h4 className="h5 mb-0 text-danger">Danger zone</h4>
-                <p className="text-muted mb-0"><small>All alone in the danger zone.</small></p>
-              </div>
-              <div className="col-12 col-md-8">
-                <div className="card">
-                  <div className="card-body">
-                    <div className="row g-3">
-                      <div className="col-12">
-                        <p>Deleting a user will remove all the content associated with that user. Are you sure?</p>
-                        <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrashCan} /> Delete</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      {can.roles.delete && (
+        <form onSubmit={handleDelete} className="container my-3 py-0">
+          <Fieldset
+            title="Danger zone"
+            description="All alone in the danger zone."
+            danger
+          >
+            <div className="col-12">
+              <p>
+                Deleting a user will remove all the content associated with that
+                user. Are you sure?
+              </p>
+              <button className="btn btn-danger btn-sm" type="submit">
+                <AmaranthIcon icon={aiTrashCan} /> Delete
+              </button>
             </div>
-          </div>
+          </Fieldset>
         </form>
-      }
+      )}
     </Admin>
-  )
+  );
 }

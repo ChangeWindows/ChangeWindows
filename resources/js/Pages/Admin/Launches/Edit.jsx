@@ -1,105 +1,95 @@
-import React, { useState } from 'react';
-import { Inertia } from '@inertiajs/inertia';
+import React from "react";
+import { useForm } from "@inertiajs/inertia-react";
 
-import Admin from '../../../Layouts/Admin';
-import NaviBar from '../../../Components/NaviBar';
-import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
+import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Status from "@/Components/Status";
+import Fieldset from "@/Components/UI/Forms/Fieldset";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
+import TextField from "@/Components/UI/Forms/TextField";
 
-import AmaranthIcon, { aiCheck, aiFloppyDisk, aiTrashCan } from '@changewindows/amaranth';
+import AmaranthIcon, { aiTrashCan } from "@changewindows/amaranth";
 
-import { parse, format, isValid, parseISO } from 'date-fns';
+import { parse, format, isValid, parseISO } from "date-fns";
 
-export default function Edit({ can, urls, launch, release, platform, status = null }) {
-    const [curLaunch, setCurLaunch] = useState({
-        date: format(parseISO(launch.date), 'yyyy-MM-dd')
-    });
+export default function Edit({ can, launch, release, platform, status }) {
+  const {
+    data,
+    setData,
+    patch,
+    delete: destroy,
+    processing,
+    errors,
+  } = useForm({
+    ...launch,
+    date: format(parseISO(launch.date), "yyyy-MM-dd"),
+  });
 
-    function formHandler(event) {
-        const { id, value, type } = event.target;
-        const _launch = Object.assign({}, curLaunch);
+  function handleSubmit(e) {
+    e.preventDefault();
+    patch(route("admin.launches.update", launch));
+  }
 
-        switch (type) {
-            default:
-                _launch[id] = value;
-                break;
-        }
+  function handleDelete(e) {
+    e.preventDefault();
+    destroy(route("admin.launches.destroy", launch));
+  }
 
-        setCurLaunch(_launch);
-    }
+  return (
+    <Admin>
+      <form onSubmit={handleSubmit}>
+        <NaviBar
+          back={route("admin.launches")}
+          actions={can.launches.edit && <SaveButton loading={processing} />}
+        >
+          <PlatformIcon platform={platform} color className="me-2" />
+          Version {release.version}
+        </NaviBar>
 
-    function handleSubmit(event) {
-      event.preventDefault();
-      Inertia.patch(urls.update_launch, curLaunch);
-    }
-
-    function handleDelete(event) {
-      event.preventDefault();
-      Inertia.delete(urls.destroy_launch, curLaunch);
-    }
-
-    return (
-        <Admin>
-            <form onSubmit={handleSubmit}>
-                <NaviBar
-                    back="/admin/flights"
-                    actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
-                    }
-                >
-                    <PlatformIcon platform={platform} color className="me-2" />
-                    Version {release.version || 'Unnamed launch'}
-                </NaviBar>
-
-                <div className="container my-3">
-                    {status &&
-                        <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
-                    }
-                    <fieldset className="row mb-3">
-                        <div className="col-12 col-md-4 my-4 my-md-0">
-                            <h4 className="h5 mb-0">Identity</h4>
-                            <p className="text-muted mb-0"><small>The date for this launch.</small></p>
-                        </div>
-                        <div className="col-12 col-md-8">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="row g-3">
-                                        <div className="col-12 col-sm-6">
-                                            <div className="form-floating">
-                                                <input type="date" className="form-control" id="date" value={isValid(parse(curLaunch.date, 'P', new Date())) ? format(parseISO(curLaunch.date), 'yyyy-MM-dd') : curLaunch.date} onChange={formHandler} />
-                                                <label htmlFor="date">Date</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </form>
-            {can.delete_launches &&
-                <form onSubmit={handleDelete}>
-                    <div className="container my-3">
-                        <div className="row">
-                            <div className="col-12 col-md-4 my-4 my-md-0">
-                                <h4 className="h5 mb-0 text-danger">Danger zone</h4>
-                                <p className="text-muted mb-0"><small>All alone in the danger zone.</small></p>
-                            </div>
-                            <div className="col-12 col-md-8">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <div className="row g-3">
-                                            <div className="col-12">
-                                                <p>Deleting a launch will remove all the content associated with that launch. Are you sure?</p>
-                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrashCan} /> Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            }
-        </Admin>
-    )
+        <div className="container my-3">
+          <Status status={status} />
+          <Fieldset
+            title="Launch date"
+            description="T-minus."
+            disabled={!can.launches.edit}
+          >
+            <div className="col-12 col-sm-6">
+              <TextField
+                type="date"
+                id="date"
+                label="Date"
+                value={
+                  isValid(parse(data.date, "P", new Date()))
+                    ? format(parseISO(data.date), "yyyy-MM-dd")
+                    : data.date
+                }
+                errors={errors.date}
+                onChange={setData}
+              />
+            </div>
+          </Fieldset>
+        </div>
+      </form>
+      {can.launches.delete && (
+        <form onSubmit={handleDelete} className="container my-3 py-0">
+          <Fieldset
+            title="Danger zone"
+            description="All alone in the danger zone."
+            danger
+          >
+            <div className="col-12">
+              <p>
+                Deleting a launch will remove all the content associated with
+                that launch. Are you sure?
+              </p>
+              <button className="btn btn-danger btn-sm" type="submit">
+                <AmaranthIcon icon={aiTrashCan} /> Delete
+              </button>
+            </div>
+          </Fieldset>
+        </form>
+      )}
+    </Admin>
+  );
 }

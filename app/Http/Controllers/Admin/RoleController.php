@@ -18,22 +18,23 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $this->authorize('roles.show');
 
-        return Inertia::render('Admin/Roles/Show', [
+        return Inertia::render('Admin/Roles/Index', [
             'can' => [
-                'create_roles' => Auth::user()->can('roles.create'),
-                'edit_roles' => Auth::user()->can('roles.edit')
+                'roles' => [
+                    'create' => Auth::user()->can('roles.create'),
+                    'edit' => Auth::user()->can('roles.edit')
+                ],
             ],
             'roles' => Role::orderBy('name')->get()->map(function ($role) {
                 return [
                     'id' => $role->id,
-                    'name' => $role->name,
-                    'editUrl' => route('admin.roles.edit', $role, false)
+                    'name' => $role->name
                 ];
             }),
-            'createUrl' => route('admin.roles.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -43,14 +44,12 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         $this->authorize('roles.create');
 
         return Inertia::render('Admin/Roles/Create', [
-            'permissions' => Permission::get(),
-            'urls' => [
-                'store_role' => route('admin.roles.store', [], false),
-            ]
+            'permissions' => Permission::get()
         ]);
     }
 
@@ -60,20 +59,24 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $this->authorize('roles.create');
 
-        $role = $role->create([
+        $role = Role::create([
             'name' => request('name'),
         ]);
-        
+
         $role_permissions = new Collection(request('permissions'));
 
-        foreach($role_permissions as $permission) {
+        foreach ($role_permissions as $permission) {
             $role->givePermissionTo($permission);
         }
 
-        return Redirect::route('admin.roles.edit', ['role' => $role->id])->with('status', 'Succesfully created this role.');
+        return Redirect::route('admin.roles.edit', ['role' => $role->id])->with('status', [
+            'message' => 'Succesfully created this role.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -93,17 +96,16 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role) {
+    public function edit(Role $role)
+    {
         $this->authorize('roles.show');
 
         return Inertia::render('Admin/Roles/Edit', [
             'can' => [
-                'edit_roles' => Auth::user()->can('roles.edit'),
-                'delete_roles' => Auth::user()->can('roles.delete')
-            ],
-            'urls' => [
-                'update_role' => route('admin.roles.update', $role, false),
-                'destroy_role' => route('admin.roles.destroy', $role, false)
+                'roles' => [
+                    'delete' => Auth::user()->can('roles.delete'),
+                    'edit' => Auth::user()->can('roles.edit')
+                ],
             ],
             'role' => [
                 'id' => $role->id,
@@ -122,7 +124,8 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role) {
+    public function update(Request $request, Role $role)
+    {
         $this->authorize('roles.edit');
 
         $role->update([
@@ -131,7 +134,7 @@ class RoleController extends Controller
 
         $role_permissions = new Collection(request('permissions'));
 
-        foreach(Permission::get() as $permission) {
+        foreach (Permission::get() as $permission) {
             if ($role_permissions->contains($permission->name)) {
                 $role->givePermissionTo($permission->name);
             } else {
@@ -139,7 +142,10 @@ class RoleController extends Controller
             }
         }
 
-        return Redirect::route('admin.roles.edit', $role)->with('status', 'Succesfully updated this role.');
+        return Redirect::route('admin.roles.edit', $role)->with('status', [
+            'message' => 'Succesfully updated this role.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -148,11 +154,15 @@ class RoleController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role) {
+    public function destroy(Role $role)
+    {
         $this->authorize('roles.delete');
 
         $role->delete();
 
-        return Redirect::route('admin.roles')->with('status', 'Succesfully deleted role.');
+        return Redirect::route('admin.roles')->with('status', [
+            'message' => 'Succesfully deleted role.',
+            'type' => 'success'
+        ]);
     }
 }

@@ -22,7 +22,7 @@ After ChangeWindows viv, we've decided to bring ChangeWindows Horizon - our 7th 
 ## Using
 To run ChangeWindows, you'll need the following:
 
-* PHP 7.4.0 or higher, including extensions required by Laravel 8.x
+* PHP 8.1.0 or higher, including extensions required by Laravel 9.x
 * MySQL
 * Composer
 * npm
@@ -46,7 +46,7 @@ php artisan serve
 This will launch a server at `127.0.0.1:8000`. Also run this NPM command.
 
 ```
-npm run watch
+npm start
 ```
 
 This will compile various files, mostly SCSS and keep an eye out for changes.
@@ -55,7 +55,7 @@ For a production build, execute the following commands:
 
 ```
 composer install --prefer-dist --no-scripts --no-dev -o
-npm run prod
+npm run build
 ```
 
 The `node_modules` folder is not required in a production environment as long as the production-script has been run. All relevant JavaScript will be compiled to the `public`-folder.
@@ -70,3 +70,13 @@ If you discover a security vulnerability within ChangeWindows, please contact us
 
 ## License
 The ChangeWindows website is open-sourced software licensed under the [AGPL license v3](LICENSE). Note however that the content on our website isn't unless stated otherwise.
+
+## ChangeWindows 7.7/8.0
+create table `flags` (`id` bigint unsigned not null auto_increment primary key, `name` varchar(255) not null, `feature_name` varchar(255) not null, `feature_id` int not null, `description` text null, `added` int not null, `removed` int null, `slug` varchar(255) not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci'
+create table `flag_status` (`id` bigint unsigned not null auto_increment primary key, `flag_id` bigint unsigned not null, `build` int not null, `status` varchar(255) not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci'
+alter table `flag_status` add constraint `flag_status_flag_id_foreign` foreign key (`flag_id`) references `flags` (`id`) on delete cascade
+create table `flag_authors` (`id` bigint unsigned not null auto_increment primary key, `flag_id` bigint unsigned not null, `user_id` bigint unsigned not null) default character set utf8mb4 collate 'utf8mb4_unicode_ci'
+alter table `flag_authors` add constraint `flag_authors_flag_id_foreign` foreign key (`flag_id`) references `flags` (`id`) on delete cascade
+alter table `flag_authors` add constraint `flag_authors_user_id_foreign` foreign key (`user_id`) references `users` (`id`) on delete cascade
+create table `flag_suggestions` (`id` bigint unsigned not null auto_increment primary key, `flag_id` bigint unsigned not null, `name` varchar(255) not null, `feature_name` varchar(255) not null, `feature_id` int not null, `description` text null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci'
+alter table `flag_suggestions` add constraint `flag_suggestions_flag_id_foreign` foreign key (`flag_id`) references `flags` (`id`) on delete cascade

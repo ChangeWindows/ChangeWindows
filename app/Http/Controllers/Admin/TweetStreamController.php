@@ -23,20 +23,20 @@ class TweetStreamController extends Controller
     {
         $this->authorize('tweet_streams.show');
 
-        return Inertia::render('Admin/TweetStreams/Show', [
+        return Inertia::render('Admin/TweetStreams/Index', [
             'can' => [
-                'create_tweet_streams' => Auth::user()->can('tweet_streams.create'),
-                'edit_tweet_streams' => Auth::user()->can('tweet_streams.edit')
+                'tweetStreams' => [
+                    'create' => Auth::user()->can('tweet_streams.create'),
+                    'edit' => Auth::user()->can('tweet_streams.edit')
+                ],
             ],
             'tweet_streams' => TweetStream::orderBy('created_at')->get()->map(function ($tweet_stream) {
                 return [
                     'id' => $tweet_stream->id,
                     'name' => $tweet_stream->name,
-                    'account' => $tweet_stream->account,
-                    'editUrl' => route('admin.tweet_streams.edit', $tweet_stream, false)
+                    'account' => $tweet_stream->account
                 ];
             }),
-            'createUrl' => route('admin.tweet_streams.create', [], false),
             'status' => session('status')
         ]);
     }
@@ -50,11 +50,7 @@ class TweetStreamController extends Controller
     {
         $this->authorize('tweet_streams.create');
 
-        return Inertia::render('Admin/TweetStreams/Create', [
-            'urls' => [
-                'store_tweet_stream' => route('admin.tweet_streams.store', [], false),
-            ]
-        ]);
+        return Inertia::render('Admin/TweetStreams/Create');
     }
 
     /**
@@ -76,7 +72,10 @@ class TweetStreamController extends Controller
             'access_token_secret' => request('access_token_secret')
         ]);
 
-        return Redirect::route('admin.tweet_streams.edit', $tweet_stream)->with('status', 'Succesfully created this tweet stream.');
+        return Redirect::route('admin.tweet_streams.edit', $tweet_stream)->with('status', [
+            'message' => 'Succesfully created this tweet stream.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -102,12 +101,10 @@ class TweetStreamController extends Controller
 
         return Inertia::render('Admin/TweetStreams/Edit', [
             'can' => [
-                'edit_tweet_streams' => Auth::user()->can('tweet_streams.edit'),
-                'delete_tweet_streams' => Auth::user()->can('tweet_streams.delete')
-            ],
-            'urls' => [
-                'update_tweet_stream' => route('admin.tweet_streams.update', $tweetStream, false),
-                'destroy_tweet_stream' => route('admin.tweet_streams.destroy', $tweetStream, false)
+                'tweetStreams' => [
+                    'delete' => Auth::user()->can('tweet_streams.delete'),
+                    'edit' => Auth::user()->can('tweet_streams.edit')
+                ],
             ],
             'tweet_stream' => $tweetStream,
             'status' => session('status')
@@ -134,7 +131,10 @@ class TweetStreamController extends Controller
             'access_token_secret' => request('access_token_secret')
         ]);
 
-        return Redirect::route('admin.tweet_streams.edit', $tweetStream)->with('status', 'Succesfully updated the tweet stream.');
+        return Redirect::route('admin.tweet_streams.edit', $tweetStream)->with('status', [
+            'message' => 'Succesfully updated the tweet stream.',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -149,6 +149,9 @@ class TweetStreamController extends Controller
 
         $tweetStream->delete();
 
-        return Redirect::route('admin.tweet_streams')->with('status', 'Succesfully deleted tweet stream.');
+        return Redirect::route('admin.tweet_streams')->with('status', [
+            'message' => 'Succesfully deleted tweet stream.',
+            'type' => 'success'
+        ]);
     }
 }

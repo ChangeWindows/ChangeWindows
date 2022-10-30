@@ -24,7 +24,6 @@ class TimelineController extends Controller
 
         $patreon_api = new \Patreon\API(env('PATREON_API_KEY'));
         $campaign_id = 1028298;
-        $tier_id = '1965775';
 
         $fields = [
             "page" => [
@@ -49,7 +48,7 @@ class TimelineController extends Controller
         foreach (array_keys($pledges_response['data']) as $pledge_data_key) {
             $pledge_data = $pledges_response['data'][$pledge_data_key];
 
-            if ($pledge_data['attributes']['patron_status'] === 'active_patron' && $pledge_data['relationships']['currently_entitled_tiers']['data'] && $pledge_data['relationships']['currently_entitled_tiers']['data'][0]['id'] === $tier_id) {
+            if ($pledge_data['attributes']['patron_status'] === 'active_patron') {
                 $patrons->push([
                     'name' => $pledge_data['attributes']['full_name'],
                     'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}",
@@ -61,17 +60,18 @@ class TimelineController extends Controller
         return Inertia::render('Timeline/Index', [
             'platforms' => Platform::orderBy('position')->get()->map(function ($platform) {
                 return [
+                    'slug' => $platform->slug,
                     'name' => $platform->name,
                     'color' => $platform->color,
                     'icon' => $platform->icon,
                     'legacy' => $platform->legacy,
                     'tool' => $platform->tool,
-                    'url' => route('front.timeline.show', $platform, false)
                 ];
             }),
             'channel_platforms' => $channel_platforms->map(function ($platform) {
                 return [
                     'name' => $platform->name,
+                    'slug' => $platform->slug,
                     'color' => $platform->color,
                     'icon' => $platform->icon,
                     'channels' => $platform->channels->where('active')->where('package', '=', 0)->map(function ($channel) {
@@ -86,8 +86,11 @@ class TimelineController extends Controller
                             'color' => $channel->color,
                             'flight' => [
                                 'version' => $release_channel->latest->flight,
-                                'date' => $release_channel->latest->timeline->date,
-                                'url' => $release_channel->latest->url
+                                'date' => $release_channel->latest->timeline->date
+                            ],
+                            'release' => [
+                                'id' => $release_channel->release->id,
+                                'slug' => $release_channel->release->slug,
                             ]
                         ];
                     })->sortBy('order')->values()->all(),
@@ -98,7 +101,7 @@ class TimelineController extends Controller
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function($item, $key) {
                         if ($item->item_type === \App\Models\Flight::class) {
-                            return $item->item->flight.'-'.$item->item->platform->position;
+                            return $item->item->platform->position.'-'.$item->item->flight;
                         } else if ($item->item_type === \App\Models\Promotion::class) {
                             return $item->item->platform->position.'.'.$item->item->releaseChannel->release->version.'.'.$item->item->releaseChannel->channel->order;
                         } else if ($item->item_type === \App\Models\Launch::class) {
@@ -113,9 +116,12 @@ class TimelineController extends Controller
                                 'id' => $_cur_flight->item->id,
                                 'flight' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->version : $_cur_flight->item->flight,
                                 'date' => $_cur_flight->item->timeline->date,
-                                'version' => $_cur_flight->item->releaseChannel->release->version,
-                                'cversion' => $_cur_flight->item->releaseChannel->release->canonical_version,
-                                'package' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->releaseChannel->release->name : false,
+                                'release' => [
+                                    'slug' => $_cur_flight->item->releaseChannel->release->slug,
+                                    'version' => $_cur_flight->item->releaseChannel->release->version,
+                                    'cversion' => $_cur_flight->item->releaseChannel->release->canonical_version,
+                                    'package' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->releaseChannel->release->name : false,
+                                ],
                                 'release_channel' => $flights->map(function ($channels) {
                                     return [
                                         'order' => $channels->item->releaseChannel->channel->order,
@@ -124,13 +130,14 @@ class TimelineController extends Controller
                                     ];
                                 })->sortBy('order')->values()->all(),
                                 'platform' => [
-                                    'order' => $_cur_flight->item->platform->order,
+                                    'id' => $_cur_flight->item->platform->id,
+                                    'slug' => $_cur_flight->item->platform->slug,
+                                    'position' => $_cur_flight->item->platform->position,
                                     'icon' => $_cur_flight->item->platform->icon,
                                     'name' => $_cur_flight->item->platform->name,
                                     'tool' => $_cur_flight->item->platform->tool,
                                     'color' => $_cur_flight->item->platform->color
-                                ],
-                                'url' => $_cur_flight->item->url
+                                ]
                             ];
                         }
 
@@ -141,19 +148,23 @@ class TimelineController extends Controller
                                 'event_priority' => 2,
                                 'id' => $_cur_promotion->item->id,
                                 'date' => $_cur_promotion->item->timeline->date,
-                                'version' => $_cur_promotion->item->releaseChannel->release->version,
-                                'cversion' => $_cur_promotion->item->releaseChannel->release->canonical_version,
+                                'release' => [
+                                    'slug' => $_cur_promotion->item->releaseChannel->release->slug,
+                                    'version' => $_cur_promotion->item->releaseChannel->release->version,
+                                    'package' => $_cur_promotion->item->releaseChannel->release->package ? $_cur_promotion->item->releaseChannel->release->name : false,
+                                ],
                                 'release_channel' => [
                                     'name' => $_cur_promotion->item->releaseChannel->short_name,
                                     'color' => $_cur_promotion->item->releaseChannel->channel->color
                                 ],
                                 'platform' => [
-                                    'order' => $_cur_promotion->item->platform->order,
+                                    'id' => $_cur_promotion->item->platform->id,
+                                    'slug' => $_cur_promotion->item->platform->slug,
+                                    'position' => $_cur_promotion->item->platform->position,
                                     'icon' => $_cur_promotion->item->platform->icon,
                                     'name' => $_cur_promotion->item->platform->name,
                                     'color' => $_cur_promotion->item->platform->color
-                                ],
-                                'url' => $_cur_promotion->item->url
+                                ]
                             ];
                         }
 
@@ -164,23 +175,33 @@ class TimelineController extends Controller
                                 'event_priority' => 1,
                                 'id' => $_cur_launch->item->id,
                                 'date' => $_cur_launch->item->timeline->date,
-                                'version' => $_cur_launch->item->release->version,
-                                'cversion' => $_cur_launch->item->release->canonical_version,
+                                'release' => [
+                                    'slug' => $_cur_launch->item->release->slug,
+                                    'version' => $_cur_launch->item->release->version,
+                                    'package' => $_cur_launch->item->release->package ? $_cur_launch->item->release->name : false,
+                                ],
                                 'platform' => [
-                                    'order' => $_cur_launch->item->platform->order,
+                                    'id' => $_cur_launch->item->platform->id,
+                                    'slug' => $_cur_launch->item->platform->slug,
+                                    'position' => $_cur_launch->item->platform->position,
                                     'icon' => $_cur_launch->item->platform->icon,
                                     'name' => $_cur_launch->item->platform->name,
                                     'color' => $_cur_launch->item->platform->color
-                                ],
-                                'url' => $_cur_launch->item->url
+                                ]
                             ];
                         }
-                    })->sortByDesc(function ($item, $key) {
-                        if ($item['type'] === 'flight') {
-                            return $item['event_priority'].'.'.$item['flight'].'.'.$item['platform']['order'];
-                        }
+                    })->groupBy(function($item, $key) {
+                        return $item['platform']['id'];
+                    })->sortBy(function($item, $key) {
+                        return $item[0]['platform']['position'];
+                    })->map(function($platform) {
+                        return $platform->sortByDesc(function ($item, $key) {
+                            if ($item['type'] === 'flight') {
+                                return $item['event_priority'].'.'.$item['platform']['position'].'.'.$item['flight'];
+                            }
 
-                        return $item['event_priority'].'.'.$item['platform']['order'];
+                            return $item['event_priority'].'.'.$item['platform']['position'];
+                        })->values()->all();
                     })->values()->all()
                 ];
             }),
@@ -234,12 +255,12 @@ class TimelineController extends Controller
             'platforms' => Platform::orderBy('position')->get()->map(function ($_platform) {
                 return [
                     'id' => $_platform->id,
+                    'slug' => $_platform->slug,
                     'name' => $_platform->name,
                     'color' => $_platform->color,
                     'icon' => $_platform->icon,
                     'legacy' => $_platform->legacy,
-                    'tool' => $_platform->tool,
-                    'url' => route('front.timeline.show', $_platform, false)
+                    'tool' => $_platform->tool
                 ];
             }),
             'platform' => [
@@ -250,6 +271,7 @@ class TimelineController extends Controller
             'channel_platforms' => $channel_platforms->map(function ($platform) {
                 return [
                     'name' => $platform->name,
+                    'slug' => $platform->slug,
                     'color' => $platform->color,
                     'icon' => $platform->icon,
                     'channels' => $platform->channels->where('active')->where('package', '=', 0)->map(function ($channel) {
@@ -264,19 +286,22 @@ class TimelineController extends Controller
                             'color' => $channel->color,
                             'flight' => [
                                 'version' => $release_channel->latest->flight,
-                                'date' => $release_channel->latest->timeline->date,
-                                'url' => $release_channel->latest->url
+                                'date' => $release_channel->latest->timeline->date
+                            ],
+                            'release' => [
+                                'id' => $release_channel->release->id,
+                                'slug' => $release_channel->release->slug,
                             ]
                         ];
                     })->sortBy('order')->values()->all(),
                 ];
             }),
-            'timeline' => $timeline->paginate(75)->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
+            'timeline' => $timeline->paginate(75)->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function($item, $key) {
                         if ($item->item_type === \App\Models\Flight::class) {
-                            return $item->item->flight.'-'.$item->item->platform->position;
+                            return $item->item->platform->position.'-'.$item->item->flight;
                         } else if ($item->item_type === \App\Models\Promotion::class) {
                             return $item->item->platform->position.'.'.$item->item->releaseChannel->release->version.'.'.$item->item->releaseChannel->channel->order;
                         } else if ($item->item_type === \App\Models\Launch::class) {
@@ -291,9 +316,12 @@ class TimelineController extends Controller
                                 'id' => $_cur_flight->item->id,
                                 'flight' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->version : $_cur_flight->item->flight,
                                 'date' => $_cur_flight->item->timeline->date,
-                                'version' => $_cur_flight->item->releaseChannel->release->version,
-                                'cversion' => $_cur_flight->item->releaseChannel->release->canonical_version,
-                                'package' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->releaseChannel->release->name : false,
+                                'release' => [
+                                    'slug' => $_cur_flight->item->releaseChannel->release->slug,
+                                    'version' => $_cur_flight->item->releaseChannel->release->version,
+                                    'cversion' => $_cur_flight->item->releaseChannel->release->canonical_version,
+                                    'package' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->releaseChannel->release->name : false,
+                                ],
                                 'release_channel' => $flights->map(function ($channels) {
                                     return [
                                         'order' => $channels->item->releaseChannel->channel->order,
@@ -302,13 +330,14 @@ class TimelineController extends Controller
                                     ];
                                 })->sortBy('order')->values()->all(),
                                 'platform' => [
-                                    'order' => $_cur_flight->item->platform->order,
+                                    'id' => $_cur_flight->item->platform->id,
+                                    'slug' => $_cur_flight->item->platform->slug,
+                                    'position' => $_cur_flight->item->platform->position,
                                     'icon' => $_cur_flight->item->platform->icon,
                                     'name' => $_cur_flight->item->platform->name,
                                     'tool' => $_cur_flight->item->platform->tool,
                                     'color' => $_cur_flight->item->platform->color
-                                ],
-                                'url' => $_cur_flight->item->url
+                                ]
                             ];
                         }
 
@@ -319,19 +348,23 @@ class TimelineController extends Controller
                                 'event_priority' => 2,
                                 'id' => $_cur_promotion->item->id,
                                 'date' => $_cur_promotion->item->timeline->date,
-                                'version' => $_cur_promotion->item->releaseChannel->release->version,
-                                'cversion' => $_cur_promotion->item->releaseChannel->release->canonical_version,
+                                'release' => [
+                                    'slug' => $_cur_promotion->item->releaseChannel->release->slug,
+                                    'version' => $_cur_promotion->item->releaseChannel->release->version,
+                                    'package' => $_cur_promotion->item->releaseChannel->release->package ? $_cur_promotion->item->releaseChannel->release->name : false,
+                                ],
                                 'release_channel' => [
                                     'name' => $_cur_promotion->item->releaseChannel->short_name,
                                     'color' => $_cur_promotion->item->releaseChannel->channel->color
                                 ],
                                 'platform' => [
-                                    'order' => $_cur_promotion->item->platform->order,
+                                    'id' => $_cur_promotion->item->platform->id,
+                                    'slug' => $_cur_promotion->item->platform->slug,
+                                    'position' => $_cur_promotion->item->platform->position,
                                     'icon' => $_cur_promotion->item->platform->icon,
                                     'name' => $_cur_promotion->item->platform->name,
                                     'color' => $_cur_promotion->item->platform->color
-                                ],
-                                'url' => $_cur_promotion->item->url
+                                ]
                             ];
                         }
 
@@ -342,23 +375,33 @@ class TimelineController extends Controller
                                 'event_priority' => 1,
                                 'id' => $_cur_launch->item->id,
                                 'date' => $_cur_launch->item->timeline->date,
-                                'version' => $_cur_launch->item->release->version,
-                                'cversion' => $_cur_launch->item->release->canonical_version,
+                                'release' => [
+                                    'slug' => $_cur_launch->item->release->slug,
+                                    'version' => $_cur_launch->item->release->version,
+                                    'package' => $_cur_launch->item->release->package ? $_cur_launch->item->release->name : false,
+                                ],
                                 'platform' => [
-                                    'order' => $_cur_launch->item->platform->order,
+                                    'id' => $_cur_launch->item->platform->id,
+                                    'slug' => $_cur_launch->item->platform->slug,
+                                    'position' => $_cur_launch->item->platform->position,
                                     'icon' => $_cur_launch->item->platform->icon,
                                     'name' => $_cur_launch->item->platform->name,
                                     'color' => $_cur_launch->item->platform->color
-                                ],
-                                'url' => $_cur_launch->item->url
+                                ]
                             ];
                         }
-                    })->sortByDesc(function ($item, $key) {
-                        if ($item['type'] === 'flight') {
-                            return $item['event_priority'].'.'.$item['flight'].'.'.$item['platform']['order'];
-                        }
+                    })->groupBy(function($item, $key) {
+                        return $item['platform']['id'];
+                    })->sortBy(function($item, $key) {
+                        return $item[0]['platform']['position'];
+                    })->map(function($platform) {
+                        return $platform->sortByDesc(function ($item, $key) {
+                            if ($item['type'] === 'flight') {
+                                return $item['event_priority'].'.'.$item['platform']['position'].'.'.$item['flight'];
+                            }
 
-                        return $item['event_priority'].'.'.$item['platform']['order'];
+                            return $item['event_priority'].'.'.$item['platform']['position'];
+                        })->values()->all();
                     })->values()->all()
                 ];
             }),

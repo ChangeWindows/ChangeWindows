@@ -1,156 +1,186 @@
-import React, { useEffect, useState } from 'react';
-import { Inertia } from '@inertiajs/inertia';
+import React, { useRef } from "react";
+import { useForm } from "@inertiajs/inertia-react";
 
-import Admin from '../../../Layouts/Admin';
-import NaviBar from '../../../Components/NaviBar';
-import PlatformIcon from '../../../Components/Platforms/PlatformIcon';
+import Admin from "@/Layouts/Admin";
+import Fieldset from "@/Components/UI/Forms/Fieldset";
+import NaviBar from "@/Components/NaviBar";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
+import Status from "@/Components/Status";
+import TextField from "@/Components/UI/Forms/TextField";
 
-import AmaranthIcon, { aiCheck, aiFloppyDisk, aiTrashCan } from '@changewindows/amaranth';
+import AmaranthIcon, { aiTrashCan } from "@changewindows/amaranth";
 
-import { parse, format, isValid, parseISO } from 'date-fns';
+import { parse, format, isValid, parseISO } from "date-fns";
 
-export default function Edit({ can, urls, flight, date, platform, release_channel, status = null }) {
-    const [curFlight, setCurFlight] = useState({
-        major: '',
-        minor: '',
-        build: '',
-        delta: '',
-        date: format(new Date(), 'yyyy-MM-dd')
-    });
+export default function Edit({
+  can,
+  flight,
+  date,
+  platform,
+  release_channel,
+  status,
+}) {
+  const {
+    data,
+    setData,
+    patch,
+    delete: destroy,
+    processing,
+    errors,
+  } = useForm({
+    ...flight,
+    date: format(parseISO(date.date), "yyyy-MM-dd"),
+  });
 
-    useEffect(() => {
-        setCurFlight({ ...flight, date: format(parseISO(date.date), 'yyyy-MM-dd') });
-        setVersion(`${flight.major}.${flight.minor}.${flight.build}.${flight.delta}`)
-    }, [flight, date]);
+  const refMajor = useRef(null);
+  const refMinor = useRef(null);
+  const refBuild = useRef(null);
+  const refDelta = useRef(null);
 
-    const [version, setVersion] = useState('10.0.');
-    useEffect(() => {
-        setCurFlight((curFlight) => ({
-            ...curFlight,
-            major: !isNaN(version.split('.')[0]) && !!version.split('.')[0] ? Number(version.split('.')[0]) : null,
-            minor: !isNaN(version.split('.')[1]) && !!version.split('.')[1] ? Number(version.split('.')[1]) : null,
-            build: !isNaN(version.split('.')[2]) && !!version.split('.')[2] ? Number(version.split('.')[2]) : null,
-            delta: !isNaN(version.split('.')[3]) && !!version.split('.')[3] ? Number(version.split('.')[3]) : null
-        }))
-    }, [version]);
+  function versionHandler(key, value) {
+    const order = ["major", "minor", "build", "delta"];
 
-    function formHandler(event) {
-        const { id, value, type } = event.target;
-        const _flight = Object.assign({}, curFlight);
+    if (value[value.length - 1] === ".") {
+      if (key === "major") {
+        refMinor.current.focus();
+      } else if (key === "minor") {
+        refBuild.current.focus();
+      } else if (key === "build") {
+        refDelta.current.focus();
+      }
+    } else {
+      if (value.includes(".")) {
+        const version = value.split(".");
 
-        switch (type) {
-            default:
-                _flight[id] = value;
-                break;
-        }
+        const target = order.slice(order.indexOf(key));
+        const fields = {};
 
-        setCurFlight(_flight);
+        target.map((key, i) => {
+          fields[key] = version[i] ?? "0";
+        });
+
+        setData({ ...data, ...fields });
+      } else {
+        setData(key, value);
+      }
     }
+  }
 
-    function handleSubmit(event) {
-      event.preventDefault();
-      Inertia.patch(urls.update_flight, curFlight);
-    }
+  function handleSubmit(e) {
+    e.preventDefault();
+    patch(route("admin.flights.update", { flight: flight.id }));
+  }
 
-    function handleDelete(event) {
-      event.preventDefault();
-      Inertia.delete(urls.destroy_flight, curFlight);
-    }
+  function handleDelete(e) {
+    e.preventDefault();
+    destroy(route("admin.flights.destroy", { flight: flight.id }));
+  }
 
-    return (
-        <Admin>
-            <form onSubmit={handleSubmit}>
-                <NaviBar
-                    back="/admin/flights"
-                    actions={
-                        <button className="btn btn-primary btn-sm" type="submit"><AmaranthIcon icon={aiFloppyDisk} /> Save</button>
-                    }
-                >
-                    <PlatformIcon platform={platform} color className="me-2" />
-                    {version || 'Unnamed flight'}
-                    <span className="badge ms-2" style={{ background: release_channel.color }}>{release_channel.name}</span>
-                </NaviBar>
+  return (
+    <Admin>
+      <form onSubmit={handleSubmit}>
+        <NaviBar
+          back="/admin/flights"
+          actions={can.flights.edit && <SaveButton loading={processing} />}
+        >
+          <PlatformIcon platform={platform} color className="me-2" />
+          {`${data.major}.${data.minor}.${data.build}.${data.delta}`}
+          <span
+            className="badge ms-2"
+            style={{ background: release_channel.color }}
+          >
+            {release_channel.name}
+          </span>
+        </NaviBar>
 
-                <div className="container my-3">
-                    {status &&
-                        <div className="alert alert-success"><AmaranthIcon icon={aiCheck} /> {status}</div>
-                    }
-                    <fieldset className="row mb-3">
-                        <div className="col-12 col-md-4 my-4 my-md-0">
-                            <h4 className="h5 mb-0">Identity</h4>
-                            <p className="text-muted mb-0"><small>The build string for this flight.</small></p>
-                        </div>
-                        <div className="col-12 col-md-8">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="row g-3">
-                                        <div className="col-12 col-sm-6">
-                                            <div className="form-floating">
-                                                <input type="text" className="form-control" id="version" value={version ?? ''} onChange={(event) => setVersion(event.target.value)} />
-                                                <label htmlFor="version">Version</label>
-                                            </div>
-                                        </div>
-                                        <div className="col-12 col-sm-6">
-                                            <div className="form-floating">
-                                                <input type="date" className="form-control" id="date" value={isValid(parse(curFlight.date, 'P', new Date())) ? format(parseISO(curFlight.date), 'yyyy-MM-dd') : curFlight.date} onChange={formHandler} />
-                                                <label htmlFor="date">Date</label>
-                                            </div>
-                                        </div>
-                                        <div className="col-3">
-                                            <div className="form-floating">
-                                                <input type="text" className="form-control" id="major" value={curFlight.major ?? ''} disabled />
-                                                <label htmlFor="major">Major</label>
-                                            </div>
-                                        </div>
-                                        <div className="col-3">
-                                            <div className="form-floating">
-                                                <input type="text" className="form-control" id="minor" value={curFlight.minor ?? ''} disabled />
-                                                <label htmlFor="minor">Minor</label>
-                                            </div>
-                                        </div>
-                                        <div className="col-3">
-                                            <div className="form-floating">
-                                                <input type="text" className="form-control" id="build" value={curFlight.build ?? ''} disabled />
-                                                <label htmlFor="build">Build</label>
-                                            </div>
-                                        </div>
-                                        <div className="col-3">
-                                            <div className="form-floating">
-                                                <input type="text" className="form-control" id="delta" value={curFlight.delta ?? ''} disabled />
-                                                <label htmlFor="delta">Delta</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
+        <div className="container my-3">
+          <Status status={status} />
+          <Fieldset
+            title="Build string"
+            description="The build string for this flight."
+            disabled={!can.flights.edit}
+          >
+            <div className="col-12 col-xl-6">
+              <div className="row g-1">
+                <div className="col-3">
+                  <TextField
+                    id="major"
+                    label="Major"
+                    value={data.major.toString()}
+                    onFocus={(e) => e.target.select()}
+                    onChange={versionHandler}
+                    ref={refMajor}
+                  />
                 </div>
-            </form>
-            {can.delete_flights &&
-                <form onSubmit={handleDelete}>
-                    <div className="container my-3">
-                        <div className="row">
-                            <div className="col-12 col-md-4 my-4 my-md-0">
-                                <h4 className="h5 mb-0 text-danger">Danger zone</h4>
-                                <p className="text-muted mb-0"><small>All alone in the danger zone.</small></p>
-                            </div>
-                            <div className="col-12 col-md-8">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <div className="row g-3">
-                                            <div className="col-12">
-                                                <p>Deleting a flight will remove all the content associated with that flight. Are you sure?</p>
-                                                <button className="btn btn-danger btn-sm" type="submit"><AmaranthIcon icon={aiTrashCan} /> Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            }
-        </Admin>
-    )
+                <div className="col-3">
+                  <TextField
+                    id="minor"
+                    label="Minor"
+                    value={data.minor.toString()}
+                    onFocus={(e) => e.target.select()}
+                    onChange={versionHandler}
+                    ref={refMinor}
+                  />
+                </div>
+                <div className="col-3">
+                  <TextField
+                    id="build"
+                    label="Build"
+                    value={data.build.toString()}
+                    onFocus={(e) => e.target.select()}
+                    onChange={versionHandler}
+                    ref={refBuild}
+                  />
+                </div>
+                <div className="col-3">
+                  <TextField
+                    id="delta"
+                    label="Delta"
+                    value={data.delta.toString()}
+                    onFocus={(e) => e.target.select()}
+                    onChange={versionHandler}
+                    ref={refDelta}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-12 col-xl-6">
+              <TextField
+                type="date"
+                id="date"
+                label="Date"
+                value={
+                  isValid(parse(data.date, "P", new Date()))
+                    ? format(parseISO(data.date), "yyyy-MM-dd")
+                    : data.date
+                }
+                errors={errors.date}
+                onChange={setData}
+              />
+            </div>
+          </Fieldset>
+        </div>
+      </form>
+      {can.flights.delete && (
+        <form onSubmit={handleDelete} className="container my-3 py-0">
+          <Fieldset
+            title="Danger zone"
+            description="All alone in the danger zone."
+            danger
+          >
+            <div className="col-12">
+              <p>
+                Deleting a flight will remove all the content associated with
+                that flight. Are you sure?
+              </p>
+              <button className="btn btn-danger btn-sm" type="submit">
+                <AmaranthIcon icon={aiTrashCan} /> Delete
+              </button>
+            </div>
+          </Fieldset>
+        </form>
+      )}
+    </Admin>
+  );
 }
