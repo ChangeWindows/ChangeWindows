@@ -171,7 +171,7 @@ export default function Show({ app, patrons }) {
                 <AmaranthIcon icon={aiTwitter} /> Twitter
               </a>
               <a
-                href="https://github.com/changewindows/horizon"
+                href="https://github.com/changewindows/changewindows"
                 target="_blank"
                 className="btn btn-primary btn-sm"
               >

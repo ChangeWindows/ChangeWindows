@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $admin = User::factory()->create(['email' => 'horizon@horizon.changewindows.org']);
+        $admin = User::factory()->create(['email' => 'admin@changewindows.org']);
         $admin->assignRole('admin');
     }
 }
