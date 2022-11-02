@@ -25,6 +25,9 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
 use App\Http\Controllers\Admin\LaunchController as AdminLaunchController;
 
+// Air
+use App\Http\Controllers\Air\TimelineController as Timeline;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +45,19 @@ Route::get('/', function () {
 
 Route::get('/admin', function () {
     return redirect()->route('admin.flights');
+});
+
+Route::prefix('air')->as('air')->group(function() {
+    Route::controller(Timeline::class)->group(function() {
+        Route::get('/timeline', 'index')->name('.timeline');
+        Route::get('/flags', 'index')->name('.flags');
+
+        Route::controller(Timeline::class)->prefix('{platform}')->name('.platform')->group(function() {
+            Route::get('/', 'index')->name('');
+            Route::get('/releases', 'index')->name('.releases');
+            Route::get('/channels', 'index')->name('.channels');
+        });
+    });
 });
 
 Route::prefix('')->as('front')->group(function() {
