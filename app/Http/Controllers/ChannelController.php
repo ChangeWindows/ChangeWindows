@@ -33,9 +33,9 @@ class ChannelController extends Controller
                     'name' => $platform->name,
                     'color' => $platform->color,
                     'icon' => $platform->icon,
-                    'channels' => $platform->channels->where('active')->where('package', '=', 0)->map(function ($channel) {
+                    'channels' => $platform->activeChannels->map(function ($channel) {
                         $release_channel = $channel->activeReleaseChannels
-                            ->sortByDesc(function ($release_channel, $key) {
+                            ->sortByDesc(function ($release_channel) {
                                 return $release_channel->release->canonical_version;
                             })->values()->first();
 

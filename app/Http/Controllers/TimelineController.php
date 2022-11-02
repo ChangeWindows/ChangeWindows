@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use App\Models\Platform;
 use App\Models\Timeline;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+
 
 class TimelineController extends Controller
 {
@@ -74,9 +76,9 @@ class TimelineController extends Controller
                     'slug' => $platform->slug,
                     'color' => $platform->color,
                     'icon' => $platform->icon,
-                    'channels' => $platform->channels->where('active')->where('package', '=', 0)->map(function ($channel) {
+                    'channels' => $platform->activeChannels->map(function ($channel) {
                         $release_channel = $channel->activeReleaseChannels
-                            ->sortByDesc(function ($release_channel, $key) {
+                            ->sortByDesc(function ($release_channel) {
                                 return $release_channel->release->canonical_version;
                             })->values()->first();
 
@@ -99,13 +101,13 @@ class TimelineController extends Controller
             'timeline' => $timeline->paginate(75)->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
-                    'flights' => $items->groupBy(function($item, $key) {
+                    'flights' => $items->groupBy(function ($item, $key) {
                         if ($item->item_type === \App\Models\Flight::class) {
-                            return $item->item->platform->position.'-'.$item->item->flight;
+                            return $item->item->platform->position . '-' . $item->item->flight;
                         } else if ($item->item_type === \App\Models\Promotion::class) {
-                            return $item->item->platform->position.'.'.$item->item->releaseChannel->release->version.'.'.$item->item->releaseChannel->channel->order;
+                            return $item->item->platform->position . '.' . $item->item->releaseChannel->release->version . '.' . $item->item->releaseChannel->channel->order;
                         } else if ($item->item_type === \App\Models\Launch::class) {
-                            return $item->item->platform->position.'.'.$item->item->release->version;
+                            return $item->item->platform->position . '.' . $item->item->release->version;
                         }
                     })->map(function ($flights) {
                         if ($flights->first()->item_type === \App\Models\Flight::class) {
@@ -190,17 +192,17 @@ class TimelineController extends Controller
                                 ]
                             ];
                         }
-                    })->groupBy(function($item, $key) {
+                    })->groupBy(function ($item, $key) {
                         return $item['platform']['id'];
-                    })->sortBy(function($item, $key) {
+                    })->sortBy(function ($item, $key) {
                         return $item[0]['platform']['position'];
-                    })->map(function($platform) {
+                    })->map(function ($platform) {
                         return $platform->sortByDesc(function ($item, $key) {
                             if ($item['type'] === 'flight') {
-                                return $item['event_priority'].'.'.$item['platform']['position'].'.'.$item['flight'];
+                                return $item['event_priority'] . '.' . $item['platform']['position'] . '.' . $item['flight'];
                             }
 
-                            return $item['event_priority'].'.'.$item['platform']['position'];
+                            return $item['event_priority'] . '.' . $item['platform']['position'];
                         })->values()->all();
                     })->values()->all()
                 ];
@@ -225,27 +227,27 @@ class TimelineController extends Controller
                 $query->join('release_channels as frs', function ($join) {
                     $join->on('frs.id', '=', 'flights.release_channel_id')
 
-                    ->join('channels as fc', function ($join) {
-                        $join->on('fc.id', '=', 'frs.channel_id');
-                    });
+                        ->join('channels as fc', function ($join) {
+                            $join->on('fc.id', '=', 'frs.channel_id');
+                        });
                 })
-                ->where('fc.platform_id', '=', $platform->id);
+                    ->where('fc.platform_id', '=', $platform->id);
             })
             ->orWhereHas('promotion', function (Builder $query) use ($platform) {
                 $query->join('release_channels as prs', function ($join) {
                     $join->on('prs.id', '=', 'promotions.release_channel_id')
 
-                    ->join('channels as pc', function ($join) {
-                        $join->on('pc.id', '=', 'prs.channel_id');
-                    });
+                        ->join('channels as pc', function ($join) {
+                            $join->on('pc.id', '=', 'prs.channel_id');
+                        });
                 })
-                ->where('pc.platform_id', '=', $platform->id);
+                    ->where('pc.platform_id', '=', $platform->id);
             })
             ->orWhereHas('launch', function (Builder $query) use ($platform) {
                 $query->join('releases as lr', function ($join) {
                     $join->on('lr.id', '=', 'launches.release_id');
                 })
-                ->where('lr.platform_id', '=', $platform->id);
+                    ->where('lr.platform_id', '=', $platform->id);
             });
         $paginator = $timeline->paginate(75)->onEachSide(2)->through(function () {
             return [];
@@ -299,13 +301,13 @@ class TimelineController extends Controller
             'timeline' => $timeline->paginate(75)->groupBy('date')->map(function ($items, $date) {
                 return [
                     'date' => $items[0]->date,
-                    'flights' => $items->groupBy(function($item, $key) {
+                    'flights' => $items->groupBy(function ($item, $key) {
                         if ($item->item_type === \App\Models\Flight::class) {
-                            return $item->item->platform->position.'-'.$item->item->flight;
+                            return $item->item->platform->position . '-' . $item->item->flight;
                         } else if ($item->item_type === \App\Models\Promotion::class) {
-                            return $item->item->platform->position.'.'.$item->item->releaseChannel->release->version.'.'.$item->item->releaseChannel->channel->order;
+                            return $item->item->platform->position . '.' . $item->item->releaseChannel->release->version . '.' . $item->item->releaseChannel->channel->order;
                         } else if ($item->item_type === \App\Models\Launch::class) {
-                            return $item->item->platform->position.'.'.$item->item->release->version;
+                            return $item->item->platform->position . '.' . $item->item->release->version;
                         }
                     })->map(function ($flights) {
                         if ($flights->first()->item_type === \App\Models\Flight::class) {
@@ -390,17 +392,17 @@ class TimelineController extends Controller
                                 ]
                             ];
                         }
-                    })->groupBy(function($item, $key) {
+                    })->groupBy(function ($item, $key) {
                         return $item['platform']['id'];
-                    })->sortBy(function($item, $key) {
+                    })->sortBy(function ($item, $key) {
                         return $item[0]['platform']['position'];
-                    })->map(function($platform) {
+                    })->map(function ($platform) {
                         return $platform->sortByDesc(function ($item, $key) {
                             if ($item['type'] === 'flight') {
-                                return $item['event_priority'].'.'.$item['platform']['position'].'.'.$item['flight'];
+                                return $item['event_priority'] . '.' . $item['platform']['position'] . '.' . $item['flight'];
                             }
 
-                            return $item['event_priority'].'.'.$item['platform']['position'];
+                            return $item['event_priority'] . '.' . $item['platform']['position'];
                         })->values()->all();
                     })->values()->all()
                 ];

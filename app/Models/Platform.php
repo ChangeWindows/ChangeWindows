@@ -30,12 +30,16 @@ class Platform extends Model
         return $this->hasMany(Channel::class);
     }
 
+    public function activeChannels() {
+        return $this->hasMany(Channel::class)->where('active', 1);
+    }
+
     public function releases() {
-        return $this->hasMany(Release::class)->where('package', '=', 0);
+        return $this->hasMany(Release::class)->where('package', 0)->with('releaseChannels');
     }
 
     public function packages() {
-        return $this->hasMany(Release::class)->where('package', '=', 1);
+        return $this->hasMany(Release::class)->where('package', 1)->with('releaseChannels');
     }
 
     public function tweetStream() {
