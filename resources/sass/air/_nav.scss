@@ -39,3 +39,12 @@
         }
     }
 }
+
+.bg-light {
+    --bs-bg-opacity: .75;
+    backdrop-filter: blur(20px) saturate(250%);
+
+    &.sticky-top {
+        z-index: 950;
+    }
+}

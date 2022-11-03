@@ -7,24 +7,13 @@ import React from "react";
 import "../../../../sass/air/style.scss";
 import Nav from "react-bootstrap/Nav";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Head } from "@inertiajs/inertia-react";
 import PlatformIcon from "../../../Components/Platforms/PlatformIcon";
 
 export default function Header({ platforms, legacyPlatforms, platform }) {
   return (
-    <div
-      className="app"
-      style={
-        platform && {
-          "--platform-color": platform.color,
-        }
-      }
-    >
-      <Head>
-        <title>CW Air</title>
-      </Head>
-      <div className="bg-light">
-        <div className="container d-flex justify-content-between align-items-center py-4 px-3 px-sm-0">
+    <>
+      <div className="bg-light" style={{ zIndex: 1000, position: 'relative' }}>
+        <div className="container d-flex justify-content-between align-items-center py-4 px-3 px-sm-0 border-bottom">
           <AmaranthIcon icon={aiChangewindows} className="fs-3 text-muted" />
           <Nav>
             <Nav.Item>
@@ -72,8 +61,17 @@ export default function Header({ platforms, legacyPlatforms, platform }) {
           </Nav>
           <AmaranthIcon icon={aiCircleUser} className="fs-6 text-muted" />
         </div>
-        {platform && (
-          <div className="container d-flex justify-content-between align-items-center py-2 px-3 px-sm-0 border-top">
+      </div>
+      {platform && (
+        <div className="bg-light sticky-top" style={{ top: -1 }}>
+          <div
+            className="container d-flex justify-content-between align-items-center py-2 px-3 px-sm-0"
+            style={
+              platform && {
+                "--platform-color": platform.color,
+              }
+            }
+          >
             <PlatformIcon platform={platform} className="text-muted" />
             <Nav className="platform-colored">
               <Nav.Item>
@@ -105,8 +103,8 @@ export default function Header({ platforms, legacyPlatforms, platform }) {
               </Nav.Item>
             </Nav>
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 }

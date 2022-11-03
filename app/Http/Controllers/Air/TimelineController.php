@@ -12,9 +12,12 @@ class TimelineController extends Controller
 {
     public function index(Platform $platform)
     {
+        $platforms = Platform::orderBy('position')->get();
         return Inertia::render('Air/Timeline/Index', [
             'platform' => $platform->id ? $platform : null,
-            'platforms' => Platform::orderBy('position')->where('legacy', 0)->where('tool', 0)->orWhere('slug', $platform->slug)->get()->map(function ($platform) {
+            'platforms' => $platforms->filter(function ($value) use ($platform) {
+                return $value->legacy === 0 && $value->tool === 0 || $value->slug === $platform->slug;
+            })->map(function ($platform) {
                 return [
                     'id' => $platform->id,
                     'slug' => $platform->slug,
@@ -22,8 +25,10 @@ class TimelineController extends Controller
                     'color' => $platform->color,
                     'icon' => $platform->icon
                 ];
-            }),
-            'legacyPlatforms' => Platform::orderBy('position')->where('legacy', 1)->orWhere('tool', 1)->get()->map(function ($platform) {
+            })->values(),
+            'legacyPlatforms' => $platforms->filter(function ($value) {
+                return $value->legacy === 1 || $value->tool === 1;
+            })->map(function ($platform) {
                 return [
                     'id' => $platform->id,
                     'slug' => $platform->slug,
@@ -31,7 +36,7 @@ class TimelineController extends Controller
                     'color' => $platform->color,
                     'icon' => $platform->icon
                 ];
-            })
+            })->values()
         ]);
     }
 }
