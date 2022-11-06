@@ -175,7 +175,6 @@ export default function Release({
                                     build={flight.flight}
                                     channels={flight.release_channel}
                                     version={flight.version}
-                                    pack={flight.package}
                                     sidebar={true}
                                     overview
                                   />

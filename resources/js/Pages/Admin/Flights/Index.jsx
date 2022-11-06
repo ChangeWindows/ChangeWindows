@@ -15,21 +15,15 @@ export default function Index({ can, timeline, pagination, status }) {
   return (
     <Admin>
       <NaviBar
-        actions={can.flights.create &&
-          <>
+        actions={
+          can.flights.create && (
             <InertiaLink
               href={route("admin.flights.create")}
               className="btn btn-primary btn-sm"
             >
-              <AmaranthIcon icon={aiPlus} /> Flight
+              <AmaranthIcon icon={aiPlus} /> Add
             </InertiaLink>
-            <InertiaLink
-              href={route("admin.flights.createPackage")}
-              className="btn btn-primary btn-sm ms-1"
-            >
-              <AmaranthIcon icon={aiPlus} /> Package
-            </InertiaLink>
-          </>
+          )
         }
       >
         Flights
@@ -40,9 +34,7 @@ export default function Index({ can, timeline, pagination, status }) {
         <div className="row g-1">
           {Object.keys(timeline).map((date, key) => (
             <Timeline date={parseISO(timeline[date].date)} key={key}>
-              <div
-                className="card-grid"
-              >
+              <div className="card-grid">
                 {timeline[date].flights.map((platform, _key) => (
                   <PlatformFlightCard platform={platform} />
                 ))}

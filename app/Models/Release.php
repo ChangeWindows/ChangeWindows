@@ -19,11 +19,10 @@ class Release extends Model implements Searchable
     public $searchableType = 'Releases';
 
     protected $table = 'releases';
-    protected $fillable = ['name', 'version', 'canonical_version', 'package', 'codename', 'description', 'changelog', 'platform_id', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts', 'ongoing', 'start_build', 'start_delta', 'end_build', 'end_delta'];
+    protected $fillable = ['name', 'version', 'canonical_version', 'codename', 'description', 'changelog', 'platform_id', 'start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts', 'ongoing', 'start_build', 'start_delta', 'end_build', 'end_delta'];
     protected $dates = ['start_preview', 'start_public', 'start_extended', 'start_lts', 'end_lts'];
 
     protected $casts = [
-        'package' => 'integer',
         'ongoing' => 'integer',
         'start_preview' => 'date:Y-m-d',
         'start_public' => 'date:Y-m-d',

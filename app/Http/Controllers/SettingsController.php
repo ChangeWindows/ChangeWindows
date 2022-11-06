@@ -44,8 +44,7 @@ class SettingsController extends Controller
             if ($pledge_data['attributes']['patron_status'] === 'active_patron') {
                 $patrons->push([
                     'name' => $pledge_data['attributes']['full_name'],
-                    'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}",
-                    'tier' => $pledge_data['relationships']['currently_entitled_tiers']['data'][0]['id']
+                    'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}"
                 ]);
             }
         }

@@ -191,22 +191,6 @@ export default function Edit({
                 }
               />
             </div>
-            <div className="col-12">
-              <TextField
-                type="textarea"
-                label="Tweet Template for Packages"
-                id="tweet_template_package"
-                value={data.tweet_template_package}
-                errors={errors.tweet_template_package}
-                onChange={setData}
-                helper={
-                  <>
-                    Include <code>%RELEASE%</code>, <code>%FLIGHT%</code>,{" "}
-                    <code>%CHANNELS%</code>, and <code>%URL%</code>.
-                  </>
-                }
-              />
-            </div>
           </Fieldset>
         </div>
       </form>

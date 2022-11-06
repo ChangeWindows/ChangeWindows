@@ -12,8 +12,7 @@ export default function ReleaseCard({
   alts,
   flight,
   url,
-  dates,
-  pack = false,
+  dates
 }) {
   const Component = useMemo(() => (url ? InertiaLink : "div"), ["url"]);
   const mainProps = useMemo(() => ({ href: url }), ["url"]);
@@ -39,12 +38,12 @@ export default function ReleaseCard({
                   )}
                 </div>
                 <div className="col-lg-4 col-12 d-flex flex-column align-items-start justify-content-center">
-                  {!pack && flight && !platform?.tool && (
+                  {flight && !platform?.tool && (
                     <small className="text-muted mb-0 mt-1 mt-lg-0">
                       {flight}
                     </small>
                   )}
-                  {!pack && alts && !platform?.tool && (
+                  {alts && !platform?.tool && (
                     <small
                       className={clsx("text-muted mb-0 mt-lg-n1", {
                         "mt-n1": flight,
