@@ -95,27 +95,6 @@ class PlatformController extends Controller
                         ];
                     })->values()->all()
                 ];
-            })->values()->all(),
-            'packages' => $platform->packages->sortBy('name')->map(function ($release) use ($platform) {
-                return [
-                    'name' => $release->name,
-                    'slug' => $release->slug,
-                    'platform' => [
-                        'icon' => $platform->icon,
-                        'name' => $platform->name,
-                        'color' => $platform->color,
-                        'tool' => $platform->tool
-                    ],
-                    'channels' => $release->releaseChannels->where('supported')->map(function ($channel) {
-                        return [
-                            'id' => $channel->id,
-                            'short_name' => $channel->short_name,
-                            'supported' => $channel->supported,
-                            'color' => $channel->channel->color,
-                            'order' => $channel->channel->order
-                        ];
-                    })->values()->all()
-                ];
             })->values()->all()
         ]);
     }

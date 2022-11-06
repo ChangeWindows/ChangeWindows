@@ -53,8 +53,7 @@ class TimelineController extends Controller
             if ($pledge_data['attributes']['patron_status'] === 'active_patron') {
                 $patrons->push([
                     'name' => $pledge_data['attributes']['full_name'],
-                    'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}",
-                    'tier' => $pledge_data['relationships']['currently_entitled_tiers']['data'][0]['id']
+                    'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}"
                 ]);
             }
         }
@@ -116,13 +115,12 @@ class TimelineController extends Controller
                                 'type' => 'flight',
                                 'event_priority' => 3,
                                 'id' => $_cur_flight->item->id,
-                                'flight' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->version : $_cur_flight->item->flight,
+                                'flight' => $_cur_flight->item->flight,
                                 'date' => $_cur_flight->item->timeline->date,
                                 'release' => [
                                     'slug' => $_cur_flight->item->releaseChannel->release->slug,
                                     'version' => $_cur_flight->item->releaseChannel->release->version,
-                                    'cversion' => $_cur_flight->item->releaseChannel->release->canonical_version,
-                                    'package' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->releaseChannel->release->name : false,
+                                    'cversion' => $_cur_flight->item->releaseChannel->release->canonical_version
                                 ],
                                 'release_channel' => $flights->map(function ($channels) {
                                     return [
@@ -152,8 +150,7 @@ class TimelineController extends Controller
                                 'date' => $_cur_promotion->item->timeline->date,
                                 'release' => [
                                     'slug' => $_cur_promotion->item->releaseChannel->release->slug,
-                                    'version' => $_cur_promotion->item->releaseChannel->release->version,
-                                    'package' => $_cur_promotion->item->releaseChannel->release->package ? $_cur_promotion->item->releaseChannel->release->name : false,
+                                    'version' => $_cur_promotion->item->releaseChannel->release->version
                                 ],
                                 'release_channel' => [
                                     'name' => $_cur_promotion->item->releaseChannel->short_name,
@@ -179,8 +176,7 @@ class TimelineController extends Controller
                                 'date' => $_cur_launch->item->timeline->date,
                                 'release' => [
                                     'slug' => $_cur_launch->item->release->slug,
-                                    'version' => $_cur_launch->item->release->version,
-                                    'package' => $_cur_launch->item->release->package ? $_cur_launch->item->release->name : false,
+                                    'version' => $_cur_launch->item->release->version
                                 ],
                                 'platform' => [
                                     'id' => $_cur_launch->item->platform->id,
@@ -276,7 +272,7 @@ class TimelineController extends Controller
                     'slug' => $platform->slug,
                     'color' => $platform->color,
                     'icon' => $platform->icon,
-                    'channels' => $platform->channels->where('active')->where('package', '=', 0)->map(function ($channel) {
+                    'channels' => $platform->channels->where('active')->map(function ($channel) {
                         $release_channel = $channel->activeReleaseChannels
                             ->sortByDesc(function ($release_channel, $key) {
                                 return $release_channel->release->canonical_version;
@@ -316,13 +312,12 @@ class TimelineController extends Controller
                                 'type' => 'flight',
                                 'event_priority' => 3,
                                 'id' => $_cur_flight->item->id,
-                                'flight' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->version : $_cur_flight->item->flight,
+                                'flight' => $_cur_flight->item->flight,
                                 'date' => $_cur_flight->item->timeline->date,
                                 'release' => [
                                     'slug' => $_cur_flight->item->releaseChannel->release->slug,
                                     'version' => $_cur_flight->item->releaseChannel->release->version,
-                                    'cversion' => $_cur_flight->item->releaseChannel->release->canonical_version,
-                                    'package' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->releaseChannel->release->name : false,
+                                    'cversion' => $_cur_flight->item->releaseChannel->release->canonical_version
                                 ],
                                 'release_channel' => $flights->map(function ($channels) {
                                     return [
@@ -352,8 +347,7 @@ class TimelineController extends Controller
                                 'date' => $_cur_promotion->item->timeline->date,
                                 'release' => [
                                     'slug' => $_cur_promotion->item->releaseChannel->release->slug,
-                                    'version' => $_cur_promotion->item->releaseChannel->release->version,
-                                    'package' => $_cur_promotion->item->releaseChannel->release->package ? $_cur_promotion->item->releaseChannel->release->name : false,
+                                    'version' => $_cur_promotion->item->releaseChannel->release->version
                                 ],
                                 'release_channel' => [
                                     'name' => $_cur_promotion->item->releaseChannel->short_name,
@@ -379,8 +373,7 @@ class TimelineController extends Controller
                                 'date' => $_cur_launch->item->timeline->date,
                                 'release' => [
                                     'slug' => $_cur_launch->item->release->slug,
-                                    'version' => $_cur_launch->item->release->version,
-                                    'package' => $_cur_launch->item->release->package ? $_cur_launch->item->release->name : false,
+                                    'version' => $_cur_launch->item->release->version
                                 ],
                                 'platform' => [
                                     'id' => $_cur_launch->item->platform->id,

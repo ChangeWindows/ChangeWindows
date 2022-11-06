@@ -16,7 +16,7 @@ class Platform extends Model
     public $searchableType = 'Platforms';
 
     protected $table = 'platforms';
-    protected $fillable = ['name', 'description', 'color', 'icon', 'position', 'legacy', 'active', 'tool', 'tweet_template', 'tweet_template_package', 'tweet_stream_id', 'retweet_stream_id', 'slug'];
+    protected $fillable = ['name', 'description', 'color', 'icon', 'position', 'legacy', 'active', 'tool', 'tweet_template', 'tweet_stream_id', 'retweet_stream_id', 'slug'];
     protected $appends = ['plain_icon', 'colored_icon', 'bg_color'];
 
     protected $casts = [
@@ -35,11 +35,7 @@ class Platform extends Model
     }
 
     public function releases() {
-        return $this->hasMany(Release::class)->where('package', 0)->with('releaseChannels');
-    }
-
-    public function packages() {
-        return $this->hasMany(Release::class)->where('package', 1)->with('releaseChannels');
+        return $this->hasMany(Release::class)->with('releaseChannels');
     }
 
     public function tweetStream() {

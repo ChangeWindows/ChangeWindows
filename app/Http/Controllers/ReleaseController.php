@@ -48,8 +48,8 @@ class ReleaseController extends Controller
             return [];
         });
 
-        $prev = Release::where('canonical_version', '<', $release->canonical_version)->where('platform_id', '=', $release->platform_id)->where('package', '=', 0)->orderBy('canonical_version', 'desc')->first();
-        $next = Release::where('canonical_version', '>', $release->canonical_version)->where('platform_id', '=', $release->platform_id)->where('package', '=', 0)->orderBy('canonical_version', 'asc')->first();
+        $prev = Release::where('canonical_version', '<', $release->canonical_version)->orderBy('canonical_version', 'desc')->first();
+        $next = Release::where('canonical_version', '>', $release->canonical_version)->orderBy('canonical_version', 'asc')->first();
 
         return Inertia::render('Platforms/Release', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
@@ -104,11 +104,10 @@ class ReleaseController extends Controller
                                 'type' => 'flight',
                                 'event_priority' => 3,
                                 'id' => $_cur_flight->item->id,
-                                'flight' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->version : $_cur_flight->item->flight,
+                                'flight' => $_cur_flight->item->flight,
                                 'date' => $_cur_flight->item->timeline->date,
                                 'version' => $_cur_flight->item->releaseChannel->release->version,
                                 'cversion' => $_cur_flight->item->releaseChannel->release->canonical_version,
-                                'package' => $_cur_flight->item->releaseChannel->release->package ? $_cur_flight->item->releaseChannel->release->name : false,
                                 'release_channel' => $flights->map(function ($channels) {
                                     return [
                                         'order' => $channels->item->releaseChannel->channel->order,
