@@ -39,10 +39,6 @@ class Release extends Model implements Searchable
         return $this->hasMany(ReleaseChannel::class);
     }
 
-    public function launch() {
-        return $this->hasOne(Launch::class);
-    }
-
     public function flights() {
         return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->flights());
     }
@@ -52,10 +48,6 @@ class Release extends Model implements Searchable
             ->orderBy('build', 'desc')
             ->orderBy('delta', 'desc')
             ->first();
-    }
-
-    public function timeline() {
-        return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->timeline());
     }
 
     public function getRouteKeyName() {

@@ -6,7 +6,6 @@ use App\Models\Release;
 use App\Models\Flight;
 use App\Models\Timeline;
 use App\Models\Promotion;
-use App\Models\Launch;
 use App\Models\ReleaseChannel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -27,7 +26,7 @@ class FlightController extends Controller
     {
         $this->authorize('flights.show');
 
-        $timeline = Timeline::where('item_type', Flight::class)->orderBy('date', 'desc');
+        $timeline = Flight::orderBy('date', 'desc');
         $paginator = $timeline->paginate(100)->onEachSide(2)->through(function () {
             return [];
         });
@@ -44,19 +43,19 @@ class FlightController extends Controller
                     'date' => $items[0]->date,
                     'flights' => $items->map(function ($flight) {
                         return [
-                            'id' => $flight->item->id,
-                            'version' => $flight->item->flight,
-                            'date' => $flight->item->timeline->date,
+                            'id' => $flight->id,
+                            'version' => $flight->flight,
+                            'date' => $flight->date,
                             'release_channel' => [
-                                'name' => $flight->item->releaseChannel->short_name,
-                                'color' => $flight->item->releaseChannel->channel->color
+                                'name' => $flight->releaseChannel->short_name,
+                                'color' => $flight->releaseChannel->channel->color
                             ],
                             'platform' => [
-                                'id' => $flight->item->platform->id,
-                                'icon' => $flight->item->platform->icon,
-                                'name' => $flight->item->platform->name,
-                                'position' => $flight->item->platform->position,
-                                'color' => $flight->item->platform->color
+                                'id' => $flight->platform->id,
+                                'icon' => $flight->platform->icon,
+                                'name' => $flight->platform->name,
+                                'position' => $flight->platform->position,
+                                'color' => $flight->platform->color
                             ]
                         ];
                     })->groupBy(function($item, $key) {
@@ -123,42 +122,13 @@ class FlightController extends Controller
         foreach ($request->releaseChannels as $releaseChannel) {
             $release_channel = ReleaseChannel::find($releaseChannel);
 
-            if ($release_channel->release->flights->count() === 0) {
-                $launch = Launch::create([
-                    'release_id' => $release_channel->release->id
-                ]);
-
-                Timeline::create([
-                    'date' => (new Carbon(request('date'))),
-                    'item_type' => Launch::class,
-                    'item_id' => $launch->id
-                ]);
-            }
-
-            if ($release_channel->flights->count() === 0) {
-                $promotion = Promotion::create([
-                    'release_channel_id' => $release_channel->id
-                ]);
-
-                Timeline::create([
-                    'date' => (new Carbon(request('date'))),
-                    'item_type' => Promotion::class,
-                    'item_id' => $promotion->id
-                ]);
-            }
-
             $flight = Flight::create([
                 'major' => request('major'),
                 'minor' => request('minor'),
                 'build' => request('build'),
                 'delta' => request('delta'),
-                'release_channel_id' => $releaseChannel
-            ]);
-
-            Timeline::create([
                 'date' => (new Carbon(request('date'))),
-                'item_type' => Flight::class,
-                'item_id' => $flight->id
+                'release_channel_id' => $releaseChannel
             ]);
 
             if ($request->tweet) {
@@ -237,7 +207,6 @@ class FlightController extends Controller
                 'name' => $flight->releaseChannel->short_name,
                 'color' => $flight->releaseChannel->channel->color
             ],
-            'date' => $flight->timeline,
             'status' => session('status')
         ]);
     }
@@ -257,10 +226,7 @@ class FlightController extends Controller
             'major' => request('major'),
             'minor' => request('minor'),
             'build' => request('build'),
-            'delta' => request('delta')
-        ]);
-
-        $flight->timeline->update([
+            'delta' => request('delta'),
             'date' => (new Carbon(request('date')))
         ]);
 
@@ -280,7 +246,6 @@ class FlightController extends Controller
     {
         $this->authorize('flights.delete');
 
-        $flight->timeline->delete();
         $flight->delete();
 
         return Redirect::route('admin.flights')->with('status', [

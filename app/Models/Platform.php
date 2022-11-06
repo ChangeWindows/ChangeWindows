@@ -54,18 +54,6 @@ class Platform extends Model
         return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->flights());
     }
 
-    public function timeline() {
-        return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->timeline());
-    }
-
-    public function getPlainIconAttribute() {
-        return '<i class="far fa-fw fa-'.$this->icon.' '.$this->icon_modifiers.'"></i>';
-    }
-
-    public function getColoredIconAttribute() {
-        return '<i style="color: '.$this->color.'" class="far fa-fw fa-'.$this->icon.' '.$this->icon_modifiers.'"></i>';
-    }
-
     public function getBgColorAttribute() {
         return 'background-color: '.$this->color;
     }

@@ -45,7 +45,7 @@ class ChannelController extends Controller
                             'color' => $channel->color,
                             'flight' => [
                                 'version' => $release_channel->latest->flight,
-                                'date' => $release_channel->latest->timeline->date
+                                'date' => $release_channel->latest->date
                             ],
                             'release' => [
                                 'id' => $release_channel->release->id,
@@ -111,7 +111,7 @@ class ChannelController extends Controller
                             'channel_id' => $channel->channel->id,
                             'flight' => $channel->latest ? [
                                 'version' => $channel->latest->flight,
-                                'date' => $channel->latest->timeline->date
+                                'date' => $channel->latest->date
                             ] : null
                         ];
                     })->values()->all()

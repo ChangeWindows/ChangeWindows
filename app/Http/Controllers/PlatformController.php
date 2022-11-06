@@ -55,7 +55,7 @@ class PlatformController extends Controller
                         if ($_channel->latest) {
                             return [
                                 'version' => $_channel->latest->flight,
-                                'date' => $_channel->latest->timeline->date,
+                                'date' => $_channel->latest->date,
                                 'release' => [
                                     'slug' => $_channel->release->slug
                                 ]
