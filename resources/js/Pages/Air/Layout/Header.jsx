@@ -13,7 +13,7 @@ export default function Header({ platforms, legacyPlatforms, platform }) {
   return (
     <>
       <div className="bg-light" style={{ zIndex: 1000, position: 'relative' }}>
-        <div className="container d-flex justify-content-between align-items-center py-4 px-3 px-sm-0 border-bottom">
+        <div className="container d-flex justify-content-between align-items-center py-4 px-3 px-sm-0">
           <AmaranthIcon icon={aiChangewindows} className="fs-3 text-muted" />
           <Nav>
             <Nav.Item>
@@ -65,7 +65,7 @@ export default function Header({ platforms, legacyPlatforms, platform }) {
       {platform && (
         <div className="bg-light sticky-top" style={{ top: -1 }}>
           <div
-            className="container d-flex justify-content-between align-items-center py-2 px-3 px-sm-0"
+            className="container d-flex justify-content-between align-items-center py-2 px-3 px-sm-0 border-top"
             style={
               platform && {
                 "--platform-color": platform.color,
