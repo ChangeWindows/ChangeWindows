@@ -14,9 +14,7 @@ export default function AdminNavigation() {
         { type: 'link', url: '/admin/flights', icon: aiPlane, title: 'Flights', permission: navCan.flights.show },
         { type: 'link', url: '/admin/flags', icon: aiFlag, title: 'Flags', permission: navCan.flags.show },
         { type: 'link', url: '/admin/releases', icon: aiSoftwareBox, title: 'Releases', permission: navCan.flights.show },
-        { type: 'link', url: '/admin/platforms', icon: aiDevices, title: 'Platforms', permission: navCan.platforms.show },
-        { type: 'link', url: '/admin/promotions', icon: aiBranchUp, title: 'Promotions', permission: navCan.flights.show },
-        { type: 'link', url: '/admin/launches', icon: aiRocket, title: 'Launches', permission: navCan.flights.show }
+        { type: 'link', url: '/admin/platforms', icon: aiDevices, title: 'Platforms', permission: navCan.platforms.show }
       ]}
       overflow={[
         { type: 'link', url: '/admin/tweet_streams', icon: aiTwitter, title: 'Twitter', permission: navCan.tweetStreams.show },

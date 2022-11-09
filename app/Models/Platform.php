@@ -17,7 +17,7 @@ class Platform extends Model
 
     protected $table = 'platforms';
     protected $fillable = ['name', 'description', 'color', 'icon', 'position', 'legacy', 'active', 'tool', 'tweet_template', 'tweet_stream_id', 'retweet_stream_id', 'slug'];
-    protected $appends = ['plain_icon', 'colored_icon', 'bg_color'];
+    protected $appends = ['bg_color'];
 
     protected $casts = [
         'legacy' => 'integer',
@@ -52,18 +52,6 @@ class Platform extends Model
 
     public function flights() {
         return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->flights());
-    }
-
-    public function timeline() {
-        return $this->hasManyDeepFromRelations($this->releaseChannels(), (new ReleaseChannel)->timeline());
-    }
-
-    public function getPlainIconAttribute() {
-        return '<i class="far fa-fw fa-'.$this->icon.' '.$this->icon_modifiers.'"></i>';
-    }
-
-    public function getColoredIconAttribute() {
-        return '<i style="color: '.$this->color.'" class="far fa-fw fa-'.$this->icon.' '.$this->icon_modifiers.'"></i>';
     }
 
     public function getBgColorAttribute() {
