@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Release;
 use App\Models\Flight;
-use App\Models\Timeline;
-use App\Models\Promotion;
 use App\Models\ReleaseChannel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

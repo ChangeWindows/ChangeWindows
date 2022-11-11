@@ -30,8 +30,8 @@ class ReleaseController extends Controller
             return [];
         });
 
-        $prev = Release::where('canonical_version', '<', $release->canonical_version)->orderBy('canonical_version', 'desc')->first();
-        $next = Release::where('canonical_version', '>', $release->canonical_version)->orderBy('canonical_version', 'asc')->first();
+        $prev = Release::where('platform_id', $release->platform->id)->where('canonical_version', '<', $release->canonical_version)->orderBy('canonical_version', 'desc')->first();
+        $next = Release::where('platform_id', $release->platform->id)->where('canonical_version', '>', $release->canonical_version)->orderBy('canonical_version', 'asc')->first();
 
         return Inertia::render('Platforms/Release', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
