@@ -16,7 +16,6 @@ import { parse, format, isValid, parseISO } from "date-fns";
 export default function Edit({
   can,
   flight,
-  date,
   platform,
   release_channel,
   status,
@@ -30,7 +29,7 @@ export default function Edit({
     errors,
   } = useForm({
     ...flight,
-    date: format(parseISO(date.date), "yyyy-MM-dd"),
+    date: format(parseISO(flight.date), "yyyy-MM-dd"),
   });
 
   const refMajor = useRef(null);
