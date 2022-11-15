@@ -28,7 +28,7 @@ export default function Header({ platforms, legacyPlatforms, platform }) {
               <Nav.Item key={_platform.slug}>
                 <Nav.Link
                   href={route("air.platform", _platform)}
-                  active={route().current("air.platform", _platform)}
+                  active={route().current("air.platform*", _platform)}
                   style={{ "--item-color": _platform.color }}
                 >
                   {_platform.name}
