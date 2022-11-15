@@ -21,7 +21,7 @@ class ReleaseController extends Controller
     {
         $this->authorize('releases.show');
 
-        $releases = Release::where('package', '=', 0)->orderBy('platform_id')->orderBy('canonical_version')->get();
+        $releases = Release::orderBy('platform_id')->orderBy('canonical_version')->get();
 
         return Inertia::render('Admin/Releases/Index', [
             'can' => [

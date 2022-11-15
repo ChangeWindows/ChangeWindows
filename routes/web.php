@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\ReleaseController;
-use App\Http\Controllers\PackageController;
 use App\Http\Controllers\FlagController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\SettingsController;
@@ -17,13 +16,10 @@ use App\Http\Controllers\Admin\FlagController as AdminFlagController;
 use App\Http\Controllers\Admin\PermissionController as AdminPermissionController;
 use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
 use App\Http\Controllers\Admin\ReleaseChannelController as AdminReleaseChannelController;
-use App\Http\Controllers\Admin\PackageController as AdminPackageController;
 use App\Http\Controllers\Admin\ReleaseController as AdminReleaseController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\TweetStreamController as AdminTweetStreamController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\Admin\PromotionController as AdminPromotionController;
-use App\Http\Controllers\Admin\LaunchController as AdminLaunchController;
 
 // Air
 use App\Http\Controllers\Air\TimelineController as Timeline;
@@ -95,10 +91,6 @@ Route::prefix('')->as('front')->group(function() {
         Route::prefix('{platform}/releases')->name('.releases')->group(function() {
             Route::get('/{release}', [ReleaseController::class, 'show'])->name('');
         });
-
-        Route::prefix('{platform}/packages')->name('.packages')->group(function() {
-            Route::get('/{release}', [PackageController::class, 'show'])->name('');
-        });
     });
 
     Route::middleware(['auth'])->prefix('profile')->name('.profile')->group(function() {
@@ -165,17 +157,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::patch('/{release}/changelog/edit', 'updateChangelog')->name('.changelog.update');
     });
 
-    Route::controller(AdminPackageController::class)->prefix('packages')->as('.packages')->group(function() {
-        Route::get('', 'index')->name('');
-        Route::post('', 'store')->name('.store');
-        Route::delete('{package}', 'destroy')->name('.destroy');
-        Route::get('/create', 'create')->name('.create');
-        Route::get('/{package}/edit', 'edit')->name('.edit');
-        Route::patch('/{package}/edit', 'update')->name('.update');
-        Route::get('/{package}/changelog/edit', 'editChangelog')->name('.changelog.edit');
-        Route::patch('/{package}/changelog/edit', 'updateChangelog')->name('.changelog.update');
-    });
-
     Route::controller(AdminPlatformController::class)->prefix('platforms')->as('.platforms')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'store')->name('.store');
@@ -215,30 +196,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
     Route::controller(AdminFlightController::class)->prefix('flights')->as('.flights')->group(function() {
         Route::get('', 'index')->name('');
         Route::post('', 'store')->name('.store');
-        Route::post('/package', 'storePackage')->name('.storePackage');
         Route::delete('{flight}', 'destroy')->name('.destroy');
         Route::get('/create', 'create')->name('.create');
-        Route::get('/createPackage', 'createPackage')->name('.createPackage');
         Route::get('/{flight}/edit', 'edit')->name('.edit');
         Route::patch('/{flight}/edit', 'update')->name('.update');
-    });
-
-    Route::controller(AdminPromotionController::class)->prefix('promotions')->as('.promotions')->group(function() {
-        Route::get('', 'index')->name('');
-        Route::post('', 'store')->name('.store');
-        Route::delete('{promotion}', 'destroy')->name('.destroy');
-        Route::get('/create', 'create')->name('.create');
-        Route::get('/{promotion}/edit', 'edit')->name('.edit');
-        Route::patch('/{promotion}/edit', 'update')->name('.update');
-    });
-
-    Route::controller(AdminLaunchController::class)->prefix('launches')->as('.launches')->group(function() {
-        Route::get('', 'index')->name('');
-        Route::post('', 'store')->name('.store');
-        Route::delete('{launch}', 'destroy')->name('.destroy');
-        Route::get('/create', 'create')->name('.create');
-        Route::get('/{launch}/edit', 'edit')->name('.edit');
-        Route::patch('/{launch}/edit', 'update')->name('.update');
     });
 });
 
