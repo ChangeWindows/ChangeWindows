@@ -19,8 +19,8 @@ class Flight extends Model
         return $this->belongsTo(ReleaseChannel::class);
     }
 
-    public function getReleaseAttribute() {
-        return $this->releaseChannel->release;
+    public function release() {
+        return $this->hasManyThrough(Release::class, ReleaseChannel::class);
     }
 
     public function getPlatformAttribute() {
