@@ -76,8 +76,6 @@ class ReleaseController extends Controller
                     })->map(function ($flights) {
                         $_cur = $flights->first();
                         return [
-                            'type' => 'flight',
-                            'event_priority' => 3,
                             'id' => $_cur->id,
                             'flight' => $_cur->flight,
                             'date' => $_cur->date,
@@ -99,11 +97,7 @@ class ReleaseController extends Controller
                             ]
                         ];
                     })->sortByDesc(function ($item, $key) {
-                        if ($item['type'] === 'flight') {
-                            return $item['event_priority'].'.'.$item['flight'].'.'.$item['platform']['order'];
-                        }
-
-                        return $item['event_priority'].'.'.$item['platform']['order'];
+                        return $item['flight'].'.'.$item['platform']['order'];
                     })->values()->all()
                 ];
             }),
