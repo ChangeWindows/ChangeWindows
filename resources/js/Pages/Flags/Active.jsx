@@ -4,33 +4,31 @@ import { InertiaHead, InertiaLink } from "@inertiajs/inertia-react";
 import App from "@/Layouts/App";
 import Pagination from "@/Components/Pagination";
 
-import Flag from "@/Components/Flag";
-import FlagTimeline from "@/Components/_FlagsTimeline";
+import FlagCurrent from "./_FlagCurrent";
 
 import AmaranthIcon, {
   aiCircleInfo,
-  aiClockRotateLeft,
   aiStar,
   aiTrashCan,
 } from "@changewindows/amaranth";
 
-export default function History({ flagStatus, pagination }) {
+export default function Active({ flags, pagination }) {
   return (
     <App>
       <InertiaHead title="Flags" />
       <nav className="navbar navbar-expand navbar-light sticky-top">
         <div className="container">
-          <ul className="navbar-nav me-auto">
+          <ul className="navbar-nav me-auto d-flex">
             <li className="nav-item">
               <InertiaLink className="nav-link" href="/flags">
-                <AmaranthIcon icon={aiStar} />{" "}
-                <span className="d-none d-sm-inline-block ms-1">Current</span>
+                <AmaranthIcon icon={aiBarsStaggered} />{" "}
+                <span className="d-none d-sm-inline-block ms-1">Timeline</span>
               </InertiaLink>
             </li>
             <li className="nav-item">
-              <InertiaLink className="nav-link active" href="/flags/history">
-                <AmaranthIcon icon={aiClockRotateLeft} />{" "}
-                <span className="d-none d-sm-inline-block ms-1">History</span>
+              <InertiaLink className="nav-link active" href="/flags/active">
+                <AmaranthIcon icon={aiStar} />{" "}
+                <span className="d-none d-sm-inline-block ms-1">Active</span>
               </InertiaLink>
             </li>
             <li className="nav-item">
@@ -56,18 +54,16 @@ export default function History({ flagStatus, pagination }) {
           <div className="col-12 titlebar">
             <h1>Flags</h1>
           </div>
-          {flagStatus.map((build) => (
-            <FlagTimeline title={build.build} key={build.build}>
-              {build.changes.map((flag) => (
-                <Flag
-                  hideBuild
-                  flag={flag}
-                  key={flag.id}
-                  url={route("front.flags.show", flag.flag)}
-                />
-              ))}
-            </FlagTimeline>
-          ))}
+          <div className="col-12 timeline">
+            {flags.data.map((flag) => (
+              <FlagCurrent
+                hideBuild
+                flag={flag}
+                key={flag.id}
+                url={route("front.flags.show", flag)}
+              />
+            ))}
+          </div>
           <Pagination pagination={pagination} />
         </div>
       </div>

@@ -55,7 +55,7 @@ Route::prefix('')->as('front')->group(function() {
 
     Route::controller(FlagController::class)->prefix('flags')->as('.flags')->group(function() {
         Route::get('', 'index')->name('');
-        Route::get('/history', 'history')->name('.history');
+        Route::get('/active', 'active')->name('.active');
         Route::get('/removed', 'removed')->name('.removed');
         Route::get('/about', 'about')->name('.about');
         Route::get('/{flag}', 'show')->name('.show');

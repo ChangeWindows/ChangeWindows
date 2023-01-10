@@ -22,14 +22,14 @@ export default function Show({ flags, pagination }) {
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
               <InertiaLink className="nav-link" href="/flags">
-                <AmaranthIcon icon={aiStar} />{" "}
-                <span className="d-none d-sm-inline-block ms-1">Current</span>
+                <AmaranthIcon icon={aiBarsStaggered} />{" "}
+                <span className="d-none d-sm-inline-block ms-1">Timeline</span>
               </InertiaLink>
             </li>
             <li className="nav-item">
-              <InertiaLink className="nav-link" href="/flags/history">
-                <AmaranthIcon icon={aiClockRotateLeft} />{" "}
-                <span className="d-none d-sm-inline-block ms-1">History</span>
+              <InertiaLink className="nav-link" href="/flags/active">
+                <AmaranthIcon icon={aiStar} />{" "}
+                <span className="d-none d-sm-inline-block ms-1">Active</span>
               </InertiaLink>
             </li>
             <li className="nav-item">

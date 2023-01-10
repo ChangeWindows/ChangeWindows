@@ -22,30 +22,12 @@ class FlagController extends Controller
      */
     public function index()
     {
-        $flags = Flag::orderBy('feature_name', 'asc')->where('removed', null)->with('latestStatus');
-        $paginator = $flags->paginate(100)->onEachSide(1)->through(function () {
-            return [];
-        });
-
-        return Inertia::render('Flags/Index', [
-            'flags' => $flags->paginate(100),
-            'pagination' => $paginator
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function history()
-    {
         $flag_status = FlagStatus::orderBy('build', 'desc')->with('flag', 'flag.latestStatusChange', 'flag.flagStatus');
         $paginator = $flag_status->paginate(100)->onEachSide(1)->through(function () {
             return [];
         });
 
-        return Inertia::render('Flags/History', [
+        return Inertia::render('Flags/Index', [
             'flagStatus' => $flag_status->paginate(100)->groupBy('build')->map(function ($flag_status) {
 
                 return [
@@ -62,6 +44,24 @@ class FlagController extends Controller
                     })
                 ];
             })->values(),
+            'pagination' => $paginator
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function active()
+    {
+        $flags = Flag::orderBy('feature_name', 'asc')->where('removed', null)->with('latestStatus');
+        $paginator = $flags->paginate(100)->onEachSide(1)->through(function () {
+            return [];
+        });
+
+        return Inertia::render('Flags/Active', [
+            'flags' => $flags->paginate(100),
             'pagination' => $paginator
         ]);
     }
