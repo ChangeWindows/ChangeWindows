@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink, InertiaHead } from "@inertiajs/inertia-react";
+import { Link as ILink, Head } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 import Channel from "@/Components/Cards/Channel";
@@ -47,17 +47,17 @@ export default function Release({
 
   return (
     <App>
-      <InertiaHead title={release.name} />
+      <Head title={release.name} />
 
       <Tab.Container defaultActiveKey="timeline">
         <nav className="navbar navbar-expand-xl navbar-light sticky-top">
           <div className="container">
-            <InertiaLink
+            <ILink
               href={route("front.platforms.show", platform)}
               className="btn btn-transparent btn-sm me-2"
             >
               <AmaranthIcon icon={aiArrowLeft} />
-            </InertiaLink>
+            </ILink>
             <Nav className="d-flex d-xl-none">
               <Nav.Item>
                 <Nav.Link eventKey="timeline">
@@ -72,7 +72,7 @@ export default function Release({
             </Nav>
             <div className="flex-grow-1" />
             {quickNav.prev && (
-              <InertiaLink
+              <ILink
                 href={route("front.platforms.releases", [
                   platform,
                   quickNav.prev,
@@ -84,10 +84,10 @@ export default function Release({
                   {" "}
                   {quickNav.prev.version}
                 </span>
-              </InertiaLink>
+              </ILink>
             )}
             {quickNav.next && (
-              <InertiaLink
+              <ILink
                 href={route("front.platforms.releases", [
                   platform,
                   quickNav.next,
@@ -98,7 +98,7 @@ export default function Release({
                   {quickNav.next.version}{" "}
                 </span>
                 <AmaranthIcon icon={aiAngleRight} />
-              </InertiaLink>
+              </ILink>
             )}
           </div>
         </nav>

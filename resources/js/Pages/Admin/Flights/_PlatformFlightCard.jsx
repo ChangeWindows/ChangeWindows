@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
@@ -14,7 +14,7 @@ export default function PlatformFlightCard({ platform }) {
         </div>
         <div className="platform-event-events">
           {platform.map((flight, key) => (
-            <InertiaLink
+            <Link
               className="subevent subevent-flight"
               href={route("admin.flights.edit", flight)}
               key={key}
@@ -29,7 +29,7 @@ export default function PlatformFlightCard({ platform }) {
                   {flight.release_channel.name}
                 </span>
               </div>
-            </InertiaLink>
+            </Link>
           ))}
         </div>
       </div>

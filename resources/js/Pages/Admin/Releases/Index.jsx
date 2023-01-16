@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
@@ -45,12 +45,12 @@ export default function Index({ can, releases, status }) {
     <Admin>
       <NaviBar
         actions={can.releases.create &&
-          <InertiaLink
+          <Link
             href={route("admin.releases.create")}
             className="btn btn-primary btn-sm"
           >
             <AmaranthIcon icon={aiPlus} /> New
-          </InertiaLink>
+          </Link>
         }
       >
         Releases

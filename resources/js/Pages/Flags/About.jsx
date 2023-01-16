@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaHead, InertiaLink } from "@inertiajs/inertia-react";
+import { Head, Link } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 
@@ -14,35 +14,35 @@ import FlagStatus from "@/Components/_FlagStatus";
 export default function About() {
   return (
     <App>
-      <InertiaHead title="Flags" />
+      <Head title="Flags" />
       <nav className="navbar navbar-expand navbar-light sticky-top">
         <div className="container">
           <ul className="navbar-nav me-auto d-flex">
             <li className="nav-item">
-              <InertiaLink className="nav-link" href="/flags">
+              <Link className="nav-link" href="/flags">
                 <AmaranthIcon icon={aiStar} />{" "}
                 <span className="d-none d-sm-inline-block ms-1">Current</span>
-              </InertiaLink>
+              </Link>
             </li>
             <li className="nav-item">
-              <InertiaLink className="nav-link" href="/flags/history">
+              <Link className="nav-link" href="/flags/history">
                 <AmaranthIcon icon={aiClockRotateLeft} />{" "}
                 <span className="d-none d-sm-inline-block ms-1">History</span>
-              </InertiaLink>
+              </Link>
             </li>
             <li className="nav-item">
-              <InertiaLink className="nav-link" href="/flags/removed">
+              <Link className="nav-link" href="/flags/removed">
                 <AmaranthIcon icon={aiTrashCan} />{" "}
                 <span className="d-none d-sm-inline-block ms-1">Removed</span>
-              </InertiaLink>
+              </Link>
             </li>
           </ul>
           <ul className="navbar-nav d-flex">
             <li className="nav-item">
-              <InertiaLink className="nav-link active" href="/flags/about">
+              <Link className="nav-link active" href="/flags/about">
                 <AmaranthIcon icon={aiCircleInfo} />{" "}
                 <span className="d-none d-md-inline-block ms-1">About</span>
-              </InertiaLink>
+              </Link>
             </li>
           </ul>
         </div>

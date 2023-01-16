@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 import PlatformIcon from "../Platforms/PlatformIcon";
 import clsx from "clsx";
@@ -13,7 +13,7 @@ export default function Flight({
   overview = false,
   sidebar = false,
 }) {
-  const Component = useMemo(() => (url ? InertiaLink : "div"), ["url"]);
+  const Component = useMemo(() => (url ? Link : "div"), ["url"]);
   const mainProps = useMemo(() => ({ href: url }), ["url"]);
 
   return (

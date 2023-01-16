@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { usePage } from "@inertiajs/inertia-react";
+import { usePage } from "@inertiajs/react";
 
 import "../../sass/style.scss";
 

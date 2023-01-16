@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
@@ -17,12 +17,12 @@ export default function Index({ can, timeline, pagination, status }) {
       <NaviBar
         actions={
           can.flights.create && (
-            <InertiaLink
+            <Link
               href={route("admin.flights.create")}
               className="btn btn-primary btn-sm"
             >
               <AmaranthIcon icon={aiPlus} /> Add
-            </InertiaLink>
+            </Link>
           )
         }
       >

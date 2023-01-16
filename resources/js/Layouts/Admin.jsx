@@ -1,5 +1,5 @@
 import React from 'react';
-import { InertiaHead } from '@inertiajs/inertia-react';
+import { Head } from '@inertiajs/react';
 
 import '../../sass/style.scss';
 
@@ -9,7 +9,7 @@ import AdminNavigation from './Navigation/AdminNavigation';
 export default function App({ children }) {
   return (
     <div className="bg-light">
-      <InertiaHead title="Backstage" />
+      <Head title="Backstage" />
 
       <div className="grid">
         <header className="grid-sidebar">

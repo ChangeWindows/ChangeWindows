@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
@@ -13,12 +13,12 @@ export default function Index({ can, platforms, status }) {
     <Admin>
       <NaviBar
         actions={can.platforms.create &&
-          <InertiaLink
+          <Link
             href={route("admin.platforms.create")}
             className="btn btn-primary btn-sm"
           >
             <AmaranthIcon icon={aiPlus} /> New
-          </InertiaLink>
+          </Link>
         }
       >
         Platforms
@@ -35,7 +35,7 @@ export default function Index({ can, platforms, status }) {
 
             return (
               <div className="col-6 col-xl-4 col-xxl-3" key={platform.id}>
-                <InertiaLink
+                <Link
                   href={route('admin.platforms.edit', platform)}
                   className="card border-0 shadow-sm"
                 >
@@ -52,7 +52,7 @@ export default function Index({ can, platforms, status }) {
                       </div>
                     </div>
                   </div>
-                </InertiaLink>
+                </Link>
               </div>
             );
           })}

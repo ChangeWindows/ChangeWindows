@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 
@@ -48,7 +48,7 @@ export default function Show({ app, patrons }) {
 
   return (
     <App>
-      <InertiaHead title="Settings" />
+      <Head title="Settings" />
 
       <nav className="navbar navbar-expand navbar-light sticky-top">
         <div className="container">

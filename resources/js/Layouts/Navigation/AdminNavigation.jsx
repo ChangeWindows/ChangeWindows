@@ -1,9 +1,9 @@
 import React from 'react';
-import { usePage } from '@inertiajs/inertia-react'
+import { usePage } from '@inertiajs/react'
 
 import NavigationBar from './components/NavigationBar';
 
-import { aiBox, aiBranchUp, aiDevices, aiFlag, aiLock, aiPlane, aiRocket, aiSoftwareBox, aiTwitter, aiUser, aiUserLock } from '@changewindows/amaranth';
+import { aiDevices, aiFlag, aiLock, aiPlane, aiSoftwareBox, aiTwitter, aiUser, aiUserLock } from '@changewindows/amaranth';
 
 export default function AdminNavigation() {
   const { navCan } = usePage().props;

@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "@inertiajs/inertia-react";
+import { useForm } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
 import Fieldset from "@/Components/UI/Forms/Fieldset";

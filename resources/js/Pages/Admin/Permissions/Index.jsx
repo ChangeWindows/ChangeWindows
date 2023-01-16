@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
@@ -13,12 +13,12 @@ export default function Show({ can, permissions, pagination, status }) {
     <Admin>
       <NaviBar
         actions={can.permissions.create &&
-          <InertiaLink
+          <Link
             href={route("admin.permissions.create")}
             className="btn btn-primary btn-sm"
           >
             <AmaranthIcon icon={aiPlus} /> New
-          </InertiaLink>
+          </Link>
         }
       >
         Permissions
@@ -29,14 +29,14 @@ export default function Show({ can, permissions, pagination, status }) {
         <div className="row g-1">
           {permissions.map((permission) => (
             <div className="col-6 col-xl-4 col-xxl-3" key={permission.id}>
-              <InertiaLink
+              <Link
                 href={route("admin.permissions.edit", permission)}
                 className="card border-0 shadow-sm"
               >
                 <div className="card-body">
                   <h3 className="h6 mb-0">{permission.name}</h3>
                 </div>
-              </InertiaLink>
+              </Link>
             </div>
           ))}
           <Pagination pagination={pagination} />

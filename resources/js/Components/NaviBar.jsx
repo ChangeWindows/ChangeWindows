@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 import AmaranthIcon, { aiArrowLeft } from "@changewindows/amaranth";
 
@@ -14,12 +14,12 @@ export default function Navigation({
     <nav className="navbar navbar-expand-xl navbar-light sticky-top">
       <div className="container flex-nowrap">
         {!!back && (
-          <InertiaLink
+          <Link
             href={back}
             className="btn btn-transparent btn-sm me-2 flex-shrink-0"
           >
             <AmaranthIcon icon={aiArrowLeft} />
-          </InertiaLink>
+          </Link>
         )}
         <span className="navbar-brand text-wrap">{children}</span>
         <div className="flex-grow-1" />

@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
@@ -12,12 +12,12 @@ export default function Index({ can, tweet_streams, status }) {
     <Admin>
       <NaviBar
         actions={can.tweetStreams.create &&
-          <InertiaLink
+          <Link
             href={route("admin.tweet_streams.create")}
             className="btn btn-primary btn-sm"
           >
             <AmaranthIcon icon={aiPlus} /> New
-          </InertiaLink>
+          </Link>
         }
       >
         Twitter Tweet Streams
@@ -28,7 +28,7 @@ export default function Index({ can, tweet_streams, status }) {
         <div className="row g-1">
           {tweet_streams.map((tweet_stream) => (
             <div className="col-6 col-xl-4 col-xxl-3" key={tweet_stream.id}>
-              <InertiaLink
+              <Link
                 href={route("admin.tweet_streams.edit", tweet_stream)}
                 className="card border-0 shadow-sm"
               >
@@ -38,7 +38,7 @@ export default function Index({ can, tweet_streams, status }) {
                     <small>{tweet_stream.account}</small>
                   </p>
                 </div>
-              </InertiaLink>
+              </Link>
             </div>
           ))}
         </div>

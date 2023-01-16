@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 export default function Flight({
   platform,
@@ -8,7 +8,7 @@ export default function Flight({
   version = null,
   url = null
 }) {
-  const Component = useMemo(() => (url ? InertiaLink : "div"), ["url"]);
+  const Component = useMemo(() => (url ? Link : "div"), ["url"]);
   const mainProps = useMemo(() => ({ href: url }), ["url"]);
 
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaHead, usePage } from "@inertiajs/inertia-react";
+import { Head, usePage } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 
@@ -8,7 +8,7 @@ export default function Index() {
 
   return (
     <App>
-      <InertiaHead title="Search" />
+      <Head title="Search" />
 
       <div className="container">
         <div className="row g-1">

@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink, useForm } from "@inertiajs/inertia-react";
+import { Link, useForm } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
@@ -208,7 +208,7 @@ export default function Edit({
 
             return (
               <div className="col-12 col-sm-6 col-xl-4" key={channel.id}>
-                <InertiaLink
+                <Link
                   href={route("admin.channels.edit", channel)}
                   className="card border-0 shadow-sm h-100"
                 >
@@ -229,13 +229,13 @@ export default function Edit({
                     </div>
                     <div className="flex-grox-1" />
                   </div>
-                </InertiaLink>
+                </Link>
               </div>
             );
           })}
           {can.channels.create && (
             <div className="col-12 col-sm-6 col-xl-4">
-              <InertiaLink
+              <Link
                 href={route("admin.channels.create", {
                   platform: platform.id,
                 })}
@@ -246,7 +246,7 @@ export default function Edit({
                     <AmaranthIcon icon={aiPlus} /> New channel
                   </h3>
                 </div>
-              </InertiaLink>
+              </Link>
             </div>
           )}
         </Fieldset>
