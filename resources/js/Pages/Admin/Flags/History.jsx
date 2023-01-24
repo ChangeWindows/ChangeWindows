@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { InertiaLink, useForm } from "@inertiajs/inertia-react";
+import { Link, useForm } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
@@ -44,19 +44,19 @@ export default function Show({ can, flagStatus, pagination, status, errors }) {
           <div className="container">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
-                <InertiaLink className="nav-link" href="/admin/flags">
+                <Link className="nav-link" href="/admin/flags">
                   <AmaranthIcon icon={aiFlag} />{" "}
                   <span className="d-none d-sm-inline-block ms-1">Manage</span>
-                </InertiaLink>
+                </Link>
               </li>
               <li className="nav-item">
-                <InertiaLink
+                <Link
                   className="nav-link active"
                   href="/admin/flags/history"
                 >
                   <AmaranthIcon icon={aiClockRotateLeft} />{" "}
                   <span className="d-none d-sm-inline-block ms-1">History</span>
-                </InertiaLink>
+                </Link>
               </li>
             </ul>
           </div>

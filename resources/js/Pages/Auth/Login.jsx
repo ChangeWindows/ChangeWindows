@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Inertia } from "@inertiajs/inertia";
-import { InertiaLink, InertiaHead } from "@inertiajs/inertia-react";
+import { Link, Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
@@ -15,12 +14,12 @@ export default function Login({ app, status }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post("/login", form);
+    router.post("/login", form);
   }
 
   return (
     <Auth>
-      <InertiaHead title="Login" />
+      <Head title="Login" />
 
       <form onSubmit={handleSubmit} className="row g-3">
         {Object.keys(status).length > 0 && (
@@ -100,12 +99,12 @@ export default function Login({ app, status }) {
           <hr className="m-0" />
         </div>
         <div className="col-12 d-flex flex-column">
-          <InertiaLink href="/register" className="btn btn-light btn-sm py-2 mb-2">
+          <Link href="/register" className="btn btn-light btn-sm py-2 mb-2">
             <AmaranthIcon icon={aiUserPlus} /> Register
-          </InertiaLink>
-          <InertiaLink href="/forgot-password" className="btn btn-light btn-sm py-2">
+          </Link>
+          <Link href="/forgot-password" className="btn btn-light btn-sm py-2">
             <AmaranthIcon icon={aiShieldKeyhole} /> Forgot password
-          </InertiaLink>
+          </Link>
         </div>
       </form>
     </Auth>

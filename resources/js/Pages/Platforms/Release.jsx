@@ -1,14 +1,12 @@
 import React from "react";
-import { InertiaLink, InertiaHead } from "@inertiajs/inertia-react";
+import { Link as ILink, Head } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 import Channel from "@/Components/Cards/Channel";
 import Flight from "@/Components/Timeline/Flight";
-import Launch from "@/Components/Timeline/Launch";
 import LifeCycle from "./_LifeCycle";
 import Pagination from "@/Components/Pagination";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
-import Promotion from "@/Components/Timeline/Promotion";
 import Timeline from "@/Components/Timeline/Timeline";
 
 import AmaranthIcon, {
@@ -49,17 +47,17 @@ export default function Release({
 
   return (
     <App>
-      <InertiaHead title={release.name} />
+      <Head title={release.name} />
 
       <Tab.Container defaultActiveKey="timeline">
         <nav className="navbar navbar-expand-xl navbar-light sticky-top">
           <div className="container">
-            <InertiaLink
+            <ILink
               href={route("front.platforms.show", platform)}
               className="btn btn-transparent btn-sm me-2"
             >
               <AmaranthIcon icon={aiArrowLeft} />
-            </InertiaLink>
+            </ILink>
             <Nav className="d-flex d-xl-none">
               <Nav.Item>
                 <Nav.Link eventKey="timeline">
@@ -74,7 +72,7 @@ export default function Release({
             </Nav>
             <div className="flex-grow-1" />
             {quickNav.prev && (
-              <InertiaLink
+              <ILink
                 href={route("front.platforms.releases", [
                   platform,
                   quickNav.prev,
@@ -86,10 +84,10 @@ export default function Release({
                   {" "}
                   {quickNav.prev.version}
                 </span>
-              </InertiaLink>
+              </ILink>
             )}
             {quickNav.next && (
-              <InertiaLink
+              <ILink
                 href={route("front.platforms.releases", [
                   platform,
                   quickNav.next,
@@ -100,7 +98,7 @@ export default function Release({
                   {quickNav.next.version}{" "}
                 </span>
                 <AmaranthIcon icon={aiAngleRight} />
-              </InertiaLink>
+              </ILink>
             )}
           </div>
         </nav>
@@ -166,47 +164,17 @@ export default function Release({
                             date={parseISO(timeline[date].date)}
                             key={key}
                           >
-                            {timeline[date].flights.map((flight, _key) => {
-                              if (flight.type === "flight") {
-                                return (
-                                  <Flight
-                                    key={`${flight.type}-${flight.id}`}
-                                    platform={flight.platform}
-                                    build={flight.flight}
-                                    channels={flight.release_channel}
-                                    version={flight.version}
-                                    pack={flight.package}
-                                    sidebar={true}
-                                    overview
-                                  />
-                                );
-                              }
-
-                              if (flight.type === "promotion") {
-                                return (
-                                  <Promotion
-                                    key={`${flight.type}-${flight.id}`}
-                                    platform={flight.platform}
-                                    channel={flight.release_channel}
-                                    version={flight.version}
-                                    sidebar={true}
-                                    overview
-                                  />
-                                );
-                              }
-
-                              if (flight.type === "launch") {
-                                return (
-                                  <Launch
-                                    key={`${flight.type}-${flight.id}`}
-                                    platform={flight.platform}
-                                    version={flight.version}
-                                    sidebar={true}
-                                    overview
-                                  />
-                                );
-                              }
-                            })}
+                            {timeline[date].flights.map((flight, _key) => (
+                              <Flight
+                                key={`${flight.type}-${flight.id}`}
+                                platform={flight.platform}
+                                build={flight.flight}
+                                channels={flight.release_channel}
+                                version={flight.version}
+                                sidebar={true}
+                                overview
+                              />
+                            ))}
                           </Timeline>
                         ))}
                         <Pagination pagination={pagination} />

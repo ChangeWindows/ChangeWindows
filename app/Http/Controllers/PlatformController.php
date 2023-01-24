@@ -41,7 +41,7 @@ class PlatformController extends Controller
                 ];
             }),
             'platform' => $platform->only('name', 'description', 'icon', 'color', 'slug'),
-            'channels' => $platform->channels->where('active')->map(function ($channel) {
+            'channels' => $platform->activeChannels->map(function ($channel) {
                 $release_channels = $channel->releaseChannels
                     ->sortByDesc(function ($release_channel, $key) {
                         return $release_channel->release->canonical_version;
@@ -55,7 +55,7 @@ class PlatformController extends Controller
                         if ($_channel->latest) {
                             return [
                                 'version' => $_channel->latest->flight,
-                                'date' => $_channel->latest->timeline->date,
+                                'date' => $_channel->latest->date,
                                 'release' => [
                                     'slug' => $_channel->release->slug
                                 ]
@@ -64,7 +64,7 @@ class PlatformController extends Controller
                     })->where('version', '<>', null)->values()->all()
                 ];
             })->sortBy('order')->values()->all(),
-            'releases' => $platform->releases->sortByDesc('canonical_version')->map(function ($release) {
+            'releases' => $platform->releases->sortByDesc('canonical_version')->map(function ($release) use ($platform) {
                 return [
                     'name' => $release->name,
                     'slug' => $release->slug,
@@ -79,33 +79,12 @@ class PlatformController extends Controller
                         'ongoing' => $release->ongoing
                     ],
                     'platform' => [
-                        'icon' => $release->platform->icon,
-                        'name' => $release->platform->name,
-                        'color' => $release->platform->color,
-                        'tool' => $release->platform->tool
+                        'icon' => $platform->icon,
+                        'name' => $platform->name,
+                        'color' => $platform->color,
+                        'tool' => $platform->tool
                     ],
                     'latest_flight' => $release->latest->flight,
-                    'channels' => $release->releaseChannels->where('supported')->map(function ($channel) {
-                        return [
-                            'id' => $channel->id,
-                            'short_name' => $channel->short_name,
-                            'supported' => $channel->supported,
-                            'color' => $channel->channel->color,
-                            'order' => $channel->channel->order
-                        ];
-                    })->values()->all()
-                ];
-            })->values()->all(),
-            'packages' => $platform->packages->sortBy('name')->map(function ($release) {
-                return [
-                    'name' => $release->name,
-                    'slug' => $release->slug,
-                    'platform' => [
-                        'icon' => $release->platform->icon,
-                        'name' => $release->platform->name,
-                        'color' => $release->platform->color,
-                        'tool' => $release->platform->tool
-                    ],
                     'channels' => $release->releaseChannels->where('supported')->map(function ($channel) {
                         return [
                             'id' => $channel->id,

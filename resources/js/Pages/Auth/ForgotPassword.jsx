@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Inertia } from "@inertiajs/inertia";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
@@ -11,12 +10,12 @@ export default function ForgotPassword({ app, status }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post("/forgot-password", form);
+    router.post("/forgot-password", form);
   }
 
   return (
     <Auth>
-      <InertiaHead title="Forgot Password" />
+      <Head title="Forgot Password" />
 
       <form onSubmit={handleSubmit} className="row g-3">
         <div className="col-12">

@@ -12,12 +12,8 @@ class Flight extends Model
     public $searchableType = 'Flights';
 
     protected $table = 'flights';
-    protected $fillable = ['major', 'minor', 'build', 'delta', 'release_channel_id'];
+    protected $fillable = ['major', 'minor', 'build', 'delta', 'date', 'release_channel_id'];
     protected $appends = ['version', 'flight'];
-
-    public function timeline() {
-        return $this->morphOne(Timeline::class, 'item');
-    }
 
     public function releaseChannel() {
         return $this->belongsTo(ReleaseChannel::class);

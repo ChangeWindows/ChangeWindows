@@ -1,6 +1,5 @@
 import React from "react";
-import { Inertia } from "@inertiajs/inertia";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
@@ -12,17 +11,17 @@ import AmaranthIcon, {
 export default function VerifyEmail({ app, session, status }) {
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post("/email/verification-notification", form);
+    router.post("/email/verification-notification", form);
   }
 
   function handleLogout(event) {
     event.preventDefault();
-    Inertia.post("/logout", form);
+    router.post("/logout", form);
   }
 
   return (
     <Auth>
-      <InertiaHead title="Verify Email" />
+      <Head title="Verify Email" />
 
       <form onSubmit={handleSubmit} className="row g-3">
         <div className="col-12">

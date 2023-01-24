@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Inertia } from "@inertiajs/inertia";
-import { InertiaLink, usePage } from "@inertiajs/inertia-react";
+import { Link, router, usePage } from "@inertiajs/react";
 
 import AmaranthIcon, {
   aiArrowRightFromBracket,
@@ -46,12 +45,12 @@ export default function AppBar() {
 
   function handleLogout(e) {
     e.preventDefault();
-    Inertia.post("/logout");
+    router.post("/logout");
   }
 
   function handleSearch(e) {
     e.preventDefault();
-    Inertia.post(url.includes("/flags") ? "/search/flags" : "/search", { search });
+    router.post(url.includes("/flags") ? "/search/flags" : "/search", { search });
   }
 
   return (
@@ -59,7 +58,7 @@ export default function AppBar() {
       <nav className="navbar navbar-dark navbar-main">
         <div className="container-fluid">
           <div className="navbar-main">
-            <InertiaLink className="navbar-brand" href="/">
+            <Link className="navbar-brand" href="/">
               <img
                 src={
                   props.app.preview === "preview"
@@ -81,7 +80,7 @@ export default function AppBar() {
                   ""
                 )}
               </span>
-            </InertiaLink>
+            </Link>
           </div>
           <div className="navbar-search">
             <form
@@ -106,12 +105,12 @@ export default function AppBar() {
           <div className="navbar-actions">
             {props.auth ? (
               <>
-                <InertiaLink
+                <Link
                   href="/profile"
                   className="btn btn-transparent btn-profile me-2"
                 >
                   <AmaranthIcon icon={aiCircleUser} />
-                </InertiaLink>
+                </Link>
                 <form onSubmit={handleLogout} className="d-block">
                   <button
                     type="submit"
@@ -122,12 +121,12 @@ export default function AppBar() {
                 </form>
               </>
             ) : (
-              <InertiaLink
+              <Link
                 href="/login"
                 className="btn btn-transparent btn-profile"
               >
                 <AmaranthIcon icon={aiArrowRightToBracket} />
-              </InertiaLink>
+              </Link>
             )}
           </div>
         </div>

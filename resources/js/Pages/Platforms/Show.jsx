@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 import Channel from "@/Components/Cards/Channel";
@@ -15,7 +15,6 @@ export default function Show({
   platform,
   channels,
   releases,
-  packages,
 }) {
   const [currentReleases, legacyReleases] = useMemo(() => {
     const currentReleases = releases.filter(
@@ -30,7 +29,7 @@ export default function Show({
 
   return (
     <App>
-      <InertiaHead title={platform.name} />
+      <Head title={platform.name} />
 
       <PlatformNavigation
         page="Platforms"
@@ -98,27 +97,6 @@ export default function Show({
                           release,
                         ])}
                         dates={release.dates}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
-              {packages.length > 0 && (
-                <div className="col-12 mt-4">
-                  <h2 className="h5 mb-3 fw-bold">Packages</h2>
-                  <div className="row g-1">
-                    {packages.map((pack, key) => (
-                      <ReleaseCard
-                        key={key}
-                        pack
-                        platform={platform}
-                        name={pack.name}
-                        alts={[`Version ${pack.version}`, pack.codename]}
-                        channels={pack.channels}
-                        url={route("front.platforms.packages", {
-                          platform,
-                          release: pack,
-                        })}
                       />
                     ))}
                   </div>

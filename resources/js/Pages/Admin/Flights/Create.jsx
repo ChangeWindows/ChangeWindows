@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
-import { useForm } from "@inertiajs/inertia-react";
+import { useForm } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
 import Checkbox from "@/Components/UI/Forms/Checkbox";

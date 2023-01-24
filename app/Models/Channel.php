@@ -29,7 +29,7 @@ class Channel extends Model
     }
 
     public function activeReleaseChannels() {
-        return $this->hasMany(ReleaseChannel::class)->whereHas('flights');
+        return $this->hasMany(ReleaseChannel::class)->whereHas('flights')->with('release');
     }
 
     public function getBgColorAttribute() {

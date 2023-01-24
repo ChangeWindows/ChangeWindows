@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 import Channel from "@/Components/Cards/Channel";
@@ -13,7 +13,7 @@ import clsx from "clsx";
 export default function Index({ platforms, channel_platforms }) {
   return (
     <App>
-      <InertiaHead title="Channels" />
+      <Head title="Channels" />
 
       <PlatformNavigation
         home

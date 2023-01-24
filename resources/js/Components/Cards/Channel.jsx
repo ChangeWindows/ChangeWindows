@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 import clsx from "clsx";
 import { format, isToday, isYesterday, parseISO, isValid } from "date-fns";
@@ -11,7 +11,7 @@ export default function Channel({
   disabled = false,
   url = null,
 }) {
-  const Component = useMemo(() => (url ? InertiaLink : "div"), ["url"]);
+  const Component = useMemo(() => (url ? Link : "div"), ["url"]);
   const mainProps = useMemo(() => ({ href: url }), ["url"]);
 
   const formatedDate = useMemo(() => {

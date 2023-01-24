@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
@@ -15,7 +15,7 @@ export default function Index({ users, status }) {
         <div className="row g-1">
           {users.map((user) => (
             <div className="col-12 col-sm-6 col-xl-4 col-xxl-3" key={user.id}>
-              <InertiaLink
+              <Link
                 href={route("admin.users.edit", user)}
                 className="card border-0 shadow-sm"
               >
@@ -25,7 +25,7 @@ export default function Index({ users, status }) {
                     <small>{user.email}</small>
                   </p>
                 </div>
-              </InertiaLink>
+              </Link>
             </div>
           ))}
         </div>

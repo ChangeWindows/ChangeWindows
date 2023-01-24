@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "@inertiajs/inertia-react";
+import { useForm } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
@@ -20,7 +20,6 @@ export default function Create({ tweet_streams }) {
     active: 1,
     legacy: 0,
     tweet_template: "",
-    tweet_template_package: "",
     tweet_stream_id: null,
     retweet_stream_id: null,
   });
@@ -163,22 +162,6 @@ export default function Create({ tweet_streams }) {
                   <>
                     Include <code>%RELEASE%</code>, <code>%VERSION%</code>,{" "}
                     <code>%CODENAME%</code>, <code>%FLIGHT%</code>,{" "}
-                    <code>%CHANNELS%</code>, and <code>%URL%</code>.
-                  </>
-                }
-              />
-            </div>
-            <div className="col-12">
-              <TextField
-                type="textarea"
-                label="Tweet Template for Packages"
-                id="tweet_template_package"
-                value={data.tweet_template_package}
-                errors={errors.tweet_template_package}
-                onChange={setData}
-                helper={
-                  <>
-                    Include <code>%RELEASE%</code>, <code>%FLIGHT%</code>,{" "}
                     <code>%CHANNELS%</code>, and <code>%URL%</code>.
                   </>
                 }

@@ -1,50 +1,52 @@
 import React from "react";
-import { InertiaHead, InertiaLink } from "@inertiajs/inertia-react";
+import { Head, Link } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 import Pagination from "@/Components/Pagination";
 
-import FlagCurrent from "./_FlagCurrent";
+import Flag from "@/Components/Flag";
+import FlagTimeline from "@/Components/_FlagsTimeline";
 
 import AmaranthIcon, {
+  aiBarsStaggered,
   aiCircleInfo,
   aiClockRotateLeft,
   aiStar,
   aiTrashCan,
 } from "@changewindows/amaranth";
 
-export default function Index({ flags, pagination }) {
+export default function Index({ flagStatus, pagination }) {
   return (
     <App>
-      <InertiaHead title="Flags" />
+      <Head title="Flags" />
       <nav className="navbar navbar-expand navbar-light sticky-top">
         <div className="container">
-          <ul className="navbar-nav me-auto d-flex">
+          <ul className="navbar-nav me-auto">
             <li className="nav-item">
-              <InertiaLink className="nav-link active" href="/flags">
+              <Link className="nav-link active" href="/flags">
+                <AmaranthIcon icon={aiBarsStaggered} />{" "}
+                <span className="d-none d-sm-inline-block ms-1">Timeline</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" href="/flags/active">
                 <AmaranthIcon icon={aiStar} />{" "}
-                <span className="d-none d-sm-inline-block ms-1">Current</span>
-              </InertiaLink>
+                <span className="d-none d-sm-inline-block ms-1">Active</span>
+              </Link>
             </li>
             <li className="nav-item">
-              <InertiaLink className="nav-link" href="/flags/history">
-                <AmaranthIcon icon={aiClockRotateLeft} />{" "}
-                <span className="d-none d-sm-inline-block ms-1">History</span>
-              </InertiaLink>
-            </li>
-            <li className="nav-item">
-              <InertiaLink className="nav-link" href="/flags/removed">
+              <Link className="nav-link" href="/flags/removed">
                 <AmaranthIcon icon={aiTrashCan} />{" "}
                 <span className="d-none d-sm-inline-block ms-1">Removed</span>
-              </InertiaLink>
+              </Link>
             </li>
           </ul>
           <ul className="navbar-nav d-flex">
             <li className="nav-item">
-              <InertiaLink className="nav-link" href="/flags/about">
+              <Link className="nav-link" href="/flags/about">
                 <AmaranthIcon icon={aiCircleInfo} />{" "}
                 <span className="d-none d-md-inline-block ms-1">About</span>
-              </InertiaLink>
+              </Link>
             </li>
           </ul>
         </div>
@@ -55,16 +57,18 @@ export default function Index({ flags, pagination }) {
           <div className="col-12 titlebar">
             <h1>Flags</h1>
           </div>
-          <div className="col-12 timeline">
-            {flags.data.map((flag) => (
-              <FlagCurrent
-                hideBuild
-                flag={flag}
-                key={flag.id}
-                url={route("front.flags.show", flag)}
-              />
-            ))}
-          </div>
+          {flagStatus.map((build) => (
+            <FlagTimeline title={build.build} key={build.build}>
+              {build.changes.map((flag) => (
+                <Flag
+                  hideBuild
+                  flag={flag}
+                  key={flag.id}
+                  url={route("front.flags.show", flag.flag)}
+                />
+              ))}
+            </FlagTimeline>
+          ))}
           <Pagination pagination={pagination} />
         </div>
       </div>

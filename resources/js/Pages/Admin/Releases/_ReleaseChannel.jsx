@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink, useForm } from "@inertiajs/inertia-react";
+import { Link, useForm } from "@inertiajs/react";
 
 import AmaranthIcon, {
   aiCheck,
@@ -18,7 +18,7 @@ export default function ReleaseChannel({ can, releaseChannel }) {
 
   return (
     <div className="col-12 col-sm-6 col-xl-4">
-      <InertiaLink
+      <Link
         href={route("admin.releasechannels.edit", releaseChannel)}
         className="card border-0 shadow-sm h-100"
       >
@@ -61,7 +61,7 @@ export default function ReleaseChannel({ can, releaseChannel }) {
             </button>
           </div>
         </div>
-      </InertiaLink>
+      </Link>
     </div>
   );
 }

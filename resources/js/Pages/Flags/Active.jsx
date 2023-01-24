@@ -8,18 +8,17 @@ import FlagCurrent from "./_FlagCurrent";
 
 import AmaranthIcon, {
   aiCircleInfo,
-  aiClockRotateLeft,
   aiStar,
   aiTrashCan,
 } from "@changewindows/amaranth";
 
-export default function Show({ flags, pagination }) {
+export default function Active({ flags, pagination }) {
   return (
     <App>
       <Head title="Flags" />
       <nav className="navbar navbar-expand navbar-light sticky-top">
         <div className="container">
-          <ul className="navbar-nav me-auto">
+          <ul className="navbar-nav me-auto d-flex">
             <li className="nav-item">
               <Link className="nav-link" href="/flags">
                 <AmaranthIcon icon={aiBarsStaggered} />{" "}
@@ -27,13 +26,13 @@ export default function Show({ flags, pagination }) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/flags/active">
+              <Link className="nav-link active" href="/flags/active">
                 <AmaranthIcon icon={aiStar} />{" "}
                 <span className="d-none d-sm-inline-block ms-1">Active</span>
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link active" href="/flags/removed">
+              <Link className="nav-link" href="/flags/removed">
                 <AmaranthIcon icon={aiTrashCan} />{" "}
                 <span className="d-none d-sm-inline-block ms-1">Removed</span>
               </Link>
@@ -58,6 +57,7 @@ export default function Show({ flags, pagination }) {
           <div className="col-12 timeline">
             {flags.data.map((flag) => (
               <FlagCurrent
+                hideBuild
                 flag={flag}
                 key={flag.id}
                 url={route("front.flags.show", flag)}

@@ -8,27 +8,26 @@
     },
     "dependencies": {
         "@changewindows/amaranth": "0.10.0-alpha.4",
-        "@inertiajs/inertia": "0.11.1",
-        "@inertiajs/inertia-react": "0.8.1",
-        "@inertiajs/progress": "0.2.7",
-        "@tiptap/extension-link": "2.0.0-beta.199",
-        "@tiptap/extension-typography": "2.0.0-beta.199",
-        "@tiptap/extension-underline": "2.0.0-beta.199",
-        "@tiptap/react": "2.0.0-beta.199",
-        "@tiptap/starter-kit": "2.0.0-beta.199",
-        "bootstrap": "5.2.2",
+        "@inertiajs/react": "1.0.0",
+        "@tiptap/extension-link": "2.0.0-beta.209",
+        "@tiptap/extension-typography": "2.0.0-beta.209",
+        "@tiptap/extension-underline": "2.0.0-beta.209",
+        "@tiptap/react": "2.0.0-beta.209",
+        "@tiptap/starter-kit": "2.0.0-beta.209",
+        "bootstrap": "5.2.3",
         "clsx": "1.2.1",
         "date-fns": "2.29.3",
         "react": "18.2.0",
-        "react-bootstrap": "2.5.0",
+        "react-bootstrap": "2.7.0",
         "react-dom": "18.2.0",
+        "sass": "^1.57.1",
         "styled-components": "5.3.6"
     },
     "devDependencies": {
         "@babel/preset-react": "7.18.6",
-        "@types/react": "18.0.24",
+        "@types/react": "18.0.27",
         "autoprefixer": "10.4.13",
-        "laravel-vite-plugin": "0.7.0",
-        "postcss": "8.4.18"
+        "laravel-vite-plugin": "0.7.3",
+        "postcss": "8.4.21"
     }
 }

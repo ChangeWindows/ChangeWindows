@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
@@ -29,7 +29,7 @@ export default function PlatformCard({ can, platform }) {
             <div className="subevent-version">{release.version}</div>
 
             <div className="subevent-actions">
-              <InertiaLink
+              <Link
                 href={route("admin.releases.edit", release)}
                 className="btn btn-link btn-sm my-n1"
               >
@@ -42,13 +42,13 @@ export default function PlatformCard({ can, platform }) {
                     <AmaranthIcon icon={aiEye} /> View
                   </>
                 )}
-              </InertiaLink>
-              <InertiaLink
+              </Link>
+              <Link
                 href={route("admin.releases.changelog.edit", release)}
                 className="btn btn-link btn-sm my-n1"
               >
                 <AmaranthIcon icon={aiNotes} />
-              </InertiaLink>
+              </Link>
             </div>
           </div>
         ))}

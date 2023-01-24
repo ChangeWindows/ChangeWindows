@@ -1,5 +1,5 @@
 import React from 'react';
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/react';
 
 import clsx from 'clsx';
 import AmaranthIcon, { aiArrowLeft, aiArrowRight } from '@changewindows/amaranth';
@@ -14,13 +14,13 @@ export default function Pagination({ pagination }) {
           if (link.label.includes('Previous')) {
             return (
               <li className={clsx('page-item d-none d-md-inline-block', { 'active': link.active, 'disabled': !link.url })} key={key}>
-                <InertiaLink className="page-link" href={link.url}><AmaranthIcon icon={aiArrowLeft} /></InertiaLink>
+                <Link className="page-link" href={link.url}><AmaranthIcon icon={aiArrowLeft} /></Link>
               </li>
             );
           } else if (link.label.includes('Next')) {
             return (
               <li className={clsx('page-item d-none d-md-inline-block', { 'active': link.active, 'disabled': !link.url })} key={key}>
-                <InertiaLink className="page-link" href={link.url}><AmaranthIcon icon={aiArrowRight} /></InertiaLink>
+                <Link className="page-link" href={link.url}><AmaranthIcon icon={aiArrowRight} /></Link>
               </li>
             );
           } else if (link.label === '...') {
@@ -32,7 +32,7 @@ export default function Pagination({ pagination }) {
           } else {
             return (
               <li className={clsx('page-item', { 'active': link.active, 'disabled': !link.url })} key={key}>
-                <InertiaLink className="page-link" href={link.url}>{link.label}</InertiaLink>
+                <Link className="page-link" href={link.url}>{link.label}</Link>
               </li>
             );
           }

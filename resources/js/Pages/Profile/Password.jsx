@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaHead, useForm } from "@inertiajs/inertia-react";
+import { Head, useForm } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 import TextField from "@/Components/UI/Forms/TextField";
@@ -24,7 +24,7 @@ export default function Index({ status, user }) {
 
   return (
     <App>
-      <InertiaHead title="Change password" />
+      <Head title="Change password" />
 
       <NaviBar
         back="/profile"

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 import Channel from "@/Components/Cards/Channel";
@@ -22,7 +22,7 @@ export default function Index({
 }) {
   return (
     <App>
-      <InertiaHead title="Timeline" />
+      <Head title="Timeline" />
 
       <PlatformNavigation
         home

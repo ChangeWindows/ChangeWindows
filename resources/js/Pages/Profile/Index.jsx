@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaHead, Link, useForm } from "@inertiajs/inertia-react";
+import { Head, Link, useForm } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 import TextField from "@/Components/UI/Forms/TextField";
@@ -26,7 +26,7 @@ export default function Index({ status, user }) {
 
   return (
     <App noHeader>
-      <InertiaHead title="Profile" />
+      <Head title="Profile" />
 
       <NaviBar
         actions={
