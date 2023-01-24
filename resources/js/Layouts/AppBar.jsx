@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { router } from "@inertiajs/react";
-import { Link, usePage } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 
 import AmaranthIcon, {
   aiArrowRightFromBracket,
