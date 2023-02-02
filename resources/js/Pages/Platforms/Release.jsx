@@ -24,6 +24,10 @@ import Typography from "@tiptap/extension-typography";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import StarterKit from "@tiptap/starter-kit";
+import { Table } from "@tiptap/extension-table";
+import { TableRow } from "@tiptap/extension-table-row";
+import { TableHeader } from "@tiptap/extension-table-header";
+import { TableCell } from "@tiptap/extension-table-cell";
 import { Nav, Tab } from "react-bootstrap";
 
 export default function Release({
@@ -36,12 +40,38 @@ export default function Release({
 }) {
   const editor = useEditor({
     editable: false,
-    extensions: [StarterKit, Typography, Underline, Link],
+    extensions: [
+      StarterKit,
+      Typography,
+      Underline,
+      Link,
+      TableRow,
+      TableHeader,
+      TableCell,
+      Table.configure({
+        HTMLAttributes: {
+          class: "table",
+        },
+      }),
+    ],
     content: release.changelog,
   });
   const editorTwo = useEditor({
     editable: false,
-    extensions: [StarterKit, Typography, Underline, Link],
+    extensions: [
+      StarterKit,
+      Typography,
+      Underline,
+      Link,
+      TableRow,
+      TableHeader,
+      TableCell,
+      Table.configure({
+        HTMLAttributes: {
+          class: "table",
+        },
+      }),
+    ],
     content: release.changelog,
   });
 

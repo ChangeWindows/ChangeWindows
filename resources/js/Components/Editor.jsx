@@ -30,6 +30,10 @@ import AmaranthIcon, {
   aiUnderline,
   aiUndo,
 } from "@changewindows/amaranth";
+import { Table } from "@tiptap/extension-table";
+import { TableRow } from "@tiptap/extension-table-row";
+import { TableHeader } from "@tiptap/extension-table-header";
+import { TableCell } from "@tiptap/extension-table-cell";
 
 export default function Editor({ content = null, setData }) {
   const editor = useEditor({
@@ -39,6 +43,14 @@ export default function Editor({ content = null, setData }) {
       Underline,
       Link.configure({
         openOnClick: false,
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
+      Table.configure({
+        HTMLAttributes: {
+          class: "table",
+        },
       }),
     ],
     content,
@@ -301,6 +313,113 @@ function MenuBar({ editor }) {
           onClick={() => editor.chain().focus().clearNodes().run()}
         >
           <AmaranthIcon icon={aiClearNode} />
+        </button>
+      </div>
+      <div className="flex-grow-1" />
+      <div className="btn-group">
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() =>
+            editor.commands.insertTable({
+              rows: 3,
+              cols: 3,
+              withHeaderRow: true,
+            })
+          }
+        >
+          Table
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.addColumnBefore()}
+        >
+          Column before
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.addColumnAfter()}
+        >
+          Column after
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.deleteColumn()}
+        >
+          Delete column
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.addRowBefore()}
+        >
+          Row before
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.addRowAfter()}
+        >
+          Row after
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.deleteRow()}
+        >
+          Delete row
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.deleteTable()}
+        >
+          Delete table
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.mergeCells()}
+        >
+          Merge
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.splitCell()}
+        >
+          Split
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.mergeOrSplit()}
+        >
+          Merge/split
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.toggleHeaderColumn()}
+        >
+          Header column
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.toggleHeaderRow()}
+        >
+          Header row
+        </button>
+        <button
+          className="editor-btn"
+          type="button"
+          onClick={() => editor.commands.toggleHeaderCell()}
+        >
+          Header cell
         </button>
       </div>
     </div>
