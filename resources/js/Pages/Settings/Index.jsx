@@ -142,7 +142,7 @@ export default function Show({ app, patrons }) {
               ChangeWindows {app.preview === "preview" && "Preview"}
               {app.preview === "canary" && "Canary"} {app.version}
               <br />
-              &copy; 2014-2022{" "}
+              &copy; 2014-2023{" "}
               <a
                 className="m-0 f-384 fw-bold"
                 href="https://studio384.be"
