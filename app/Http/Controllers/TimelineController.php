@@ -222,29 +222,29 @@ class TimelineController extends Controller
                     })->map(function ($flights) {
                         $_cur = $flights->first();
                         return [
-                            'id' => $_cur->d,
-                            'flight' => $_cur->light,
-                            'date' => $_cur->ate,
+                            'id' => $_cur->id,
+                            'flight' => $_cur->flight,
+                            'date' => $_cur->date,
                             'release' => [
-                                'slug' => $_cur->eleaseChannel->release->slug,
-                                'version' => $_cur->eleaseChannel->release->version,
-                                'cversion' => $_cur->eleaseChannel->release->canonical_version
+                                'slug' => $_cur->releaseChannel->release->slug,
+                                'version' => $_cur->releaseChannel->release->version,
+                                'cversion' => $_cur->releaseChannel->release->canonical_version
                             ],
                             'release_channel' => $flights->map(function ($channels) {
                                 return [
-                                    'order' => $channels->eleaseChannel->channel->order,
-                                    'name' => $channels->eleaseChannel->short_name,
-                                    'color' => $channels->eleaseChannel->channel->color
+                                    'order' => $channels->releaseChannel->channel->order,
+                                    'name' => $channels->releaseChannel->short_name,
+                                    'color' => $channels->releaseChannel->channel->color
                                 ];
                             })->sortBy('order')->values()->all(),
                             'platform' => [
-                                'id' => $_cur->latform->id,
-                                'slug' => $_cur->latform->slug,
-                                'position' => $_cur->latform->position,
-                                'icon' => $_cur->latform->icon,
-                                'name' => $_cur->latform->name,
-                                'tool' => $_cur->latform->tool,
-                                'color' => $_cur->latform->color
+                                'id' => $_cur->platform->id,
+                                'slug' => $_cur->platform->slug,
+                                'position' => $_cur->platform->position,
+                                'icon' => $_cur->platform->icon,
+                                'name' => $_cur->platform->name,
+                                'tool' => $_cur->platform->tool,
+                                'color' => $_cur->platform->color
                             ]
                         ];
                     })->groupBy(function ($item, $key) {
@@ -253,11 +253,7 @@ class TimelineController extends Controller
                         return $item[0]['platform']['position'];
                     })->map(function ($platform) {
                         return $platform->sortByDesc(function ($item, $key) {
-                            if ($item['type'] === 'flight') {
-                                return $item['event_priority'] . '.' . $item['platform']['position'] . '.' . $item['flight'];
-                            }
-
-                            return $item['event_priority'] . '.' . $item['platform']['position'];
+                            return $item['platform']['position'] . '.' . $item['flight'];
                         })->values()->all();
                     })->values()->all()
                 ];
