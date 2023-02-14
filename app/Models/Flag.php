@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 use Spatie\Searchable\Searchable;
@@ -13,7 +14,7 @@ use Spatie\Searchable\SearchResult;
 class Flag extends Model implements Searchable
 {
     use HasFactory;
-    use Sluggable;
+    use HasSlug;
     use HasRelationships;
 
     public $searchableType = 'Flag';
@@ -57,18 +58,16 @@ class Flag extends Model implements Searchable
         }
     }
 
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('feature_name')
+            ->saveSlugsTo('slug');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';
-    }
-
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => 'feature_name'
-            ]
-        ];
     }
 
     public function getSearchResult(): SearchResult

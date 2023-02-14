@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class Platform extends Model
 {
     use HasFactory;
-    use Sluggable;
+    use HasSlug;
     use HasRelationships;
 
     public $searchableType = 'Platforms';
@@ -58,15 +59,14 @@ class Platform extends Model
         return 'background-color: '.$this->color;
     }
 
-    public function getRouteKeyName() {
-        return 'slug';
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
     }
 
-    public function sluggable(): array {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
+    public function getRouteKeyName() {
+        return 'slug';
     }
 }
