@@ -12,7 +12,7 @@
         "atymic/twitter": "^3.1.15",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.6",
-        "laravel/framework": "^9.0",
+        "laravel/framework": "^10.0",
         "laravel/tinker": "^2.7",
         "patreon/patreon": "^1.0",
         "spatie/laravel-permission": "^5.5",
@@ -25,9 +25,9 @@
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.10",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0"
     },
     "config": {
         "optimize-autoloader": true,
