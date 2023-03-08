@@ -123,6 +123,7 @@ class ReleaseChannelController extends Controller
 
         $releaseChannel->update([
             'name' => request('name'),
+            'channel_id' => request('channel_id'),
             'short_name' => request('short_name'),
             'supported' => request('supported') ? 1 : 0
         ]);
