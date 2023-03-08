@@ -13,6 +13,7 @@ export default function AdminNavigation() {
       main={[
         { type: 'link', url: '/admin/flights', icon: aiPlane, title: 'Flights', permission: navCan.flights.show },
         { type: 'link', url: '/admin/flags', icon: aiFlag, title: 'Flags', permission: navCan.flags.show },
+        { type: 'link', url: '/admin/features', icon: aiFlag, title: 'Feature Store', permission: navCan.flags.show },
         { type: 'link', url: '/admin/releases', icon: aiSoftwareBox, title: 'Releases', permission: navCan.flights.show },
         { type: 'link', url: '/admin/platforms', icon: aiDevices, title: 'Platforms', permission: navCan.platforms.show }
       ]}

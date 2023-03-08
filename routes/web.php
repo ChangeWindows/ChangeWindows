@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ChannelController as AdminChannelController;
 use App\Http\Controllers\Admin\FlightController as AdminFlightController;
 use App\Http\Controllers\Admin\FlagController as AdminFlagController;
+use App\Http\Controllers\Admin\FeatureStoreController as AdminFeatureStoreController;
 use App\Http\Controllers\Admin\PermissionController as AdminPermissionController;
 use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
 use App\Http\Controllers\Admin\ReleaseChannelController as AdminReleaseChannelController;
@@ -120,6 +121,19 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
     Route::controller(AdminFlagController::class)->prefix('flags')->as('.flags')->group(function() {
         Route::get('', 'index')->name('');
         Route::get('/history', 'history')->name('history');
+        Route::post('', 'store')->name('.store');
+        Route::post('/batch', 'batch')->name('.batch');
+        Route::delete('{flag}', 'destroy')->name('.destroy');
+        Route::get('/create', 'create')->name('.create');
+        Route::get('/{flag}/edit', 'edit')->name('.edit');
+        Route::patch('/{flag}/edit', 'update')->name('.update');
+        Route::patch('/{flag_content}/moderateApprove', 'moderateApprove')->name('.moderate.approve');
+        Route::patch('/{flag_content}/moderateDiscard', 'moderateDiscard')->name('.moderate.discard');
+    });
+
+    Route::controller(AdminFeatureStoreController::class)->prefix('features')->as('.features')->group(function() {
+        Route::get('', 'index')->name('');
+        Route::get('/directory', 'direct')->name('directory');
         Route::post('', 'store')->name('.store');
         Route::post('/batch', 'batch')->name('.batch');
         Route::delete('{flag}', 'destroy')->name('.destroy');
