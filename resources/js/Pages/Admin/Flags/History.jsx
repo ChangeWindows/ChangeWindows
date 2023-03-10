@@ -2,7 +2,6 @@ import React, { Fragment, useEffect } from "react";
 import { Link, useForm } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
-import NaviBar from "@/Components/NaviBar";
 import Pagination from "@/Components/Pagination";
 import Status from "@/Components/Status";
 
@@ -39,29 +38,24 @@ export default function Show({ can, flagStatus, pagination, status, errors }) {
 
   return (
     <Admin>
-      <NaviBar>
-        <nav className="navbar navbar-expand navbar-light sticky-top">
-          <div className="container">
-            <ul className="navbar-nav me-auto">
-              <li className="nav-item">
-                <Link className="nav-link" href="/admin/flags">
-                  <AmaranthIcon icon={aiFlag} />{" "}
-                  <span className="d-none d-sm-inline-block ms-1">Manage</span>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link active"
-                  href="/admin/flags/history"
-                >
-                  <AmaranthIcon icon={aiClockRotateLeft} />{" "}
-                  <span className="d-none d-sm-inline-block ms-1">History</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </NaviBar>
+      <nav className="navbar navbar-expand navbar-light sticky-top">
+        <div className="container">
+          <ul className="navbar-nav me-auto d-flex">
+            <li className="nav-item">
+              <Link className="nav-link" href="/admin/flags">
+                <AmaranthIcon icon={aiFlag} />{" "}
+                <span className="d-none d-sm-inline-block ms-1">Manage</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" href="/admin/flags/history">
+                <AmaranthIcon icon={aiClockRotateLeft} />{" "}
+                <span className="d-none d-sm-inline-block ms-1">History</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
       <div className="container my-2">
         <Status status={status} />

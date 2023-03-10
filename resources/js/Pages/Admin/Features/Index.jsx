@@ -2,13 +2,11 @@ import React, { useEffect } from "react";
 import { Link, useForm } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
-import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
 
 import AmaranthIcon, {
   aiSpinnerThird,
   aiArrowUp,
-  aiClockRotateLeft,
   aiFlag,
   aiFolder,
 } from "@changewindows/amaranth";
@@ -38,7 +36,6 @@ export default function Index({ can, status, errors, suggestion }) {
 
   return (
     <Admin>
-      <NaviBar>
         <nav className="navbar navbar-expand navbar-light sticky-top">
           <div className="container">
             <ul className="navbar-nav me-auto">
@@ -57,7 +54,6 @@ export default function Index({ can, status, errors, suggestion }) {
             </ul>
           </div>
         </nav>
-      </NaviBar>
 
       <div className="container my-2">
         <Status status={status} />
