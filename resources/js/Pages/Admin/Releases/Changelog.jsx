@@ -30,7 +30,7 @@ export default function Edit({ release, status }) {
           <Status status={status} />
           <fieldset className="row mb-3">
             <div className="col-12 position-relative">
-              <Editor content={release.changelog} setData={setData} />
+              <Editor content={release.changelog} setData={setData} id="changelog" />
             </div>
           </fieldset>
         </div>

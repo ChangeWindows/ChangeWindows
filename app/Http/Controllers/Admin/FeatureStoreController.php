@@ -122,4 +122,30 @@ class FeatureStoreController extends Controller
             'status' => session('status')
         ]);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Feature $feature)
+    {
+        $this->authorize('flags.edit');
+
+        return Inertia::render('Admin/Features/Edit', [
+            'can' => [
+                'features' => [
+                    'create' => Auth::user()->can('flags.create'),
+                    'edit' => Auth::user()->can('flags.edit')
+                ]
+            ],
+            'feature' => [
+                'name' => $feature->f_name,
+                'featureId' => $feature->latestContents ? $feature->latestContents->feature_id : '',
+                'featureName' => $feature->latestContents ? $feature->latestContents->name : '',
+                'description' => $feature->latestContents ? $feature->latestContents->description : ''
+            ],
+            'status' => session('status')
+        ]);
+    }
 }

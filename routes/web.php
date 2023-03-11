@@ -136,12 +136,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/directory', 'direct')->name('directory');
         Route::post('', 'store')->name('.store');
         Route::post('/batch', 'batch')->name('.batch');
-        Route::delete('{flag}', 'destroy')->name('.destroy');
+        Route::delete('{feature}', 'destroy')->name('.destroy');
         Route::get('/create', 'create')->name('.create');
-        Route::get('/{flag}/edit', 'edit')->name('.edit');
-        Route::patch('/{flag}/edit', 'update')->name('.update');
-        Route::patch('/{flag_content}/moderateApprove', 'moderateApprove')->name('.moderate.approve');
-        Route::patch('/{flag_content}/moderateDiscard', 'moderateDiscard')->name('.moderate.discard');
+        Route::get('/{feature}/edit', 'edit')->name('.edit');
+        Route::patch('/{feature}/edit', 'update')->name('.update');
+        Route::patch('/{feature_content}/moderateApprove', 'moderateApprove')->name('.moderate.approve');
+        Route::patch('/{feature_content}/moderateDiscard', 'moderateDiscard')->name('.moderate.discard');
     });
 
     Route::controller(AdminReleaseController::class)->prefix('releases')->as('.releases')->group(function() {

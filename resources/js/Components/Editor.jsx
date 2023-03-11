@@ -31,7 +31,7 @@ import AmaranthIcon, {
   aiUndo,
 } from "@changewindows/amaranth";
 
-export default function Editor({ content = null, setData }) {
+export default function Editor({ content = null, setData, id }) {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -43,7 +43,7 @@ export default function Editor({ content = null, setData }) {
     ],
     content,
     onUpdate: ({ editor }) => {
-      setData((_content) => ({ ..._content, changelog: editor.getHTML() }));
+      setData((_content) => ({ ..._content, [id]: editor.getHTML() }));
     },
   });
 
