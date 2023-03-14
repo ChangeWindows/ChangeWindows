@@ -133,7 +133,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
 
     Route::controller(AdminFeatureStoreController::class)->prefix('features')->as('.features')->group(function() {
         Route::get('', 'index')->name('');
-        Route::get('/directory', 'direct')->name('directory');
+        Route::get('/directory', 'direct')->name('.directory');
         Route::post('', 'store')->name('.store');
         Route::post('/batch', 'batch')->name('.batch');
         Route::delete('{feature}', 'destroy')->name('.destroy');

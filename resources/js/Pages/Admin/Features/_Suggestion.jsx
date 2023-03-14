@@ -12,13 +12,15 @@ export default function Suggestion({ suggestion }) {
 
   function submitDiscard(e) {
     e.preventDefault();
-    patch(route("admin.flags.moderate.discard", data));
+    patch(route("admin.features.moderate.discard", data));
   }
 
   function submitApprove(e) {
     e.preventDefault();
-    patch(route("admin.flags.moderate.approve", data));
+    patch(route("admin.features.moderate.approve", data));
   }
+
+  console.log(suggestion);
 
   return (
     <div className="card">
@@ -26,14 +28,14 @@ export default function Suggestion({ suggestion }) {
         <div className="row">
           <div className="col-12">
             <h4 className="pb-3 mb-3 border-bottom">
-              {suggestion.flag.feature_name}
+              {suggestion.feature.feature_name}
             </h4>
           </div>
           <div className="col-6 border-end">
-            {suggestion.flag.latest_contents ? (
+            {suggestion.feature.latest_contents ? (
               <>
-                <h5>{suggestion.flag.latest_contents.name}</h5>
-                <p>{suggestion.flag.latest_contents.description}</p>
+                <h5>{suggestion.feature.latest_contents.name}</h5>
+                <p>{suggestion.feature.latest_contents.description}</p>
               </>
             ) : (
               <i className="text-muted">This flag has no content set.</i>

@@ -140,12 +140,39 @@ class FeatureStoreController extends Controller
                 ]
             ],
             'feature' => [
+                'id' => $feature->id,
+                'slug' => $feature->slug,
                 'name' => $feature->f_name,
-                'featureId' => $feature->latestContents ? $feature->latestContents->feature_id : '',
                 'featureName' => $feature->latestContents ? $feature->latestContents->name : '',
                 'description' => $feature->latestContents ? $feature->latestContents->description : ''
             ],
             'status' => session('status')
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Feature $feature)
+    {
+        $this->authorize('flags.edit');
+
+        $feature->update([
+            'name' => $request->name
+        ]);
+
+        $feature->featureContents()->create([
+            'name' => $request->featureName,
+            'description' => $request->description,
+            'status' => 2,
+            'user_id' => Auth::user()->id
+        ]);
+
+        return Redirect::route('admin.features')->with('status', [
+            'message' => 'Succesfully updated feature content for ' . request('name') . '.',
+            'type' => 'success'
         ]);
     }
 }

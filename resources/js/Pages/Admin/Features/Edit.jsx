@@ -12,6 +12,7 @@ import AmaranthIcon, { aiTrashCan } from "@changewindows/amaranth";
 import Editor from "@/Components/Editor";
 
 export default function Edit({ can, feature, status }) {
+  console.log(feature);
 
   const {
     data,
@@ -31,13 +32,12 @@ export default function Edit({ can, feature, status }) {
     e.preventDefault();
     destroy(route("admin.features.destroy", feature));
   }
-  console.log(data);
 
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
         <NaviBar
-          back="/admin/features"
+          back={route('admin.features.directory')}
           actions={can.features.edit && <SaveButton loading={processing} />}
         >
           {data.name || "Unnamed feature"}

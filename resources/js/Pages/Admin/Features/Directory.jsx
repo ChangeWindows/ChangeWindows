@@ -40,14 +40,14 @@ export default function Show({ can, features, pagination, status }) {
           <h4>Features</h4>
           {features.map((feature) => (
             <Fragment key={feature.id}>
-              <div className="px-3 py-2 bg-dark rounded-2 d-flex flex-row align-items-center">
-                <div className="text-muted font-monospace me-2">
+              <a href={route('admin.features.edit', feature)} className="px-3 py-2 bg-dark rounded-2 d-flex flex-row align-items-center text-decoration-none">
+                <div style={{ color: 'inherit' }}>{feature.featureName}</div>
+                <div className="text-muted font-monospace ms-2">
                   {feature.latest.featureId}
                 </div>
-                <div>{feature.featureName}</div>
                 <div className="flex-grow-1" />
                 <FeatureStatus featureStatus={feature.latest} />
-              </div>
+              </a>
             </Fragment>
           ))}
           <Pagination pagination={pagination} />
