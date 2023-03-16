@@ -6,6 +6,7 @@ use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\FlagController;
+use App\Http\Controllers\FeatureStoreController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SearchController;
@@ -62,6 +63,16 @@ Route::prefix('')->as('front')->group(function() {
         Route::get('/{flag}', 'show')->name('.show');
         Route::post('/{flag}/suggestion', 'suggestion')->name('.suggestion');
         Route::patch('/{flag}/suggestion/{flag_content}', 'suggestionPatch')->name('.suggestionPatch');
+    });
+
+    Route::controller(FeatureStoreController::class)->prefix('features')->as('.features')->group(function() {
+        Route::get('', 'index')->name('');
+        Route::get('/active', 'active')->name('.active');
+        Route::get('/removed', 'removed')->name('.removed');
+        Route::get('/about', 'about')->name('.about');
+        Route::get('/{feature}', 'show')->name('.show');
+        Route::post('/{feature}/suggestion', 'suggestion')->name('.suggestion');
+        Route::patch('/{feature}/suggestion/{feature_content}', 'suggestionPatch')->name('.suggestionPatch');
     });
 
     Route::controller(ChannelController::class)->prefix('channels')->as('.channels')->group(function() {

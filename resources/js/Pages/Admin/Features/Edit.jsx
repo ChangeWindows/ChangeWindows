@@ -12,8 +12,6 @@ import AmaranthIcon, { aiTrashCan } from "@changewindows/amaranth";
 import Editor from "@/Components/Editor";
 
 export default function Edit({ can, feature, status }) {
-  console.log(feature);
-
   const {
     data,
     setData,

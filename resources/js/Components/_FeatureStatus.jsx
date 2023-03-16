@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function FeatureStatus({ featureStatus, hideBuild = false }) {
-  console.log(featureStatus);
   return (
     <div
       className={`text-sm fw-bold d-inline-block lh-1 ${

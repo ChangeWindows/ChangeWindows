@@ -8,6 +8,7 @@ import Status from "@/Components/Status";
 import AmaranthIcon, { aiFlag, aiFolder } from "@changewindows/amaranth";
 
 import FeatureStatus from "@/Components/_FeatureStatus";
+import Feature from "@/Components/Feature";
 
 export default function Show({ can, features, pagination, status }) {
   return (
@@ -37,19 +38,18 @@ export default function Show({ can, features, pagination, status }) {
       <div className="container my-2">
         <Status status={status} />
         <div className="row g-1">
-          <h4>Features</h4>
-          {features.map((feature) => (
-            <Fragment key={feature.id}>
-              <a href={route('admin.features.edit', feature)} className="px-3 py-2 bg-dark rounded-2 d-flex flex-row align-items-center text-decoration-none">
-                <div style={{ color: 'inherit' }}>{feature.featureName}</div>
-                <div className="text-muted font-monospace ms-2">
-                  {feature.latest.featureId}
-                </div>
-                <div className="flex-grow-1" />
-                <FeatureStatus featureStatus={feature.latest} />
-              </a>
-            </Fragment>
-          ))}
+          <div className="col-12 titlebar">
+            <h1>Features</h1>
+          </div>
+          <div className="col-12 timeline">
+            {features.map((feature) => (
+              <Feature
+                key={feature.id}
+                feature={feature}
+                url={route("admin.features.edit", feature)}
+              />
+            ))}
+          </div>
           <Pagination pagination={pagination} />
         </div>
       </div>
