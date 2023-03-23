@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from '@inertiajs/react';
+import { Link } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
@@ -10,6 +10,7 @@ import Timeline from "@/Components/Timeline/Timeline";
 import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
 import { parseISO } from "date-fns";
 import PlatformFlightCard from "./_PlatformFlightCard";
+import { Box, Button } from "@mui/joy";
 
 export default function Index({ can, timeline, pagination, status }) {
   return (
@@ -17,12 +18,24 @@ export default function Index({ can, timeline, pagination, status }) {
       <NaviBar
         actions={
           can.flights.create && (
-            <Link
-              href={route("admin.flights.create")}
-              className="btn btn-primary btn-sm"
-            >
-              <AmaranthIcon icon={aiPlus} /> Add
-            </Link>
+            <>
+              <Link
+                href={route("admin.flights.create")}
+                className="btn btn-primary btn-sm"
+              >
+                <AmaranthIcon icon={aiPlus} /> Add
+              </Link>
+              <Box>
+                <Button
+                  size="sm"
+                  startDecorator={<AmaranthIcon icon={aiPlus} />}
+                  href={route("admin.flights.create")}
+                  component="a"
+                >
+                  Add
+                </Button>
+              </Box>
+            </>
           )
         }
       >
