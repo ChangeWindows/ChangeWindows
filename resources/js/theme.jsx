@@ -106,7 +106,9 @@ const cwTheme = extendTheme({
     JoyChip: {
       styleOverrides: {
         root: ({ ownerState }) => ({
-          backgroundColor: `rgba(var(--joy-palette-${ownerState.color}-mainChannel) / .1)`,
+          ...(ownerState.variant === "outlined" && {
+            backgroundColor: `rgba(var(--joy-palette-${ownerState.color}-mainChannel) / .1)`,
+          }),
         }),
       },
     },

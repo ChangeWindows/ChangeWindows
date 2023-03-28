@@ -83,7 +83,7 @@ export default function Index({ can, timeline, pagination }) {
                           <ListItemDecorator>
                             <Chip
                               size="sm"
-                              variant="outlined"
+                              variant="solid"
                               color={
                                 flight.release_channel.color === "#673ab7"
                                   ? "purple"
