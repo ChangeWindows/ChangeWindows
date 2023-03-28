@@ -1,104 +1,115 @@
-import { extendTheme } from '@mui/joy/styles';
+import { extendTheme } from "@mui/joy/styles";
 
-import cwColors from './colors';
+import cwColors from "./colors";
 import {
   createDarkHueDarkModeVariantVariables,
   createDarkHueLightModeVariantVariables,
   createLightHueDarkModeVariantVariables,
-  createLightHueLightModeVariantVariables
-} from './generateColor';
+  createLightHueLightModeVariantVariables,
+} from "./generateColor";
 
 const cwTheme = extendTheme({
   colorSchemes: {
     light: {
       palette: {
-        borderChannel: '220 220 220',
-        deepPurple: {
-          ...cwColors.deepPurple,
-          ...createDarkHueLightModeVariantVariables('deepPurple')
+        borderChannel: "220 220 220",
+        primary: cwColors.blue,
+        neutral: cwColors.grey,
+        purple: {
+          ...cwColors.purple,
+          ...createDarkHueLightModeVariantVariables("purple"),
         },
         red: {
           ...cwColors.red,
-          ...createDarkHueLightModeVariantVariables('red')
+          ...createDarkHueLightModeVariantVariables("red"),
         },
         orange: {
           ...cwColors.orange,
-          ...createLightHueLightModeVariantVariables('orange')
+          ...createLightHueLightModeVariantVariables("orange"),
         },
         amber: {
           ...cwColors.amber,
-          ...createLightHueLightModeVariantVariables('amber')
+          ...createLightHueLightModeVariantVariables("amber"),
         },
         lime: {
           ...cwColors.lime,
-          ...createLightHueLightModeVariantVariables('lime')
+          ...createLightHueLightModeVariantVariables("lime"),
         },
-        lightGreen: {
-          ...cwColors.lightGreen,
-          ...createLightHueLightModeVariantVariables('lightGreen')
+        emerald: {
+          ...cwColors.emerald,
+          ...createLightHueLightModeVariantVariables("emerald"),
         },
         green: {
           ...cwColors.green,
-          ...createDarkHueLightModeVariantVariables('green')
+          ...createDarkHueLightModeVariantVariables("green"),
         },
         teal: {
           ...cwColors.teal,
-          ...createDarkHueLightModeVariantVariables('teal')
+          ...createDarkHueLightModeVariantVariables("teal"),
         },
-        cyan: {
-          ...cwColors.cyan,
-          ...createDarkHueLightModeVariantVariables('cyan')
-        }
+        sky: {
+          ...cwColors.sky,
+          ...createDarkHueLightModeVariantVariables("sky"),
+        },
       },
     },
     dark: {
       palette: {
-        borderChannel: '37 37 45',
-        deepPurple: {
-          ...cwColors.deepPurple,
-          ...createDarkHueDarkModeVariantVariables('deepPurple')
+        borderChannel: "37 37 45",
+        primary: cwColors.blue,
+        neutral: cwColors.grey,
+        purple: {
+          ...cwColors.purple,
+          ...createDarkHueDarkModeVariantVariables("purple"),
         },
         red: {
           ...cwColors.red,
-          ...createDarkHueDarkModeVariantVariables('red')
+          ...createDarkHueDarkModeVariantVariables("red"),
         },
         orange: {
           ...cwColors.orange,
-          ...createLightHueDarkModeVariantVariables('orange')
+          ...createLightHueDarkModeVariantVariables("orange"),
         },
         amber: {
           ...cwColors.amber,
-          ...createLightHueDarkModeVariantVariables('amber')
+          ...createLightHueDarkModeVariantVariables("amber"),
         },
         lime: {
           ...cwColors.lime,
-          ...createLightHueDarkModeVariantVariables('lime')
+          ...createLightHueDarkModeVariantVariables("lime"),
         },
-        lightGreen: {
-          ...cwColors.lightGreen,
-          ...createDarkHueDarkModeVariantVariables('lightGreen')
+        emerald: {
+          ...cwColors.emerald,
+          ...createDarkHueDarkModeVariantVariables("emerald"),
         },
         green: {
           ...cwColors.green,
-          ...createDarkHueDarkModeVariantVariables('green')
+          ...createDarkHueDarkModeVariantVariables("green"),
         },
         teal: {
           ...cwColors.teal,
-          ...createDarkHueDarkModeVariantVariables('teal')
+          ...createDarkHueDarkModeVariantVariables("teal"),
         },
-        cyan: {
-          ...cwColors.cyan,
-          ...createDarkHueDarkModeVariantVariables('cyan')
-        }
+        sky: {
+          ...cwColors.sky,
+          ...createDarkHueDarkModeVariantVariables("sky"),
+        },
       },
     },
   },
   fontFamily: {
     body: "-apple-system, BlinkMacSystemFont, 'Segoe UI Variable Text', 'Segoe UI', Roboto, Helvetica Neue, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
     display:
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI Variable Display', 'Segoe UI', Roboto, Helvetica Neue, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI Variable Display', 'Segoe UI', Roboto, Helvetica Neue, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
   },
   components: {
+    JoyChip: {
+      styleOverrides: {
+        root: ({ ownerState }) => ({
+          backgroundColor: `rgba(var(--joy-palette-${ownerState.color}-mainChannel) / .1)`,
+        }),
+      },
+    },
   },
 });
 

@@ -108,23 +108,26 @@ export default function Page({ children }) {
         </List>
         <Stack direction="row" gap={.25} sx={{ px: 1, py: .5}}>
           <IconButton
-            variant={mode === "system" ? "soft" : "plain"}
+            variant={mode === "system" ? "solid" : "plain"}
             onClick={() => setMode("system")}
             size="sm"
+            color="neutral"
           >
             <AmaranthIcon icon={aiCircleHalfInner} />
           </IconButton>
           <IconButton
-            variant={mode === "light" ? "soft" : "plain"}
+            variant={mode === "light" ? "solid" : "plain"}
             onClick={() => setMode("light")}
             size="sm"
+            color="neutral"
           >
             <AmaranthIcon icon={aiSun} />
           </IconButton>
           <IconButton
-            variant={mode === "dark" ? "soft" : "plain"}
+            variant={mode === "dark" ? "solid" : "plain"}
             onClick={() => setMode("dark")}
             size="sm"
+            color="neutral"
           >
             <AmaranthIcon icon={aiMoon} />
           </IconButton>

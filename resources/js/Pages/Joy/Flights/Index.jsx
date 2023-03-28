@@ -83,10 +83,10 @@ export default function Index({ can, timeline, pagination }) {
                           <ListItemDecorator>
                             <Chip
                               size="sm"
-                              variant="soft"
+                              variant="outlined"
                               color={
                                 flight.release_channel.color === "#673ab7"
-                                  ? "deepPurple"
+                                  ? "purple"
                                   : flight.release_channel.color === "#e74018"
                                   ? "red"
                                   : flight.release_channel.color === "#fb8009"
@@ -96,13 +96,13 @@ export default function Index({ can, timeline, pagination }) {
                                   : flight.release_channel.color === "#97c800"
                                   ? "lime"
                                   : flight.release_channel.color === "#c0d700"
-                                  ? "lightGreen"
-                                  : flight.release_channel.color === "#46c429"
                                   ? "green"
+                                  : flight.release_channel.color === "#46c429"
+                                  ? "emerald"
                                   : flight.release_channel.color === "#10b08f"
                                   ? "teal"
                                   : flight.release_channel.color === "#0098df"
-                                  ? "cyan"
+                                  ? "sky"
                                   : "primary"
                               }
                             >
