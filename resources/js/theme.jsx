@@ -31,13 +31,13 @@ const cwTheme = extendTheme({
           ...cwColors.amber,
           ...createLightHueLightModeVariantVariables("amber"),
         },
+        rio: {
+          ...cwColors.rio,
+          ...createLightHueLightModeVariantVariables("rio"),
+        },
         lime: {
           ...cwColors.lime,
           ...createLightHueLightModeVariantVariables("lime"),
-        },
-        emerald: {
-          ...cwColors.emerald,
-          ...createLightHueLightModeVariantVariables("emerald"),
         },
         green: {
           ...cwColors.green,
@@ -74,13 +74,13 @@ const cwTheme = extendTheme({
           ...cwColors.amber,
           ...createLightHueDarkModeVariantVariables("amber"),
         },
+        rio: {
+          ...cwColors.rio,
+          ...createLightHueDarkModeVariantVariables("rio"),
+        },
         lime: {
           ...cwColors.lime,
           ...createLightHueDarkModeVariantVariables("lime"),
-        },
-        emerald: {
-          ...cwColors.emerald,
-          ...createDarkHueDarkModeVariantVariables("emerald"),
         },
         green: {
           ...cwColors.green,

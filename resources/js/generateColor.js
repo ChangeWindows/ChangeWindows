@@ -22,9 +22,9 @@ const createDarkHueLightModeVariantVariables = (color) => ({
   softDisabledBg: `var(--joy-palette-${color}-50)`,
 
   solidColor: '#fff',
-  solidBg: `var(--joy-palette-${color}-500)`,
-  solidHoverBg: `var(--joy-palette-${color}-600)`,
-  solidActiveBg: `var(--joy-palette-${color}-700)`,
+  solidBg: `var(--joy-palette-${color}-600)`,
+  solidHoverBg: `var(--joy-palette-${color}-700)`,
+  solidActiveBg: `var(--joy-palette-${color}-800)`,
   solidDisabledColor: `#fff`,
   solidDisabledBg: `var(--joy-palette-${color}-200)`
 });
@@ -53,9 +53,9 @@ const createLightHueLightModeVariantVariables = (color) => ({
   softDisabledBg: `var(--joy-palette-${color}-50)`,
 
   solidColor: '#000',
-  solidBg: `var(--joy-palette-${color}-500)`,
-  solidHoverBg: `var(--joy-palette-${color}-600)`,
-  solidActiveBg: `var(--joy-palette-${color}-700)`,
+  solidBg: `var(--joy-palette-${color}-600)`,
+  solidHoverBg: `var(--joy-palette-${color}-700)`,
+  solidActiveBg: `var(--joy-palette-${color}-800)`,
   solidDisabledColor: `#fff`,
   solidDisabledBg: `var(--joy-palette-${color}-200)`
 });
