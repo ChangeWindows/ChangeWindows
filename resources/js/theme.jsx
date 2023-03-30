@@ -51,6 +51,10 @@ const cwTheme = extendTheme({
           ...cwColors.sky,
           ...createDarkHueLightModeVariantVariables("sky"),
         },
+        acrylic: {
+          filter: "blur(20px) saturate(150%)",
+          backgroundColor: "rgb(247 247 248 / .8)",
+        },
       },
     },
     dark: {
@@ -94,6 +98,10 @@ const cwTheme = extendTheme({
           ...cwColors.sky,
           ...createDarkHueDarkModeVariantVariables("sky"),
         },
+        acrylic: {
+          filter: "blur(20px) saturate(150%)",
+          backgroundColor: "rgb(38 38 38 / .8)",
+        },
       },
     },
   },
@@ -103,6 +111,20 @@ const cwTheme = extendTheme({
       "-apple-system, BlinkMacSystemFont, 'Segoe UI Variable Display', 'Segoe UI', Roboto, Helvetica Neue, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
   },
   components: {
+    JoyButton: {
+      styleOverrides: {
+        root: {
+          minHeight: 32,
+        },
+      },
+    },
+    JoyCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'var(--joy-palette-background-body)'
+        }
+      },
+    },
     JoyChip: {
       styleOverrides: {
         root: ({ ownerState }) => ({

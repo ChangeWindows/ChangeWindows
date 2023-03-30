@@ -1,8 +1,8 @@
 import React from "react";
 
 import {
+  Button,
   Box,
-  Container,
   IconButton,
   List,
   ListDivider,
@@ -42,20 +42,37 @@ export default function Page({ children }) {
         height: 1,
         minHeight: "100dvh",
         gridTemplateColumns: "200px auto",
-        gridTemplateRows: "auto",
-        gridTemplateAreas: "'navigation content'",
+        gridTemplateRows: "48px auto",
+        gridTemplateAreas: "'titlebar titlebar' 'navigation content'",
+        bgcolor: "background.body",
       }}
     >
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{ gridArea: "titlebar", px: 1 }}
+      >
+        <Button
+          color="neutral"
+          variant="plain"
+          size="sm"
+          component={Link}
+          href={route("front.timeline")}
+          startDecorator={<AmaranthIcon icon={aiChangeWindows} />}
+        >
+          ChangeWindows
+        </Button>
+      </Stack>
       <Box
         sx={{
-          bgcolor: "background.level1",
+          bgcolor: "background.body",
           gridArea: "navigation",
           height: "100vh",
           overflow: "auto",
         }}
       >
         <List
-          size="sm"
           sx={{
             "--List-padding": "8px",
             "--List-gap": "2px",
@@ -63,11 +80,6 @@ export default function Page({ children }) {
             "--ListItemDecorator-size": "1.75rem",
           }}
         >
-          <NavigationItem
-            target="front.timeline"
-            icon={aiChangeWindows}
-            name="ChangeWindows"
-          />
           <ListSubheader>Flights</ListSubheader>
           <NavigationItem
             target="admin.flights"
@@ -106,7 +118,7 @@ export default function Page({ children }) {
             name="Permissions"
           />
         </List>
-        <Stack direction="row" gap={.25} sx={{ px: 1, py: .5}}>
+        <Stack direction="row" gap={0.25} sx={{ px: 1, py: 0.5 }}>
           <IconButton
             variant={mode === "system" ? "solid" : "plain"}
             onClick={() => setMode("system")}
@@ -135,13 +147,17 @@ export default function Page({ children }) {
       </Box>
       <Box
         sx={{
-          bgcolor: "background.body",
+          bgcolor: "background.level1",
+          borderTopLeftRadius: 12,
           gridArea: "content",
-          height: "100vh",
+          height: "calc(100vh - 48px)",
           overflow: "auto",
+          borderColor: "rgba(var(--joy-palette-neutral-mainChannel) / .1)",
+          borderWidth: "1px 0 0 1px",
+          borderStyle: "solid",
         }}
       >
-        <Container>{children}</Container>
+        {children}
       </Box>
     </Box>
   );
