@@ -26,6 +26,7 @@ class ReleaseChannel extends Model
         return $this->belongsTo(Release::class);
     }
 
+    // Deprecated, go through channel instead
     public function platform() {
         return $this->hasOneThrough(Platform::class, Channel::class);
     }
@@ -34,6 +35,11 @@ class ReleaseChannel extends Model
         return $this->hasMany(Flight::class);
     }
 
+    public function latestFlight() {
+        return $this->hasOne(Flight::class)->ofMany('date', 'max');
+    }
+
+    // Deprecated, use latestFlight instead
     public function getLatestAttribute() {
         return Flight::where('release_channel_id', '=', $this->id)
             ->orderBy('build', 'desc')

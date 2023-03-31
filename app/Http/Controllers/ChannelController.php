@@ -14,7 +14,7 @@ class ChannelController extends Controller
      */
     public function index()
     {
-        $channel_platforms = Platform::orderBy('tool')->orderBy('position')->where('active', '=', '1')->get();
+        $channel_platforms = Platform::with('activeChannels', 'activeChannels.activeReleaseChannels', 'activeChannels.activeReleaseChannels.latestFlight')->orderBy('tool')->orderBy('position')->where('active', '=', '1')->get();
 
         return Inertia::render('Channels/Index', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
@@ -44,8 +44,8 @@ class ChannelController extends Controller
                             'order' => $channel->order,
                             'color' => $channel->color,
                             'flight' => [
-                                'version' => $release_channel->latest->flight,
-                                'date' => $release_channel->latest->date
+                                'version' => $release_channel->latestFlight->flight,
+                                'date' => $release_channel->latestFlight->date
                             ],
                             'release' => [
                                 'id' => $release_channel->release->id,
@@ -66,6 +66,8 @@ class ChannelController extends Controller
      */
     public function show(Platform $platform)
     {
+        $platform->load('releases', 'releases.releaseChannels', 'releases.releaseChannels.channel', 'releases.releaseChannels.latestFlight');
+
         return Inertia::render('Channels/Show', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
                 return [
@@ -89,17 +91,17 @@ class ChannelController extends Controller
                     'active' => $channel->active
                 ];
             })->values()->all(),
-            'releases' => $platform->releases->sortByDesc('canonical_version')->map(function ($release) {
+            'releases' => $platform->releases->sortByDesc('canonical_version')->map(function ($release) use ($platform) {
                 return [
                     'name' => $release->name,
                     'slug' => $release->slug,
                     'version' => $release->version,
                     'codename' => $release->codename,
                     'platform' => [
-                        'icon' => $release->platform->icon,
-                        'name' => $release->platform->name,
-                        'color' => $release->platform->color,
-                        'tool' => $release->platform->tool
+                        'icon' => $platform->icon,
+                        'name' => $platform->name,
+                        'color' => $platform->color,
+                        'tool' => $platform->tool
                     ],
                     'channels' => $release->releaseChannels->map(function ($channel) {
                         return [
@@ -109,9 +111,9 @@ class ChannelController extends Controller
                             'color' => $channel->channel->color,
                             'order' => $channel->channel->order,
                             'channel_id' => $channel->channel->id,
-                            'flight' => $channel->latest ? [
-                                'version' => $channel->latest->flight,
-                                'date' => $channel->latest->date
+                            'flight' => $channel->latestFlight ? [
+                                'version' => $channel->latestFlight->flight,
+                                'date' => $channel->latestFlight->date
                             ] : null
                         ];
                     })->values()->all()
