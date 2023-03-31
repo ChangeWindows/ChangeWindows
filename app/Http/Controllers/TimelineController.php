@@ -18,7 +18,7 @@ class TimelineController extends Controller
      */
     public function index()
     {
-        $channel_platforms = Platform::with('activeChannels', 'activeChannels.activeReleaseChannels')->orderBy('tool')->orderBy('position')->where('active', '=', '1')->get();
+        $channel_platforms = Platform::with('activeChannels', 'activeChannels.activeReleaseChannels', 'activeChannels.activeReleaseChannels.latestFlight')->orderBy('tool')->orderBy('position')->where('active', '=', '1')->get();
         $timeline = Flight::with('releaseChannel', 'releaseChannel.channel', 'releaseChannel.release', 'releaseChannel.release.platform')->orderBy('date', 'desc');
         $paginator = $timeline->paginate(75)->onEachSide(2);
 
@@ -84,8 +84,8 @@ class TimelineController extends Controller
                             'order' => $channel->order,
                             'color' => $channel->color,
                             'flight' => [
-                                'version' => $release_channel->latest->flight,
-                                'date' => $release_channel->latest->date
+                                'version' => $release_channel->latestFlight->flight,
+                                'date' => $release_channel->latestFlight->date
                             ],
                             'release' => [
                                 'id' => $release_channel->release->id,
@@ -152,7 +152,7 @@ class TimelineController extends Controller
      */
     public function show(Platform $platform)
     {
-        $channel_platforms = Platform::with('activeChannels', 'activeChannels.activeReleaseChannels')->orderBy('tool')->orderBy('position')->where('active', '=', '1')->get();
+        $channel_platforms = Platform::with('activeChannels', 'activeChannels.activeReleaseChannels', 'activeChannels.activeReleaseChannels.latestFlight')->orderBy('tool')->orderBy('position')->where('active', '=', '1')->get();
         $timeline = Flight::with('releaseChannel', 'releaseChannel.channel', 'releaseChannel.release', 'releaseChannel.release.platform')->orderBy('date', 'desc')
             ->join('release_channels as frs', function ($join) {
                 $join->on('frs.id', '=', 'flights.release_channel_id')
@@ -198,8 +198,8 @@ class TimelineController extends Controller
                             'order' => $channel->order,
                             'color' => $channel->color,
                             'flight' => [
-                                'version' => $release_channel->latest->flight,
-                                'date' => $release_channel->latest->date
+                                'version' => $release_channel->latestFlight->flight,
+                                'date' => $release_channel->latestFlight->date
                             ],
                             'release' => [
                                 'id' => $release_channel->release->id,
