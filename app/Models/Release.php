@@ -45,8 +45,7 @@ class Release extends Model implements Searchable
 
     public function getLatestAttribute() {
         return Flight::whereIn('release_channel_id', $this->releaseChannels->pluck('id'))
-            ->orderBy('build', 'desc')
-            ->orderBy('delta', 'desc')
+            ->orderBy('date', 'desc')
             ->first();
     }
 

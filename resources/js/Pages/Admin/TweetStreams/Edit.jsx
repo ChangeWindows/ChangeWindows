@@ -35,7 +35,7 @@ export default function Edit({ can, tweet_stream, status }) {
       <form onSubmit={handleSubmit}>
         <NaviBar
           back="/admin/tweet_streams"
-          actions={can.tweetStrems.edit && <SaveButton loading={processing} />}
+          actions={can.tweetStreams.edit && <SaveButton loading={processing} />}
         >
           {data.name || "Unnamed Twitter Tweet Stream"}
         </NaviBar>
