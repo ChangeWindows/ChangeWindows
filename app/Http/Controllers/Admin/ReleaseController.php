@@ -21,7 +21,7 @@ class ReleaseController extends Controller
     {
         $this->authorize('releases.show');
 
-        $releases = Release::orderBy('platform_id')->orderBy('canonical_version')->get();
+        $releases = Release::orderBy('platform_id')->with('platform', 'releaseChannels', 'releaseChannels.channel')->orderBy('canonical_version')->get();
 
         return Inertia::render('Admin/Releases/Index', [
             'can' => [
@@ -119,6 +119,8 @@ class ReleaseController extends Controller
     public function edit(Release $release)
     {
         $this->authorize('releases.show');
+
+        $release->load('releaseChannels', 'releaseChannels.channel', 'platform');
 
         return Inertia::render('Admin/Releases/Edit', [
             'can' => [
