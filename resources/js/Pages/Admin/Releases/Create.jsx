@@ -57,7 +57,7 @@ export default function Create({ platforms }) {
                 selectLabel={(x) => x.name}
                 selectValue={(x) => x.id}
                 errors={errors.platform_id}
-                onChange={(e) => setData('platform_id', e.target.value)}
+                onChange={setData}
               />
             </div>
             <div className="col-12 col-lg-6">
