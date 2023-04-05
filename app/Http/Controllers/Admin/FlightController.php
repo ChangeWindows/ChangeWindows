@@ -77,7 +77,7 @@ class FlightController extends Controller
 
         $releases = Release::with('platform', 'releaseChannels', 'releaseChannels.channel')->orderBy('canonical_version')->orderBy('platform_id')->get();
 
-        return Inertia::render('Admin/Flights/Create', [
+        return Inertia::render('Joy/Flights/Create', [
             'releases' => $releases->map(function ($release) {
                 return [
                     'id' => $release->id,

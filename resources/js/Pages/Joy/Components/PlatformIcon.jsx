@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import clsx from "clsx";
 
 import AmaranthIcon, {
   aiAzure,
@@ -16,11 +15,7 @@ import AmaranthIcon, {
   aiWindows,
 } from "@studio384/amaranth";
 
-export default function PlatformIcon({
-  platform,
-  color = false,
-  className = null,
-}) {
+export default function PlatformIcon({ platform, color = false, sx }) {
   const icon = useMemo(() => {
     switch (platform.icon) {
       case "cloud":
@@ -55,8 +50,10 @@ export default function PlatformIcon({
   return (
     <AmaranthIcon
       icon={icon}
-      className={clsx(className)}
-      sx={{ color: color ? platform.color : "inherit", fontSize: '1rem' }}
+      sx={[
+        { color: color ? platform.color : "inherit", fontSize: "1em" },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
     />
   );
 }
