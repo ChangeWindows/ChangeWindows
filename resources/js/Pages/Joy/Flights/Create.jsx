@@ -123,7 +123,7 @@ export default function Create({ releases }) {
       <Head title="New flight" />
       <Page>
         <form onSubmit={handleSubmit}>
-          <Toolbar title="New flight">
+          <Toolbar back={route("admin.flights")} title="New flight">
             <SaveButton loading={processing} />
           </Toolbar>
 

@@ -188,7 +188,7 @@ class FlightController extends Controller
 
         $flight->load('releaseChannel', 'releaseChannel.channel', 'releaseChannel.channel.platform');
 
-        return Inertia::render('Admin/Flights/Edit', [
+        return Inertia::render('Joy/Flights/Edit', [
             'can' => [
                 'flights' => [
                     'delete' => Auth::user()->can('flights.delete'),

@@ -1,8 +1,10 @@
 import React from "react";
 
-import { Box, Container, Stack, Typography } from "@mui/joy";
+import { Box, Container, IconButton, Stack, Typography } from "@mui/joy";
+import { Link } from "@inertiajs/react";
+import AmaranthIcon, { aiArrowLeft } from "@studio384/amaranth";
 
-export default function Toolbar({ title, children }) {
+export default function Toolbar({ title, back, children }) {
   return (
     <Box
       sx={{
@@ -22,9 +24,16 @@ export default function Toolbar({ title, children }) {
           alignItems="center"
           sx={{ py: 1 }}
         >
-          <Typography level="h2" fontSize="xl">
-            {title}
-          </Typography>
+          <Stack direction="row" gap={1} alignItems="center">
+            {back && (
+              <IconButton component={Link} href={back} color="neutral">
+                <AmaranthIcon icon={aiArrowLeft} />
+              </IconButton>
+            )}
+            <Typography level="h2" fontSize="xl">
+              {title}
+            </Typography>
+          </Stack>
           <Stack direction="row" gap={1}>
             {children}
           </Stack>

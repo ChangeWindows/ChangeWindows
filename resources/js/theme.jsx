@@ -1,5 +1,5 @@
 import { extendTheme } from "@mui/joy/styles";
-
+import React from "react";
 import cwColors from "./colors";
 import {
   createDarkHueDarkModeVariantVariables,
@@ -7,6 +7,7 @@ import {
   createLightHueDarkModeVariantVariables,
   createLightHueLightModeVariantVariables,
 } from "./generateColor";
+import AmaranthIcon, { aiSpinnerThird } from "@studio384/amaranth";
 
 const cwTheme = extendTheme({
   colorSchemes: {
@@ -112,17 +113,16 @@ const cwTheme = extendTheme({
   },
   components: {
     JoyButton: {
-      styleOverrides: {
-        root: {
-          minHeight: 32,
-        },
+      defaultProps: {
+        loadingPosition: "start",
+        loadingIndicator: <AmaranthIcon icon={aiSpinnerThird} spin />,
       },
     },
     JoyCard: {
       styleOverrides: {
         root: {
-          backgroundColor: 'var(--joy-palette-background-body)'
-        }
+          backgroundColor: "var(--joy-palette-background-body)",
+        },
       },
     },
     JoyChip: {

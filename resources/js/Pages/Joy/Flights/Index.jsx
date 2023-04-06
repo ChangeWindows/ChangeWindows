@@ -32,6 +32,9 @@ export default function Index({ can, timeline, pagination }) {
               component={Link}
               startDecorator={<AmaranthIcon icon={aiPlus} />}
               href={route("admin.flights.create")}
+              sx={{
+                "--Button-minHeight": "2rem",
+              }}
             >
               Add
             </Button>
