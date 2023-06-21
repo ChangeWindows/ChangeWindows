@@ -22,6 +22,7 @@ export default function Pagination({ pagination }) {
           position: "fixed",
           bottom: 0,
           borderRadius: "md",
+          boxShadow: 'lg'
         }}
       >
         {pagination.links.map((link, key) => {

@@ -68,7 +68,6 @@ export default function Page({ children }) {
         sx={{
           bgcolor: "background.body",
           gridArea: "navigation",
-          height: "100vh",
           overflow: "auto",
         }}
       >
