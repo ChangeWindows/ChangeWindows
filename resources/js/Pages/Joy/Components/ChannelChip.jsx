@@ -1,11 +1,12 @@
 import React from "react";
 
-import { Chip } from "@mui/joy";
+import { Typography } from "@mui/joy";
 
 export default function ChannelChip({ channel }) {
   return (
-    <Chip
-      size="sm"
+    <Typography
+      fontSize="xs"
+      fontWeight="lg"
       variant="solid"
       color={
         channel.color === "#673ab7"
@@ -30,6 +31,6 @@ export default function ChannelChip({ channel }) {
       }
     >
       {channel.name}
-    </Chip>
+    </Typography>
   );
 }

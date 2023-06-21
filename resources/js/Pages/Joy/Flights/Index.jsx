@@ -51,13 +51,12 @@ export default function Index({ can, timeline, pagination }) {
               </Grid>
               {timeline[date].flights.map((platform, _key) => (
                 <Grid xs={12} sm={6} md={4} lg={3} key={_key}>
-                  <Card size="sm" variant="outlined">
+                  <Card variant="outlined" sx={{ p: 0.5 }}>
                     <List
-                      size="sm"
                       sx={{
                         "--List-padding": 0,
                         "--List-gap": "2px",
-                        "--ListItem-radius": "4px",
+                        "--ListItem-radius": "7px",
                         "--ListItemDecorator-size": "1.75rem",
                       }}
                     >
