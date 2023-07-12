@@ -13,6 +13,7 @@ export default function Navigation() {
       main={[
         { type: 'link', url: '/timeline', icon: aiBarsStaggered, title: 'Timeline' },
         { type: 'link', url: '/flags', icon: aiFlag, title: 'Flags' },
+        { type: 'link', url: '/features', icon: aiFlag, title: 'Feature Store' },
         { type: 'link', url: '/platforms', primary: '/pc', icon: aiDevices, title: 'Platforms' },
         { type: 'link', url: '/channels', icon: aiBranch, title: 'Channels' },
         { type: 'divider' },

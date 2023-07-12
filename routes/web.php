@@ -6,6 +6,7 @@ use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\FlagController;
+use App\Http\Controllers\FeatureStoreController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SearchController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ChannelController as AdminChannelController;
 use App\Http\Controllers\Admin\FlightController as AdminFlightController;
 use App\Http\Controllers\Admin\FlagController as AdminFlagController;
+use App\Http\Controllers\Admin\FeatureStoreController as AdminFeatureStoreController;
 use App\Http\Controllers\Admin\PermissionController as AdminPermissionController;
 use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
 use App\Http\Controllers\Admin\ReleaseChannelController as AdminReleaseChannelController;
@@ -61,6 +63,16 @@ Route::prefix('')->as('front')->group(function() {
         Route::get('/{flag}', 'show')->name('.show');
         Route::post('/{flag}/suggestion', 'suggestion')->name('.suggestion');
         Route::patch('/{flag}/suggestion/{flag_content}', 'suggestionPatch')->name('.suggestionPatch');
+    });
+
+    Route::controller(FeatureStoreController::class)->prefix('features')->as('.features')->group(function() {
+        Route::get('', 'index')->name('');
+        Route::get('/active', 'active')->name('.active');
+        Route::get('/removed', 'removed')->name('.removed');
+        Route::get('/about', 'about')->name('.about');
+        Route::get('/{feature}', 'show')->name('.show');
+        Route::post('/{feature}/suggestion', 'suggestion')->name('.suggestion');
+        Route::patch('/{feature}/suggestion/{feature_content}', 'suggestionPatch')->name('.suggestionPatch');
     });
 
     Route::controller(ChannelController::class)->prefix('channels')->as('.channels')->group(function() {
@@ -128,6 +140,19 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::patch('/{flag}/edit', 'update')->name('.update');
         Route::patch('/{flag_content}/moderateApprove', 'moderateApprove')->name('.moderate.approve');
         Route::patch('/{flag_content}/moderateDiscard', 'moderateDiscard')->name('.moderate.discard');
+    });
+
+    Route::controller(AdminFeatureStoreController::class)->prefix('features')->as('.features')->group(function() {
+        Route::get('', 'index')->name('');
+        Route::get('/directory', 'direct')->name('.directory');
+        Route::post('', 'store')->name('.store');
+        Route::post('/batch', 'batch')->name('.batch');
+        Route::delete('{feature}', 'destroy')->name('.destroy');
+        Route::get('/create', 'create')->name('.create');
+        Route::get('/{feature}/edit', 'edit')->name('.edit');
+        Route::patch('/{feature}/edit', 'update')->name('.update');
+        Route::patch('/{feature_content}/moderateApprove', 'moderateApprove')->name('.moderate.approve');
+        Route::patch('/{feature_content}/moderateDiscard', 'moderateDiscard')->name('.moderate.discard');
     });
 
     Route::controller(AdminReleaseController::class)->prefix('releases')->as('.releases')->group(function() {
