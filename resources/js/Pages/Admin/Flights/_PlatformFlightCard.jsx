@@ -23,7 +23,7 @@ export default function PlatformFlightCard({ platform }) {
               <div className="subevent-tags">
                 <span
                   key={key}
-                  className="badge me-1"
+                  className="badge"
                   style={{ background: flight.release_channel.color }}
                 >
                   {flight.release_channel.name}

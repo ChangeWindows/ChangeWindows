@@ -29,7 +29,7 @@ export default function Flight({
         {channels.map((channel, key) => (
           <span
             key={key}
-            className="badge me-1"
+            className="badge"
             style={{ backgroundColor: channel.color }}
           >
             {channel.name}

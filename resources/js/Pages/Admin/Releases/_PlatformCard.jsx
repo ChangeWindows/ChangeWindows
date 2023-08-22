@@ -19,7 +19,7 @@ export default function PlatformCard({ can, platform }) {
               {release.channels.map((channel, _key) => (
                 <span
                   key={_key}
-                  className="badge me-1"
+                  className="badge"
                   style={{ background: channel.color }}
                 >
                   {channel.short_name}

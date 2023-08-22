@@ -247,6 +247,7 @@ body {
             margin-bottom: 0.5rem;
             margin-top: 0.25rem;
             padding: 0;
+            gap: 4px;
 
             & > span {
                 margin: 0.25rem 0 0 0;
@@ -294,12 +295,12 @@ body {
         }
 
         .subevent {
-            padding: 0 0.5rem;
+            padding: 0.5rem;
             display: grid;
             gap: 1.5rem;
             grid-template-columns: 32px 120px auto;
             grid-template-areas: "subevent-version subevent-build subevent-tags";
-            height: 40px;
+            min-height: 40px;
             align-content: center;
 
             transition: background-color .2s ease-in-out;
@@ -348,10 +349,14 @@ body {
                 grid-area: subevent-version;
                 font-family: $font-family-monospace;
                 color: $text-muted;
+                display: flex;
+                align-items: center;
             }
 
             .subevent-build {
                 grid-area: subevent-build;
+                display: flex;
+                align-items: center;
 
                 white-space: nowrap;
                 overflow: hidden;
@@ -362,6 +367,8 @@ body {
                 grid-area: subevent-tags;
                 display: flex;
                 align-items: center;
+                flex-wrap: wrap;
+                gap: 4px;
 
                 .badge {
                     display: block;
@@ -418,6 +425,7 @@ body {
             margin-bottom: 0.5rem;
             margin-top: 0.25rem;
             padding: 0;
+            gap: 4px;
 
             & > span {
                 margin: 0.25rem 0 0 0;
