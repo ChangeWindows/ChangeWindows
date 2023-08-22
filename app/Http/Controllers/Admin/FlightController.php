@@ -11,7 +11,6 @@ use Inertia\Inertia;
 use Auth;
 use Redirect;
 use Carbon\Carbon;
-use Twitter;
 
 class FlightController extends Controller
 {
@@ -128,37 +127,6 @@ class FlightController extends Controller
                 'date' => (new Carbon(request('date'))),
                 'release_channel_id' => $releaseChannel
             ]);
-
-            if ($request->tweet) {
-                if ($release_channel->channel->platform->tweetStream) {
-                    $tweet_stream = $release_channel->channel->platform->tweetStream;
-
-                    $twitter_stream = Twitter::usingCredentials($tweet_stream->access_token, $tweet_stream->access_token_secret, $tweet_stream->consumer_key, $tweet_stream->consumer_secret);
-
-                    $posted_tweet = $twitter_stream->postTweet([
-                        'status' => str_replace(
-                            array('%RELEASE%', '%VERSION%', '%CODENAME%', '%FLIGHT%', '%CHANNELS%', '%URL%'),
-                            array(
-                                $release_channel->release->name,
-                                $release_channel->release->version,
-                                $release_channel->release->codename,
-                                $flight->version,
-                                $release_channel->name,
-                                'https://changewindows.org' . route('front.platforms.releases', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
-                            ),
-                            $release_channel->channel->platform->tweet_template
-                        )
-                    ]);
-
-                    if ($posted_tweet && $release_channel->channel->platform->retweetStream) {
-                        $retweet_stream = $release_channel->channel->platform->retweetStream;
-
-                        $twitter_re_stream = Twitter::usingCredentials($retweet_stream->access_token, $retweet_stream->access_token_secret, $retweet_stream->consumer_key, $retweet_stream->consumer_secret);
-
-                        $twitter_re_stream->postRt($posted_tweet->id);
-                    }
-                }
-            }
         }
 
         return Redirect::route('admin.flights')->with('status', [

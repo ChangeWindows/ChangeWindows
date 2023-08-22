@@ -3,7 +3,7 @@ import { usePage } from '@inertiajs/react'
 
 import NavigationBar from './components/NavigationBar';
 
-import { aiDevices, aiFlag, aiLock, aiPlane, aiSoftwareBox, aiTwitter, aiUser, aiUserLock } from '@changewindows/amaranth';
+import { aiDevices, aiFlag, aiLock, aiPlane, aiSoftwareBox, aiUser, aiUserLock } from '@changewindows/amaranth';
 
 export default function AdminNavigation() {
   const { navCan } = usePage().props;
@@ -17,8 +17,6 @@ export default function AdminNavigation() {
         { type: 'link', url: '/admin/platforms', icon: aiDevices, title: 'Platforms', permission: navCan.platforms.show }
       ]}
       overflow={[
-        { type: 'link', url: '/admin/tweet_streams', icon: aiTwitter, title: 'Twitter', permission: navCan.tweetStreams.show },
-        { type: 'divider' },
         { type: 'link', url: '/admin/users', icon: aiUser, title: 'Users', permission: navCan.users.show },
         { type: 'link', url: '/admin/roles', icon: aiUserLock, title: 'Roles', permission: navCan.roles.show },
         { type: 'link', url: '/admin/permissions', icon: aiLock, title: 'Permissions', permission: navCan.permissions.show }

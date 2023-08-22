@@ -71,12 +71,8 @@ If you discover a security vulnerability within ChangeWindows, please contact us
 ## License
 The ChangeWindows website is open-sourced software licensed under the [AGPL license v3](LICENSE). Note however that the content on our website isn't unless stated otherwise.
 
-## ChangeWindows 7.7/8.0
-create table `flags` (`id` bigint unsigned not null auto_increment primary key, `name` varchar(255) not null, `feature_name` varchar(255) not null, `feature_id` int not null, `description` text null, `added` int not null, `removed` int null, `slug` varchar(255) not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci'
-create table `flag_status` (`id` bigint unsigned not null auto_increment primary key, `flag_id` bigint unsigned not null, `build` int not null, `status` varchar(255) not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci'
-alter table `flag_status` add constraint `flag_status_flag_id_foreign` foreign key (`flag_id`) references `flags` (`id`) on delete cascade
-create table `flag_authors` (`id` bigint unsigned not null auto_increment primary key, `flag_id` bigint unsigned not null, `user_id` bigint unsigned not null) default character set utf8mb4 collate 'utf8mb4_unicode_ci'
-alter table `flag_authors` add constraint `flag_authors_flag_id_foreign` foreign key (`flag_id`) references `flags` (`id`) on delete cascade
-alter table `flag_authors` add constraint `flag_authors_user_id_foreign` foreign key (`user_id`) references `users` (`id`) on delete cascade
-create table `flag_suggestions` (`id` bigint unsigned not null auto_increment primary key, `flag_id` bigint unsigned not null, `name` varchar(255) not null, `feature_name` varchar(255) not null, `feature_id` int not null, `description` text null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci'
-alter table `flag_suggestions` add constraint `flag_suggestions_flag_id_foreign` foreign key (`flag_id`) references `flags` (`id`) on delete cascade
+## ChangeWidnows 7.9
+alter table `platforms` drop `tweet_template`;
+alter table `platforms` drop `tweet_stream_id`;
+alter table `platforms` drop `retweet_stream_id`;
+drop table if exists `tweet_streams`;

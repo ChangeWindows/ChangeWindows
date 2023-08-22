@@ -7,7 +7,6 @@ import Fieldset from "@/Components/UI/Forms/Fieldset";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import SaveButton from "@/Components/UI/Forms/SaveButton";
-import Select from "@/Components/UI/Forms/Select";
 import Status from "@/Components/Status";
 import TextField from "@/Components/UI/Forms/TextField";
 
@@ -17,7 +16,6 @@ export default function Edit({
   can,
   platform,
   channels,
-  tweet_streams,
   status,
 }) {
   const {
@@ -142,53 +140,6 @@ export default function Edit({
                 helper="This platform is a tool and should not be displayed beyond the timeline."
                 checked={data.tool}
                 onChange={setData}
-              />
-            </div>
-          </Fieldset>
-          <Fieldset
-            title="Tweet Stream"
-            description="Keeping people up-to-date with Twitter."
-            disabled={!can.platforms.edit}
-          >
-            <div className="col-12 col-lg-6">
-              <Select
-                id="tweet_stream_id"
-                label="Tweet Stream"
-                value={data.tweet_stream_id}
-                selects={tweet_streams}
-                selectLabel={(x) => x.name}
-                selectValue={(x) => x.id}
-                errors={errors.tweet_stream_id}
-                onChange={setData}
-              />
-            </div>
-            <div className="col-12 col-lg-6">
-              <Select
-                id="retweet_stream_id"
-                label="Retweet Stream"
-                value={data.retweet_stream_id}
-                selects={tweet_streams}
-                selectLabel={(x) => x.name}
-                selectValue={(x) => x.id}
-                errors={errors.retweet_stream_id}
-                onChange={setData}
-              />
-            </div>
-            <div className="col-12">
-              <TextField
-                type="textarea"
-                label="Tweet Template"
-                id="tweet_template"
-                value={data.tweet_template}
-                errors={errors.tweet_template}
-                onChange={setData}
-                helper={
-                  <>
-                    Include <code>%RELEASE%</code>, <code>%VERSION%</code>,{" "}
-                    <code>%CODENAME%</code>, <code>%FLIGHT%</code>,{" "}
-                    <code>%CHANNELS%</code>, and <code>%URL%</code>.
-                  </>
-                }
               />
             </div>
           </Fieldset>
