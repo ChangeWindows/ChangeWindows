@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 
 import FlagStatus from "./_FlagStatus";
 
-import AmaranthIcon, { aiAngleRight } from "@changewindows/amaranth";
+import AmaranthIcon, { aiAngleRight } from "@studio384/amaranth";
 
 export default function Flag({ flag, url = null, hideBuild = false }) {
   const Component = useMemo(() => (url ? Link : "div"), ["url"]);

@@ -15,7 +15,7 @@ import AmaranthIcon, {
   aiArrowLeft,
   aiNotes,
   aiBarsStaggered,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 import { parseISO } from "date-fns";
 

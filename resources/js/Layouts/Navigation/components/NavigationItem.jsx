@@ -3,7 +3,7 @@ import { Link, usePage } from '@inertiajs/react';
 
 import clsx from 'clsx';
 
-import AmaranthIcon from '@changewindows/amaranth';
+import AmaranthIcon from '@studio384/amaranth';
 
 export default function NavigationItem({ title, url, icon, primary, external = false }) {
   const page = usePage();

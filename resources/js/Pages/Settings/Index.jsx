@@ -4,12 +4,12 @@ import { Head } from "@inertiajs/react";
 import App from "@/Layouts/App";
 
 import AmaranthIcon, {
-  aiBranch,
+  aiCodeBranch,
   aiGithub,
   aiPatreon,
   aiSwatchbook,
   aiTwitter,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 import { getLocal, setLocal } from "@/utils/localStorage";
 
@@ -90,7 +90,7 @@ export default function Show({ app, patrons }) {
                 <p className="h6 mb-2">Channels</p>
                 <div className="settings-card">
                   <div className="settings-icon">
-                    <AmaranthIcon icon={aiBranch} className="fs-6" />
+                    <AmaranthIcon icon={aiCodeBranch} className="fs-6" />
                   </div>
                   <div className="flex-grow-1">
                     <span className="d-block mb-n1">

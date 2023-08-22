@@ -11,8 +11,8 @@ import AmaranthIcon, {
   aiEnvelope,
   aiShieldKeyhole,
   aiSpinnerThird,
-  aiUser,
-} from "@changewindows/amaranth";
+  aiPerson,
+} from "@studio384/amaranth";
 
 export default function Index({ status, user }) {
   const { data, setData, patch, processing, errors } = useForm(user);
@@ -56,7 +56,7 @@ export default function Index({ status, user }) {
                 <p className="h6 mb-2">Details</p>
                 <div className="settings-card">
                   <div className="settings-icon">
-                    <AmaranthIcon icon={aiUser} className="fs-6" />
+                    <AmaranthIcon icon={aiPerson} className="fs-6" />
                   </div>
                   <div className="flex-grow-1">
                     <span className="d-block">Username</span>

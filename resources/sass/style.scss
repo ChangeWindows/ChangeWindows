@@ -2,7 +2,6 @@
 
 // Bootstrap
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
-@import "../../node_modules/@changewindows/amaranth/dist/amaranth.scss";
 
 @import "alert";
 @import "button";
@@ -20,6 +19,12 @@
 // Dark mode
 @function light-dark($light, $dark) {
     @return var(--light, #{$light}) var(--dark, #{$dark});
+}
+
+span {
+    svg {
+        vertical-align: -2px;
+    }
 }
 
 :root {

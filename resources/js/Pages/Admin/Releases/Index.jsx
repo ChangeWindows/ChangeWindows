@@ -5,7 +5,7 @@ import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPlus } from "@studio384/amaranth";
 import PlatformCard from "./_PlatformCard";
 
 export default function Index({ can, releases, status }) {

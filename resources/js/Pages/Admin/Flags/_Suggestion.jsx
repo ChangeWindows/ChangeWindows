@@ -5,7 +5,7 @@ import AmaranthIcon, {
   aiCheck,
   aiSpinnerThird,
   aiTrashCan,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 export default function Suggestion({ suggestion }) {
   const { data, patch, processing } = useForm(suggestion);

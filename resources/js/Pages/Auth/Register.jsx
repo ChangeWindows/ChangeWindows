@@ -3,7 +3,7 @@ import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
-import AmaranthIcon, { aiUserPlus } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPersonPlus } from "@studio384/amaranth";
 
 export default function Register({ app, status }) {
   const [form, setForm] = useState({
@@ -104,7 +104,7 @@ export default function Register({ app, status }) {
         </div>
         <div className="col-12 d-flex flex-column">
           <button className="btn btn-primary btn-sm py-2" type="submit">
-            <AmaranthIcon icon={aiUserPlus} /> Register
+            <AmaranthIcon icon={aiPersonPlus} /> Register
           </button>
         </div>
       </form>

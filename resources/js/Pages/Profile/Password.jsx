@@ -10,7 +10,7 @@ import AmaranthIcon, {
   aiCheck,
   aiShieldKeyhole,
   aiSpinnerThird,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 export default function Index({ status, user }) {
   const { data, setData, patch, processing, errors } = useForm(user);

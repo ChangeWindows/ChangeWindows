@@ -3,7 +3,7 @@ import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
-import AmaranthIcon, { aiCheck } from "@changewindows/amaranth";
+import AmaranthIcon, { aiCheck } from "@studio384/amaranth";
 
 export default function ConfirmPassword({ app, status }) {
   const [form, setForm] = useState({ password: "" });

@@ -3,7 +3,7 @@ import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
-import AmaranthIcon, { aiShieldKeyhole } from "@changewindows/amaranth";
+import AmaranthIcon, { aiShieldKeyhole } from "@studio384/amaranth";
 
 export default function ResetPassword({ app, token, status }) {
   const [form, setForm] = useState({

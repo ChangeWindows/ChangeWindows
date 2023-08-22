@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AmaranthIcon, { aiCircleCheck, aiCircleInfo, aiCircleExclamation } from '@changewindows/amaranth';
+import AmaranthIcon, { aiCircleCheck, aiCircleInfo, aiCircleExclamation } from '@studio384/amaranth';
 
 import clsx from 'clsx';
 

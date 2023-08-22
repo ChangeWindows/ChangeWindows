@@ -9,7 +9,7 @@ import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Status from "@/Components/Status";
 import TextField from "@/Components/UI/Forms/TextField";
 
-import AmaranthIcon, { aiTrashCan } from "@changewindows/amaranth";
+import AmaranthIcon, { aiTrashCan } from "@studio384/amaranth";
 
 import { parse, format, isValid, parseISO } from "date-fns";
 

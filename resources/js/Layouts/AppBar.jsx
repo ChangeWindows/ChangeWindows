@@ -4,9 +4,9 @@ import { Link, router, usePage } from "@inertiajs/react";
 import AmaranthIcon, {
   aiArrowRightFromBracket,
   aiArrowRightToBracket,
-  aiCircleUser,
+  aiCirclePerson,
   aiMagnifyingGlass,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 import { getLocal, setLocal } from "../utils/localStorage";
 import useMediaQuery from "../hooks/useMediaQuery";
@@ -109,7 +109,7 @@ export default function AppBar() {
                   href="/profile"
                   className="btn btn-transparent btn-profile me-2"
                 >
-                  <AmaranthIcon icon={aiCircleUser} />
+                  <AmaranthIcon icon={aiCirclePerson} />
                 </Link>
                 <form onSubmit={handleLogout} className="d-block">
                   <button

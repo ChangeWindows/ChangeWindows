@@ -3,7 +3,7 @@ import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
-import AmaranthIcon, { aiPaperPlaneTop } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPaperPlaneTop } from "@studio384/amaranth";
 
 export default function ForgotPassword({ app, status }) {
   const [form, setForm] = useState({ email: "" });

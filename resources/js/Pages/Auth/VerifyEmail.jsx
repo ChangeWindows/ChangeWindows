@@ -6,7 +6,7 @@ import Auth from "@/Layouts/Auth";
 import AmaranthIcon, {
   aiArrowRightFromBracket,
   aiPaperPlaneTop,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 export default function VerifyEmail({ app, session, status }) {
   function handleSubmit(event) {

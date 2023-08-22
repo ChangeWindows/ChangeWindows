@@ -5,7 +5,7 @@ import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPlus } from "@studio384/amaranth";
 
 export default function Show({ can, roles, status }) {
   return (

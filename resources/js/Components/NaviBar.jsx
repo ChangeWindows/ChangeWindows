@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from '@inertiajs/react';
 
-import AmaranthIcon, { aiArrowLeft } from "@changewindows/amaranth";
+import AmaranthIcon, { aiArrowLeft } from "@studio384/amaranth";
 
 /* -- Utilities -- */
 

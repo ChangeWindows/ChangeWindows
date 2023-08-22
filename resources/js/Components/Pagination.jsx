@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from '@inertiajs/react';
 
 import clsx from 'clsx';
-import AmaranthIcon, { aiArrowLeft, aiArrowRight } from '@changewindows/amaranth';
+import AmaranthIcon, { aiArrowLeft, aiArrowRight } from '@studio384/amaranth';
 
 export default function Pagination({ pagination }) {
   if (pagination.links.length <= 3) return;

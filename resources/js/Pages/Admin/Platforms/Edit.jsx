@@ -10,7 +10,7 @@ import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Status from "@/Components/Status";
 import TextField from "@/Components/UI/Forms/TextField";
 
-import AmaranthIcon, { aiPlus, aiTrashCan } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPlus, aiTrashCan } from "@studio384/amaranth";
 
 export default function Edit({
   can,

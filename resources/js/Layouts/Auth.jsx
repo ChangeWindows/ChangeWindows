@@ -6,7 +6,7 @@ import "../../sass/style.scss";
 import AmaranthIcon, {
   aiArrowLeft,
   aiChangewindows,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 import { getLocal, setLocal } from "../utils/localStorage";
 import useMediaQuery from "../hooks/useMediaQuery";

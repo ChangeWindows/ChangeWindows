@@ -7,8 +7,8 @@ import Link from "@tiptap/extension-link";
 import clsx from "clsx";
 import AmaranthIcon, {
   aiBold,
-  aiClearFormatting,
-  aiClearNode,
+  aiAGum,
+  aiSquareGum,
   aiCode,
   aiCodeblock,
   aiHeading1,
@@ -17,19 +17,19 @@ import AmaranthIcon, {
   aiHeading4,
   aiHeading5,
   aiHeading6,
-  aiHorizontalRule,
+  aiLine,
   aiItalic,
-  aiLink,
-  aiLinkSlash,
+  aiChain,
+  aiChainSlash,
   aiList,
-  aiListOl,
+  aiListOrdered,
   aiParagraph,
   aiQuote,
   aiRedo,
   aiStrikethrough,
   aiUnderline,
   aiUndo,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 import { Table } from "@tiptap/extension-table";
 import { TableRow } from "@tiptap/extension-table-row";
 import { TableHeader } from "@tiptap/extension-table-header";
@@ -228,7 +228,7 @@ function MenuBar({ editor }) {
             active: editor.isActive("link"),
           })}
         >
-          <AmaranthIcon icon={aiLink} />
+          <AmaranthIcon icon={aiChain} />
         </button>
         <button
           type="button"
@@ -237,7 +237,7 @@ function MenuBar({ editor }) {
             disabled: !editor.isActive("link"),
           })}
         >
-          <AmaranthIcon icon={aiLinkSlash} />
+          <AmaranthIcon icon={aiChainSlash} />
         </button>
       </div>
       <div className="btn-group">
@@ -257,7 +257,7 @@ function MenuBar({ editor }) {
             active: editor.isActive("orderedList"),
           })}
         >
-          <AmaranthIcon icon={aiListOl} />
+          <AmaranthIcon icon={aiListOrdered} />
         </button>
       </div>
       <div className="btn-group">
@@ -295,7 +295,7 @@ function MenuBar({ editor }) {
           type="button"
           onClick={() => editor.chain().focus().setHorizontalRule().run()}
         >
-          <AmaranthIcon icon={aiHorizontalRule} />
+          <AmaranthIcon icon={aiLine} />
         </button>
       </div>
       <div className="flex-grow-1" />
@@ -305,14 +305,14 @@ function MenuBar({ editor }) {
           type="button"
           onClick={() => editor.chain().focus().unsetAllMarks().run()}
         >
-          <AmaranthIcon icon={aiClearFormatting} />
+          <AmaranthIcon icon={aiAGum} />
         </button>
         <button
           className="editor-btn"
           type="button"
           onClick={() => editor.chain().focus().clearNodes().run()}
         >
-          <AmaranthIcon icon={aiClearNode} />
+          <AmaranthIcon icon={aiSquareGum} />
         </button>
       </div>
       <div className="flex-grow-1" />

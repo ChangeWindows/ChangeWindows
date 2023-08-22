@@ -7,8 +7,11 @@
         "start": "vite"
     },
     "dependencies": {
-        "@changewindows/amaranth": "0.10.0-alpha.4",
+        "@studio384/amaranth": "1.0.0-alpha.2",
+        "@emotion/react": "11.10.6",
+        "@emotion/styled": "11.10.6",
         "@inertiajs/react": "1.0.11",
+        "@mui/system": "5.11.12",
         "@tiptap/extension-link": "2.1.6",
         "@tiptap/extension-table": "2.1.6",
         "@tiptap/extension-table-cell": "2.1.6",

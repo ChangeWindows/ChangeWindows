@@ -6,7 +6,7 @@ import NaviBar from "@/Components/NaviBar";
 import Pagination from "@/Components/Pagination";
 import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPlus } from "@studio384/amaranth";
 
 export default function Show({ can, permissions, pagination, status }) {
   return (

@@ -10,7 +10,7 @@ import AmaranthIcon, {
   aiCircleInfo,
   aiStar,
   aiTrashCan,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 export default function Active({ flags, pagination }) {
   return (

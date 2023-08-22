@@ -7,7 +7,7 @@ import Pagination from "@/Components/Pagination";
 import Status from "@/Components/Status";
 import Timeline from "@/Components/Timeline/Timeline";
 
-import AmaranthIcon, { aiPlus } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPlus } from "@studio384/amaranth";
 import { parseISO } from "date-fns";
 import PlatformFlightCard from "./_PlatformFlightCard";
 

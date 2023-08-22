@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
-import AmaranthIcon, { aiPen } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPen } from "@studio384/amaranth";
 
 export default function PlatformFlightCard({ platform }) {
   return (
