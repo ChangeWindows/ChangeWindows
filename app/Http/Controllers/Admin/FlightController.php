@@ -55,6 +55,8 @@ class FlightController extends Controller
                                 'color' => $flight->platform->color
                             ]
                         ];
+                    })->sortByDesc(function ($item) {
+                        return $item['version'];
                     })->groupBy(function($item, $key) {
                         return $item['platform']['id'];
                     })->sortBy(function($item, $key) {
