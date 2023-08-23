@@ -49,7 +49,8 @@ span {
 
     --main-bg: #{light-dark(darken($light, 2), darken($dark, 4))};
     --main-bg-acrylic: #{light-dark(rgba(darken($light, 2), 0.75), rgba(darken($dark, 4), 0.75))};
-    --main-border-color: #{light-dark(darken($light, 8), darken($dark, 8))};
+    --main-border-color: #{light-dark(darken($light, 10), darken($dark, 8))};
+    --table-border-color: #{light-dark(darken($light, 14), lighten($dark, 8))};
 
     --timeline-bg-nth: #{light-dark(darken($light, 6), $dark)};
     --timeline-bg-hover: #{light-dark(darken($light, 8), lighten($dark, 4))};
@@ -635,7 +636,7 @@ a.settings-card {
 // Tables
 .table {
     --bs-table-color: var(--text);
-    --bs-border-color: var(--main-border-color);
+    --bs-border-color: var(--table-border-color);
 }
 
 // Utils
