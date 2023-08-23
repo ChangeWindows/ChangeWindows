@@ -11,20 +11,12 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
-    public function index() {
-        $user = User::find(Auth::user()->id);
-
-        return Inertia::render('Profile/Index', [
-            'status' => session('status'),
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email
-            ]
-        ]);
+    public function index()
+    {
     }
 
-    public function password() {
+    public function password()
+    {
         $user = User::find(Auth::user()->id);
 
         return Inertia::render('Profile/Password', [
@@ -36,7 +28,8 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function update(User $user) {
+    public function update(User $user)
+    {
         if (Auth::user()->id !== $user->id) {
             abort(403);
         }
@@ -56,13 +49,14 @@ class ProfileController extends Controller
             'email' => request('email')
         ]);
 
-        return Redirect::route('front.profile')->with('status', [
+        return Redirect::route('front.settings')->with('status', [
             'message' => 'Your profile has been saved.',
-        'type' => 'success'
-    ]);
+            'type' => 'success'
+        ]);
     }
 
-    public function updatePassword(User $user) {
+    public function updatePassword(User $user)
+    {
         if (Auth::user()->id !== $user->id) {
             abort(403);
         }
@@ -79,7 +73,7 @@ class ProfileController extends Controller
             'password' => request('password')
         ]);
 
-        return Redirect::route('front.profile')->with('status', [
+        return Redirect::route('front.settings')->with('status', [
             'message' => 'Your password has been updated.',
             'type' => 'success'
         ]);

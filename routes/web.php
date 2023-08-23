@@ -77,7 +77,6 @@ Route::prefix('')->as('front')->group(function() {
     });
 
     Route::middleware(['auth'])->prefix('profile')->name('.profile')->group(function() {
-        Route::get('', [ProfileController::class, 'index'])->name('');
         Route::get('/password', [ProfileController::class, 'password'])->name('.password');
         Route::patch('/{user}', [ProfileController::class, 'update'])->name('.update');
         Route::patch('/{user}/password', [ProfileController::class, 'updatePassword'])->name('.password.update');
@@ -86,7 +85,7 @@ Route::prefix('')->as('front')->group(function() {
     Route::controller(SettingsController::class)->prefix('settings')->as('.settings')->group(function() {
         Route::get('', 'index')->name('');
         Route::get('/about', 'index');
-        Route::get('/privacy', 'privacy');
+        Route::get('/privacy', 'privacy')->name('.privacy');
     });
 });
 
