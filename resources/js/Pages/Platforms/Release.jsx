@@ -50,7 +50,7 @@ export default function Release({
       TableCell,
       Table.configure({
         HTMLAttributes: {
-          class: "table",
+          class: "table table-bordered table-sm",
         },
       }),
     ],
@@ -68,7 +68,7 @@ export default function Release({
       TableCell,
       Table.configure({
         HTMLAttributes: {
-          class: "table",
+          class: "table table-bordered table-sm",
         },
       }),
     ],

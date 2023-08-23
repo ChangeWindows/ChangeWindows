@@ -25,15 +25,27 @@ import AmaranthIcon, {
   aiListOrdered,
   aiParagraph,
   aiQuote,
-  aiRedo,
   aiStrikethrough,
   aiUnderline,
-  aiUndo,
+  aiTable,
+  aiTableColumnInsertLeft,
+  aiTableColumnInsertRight,
+  aiTableColumnMin,
+  aiTableRowInsertTop,
+  aiTableRowInsertBottom,
+  aiTableRowMin,
+  aiTableMin,
+  aiTableCellMerge,
+  aiTableHeaderColumn,
+  aiTableHeaderRow,
+  aiTableHeaderCell,
+  aiAngleDown,
 } from "@studio384/amaranth";
 import { Table } from "@tiptap/extension-table";
 import { TableRow } from "@tiptap/extension-table-row";
 import { TableHeader } from "@tiptap/extension-table-header";
 import { TableCell } from "@tiptap/extension-table-cell";
+import DropdownItem from "./Navbar/DropdownItem";
 
 export default function Editor({ content = null, setData }) {
   const editor = useEditor({
@@ -49,7 +61,7 @@ export default function Editor({ content = null, setData }) {
       TableCell,
       Table.configure({
         HTMLAttributes: {
-          class: "table",
+          class: "table table-bordered table-sm",
         },
       }),
     ],
@@ -91,22 +103,6 @@ function MenuBar({ editor }) {
 
   return (
     <div className="editor-toolbar btn-toolbar">
-      <div className="btn-group">
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.chain().focus().undo().run()}
-        >
-          <AmaranthIcon icon={aiUndo} />
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.chain().focus().redo().run()}
-        >
-          <AmaranthIcon icon={aiRedo} />
-        </button>
-      </div>
       <div className="btn-group">
         <button
           type="button"
@@ -221,24 +217,27 @@ function MenuBar({ editor }) {
         </button>
       </div>
       <div className="btn-group">
-        <button
-          type="button"
-          onClick={setLink}
-          className={clsx("editor-btn", {
-            active: editor.isActive("link"),
-          })}
-        >
-          <AmaranthIcon icon={aiChain} />
-        </button>
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().unsetLink().run()}
-          className={clsx("editor-btn", {
-            disabled: !editor.isActive("link"),
-          })}
-        >
-          <AmaranthIcon icon={aiChainSlash} />
-        </button>
+        {!editor.isActive("link") ? (
+          <button
+            type="button"
+            onClick={setLink}
+            className={clsx("editor-btn", {
+              active: editor.isActive("link"),
+            })}
+          >
+            <AmaranthIcon icon={aiChain} />
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => editor.chain().focus().unsetLink().run()}
+            className={clsx("editor-btn", {
+              active: editor.isActive("link"),
+            })}
+          >
+            <AmaranthIcon icon={aiChainSlash} />
+          </button>
+        )}
       </div>
       <div className="btn-group">
         <button
@@ -282,6 +281,78 @@ function MenuBar({ editor }) {
       </div>
       <div className="btn-group">
         <button
+          className="editor-btn"
+          type="button"
+          onClick={() =>
+            editor.commands.insertTable({
+              rows: 3,
+              cols: 3,
+              withHeaderRow: true,
+            })
+          }
+        >
+          <AmaranthIcon icon={aiTable} /> Table
+        </button>
+        <a
+          className="editor-btn"
+          href="#"
+          id="tableTools"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <AmaranthIcon icon={aiAngleDown} />
+        </a>
+        <ul
+          className="dropdown-menu dropdown-menu-end"
+          aria-labelledby="tableTools"
+        >
+          <DropdownItem onClick={() => editor.commands.addColumnBefore()}>
+            <AmaranthIcon icon={aiTableColumnInsertLeft} sx={{ mr: 1 }} /> Add
+            column before
+          </DropdownItem>
+          <DropdownItem onClick={() => editor.commands.addColumnAfter()}>
+            <AmaranthIcon icon={aiTableColumnInsertRight} sx={{ mr: 1 }} /> Add
+            column after
+          </DropdownItem>
+          <DropdownItem onClick={() => editor.commands.deleteColumn()}>
+            <AmaranthIcon icon={aiTableColumnMin} sx={{ mr: 1 }} /> Delete
+            column
+          </DropdownItem>
+          <DropdownItem onClick={() => editor.commands.addRowBefore()}>
+            <AmaranthIcon icon={aiTableRowInsertTop} sx={{ mr: 1 }} /> Add row
+            before
+          </DropdownItem>
+          <DropdownItem onClick={() => editor.commands.addRowAfter()}>
+            <AmaranthIcon icon={aiTableRowInsertBottom} sx={{ mr: 1 }} /> Add
+            row before
+          </DropdownItem>
+          <DropdownItem onClick={() => editor.commands.deleteRow()}>
+            <AmaranthIcon icon={aiTableRowMin} sx={{ mr: 1 }} /> Add row before
+          </DropdownItem>
+          <DropdownItem onClick={() => editor.commands.deleteTable()}>
+            <AmaranthIcon icon={aiTableMin} sx={{ mr: 1 }} /> Delete table
+          </DropdownItem>
+          <DropdownItem onClick={() => editor.commands.mergeOrSplit()}>
+            <AmaranthIcon icon={aiTableCellMerge} sx={{ mr: 1 }} /> Merge/split
+            cell
+          </DropdownItem>
+          <DropdownItem onClick={() => editor.commands.toggleHeaderColumn()}>
+            <AmaranthIcon icon={aiTableHeaderColumn} sx={{ mr: 1 }} /> Make
+            header column
+          </DropdownItem>
+          <DropdownItem onClick={() => editor.commands.toggleHeaderRow()}>
+            <AmaranthIcon icon={aiTableHeaderRow} sx={{ mr: 1 }} /> Make header
+            row
+          </DropdownItem>
+          <DropdownItem onClick={() => editor.commands.toggleHeaderCell()}>
+            <AmaranthIcon icon={aiTableHeaderCell} sx={{ mr: 1 }} /> Make header
+            cell
+          </DropdownItem>
+        </ul>
+      </div>
+      <div className="btn-group">
+        <button
           type="button"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           className={clsx("editor-btn", {
@@ -313,113 +384,6 @@ function MenuBar({ editor }) {
           onClick={() => editor.chain().focus().clearNodes().run()}
         >
           <AmaranthIcon icon={aiSquareGum} />
-        </button>
-      </div>
-      <div className="flex-grow-1" />
-      <div className="btn-group">
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() =>
-            editor.commands.insertTable({
-              rows: 3,
-              cols: 3,
-              withHeaderRow: true,
-            })
-          }
-        >
-          Table
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.addColumnBefore()}
-        >
-          Column before
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.addColumnAfter()}
-        >
-          Column after
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.deleteColumn()}
-        >
-          Delete column
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.addRowBefore()}
-        >
-          Row before
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.addRowAfter()}
-        >
-          Row after
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.deleteRow()}
-        >
-          Delete row
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.deleteTable()}
-        >
-          Delete table
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.mergeCells()}
-        >
-          Merge
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.splitCell()}
-        >
-          Split
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.mergeOrSplit()}
-        >
-          Merge/split
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.toggleHeaderColumn()}
-        >
-          Header column
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.toggleHeaderRow()}
-        >
-          Header row
-        </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.commands.toggleHeaderCell()}
-        >
-          Header cell
         </button>
       </div>
     </div>
