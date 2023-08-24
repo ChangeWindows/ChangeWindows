@@ -91,6 +91,8 @@ class PlatformController extends Controller
     {
         $this->authorize('platforms.show');
 
+        $platform->load('channels');
+
         return Inertia::render('Admin/Platforms/Edit', [
             'can' => [
                 'platforms' => [

@@ -23,10 +23,8 @@ class FlightController extends Controller
     {
         $this->authorize('flights.show');
 
-        $timeline = Flight::orderBy('date', 'desc');
-        $paginator = $timeline->paginate(100)->onEachSide(2)->through(function () {
-            return [];
-        });
+        $timeline = Flight::orderBy('date', 'desc')->with('releaseChannel', 'releaseChannel.channel', 'releaseChannel.channel.platform');
+        $paginator = $timeline->paginate(100)->onEachSide(2);
 
         return Inertia::render('Admin/Flights/Index', [
             'can' => [
@@ -37,7 +35,7 @@ class FlightController extends Controller
             ],
             'timeline' => $timeline->paginate(100)->groupBy('date')->map(function ($items, $date) {
                 return [
-                    'date' => $items[0]->date,
+                    'date' => $date,
                     'flights' => $items->map(function ($flight) {
                         return [
                             'id' => $flight->id,
@@ -48,18 +46,18 @@ class FlightController extends Controller
                                 'color' => $flight->releaseChannel->channel->color
                             ],
                             'platform' => [
-                                'id' => $flight->platform->id,
-                                'icon' => $flight->platform->icon,
-                                'name' => $flight->platform->name,
-                                'position' => $flight->platform->position,
-                                'color' => $flight->platform->color
+                                'id' => $flight->releaseChannel->channel->platform->id,
+                                'icon' => $flight->releaseChannel->channel->platform->icon,
+                                'name' => $flight->releaseChannel->channel->platform->name,
+                                'position' => $flight->releaseChannel->channel->platform->position,
+                                'color' => $flight->releaseChannel->channel->platform->color
                             ]
                         ];
                     })->sortByDesc(function ($item) {
                         return $item['version'];
-                    })->groupBy(function($item, $key) {
+                    })->groupBy(function($item) {
                         return $item['platform']['id'];
-                    })->sortBy(function($item, $key) {
+                    })->sortBy(function($item) {
                         return $item[0]['platform']['position'];
                     })->values()->all()
                 ];
@@ -78,7 +76,7 @@ class FlightController extends Controller
     {
         $this->authorize('flights.create');
 
-        $releases = Release::orderBy('canonical_version')->orderBy('platform_id')->get();
+        $releases = Release::with('platform', 'releaseChannels', 'releaseChannels.channel')->orderBy('canonical_version')->orderBy('platform_id')->get();
 
         return Inertia::render('Admin/Flights/Create', [
             'releases' => $releases->map(function ($release) {
@@ -119,7 +117,7 @@ class FlightController extends Controller
         $this->authorize('flights.create');
 
         foreach ($request->releaseChannels as $releaseChannel) {
-            $release_channel = ReleaseChannel::find($releaseChannel);
+            $release_channel = ReleaseChannel::with('channel', 'channel.platform', 'channel.platform.tweetStream', 'channel.platform.retweetStream', 'release')->find($releaseChannel);
 
             $flight = Flight::create([
                 'major' => request('major'),
@@ -157,6 +155,8 @@ class FlightController extends Controller
     public function edit(Flight $flight)
     {
         $this->authorize('flights.show');
+
+        $flight->load('releaseChannel', 'releaseChannel.channel', 'releaseChannel.channel.platform');
 
         return Inertia::render('Admin/Flights/Edit', [
             'can' => [

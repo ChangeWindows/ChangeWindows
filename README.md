@@ -2,10 +2,10 @@
 <img src="https://changewindows.org/images/logo.svg" width="100px" height="auto">
 </p>
 
-<h3 align="center">ChangeWindows Horizon</h3>
+<h3 align="center">ChangeWindows</h3>
 
 <p align="center">
-Changing Horizon one commit at a time
+Building ChangeWindows one commit at a time
 <br />
 <br />
 <a href="https://preview.changewindows.org">ChangeWindows Preview</a>
@@ -17,7 +17,7 @@ Changing Horizon one commit at a time
 ChangeWindows does what Microsoft doesn't: document every change we can possibly find in Windows on any platform.
 
 ## Open source
-After ChangeWindows viv, we've decided to bring ChangeWindows Horizon - our 7th major itteration - to an open source repository near you too. Built with Laravel and React, this is a more modern version of our website.
+ChangeWindows is an open source project build on top of Laravel, Vite and React.
 
 ## Using
 To run ChangeWindows, you'll need the following:

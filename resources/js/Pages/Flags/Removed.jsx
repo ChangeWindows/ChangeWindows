@@ -7,8 +7,8 @@ import Pagination from "@/Components/Pagination";
 import FlagCurrent from "./_FlagCurrent";
 
 import AmaranthIcon, {
+  aiBarsStaggered,
   aiCircleInfo,
-  aiClockRotateLeft,
   aiStar,
   aiTrashCan,
 } from "@studio384/amaranth";
