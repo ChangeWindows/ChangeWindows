@@ -5,7 +5,7 @@ import Auth from "@/Layouts/Auth";
 
 import AmaranthIcon, {
   aiArrowRightFromBracket,
-  aiPaperPlaneTop,
+  aiPaperPlane,
 } from "@studio384/amaranth";
 
 export default function VerifyEmail({ app, session, status }) {
@@ -56,7 +56,7 @@ export default function VerifyEmail({ app, session, status }) {
         )}
         <div className="col-12 d-flex flex-column">
           <button className="btn btn-primary btn-sm py-2 mb-2" type="submit">
-            <AmaranthIcon icon={aiPaperPlaneTop} /> Resend verification email
+            <AmaranthIcon icon={aiPaperPlane} /> Resend verification email
           </button>
           <button
             className="btn btn-primary btn-sm py-2 mb-2"
