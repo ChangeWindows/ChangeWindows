@@ -117,9 +117,7 @@ class FlightController extends Controller
         $this->authorize('flights.create');
 
         foreach ($request->releaseChannels as $releaseChannel) {
-            $release_channel = ReleaseChannel::with('channel', 'channel.platform', 'channel.platform.tweetStream', 'channel.platform.retweetStream', 'release')->find($releaseChannel);
-
-            $flight = Flight::create([
+            Flight::create([
                 'major' => request('major'),
                 'minor' => request('minor'),
                 'build' => request('build'),
