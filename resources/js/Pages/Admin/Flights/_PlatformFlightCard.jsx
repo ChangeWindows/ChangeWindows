@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
-import AmaranthIcon, { aiPen } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPen } from "@studio384/amaranth";
 
 export default function PlatformFlightCard({ platform }) {
   return (
@@ -23,7 +23,7 @@ export default function PlatformFlightCard({ platform }) {
               <div className="subevent-tags">
                 <span
                   key={key}
-                  className="badge me-1"
+                  className="badge"
                   style={{ background: flight.release_channel.color }}
                 >
                   {flight.release_channel.name}

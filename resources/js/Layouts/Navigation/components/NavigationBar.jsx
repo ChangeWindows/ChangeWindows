@@ -3,7 +3,7 @@ import { Link, usePage } from "@inertiajs/react";
 
 import NavigationItem from "./NavigationItem";
 
-import AmaranthIcon, { aiEllipsis } from "@changewindows/amaranth";
+import AmaranthIcon, { aiEllipsis } from "@studio384/amaranth";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useWidth from "@/hooks/useWidth";

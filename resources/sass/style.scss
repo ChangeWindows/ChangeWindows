@@ -2,7 +2,6 @@
 
 // Bootstrap
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
-@import "../../node_modules/@changewindows/amaranth/dist/amaranth.scss";
 
 @import "alert";
 @import "button";
@@ -20,6 +19,12 @@
 // Dark mode
 @function light-dark($light, $dark) {
     @return var(--light, #{$light}) var(--dark, #{$dark});
+}
+
+span {
+    svg {
+        vertical-align: -2px;
+    }
 }
 
 :root {
@@ -44,7 +49,8 @@
 
     --main-bg: #{light-dark(darken($light, 2), darken($dark, 4))};
     --main-bg-acrylic: #{light-dark(rgba(darken($light, 2), 0.75), rgba(darken($dark, 4), 0.75))};
-    --main-border-color: #{light-dark(darken($light, 8), darken($dark, 8))};
+    --main-border-color: #{light-dark(darken($light, 10), darken($dark, 8))};
+    --table-border-color: #{light-dark(darken($light, 14), lighten($dark, 8))};
 
     --timeline-bg-nth: #{light-dark(darken($light, 6), $dark)};
     --timeline-bg-hover: #{light-dark(darken($light, 8), lighten($dark, 4))};
@@ -242,6 +248,7 @@ body {
             margin-bottom: 0.5rem;
             margin-top: 0.25rem;
             padding: 0;
+            gap: 4px;
 
             & > span {
                 margin: 0.25rem 0 0 0;
@@ -289,12 +296,12 @@ body {
         }
 
         .subevent {
-            padding: 0 0.5rem;
+            padding: 0.5rem;
             display: grid;
             gap: 1.5rem;
             grid-template-columns: 32px 120px auto;
             grid-template-areas: "subevent-version subevent-build subevent-tags";
-            height: 40px;
+            min-height: 40px;
             align-content: center;
 
             transition: background-color .2s ease-in-out;
@@ -343,10 +350,14 @@ body {
                 grid-area: subevent-version;
                 font-family: $font-family-monospace;
                 color: $text-muted;
+                display: flex;
+                align-items: center;
             }
 
             .subevent-build {
                 grid-area: subevent-build;
+                display: flex;
+                align-items: center;
 
                 white-space: nowrap;
                 overflow: hidden;
@@ -357,6 +368,8 @@ body {
                 grid-area: subevent-tags;
                 display: flex;
                 align-items: center;
+                flex-wrap: wrap;
+                gap: 4px;
 
                 .badge {
                     display: block;
@@ -373,13 +386,13 @@ body {
 
         a.subevent {
             &:hover {
-                border-top: none;
+                border-top-color: transparent;
                 border-radius: var(--event-border-radius) 0 0 var(--event-border-radius);
                 background-color: var(--card-bg-hover)
             }
 
             &:hover + .subevent {
-                border-top: none;
+                border-top-color: transparent;
             }
         }
 
@@ -413,6 +426,7 @@ body {
             margin-bottom: 0.5rem;
             margin-top: 0.25rem;
             padding: 0;
+            gap: 4px;
 
             & > span {
                 margin: 0.25rem 0 0 0;
@@ -622,7 +636,7 @@ a.settings-card {
 // Tables
 .table {
     --bs-table-color: var(--text);
-    --bs-border-color: var(--main-border-color);
+    --bs-border-color: var(--table-border-color);
 }
 
 // Utils

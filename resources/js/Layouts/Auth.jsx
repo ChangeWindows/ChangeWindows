@@ -5,8 +5,8 @@ import "../../sass/style.scss";
 
 import AmaranthIcon, {
   aiArrowLeft,
-  aiChangewindows,
-} from "@changewindows/amaranth";
+  aiChangeWindows,
+} from "@studio384/amaranth";
 
 import { getLocal, setLocal } from "../utils/localStorage";
 import useMediaQuery from "../hooks/useMediaQuery";
@@ -51,7 +51,7 @@ export default function Auth({ children }) {
           </a>
 
           <h1 className="m-0 py-3 pt-sm-4 pb-sm-5 d-flex font-brand fw-bold justify-content-center align-items-center" style={{ fontSize: 28 }}>
-            <AmaranthIcon icon={aiChangewindows} className="me-1" />
+            <AmaranthIcon icon={aiChangeWindows} className="me-1" />
             {app.name}
           </h1>
           {children}

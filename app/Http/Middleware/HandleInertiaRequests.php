@@ -50,7 +50,6 @@ class HandleInertiaRequests extends Middleware
                 'flags' => ['show' => Auth::check() ? Auth::user()->can('flags.show') : false],
                 'releases' => ['show' => Auth::check() ? Auth::user()->can('releases.show') : false],
                 'platforms' => ['show' => Auth::check() ? Auth::user()->can('platforms.show') : false],
-                'tweetStreams' => ['show' => Auth::check() ? Auth::user()->can('tweet_streams.show') : false],
                 'users' => ['show' => Auth::check() ? Auth::user()->can('users.show') : false],
                 'roles' => ['show' => Auth::check() ? Auth::user()->can('roles.show') : false],
                 'permissions' => ['show' => Auth::check() ? Auth::user()->can('permissions.show') : false]

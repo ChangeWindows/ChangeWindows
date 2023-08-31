@@ -6,8 +6,8 @@ import Auth from "@/Layouts/Auth";
 import AmaranthIcon, {
   aiArrowRightToBracket,
   aiShieldKeyhole,
-  aiUserPlus,
-} from "@changewindows/amaranth";
+  aiPersonPlus,
+} from "@studio384/amaranth";
 
 export default function Login({ app, status }) {
   const [form, setForm] = useState({ email: "", password: "", remember: true });
@@ -100,7 +100,7 @@ export default function Login({ app, status }) {
         </div>
         <div className="col-12 d-flex flex-column">
           <Link href="/register" className="btn btn-light btn-sm py-2 mb-2">
-            <AmaranthIcon icon={aiUserPlus} /> Register
+            <AmaranthIcon icon={aiPersonPlus} /> Register
           </Link>
           <Link href="/forgot-password" className="btn btn-light btn-sm py-2">
             <AmaranthIcon icon={aiShieldKeyhole} /> Forgot password

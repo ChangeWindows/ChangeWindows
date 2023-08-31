@@ -13,7 +13,7 @@ import AmaranthIcon, {
   aiPen,
   aiSpinnerThird,
   aiXmark,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 import clsx from "clsx";
 

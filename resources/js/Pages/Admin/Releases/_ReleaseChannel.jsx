@@ -5,7 +5,7 @@ import AmaranthIcon, {
   aiCheck,
   aiSpinnerThird,
   aiXmark,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 import clsx from "clsx";
 
 export default function ReleaseChannel({ can, releaseChannel }) {

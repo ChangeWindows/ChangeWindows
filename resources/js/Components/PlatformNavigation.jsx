@@ -6,7 +6,7 @@ import NavItem from './Navbar/NavItem';
 
 import PlatformIcon from './Platforms/PlatformIcon';
 
-import AmaranthIcon, { aiAngleDown, aiEllipsis } from '@changewindows/amaranth';
+import AmaranthIcon, { aiAngleDown, aiEllipsis } from '@studio384/amaranth';
 
 import useMediaQuery from '../hooks/useMediaQuery';
 import clsx from 'clsx';

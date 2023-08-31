@@ -3,7 +3,7 @@ import { usePage } from '@inertiajs/react';
 
 import NavigationBar from './components/NavigationBar';
 
-import { aiDashboard, aiMessagePen, aiBranch, aiDevices, aiPatreon, aiBarsStaggered, aiTwitter, aiGear, aiFlag } from '@changewindows/amaranth';
+import { aiGauge, aiMegaphone, aiCodeBranch, aiDevices, aiPatreon, aiBarsStaggered, aiTwitter, aiGear, aiFlag } from '@studio384/amaranth';
 
 export default function Navigation() {
   const { navCan } = usePage().props;
@@ -14,13 +14,13 @@ export default function Navigation() {
         { type: 'link', url: '/timeline', icon: aiBarsStaggered, title: 'Timeline' },
         { type: 'link', url: '/flags', icon: aiFlag, title: 'Flags' },
         { type: 'link', url: '/platforms', primary: '/pc', icon: aiDevices, title: 'Platforms' },
-        { type: 'link', url: '/channels', icon: aiBranch, title: 'Channels' },
+        { type: 'link', url: '/channels', icon: aiCodeBranch, title: 'Channels' },
         { type: 'divider' },
         { type: 'link', url: '/settings', icon: aiGear, title: 'Settings' }
       ]}
       overflow={[
-        { type: 'external', url: 'https://medium.com/changewindows', icon: aiMessagePen, title: 'Blog' },
-        { type: 'link', url: '/admin/flights', icon: aiDashboard, title: 'Backstage', permission: navCan.dashboard }
+        { type: 'external', url: 'https://medium.com/changewindows', icon: aiMegaphone, title: 'Blog' },
+        { type: 'link', url: '/admin/flights', icon: aiGauge, title: 'Backstage', permission: navCan.dashboard }
       ]}
       socials={[
         { type: 'external', url: 'https://twitter.com/changewindows', icon: aiTwitter, title: 'Follow' },

@@ -18,7 +18,6 @@ use App\Http\Controllers\Admin\PlatformController as AdminPlatformController;
 use App\Http\Controllers\Admin\ReleaseChannelController as AdminReleaseChannelController;
 use App\Http\Controllers\Admin\ReleaseController as AdminReleaseController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
-use App\Http\Controllers\Admin\TweetStreamController as AdminTweetStreamController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 /*
@@ -78,7 +77,6 @@ Route::prefix('')->as('front')->group(function() {
     });
 
     Route::middleware(['auth'])->prefix('profile')->name('.profile')->group(function() {
-        Route::get('', [ProfileController::class, 'index'])->name('');
         Route::get('/password', [ProfileController::class, 'password'])->name('.password');
         Route::patch('/{user}', [ProfileController::class, 'update'])->name('.update');
         Route::patch('/{user}/password', [ProfileController::class, 'updatePassword'])->name('.password.update');
@@ -87,7 +85,7 @@ Route::prefix('')->as('front')->group(function() {
     Route::controller(SettingsController::class)->prefix('settings')->as('.settings')->group(function() {
         Route::get('', 'index')->name('');
         Route::get('/about', 'index');
-        Route::get('/privacy', 'privacy');
+        Route::get('/privacy', 'privacy')->name('.privacy');
     });
 });
 
@@ -148,15 +146,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin')->group(function() {
         Route::get('/create', 'create')->name('.create');
         Route::get('/{platform}/edit', 'edit')->name('.edit');
         Route::patch('/{platform}/edit', 'update')->name('.update');
-    });
-
-    Route::controller(AdminTweetStreamController::class)->prefix('tweet_streams')->as('.tweet_streams')->group(function() {
-        Route::get('', 'index')->name('');
-        Route::post('', 'store')->name('.store');
-        Route::delete('{tweet_stream}', 'destroy')->name('.destroy');
-        Route::get('/create', 'create')->name('.create');
-        Route::get('/{tweet_stream}/edit', 'edit')->name('.edit');
-        Route::patch('/{tweet_stream}/edit', 'update')->name('.update');
     });
 
     Route::controller(AdminChannelController::class)->prefix('channels')->as('.channels')->group(function() {

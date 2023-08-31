@@ -4,9 +4,8 @@ import { Link, router, usePage } from "@inertiajs/react";
 import AmaranthIcon, {
   aiArrowRightFromBracket,
   aiArrowRightToBracket,
-  aiCircleUser,
   aiMagnifyingGlass,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 import { getLocal, setLocal } from "../utils/localStorage";
 import useMediaQuery from "../hooks/useMediaQuery";
@@ -50,7 +49,9 @@ export default function AppBar() {
 
   function handleSearch(e) {
     e.preventDefault();
-    router.post(url.includes("/flags") ? "/search/flags" : "/search", { search });
+    router.post(url.includes("/flags") ? "/search/flags" : "/search", {
+      search,
+    });
   }
 
   return (
@@ -95,7 +96,11 @@ export default function AppBar() {
                 id="search"
                 name="search"
                 className="form-control"
-                placeholder={url.includes('/flags') ? "Search flags..." : "Search releases..."}
+                placeholder={
+                  url.includes("/flags")
+                    ? "Search flags..."
+                    : "Search releases..."
+                }
                 onChange={(event) => setSearch(event.target.value)}
                 aria-label="Search"
                 aria-describedby="search"
@@ -104,27 +109,16 @@ export default function AppBar() {
           </div>
           <div className="navbar-actions">
             {props.auth ? (
-              <>
-                <Link
-                  href="/profile"
-                  className="btn btn-transparent btn-profile me-2"
+              <form onSubmit={handleLogout} className="d-block">
+                <button
+                  type="submit"
+                  className="btn btn-transparent btn-profile"
                 >
-                  <AmaranthIcon icon={aiCircleUser} />
-                </Link>
-                <form onSubmit={handleLogout} className="d-block">
-                  <button
-                    type="submit"
-                    className="btn btn-transparent btn-profile"
-                  >
-                    <AmaranthIcon icon={aiArrowRightFromBracket} />
-                  </button>
-                </form>
-              </>
+                  <AmaranthIcon icon={aiArrowRightFromBracket} />
+                </button>
+              </form>
             ) : (
-              <Link
-                href="/login"
-                className="btn btn-transparent btn-profile"
-              >
+              <Link href="/login" className="btn btn-transparent btn-profile">
                 <AmaranthIcon icon={aiArrowRightToBracket} />
               </Link>
             )}

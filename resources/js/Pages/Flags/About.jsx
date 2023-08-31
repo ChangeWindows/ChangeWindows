@@ -8,7 +8,7 @@ import AmaranthIcon, {
   aiClockRotateLeft,
   aiStar,
   aiTrashCan,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 import FlagStatus from "@/Components/_FlagStatus";
 
 export default function About() {

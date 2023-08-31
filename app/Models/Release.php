@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 use Spatie\Searchable\Searchable;
@@ -13,7 +14,7 @@ use Spatie\Searchable\SearchResult;
 class Release extends Model implements Searchable
 {
     use HasFactory;
-    use Sluggable;
+    use HasSlug;
     use HasRelationships;
 
     public $searchableType = 'Releases';
@@ -49,16 +50,15 @@ class Release extends Model implements Searchable
             ->first();
     }
 
-    public function getRouteKeyName() {
-        return 'slug';
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
     }
 
-    public function sluggable(): array {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
+    public function getRouteKeyName() {
+        return 'slug';
     }
 
     public function getSearchResult(): SearchResult {

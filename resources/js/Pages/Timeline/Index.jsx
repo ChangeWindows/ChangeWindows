@@ -11,7 +11,7 @@ import Timeline from "@/Components/Timeline/Timeline";
 import PlatformTimelineCard from "./_PlatformTimelineCard";
 
 import { parseISO } from "date-fns";
-import AmaranthIcon, { aiPatreon } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPatreon } from "@studio384/amaranth";
 
 export default function Index({
   timeline,

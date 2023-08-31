@@ -29,7 +29,7 @@ export default function Select({
           className="form-select"
           id={id}
           defaultValue={value}
-          onChange={(e) => onChange(id, e.target.value)}
+          onChange={onChange}
           disabled={disabled}
         >
           {!!nullProps && <option value={nullProps.value} disabled={!nullProps.selectable}>{nullProps.label}</option>}
