@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { InertiaLink, useForm } from "@inertiajs/inertia-react";
+import { Link, useForm } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
@@ -17,7 +17,7 @@ import AmaranthIcon, {
   aiNotes,
   aiPlus,
   aiTrashCan,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 import { parse, format, isValid, parseISO } from "date-fns";
 
@@ -138,7 +138,7 @@ export default function Edit({
           </Fieldset>
           <Fieldset title="Changelog" description="What's new?" disabledCard>
             <div className="col-12">
-              <InertiaLink
+              <Link
                 href={route("admin.releases.changelog.edit", release)}
                 className="btn btn-primary btn-sm"
               >
@@ -147,7 +147,7 @@ export default function Edit({
                   className="me-2"
                 />
                 {can.releases.edit ? "Edit changelog" : "View changelog"}
-              </InertiaLink>
+              </Link>
             </div>
           </Fieldset>
           <Fieldset
@@ -316,7 +316,7 @@ export default function Edit({
                       aria-labelledby="dropdownMenuLink"
                     >
                       {availablePlatformChannels.map((channel, key) => (
-                        <InertiaLink
+                        <Link
                           key={key}
                           href={route("admin.releasechannels.create", {
                             release: release.id,
@@ -334,7 +334,7 @@ export default function Edit({
                             }}
                           />{" "}
                           <div className="ms-2">{channel.name}</div>
-                        </InertiaLink>
+                        </Link>
                       ))}
                     </ul>
                   </div>

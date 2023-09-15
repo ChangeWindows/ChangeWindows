@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Inertia } from "@inertiajs/inertia";
-import { InertiaLink, usePage } from "@inertiajs/inertia-react";
+import { Link, router, usePage } from "@inertiajs/react";
 
 import AmaranthIcon, {
   aiArrowRightFromBracket,
   aiArrowRightToBracket,
-  aiCircleUser,
   aiMagnifyingGlass,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 import { getLocal, setLocal } from "../utils/localStorage";
 import useMediaQuery from "../hooks/useMediaQuery";
@@ -46,12 +44,14 @@ export default function AppBar() {
 
   function handleLogout(e) {
     e.preventDefault();
-    Inertia.post("/logout");
+    router.post("/logout");
   }
 
   function handleSearch(e) {
     e.preventDefault();
-    Inertia.post(url.includes("/flags") ? "/search/flags" : "/search", { search });
+    router.post(url.includes("/flags") ? "/search/flags" : "/search", {
+      search,
+    });
   }
 
   return (
@@ -59,7 +59,7 @@ export default function AppBar() {
       <nav className="navbar navbar-dark navbar-main">
         <div className="container-fluid">
           <div className="navbar-main">
-            <InertiaLink className="navbar-brand" href="/">
+            <Link className="navbar-brand" href="/">
               <img
                 src={
                   props.app.preview === "preview"
@@ -81,7 +81,7 @@ export default function AppBar() {
                   ""
                 )}
               </span>
-            </InertiaLink>
+            </Link>
           </div>
           <div className="navbar-search">
             <form
@@ -96,7 +96,11 @@ export default function AppBar() {
                 id="search"
                 name="search"
                 className="form-control"
-                placeholder={url.includes('/flags') ? "Search flags..." : "Search releases..."}
+                placeholder={
+                  url.includes("/flags")
+                    ? "Search flags..."
+                    : "Search releases..."
+                }
                 onChange={(event) => setSearch(event.target.value)}
                 aria-label="Search"
                 aria-describedby="search"
@@ -105,29 +109,18 @@ export default function AppBar() {
           </div>
           <div className="navbar-actions">
             {props.auth ? (
-              <>
-                <InertiaLink
-                  href="/profile"
-                  className="btn btn-transparent btn-profile me-2"
+              <form onSubmit={handleLogout} className="d-block">
+                <button
+                  type="submit"
+                  className="btn btn-transparent btn-profile"
                 >
-                  <AmaranthIcon icon={aiCircleUser} />
-                </InertiaLink>
-                <form onSubmit={handleLogout} className="d-block">
-                  <button
-                    type="submit"
-                    className="btn btn-transparent btn-profile"
-                  >
-                    <AmaranthIcon icon={aiArrowRightFromBracket} />
-                  </button>
-                </form>
-              </>
+                  <AmaranthIcon icon={aiArrowRightFromBracket} />
+                </button>
+              </form>
             ) : (
-              <InertiaLink
-                href="/login"
-                className="btn btn-transparent btn-profile"
-              >
+              <Link href="/login" className="btn btn-transparent btn-profile">
                 <AmaranthIcon icon={aiArrowRightToBracket} />
-              </InertiaLink>
+              </Link>
             )}
           </div>
         </div>

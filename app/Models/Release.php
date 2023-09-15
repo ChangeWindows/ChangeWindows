@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 use Spatie\Searchable\Searchable;
@@ -13,7 +14,7 @@ use Spatie\Searchable\SearchResult;
 class Release extends Model implements Searchable
 {
     use HasFactory;
-    use Sluggable;
+    use HasSlug;
     use HasRelationships;
 
     public $searchableType = 'Releases';
@@ -45,21 +46,19 @@ class Release extends Model implements Searchable
 
     public function getLatestAttribute() {
         return Flight::whereIn('release_channel_id', $this->releaseChannels->pluck('id'))
-            ->orderBy('build', 'desc')
-            ->orderBy('delta', 'desc')
+            ->orderBy('date', 'desc')
             ->first();
+    }
+
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
     }
 
     public function getRouteKeyName() {
         return 'slug';
-    }
-
-    public function sluggable(): array {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
     }
 
     public function getSearchResult(): SearchResult {

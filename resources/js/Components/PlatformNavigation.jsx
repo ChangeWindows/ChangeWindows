@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { Link, usePage } from '@inertiajs/react';
 
 import DropdownItem from './Navbar/DropdownItem';
 import NavItem from './Navbar/NavItem';
 
 import PlatformIcon from './Platforms/PlatformIcon';
 
-import AmaranthIcon, { aiAngleDown, aiEllipsis } from '@changewindows/amaranth';
+import AmaranthIcon, { aiAngleDown, aiEllipsis } from '@studio384/amaranth';
 
 import useMediaQuery from '../hooks/useMediaQuery';
 import clsx from 'clsx';
@@ -34,9 +34,9 @@ export default function Navigation({ home = false, platforms, routeName, all = f
           <ul className="navbar-nav me-auto">
             {all &&
               <li className="nav-item">
-                <InertiaLink className={clsx('nav-link', { 'active': route().current(all) })} href={route(all)}>
+                <Link className={clsx('nav-link', { 'active': route().current(all) })} href={route(all)}>
                   All
-                </InertiaLink>
+                </Link>
               </li>
             }
             {mainPlatforms.map((platform, key) => (

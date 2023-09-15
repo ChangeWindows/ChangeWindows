@@ -11,7 +11,6 @@ use Inertia\Inertia;
 use Auth;
 use Redirect;
 use Carbon\Carbon;
-use Twitter;
 
 class FlightController extends Controller
 {
@@ -24,10 +23,8 @@ class FlightController extends Controller
     {
         $this->authorize('flights.show');
 
-        $timeline = Flight::orderBy('date', 'desc');
-        $paginator = $timeline->paginate(100)->onEachSide(2)->through(function () {
-            return [];
-        });
+        $timeline = Flight::orderBy('date', 'desc')->with('releaseChannel', 'releaseChannel.channel', 'releaseChannel.channel.platform');
+        $paginator = $timeline->paginate(100)->onEachSide(2);
 
         return Inertia::render('Admin/Flights/Index', [
             'can' => [
@@ -38,7 +35,7 @@ class FlightController extends Controller
             ],
             'timeline' => $timeline->paginate(100)->groupBy('date')->map(function ($items, $date) {
                 return [
-                    'date' => $items[0]->date,
+                    'date' => $date,
                     'flights' => $items->map(function ($flight) {
                         return [
                             'id' => $flight->id,
@@ -49,16 +46,18 @@ class FlightController extends Controller
                                 'color' => $flight->releaseChannel->channel->color
                             ],
                             'platform' => [
-                                'id' => $flight->platform->id,
-                                'icon' => $flight->platform->icon,
-                                'name' => $flight->platform->name,
-                                'position' => $flight->platform->position,
-                                'color' => $flight->platform->color
+                                'id' => $flight->releaseChannel->channel->platform->id,
+                                'icon' => $flight->releaseChannel->channel->platform->icon,
+                                'name' => $flight->releaseChannel->channel->platform->name,
+                                'position' => $flight->releaseChannel->channel->platform->position,
+                                'color' => $flight->releaseChannel->channel->platform->color
                             ]
                         ];
-                    })->groupBy(function($item, $key) {
+                    })->sortByDesc(function ($item) {
+                        return $item['version'];
+                    })->groupBy(function($item) {
                         return $item['platform']['id'];
-                    })->sortBy(function($item, $key) {
+                    })->sortBy(function($item) {
                         return $item[0]['platform']['position'];
                     })->values()->all()
                 ];
@@ -77,7 +76,7 @@ class FlightController extends Controller
     {
         $this->authorize('flights.create');
 
-        $releases = Release::orderBy('canonical_version')->orderBy('platform_id')->get();
+        $releases = Release::with('platform', 'releaseChannels', 'releaseChannels.channel')->orderBy('canonical_version')->orderBy('platform_id')->get();
 
         return Inertia::render('Admin/Flights/Create', [
             'releases' => $releases->map(function ($release) {
@@ -118,9 +117,7 @@ class FlightController extends Controller
         $this->authorize('flights.create');
 
         foreach ($request->releaseChannels as $releaseChannel) {
-            $release_channel = ReleaseChannel::find($releaseChannel);
-
-            $flight = Flight::create([
+            Flight::create([
                 'major' => request('major'),
                 'minor' => request('minor'),
                 'build' => request('build'),
@@ -128,37 +125,6 @@ class FlightController extends Controller
                 'date' => (new Carbon(request('date'))),
                 'release_channel_id' => $releaseChannel
             ]);
-
-            if ($request->tweet) {
-                if ($release_channel->channel->platform->tweetStream) {
-                    $tweet_stream = $release_channel->channel->platform->tweetStream;
-
-                    $twitter_stream = Twitter::usingCredentials($tweet_stream->access_token, $tweet_stream->access_token_secret, $tweet_stream->consumer_key, $tweet_stream->consumer_secret);
-
-                    $posted_tweet = $twitter_stream->postTweet([
-                        'status' => str_replace(
-                            array('%RELEASE%', '%VERSION%', '%CODENAME%', '%FLIGHT%', '%CHANNELS%', '%URL%'),
-                            array(
-                                $release_channel->release->name,
-                                $release_channel->release->version,
-                                $release_channel->release->codename,
-                                $flight->version,
-                                $release_channel->name,
-                                'https://changewindows.org' . route('front.platforms.releases', ['release' => $release_channel->release, 'platform' => $release_channel->release->platform], false)
-                            ),
-                            $release_channel->channel->platform->tweet_template
-                        )
-                    ]);
-
-                    if ($posted_tweet && $release_channel->channel->platform->retweetStream) {
-                        $retweet_stream = $release_channel->channel->platform->retweetStream;
-
-                        $twitter_re_stream = Twitter::usingCredentials($retweet_stream->access_token, $retweet_stream->access_token_secret, $retweet_stream->consumer_key, $retweet_stream->consumer_secret);
-
-                        $twitter_re_stream->postRt($posted_tweet->id);
-                    }
-                }
-            }
         }
 
         return Redirect::route('admin.flights')->with('status', [
@@ -187,6 +153,8 @@ class FlightController extends Controller
     public function edit(Flight $flight)
     {
         $this->authorize('flights.show');
+
+        $flight->load('releaseChannel', 'releaseChannel.channel', 'releaseChannel.channel.platform');
 
         return Inertia::render('Admin/Flights/Edit', [
             'can' => [

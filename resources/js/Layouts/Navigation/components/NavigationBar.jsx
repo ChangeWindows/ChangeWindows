@@ -1,9 +1,9 @@
 import React, { useMemo, useRef } from "react";
-import { InertiaLink, usePage } from "@inertiajs/inertia-react";
+import { Link, usePage } from "@inertiajs/react";
 
 import NavigationItem from "./NavigationItem";
 
-import AmaranthIcon, { aiEllipsis } from "@changewindows/amaranth";
+import AmaranthIcon, { aiEllipsis } from "@studio384/amaranth";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useWidth from "@/hooks/useWidth";
@@ -102,7 +102,7 @@ export default function NavigationBar({ main, overflow, socials }) {
 
           <ul className="dropdown-menu">
             {overflowItems.map((item, key) => {
-              const Component = item.type === "external" ? "a" : InertiaLink;
+              const Component = item.type === "external" ? "a" : Link;
               const mainProps =
                 item.type === "external" ? { target: "_blank" } : {};
 

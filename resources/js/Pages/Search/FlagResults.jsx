@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 
@@ -9,7 +9,7 @@ import clsx from "clsx";
 export default function Index({ results, query }) {
   return (
     <App>
-      <InertiaHead title="Search" />
+      <Head title="Search" />
 
       <div className="container">
         <div className="row g-1">

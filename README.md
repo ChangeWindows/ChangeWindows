@@ -70,3 +70,9 @@ If you discover a security vulnerability within ChangeWindows, please contact us
 
 ## License
 The ChangeWindows website is open-sourced software licensed under the [AGPL license v3](LICENSE). Note however that the content on our website isn't unless stated otherwise.
+
+## ChangeWidnows 7.9
+alter table `platforms` drop `tweet_template`;
+alter table `platforms` drop `tweet_stream_id`;
+alter table `platforms` drop `retweet_stream_id`;
+drop table if exists `tweet_streams`;

@@ -5,7 +5,7 @@ import clsx from "clsx";
 import AmaranthIcon, {
   aiFloppyDisk,
   aiSpinnerThird,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 export default function SaveButton({ className, loading, ...props }) {
   return (

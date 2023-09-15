@@ -29,6 +29,8 @@ class PlatformController extends Controller
      */
     public function show(Platform $platform)
     {
+        $platform->load('activeChannels', 'activeChannels.activeReleaseChannels', 'activeChannels.activeReleaseChannels.latestFlight', 'activeChannels.activeReleaseChannels.release', 'releases', 'releases.releaseChannels', 'releases.releaseChannels.channel');
+
         return Inertia::render('Platforms/Show', [
             'platforms' => Platform::where('tool', 0)->orderBy('position')->get()->map(function ($_platform) {
                 return [
@@ -42,26 +44,23 @@ class PlatformController extends Controller
             }),
             'platform' => $platform->only('name', 'description', 'icon', 'color', 'slug'),
             'channels' => $platform->activeChannels->map(function ($channel) {
-                $release_channels = $channel->releaseChannels
-                    ->sortByDesc(function ($release_channel, $key) {
+                $release_channel = $channel->activeReleaseChannels
+                    ->sortByDesc(function ($release_channel) {
                         return $release_channel->release->canonical_version;
-                    })->values()->all();
+                    })->values()->first();
 
                 return [
-                    'name' => $release_channels[0]->short_name,
+                    'name' => $release_channel->short_name,
                     'order' => $channel->order,
                     'color' => $channel->color,
-                    'flights' => collect($release_channels)->map(function ($_channel) {
-                        if ($_channel->latest) {
-                            return [
-                                'version' => $_channel->latest->flight,
-                                'date' => $_channel->latest->date,
-                                'release' => [
-                                    'slug' => $_channel->release->slug
-                                ]
-                            ];
-                        }
-                    })->where('version', '<>', null)->values()->all()
+                    'flight' => [
+                        'version' => $release_channel->latestFlight->flight,
+                        'date' => $release_channel->latestFlight->date
+                    ],
+                    'release' => [
+                        'id' => $release_channel->release->id,
+                        'slug' => $release_channel->release->slug,
+                    ]
                 ];
             })->sortBy('order')->values()->all(),
             'releases' => $platform->releases->sortByDesc('canonical_version')->map(function ($release) use ($platform) {

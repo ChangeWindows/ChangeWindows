@@ -6,7 +6,6 @@ use Inertia\Inertia;
 use App\Models\Platform;
 use App\Models\Release;
 use App\Models\Flight;
-use Illuminate\Database\Eloquent\Builder;
 
 class ReleaseController extends Controller
 {
@@ -17,7 +16,8 @@ class ReleaseController extends Controller
      */
     public function show(Platform $platform, Release $release)
     {
-        $timeline = Flight::orderBy('date', 'desc')
+        $release->load('releaseChannels', 'releaseChannels.channel', 'releaseChannels.latestFlight');
+        $timeline = Flight::with('releaseChannel.release')->orderBy('date', 'desc')
             ->join('release_channels as frs', function ($join) {
                 $join->on('frs.id', '=', 'flights.release_channel_id')
 
@@ -26,9 +26,7 @@ class ReleaseController extends Controller
                 });
             })
             ->where('frs.release_id', '=', $release->id);
-        $paginator = $timeline->paginate(75)->onEachSide(2)->through(function () {
-            return [];
-        });
+        $paginator = $timeline->paginate(75)->onEachSide(2);
 
         $prev = Release::where('platform_id', $release->platform->id)->where('canonical_version', '<', $release->canonical_version)->orderBy('canonical_version', 'desc')->first();
         $next = Release::where('platform_id', $release->platform->id)->where('canonical_version', '>', $release->canonical_version)->orderBy('canonical_version', 'asc')->first();
@@ -62,25 +60,25 @@ class ReleaseController extends Controller
                     'order' => $release_channel->channel->order,
                     'color' => $release_channel->channel->color,
                     'disabled' => $release_channel->supported ? false : true,
-                    'flight' => $release_channel->latest ? [
-                        'version' => $release_channel->latest->flight,
-                        'date' => $release_channel->latest->date
+                    'flight' => $release_channel->latestFlight ? [
+                        'version' => $release_channel->latestFlight->flight,
+                        'date' => $release_channel->latestFlight->date
                     ] : []
                 ];
             })->sortBy('order')->values()->all(),
-            'timeline' => $timeline->paginate(75)->sortByDesc('date')->groupBy('date')->map(function ($items, $date) {
+            'timeline' => $timeline->paginate(75)->sortByDesc('date')->groupBy('date')->map(function ($items, $date) use ($platform, $release) {
                 return [
-                    'date' => $items[0]->date,
+                    'date' => $date,
                     'flights' => $items->groupBy(function($item) {
                         return $item->flight.'-'.$item->platform->position;
-                    })->map(function ($flights) {
+                    })->map(function ($flights) use ($platform, $release) {
                         $_cur = $flights->first();
                         return [
                             'id' => $_cur->id,
                             'flight' => $_cur->flight,
                             'date' => $_cur->date,
-                            'version' => $_cur->releaseChannel->release->version,
-                            'cversion' => $_cur->releaseChannel->release->canonical_version,
+                            'version' => $release->version,
+                            'cversion' => $release->canonical_version,
                             'release_channel' => $flights->map(function ($channels) {
                                 return [
                                     'order' => $channels->releaseChannel->channel->order,
@@ -89,11 +87,11 @@ class ReleaseController extends Controller
                                 ];
                             })->sortBy('order')->values()->all(),
                             'platform' => [
-                                'order' => $_cur->platform->order,
-                                'icon' => $_cur->platform->icon,
-                                'name' => $_cur->platform->name,
-                                'tool' => $_cur->platform->tool,
-                                'color' => $_cur->platform->color
+                                'order' => $platform->order,
+                                'icon' => $platform->icon,
+                                'name' => $platform->name,
+                                'tool' => $platform->tool,
+                                'color' => $platform->color
                             ]
                         ];
                     })->sortByDesc(function ($item, $key) {

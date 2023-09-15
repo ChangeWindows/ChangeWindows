@@ -1,28 +1,27 @@
 import React from "react";
-import { Inertia } from "@inertiajs/inertia";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
 import AmaranthIcon, {
   aiArrowRightFromBracket,
-  aiPaperPlaneTop,
-} from "@changewindows/amaranth";
+  aiPaperPlane,
+} from "@studio384/amaranth";
 
 export default function VerifyEmail({ app, session, status }) {
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post("/email/verification-notification", form);
+    router.post("/email/verification-notification", form);
   }
 
   function handleLogout(event) {
     event.preventDefault();
-    Inertia.post("/logout", form);
+    router.post("/logout", form);
   }
 
   return (
     <Auth>
-      <InertiaHead title="Verify Email" />
+      <Head title="Verify Email" />
 
       <form onSubmit={handleSubmit} className="row g-3">
         <div className="col-12">
@@ -57,7 +56,7 @@ export default function VerifyEmail({ app, session, status }) {
         )}
         <div className="col-12 d-flex flex-column">
           <button className="btn btn-primary btn-sm py-2 mb-2" type="submit">
-            <AmaranthIcon icon={aiPaperPlaneTop} /> Resend verification email
+            <AmaranthIcon icon={aiPaperPlane} /> Resend verification email
           </button>
           <button
             className="btn btn-primary btn-sm py-2 mb-2"

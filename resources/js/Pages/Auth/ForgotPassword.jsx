@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import { Inertia } from "@inertiajs/inertia";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
-import AmaranthIcon, { aiPaperPlaneTop } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPaperPlane } from "@studio384/amaranth";
 
 export default function ForgotPassword({ app, status }) {
   const [form, setForm] = useState({ email: "" });
 
   function handleSubmit(event) {
     event.preventDefault();
-    Inertia.post("/forgot-password", form);
+    router.post("/forgot-password", form);
   }
 
   return (
     <Auth>
-      <InertiaHead title="Forgot Password" />
+      <Head title="Forgot Password" />
 
       <form onSubmit={handleSubmit} className="row g-3">
         <div className="col-12">
@@ -54,7 +53,7 @@ export default function ForgotPassword({ app, status }) {
         </div>
         <div className="col-12 d-flex flex-column">
           <button className="btn btn-primary btn-sm py-2" type="submit">
-            <AmaranthIcon icon={aiPaperPlaneTop} /> Send password reset link
+            <AmaranthIcon icon={aiPaperPlane} /> Send password reset link
           </button>
         </div>
       </form>

@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "@inertiajs/inertia-react";
+import { useForm } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
@@ -9,7 +9,7 @@ import TextField from "@/Components/UI/Forms/TextField";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
 import Fieldset from "@/Components/UI/Forms/Fieldset";
 
-import AmaranthIcon, { aiTrashCan } from "@changewindows/amaranth";
+import AmaranthIcon, { aiTrashCan } from "@studio384/amaranth";
 
 export default function Edit({ can, user, roles, status }) {
   const {

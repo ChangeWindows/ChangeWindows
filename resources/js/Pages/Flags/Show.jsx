@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { InertiaHead } from "@inertiajs/inertia-react";
-import { useForm } from "@inertiajs/inertia-react";
+import { Head, useForm } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 import FlagStatus from "@/Components/_FlagStatus";
@@ -14,7 +13,7 @@ import AmaranthIcon, {
   aiPen,
   aiSpinnerThird,
   aiXmark,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 import clsx from "clsx";
 
@@ -50,7 +49,7 @@ export default function Show({ flag, flagContent, status }) {
 
   return (
     <App>
-      <InertiaHead title="Flags" />
+      <Head title="Flags" />
       <NaviBar
         back="/flags"
         actions={

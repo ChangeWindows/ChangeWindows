@@ -1,9 +1,9 @@
 import React from 'react';
-import { usePage } from '@inertiajs/inertia-react'
+import { usePage } from '@inertiajs/react'
 
 import NavigationBar from './components/NavigationBar';
 
-import { aiBox, aiBranchUp, aiDevices, aiFlag, aiLock, aiPlane, aiRocket, aiSoftwareBox, aiTwitter, aiUser, aiUserLock } from '@changewindows/amaranth';
+import { aiDevices, aiFlag, aiLock, aiPlane, aiBoxOpenFull, aiPerson, aiPersonLock } from '@studio384/amaranth';
 
 export default function AdminNavigation() {
   const { navCan } = usePage().props;
@@ -13,14 +13,12 @@ export default function AdminNavigation() {
       main={[
         { type: 'link', url: '/admin/flights', icon: aiPlane, title: 'Flights', permission: navCan.flights.show },
         { type: 'link', url: '/admin/flags', icon: aiFlag, title: 'Flags', permission: navCan.flags.show },
-        { type: 'link', url: '/admin/releases', icon: aiSoftwareBox, title: 'Releases', permission: navCan.flights.show },
+        { type: 'link', url: '/admin/releases', icon: aiBoxOpenFull, title: 'Releases', permission: navCan.flights.show },
         { type: 'link', url: '/admin/platforms', icon: aiDevices, title: 'Platforms', permission: navCan.platforms.show }
       ]}
       overflow={[
-        { type: 'link', url: '/admin/tweet_streams', icon: aiTwitter, title: 'Twitter', permission: navCan.tweetStreams.show },
-        { type: 'divider' },
-        { type: 'link', url: '/admin/users', icon: aiUser, title: 'Users', permission: navCan.users.show },
-        { type: 'link', url: '/admin/roles', icon: aiUserLock, title: 'Roles', permission: navCan.roles.show },
+        { type: 'link', url: '/admin/users', icon: aiPerson, title: 'Users', permission: navCan.users.show },
+        { type: 'link', url: '/admin/roles', icon: aiPersonLock, title: 'Roles', permission: navCan.roles.show },
         { type: 'link', url: '/admin/permissions', icon: aiLock, title: 'Permissions', permission: navCan.permissions.show }
       ]}
       socials={[]}

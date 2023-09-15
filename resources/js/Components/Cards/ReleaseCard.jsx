@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Link } from '@inertiajs/react';
 
 import LifeCycle from "@/Pages/Platforms/_LifeCycle";
 import clsx from "clsx";
@@ -14,7 +14,7 @@ export default function ReleaseCard({
   url,
   dates
 }) {
-  const Component = useMemo(() => (url ? InertiaLink : "div"), ["url"]);
+  const Component = useMemo(() => (url ? Link : "div"), ["url"]);
   const mainProps = useMemo(() => ({ href: url }), ["url"]);
 
   return (

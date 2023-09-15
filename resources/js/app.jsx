@@ -1,9 +1,8 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { InertiaProgress } from "@inertiajs/progress";
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 
-import { createInertiaApp } from "@inertiajs/inertia-react";
+import { createInertiaApp } from '@inertiajs/react'
 
 import 'bootstrap';
 
@@ -14,10 +13,9 @@ createInertiaApp({
     const root = createRoot(el);
     root.render(<App {...props} />);
   },
-});
-
-InertiaProgress.init({
-  color: "#0066ff",
+  progress: {
+    color: "#0066ff",
+  }
 });
 
 function appHeight() {

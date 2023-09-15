@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { InertiaLink, useForm } from "@inertiajs/inertia-react";
+import { Link, useForm } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
@@ -10,7 +10,7 @@ import AmaranthIcon, {
   aiArrowUp,
   aiClockRotateLeft,
   aiFlag,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 import clsx from "clsx";
 import Suggestion from "./_Suggestion";
@@ -42,16 +42,16 @@ export default function Index({ can, status, errors, suggestion }) {
           <div className="container">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
-                <InertiaLink className="nav-link active" href="/admin/flags">
+                <Link className="nav-link active" href="/admin/flags">
                   <AmaranthIcon icon={aiFlag} />{" "}
                   <span className="d-none d-sm-inline-block ms-1">Manage</span>
-                </InertiaLink>
+                </Link>
               </li>
               <li className="nav-item">
-                <InertiaLink className="nav-link" href="/admin/flags/history">
+                <Link className="nav-link" href="/admin/flags/history">
                   <AmaranthIcon icon={aiClockRotateLeft} />{" "}
                   <span className="d-none d-sm-inline-block ms-1">History</span>
-                </InertiaLink>
+                </Link>
               </li>
             </ul>
           </div>

@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 import Channel from "@/Components/Cards/Channel";
@@ -36,7 +36,7 @@ export default function Show({ platform, platforms, channel_order, releases }) {
 
   return (
     <App>
-      <InertiaHead title={`${platform.name} channels`} />
+      <Head title={`${platform.name} channels`} />
 
       <PlatformNavigation
         all="front.channels"

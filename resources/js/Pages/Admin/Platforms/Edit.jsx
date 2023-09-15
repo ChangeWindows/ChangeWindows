@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink, useForm } from "@inertiajs/inertia-react";
+import { Link, useForm } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
@@ -7,17 +7,15 @@ import Fieldset from "@/Components/UI/Forms/Fieldset";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import SaveButton from "@/Components/UI/Forms/SaveButton";
-import Select from "@/Components/UI/Forms/Select";
 import Status from "@/Components/Status";
 import TextField from "@/Components/UI/Forms/TextField";
 
-import AmaranthIcon, { aiPlus, aiTrashCan } from "@changewindows/amaranth";
+import AmaranthIcon, { aiPlus, aiTrashCan } from "@studio384/amaranth";
 
 export default function Edit({
   can,
   platform,
   channels,
-  tweet_streams,
   status,
 }) {
   const {
@@ -145,53 +143,6 @@ export default function Edit({
               />
             </div>
           </Fieldset>
-          <Fieldset
-            title="Tweet Stream"
-            description="Keeping people up-to-date with Twitter."
-            disabled={!can.platforms.edit}
-          >
-            <div className="col-12 col-lg-6">
-              <Select
-                id="tweet_stream_id"
-                label="Tweet Stream"
-                value={data.tweet_stream_id}
-                selects={tweet_streams}
-                selectLabel={(x) => x.name}
-                selectValue={(x) => x.id}
-                errors={errors.tweet_stream_id}
-                onChange={setData}
-              />
-            </div>
-            <div className="col-12 col-lg-6">
-              <Select
-                id="retweet_stream_id"
-                label="Retweet Stream"
-                value={data.retweet_stream_id}
-                selects={tweet_streams}
-                selectLabel={(x) => x.name}
-                selectValue={(x) => x.id}
-                errors={errors.retweet_stream_id}
-                onChange={setData}
-              />
-            </div>
-            <div className="col-12">
-              <TextField
-                type="textarea"
-                label="Tweet Template"
-                id="tweet_template"
-                value={data.tweet_template}
-                errors={errors.tweet_template}
-                onChange={setData}
-                helper={
-                  <>
-                    Include <code>%RELEASE%</code>, <code>%VERSION%</code>,{" "}
-                    <code>%CODENAME%</code>, <code>%FLIGHT%</code>,{" "}
-                    <code>%CHANNELS%</code>, and <code>%URL%</code>.
-                  </>
-                }
-              />
-            </div>
-          </Fieldset>
         </div>
       </form>
       <div className="container my-3">
@@ -208,7 +159,7 @@ export default function Edit({
 
             return (
               <div className="col-12 col-sm-6 col-xl-4" key={channel.id}>
-                <InertiaLink
+                <Link
                   href={route("admin.channels.edit", channel)}
                   className="card border-0 shadow-sm h-100"
                 >
@@ -229,13 +180,13 @@ export default function Edit({
                     </div>
                     <div className="flex-grox-1" />
                   </div>
-                </InertiaLink>
+                </Link>
               </div>
             );
           })}
           {can.channels.create && (
             <div className="col-12 col-sm-6 col-xl-4">
-              <InertiaLink
+              <Link
                 href={route("admin.channels.create", {
                   platform: platform.id,
                 })}
@@ -246,7 +197,7 @@ export default function Edit({
                     <AmaranthIcon icon={aiPlus} /> New channel
                   </h3>
                 </div>
-              </InertiaLink>
+              </Link>
             </div>
           )}
         </Fieldset>

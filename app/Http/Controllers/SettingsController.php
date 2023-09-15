@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+
+use App\Models\User;
 
 class SettingsController extends Controller
 {
@@ -14,6 +17,8 @@ class SettingsController extends Controller
      */
     public function index()
     {
+        $user = User::find(Auth::user()?->id);
+
         $patreon_api = new \Patreon\API(env('PATREON_API_KEY'));
 
         $campaign_id = 1028298;
@@ -50,6 +55,12 @@ class SettingsController extends Controller
         }
 
         return Inertia::render('Settings/Index', [
+            'status' => session('status'),
+            'user' => $user ? [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email
+            ] : null,
             'patrons' => $patrons
         ]);
     }

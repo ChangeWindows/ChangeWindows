@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
-import { useForm } from "@inertiajs/inertia-react";
+import { useForm } from "@inertiajs/react";
 
 import Admin from "@/Layouts/Admin";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
@@ -20,8 +20,7 @@ export default function Create({ releases }) {
     build: "",
     delta: "",
     releaseChannels: [],
-    date: format(new Date(), "yyyy-MM-dd"),
-    tweet: true,
+    date: format(new Date(), "yyyy-MM-dd")
   });
 
   const eligibleReleases = useMemo(() => {
@@ -178,20 +177,6 @@ export default function Create({ releases }) {
                     : data.date
                 }
                 errors={errors.date}
-                onChange={setData}
-              />
-            </div>
-          </Fieldset>
-          <Fieldset
-            title="Socials"
-            description="Socializing, but safe of course, it's still a pandemic..."
-          >
-            <div className="col-12">
-              <Checkbox
-                id="tweet"
-                label="Publish to Twitter"
-                helper="Tweet to the platform-connected Twitter handles."
-                checked={data.tweet}
                 onChange={setData}
               />
             </div>

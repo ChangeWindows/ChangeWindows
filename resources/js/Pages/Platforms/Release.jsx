@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink, InertiaHead } from "@inertiajs/inertia-react";
+import { Link as ILink, Head } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 import Channel from "@/Components/Cards/Channel";
@@ -15,7 +15,7 @@ import AmaranthIcon, {
   aiArrowLeft,
   aiNotes,
   aiBarsStaggered,
-} from "@changewindows/amaranth";
+} from "@studio384/amaranth";
 
 import { parseISO } from "date-fns";
 
@@ -24,6 +24,10 @@ import Typography from "@tiptap/extension-typography";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import StarterKit from "@tiptap/starter-kit";
+import { Table } from "@tiptap/extension-table";
+import { TableRow } from "@tiptap/extension-table-row";
+import { TableHeader } from "@tiptap/extension-table-header";
+import { TableCell } from "@tiptap/extension-table-cell";
 import { Nav, Tab } from "react-bootstrap";
 
 export default function Release({
@@ -36,28 +40,54 @@ export default function Release({
 }) {
   const editor = useEditor({
     editable: false,
-    extensions: [StarterKit, Typography, Underline, Link],
+    extensions: [
+      StarterKit,
+      Typography,
+      Underline,
+      Link,
+      TableRow,
+      TableHeader,
+      TableCell,
+      Table.configure({
+        HTMLAttributes: {
+          class: "table table-bordered table-sm",
+        },
+      }),
+    ],
     content: release.changelog,
   });
   const editorTwo = useEditor({
     editable: false,
-    extensions: [StarterKit, Typography, Underline, Link],
+    extensions: [
+      StarterKit,
+      Typography,
+      Underline,
+      Link,
+      TableRow,
+      TableHeader,
+      TableCell,
+      Table.configure({
+        HTMLAttributes: {
+          class: "table table-bordered table-sm",
+        },
+      }),
+    ],
     content: release.changelog,
   });
 
   return (
     <App>
-      <InertiaHead title={release.name} />
+      <Head title={release.name} />
 
       <Tab.Container defaultActiveKey="timeline">
         <nav className="navbar navbar-expand-xl navbar-light sticky-top">
           <div className="container">
-            <InertiaLink
+            <ILink
               href={route("front.platforms.show", platform)}
               className="btn btn-transparent btn-sm me-2"
             >
               <AmaranthIcon icon={aiArrowLeft} />
-            </InertiaLink>
+            </ILink>
             <Nav className="d-flex d-xl-none">
               <Nav.Item>
                 <Nav.Link eventKey="timeline">
@@ -72,7 +102,7 @@ export default function Release({
             </Nav>
             <div className="flex-grow-1" />
             {quickNav.prev && (
-              <InertiaLink
+              <ILink
                 href={route("front.platforms.releases", [
                   platform,
                   quickNav.prev,
@@ -84,10 +114,10 @@ export default function Release({
                   {" "}
                   {quickNav.prev.version}
                 </span>
-              </InertiaLink>
+              </ILink>
             )}
             {quickNav.next && (
-              <InertiaLink
+              <ILink
                 href={route("front.platforms.releases", [
                   platform,
                   quickNav.next,
@@ -98,7 +128,7 @@ export default function Release({
                   {quickNav.next.version}{" "}
                 </span>
                 <AmaranthIcon icon={aiAngleRight} />
-              </InertiaLink>
+              </ILink>
             )}
           </div>
         </nav>

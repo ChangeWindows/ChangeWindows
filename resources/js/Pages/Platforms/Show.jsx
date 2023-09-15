@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 import Channel from "@/Components/Cards/Channel";
@@ -10,12 +10,7 @@ import PlatformNavigation from "@/Components/PlatformNavigation";
 
 import { parseISO } from "date-fns";
 
-export default function Show({
-  platforms,
-  platform,
-  channels,
-  releases,
-}) {
+export default function Show({ platforms, platform, channels, releases }) {
   const [currentReleases, legacyReleases] = useMemo(() => {
     const currentReleases = releases.filter(
       (release) => release.channels.length > 0
@@ -29,7 +24,7 @@ export default function Show({
 
   return (
     <App>
-      <InertiaHead title={platform.name} />
+      <Head title={platform.name} />
 
       <PlatformNavigation
         page="Platforms"
@@ -54,21 +49,13 @@ export default function Show({
                 {channels.map((channel, key) => (
                   <Channel
                     key={key}
-                    channel={{ color: channel.color, name: channel.name }}
-                    build={
-                      channel.flights.length > 0
-                        ? channel.flights[0].version
-                        : ""
-                    }
-                    date={
-                      channel.flights.length > 0
-                        ? parseISO(channel.flights[0].date)
-                        : ""
-                    }
+                    channel={{ color: channel.color, name: channel.name ?? 'No data' }}
+                    build={channel.flight?.version ?? "No data"}
+                    date={parseISO(channel.flight?.date) ?? "No data"}
                     url={
-                      channel.flights.length > 0
+                      channel.release
                         ? route("front.platforms.releases", {
-                            release: channel.flights[0].release,
+                            release: channel.release,
                             platform,
                           })
                         : undefined
