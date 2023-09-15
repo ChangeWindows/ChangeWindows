@@ -307,48 +307,48 @@ function MenuBar({ editor }) {
           className="dropdown-menu dropdown-menu-end"
           aria-labelledby="tableTools"
         >
-          <DropdownItem onClick={() => editor.commands.addColumnBefore()}>
+          <button className="dropdown-item" type="button" onClick={() => editor.commands.addColumnBefore()}>
             <AmaranthIcon icon={aiTableColumnInsertLeft} sx={{ mr: 1 }} /> Add
             column before
-          </DropdownItem>
-          <DropdownItem onClick={() => editor.commands.addColumnAfter()}>
+          </button>
+          <button className="dropdown-item" type="button" onClick={() => editor.commands.addColumnAfter()}>
             <AmaranthIcon icon={aiTableColumnInsertRight} sx={{ mr: 1 }} /> Add
             column after
-          </DropdownItem>
-          <DropdownItem onClick={() => editor.commands.deleteColumn()}>
+          </button>
+          <button className="dropdown-item" type="button" onClick={() => editor.commands.deleteColumn()}>
             <AmaranthIcon icon={aiTableColumnMin} sx={{ mr: 1 }} /> Delete
             column
-          </DropdownItem>
-          <DropdownItem onClick={() => editor.commands.addRowBefore()}>
+          </button>
+          <button className="dropdown-item" type="button" onClick={() => editor.commands.addRowBefore()}>
             <AmaranthIcon icon={aiTableRowInsertTop} sx={{ mr: 1 }} /> Add row
             before
-          </DropdownItem>
-          <DropdownItem onClick={() => editor.commands.addRowAfter()}>
+          </button>
+          <button className="dropdown-item" type="button" onClick={() => editor.commands.addRowAfter()}>
             <AmaranthIcon icon={aiTableRowInsertBottom} sx={{ mr: 1 }} /> Add
             row before
-          </DropdownItem>
-          <DropdownItem onClick={() => editor.commands.deleteRow()}>
+          </button>
+          <button className="dropdown-item" type="button" onClick={() => editor.commands.deleteRow()}>
             <AmaranthIcon icon={aiTableRowMin} sx={{ mr: 1 }} /> Add row before
-          </DropdownItem>
-          <DropdownItem onClick={() => editor.commands.deleteTable()}>
+          </button>
+          <button className="dropdown-item" type="button" onClick={() => editor.commands.deleteTable()}>
             <AmaranthIcon icon={aiTableMin} sx={{ mr: 1 }} /> Delete table
-          </DropdownItem>
-          <DropdownItem onClick={() => editor.commands.mergeOrSplit()}>
+          </button>
+          <button className="dropdown-item" type="button" onClick={() => editor.commands.mergeOrSplit()}>
             <AmaranthIcon icon={aiTableCellMerge} sx={{ mr: 1 }} /> Merge/split
             cell
-          </DropdownItem>
-          <DropdownItem onClick={() => editor.commands.toggleHeaderColumn()}>
+          </button>
+          <button className="dropdown-item" type="button" onClick={() => editor.commands.toggleHeaderColumn()}>
             <AmaranthIcon icon={aiTableHeaderColumn} sx={{ mr: 1 }} /> Make
             header column
-          </DropdownItem>
-          <DropdownItem onClick={() => editor.commands.toggleHeaderRow()}>
+          </button>
+          <button className="dropdown-item" type="button" onClick={() => editor.commands.toggleHeaderRow()}>
             <AmaranthIcon icon={aiTableHeaderRow} sx={{ mr: 1 }} /> Make header
             row
-          </DropdownItem>
-          <DropdownItem onClick={() => editor.commands.toggleHeaderCell()}>
+          </button>
+          <button className="dropdown-item" type="button" onClick={() => editor.commands.toggleHeaderCell()}>
             <AmaranthIcon icon={aiTableHeaderCell} sx={{ mr: 1 }} /> Make header
             cell
-          </DropdownItem>
+          </button>
         </ul>
       </div>
       <div className="btn-group">

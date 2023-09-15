@@ -1,0 +1,43 @@
+// Features
+$enable-negative-margins: true;
+$enable-caret: false;
+$btn-white-space: nowrap;
+
+// Text
+$headings-font-weight: 700;
+$form-text-font-size: .8rem;
+
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-base: "Segoe UI Variable Text", $font-family-sans-serif;
+$headings-font-family: "Segoe UI Variable Display", $font-family-sans-serif;
+
+// Body
+$body-bg: #fff;
+
+// Colors
+$min-contrast-ratio: 4;
+
+$accent: #0066ff;
+$primary: $accent;
+$blue: #0f6dec;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #e52262;
+$red: #e74018;
+$orange: #fb8009;
+$yellow: #ffc000;
+$green: #97c800;
+$teal: #10b08f;
+$cyan: #0098df;
+
+$border-color: #d9d9d9;
+
+// Shadows
+$box-shadow-sm: 0 0 .2px rgba(0,0,0,.02), 0 0 .4px rgba(0,0,0,.028), 0 0 .8px rgba(0,0,0,.035), 0 0 1.3px rgba(0,0,0,.042), 0 0 2.5px rgba(0,0,0,.05), 0 0 6px rgba(0,0,0,.07);
+$box-shadow: 0 0 .3px rgba(0,0,0,.02), 0 0 .8px rgba(0,0,0,.028), 0 0 1.5px rgba(0,0,0,.035), 0 0 2.7px rgba(0,0,0,.042), 0 0 5px rgba(0,0,0,.05), 0 0 12px rgba(0,0,0,.07);
+$box-shadow-lg: 0 0 .7px rgba(0,0,0,.02), 0 0 1.6px rgba(0,0,0,.028), 0 0 3px rgba(0,0,0,.035), 0 0 5.4px rgba(0,0,0,.042), 0 0 10px rgba(0,0,0,.05), 0 0 24px rgba(0,0,0,.07);
+
+$box-shadow-sm-success: 0 0 .2px rgba(darken($green, 25), .02), 0 0 .4px rgba(darken($green, 25), .028), 0 0 .8px rgba(darken($green, 25), .035), 0 0 1.3px rgba(darken($green, 25), .042), 0 0 2.5px rgba(darken($green, 25), .05), 0 0 6px rgba(darken($green, 25), .07);
+$box-shadow-sm-warning: 0 0 .2px rgba(darken($green, 25), .02), 0 0 .4px rgba(darken($yellow, 25), .028), 0 0 .8px rgba(darken($yellow, 25), .035), 0 0 1.3px rgba(darken($yellow, 25), .042), 0 0 2.5px rgba(darken($yellow, 25), .05), 0 0 6px rgba(darken($yellow, 25), .07);
+$box-shadow-sm-danger: 0 0 .2px rgba(darken($red, 25), .02), 0 0 .4px rgba(darken($red, 25), .028), 0 0 .8px rgba(darken($red, 25), .035), 0 0 1.3px rgba(darken($red, 25), .042), 0 0 2.5px rgba(darken($red, 25), .05), 0 0 6px rgba(darken($red, 25), .07);
+$box-shadow-sm-info: 0 0 .2px rgba(darken($cyan, 25), .02), 0 0 .4px rgba(darken($cyan, 25), .028), 0 0 .8px rgba(darken($cyan, 25), .035), 0 0 1.3px rgba(darken($cyan, 25), .042), 0 0 2.5px rgba(darken($cyan, 25), .05), 0 0 6px rgba(darken($cyan, 25), .07);
