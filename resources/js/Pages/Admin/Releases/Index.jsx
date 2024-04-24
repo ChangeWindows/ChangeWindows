@@ -5,7 +5,7 @@ import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiPlus } from "@studio384/amaranth";
+import Amicon, { aiPlus } from "@studio384/amaranth";
 import PlatformCard from "./_PlatformCard";
 
 export default function Index({ can, releases, status }) {
@@ -90,7 +90,7 @@ export default function Index({ can, releases, status }) {
               href={route("admin.releases.create")}
               className="btn btn-primary btn-sm"
             >
-              <AmaranthIcon icon={aiPlus} /> New
+              <Amicon icon={aiPlus} /> New
             </Link>
           )
         }

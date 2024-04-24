@@ -10,7 +10,7 @@ import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Status from "@/Components/Status";
 import TextField from "@/Components/UI/Forms/TextField";
 
-import AmaranthIcon, { aiPlus, aiTrashCan } from "@studio384/amaranth";
+import Amicon, { aiPlus, aiTrashCan } from "@studio384/amaranth";
 
 export default function Edit({
   can,
@@ -194,7 +194,7 @@ export default function Edit({
               >
                 <div className="card-body py-3">
                   <h3 className="h5 fw-normal m-0">
-                    <AmaranthIcon icon={aiPlus} /> New channel
+                    <Amicon icon={aiPlus} /> New channel
                   </h3>
                 </div>
               </Link>
@@ -215,7 +215,7 @@ export default function Edit({
                 that platform. Are you sure?
               </p>
               <button className="btn btn-danger btn-sm" type="submit">
-                <AmaranthIcon icon={aiTrashCan} /> Delete
+                <Amicon icon={aiTrashCan} /> Delete
               </button>
             </div>
           </Fieldset>

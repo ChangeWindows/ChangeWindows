@@ -8,7 +8,7 @@ import Status from "@/Components/Status";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import AmaranthIcon, {
+import Amicon, {
   aiFloppyDisk,
   aiPen,
   aiSpinnerThird,
@@ -54,7 +54,7 @@ export default function Show({ flag, flagContent, status }) {
         back="/flags"
         actions={
           <Button variant="primary" size="sm" onClick={handleShow}>
-            <AmaranthIcon icon={aiPen} />{" "}
+            <Amicon icon={aiPen} />{" "}
             {flagContent ? "Edit your suggestion" : "Submit a suggestion"}
           </Button>
         }
@@ -165,10 +165,10 @@ export default function Show({ flag, flagContent, status }) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" size="sm" onClick={handleClose}>
-            <AmaranthIcon icon={aiXmark} /> Cancel
+            <Amicon icon={aiXmark} /> Cancel
           </Button>
           <Button variant="primary" size="sm" onClick={submit}>
-            <AmaranthIcon
+            <Amicon
               icon={processing ? aiSpinnerThird : aiFloppyDisk}
               spin={processing}
             />{" "}

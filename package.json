@@ -12,7 +12,7 @@
         "@emotion/styled": "11.11.5",
         "@inertiajs/react": "1.0.16",
         "@mui/system": "5.15.15",
-        "@studio384/amaranth": "1.0.0-alpha.7",
+        "@studio384/amaranth": "1.0.0-alpha.8",
         "@tiptap/extension-link": "2.3.0",
         "@tiptap/extension-table": "2.3.0",
         "@tiptap/extension-table-cell": "2.3.0",

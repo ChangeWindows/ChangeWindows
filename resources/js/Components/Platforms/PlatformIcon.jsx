@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import clsx from "clsx";
 
-import AmaranthIcon, {
+import Amicon, {
   aiAzure,
   aiMicrochip,
   aiTerminal,
@@ -54,7 +54,7 @@ export default function PlatformIcon({
   }, []);
 
   return (
-    <AmaranthIcon
+    <Amicon
       icon={icon}
       className={clsx(className)}
       style={{ color: color ? platform.color : "inherit" }}

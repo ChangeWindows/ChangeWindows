@@ -6,7 +6,7 @@ import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiPlus } from "@studio384/amaranth";
+import Amicon, { aiPlus } from "@studio384/amaranth";
 
 export default function Index({ can, platforms, status }) {
   return (
@@ -17,7 +17,7 @@ export default function Index({ can, platforms, status }) {
             href={route("admin.platforms.create")}
             className="btn btn-primary btn-sm"
           >
-            <AmaranthIcon icon={aiPlus} /> New
+            <Amicon icon={aiPlus} /> New
           </Link>
         }
       >

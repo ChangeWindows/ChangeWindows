@@ -6,7 +6,7 @@ import NavItem from './Navbar/NavItem';
 
 import PlatformIcon from './Platforms/PlatformIcon';
 
-import AmaranthIcon, { aiAngleDown, aiEllipsisH } from '@studio384/amaranth';
+import Amicon, { aiAngleDown, aiEllipsisH } from '@studio384/amaranth';
 
 import useMediaQuery from '../hooks/useMediaQuery';
 import clsx from 'clsx';
@@ -48,8 +48,8 @@ export default function Navigation({ home = false, platforms, routeName, all = f
           <ul className="navbar-nav">
             <li className="nav-item dropdown">
               <a className={clsx('nav-link dropdown-toggle', { 'active': isActiveOverflow })} href="#" id="legacyPlatforms" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span className="d-none d-sm-inline-block"><AmaranthIcon icon={aiAngleDown} /> Legacy</span>
-                <span className="d-inline-block d-sm-none"><AmaranthIcon icon={aiEllipsisH} /></span>
+                <span className="d-none d-sm-inline-block"><Amicon icon={aiAngleDown} /> Legacy</span>
+                <span className="d-inline-block d-sm-none"><Amicon icon={aiEllipsisH} /></span>
               </a>
               <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="legacyPlatforms">
                 {!matchesSmUp && toolPlatforms.length > 0 &&

@@ -7,7 +7,7 @@ import Pagination from "@/Components/Pagination";
 import Flag from "@/Components/Flag";
 import FlagTimeline from "@/Components/_FlagsTimeline";
 
-import AmaranthIcon, {
+import Amicon, {
   aiBarsStaggered,
   aiCircleInfo,
   aiStar,
@@ -23,19 +23,19 @@ export default function Index({ flagStatus, pagination }) {
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
               <Link className="nav-link active" href="/flags">
-                <AmaranthIcon icon={aiBarsStaggered} />{" "}
+                <Amicon icon={aiBarsStaggered} />{" "}
                 <span className="d-none d-sm-inline-block ms-1">Timeline</span>
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" href="/flags/active">
-                <AmaranthIcon icon={aiStar} />{" "}
+                <Amicon icon={aiStar} />{" "}
                 <span className="d-none d-sm-inline-block ms-1">Active</span>
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" href="/flags/removed">
-                <AmaranthIcon icon={aiTrashCan} />{" "}
+                <Amicon icon={aiTrashCan} />{" "}
                 <span className="d-none d-sm-inline-block ms-1">Removed</span>
               </Link>
             </li>
@@ -43,7 +43,7 @@ export default function Index({ flagStatus, pagination }) {
           <ul className="navbar-nav d-flex">
             <li className="nav-item">
               <Link className="nav-link" href="/flags/about">
-                <AmaranthIcon icon={aiCircleInfo} />{" "}
+                <Amicon icon={aiCircleInfo} />{" "}
                 <span className="d-none d-md-inline-block ms-1">About</span>
               </Link>
             </li>

@@ -8,7 +8,7 @@ import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Status from "@/Components/Status";
 import TextField from "@/Components/UI/Forms/TextField";
 
-import AmaranthIcon, { aiTrashCan } from "@studio384/amaranth";
+import Amicon, { aiTrashCan } from "@studio384/amaranth";
 
 export default function Edit({ can, permission, status }) {
   const {
@@ -72,7 +72,7 @@ export default function Edit({ can, permission, status }) {
                 with that permission. Are you sure?
               </p>
               <button className="btn btn-danger btn-sm" type="submit">
-                <AmaranthIcon icon={aiTrashCan} /> Delete
+                <Amicon icon={aiTrashCan} /> Delete
               </button>
             </div>
           </Fieldset>

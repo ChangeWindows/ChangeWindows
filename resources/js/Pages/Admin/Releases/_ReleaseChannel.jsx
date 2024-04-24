@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useForm } from "@inertiajs/react";
 
-import AmaranthIcon, {
+import Amicon, {
   aiCheck,
   aiSpinnerThird,
   aiXmark,
@@ -47,7 +47,7 @@ export default function ReleaseChannel({ can, releaseChannel }) {
               disabled={!can.releases.edit}
               onClick={toggleSupported}
             >
-              <AmaranthIcon
+              <Amicon
                 icon={
                   processing
                     ? aiSpinnerThird

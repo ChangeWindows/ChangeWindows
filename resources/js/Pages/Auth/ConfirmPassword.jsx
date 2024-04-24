@@ -3,7 +3,7 @@ import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
-import AmaranthIcon, { aiCheck } from "@studio384/amaranth";
+import Amicon, { aiCheck } from "@studio384/amaranth";
 
 export default function ConfirmPassword({ app, status }) {
   const [form, setForm] = useState({ password: "" });
@@ -52,7 +52,7 @@ export default function ConfirmPassword({ app, status }) {
         </div>
         <div className="col-12 d-flex flex-column">
           <button className="btn btn-primary btn-sm py-2" type="submit">
-            <AmaranthIcon icon={aiCheck} /> Confirm
+            <Amicon icon={aiCheck} /> Confirm
           </button>
         </div>
       </form>

@@ -6,7 +6,7 @@ import NaviBar from "@/Components/NaviBar";
 import Pagination from "@/Components/Pagination";
 import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiPlus } from "@studio384/amaranth";
+import Amicon, { aiPlus } from "@studio384/amaranth";
 
 export default function Show({ can, permissions, pagination, status }) {
   return (
@@ -17,7 +17,7 @@ export default function Show({ can, permissions, pagination, status }) {
             href={route("admin.permissions.create")}
             className="btn btn-primary btn-sm"
           >
-            <AmaranthIcon icon={aiPlus} /> New
+            <Amicon icon={aiPlus} /> New
           </Link>
         }
       >

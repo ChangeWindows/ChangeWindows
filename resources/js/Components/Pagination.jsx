@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from '@inertiajs/react';
 
 import clsx from 'clsx';
-import AmaranthIcon, { aiArrowLeft, aiArrowRight } from '@studio384/amaranth';
+import Amicon, { aiArrowLeft, aiArrowRight } from '@studio384/amaranth';
 
 export default function Pagination({ pagination }) {
   if (pagination.links.length <= 3) return;
@@ -14,13 +14,13 @@ export default function Pagination({ pagination }) {
           if (link.label.includes('Previous')) {
             return (
               <li className={clsx('page-item d-none d-md-inline-block', { 'active': link.active, 'disabled': !link.url })} key={key}>
-                <Link className="page-link" href={link.url}><AmaranthIcon icon={aiArrowLeft} /></Link>
+                <Link className="page-link" href={link.url}><Amicon icon={aiArrowLeft} /></Link>
               </li>
             );
           } else if (link.label.includes('Next')) {
             return (
               <li className={clsx('page-item d-none d-md-inline-block', { 'active': link.active, 'disabled': !link.url })} key={key}>
-                <Link className="page-link" href={link.url}><AmaranthIcon icon={aiArrowRight} /></Link>
+                <Link className="page-link" href={link.url}><Amicon icon={aiArrowRight} /></Link>
               </li>
             );
           } else if (link.label === '...') {

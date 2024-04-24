@@ -11,7 +11,7 @@ import Timeline from "@/Components/Timeline/Timeline";
 import PlatformTimelineCard from "./_PlatformTimelineCard";
 
 import { parseISO } from "date-fns";
-import AmaranthIcon, { aiPatreon } from "@studio384/amaranth";
+import Amicon, { aiPatreon } from "@studio384/amaranth";
 
 export default function Index({
   timeline,
@@ -79,7 +79,7 @@ export default function Index({
                               </small>
                             </div>
                             <div className="ms-2 d-block d-md-none d-lg-block">
-                              <AmaranthIcon icon={aiPatreon} />
+                              <Amicon icon={aiPatreon} />
                             </div>
                           </a>
                         </div>

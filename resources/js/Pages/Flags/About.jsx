@@ -3,7 +3,7 @@ import { Head, Link } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 
-import AmaranthIcon, {
+import Amicon, {
   aiCircleInfo,
   aiClockRotateLeft,
   aiStar,
@@ -20,19 +20,19 @@ export default function About() {
           <ul className="navbar-nav me-auto d-flex">
             <li className="nav-item">
               <Link className="nav-link" href="/flags">
-                <AmaranthIcon icon={aiStar} />{" "}
+                <Amicon icon={aiStar} />{" "}
                 <span className="d-none d-sm-inline-block ms-1">Current</span>
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" href="/flags/history">
-                <AmaranthIcon icon={aiClockRotateLeft} />{" "}
+                <Amicon icon={aiClockRotateLeft} />{" "}
                 <span className="d-none d-sm-inline-block ms-1">History</span>
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" href="/flags/removed">
-                <AmaranthIcon icon={aiTrashCan} />{" "}
+                <Amicon icon={aiTrashCan} />{" "}
                 <span className="d-none d-sm-inline-block ms-1">Removed</span>
               </Link>
             </li>
@@ -40,7 +40,7 @@ export default function About() {
           <ul className="navbar-nav d-flex">
             <li className="nav-item">
               <Link className="nav-link active" href="/flags/about">
-                <AmaranthIcon icon={aiCircleInfo} />{" "}
+                <Amicon icon={aiCircleInfo} />{" "}
                 <span className="d-none d-md-inline-block ms-1">About</span>
               </Link>
             </li>

@@ -2,7 +2,7 @@ import React from "react";
 
 import clsx from "clsx";
 
-import AmaranthIcon, {
+import Amicon, {
   aiFloppyDisk,
   aiSpinnerThird,
 } from "@studio384/amaranth";
@@ -14,7 +14,7 @@ export default function SaveButton({ className, loading, ...props }) {
       className={clsx("btn btn-primary btn-sm", className)}
       disabled={loading}
     >
-      <AmaranthIcon
+      <Amicon
         icon={loading ? aiSpinnerThird : aiFloppyDisk}
         spin={loading}
       />{" "}

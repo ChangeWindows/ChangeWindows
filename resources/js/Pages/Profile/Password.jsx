@@ -6,7 +6,7 @@ import TextField from "@/Components/UI/Forms/TextField";
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
 
-import AmaranthIcon, {
+import Amicon, {
   aiCheck,
   aiShieldKeyhole,
   aiSpinnerThird,
@@ -35,7 +35,7 @@ export default function Index({ status, user }) {
             disabled={processing}
             onClick={submitPatch}
           >
-            <AmaranthIcon
+            <Amicon
               icon={processing ? aiSpinnerThird : aiCheck}
               spin={processing}
             />{" "}
@@ -55,7 +55,7 @@ export default function Index({ status, user }) {
                 <p className="h6 mb-2">Password</p>
                 <div className="settings-card">
                   <div className="settings-icon">
-                    <AmaranthIcon icon={aiShieldKeyhole} className="fs-6" />
+                    <Amicon icon={aiShieldKeyhole} className="fs-6" />
                   </div>
                   <div className="flex-grow-1">
                     <span className="d-block">New password</span>
@@ -75,7 +75,7 @@ export default function Index({ status, user }) {
                 </div>
                 <div className="settings-card">
                   <div className="settings-icon">
-                    <AmaranthIcon icon={aiShieldKeyhole} className="fs-6" />
+                    <Amicon icon={aiShieldKeyhole} className="fs-6" />
                   </div>
                   <div className="flex-grow-1">
                     <span className="d-block">Confirm password</span>

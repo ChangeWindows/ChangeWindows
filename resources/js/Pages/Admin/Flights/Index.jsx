@@ -7,7 +7,7 @@ import Pagination from "@/Components/Pagination";
 import Status from "@/Components/Status";
 import Timeline from "@/Components/Timeline/Timeline";
 
-import AmaranthIcon, { aiPlus } from "@studio384/amaranth";
+import Amicon, { aiPlus } from "@studio384/amaranth";
 import { parseISO } from "date-fns";
 import PlatformFlightCard from "./_PlatformFlightCard";
 
@@ -21,7 +21,7 @@ export default function Index({ can, timeline, pagination, status }) {
               href={route("admin.flights.create")}
               className="btn btn-primary btn-sm"
             >
-              <AmaranthIcon icon={aiPlus} /> Add
+              <Amicon icon={aiPlus} /> Add
             </Link>
           )
         }

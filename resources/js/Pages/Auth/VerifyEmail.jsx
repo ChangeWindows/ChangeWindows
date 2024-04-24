@@ -3,7 +3,7 @@ import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
-import AmaranthIcon, {
+import Amicon, {
   aiArrowRightFromBracket,
   aiPaperPlane,
 } from "@studio384/amaranth";
@@ -56,13 +56,13 @@ export default function VerifyEmail({ app, session, status }) {
         )}
         <div className="col-12 d-flex flex-column">
           <button className="btn btn-primary btn-sm py-2 mb-2" type="submit">
-            <AmaranthIcon icon={aiPaperPlane} /> Resend verification email
+            <Amicon icon={aiPaperPlane} /> Resend verification email
           </button>
           <button
             className="btn btn-primary btn-sm py-2 mb-2"
             onClick={handleLogout}
           >
-            <AmaranthIcon icon={aiArrowRightFromBracket} /> Logout
+            <Amicon icon={aiArrowRightFromBracket} /> Logout
           </button>
         </div>
       </form>

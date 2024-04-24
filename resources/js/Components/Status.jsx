@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AmaranthIcon, { aiCircleCheck, aiCircleInfo, aiCircleExclamation } from '@studio384/amaranth';
+import Amicon, { aiCircleCheck, aiCircleInfo, aiCircleExclamation } from '@studio384/amaranth';
 
 import clsx from 'clsx';
 
@@ -10,7 +10,7 @@ export default function Status({ status }) {
       {!!status &&
         <div className={clsx('alert mt-3 d-flex', `alert-${status.type ?? 'info'}`)}>
           <p className="m-0 me-2">
-            <AmaranthIcon icon={status.type === 'success' ? aiCircleCheck : (status.type === 'info' ? aiCircleInfo : aiCircleExclamation)} />
+            <Amicon icon={status.type === 'success' ? aiCircleCheck : (status.type === 'info' ? aiCircleInfo : aiCircleExclamation)} />
           </p>
           <div>
             {status.title && <h4 className="h5 text-dark m-0">{status.title}</h4>}

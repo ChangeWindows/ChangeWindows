@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 
 import FlagStatus from "./_FlagStatus";
 
-import AmaranthIcon, { aiAngleRight } from "@studio384/amaranth";
+import Amicon, { aiAngleRight } from "@studio384/amaranth";
 
 export default function Flag({ flag, url = null, hideBuild = false }) {
   const Component = useMemo(() => (url ? Link : "div"), ["url"]);
@@ -33,7 +33,7 @@ export default function Flag({ flag, url = null, hideBuild = false }) {
             ) : (
               <>
                 <FlagStatus hideBuild={hideBuild} flagStatus={flag.previousStatus} />
-                <AmaranthIcon icon={aiAngleRight} />
+                <Amicon icon={aiAngleRight} />
                 <FlagStatus hideBuild={hideBuild} flagStatus={flag} />
               </>
             )}
