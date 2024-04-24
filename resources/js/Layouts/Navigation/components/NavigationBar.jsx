@@ -3,7 +3,7 @@ import { Link, usePage } from "@inertiajs/react";
 
 import NavigationItem from "./NavigationItem";
 
-import AmaranthIcon, { aiEllipsis } from "@studio384/amaranth";
+import AmaranthIcon, { aiEllipsisH } from "@studio384/amaranth";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useWidth from "@/hooks/useWidth";
@@ -96,7 +96,7 @@ export default function NavigationBar({ main, overflow, socials }) {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <AmaranthIcon icon={aiEllipsis} />
+            <AmaranthIcon icon={aiEllipsisH} />
             <span className="sidebar-label">More</span>
           </a>
 
