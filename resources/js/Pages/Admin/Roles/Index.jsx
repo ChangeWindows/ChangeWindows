@@ -5,7 +5,7 @@ import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
 
-import AmaranthIcon, { aiPlus } from "@studio384/amaranth";
+import Amicon, { aiPlus } from "@studio384/amaranth";
 
 export default function Show({ can, roles, status }) {
   return (
@@ -16,7 +16,7 @@ export default function Show({ can, roles, status }) {
             href={route("admin.roles.create")}
             className="btn btn-primary btn-sm"
           >
-            <AmaranthIcon icon={aiPlus} /> New
+            <Amicon icon={aiPlus} /> New
           </Link>
         }
       >

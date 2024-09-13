@@ -12,7 +12,7 @@ import TextField from "@/Components/UI/Forms/TextField";
 
 import ReleaseChannel from "./_ReleaseChannel";
 
-import AmaranthIcon, {
+import Amicon, {
   aiEye,
   aiNotes,
   aiPlus,
@@ -142,7 +142,7 @@ export default function Edit({
                 href={route("admin.releases.changelog.edit", release)}
                 className="btn btn-primary btn-sm"
               >
-                <AmaranthIcon
+                <Amicon
                   icon={can.releases.edit ? aiNotes : aiEye}
                   className="me-2"
                 />
@@ -307,7 +307,7 @@ export default function Edit({
                     >
                       <div className="card-body py-3">
                         <h3 className="h5 fw-normal m-0">
-                          <AmaranthIcon icon={aiPlus} /> New channel
+                          <Amicon icon={aiPlus} /> New channel
                         </h3>
                       </div>
                     </a>
@@ -357,7 +357,7 @@ export default function Edit({
                 that release. Are you sure?
               </p>
               <button className="btn btn-danger btn-sm" type="submit">
-                <AmaranthIcon icon={aiTrashCan} /> Delete
+                <Amicon icon={aiTrashCan} /> Delete
               </button>
             </div>
           </Fieldset>

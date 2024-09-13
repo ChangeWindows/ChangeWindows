@@ -3,7 +3,7 @@ import { Link, Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
-import AmaranthIcon, {
+import Amicon, {
   aiArrowRightToBracket,
   aiShieldKeyhole,
   aiPersonPlus,
@@ -92,7 +92,7 @@ export default function Login({ app, status }) {
         </div>
         <div className="col-12 d-flex flex-column">
           <button className="btn btn-primary btn-sm py-2" type="submit">
-            <AmaranthIcon icon={aiArrowRightToBracket} /> Login
+            <Amicon icon={aiArrowRightToBracket} /> Login
           </button>
         </div>
         <div className="col-12">
@@ -100,10 +100,10 @@ export default function Login({ app, status }) {
         </div>
         <div className="col-12 d-flex flex-column">
           <Link href="/register" className="btn btn-light btn-sm py-2 mb-2">
-            <AmaranthIcon icon={aiPersonPlus} /> Register
+            <Amicon icon={aiPersonPlus} /> Register
           </Link>
           <Link href="/forgot-password" className="btn btn-light btn-sm py-2">
-            <AmaranthIcon icon={aiShieldKeyhole} /> Forgot password
+            <Amicon icon={aiShieldKeyhole} /> Forgot password
           </Link>
         </div>
       </form>

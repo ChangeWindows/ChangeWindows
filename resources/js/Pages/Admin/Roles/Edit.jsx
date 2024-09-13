@@ -9,7 +9,7 @@ import TextField from "@/Components/UI/Forms/TextField";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
 import Fieldset from "@/Components/UI/Forms/Fieldset";
 
-import AmaranthIcon, { aiTrashCan } from "@studio384/amaranth";
+import Amicon, { aiTrashCan } from "@studio384/amaranth";
 
 export default function Edit({ can, role, permissions, status }) {
   const {
@@ -110,7 +110,7 @@ export default function Edit({ can, role, permissions, status }) {
                 user. Are you sure?
               </p>
               <button className="btn btn-danger btn-sm" type="submit">
-                <AmaranthIcon icon={aiTrashCan} /> Delete
+                <Amicon icon={aiTrashCan} /> Delete
               </button>
             </div>
           </Fieldset>

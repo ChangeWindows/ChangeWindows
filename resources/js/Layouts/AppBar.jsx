@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, router, usePage } from "@inertiajs/react";
 
-import AmaranthIcon, {
+import Amicon, {
   aiArrowRightFromBracket,
   aiArrowRightToBracket,
   aiMagnifyingGlass,
@@ -89,7 +89,7 @@ export default function AppBar() {
               className="input-group input-group-search"
             >
               <span className="input-group-text">
-                <AmaranthIcon icon={aiMagnifyingGlass} />
+                <Amicon icon={aiMagnifyingGlass} />
               </span>
               <input
                 type="text"
@@ -114,12 +114,12 @@ export default function AppBar() {
                   type="submit"
                   className="btn btn-transparent btn-profile"
                 >
-                  <AmaranthIcon icon={aiArrowRightFromBracket} />
+                  <Amicon icon={aiArrowRightFromBracket} />
                 </button>
               </form>
             ) : (
               <Link href="/login" className="btn btn-transparent btn-profile">
-                <AmaranthIcon icon={aiArrowRightToBracket} />
+                <Amicon icon={aiArrowRightToBracket} />
               </Link>
             )}
           </div>

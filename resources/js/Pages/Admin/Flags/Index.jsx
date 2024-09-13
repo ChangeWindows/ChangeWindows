@@ -5,7 +5,7 @@ import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
 
-import AmaranthIcon, {
+import Amicon, {
   aiSpinnerThird,
   aiArrowUp,
   aiClockRotateLeft,
@@ -43,13 +43,13 @@ export default function Index({ can, status, errors, suggestion }) {
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
                 <Link className="nav-link active" href="/admin/flags">
-                  <AmaranthIcon icon={aiFlag} />{" "}
+                  <Amicon icon={aiFlag} />{" "}
                   <span className="d-none d-sm-inline-block ms-1">Manage</span>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" href="/admin/flags/history">
-                  <AmaranthIcon icon={aiClockRotateLeft} />{" "}
+                  <Amicon icon={aiClockRotateLeft} />{" "}
                   <span className="d-none d-sm-inline-block ms-1">History</span>
                 </Link>
               </li>
@@ -104,7 +104,7 @@ export default function Index({ can, status, errors, suggestion }) {
                           className="btn btn-primary btn-sm"
                           disabled={processing}
                         >
-                          <AmaranthIcon
+                          <Amicon
                             icon={processing ? aiSpinnerThird : aiArrowUp}
                             spin={processing}
                           />{" "}

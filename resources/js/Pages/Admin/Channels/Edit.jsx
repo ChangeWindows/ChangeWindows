@@ -10,7 +10,7 @@ import Select from "@/Components/UI/Forms/Select";
 import Status from "@/Components/Status";
 import TextField from "@/Components/UI/Forms/TextField";
 
-import AmaranthIcon, { aiTrashCan } from "@studio384/amaranth";
+import Amicon, { aiTrashCan } from "@studio384/amaranth";
 
 export default function Edit({ can, channel, platforms, status }) {
   const {
@@ -127,7 +127,7 @@ export default function Edit({ can, channel, platforms, status }) {
                 that channel. Are you sure?
               </p>
               <button className="btn btn-danger btn-sm" type="submit">
-                <AmaranthIcon icon={aiTrashCan} /> Delete
+                <Amicon icon={aiTrashCan} /> Delete
               </button>
             </div>
           </Fieldset>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
 
-import AmaranthIcon, {
+import Amicon, {
   aiCheck,
   aiSpinnerThird,
   aiTrashCan,
@@ -55,7 +55,7 @@ export default function Suggestion({ suggestion }) {
                 className="btn btn-secondary btn-sm"
                 onClick={submitDiscard}
               >
-                <AmaranthIcon
+                <Amicon
                   icon={processing ? aiSpinnerThird : aiTrashCan}
                   spin={processing}
                 />{" "}
@@ -65,7 +65,7 @@ export default function Suggestion({ suggestion }) {
                 className="btn btn-success btn-sm"
                 onClick={submitApprove}
               >
-                <AmaranthIcon
+                <Amicon
                   icon={processing ? aiSpinnerThird : aiCheck}
                   spin={processing}
                 />{" "}

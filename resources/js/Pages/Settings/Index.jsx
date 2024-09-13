@@ -3,7 +3,7 @@ import { Head, Link, useForm } from "@inertiajs/react";
 
 import App from "@/Layouts/App";
 
-import AmaranthIcon, {
+import Amicon, {
   aiCodeBranch,
   aiGithub,
   aiPatreon,
@@ -78,7 +78,7 @@ export default function Show({ app, patrons, user }) {
               disabled={processing}
               onClick={submitPatch}
             >
-              <AmaranthIcon
+              <Amicon
                 icon={processing ? aiSpinnerThird : aiCheck}
                 spin={processing}
               />{" "}
@@ -100,7 +100,7 @@ export default function Show({ app, patrons, user }) {
                   <p className="h6 mb-2">Details</p>
                   <div className="settings-card">
                     <div className="settings-icon">
-                      <AmaranthIcon icon={aiPerson} className="fs-6" />
+                      <Amicon icon={aiPerson} className="fs-6" />
                     </div>
                     <div className="flex-grow-1">
                       <span className="d-block">Username</span>
@@ -118,7 +118,7 @@ export default function Show({ app, patrons, user }) {
                   </div>
                   <div className="settings-card">
                     <div className="settings-icon">
-                      <AmaranthIcon icon={aiEnvelope} className="fs-6" />
+                      <Amicon icon={aiEnvelope} className="fs-6" />
                     </div>
                     <div className="flex-grow-1">
                       <span className="d-block">Email address</span>
@@ -143,7 +143,7 @@ export default function Show({ app, patrons, user }) {
                   <p className="h6 mb-2">Security</p>
                   <div className="settings-card">
                     <div className="settings-icon">
-                      <AmaranthIcon icon={aiShieldKeyhole} className="fs-6" />
+                      <Amicon icon={aiShieldKeyhole} className="fs-6" />
                     </div>
                     <div className="flex-grow-1">
                       <span className="d-block mb-n1">Password</span>
@@ -156,7 +156,7 @@ export default function Show({ app, patrons, user }) {
                         href={route("front.profile.password")}
                         className="btn btn-primary btn-sm"
                       >
-                        <AmaranthIcon icon={aiShieldKeyhole} /> Change password
+                        <Amicon icon={aiShieldKeyhole} /> Change password
                       </Link>
                     </div>
                   </div>
@@ -167,7 +167,7 @@ export default function Show({ app, patrons, user }) {
                 <p className="h6 mb-2">Appearance</p>
                 <div className="settings-card">
                   <div className="settings-icon">
-                    <AmaranthIcon icon={aiSwatchbook} className="fs-6" />
+                    <Amicon icon={aiSwatchbook} className="fs-6" />
                   </div>
                   <div className="flex-grow-1">
                     <span className="d-block mb-n1">Choose your theme</span>
@@ -193,7 +193,7 @@ export default function Show({ app, patrons, user }) {
                 <p className="h6 mb-2">Channels</p>
                 <div className="settings-card">
                   <div className="settings-icon">
-                    <AmaranthIcon icon={aiCodeBranch} className="fs-6" />
+                    <Amicon icon={aiCodeBranch} className="fs-6" />
                   </div>
                   <div className="flex-grow-1">
                     <span className="d-block mb-n1">
@@ -271,21 +271,21 @@ export default function Show({ app, patrons, user }) {
                 target="_blank"
                 className="btn btn-primary btn-sm"
               >
-                <AmaranthIcon icon={aiTwitter} /> Twitter
+                <Amicon icon={aiTwitter} /> Twitter
               </a>
               <a
                 href="https://github.com/changewindows/changewindows"
                 target="_blank"
                 className="btn btn-primary btn-sm"
               >
-                <AmaranthIcon icon={aiGithub} /> GitHub
+                <Amicon icon={aiGithub} /> GitHub
               </a>
               <a
                 href="https://patreon.com/changewindows"
                 target="_blank"
                 className="btn btn-primary btn-sm"
               >
-                <AmaranthIcon icon={aiPatreon} /> Patreon
+                <Amicon icon={aiPatreon} /> Patreon
               </a>
             </div>
             <div className="mt-3">

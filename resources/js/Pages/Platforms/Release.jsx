@@ -9,7 +9,7 @@ import Pagination from "@/Components/Pagination";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import Timeline from "@/Components/Timeline/Timeline";
 
-import AmaranthIcon, {
+import Amicon, {
   aiAngleLeft,
   aiAngleRight,
   aiArrowLeft,
@@ -86,17 +86,17 @@ export default function Release({
               href={route("front.platforms.show", platform)}
               className="btn btn-transparent btn-sm me-2"
             >
-              <AmaranthIcon icon={aiArrowLeft} />
+              <Amicon icon={aiArrowLeft} />
             </ILink>
             <Nav className="d-flex d-xl-none">
               <Nav.Item>
                 <Nav.Link eventKey="timeline">
-                  <AmaranthIcon icon={aiBarsStaggered} /> Timeline
+                  <Amicon icon={aiBarsStaggered} /> Timeline
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="changelog">
-                  <AmaranthIcon icon={aiNotes} /> Changelog
+                  <Amicon icon={aiNotes} /> Changelog
                 </Nav.Link>
               </Nav.Item>
             </Nav>
@@ -109,7 +109,7 @@ export default function Release({
                 ])}
                 className="btn btn-transparent btn-sm"
               >
-                <AmaranthIcon icon={aiAngleLeft} />
+                <Amicon icon={aiAngleLeft} />
                 <span className="d-none d-sm-inline">
                   {" "}
                   {quickNav.prev.version}
@@ -127,7 +127,7 @@ export default function Release({
                 <span className="d-none d-sm-inline">
                   {quickNav.next.version}{" "}
                 </span>
-                <AmaranthIcon icon={aiAngleRight} />
+                <Amicon icon={aiAngleRight} />
               </ILink>
             )}
           </div>

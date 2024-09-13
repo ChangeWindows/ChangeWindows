@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
-import AmaranthIcon, { aiEye, aiNotes, aiPen } from "@studio384/amaranth";
+import Amicon, { aiEye, aiNotes, aiPen } from "@studio384/amaranth";
 
 export default function PlatformCard({ can, platform }) {
   return (
@@ -35,11 +35,11 @@ export default function PlatformCard({ can, platform }) {
               >
                 {can.releases.edit ? (
                   <>
-                    <AmaranthIcon icon={aiPen} /> Edit
+                    <Amicon icon={aiPen} /> Edit
                   </>
                 ) : (
                   <>
-                    <AmaranthIcon icon={aiEye} /> View
+                    <Amicon icon={aiEye} /> View
                   </>
                 )}
               </Link>
@@ -47,7 +47,7 @@ export default function PlatformCard({ can, platform }) {
                 href={route("admin.releases.changelog.edit", release)}
                 className="btn btn-link btn-sm my-n1"
               >
-                <AmaranthIcon icon={aiNotes} />
+                <Amicon icon={aiNotes} />
               </Link>
             </div>
           </div>

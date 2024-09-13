@@ -3,7 +3,7 @@ import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
-import AmaranthIcon, { aiShieldKeyhole } from "@studio384/amaranth";
+import Amicon, { aiShieldKeyhole } from "@studio384/amaranth";
 
 export default function ResetPassword({ app, token, status }) {
   const [form, setForm] = useState({
@@ -90,7 +90,7 @@ export default function ResetPassword({ app, token, status }) {
         </div>
         <div className="col-12 d-flex flex-column">
           <button className="btn btn-primary btn-sm py-2" type="submit">
-            <AmaranthIcon icon={aiShieldKeyhole} /> Reset password
+            <Amicon icon={aiShieldKeyhole} /> Reset password
           </button>
         </div>
       </form>

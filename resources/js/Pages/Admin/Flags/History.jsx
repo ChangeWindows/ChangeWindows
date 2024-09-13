@@ -6,7 +6,7 @@ import NaviBar from "@/Components/NaviBar";
 import Pagination from "@/Components/Pagination";
 import Status from "@/Components/Status";
 
-import AmaranthIcon, {
+import Amicon, {
   aiAngleRight,
   aiSpinnerThird,
   aiArrowUp,
@@ -45,7 +45,7 @@ export default function Show({ can, flagStatus, pagination, status, errors }) {
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
                 <Link className="nav-link" href="/admin/flags">
-                  <AmaranthIcon icon={aiFlag} />{" "}
+                  <Amicon icon={aiFlag} />{" "}
                   <span className="d-none d-sm-inline-block ms-1">Manage</span>
                 </Link>
               </li>
@@ -54,7 +54,7 @@ export default function Show({ can, flagStatus, pagination, status, errors }) {
                   className="nav-link active"
                   href="/admin/flags/history"
                 >
-                  <AmaranthIcon icon={aiClockRotateLeft} />{" "}
+                  <Amicon icon={aiClockRotateLeft} />{" "}
                   <span className="d-none d-sm-inline-block ms-1">History</span>
                 </Link>
               </li>
@@ -109,7 +109,7 @@ export default function Show({ can, flagStatus, pagination, status, errors }) {
                           className="btn btn-primary btn-sm"
                           disabled={processing}
                         >
-                          <AmaranthIcon
+                          <Amicon
                             icon={processing ? aiSpinnerThird : aiArrowUp}
                             spin={processing}
                           />{" "}
@@ -139,7 +139,7 @@ export default function Show({ can, flagStatus, pagination, status, errors }) {
                     <FlagStatus
                       flagStatus={flag.flag.latest_status_change[1]}
                     />
-                    <AmaranthIcon icon={aiAngleRight} />
+                    <Amicon icon={aiAngleRight} />
                     <FlagStatus
                       flagStatus={flag.flag.latest_status_change[0]}
                     />

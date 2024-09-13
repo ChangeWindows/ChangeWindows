@@ -3,7 +3,7 @@ import { usePage } from "@inertiajs/react";
 
 import "../../sass/style.scss";
 
-import AmaranthIcon, {
+import Amicon, {
   aiArrowLeft,
   aiChangeWindows,
 } from "@studio384/amaranth";
@@ -47,11 +47,11 @@ export default function Auth({ children }) {
       <div className="auth-card">
         <div className="auth-card-content">
           <a href="javascript:history.back()" className="btn btn-transparent" style={{ paddingTop: 7, paddingBottom: 7 }}>
-            <AmaranthIcon icon={aiArrowLeft} />
+            <Amicon icon={aiArrowLeft} />
           </a>
 
           <h1 className="m-0 py-3 pt-sm-4 pb-sm-5 d-flex font-brand fw-bold justify-content-center align-items-center" style={{ fontSize: 28 }}>
-            <AmaranthIcon icon={aiChangeWindows} className="me-1" />
+            <Amicon icon={aiChangeWindows} className="me-1" />
             {app.name}
           </h1>
           {children}

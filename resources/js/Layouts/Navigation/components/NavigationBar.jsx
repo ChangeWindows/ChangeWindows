@@ -3,7 +3,7 @@ import { Link, usePage } from "@inertiajs/react";
 
 import NavigationItem from "./NavigationItem";
 
-import AmaranthIcon, { aiEllipsisH } from "@studio384/amaranth";
+import Amicon, { aiEllipsisH } from "@studio384/amaranth";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useWidth from "@/hooks/useWidth";
@@ -96,7 +96,7 @@ export default function NavigationBar({ main, overflow, socials }) {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <AmaranthIcon icon={aiEllipsisH} />
+            <Amicon icon={aiEllipsisH} />
             <span className="sidebar-label">More</span>
           </a>
 
@@ -116,7 +116,7 @@ export default function NavigationBar({ main, overflow, socials }) {
                       active: page.url.includes(item.url),
                     })}
                   >
-                    <AmaranthIcon icon={item.icon} /> {item.title}
+                    <Amicon icon={item.icon} /> {item.title}
                   </Component>
                 );
               } else if (item.type === "external") {
@@ -129,7 +129,7 @@ export default function NavigationBar({ main, overflow, socials }) {
                       active: page.url.includes(item.url),
                     })}
                   >
-                    <AmaranthIcon icon={item.icon} /> {item.title}
+                    <Amicon icon={item.icon} /> {item.title}
                   </Component>
                 );
               } else if (item.type === "divider") {

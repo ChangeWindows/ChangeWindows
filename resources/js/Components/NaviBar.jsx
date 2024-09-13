@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from '@inertiajs/react';
 
-import AmaranthIcon, { aiArrowLeft } from "@studio384/amaranth";
+import Amicon, { aiArrowLeft } from "@studio384/amaranth";
 
 /* -- Utilities -- */
 
@@ -18,7 +18,7 @@ export default function Navigation({
             href={back}
             className="btn btn-transparent btn-sm me-2 flex-shrink-0"
           >
-            <AmaranthIcon icon={aiArrowLeft} />
+            <Amicon icon={aiArrowLeft} />
           </Link>
         )}
         <span className="navbar-brand text-wrap">{children}</span>
