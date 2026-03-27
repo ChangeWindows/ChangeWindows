@@ -1,7 +1,7 @@
 import React from 'react';
 import { Head } from '@inertiajs/react';
 
-import '../../sass/style.scss';
+import '../../css/app.css';
 
 import AppBar from './AppBar';
 import AdminNavigation from './Navigation/AdminNavigation';

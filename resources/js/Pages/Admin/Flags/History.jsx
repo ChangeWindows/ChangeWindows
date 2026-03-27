@@ -40,7 +40,7 @@ export default function Show({ can, flagStatus, pagination, status, errors }) {
   return (
     <Admin>
       <NaviBar>
-        <nav className="navbar navbar-expand navbar-light sticky-top">
+        <nav className="navbar navbar-expand sticky-top">
           <div className="container">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">

@@ -28,7 +28,7 @@ export default function Navigation({ home = false, platforms, routeName, all = f
   }, [matchesSmUp, legacyPlatforms, toolPlatforms]);
 
   return (
-    <nav className="navbar navbar-expand navbar-light sticky-top">
+    <nav className="navbar navbar-expand sticky-top">
       <div className="container">
         <div className="collapse navbar-collapse" id="navbar-page">
           <ul className="navbar-nav me-auto">

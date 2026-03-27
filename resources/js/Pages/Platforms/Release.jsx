@@ -28,7 +28,7 @@ import { Table } from "@tiptap/extension-table";
 import { TableRow } from "@tiptap/extension-table-row";
 import { TableHeader } from "@tiptap/extension-table-header";
 import { TableCell } from "@tiptap/extension-table-cell";
-import { Nav, Tab } from "react-bootstrap";
+import { Tabs } from "@base-ui/react";
 
 export default function Release({
   release,
@@ -79,8 +79,8 @@ export default function Release({
     <App>
       <Head title={release.name} />
 
-      <Tab.Container defaultActiveKey="timeline">
-        <nav className="navbar navbar-expand-xl navbar-light sticky-top">
+      <Tabs.Root defaultValue="timeline">
+        <nav className="navbar navbar-expand-xl sticky-top">
           <div className="container">
             <ILink
               href={route("front.platforms.show", platform)}
@@ -88,18 +88,14 @@ export default function Release({
             >
               <Amicon icon={aiArrowLeft} />
             </ILink>
-            <Nav className="d-flex d-xl-none">
-              <Nav.Item>
-                <Nav.Link eventKey="timeline">
-                  <Amicon icon={aiBarsStaggered} /> Timeline
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="changelog">
-                  <Amicon icon={aiNotes} /> Changelog
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
+            <Tabs.List className="nav d-flex d-xl-none">
+              <Tabs.Tab value="timeline" className="nav-link">
+                <Amicon icon={aiBarsStaggered} /> Timeline
+              </Tabs.Tab>
+              <Tabs.Tab value="changelog" className="nav-link">
+                <Amicon icon={aiNotes} /> Changelog
+              </Tabs.Tab>
+            </Tabs.List>
             <div className="flex-grow-1" />
             {quickNav.prev && (
               <ILink
@@ -154,8 +150,7 @@ export default function Release({
             </div>
 
             <div className="col-12">
-              <Tab.Content>
-                <Tab.Pane eventKey="timeline">
+                <Tabs.Panel value="timeline">
                   <div className="row">
                     <div className="col-12 mt-3">
                       <LifeCycle release={release} />
@@ -211,8 +206,8 @@ export default function Release({
                       </div>
                     </div>
                   </div>
-                </Tab.Pane>
-                <Tab.Pane eventKey="changelog">
+                </Tabs.Panel>
+                <Tabs.Panel value="changelog">
                   <div className="row">
                     <div className="col-12 mt-3">
                       <EditorContent
@@ -222,12 +217,11 @@ export default function Release({
                       />
                     </div>
                   </div>
-                </Tab.Pane>
-              </Tab.Content>
+                </Tabs.Panel>
             </div>
           </div>
         </div>
-      </Tab.Container>
+      </Tabs.Root>
     </App>
   );
 }

@@ -11,7 +11,7 @@ export default function Navigation({
   actions = false,
 }) {
   return (
-    <nav className="navbar navbar-expand-xl navbar-light sticky-top">
+    <nav className="navbar navbar-expand-xl sticky-top">
       <div className="container flex-nowrap">
         {!!back && (
           <Link

@@ -4,8 +4,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 
 import { createInertiaApp } from '@inertiajs/react'
 
-import '../sass/style.scss';
-import 'bootstrap';
+import '../css/app.css';
 
 createInertiaApp({
   title: (title) => `${title} &middot; ChangeWindows`,

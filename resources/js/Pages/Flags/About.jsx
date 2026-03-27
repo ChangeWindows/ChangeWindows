@@ -15,7 +15,7 @@ export default function About() {
   return (
     <App>
       <Head title="Flags" />
-      <nav className="navbar navbar-expand navbar-light sticky-top">
+      <nav className="navbar navbar-expand sticky-top">
         <div className="container">
           <ul className="navbar-nav me-auto d-flex">
             <li className="nav-item">

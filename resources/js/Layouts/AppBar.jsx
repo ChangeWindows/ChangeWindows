@@ -56,7 +56,7 @@ export default function AppBar() {
 
   return (
     <div className="grid-header">
-      <nav className="navbar navbar-dark navbar-main">
+      <nav className="navbar navbar-main">
         <div className="container-fluid">
           <div className="navbar-main">
             <Link className="navbar-brand" href="/">

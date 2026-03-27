@@ -8,7 +8,7 @@ export default function Show({ app }) {
     <App>
       <Head title="Settings" />
 
-      <nav className="navbar navbar-expand navbar-light sticky-top">
+      <nav className="navbar navbar-expand sticky-top">
         <div className="container">
           <span className="navbar-brand text-wrap">Privacy</span>
         </div>

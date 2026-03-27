@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { usePage } from "@inertiajs/react";
 
-import "../../sass/style.scss";
+import "../../css/app.css";
 
 import Amicon, {
   aiArrowLeft,

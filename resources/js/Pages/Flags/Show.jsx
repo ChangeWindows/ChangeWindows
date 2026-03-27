@@ -6,8 +6,7 @@ import FlagStatus from "@/Components/_FlagStatus";
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
 
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import { Dialog } from "@base-ui/react";
 import Amicon, {
   aiFloppyDisk,
   aiPen,
@@ -53,10 +52,10 @@ export default function Show({ flag, flagContent, status }) {
       <NaviBar
         back="/flags"
         actions={
-          <Button variant="primary" size="sm" onClick={handleShow}>
+          <button className="btn btn-primary btn-sm" onClick={handleShow}>
             <Amicon icon={aiPen} />{" "}
             {flagContent ? "Edit your suggestion" : "Submit a suggestion"}
-          </Button>
+          </button>
         }
       >
         {flag.latest_contents?.name || flag.feature_name}
@@ -107,11 +106,15 @@ export default function Show({ flag, flagContent, status }) {
         </div>
       </div>
 
-      <Modal show={show} onHide={handleClose} as="form">
-        <Modal.Header>
-          <h3>Suggest a change</h3>
-        </Modal.Header>
-        <Modal.Body className="py-0">
+      <Dialog.Root open={show} onOpenChange={(open) => { if (!open) handleClose(); }}>
+        <Dialog.Portal>
+          <Dialog.Backdrop className="modal-backdrop" />
+          <div className="modal">
+            <Dialog.Popup className="modal-dialog" render={<form onSubmit={submit} />}>
+          <div className="modal-header">
+            <h3>Suggest a change</h3>
+          </div>
+          <div className="modal-body py-0">
           <div className="row g-3">
             <div className="col-12">
               <p className="mb-0">
@@ -162,20 +165,23 @@ export default function Show({ flag, flagContent, status }) {
               )}
             </div>
           </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" size="sm" onClick={handleClose}>
-            <Amicon icon={aiXmark} /> Cancel
-          </Button>
-          <Button variant="primary" size="sm" onClick={submit}>
-            <Amicon
-              icon={processing ? aiSpinnerThird : aiFloppyDisk}
-              spin={processing}
-            />{" "}
-            {processing ? "Saving..." : "Submit"}
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          </div>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary btn-sm" onClick={handleClose}>
+              <Amicon icon={aiXmark} /> Cancel
+            </button>
+            <button type="submit" className="btn btn-primary btn-sm" disabled={processing}>
+              <Amicon
+                icon={processing ? aiSpinnerThird : aiFloppyDisk}
+                spin={processing}
+              />{" "}
+              {processing ? "Saving..." : "Submit"}
+            </button>
+          </div>
+            </Dialog.Popup>
+          </div>
+        </Dialog.Portal>
+      </Dialog.Root>
     </App>
   );
 }
