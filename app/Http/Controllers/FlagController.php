@@ -91,9 +91,20 @@ class FlagController extends Controller
      */
     public function show(Flag $flag)
     {
+        $user = Auth::user();
+
+        $flag_content_query = FlagContent::where('flag_id', $flag->id)
+            ->where('status', 1);
+
+        if ($user) {
+            $flag_content_query->where('user_id', $user->id);
+        } else {
+            $flag_content_query->whereNull('user_id');
+        }
+
         return Inertia::render('Flags/Show', [
             'flag' => Flag::where('feature_name', $flag->feature_name)->with('flagStatus', 'latestContents')->first(),
-            'flagContent' => FlagContent::where('user_id', Auth::user()->id)->where('status', 1)->first(),
+            'flagContent' => $flag_content_query->first(),
             'status' => session('status')
         ]);
     }

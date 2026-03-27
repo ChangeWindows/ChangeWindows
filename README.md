@@ -22,7 +22,7 @@ ChangeWindows is an open source project build on top of Laravel, Vite and React.
 ## Using
 To run ChangeWindows, you'll need the following:
 
-* PHP 8.1.0 or higher, including extensions required by Laravel 9.x
+* PHP 8.3.0 or higher, including extensions required by Laravel 13.x
 * MySQL
 * Composer
 * npm
@@ -43,10 +43,10 @@ To run ChangeWindows, use the following command:
 php artisan serve
 ```
 
-This will launch a server at `127.0.0.1:8000`. Also run this NPM command.
+This will launch a server at `127.0.0.1:8000`. Also run this npm command.
 
 ```
-npm start
+npm run dev
 ```
 
 This will compile various files, mostly SCSS and keep an eye out for changes.
@@ -57,8 +57,6 @@ For a production build, execute the following commands:
 composer install --prefer-dist --no-scripts --no-dev -o
 npm run build
 ```
-
-The `node_modules` folder is not required in a production environment as long as the production-script has been run. All relevant JavaScript will be compiled to the `public`-folder.
 
 ## Contributing
 We are open to contributions to ChangeWindows. Do you have a feature that you really want to see but we are not spending any time on it ourselves? Feel free to open a pull request for it!

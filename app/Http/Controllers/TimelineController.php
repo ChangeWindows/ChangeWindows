@@ -22,38 +22,62 @@ class TimelineController extends Controller
         $timeline = Flight::with('releaseChannel', 'releaseChannel.channel', 'releaseChannel.release', 'releaseChannel.release.platform')->orderBy('date', 'desc');
         $paginator = $timeline->paginate(75)->onEachSide(2);
 
-        $patreon_api = new \Patreon\API(env('PATREON_API_KEY'));
-        $campaign_id = 1028298;
-
-        $fields = [
-            "page" => [
-                "size" => 100
-            ],
-            "include" => implode(",", [
-                "user",
-                "currently_entitled_tiers"
-            ]),
-            "fields" => [
-                "member" => implode(",", [
-                    "full_name",
-                    "patron_status"
-                ])
-            ]
-        ];
-        $query = http_build_query($fields);
-
-        $pledges_response = $patreon_api->get_data("campaigns/{$campaign_id}/members?{$query}");
         $patrons = collect();
 
-        foreach (array_keys($pledges_response['data']) as $pledge_data_key) {
-            $pledge_data = $pledges_response['data'][$pledge_data_key];
+        // The Patreon SDK can return a JSON string or an array depending on version/state.
+        // Keep the timeline page resilient when Patreon is unavailable or data shape changes.
+        try {
+            if (env('PATREON_API_KEY')) {
+                $patreon_api = new \Patreon\API(env('PATREON_API_KEY'));
+                $campaign_id = 1028298;
 
-            if ($pledge_data['attributes']['patron_status'] === 'active_patron') {
-                $patrons->push([
-                    'name' => $pledge_data['attributes']['full_name'],
-                    'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}"
-                ]);
+                $fields = [
+                    "page" => [
+                        "size" => 100
+                    ],
+                    "include" => implode(",", [
+                        "user",
+                        "currently_entitled_tiers"
+                    ]),
+                    "fields" => [
+                        "member" => implode(",", [
+                            "full_name",
+                            "patron_status"
+                        ])
+                    ]
+                ];
+                $query = http_build_query($fields);
+
+                $pledges_response = $patreon_api->get_data("campaigns/{$campaign_id}/members?{$query}");
+
+                if (is_string($pledges_response)) {
+                    $decoded = json_decode($pledges_response, true);
+                    $pledges_response = is_array($decoded) ? $decoded : [];
+                }
+
+                $pledges_data = is_array($pledges_response) ? ($pledges_response['data'] ?? []) : [];
+
+                if (is_array($pledges_data)) {
+                    foreach ($pledges_data as $pledge_data) {
+                        if (!is_array($pledge_data)) {
+                            continue;
+                        }
+
+                        $patron_status = data_get($pledge_data, 'attributes.patron_status');
+                        $full_name = data_get($pledge_data, 'attributes.full_name');
+                        $user_id = data_get($pledge_data, 'relationships.user.data.id');
+
+                        if ($patron_status === 'active_patron' && $full_name && $user_id) {
+                            $patrons->push([
+                                'name' => $full_name,
+                                'avatar' => "https://c8.patreon.com/2/200/{$user_id}"
+                            ]);
+                        }
+                    }
+                }
             }
+        } catch (\Throwable $e) {
+            report($e);
         }
 
         return Inertia::render('Timeline/Index', [
@@ -140,7 +164,7 @@ class TimelineController extends Controller
                 ];
             }),
             'pagination' => $paginator,
-            'patron' => $patrons->random(),
+            'patron' => $patrons->isNotEmpty() ? $patrons->random() : null,
             'status' => session('status')
         ]);
     }

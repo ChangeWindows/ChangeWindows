@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import Progress from "@/Components/Progress/Progress";
 import ProgressBar from "@/Components/Progress/ProgressBar";
 
-import { differenceInDays } from "date-fns/esm";
+import { differenceInDays } from "date-fns";
 import { format, isBefore, parseISO } from "date-fns";
 
 export default function LifeCycle({ release, small }) {

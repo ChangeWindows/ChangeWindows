@@ -11,8 +11,8 @@ export default function Channel({
   disabled = false,
   url = null,
 }) {
-  const Component = useMemo(() => (url ? Link : "div"), ["url"]);
-  const mainProps = useMemo(() => ({ href: url }), ["url"]);
+  const Component = useMemo(() => (url ? Link : "div"), [url]);
+  const mainProps = useMemo(() => ({ href: url }), [url]);
 
   const formatedDate = useMemo(() => {
     if (isValid(date)) {

@@ -6,8 +6,8 @@ import FlagStatus from "./_FlagStatus";
 import Amicon, { aiAngleRight } from "@studio384/amaranth";
 
 export default function Flag({ flag, url = null, hideBuild = false }) {
-  const Component = useMemo(() => (url ? Link : "div"), ["url"]);
-  const mainProps = useMemo(() => ({ href: url }), ["url"]);
+  const Component = useMemo(() => (url ? Link : "div"), [url]);
+  const mainProps = useMemo(() => ({ href: url }), [url]);
 
   return (
     <Component
