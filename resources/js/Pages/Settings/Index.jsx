@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { Head, Link, useForm } from "@inertiajs/react";
 
+import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
+import TextField from "@/Components/UI/Forms/TextField";
 import App from "@/Layouts/App";
+import { getLocal, setLocal } from "@/utils/localStorage";
 
+import { Head, Link, useForm } from "@inertiajs/react";
 import Amicon, {
   aiCodeBranch,
   aiGithub,
@@ -16,17 +20,10 @@ import Amicon, {
   aiPerson,
 } from "@studio384/amaranth";
 
-import { getLocal, setLocal } from "@/utils/localStorage";
-import TextField from "@/Components/UI/Forms/TextField";
-import NaviBar from "@/Components/NaviBar";
-import Status from "@/Components/Status";
-
 export default function Show({ app, patrons, user }) {
   // Live settings
   const [theme, setTheme] = useState(getLocal("theme"));
-  const [showActiveOnly, setShowActiveOnly] = useState(
-    getLocal("showActiveOnly")
-  );
+  const [showActiveOnly, setShowActiveOnly] = useState(getLocal("showActiveOnly"));
 
   function toggleTheme(mode) {
     if (mode === "default") {
@@ -72,17 +69,8 @@ export default function Show({ app, patrons, user }) {
       <NaviBar
         actions={
           user && (
-            <button
-              type="submit"
-              className="btn btn-primary btn-sm"
-              disabled={processing}
-              onClick={submitPatch}
-            >
-              <Amicon
-                icon={processing ? aiSpinnerThird : aiCheck}
-                spin={processing}
-              />{" "}
-              Save
+            <button type="submit" className="btn btn-primary btn-sm" disabled={processing} onClick={submitPatch}>
+              <Amicon icon={processing ? aiSpinnerThird : aiCheck} spin={processing} /> Save
             </button>
           )
         }
@@ -93,7 +81,7 @@ export default function Show({ app, patrons, user }) {
       <form className="container" onSubmit={submitPatch}>
         <Status status={status} />
         <fieldset className="row g-3">
-          <div className="col-12 col-lg-8 col-xl-9">
+          <div className="col-lg-8 col-xl-9 col-12">
             <div className="row g-3">
               {user && (
                 <div className="col-12 pt-3">
@@ -147,15 +135,10 @@ export default function Show({ app, patrons, user }) {
                     </div>
                     <div className="flex-grow-1">
                       <span className="d-block mb-n1">Password</span>
-                      <span className="d-block text-muted text-sm">
-                        Manage your password
-                      </span>
+                      <span className="d-block text-muted text-sm">Manage your password</span>
                     </div>
                     <div>
-                      <Link
-                        href={route("front.profile.password")}
-                        className="btn btn-primary btn-sm"
-                      >
+                      <Link href={route("front.profile.password")} className="btn btn-primary btn-sm">
                         <Amicon icon={aiShieldKeyhole} /> Change password
                       </Link>
                     </div>
@@ -171,16 +154,10 @@ export default function Show({ app, patrons, user }) {
                   </div>
                   <div className="flex-grow-1">
                     <span className="d-block mb-n1">Choose your theme</span>
-                    <span className="d-block text-muted text-sm">
-                      Change the ChangeWindows theme.
-                    </span>
+                    <span className="d-block text-muted text-sm">Change the ChangeWindows theme.</span>
                   </div>
                   <div>
-                    <select
-                      className="form-control"
-                      onChange={(e) => toggleTheme(e.target.value)}
-                      defaultValue={theme}
-                    >
+                    <select className="form-control" onChange={(e) => toggleTheme(e.target.value)} defaultValue={theme}>
                       <option value="light">Light</option>
                       <option value="dark">Dark</option>
                       <option value="default">Use system theme</option>
@@ -196,12 +173,9 @@ export default function Show({ app, patrons, user }) {
                     <Amicon icon={aiCodeBranch} className="fs-6" />
                   </div>
                   <div className="flex-grow-1">
-                    <span className="d-block mb-n1">
-                      Show inactive channels
-                    </span>
+                    <span className="d-block mb-n1">Show inactive channels</span>
                     <span className="d-block text-muted text-sm">
-                      Hide channels on the Channels-pages when they aren't
-                      active.
+                      Hide channels on the Channels-pages when they aren't active.
                     </span>
                   </div>
                   <div>
@@ -238,7 +212,7 @@ export default function Show({ app, patrons, user }) {
               </div>
             </div>
           </div>
-          <div className="col-12 col-lg-4 col-xl-3">
+          <div className="col-lg-4 col-xl-3 col-12">
             <p className="h6 pt-3">About ChangeWindows</p>
 
             <p className="text-md">
@@ -246,11 +220,7 @@ export default function Show({ app, patrons, user }) {
               {app.preview === "canary" && "Canary"} {app.version}
               <br />
               &copy; 2014-2023{" "}
-              <a
-                className="m-0 f-384 fw-bold"
-                href="https://studio384.be"
-                target="_blank"
-              >
+              <a className="f-384 fw-bold m-0" href="https://studio384.be" target="_blank">
                 Studio <span className="studio-384">384</span>
               </a>
               <br />
@@ -258,19 +228,13 @@ export default function Show({ app, patrons, user }) {
             </p>
 
             <p className="text-md">
-              ChangeWindows is a detailed changelog and release history for
-              Windows across all platforms it appears on. With detailed and
-              timely updates, as well as a clean and clear interface,
-              ChangeWindows' goal is to provide a solid resource for anyone
-              interested in knowing what's next for Windows.
+              ChangeWindows is a detailed changelog and release history for Windows across all platforms it appears on.
+              With detailed and timely updates, as well as a clean and clear interface, ChangeWindows' goal is to
+              provide a solid resource for anyone interested in knowing what's next for Windows.
             </p>
 
-            <div className="d-flex gap-1 flex-wrap">
-              <a
-                href="https://twitter.com/changewindows"
-                target="_blank"
-                className="btn btn-primary btn-sm"
-              >
+            <div className="d-flex flex-wrap gap-1">
+              <a href="https://twitter.com/changewindows" target="_blank" className="btn btn-primary btn-sm">
                 <Amicon icon={aiTwitter} /> Twitter
               </a>
               <a
@@ -280,20 +244,12 @@ export default function Show({ app, patrons, user }) {
               >
                 <Amicon icon={aiGithub} /> GitHub
               </a>
-              <a
-                href="https://patreon.com/changewindows"
-                target="_blank"
-                className="btn btn-primary btn-sm"
-              >
+              <a href="https://patreon.com/changewindows" target="_blank" className="btn btn-primary btn-sm">
                 <Amicon icon={aiPatreon} /> Patreon
               </a>
             </div>
             <div className="mt-3">
-              <a
-                className="h1 m-0 f-384 fw-bold"
-                href="https://studio384.be"
-                target="_blank"
-              >
+              <a className="h1 f-384 fw-bold m-0" href="https://studio384.be" target="_blank">
                 Studio <span className="studio-384">384</span>
               </a>
             </div>

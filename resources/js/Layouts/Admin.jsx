@@ -1,10 +1,10 @@
-import React from 'react';
-import { Head } from '@inertiajs/react';
+import React from "react";
 
-import '../../css/app.css';
+import { Head } from "@inertiajs/react";
 
-import AppBar from './AppBar';
-import AdminNavigation from './Navigation/AdminNavigation';
+import "../../css/app.css";
+import AppBar from "./AppBar";
+import AdminNavigation from "./Navigation/AdminNavigation";
 
 export default function App({ children }) {
   return (
@@ -16,10 +16,8 @@ export default function App({ children }) {
           <AdminNavigation />
         </header>
         <AppBar />
-        <main className="grid-content">
-          { children }
-        </main>
+        <main className="grid-content">{children}</main>
       </div>
     </div>
-  )
+  );
 }

@@ -1,23 +1,26 @@
-import React from 'react';
+import React from "react";
 
-import Amicon, { aiCircleCheck, aiCircleInfo, aiCircleExclamation } from '@studio384/amaranth';
-
-import clsx from 'clsx';
+import Amicon, { aiCircleCheck, aiCircleInfo, aiCircleExclamation } from "@studio384/amaranth";
+import clsx from "clsx";
 
 export default function Status({ status }) {
   return (
     <>
-      {!!status &&
-        <div className={clsx('alert mt-3 d-flex', `alert-${status.type ?? 'info'}`)}>
+      {!!status && (
+        <div className={clsx("alert d-flex mt-3", `alert-${status.type ?? "info"}`)}>
           <p className="m-0 me-2">
-            <Amicon icon={status.type === 'success' ? aiCircleCheck : (status.type === 'info' ? aiCircleInfo : aiCircleExclamation)} />
+            <Amicon
+              icon={
+                status.type === "success" ? aiCircleCheck : status.type === "info" ? aiCircleInfo : aiCircleExclamation
+              }
+            />
           </p>
           <div>
             {status.title && <h4 className="h5 text-dark m-0">{status.title}</h4>}
             <p className="m-0">{status.message}</p>
           </div>
         </div>
-      }
+      )}
     </>
-  )
+  );
 }

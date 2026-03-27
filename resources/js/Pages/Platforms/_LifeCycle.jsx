@@ -29,15 +29,9 @@ export default function LifeCycle({ release, small }) {
     highest_duration,
   ] = useMemo(() => {
     const today = new Date();
-    const start_preview = release.start_preview
-      ? parseISO(release.start_preview)
-      : null;
-    const start_public = release.start_public
-      ? parseISO(release.start_public)
-      : null;
-    const start_extended = release.start_extended
-      ? parseISO(release.start_extended)
-      : null;
+    const start_preview = release.start_preview ? parseISO(release.start_preview) : null;
+    const start_public = release.start_public ? parseISO(release.start_public) : null;
+    const start_extended = release.start_extended ? parseISO(release.start_extended) : null;
     const start_lts = release.start_lts ? parseISO(release.start_lts) : null;
     const end_lts = release.end_lts ? parseISO(release.end_lts) : null;
 
@@ -55,8 +49,7 @@ export default function LifeCycle({ release, small }) {
       preview_duration = differenceInDays(start_public, start_preview);
 
       if (isBefore(today, start_public)) {
-        preview_progress =
-          (differenceInDays(today, start_preview) / preview_duration) * 100;
+        preview_progress = (differenceInDays(today, start_preview) / preview_duration) * 100;
       } else {
         preview_progress = 100;
       }
@@ -70,8 +63,7 @@ export default function LifeCycle({ release, small }) {
       public_duration = differenceInDays(start_extended, start_public);
 
       if (isBefore(today, start_extended)) {
-        public_progress =
-          (differenceInDays(today, start_public) / public_duration) * 100;
+        public_progress = (differenceInDays(today, start_public) / public_duration) * 100;
       } else {
         public_progress = 100;
       }
@@ -85,8 +77,7 @@ export default function LifeCycle({ release, small }) {
       extended_duration = differenceInDays(start_lts, start_extended);
 
       if (isBefore(today, start_lts)) {
-        extended_progress =
-          (differenceInDays(today, start_extended) / extended_duration) * 100;
+        extended_progress = (differenceInDays(today, start_extended) / extended_duration) * 100;
       } else {
         extended_progress = 100;
       }
@@ -100,8 +91,7 @@ export default function LifeCycle({ release, small }) {
       lts_duration = differenceInDays(end_lts, start_lts);
 
       if (isBefore(today, end_lts)) {
-        lts_progress =
-          (differenceInDays(today, start_lts) / lts_duration) * 100;
+        lts_progress = (differenceInDays(today, start_lts) / lts_duration) * 100;
       } else {
         lts_progress = 100;
       }
@@ -111,14 +101,8 @@ export default function LifeCycle({ release, small }) {
       lts_progress = 100;
     }
 
-    const total_duration =
-      preview_duration + public_duration + extended_duration + lts_duration;
-    const highest_duration = max([
-      preview_duration,
-      public_duration,
-      extended_duration,
-      lts_duration,
-    ]);
+    const total_duration = preview_duration + public_duration + extended_duration + lts_duration;
+    const highest_duration = max([preview_duration, public_duration, extended_duration, lts_duration]);
 
     return [
       total_duration,
@@ -133,20 +117,11 @@ export default function LifeCycle({ release, small }) {
       ongoing_phase,
       highest_duration,
     ];
-  }, [
-    release.start_preview,
-    release.start_public,
-    release.start_extended,
-    release.start_lts,
-    release.end_lts,
-  ]);
+  }, [release.start_preview, release.start_public, release.start_extended, release.start_lts, release.end_lts]);
 
   return (
     <>
-      {(!!preview_duration ||
-        !!public_duration ||
-        !!extended_duration ||
-        !!lts_duration) && (
+      {(!!preview_duration || !!public_duration || !!extended_duration || !!lts_duration) && (
         <>
           <div className="d-flex progress-group flex-row">
             {!!preview_duration && (
@@ -155,14 +130,9 @@ export default function LifeCycle({ release, small }) {
                 totalDuration={total_duration}
                 highestDuration={highest_duration}
                 title="Development"
-                startDescription={format(
-                  parseISO(release.start_preview),
-                  "d MMM yyyy"
-                )}
+                startDescription={format(parseISO(release.start_preview), "d MMM yyyy")}
                 endDescription={
-                  ongoing_phase === "development"
-                    ? "Ongoing"
-                    : format(parseISO(release.start_public), "d MMM yyyy")
+                  ongoing_phase === "development" ? "Ongoing" : format(parseISO(release.start_public), "d MMM yyyy")
                 }
                 small={small}
               >
@@ -175,14 +145,9 @@ export default function LifeCycle({ release, small }) {
                 totalDuration={total_duration}
                 highestDuration={highest_duration}
                 title="Support"
-                startDescription={format(
-                  parseISO(release.start_public),
-                  "d MMM yyyy"
-                )}
+                startDescription={format(parseISO(release.start_public), "d MMM yyyy")}
                 endDescription={
-                  ongoing_phase === "production"
-                    ? "Ongoing"
-                    : format(parseISO(release.start_extended), "d MMM yyyy")
+                  ongoing_phase === "production" ? "Ongoing" : format(parseISO(release.start_extended), "d MMM yyyy")
                 }
                 small={small}
               >
@@ -195,14 +160,9 @@ export default function LifeCycle({ release, small }) {
                 totalDuration={total_duration}
                 highestDuration={highest_duration}
                 title="Extended"
-                startDescription={format(
-                  parseISO(release.start_extended),
-                  "d MMM yyyy"
-                )}
+                startDescription={format(parseISO(release.start_extended), "d MMM yyyy")}
                 endDescription={
-                  ongoing_phase === "extended"
-                    ? "Ongoing"
-                    : format(parseISO(release.start_lts), "d MMM yyyy")
+                  ongoing_phase === "extended" ? "Ongoing" : format(parseISO(release.start_lts), "d MMM yyyy")
                 }
                 small={small}
               >
@@ -215,15 +175,8 @@ export default function LifeCycle({ release, small }) {
                 totalDuration={total_duration}
                 highestDuration={highest_duration}
                 title="LTSC"
-                startDescription={format(
-                  parseISO(release.start_lts),
-                  "d MMM yyyy"
-                )}
-                endDescription={
-                  ongoing_phase === "lts"
-                    ? "Ongoing"
-                    : format(parseISO(release.end_lts), "d MMM yyyy")
-                }
+                startDescription={format(parseISO(release.start_lts), "d MMM yyyy")}
+                endDescription={ongoing_phase === "lts" ? "Ongoing" : format(parseISO(release.end_lts), "d MMM yyyy")}
                 small={small}
               >
                 <ProgressBar progress={lts_progress} color="danger" />
@@ -231,57 +184,33 @@ export default function LifeCycle({ release, small }) {
             )}
           </div>
           {!small && (
-            <div className="d-flex d-lg-none flex-row justify-content-center mt-2">
+            <div className="d-flex d-lg-none justify-content-center mt-2 flex-row">
               <div className="d-flex flex-column justify-content-center mt-n1">
-                {!!preview_duration && (
-                  <p className="legend-stage">Development</p>
-                )}
+                {!!preview_duration && <p className="legend-stage">Development</p>}
                 {!!public_duration && <p className="legend-stage">Support</p>}
-                {!!extended_duration && (
-                  <p className="legend-stage">Extended</p>
-                )}
+                {!!extended_duration && <p className="legend-stage">Extended</p>}
                 {!!lts_duration && <p className="legend-stage">LTSC</p>}
               </div>
               <div className="d-flex flex-column justify-content-center">
-                {!!preview_duration && (
-                  <div className="legend-bar legend-bar-primary" />
-                )}
-                {!!public_duration && (
-                  <div className="legend-bar legend-bar-success" />
-                )}
-                {!!extended_duration && (
-                  <div className="legend-bar legend-bar-warning" />
-                )}
-                {!!lts_duration && (
-                  <div className="legend-bar legend-bar-danger" />
-                )}
+                {!!preview_duration && <div className="legend-bar legend-bar-primary" />}
+                {!!public_duration && <div className="legend-bar legend-bar-success" />}
+                {!!extended_duration && <div className="legend-bar legend-bar-warning" />}
+                {!!lts_duration && <div className="legend-bar legend-bar-danger" />}
               </div>
               <div className="d-flex flex-column justify-content-center mt-n1">
                 {!!release.start_preview && (
-                  <p className="legend-dates">
-                    {format(parseISO(release.start_preview), "d MMM yyyy")}
-                  </p>
+                  <p className="legend-dates">{format(parseISO(release.start_preview), "d MMM yyyy")}</p>
                 )}
                 {!!release.start_public && (
-                  <p className="legend-dates">
-                    {format(parseISO(release.start_public), "d MMM yyyy")}
-                  </p>
+                  <p className="legend-dates">{format(parseISO(release.start_public), "d MMM yyyy")}</p>
                 )}
                 {!!release.start_extended && (
-                  <p className="legend-dates">
-                    {format(parseISO(release.start_extended), "d MMM yyyy")}
-                  </p>
+                  <p className="legend-dates">{format(parseISO(release.start_extended), "d MMM yyyy")}</p>
                 )}
                 {!!release.start_lts && (
-                  <p className="legend-dates">
-                    {format(parseISO(release.start_lts), "d MMM yyyy")}
-                  </p>
+                  <p className="legend-dates">{format(parseISO(release.start_lts), "d MMM yyyy")}</p>
                 )}
-                {!!release.end_lts && (
-                  <p className="legend-dates">
-                    {format(parseISO(release.end_lts), "d MMM yyyy")}
-                  </p>
-                )}
+                {!!release.end_lts && <p className="legend-dates">{format(parseISO(release.end_lts), "d MMM yyyy")}</p>}
                 {!!release.ongoing && <p className="legend-dates">Ongoing</p>}
               </div>
             </div>

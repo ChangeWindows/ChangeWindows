@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
+import { Head, router } from "@inertiajs/react";
 import Amicon, { aiShieldKeyhole } from "@studio384/amaranth";
 
 export default function ResetPassword({ app, token, status }) {
@@ -28,9 +28,7 @@ export default function ResetPassword({ app, token, status }) {
           <div className="col-12">
             <div className="alert alert-danger mb-0">
               {Object.keys(status).map((errorGroup, _key) =>
-                status[errorGroup].map((error, key) => (
-                  <span key={key}>{error}</span>
-                ))
+                status[errorGroup].map((error, key) => <span key={key}>{error}</span>),
               )}
             </div>
           </div>
@@ -88,7 +86,7 @@ export default function ResetPassword({ app, token, status }) {
             <label htmlFor="password_confirmation">Confirm password</label>
           </div>
         </div>
-        <div className="col-12 d-flex flex-column">
+        <div className="d-flex flex-column col-12">
           <button className="btn btn-primary btn-sm py-2" type="submit">
             <Amicon icon={aiShieldKeyhole} /> Reset password
           </button>

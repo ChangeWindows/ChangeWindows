@@ -1,23 +1,23 @@
-import React from 'react';
-import clsx from 'clsx';
+import clsx from "clsx";
 
-import '../../css/app.css';
-
-import AppBar from './AppBar';
-import Navigation from './Navigation/Navigation';
+import "../../css/app.css";
+import AppBar from "./AppBar";
+import Navigation from "./Navigation/Navigation";
 
 export default function App({ children, background = false }) {
   return (
-    <div className="bg-light">
-      <div className="grid">
-        <header className="grid-sidebar">
-          <Navigation />
-        </header>
-        <AppBar />
-        <main className={clsx('grid-content', { 'auth': background })}>
-          { children }
-        </main>
-      </div>
+    <div className="grid h-dvh grid-cols-[240px_auto] grid-rows-[min-content_auto] bg-zinc-100 text-black">
+      <AppBar />
+      <header className="">
+        <Navigation />
+      </header>
+      <main
+        className={clsx("relative me-2 mb-2 overflow-auto rounded-lg border border-zinc-300 bg-white shadow-md", {
+          auth: background,
+        })}
+      >
+        {children}
+      </main>
     </div>
-  )
+  );
 }

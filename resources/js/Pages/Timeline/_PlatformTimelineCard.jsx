@@ -1,15 +1,16 @@
 import React from "react";
 
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+
 import Flight from "./Flight";
 
 export default function PlatformTimelineCard({ platform }) {
   return (
-    <div className="platform-event">
-      <div className="platform-event-icon">
+    <div className="grid grid-cols-[min-content_auto] rounded-lg border border-zinc-200 bg-white shadow-sm contain-paint">
+      <div className="flex size-10 items-center justify-center">
         <PlatformIcon platform={platform[0].platform} color />
       </div>
-      <div className="platform-event-events">
+      <div className="grid grid-cols-[min-content_min-content_auto] gap-x-4 divide-y divide-zinc-200">
         {platform.map((flight, _key) => (
           <Flight
             key={`${flight.type}-${flight.id}`}

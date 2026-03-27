@@ -1,24 +1,17 @@
 import React from "react";
-import { useForm } from "@inertiajs/react";
 
-import Admin from "@/Layouts/Admin";
-import Fieldset from "@/Components/UI/Forms/Fieldset";
 import NaviBar from "@/Components/NaviBar";
-import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Status from "@/Components/Status";
+import Fieldset from "@/Components/UI/Forms/Fieldset";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
 import TextField from "@/Components/UI/Forms/TextField";
+import Admin from "@/Layouts/Admin";
 
+import { useForm } from "@inertiajs/react";
 import Amicon, { aiTrashCan } from "@studio384/amaranth";
 
 export default function Edit({ can, permission, status }) {
-  const {
-    data,
-    setData,
-    patch,
-    delete: destroy,
-    processing,
-    errors,
-  } = useForm(permission);
+  const { data, setData, patch, delete: destroy, processing, errors } = useForm(permission);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -33,44 +26,24 @@ export default function Edit({ can, permission, status }) {
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
-        <NaviBar
-          back="/admin/permissions"
-          actions={can.permissions.edit && <SaveButton loading={processing} />}
-        >
+        <NaviBar back="/admin/permissions" actions={can.permissions.edit && <SaveButton loading={processing} />}>
           {data.name || "Unnamed permisison"}
         </NaviBar>
 
         <div className="container my-3">
           <Status status={status} />
-          <Fieldset
-            title="General"
-            description="Basic settings."
-            disabled={!can.permissions.edit}
-          >
-            <div className="col-12 col-sm-6">
-              <TextField
-                id="name"
-                label="Name"
-                value={data.name}
-                errors={errors.name}
-                onChange={setData}
-              />
+          <Fieldset title="General" description="Basic settings." disabled={!can.permissions.edit}>
+            <div className="col-sm-6 col-12">
+              <TextField id="name" label="Name" value={data.name} errors={errors.name} onChange={setData} />
             </div>
           </Fieldset>
         </div>
       </form>
       {can.permissions.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
-          <Fieldset
-            title="Danger zone"
-            description="All alone in the danger zone."
-            danger
-          >
+          <Fieldset title="Danger zone" description="All alone in the danger zone." danger>
             <div className="col-12">
-              <p>
-                Deleting a permission will remove all the content associated
-                with that permission. Are you sure?
-              </p>
+              <p>Deleting a permission will remove all the content associated with that permission. Are you sure?</p>
               <button className="btn btn-danger btn-sm" type="submit">
                 <Amicon icon={aiTrashCan} /> Delete
               </button>

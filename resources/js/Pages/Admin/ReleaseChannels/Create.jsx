@@ -1,13 +1,14 @@
 import React from "react";
-import { useForm } from "@inertiajs/react";
 
-import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
-import TextField from "@/Components/UI/Forms/TextField";
-import Select from "@/Components/UI/Forms/Select";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
-import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Fieldset from "@/Components/UI/Forms/Fieldset";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
+import Select from "@/Components/UI/Forms/Select";
+import TextField from "@/Components/UI/Forms/TextField";
+import Admin from "@/Layouts/Admin";
+
+import { useForm } from "@inertiajs/react";
 
 export default function Create({ releases, channels, channel, params }) {
   const { data, setData, post, processing, errors } = useForm({
@@ -26,19 +27,13 @@ export default function Create({ releases, channels, channel, params }) {
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
-        <NaviBar
-          back="/admin/releases"
-          actions={<SaveButton loading={processing} />}
-        >
+        <NaviBar back="/admin/releases" actions={<SaveButton loading={processing} />}>
           {data.name || "Unnamed channel"}
         </NaviBar>
 
         <div className="container my-3">
-          <Fieldset
-            title="Identity"
-            description="About this release channel."
-          >
-            <div className="col-12 col-lg-6">
+          <Fieldset title="Identity" description="About this release channel.">
+            <div className="col-lg-6 col-12">
               <Select
                 id="channel_id"
                 label="Channel"
@@ -50,7 +45,7 @@ export default function Create({ releases, channels, channel, params }) {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <Select
                 id="release_id"
                 label="Release"
@@ -62,16 +57,10 @@ export default function Create({ releases, channels, channel, params }) {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
-              <TextField
-                id="name"
-                label="Name"
-                value={data.name}
-                errors={errors.name}
-                onChange={setData}
-              />
+            <div className="col-lg-6 col-12">
+              <TextField id="name" label="Name" value={data.name} errors={errors.name} onChange={setData} />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 id="short_name"
                 label="Short name"
@@ -81,11 +70,8 @@ export default function Create({ releases, channels, channel, params }) {
               />
             </div>
           </Fieldset>
-          <Fieldset
-            title="Status"
-            description="The channel's current status."
-          >
-            <div className="col-12 col-lg-6">
+          <Fieldset title="Status" description="The channel's current status.">
+            <div className="col-lg-6 col-12">
               <Checkbox
                 id="supported"
                 label="Supported"

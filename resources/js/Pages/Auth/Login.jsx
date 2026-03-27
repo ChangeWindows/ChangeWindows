@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-import { Link, Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
-import Amicon, {
-  aiArrowRightToBracket,
-  aiShieldKeyhole,
-  aiPersonPlus,
-} from "@studio384/amaranth";
+import { Link, Head, router } from "@inertiajs/react";
+import Amicon, { aiArrowRightToBracket, aiShieldKeyhole, aiPersonPlus } from "@studio384/amaranth";
 
 export default function Login({ app, status }) {
   const [form, setForm] = useState({ email: "", password: "", remember: true });
@@ -26,9 +22,7 @@ export default function Login({ app, status }) {
           <div className="col-12">
             <div className="alert alert-danger mb-0">
               {Object.keys(status).map((errorGroup, _key) =>
-                status[errorGroup].map((error, key) => (
-                  <span key={key}>{error}</span>
-                ))
+                status[errorGroup].map((error, key) => <span key={key}>{error}</span>),
               )}
             </div>
           </div>
@@ -90,7 +84,7 @@ export default function Login({ app, status }) {
             </label>
           </div>
         </div>
-        <div className="col-12 d-flex flex-column">
+        <div className="d-flex flex-column col-12">
           <button className="btn btn-primary btn-sm py-2" type="submit">
             <Amicon icon={aiArrowRightToBracket} /> Login
           </button>
@@ -98,8 +92,8 @@ export default function Login({ app, status }) {
         <div className="col-12">
           <hr className="m-0" />
         </div>
-        <div className="col-12 d-flex flex-column">
-          <Link href="/register" className="btn btn-light btn-sm py-2 mb-2">
+        <div className="d-flex flex-column col-12">
+          <Link href="/register" className="btn btn-light btn-sm mb-2 py-2">
             <Amicon icon={aiPersonPlus} /> Register
           </Link>
           <Link href="/forgot-password" className="btn btn-light btn-sm py-2">

@@ -21,7 +21,9 @@ export default function Progress({
           <small>{title}</small>
         </p>
       )}
-      <div className="progress" style={small && { height: 2 }}>{children}</div>
+      <div className="progress" style={small && { height: 2 }}>
+        {children}
+      </div>
       {(startDescription || endDescription) && !small && (
         <div className="d-none d-lg-flex">
           <p className="progress-date me-2">

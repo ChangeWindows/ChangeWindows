@@ -1,5 +1,6 @@
-import clsx from 'clsx';
-import React from 'react';
+import React from "react";
+
+import clsx from "clsx";
 
 export default function Checkbox({
   className,
@@ -11,17 +12,12 @@ export default function Checkbox({
   disabled,
   errors,
   onChange,
-  helper
+  helper,
 }) {
   return (
-    <div className={clsx('form-check', className)}>
+    <div className={clsx("form-check", className)}>
       <input
-        className={
-          clsx(
-            'form-check-input',
-            { 'is-invalid': errors }
-          )
-        }
+        className={clsx("form-check-input", { "is-invalid": errors })}
         type="checkbox"
         value={value}
         id={id}
@@ -32,13 +28,9 @@ export default function Checkbox({
       />
       <label className="form-check-label d-block" htmlFor={id}>
         {label}
-        {!!helper &&
-          <small className="form-text d-block">{helper}</small>
-        }
+        {!!helper && <small className="form-text d-block">{helper}</small>}
       </label>
-      {errors &&
-        <div className="invalid-feedback">{errors}</div>
-      }
+      {errors && <div className="invalid-feedback">{errors}</div>}
     </div>
-  )
+  );
 }

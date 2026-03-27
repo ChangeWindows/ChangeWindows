@@ -1,25 +1,20 @@
-import React, { Fragment } from "react";
-import { Head } from "@inertiajs/react";
+import { Fragment } from "react";
 
-import App from "@/Layouts/App";
 import Channel from "@/Components/Cards/Channel";
 import Pagination from "@/Components/Pagination";
-import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import PlatformNavigation from "@/Components/PlatformNavigation";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import Timeline from "@/Components/Timeline/Timeline";
+import App from "@/Layouts/App";
+
+import { Head } from "@inertiajs/react";
+import Amicon, { aiPatreon } from "@studio384/amaranth";
+import clsx from "clsx";
+import { parseISO } from "date-fns";
 
 import PlatformTimelineCard from "./_PlatformTimelineCard";
 
-import { parseISO } from "date-fns";
-import Amicon, { aiPatreon } from "@studio384/amaranth";
-
-export default function Index({
-  timeline,
-  pagination,
-  platforms,
-  channel_platforms,
-  patron,
-}) {
+export default function Index({ timeline, pagination, platforms, channel_platforms, patron }) {
   return (
     <App>
       <Head title="Timeline" />
@@ -32,81 +27,74 @@ export default function Index({
         platforms={platforms}
       />
 
-      <div className="container">
-        <div className="row g-1">
-          <div className="col-12 titlebar">
-            <h1>Timeline</h1>
-          </div>
-          <div className="col">
-            <div className="row g-3">
-              <div className="col-12 col-md-8 col-lg-7">
-                <div className="row g-1">
-                  {Object.keys(timeline).map((date, key) => (
-                    <Timeline date={parseISO(timeline[date].date)} key={key}>
-                      {timeline[date].flights.map((platform, _key) => (
-                        <PlatformTimelineCard platform={platform} />
-                      ))}
-                    </Timeline>
-                  ))}
-                  <Pagination pagination={pagination} />
-                </div>
-              </div>
-              <div className="d-none d-md-block col-md-4 col-lg-5">
-                <div className="row g-1">
-                  {channel_platforms.map((platform, key) => (
-                    <Fragment key={key}>
-                      {key === 2 && patron && (
-                        <div className="col-12 mt-3">
-                          <a
-                            href="https://www.patreon.com/changewindows"
-                            className="settings-card"
-                            key={key}
-                          >
-                            <div className="settings-icon ms-1 me-2 ms-lg-0 me-lg-0">
-                              <img
-                                src={patron.avatar}
-                                alt={patron.name}
-                                style={{ width: 32, height: 32 }}
-                                className="rounded-circle"
-                              />
-                            </div>
-                            <div className="flex-grow-1 mw-0">
-                              <span className="d-block text-truncate">
-                                Join <b>{patron.name}</b>
-                              </span>
-                              <small className="d-block mt-n1 text-muted text-truncate">
-                                in supporting ChangeWindows
-                              </small>
-                            </div>
-                            <div className="ms-2 d-block d-md-none d-lg-block">
-                              <Amicon icon={aiPatreon} />
-                            </div>
-                          </a>
-                        </div>
-                      )}
-                      <div className="col-12 titel">
-                        <h3 className="h6" style={{ color: platform.color }}>
-                          <PlatformIcon platform={platform} color />
-                          <span className="fw-bold ms-2">{platform.name}</span>
-                        </h3>
-                      </div>
-                      {platform.channels.map((channel, _key) => (
-                        <Channel
-                          key={_key}
-                          channel={{ color: channel.color, name: channel.name }}
-                          build={channel.flight ? channel.flight.version : ""}
-                          date={
-                            channel.flight ? parseISO(channel.flight.date) : ""
-                          }
-                          url={channel.flight ? route('front.platforms.releases', { release: channel.release, platform }) : undefined}
-                        />
-                      ))}
-                    </Fragment>
+      <div className="container grid grid-rows-[repeat(2,min_content)] gap-3 lg:grid-cols-[5fr_3fr]">
+        <div>
+          <h1 className="font-display my-2 text-2xl font-bold">Timeline</h1>
+          {Object.keys(timeline).map((date, key) => (
+            <Timeline date={parseISO(timeline[date].date)} key={key}>
+              {timeline[date].flights.map((platform, _key) => (
+                <PlatformTimelineCard platform={platform} />
+              ))}
+            </Timeline>
+          ))}
+          <Pagination pagination={pagination} />
+        </div>
+        <div className="my-4 flex flex-col gap-4">
+          {channel_platforms.map((platform, key) => (
+            <Fragment key={key}>
+              {key === 2 && patron && (
+                <a
+                  href="https://www.patreon.com/changewindows"
+                  className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-zinc-200 p-2 px-4 shadow-sm transition hover:shadow-lg"
+                  key={key}
+                >
+                  <img src={patron.avatar} alt={patron.name} className="size-8 rounded-full" />
+                  <div className="flex grow flex-col">
+                    <span className="block truncate">
+                      Join <b>{patron.name}</b>
+                    </span>
+                    <small className="block truncate text-zinc-500">in supporting ChangeWindows</small>
+                  </div>
+                  <Amicon icon={aiPatreon} />
+                </a>
+              )}
+              <div className="flex flex-col gap-2">
+                <h3 className="flex items-center gap-2 px-2 text-lg font-semibold" style={{ color: platform.color }}>
+                  <PlatformIcon platform={platform} color />
+                  <span>{platform.name}</span>
+                  <span>{platform.channels.length}</span>
+                </h3>
+                <div className="grid grid-cols-6 gap-px rounded-lg border border-zinc-200 bg-zinc-200 shadow-sm contain-paint">
+                  {platform.channels.map((channel, _key) => (
+                    <Channel
+                      key={_key}
+                      channel={{ color: channel.color, name: channel.name }}
+                      build={channel.flight ? channel.flight.version : ""}
+                      date={channel.flight ? parseISO(channel.flight.date) : ""}
+                      url={
+                        channel.flight
+                          ? route("front.platforms.releases", { release: channel.release, platform })
+                          : undefined
+                      }
+                      classNames={clsx({
+                        "col-span-full": platform.channels.length === 1,
+                        "col-span-3":
+                          platform.channels.length === 2 ||
+                          platform.channels.length === 4 ||
+                          (platform.channels.length === 5 && _key > 2) ||
+                          (platform.channels.length === 7 && _key <= 3),
+                        "col-span-2":
+                          platform.channels.length === 3 ||
+                          (platform.channels.length === 5 && _key <= 2) ||
+                          platform.channels.length === 6 ||
+                          (platform.channels.length === 7 && _key > 3),
+                      })}
+                    />
                   ))}
                 </div>
               </div>
-            </div>
-          </div>
+            </Fragment>
+          ))}
         </div>
       </div>
     </App>

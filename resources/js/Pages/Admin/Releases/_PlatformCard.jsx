@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from '@inertiajs/react';
 
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
+import { Link } from "@inertiajs/react";
 import Amicon, { aiEye, aiNotes, aiPen } from "@studio384/amaranth";
 
 export default function PlatformCard({ can, platform }) {
@@ -17,11 +17,7 @@ export default function PlatformCard({ can, platform }) {
             <div className="subevent-build">{release.name}</div>
             <div className="subevent-tags">
               {release.channels.map((channel, _key) => (
-                <span
-                  key={_key}
-                  className="badge"
-                  style={{ background: channel.color }}
-                >
+                <span key={_key} className="badge" style={{ background: channel.color }}>
                   {channel.short_name}
                 </span>
               ))}
@@ -29,10 +25,7 @@ export default function PlatformCard({ can, platform }) {
             <div className="subevent-version">{release.version}</div>
 
             <div className="subevent-actions">
-              <Link
-                href={route("admin.releases.edit", release)}
-                className="btn btn-link btn-sm my-n1"
-              >
+              <Link href={route("admin.releases.edit", release)} className="btn btn-link btn-sm my-n1">
                 {can.releases.edit ? (
                   <>
                     <Amicon icon={aiPen} /> Edit
@@ -43,10 +36,7 @@ export default function PlatformCard({ can, platform }) {
                   </>
                 )}
               </Link>
-              <Link
-                href={route("admin.releases.changelog.edit", release)}
-                className="btn btn-link btn-sm my-n1"
-              >
+              <Link href={route("admin.releases.changelog.edit", release)} className="btn btn-link btn-sm my-n1">
                 <Amicon icon={aiNotes} />
               </Link>
             </div>

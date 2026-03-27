@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
+import { Head, router } from "@inertiajs/react";
 import Amicon, { aiPersonPlus } from "@studio384/amaranth";
 
 export default function Register({ app, status }) {
@@ -27,9 +27,7 @@ export default function Register({ app, status }) {
           <div className="col-12">
             <div className="alert alert-danger mb-0">
               {Object.keys(status).map((errorGroup, _key) =>
-                status[errorGroup].map((error, key) => (
-                  <span key={key}>{error}</span>
-                ))
+                status[errorGroup].map((error, key) => <span key={key}>{error}</span>),
               )}
             </div>
           </div>
@@ -41,9 +39,7 @@ export default function Register({ app, status }) {
               className="form-control"
               id="name"
               value={form.name}
-              onChange={(event) =>
-                setForm((curForm) => ({ ...curForm, name: event.target.value }))
-              }
+              onChange={(event) => setForm((curForm) => ({ ...curForm, name: event.target.value }))}
               autoFocus
             />
             <label htmlFor="name">Name</label>
@@ -102,7 +98,7 @@ export default function Register({ app, status }) {
             <label htmlFor="password_confirmation">Confirm password</label>
           </div>
         </div>
-        <div className="col-12 d-flex flex-column">
+        <div className="d-flex flex-column col-12">
           <button className="btn btn-primary btn-sm py-2" type="submit">
             <Amicon icon={aiPersonPlus} /> Register
           </button>

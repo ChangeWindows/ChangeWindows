@@ -1,14 +1,15 @@
 import React from "react";
-import { Link } from '@inertiajs/react';
 
-import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import Pagination from "@/Components/Pagination";
 import Status from "@/Components/Status";
 import Timeline from "@/Components/Timeline/Timeline";
+import Admin from "@/Layouts/Admin";
 
+import { Link } from "@inertiajs/react";
 import Amicon, { aiPlus } from "@studio384/amaranth";
 import { parseISO } from "date-fns";
+
 import PlatformFlightCard from "./_PlatformFlightCard";
 
 export default function Index({ can, timeline, pagination, status }) {
@@ -17,10 +18,7 @@ export default function Index({ can, timeline, pagination, status }) {
       <NaviBar
         actions={
           can.flights.create && (
-            <Link
-              href={route("admin.flights.create")}
-              className="btn btn-primary btn-sm"
-            >
+            <Link href={route("admin.flights.create")} className="btn btn-primary btn-sm">
               <Amicon icon={aiPlus} /> Add
             </Link>
           )

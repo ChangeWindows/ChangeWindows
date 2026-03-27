@@ -1,13 +1,14 @@
 import React from "react";
-import { useForm } from "@inertiajs/react";
 
-import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
-import TextField from "@/Components/UI/Forms/TextField";
-import SaveButton from "@/Components/UI/Forms/SaveButton";
-import Fieldset from "@/Components/UI/Forms/Fieldset";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
+import Fieldset from "@/Components/UI/Forms/Fieldset";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
+import TextField from "@/Components/UI/Forms/TextField";
+import Admin from "@/Layouts/Admin";
+
+import { useForm } from "@inertiajs/react";
 
 export default function Create() {
   const { data, setData, post, processing, errors } = useForm({
@@ -17,7 +18,7 @@ export default function Create() {
     color: "#",
     position: 0,
     active: 1,
-    legacy: 0
+    legacy: 0,
   });
 
   function handleSubmit(e) {
@@ -28,24 +29,14 @@ export default function Create() {
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
-        <NaviBar
-          back="/admin/platforms"
-          actions={<SaveButton loading={processing} />}
-        >
-          <PlatformIcon platform={data} color className="me-2" />{" "}
-          {data.name || "Unnamed platform"}
+        <NaviBar back="/admin/platforms" actions={<SaveButton loading={processing} />}>
+          <PlatformIcon platform={data} color className="me-2" /> {data.name || "Unnamed platform"}
         </NaviBar>
 
         <div className="container my-3">
           <Fieldset title="Identity" description="About this platform.">
-            <div className="col-12 col-lg-6">
-              <TextField
-                id="name"
-                label="Name"
-                value={data.name}
-                errors={errors.name}
-                onChange={setData}
-              />
+            <div className="col-lg-6 col-12">
+              <TextField id="name" label="Name" value={data.name} errors={errors.name} onChange={setData} />
             </div>
             <div className="col-12">
               <TextField
@@ -59,7 +50,7 @@ export default function Create() {
             </div>
           </Fieldset>
           <Fieldset title="Appearance" description="The way it will look.">
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="number"
                 id="position"
@@ -69,16 +60,10 @@ export default function Create() {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
-              <TextField
-                id="color"
-                label="Color"
-                value={data.color}
-                errors={errors.color}
-                onChange={setData}
-              />
+            <div className="col-lg-6 col-12">
+              <TextField id="color" label="Color" value={data.color} errors={errors.color} onChange={setData} />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 id="icon"
                 label="Icon"
@@ -90,7 +75,7 @@ export default function Create() {
             </div>
           </Fieldset>
           <Fieldset title="Status" description="The platform's current status.">
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <Checkbox
                 id="active"
                 label="Active"
@@ -99,7 +84,7 @@ export default function Create() {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <Checkbox
                 id="legacy"
                 label="Legacy"
@@ -108,7 +93,7 @@ export default function Create() {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <Checkbox
                 id="tool"
                 label="Tool"

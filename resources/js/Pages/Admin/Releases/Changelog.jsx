@@ -1,12 +1,12 @@
 import React from "react";
-import { useForm } from "@inertiajs/react";
 
-import Admin from "@/Layouts/Admin";
+import Editor from "@/Components/Editor";
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
 import SaveButton from "@/Components/UI/Forms/SaveButton";
+import Admin from "@/Layouts/Admin";
 
-import Editor from "@/Components/Editor";
+import { useForm } from "@inertiajs/react";
 
 export default function Edit({ release, status }) {
   const { data, setData, patch, processing } = useForm(release);
@@ -19,17 +19,14 @@ export default function Edit({ release, status }) {
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
-        <NaviBar
-          back="/admin/releases"
-          actions={<SaveButton loading={processing} />}
-        >
+        <NaviBar back="/admin/releases" actions={<SaveButton loading={processing} />}>
           {data.name}
         </NaviBar>
 
         <div className="container my-3">
           <Status status={status} />
           <fieldset className="row mb-3">
-            <div className="col-12 position-relative">
+            <div className="position-relative col-12">
               <Editor content={release.changelog} setData={setData} />
             </div>
           </fieldset>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Head, router } from "@inertiajs/react";
 
 import Auth from "@/Layouts/Auth";
 
+import { Head, router } from "@inertiajs/react";
 import Amicon, { aiCheck } from "@studio384/amaranth";
 
 export default function ConfirmPassword({ app, status }) {
@@ -20,19 +20,14 @@ export default function ConfirmPassword({ app, status }) {
       <form onSubmit={handleSubmit} className="row g-3">
         <div className="col-12">
           <p>
-            <small>
-              This is a secure area of the application. Please confirm your
-              password before continuing.
-            </small>
+            <small>This is a secure area of the application. Please confirm your password before continuing.</small>
           </p>
         </div>
         {Object.keys(status).length > 0 && (
           <div className="col-12">
             <div className="alert alert-danger mb-0">
               {Object.keys(status).map((errorGroup, _key) =>
-                status[errorGroup].map((error, key) => (
-                  <span key={key}>{error}</span>
-                ))
+                status[errorGroup].map((error, key) => <span key={key}>{error}</span>),
               )}
             </div>
           </div>
@@ -50,7 +45,7 @@ export default function ConfirmPassword({ app, status }) {
             <label htmlFor="password">Password</label>
           </div>
         </div>
-        <div className="col-12 d-flex flex-column">
+        <div className="d-flex flex-column col-12">
           <button className="btn btn-primary btn-sm py-2" type="submit">
             <Amicon icon={aiCheck} /> Confirm
           </button>

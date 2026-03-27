@@ -1,25 +1,18 @@
 import React, { useRef } from "react";
-import { useForm } from "@inertiajs/react";
 
-import Admin from "@/Layouts/Admin";
-import Fieldset from "@/Components/UI/Forms/Fieldset";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
-import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Status from "@/Components/Status";
+import Fieldset from "@/Components/UI/Forms/Fieldset";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
 import TextField from "@/Components/UI/Forms/TextField";
+import Admin from "@/Layouts/Admin";
 
+import { useForm } from "@inertiajs/react";
 import Amicon, { aiTrashCan } from "@studio384/amaranth";
-
 import { parse, format, isValid, parseISO } from "date-fns";
 
-export default function Edit({
-  can,
-  flight,
-  platform,
-  release_channel,
-  status,
-}) {
+export default function Edit({ can, flight, platform, release_channel, status }) {
   const {
     data,
     setData,
@@ -79,28 +72,18 @@ export default function Edit({
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
-        <NaviBar
-          back="/admin/flights"
-          actions={can.flights.edit && <SaveButton loading={processing} />}
-        >
+        <NaviBar back="/admin/flights" actions={can.flights.edit && <SaveButton loading={processing} />}>
           <PlatformIcon platform={platform} color className="me-2" />
           {`${data.major}.${data.minor}.${data.build}.${data.delta}`}
-          <span
-            className="badge ms-2"
-            style={{ background: release_channel.color }}
-          >
+          <span className="badge ms-2" style={{ background: release_channel.color }}>
             {release_channel.name}
           </span>
         </NaviBar>
 
         <div className="container my-3">
           <Status status={status} />
-          <Fieldset
-            title="Build string"
-            description="The build string for this flight."
-            disabled={!can.flights.edit}
-          >
-            <div className="col-12 col-xl-6">
+          <Fieldset title="Build string" description="The build string for this flight." disabled={!can.flights.edit}>
+            <div className="col-xl-6 col-12">
               <div className="row g-1">
                 <div className="col-3">
                   <TextField
@@ -144,15 +127,13 @@ export default function Edit({
                 </div>
               </div>
             </div>
-            <div className="col-12 col-xl-6">
+            <div className="col-xl-6 col-12">
               <TextField
                 type="date"
                 id="date"
                 label="Date"
                 value={
-                  isValid(parse(data.date, "P", new Date()))
-                    ? format(parseISO(data.date), "yyyy-MM-dd")
-                    : data.date
+                  isValid(parse(data.date, "P", new Date())) ? format(parseISO(data.date), "yyyy-MM-dd") : data.date
                 }
                 errors={errors.date}
                 onChange={setData}
@@ -163,16 +144,9 @@ export default function Edit({
       </form>
       {can.flights.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
-          <Fieldset
-            title="Danger zone"
-            description="All alone in the danger zone."
-            danger
-          >
+          <Fieldset title="Danger zone" description="All alone in the danger zone." danger>
             <div className="col-12">
-              <p>
-                Deleting a flight will remove all the content associated with
-                that flight. Are you sure?
-              </p>
+              <p>Deleting a flight will remove all the content associated with that flight. Are you sure?</p>
               <button className="btn btn-danger btn-sm" type="submit">
                 <Amicon icon={aiTrashCan} /> Delete
               </button>

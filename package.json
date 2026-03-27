@@ -2,8 +2,14 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "vite",
         "build": "vite build",
+        "dev": "vite",
+        "fix": "oxfmt && oxlint --fix",
+        "format": "oxfmt --check",
+        "format:fix": "oxfmt",
+        "lint": "oxlint",
+        "lint:fix": "oxlint --fix",
+        "lint:github": "oxlint --format=github",
         "serve": "vite preview",
         "start": "vite"
     },
@@ -24,7 +30,7 @@
         "@tiptap/extension-underline": "3.21.0",
         "@tiptap/react": "3.21.0",
         "@tiptap/starter-kit": "3.21.0",
-        "clsx": "2.1.1",
+        "clsx": "^2.1.1",
         "date-fns": "4.1.0",
         "react": "19.2.4",
         "react-dom": "19.2.4",
@@ -38,6 +44,8 @@
         "@vitejs/plugin-react": "6.0.1",
         "autoprefixer": "10.4.27",
         "laravel-vite-plugin": "3.0.0",
+        "oxfmt": "^0.42.0",
+        "oxlint": "^1.57.0",
         "postcss": "8.5.8",
         "vite": "8.0.3"
     }

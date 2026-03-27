@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import clsx from "clsx";
 
 import Amicon, {
   aiAzure,
@@ -16,12 +15,9 @@ import Amicon, {
   aiDisplayCam,
   aiWindows,
 } from "@studio384/amaranth";
+import clsx from "clsx";
 
-export default function PlatformIcon({
-  platform,
-  color = false,
-  className = null,
-}) {
+export default function PlatformIcon({ platform, color = false, className = null }) {
   const icon = useMemo(() => {
     switch (platform.icon) {
       case "cloud":
@@ -53,11 +49,5 @@ export default function PlatformIcon({
     }
   }, []);
 
-  return (
-    <Amicon
-      icon={icon}
-      className={clsx(className)}
-      style={{ color: color ? platform.color : "inherit" }}
-    />
-  );
+  return <Amicon icon={icon} className={clsx(className)} style={{ color: color ? platform.color : "inherit" }} />;
 }

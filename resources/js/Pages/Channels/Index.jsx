@@ -1,14 +1,13 @@
 import React from "react";
-import { Head } from "@inertiajs/react";
 
-import App from "@/Layouts/App";
 import Channel from "@/Components/Cards/Channel";
-
-import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import PlatformNavigation from "@/Components/PlatformNavigation";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import App from "@/Layouts/App";
 
-import { parseISO } from "date-fns";
+import { Head } from "@inertiajs/react";
 import clsx from "clsx";
+import { parseISO } from "date-fns";
 
 export default function Index({ platforms, channel_platforms }) {
   return (
@@ -25,19 +24,19 @@ export default function Index({ platforms, channel_platforms }) {
 
       <div className="container">
         <div className="row g-1">
-          <div className="col-12 titlebar">
+          <div className="titlebar col-12">
             <h1>Channels</h1>
           </div>
           {channel_platforms.map((platform, key) => (
             <div
               className={clsx({
                 "col-12": platform.channels.length >= 3,
-                "col-12 col-md-6": platform.channels.length <= 2,
+                "col-md-6 col-12": platform.channels.length <= 2,
               })}
               key={key}
             >
               <div className="row g-1">
-                <div className="col-12 titel">
+                <div className="titel col-12">
                   <h3 className="h6" style={{ color: platform.color }}>
                     <PlatformIcon platform={platform} color />
                     <span className="fw-bold ms-2">{platform.name}</span>
@@ -49,7 +48,11 @@ export default function Index({ platforms, channel_platforms }) {
                     channel={{ color: channel.color, name: channel.name }}
                     build={channel.flight ? channel.flight.version : ""}
                     date={channel.flight ? parseISO(channel.flight.date) : ""}
-                    url={channel.flight ? route('front.platforms.releases', { release: channel.release, platform }) : undefined}
+                    url={
+                      channel.flight
+                        ? route("front.platforms.releases", { release: channel.release, platform })
+                        : undefined
+                    }
                   />
                 ))}
               </div>

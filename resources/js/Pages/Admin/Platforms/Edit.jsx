@@ -1,31 +1,19 @@
 import React from "react";
-import { Link, useForm } from "@inertiajs/react";
 
-import Admin from "@/Layouts/Admin";
-import Checkbox from "@/Components/UI/Forms/Checkbox";
-import Fieldset from "@/Components/UI/Forms/Fieldset";
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
-import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Status from "@/Components/Status";
+import Checkbox from "@/Components/UI/Forms/Checkbox";
+import Fieldset from "@/Components/UI/Forms/Fieldset";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
 import TextField from "@/Components/UI/Forms/TextField";
+import Admin from "@/Layouts/Admin";
 
+import { Link, useForm } from "@inertiajs/react";
 import Amicon, { aiPlus, aiTrashCan } from "@studio384/amaranth";
 
-export default function Edit({
-  can,
-  platform,
-  channels,
-  status,
-}) {
-  const {
-    data,
-    setData,
-    patch,
-    delete: destroy,
-    processing,
-    errors,
-  } = useForm(platform);
+export default function Edit({ can, platform, channels, status }) {
+  const { data, setData, patch, delete: destroy, processing, errors } = useForm(platform);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -40,29 +28,15 @@ export default function Edit({
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
-        <NaviBar
-          back="/admin/platforms"
-          actions={can.platforms.edit && <SaveButton loading={processing} />}
-        >
-          <PlatformIcon platform={data} color className="me-2" />{" "}
-          {data.name || "Unnamed platform"}
+        <NaviBar back="/admin/platforms" actions={can.platforms.edit && <SaveButton loading={processing} />}>
+          <PlatformIcon platform={data} color className="me-2" /> {data.name || "Unnamed platform"}
         </NaviBar>
 
         <div className="container my-3">
           <Status status={status} />
-          <Fieldset
-            title="Identity"
-            description="About this platform."
-            disabled={!can.platforms.edit}
-          >
-            <div className="col-12 col-lg-6">
-              <TextField
-                id="name"
-                label="Name"
-                value={data.name}
-                errors={errors.name}
-                onChange={setData}
-              />
+          <Fieldset title="Identity" description="About this platform." disabled={!can.platforms.edit}>
+            <div className="col-lg-6 col-12">
+              <TextField id="name" label="Name" value={data.name} errors={errors.name} onChange={setData} />
             </div>
             <div className="col-12">
               <TextField
@@ -75,12 +49,8 @@ export default function Edit({
               />
             </div>
           </Fieldset>
-          <Fieldset
-            title="Appearance"
-            description="The way it will look."
-            disabled={!can.platforms.edit}
-          >
-            <div className="col-12 col-lg-6">
+          <Fieldset title="Appearance" description="The way it will look." disabled={!can.platforms.edit}>
+            <div className="col-lg-6 col-12">
               <TextField
                 type="number"
                 id="position"
@@ -90,16 +60,10 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
-              <TextField
-                id="color"
-                label="Color"
-                value={data.color}
-                errors={errors.color}
-                onChange={setData}
-              />
+            <div className="col-lg-6 col-12">
+              <TextField id="color" label="Color" value={data.color} errors={errors.color} onChange={setData} />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 id="icon"
                 label="Icon"
@@ -110,12 +74,8 @@ export default function Edit({
               />
             </div>
           </Fieldset>
-          <Fieldset
-            title="Status"
-            description="The platform's current status."
-            disabled={!can.platforms.edit}
-          >
-            <div className="col-12 col-lg-6">
+          <Fieldset title="Status" description="The platform's current status." disabled={!can.platforms.edit}>
+            <div className="col-lg-6 col-12">
               <Checkbox
                 id="active"
                 label="Active"
@@ -124,7 +84,7 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <Checkbox
                 id="legacy"
                 label="Legacy"
@@ -133,7 +93,7 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <Checkbox
                 id="tool"
                 label="Tool"
@@ -158,22 +118,16 @@ export default function Edit({
             channel.active && channelstatus.push("Active");
 
             return (
-              <div className="col-12 col-sm-6 col-xl-4" key={channel.id}>
-                <Link
-                  href={route("admin.channels.edit", channel)}
-                  className="card border-0 shadow-sm h-100"
-                >
+              <div className="col-sm-6 col-xl-4 col-12" key={channel.id}>
+                <Link href={route("admin.channels.edit", channel)} className="card h-100 border-0 shadow-sm">
                   <div className="card-body">
                     <div className="d-flex">
                       <h3 className="h6 mb-0">
-                        <div
-                          className="dot"
-                          style={{ backgroundColor: channel.color }}
-                        />
+                        <div className="dot" style={{ backgroundColor: channel.color }} />
                       </h3>
                       <div className="ms-2">
                         <h3 className="h6 mb-0">{channel.name}</h3>
-                        <p className="text-muted mb-0 mt-n1">
+                        <p className="text-muted mt-n1 mb-0">
                           <small>{channelstatus.join(", ")}</small>
                         </p>
                       </div>
@@ -185,7 +139,7 @@ export default function Edit({
             );
           })}
           {can.channels.create && (
-            <div className="col-12 col-sm-6 col-xl-4">
+            <div className="col-sm-6 col-xl-4 col-12">
               <Link
                 href={route("admin.channels.create", {
                   platform: platform.id,
@@ -204,16 +158,9 @@ export default function Edit({
       </div>
       {can.platforms.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
-          <Fieldset
-            title="Danger zone"
-            description="All alone in the danger zone."
-            danger
-          >
+          <Fieldset title="Danger zone" description="All alone in the danger zone." danger>
             <div className="col-12">
-              <p>
-                Deleting a platform will remove all the content associated with
-                that platform. Are you sure?
-              </p>
+              <p>Deleting a platform will remove all the content associated with that platform. Are you sure?</p>
               <button className="btn btn-danger btn-sm" type="submit">
                 <Amicon icon={aiTrashCan} /> Delete
               </button>

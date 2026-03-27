@@ -1,14 +1,13 @@
 import React, { useMemo } from "react";
-import { Head } from "@inertiajs/react";
 
-import App from "@/Layouts/App";
 import Channel from "@/Components/Cards/Channel";
-
-import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import PlatformNavigation from "@/Components/PlatformNavigation";
-
-import { parseISO } from "date-fns";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import App from "@/Layouts/App";
 import { getLocal } from "@/utils/localStorage";
+
+import { Head } from "@inertiajs/react";
+import { parseISO } from "date-fns";
 
 export default function Show({ platform, platforms, channel_order, releases }) {
   const showActiveOnly = getLocal("showActiveOnly");
@@ -38,32 +37,26 @@ export default function Show({ platform, platforms, channel_order, releases }) {
     <App>
       <Head title={`${platform.name} channels`} />
 
-      <PlatformNavigation
-        all="front.channels"
-        page="Channels"
-        routeName="front.channels.show"
-        platforms={platforms}
-      />
+      <PlatformNavigation all="front.channels" page="Channels" routeName="front.channels.show" platforms={platforms} />
 
       <div className="container">
         <div className="row g-3">
-          <div className="col-12 titlebar">
+          <div className="titlebar col-12">
             <h1 style={{ color: platform.color }}>
-              <PlatformIcon platform={platform} color className="me-2" />{" "}
-              {platform.name}
+              <PlatformIcon platform={platform} color className="me-2" /> {platform.name}
             </h1>
           </div>
           {releaseList.map((release, key) => (
             <div className="col-12" key={key}>
               <div className="row g-1">
-                <div className="col-12 titel">
+                <div className="titel col-12">
                   <div className="d-flex flex-row">
                     <h3 className="h6 mb-0">
                       <PlatformIcon platform={release.platform} color />
                     </h3>
                     <div className="ms-2">
                       <h3 className="h6 mb-0">{release.name}</h3>
-                      <p className="text-muted mb-1 mt-n1">
+                      <p className="text-muted mt-n1 mb-1">
                         <small>
                           Version {release.version}, {release.codename}
                         </small>
@@ -74,9 +67,7 @@ export default function Show({ platform, platforms, channel_order, releases }) {
                 {channel_order
                   .filter((_co) => (showActiveOnly ? _co.active : true))
                   .map((_channel, _key) => {
-                    const channel = release.channels.find(
-                      (__channel) => __channel.channel_id === _channel.id
-                    );
+                    const channel = release.channels.find((__channel) => __channel.channel_id === _channel.id);
 
                     if (channel) {
                       return (
@@ -85,16 +76,12 @@ export default function Show({ platform, platforms, channel_order, releases }) {
                           disabled={!channel.supported}
                           channel={{ color: channel.color, name: channel.name }}
                           build={channel.flight ? channel.flight.version : ""}
-                          date={
-                            channel.flight ? parseISO(channel.flight.date) : ""
-                          }
-                          url={channel.flight ? route('front.platforms.releases', { release, platform }) : undefined}
+                          date={channel.flight ? parseISO(channel.flight.date) : ""}
+                          url={channel.flight ? route("front.platforms.releases", { release, platform }) : undefined}
                         />
                       );
                     } else {
-                      return (
-                        <div className="col d-none d-xxl-flex" key={_key} />
-                      );
+                      return <div className="col d-none d-xxl-flex" key={_key} />;
                     }
                   })}
               </div>

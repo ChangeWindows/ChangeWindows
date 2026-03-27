@@ -1,0 +1,55 @@
+{
+    "$schema": "./node_modules/oxfmt/configuration_schema.json",
+    "printWidth": 120,
+    "sortTailwindcss": {
+        "functions": ["clsx", "cn", "cva", "twMerge"]
+    },
+    "sortPackageJson": {
+        "sortScripts": true
+    },
+    "sortImports": {
+        "customGroups": [
+            {
+                "groupName": "react-libs",
+                "elementNamePattern": ["react", "react-**", "@react"]
+            },
+            {
+                "groupName": "internals",
+                "elementNamePattern": ["@/**"]
+            }
+        ],
+        "newlinesBetween": true,
+        "groups": [
+            "react-libs",
+            "internals",
+            ["value-builtin", "value-external"],
+            "value-internal",
+            ["value-parent", "value-sibling", "value-index"],
+            "unknown"
+        ]
+    },
+    "ignorePatterns": [
+        "logs/*",
+        "*.log",
+        "npm-debug.log*",
+        "yarn-debug.log*",
+        "yarn-error.log*",
+        "pnpm-debug.log*",
+        "lerna-debug.log*",
+        "node_modules",
+        "dist",
+        "dist-ssr",
+        "*.local",
+        "*.md",
+        ".vscode/*",
+        "!.vscode/extensions.json",
+        ".idea",
+        ".DS_Store",
+        "*.suo",
+        "*.ntvs*",
+        "*.njsproj",
+        "*.sln",
+        "*.sw?",
+        "coverage/*"
+    ]
+}

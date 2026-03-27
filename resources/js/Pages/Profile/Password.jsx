@@ -1,16 +1,12 @@
 import React from "react";
-import { Head, useForm } from "@inertiajs/react";
 
-import App from "@/Layouts/App";
-import TextField from "@/Components/UI/Forms/TextField";
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
+import TextField from "@/Components/UI/Forms/TextField";
+import App from "@/Layouts/App";
 
-import Amicon, {
-  aiCheck,
-  aiShieldKeyhole,
-  aiSpinnerThird,
-} from "@studio384/amaranth";
+import { Head, useForm } from "@inertiajs/react";
+import Amicon, { aiCheck, aiShieldKeyhole, aiSpinnerThird } from "@studio384/amaranth";
 
 export default function Index({ status, user }) {
   const { data, setData, patch, processing, errors } = useForm(user);
@@ -27,19 +23,10 @@ export default function Index({ status, user }) {
       <Head title="Change password" />
 
       <NaviBar
-        back={route('front.settings')}
+        back={route("front.settings")}
         actions={
-          <button
-            type="submit"
-            className="btn btn-primary btn-sm"
-            disabled={processing}
-            onClick={submitPatch}
-          >
-            <Amicon
-              icon={processing ? aiSpinnerThird : aiCheck}
-              spin={processing}
-            />{" "}
-            Save
+          <button type="submit" className="btn btn-primary btn-sm" disabled={processing} onClick={submitPatch}>
+            <Amicon icon={processing ? aiSpinnerThird : aiCheck} spin={processing} /> Save
           </button>
         }
       >
@@ -47,9 +34,9 @@ export default function Index({ status, user }) {
       </NaviBar>
 
       <form className="container" onSubmit={submitPatch}>
-          <Status status={status} />
+        <Status status={status} />
         <fieldset className="row g-3">
-          <div className="col-12 col-lg-8 col-xl-9">
+          <div className="col-lg-8 col-xl-9 col-12">
             <div className="row g-3">
               <div className="col-12 pt-3">
                 <p className="h6 mb-2">Password</p>

@@ -1,14 +1,14 @@
 import React from "react";
-import { useForm } from "@inertiajs/react";
 
-import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
 import Fieldset from "@/Components/UI/Forms/Fieldset";
-import NaviBar from "@/Components/NaviBar";
 import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Select from "@/Components/UI/Forms/Select";
 import TextField from "@/Components/UI/Forms/TextField";
+import Admin from "@/Layouts/Admin";
 
+import { useForm } from "@inertiajs/react";
 import { parse, format, isValid, parseISO } from "date-fns";
 
 export default function Create({ platforms }) {
@@ -39,16 +39,13 @@ export default function Create({ platforms }) {
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
-        <NaviBar
-          back="/admin/releases"
-          actions={<SaveButton loading={processing} />}
-        >
+        <NaviBar back="/admin/releases" actions={<SaveButton loading={processing} />}>
           {data.name || "Unnamed release"}
         </NaviBar>
 
         <div className="container my-3">
           <Fieldset title="Identity" description="About this release.">
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <Select
                 id="platform_id"
                 label="Platform"
@@ -57,28 +54,16 @@ export default function Create({ platforms }) {
                 selectLabel={(x) => x.name}
                 selectValue={(x) => x.id}
                 errors={errors.platform_id}
-                onChange={(e) => setData('platform_id', e.target.value)}
+                onChange={(e) => setData("platform_id", e.target.value)}
               />
             </div>
-            <div className="col-12 col-lg-6">
-              <TextField
-                id="name"
-                label="Name"
-                value={data.name}
-                errors={errors.name}
-                onChange={setData}
-              />
+            <div className="col-lg-6 col-12">
+              <TextField id="name" label="Name" value={data.name} errors={errors.name} onChange={setData} />
             </div>
-            <div className="col-12 col-lg-6">
-              <TextField
-                id="version"
-                label="Version"
-                value={data.version}
-                errors={errors.version}
-                onChange={setData}
-              />
+            <div className="col-lg-6 col-12">
+              <TextField id="version" label="Version" value={data.version} errors={errors.version} onChange={setData} />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 id="canonical_version"
                 label="Canonical Version"
@@ -87,7 +72,7 @@ export default function Create({ platforms }) {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 id="codename"
                 label="Codename"
@@ -107,11 +92,8 @@ export default function Create({ platforms }) {
               />
             </div>
           </Fieldset>
-          <Fieldset
-            title="Life cycle"
-            description="Dates relate to the life cycle of the release."
-          >
-            <div className="col-12 col-lg-6">
+          <Fieldset title="Life cycle" description="Dates relate to the life cycle of the release.">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="date"
                 id="start_preview"
@@ -125,7 +107,7 @@ export default function Create({ platforms }) {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="date"
                 id="start_public"
@@ -139,7 +121,7 @@ export default function Create({ platforms }) {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="date"
                 id="start_extended"
@@ -153,7 +135,7 @@ export default function Create({ platforms }) {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="date"
                 id="start_lts"
@@ -167,7 +149,7 @@ export default function Create({ platforms }) {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="date"
                 id="end_lts"
@@ -181,7 +163,7 @@ export default function Create({ platforms }) {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <Checkbox
                 id="ongoing"
                 label="Ongoing phase"
@@ -191,11 +173,8 @@ export default function Create({ platforms }) {
               />
             </div>
           </Fieldset>
-          <Fieldset
-            title="Flight range"
-            description="The range within all flights of this release fall."
-          >
-            <div className="col-12 col-lg-6">
+          <Fieldset title="Flight range" description="The range within all flights of this release fall.">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="number"
                 id="start_build"
@@ -205,7 +184,7 @@ export default function Create({ platforms }) {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="number"
                 id="start_delta"
@@ -215,7 +194,7 @@ export default function Create({ platforms }) {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="number"
                 id="end_build"
@@ -225,7 +204,7 @@ export default function Create({ platforms }) {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="number"
                 id="end_delta"

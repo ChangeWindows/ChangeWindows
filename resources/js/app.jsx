@@ -1,21 +1,21 @@
 import React from "react";
+
+import { createInertiaApp } from "@inertiajs/react";
+import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createRoot } from "react-dom/client";
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 
-import { createInertiaApp } from '@inertiajs/react'
-
-import '../css/app.css';
+import "../css/app.css";
 
 createInertiaApp({
   title: (title) => `${title} &middot; ChangeWindows`,
-  resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
+  resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob("./Pages/**/*.jsx")),
   setup({ el, App, props }) {
     const root = createRoot(el);
     root.render(<App {...props} />);
   },
   progress: {
     color: "#0066ff",
-  }
+  },
 });
 
 function appHeight() {

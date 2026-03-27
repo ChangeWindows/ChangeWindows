@@ -1,11 +1,7 @@
 import React from "react";
-import { Link, useForm } from "@inertiajs/react";
 
-import Amicon, {
-  aiCheck,
-  aiSpinnerThird,
-  aiXmark,
-} from "@studio384/amaranth";
+import { Link, useForm } from "@inertiajs/react";
+import Amicon, { aiCheck, aiSpinnerThird, aiXmark } from "@studio384/amaranth";
 import clsx from "clsx";
 
 export default function ReleaseChannel({ can, releaseChannel }) {
@@ -17,18 +13,12 @@ export default function ReleaseChannel({ can, releaseChannel }) {
   }
 
   return (
-    <div className="col-12 col-sm-6 col-xl-4">
-      <Link
-        href={route("admin.releasechannels.edit", releaseChannel)}
-        className="card border-0 shadow-sm h-100"
-      >
+    <div className="col-sm-6 col-xl-4 col-12">
+      <Link href={route("admin.releasechannels.edit", releaseChannel)} className="card h-100 border-0 shadow-sm">
         <div className="card-body">
           <div className="d-flex">
             <h3 className="h6 mb-0">
-              <div
-                className="dot"
-                style={{ backgroundColor: releaseChannel.color }}
-              />
+              <div className="dot" style={{ backgroundColor: releaseChannel.color }} />
             </h3>
             <div className="ms-2">
               <h3 className="h6 mb-0">{releaseChannel.name}</h3>
@@ -48,13 +38,7 @@ export default function ReleaseChannel({ can, releaseChannel }) {
               onClick={toggleSupported}
             >
               <Amicon
-                icon={
-                  processing
-                    ? aiSpinnerThird
-                    : releaseChannel.supported
-                    ? aiCheck
-                    : aiXmark
-                }
+                icon={processing ? aiSpinnerThird : releaseChannel.supported ? aiCheck : aiXmark}
                 spin={processing}
               />{" "}
               {processing ? "Toggling..." : "Supported"}

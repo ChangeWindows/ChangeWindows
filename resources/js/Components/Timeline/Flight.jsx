@@ -1,8 +1,9 @@
 import React, { useMemo } from "react";
-import { Link } from '@inertiajs/react';
+
+import { Link } from "@inertiajs/react";
+import clsx from "clsx";
 
 import PlatformIcon from "../Platforms/PlatformIcon";
-import clsx from "clsx";
 
 export default function Flight({
   platform,
@@ -17,21 +18,14 @@ export default function Flight({
   const mainProps = useMemo(() => ({ href: url }), ["url"]);
 
   return (
-    <Component
-      {...mainProps}
-      className={clsx("event", { "full-timeline": !sidebar })}
-    >
+    <Component {...mainProps} className={clsx("event", { "full-timeline": !sidebar })}>
       <div className="icon">
         <PlatformIcon platform={platform} color />
       </div>
       <div className="revision">{build}</div>
       <div className={clsx("tags", { "justify-content-end": sidebar })}>
         {channels.map((channel, key) => (
-          <span
-            key={key}
-            className="badge"
-            style={{ backgroundColor: channel.color }}
-          >
+          <span key={key} className="badge" style={{ backgroundColor: channel.color }}>
             {channel.name}
           </span>
         ))}

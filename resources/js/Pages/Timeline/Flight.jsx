@@ -1,32 +1,24 @@
 import React, { useMemo } from "react";
-import { Link } from '@inertiajs/react';
 
-export default function Flight({
-  platform,
-  build,
-  channels,
-  version = null,
-  url = null
-}) {
+import { Link } from "@inertiajs/react";
+
+export default function Flight({ platform, build, channels, version = null, url = null }) {
   const Component = useMemo(() => (url ? Link : "div"), ["url"]);
   const mainProps = useMemo(() => ({ href: url }), ["url"]);
 
   return (
-    <Component {...mainProps} className="subevent">
-      <div className="subevent-build">{build}</div>
+    <Component
+      {...mainProps}
+      className="col-span-full grid h-10 grid-cols-subgrid items-center justify-center px-2 transition hover:bg-zinc-100"
+    >
+      <div className="font-mono text-sm text-zinc-500">{platform.tool ? null : version}</div>
+      <div className="tabular-nums">{build}</div>
       <div className="subevent-tags">
         {channels.map((channel, key) => (
-          <span
-            key={key}
-            className="badge"
-            style={{ backgroundColor: channel.color }}
-          >
+          <span key={key} className="badge" style={{ backgroundColor: channel.color }}>
             {channel.name}
           </span>
         ))}
-      </div>
-      <div className="subevent-version">
-        {platform.tool ? null : version}
       </div>
     </Component>
   );

@@ -1,14 +1,14 @@
 import React, { useMemo, useRef, useState } from "react";
-import { useForm } from "@inertiajs/react";
 
-import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
 import Fieldset from "@/Components/UI/Forms/Fieldset";
-import NaviBar from "@/Components/NaviBar";
 import SaveButton from "@/Components/UI/Forms/SaveButton";
 import TextField from "@/Components/UI/Forms/TextField";
-import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Admin from "@/Layouts/Admin";
 
+import { useForm } from "@inertiajs/react";
 import { parse, format, isValid, parseISO } from "date-fns";
 
 export default function Create({ releases }) {
@@ -20,7 +20,7 @@ export default function Create({ releases }) {
     build: "",
     delta: "",
     releaseChannels: [],
-    date: format(new Date(), "yyyy-MM-dd")
+    date: format(new Date(), "yyyy-MM-dd"),
   });
 
   const eligibleReleases = useMemo(() => {
@@ -28,11 +28,9 @@ export default function Create({ releases }) {
       if (
         !showAll &&
         (Number(data.build) < Number(release.start_build) ||
-          (Number(data.build) === Number(release.start_build) &&
-            Number(data.delta) < Number(release.start_delta)) ||
+          (Number(data.build) === Number(release.start_build) && Number(data.delta) < Number(release.start_delta)) ||
           Number(data.build) > Number(release.end_build) ||
-          (Number(data.build) === Number(release.end_build) &&
-            Number(data.delta) > Number(release.end_delta)))
+          (Number(data.build) === Number(release.end_build) && Number(data.delta) > Number(release.end_delta)))
       ) {
         return false;
       }
@@ -42,9 +40,7 @@ export default function Create({ releases }) {
           .filter((channel) => channel.supported)
           .sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
       } else {
-        release.availableChannels = release.channels.sort(
-          (a, b) => parseFloat(a.order) - parseFloat(b.order)
-        );
+        release.availableChannels = release.channels.sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
       }
 
       if (!showAll && release.availableChannels.length === 0) {
@@ -61,7 +57,7 @@ export default function Create({ releases }) {
     if (data.releaseChannels.find((channelId) => channelId === id)) {
       setData(
         "releaseChannels",
-        data.releaseChannels.filter((channelId) => channelId !== id)
+        data.releaseChannels.filter((channelId) => channelId !== id),
       );
     } else {
       setData("releaseChannels", [...data.releaseChannels, id]);
@@ -110,19 +106,13 @@ export default function Create({ releases }) {
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
-        <NaviBar
-          back="/admin/flights"
-          actions={<SaveButton loading={processing} />}
-        >
+        <NaviBar back="/admin/flights" actions={<SaveButton loading={processing} />}>
           New flight
         </NaviBar>
 
         <div className="container my-3">
-          <Fieldset
-            title="Build string"
-            description="The build string for this flight."
-          >
-            <div className="col-12 col-xl-6">
+          <Fieldset title="Build string" description="The build string for this flight.">
+            <div className="col-xl-6 col-12">
               <div className="row g-1">
                 <div className="col-3">
                   <TextField
@@ -166,26 +156,20 @@ export default function Create({ releases }) {
                 </div>
               </div>
             </div>
-            <div className="col-12 col-xl-6">
+            <div className="col-xl-6 col-12">
               <TextField
                 type="date"
                 id="date"
                 label="Date"
                 value={
-                  isValid(parse(data.date, "P", new Date()))
-                    ? format(parseISO(data.date), "yyyy-MM-dd")
-                    : data.date
+                  isValid(parse(data.date, "P", new Date())) ? format(parseISO(data.date), "yyyy-MM-dd") : data.date
                 }
                 errors={errors.date}
                 onChange={setData}
               />
             </div>
           </Fieldset>
-          <Fieldset
-            title="Release channels"
-            description="All channels this flight is in."
-            disabledCard
-          >
+          <Fieldset title="Release channels" description="All channels this flight is in." disabledCard>
             <div className="col-12">
               <div className="card">
                 <div className="card-header">
@@ -200,13 +184,10 @@ export default function Create({ releases }) {
                       onChange={() => setShowEligible(!showEligible)}
                     />
                     <label className="form-check-label" htmlFor="showEligible">
-                      <span className="fw-bold">
-                        Show all eligible releases and channels
-                      </span>
+                      <span className="fw-bold">Show all eligible releases and channels</span>
                       <p className="lh-sm mt-1 mb-0">
                         <small className="text-muted d-block mt-n1">
-                          You'll be able to select any channel within a release
-                          that accepts this build string.
+                          You'll be able to select any channel within a release that accepts this build string.
                         </small>
                       </p>
                     </label>
@@ -222,13 +203,11 @@ export default function Create({ releases }) {
                       onChange={() => setShowAll(!showAll)}
                     />
                     <label className="form-check-label" htmlFor="showAll">
-                      <span className="fw-bold">
-                        Show all releases and channels
-                      </span>
+                      <span className="fw-bold">Show all releases and channels</span>
                       <p className="lh-sm mt-1 mb-0">
                         <small className="text-muted d-block mt-n1">
-                          You'll be able to select any channel, but publishing
-                          may be blocked if the build doesn't match.
+                          You'll be able to select any channel, but publishing may be blocked if the build doesn't
+                          match.
                         </small>
                       </p>
                     </label>
@@ -237,7 +216,7 @@ export default function Create({ releases }) {
                 <div className="card-body">
                   <div className="row g-3">
                     {eligibleReleases.map((release, key) => (
-                      <div className="col-12 col-lg-6" key={key}>
+                      <div className="col-lg-6 col-12" key={key}>
                         <div className="d-flex mb-1">
                           <div className="me-2">
                             <PlatformIcon platform={release.platform} color />
@@ -245,8 +224,8 @@ export default function Create({ releases }) {
                           <div className="d-flex flex-column">
                             <span className="fw-bold">{release.name}</span>
                             <small className="text-muted mt-n1">
-                              {`${release.start_build}.${release.start_delta}`}{" "}
-                              - {`${release.end_build}.${release.end_delta}`}
+                              {`${release.start_build}.${release.start_delta}`} -{" "}
+                              {`${release.end_build}.${release.end_delta}`}
                             </small>
                           </div>
                         </div>
@@ -258,18 +237,11 @@ export default function Create({ releases }) {
                               value="1"
                               id={channel.id}
                               name="channel"
-                              checked={data.releaseChannels.find(
-                                (channelId) => channelId === channel.id
-                              )}
+                              checked={data.releaseChannels.find((channelId) => channelId === channel.id)}
                               onChange={channelHandler}
                             />
-                            <label
-                              className="form-check-label"
-                              htmlFor={channel.id}
-                            >
-                              <span style={{ color: channel.color }}>
-                                {channel.name}
-                              </span>
+                            <label className="form-check-label" htmlFor={channel.id}>
+                              <span style={{ color: channel.color }}>{channel.name}</span>
                               {!channel.supported && (
                                 <small className="text-muted">
                                   {" "}
@@ -283,14 +255,10 @@ export default function Create({ releases }) {
                     ))}
                     {eligibleReleases.length === 0 && (
                       <div className="col-12">
-                        {data.major === '10' && data.minor === '0' ? (
-                          <p className="mb-0">
-                            Enter a string to get started...
-                          </p>
+                        {data.major === "10" && data.minor === "0" ? (
+                          <p className="mb-0">Enter a string to get started...</p>
                         ) : (
-                          <p className="mb-0">
-                            This build doesn't seem to match any release...
-                          </p>
+                          <p className="mb-0">This build doesn't seem to match any release...</p>
                         )}
                       </div>
                     )}

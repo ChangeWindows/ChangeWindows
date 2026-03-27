@@ -1,31 +1,24 @@
 import React from "react";
-import { useForm } from "@inertiajs/react";
 
-import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
-import SaveButton from "@/Components/UI/Forms/SaveButton";
-import TextField from "@/Components/UI/Forms/TextField";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
 import Fieldset from "@/Components/UI/Forms/Fieldset";
+import SaveButton from "@/Components/UI/Forms/SaveButton";
+import TextField from "@/Components/UI/Forms/TextField";
+import Admin from "@/Layouts/Admin";
 
+import { useForm } from "@inertiajs/react";
 import Amicon, { aiTrashCan } from "@studio384/amaranth";
 
 export default function Edit({ can, user, roles, status }) {
-  const {
-    data,
-    setData,
-    patch,
-    delete: destroy,
-    processing,
-    errors,
-  } = useForm(user);
+  const { data, setData, patch, delete: destroy, processing, errors } = useForm(user);
 
   function roleHandler(role) {
     if (data.roles.find((_role) => _role === role)) {
       setData(
         "roles",
-        data.roles.filter((_role) => _role !== role)
+        data.roles.filter((_role) => _role !== role),
       );
     } else {
       setData("roles", [...data.roles, role]);
@@ -45,30 +38,17 @@ export default function Edit({ can, user, roles, status }) {
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
-        <NaviBar
-          back="/admin/users"
-          actions={<SaveButton loading={processing} />}
-        >
+        <NaviBar back="/admin/users" actions={<SaveButton loading={processing} />}>
           {data.name || "Unnamed user"}
         </NaviBar>
 
         <div className="container my-3">
           <Status status={status} />
-          <Fieldset
-            title="Identity"
-            description="Hello! Who are you?"
-            disabled={!can.users.edit}
-          >
-            <div className="col-12 col-sm-6">
-              <TextField
-                id="name"
-                label="Name"
-                value={data.name}
-                errors={errors.name}
-                onChange={setData}
-              />
+          <Fieldset title="Identity" description="Hello! Who are you?" disabled={!can.users.edit}>
+            <div className="col-sm-6 col-12">
+              <TextField id="name" label="Name" value={data.name} errors={errors.name} onChange={setData} />
             </div>
-            <div className="col-12 col-sm-6">
+            <div className="col-sm-6 col-12">
               <TextField
                 type="email"
                 id="email"
@@ -79,21 +59,14 @@ export default function Edit({ can, user, roles, status }) {
               />
             </div>
           </Fieldset>
-          <Fieldset
-            title="Permissions"
-            description="What you can do."
-            disabled={!can.users.edit}
-          >
+          <Fieldset title="Permissions" description="What you can do." disabled={!can.users.edit}>
             {roles.map((role, key) => (
-              <div className="col-12 col-sm-6" key={key}>
+              <div className="col-sm-6 col-12" key={key}>
                 <Checkbox
                   id={role.name}
                   name={role.name}
                   label={role.name}
-                  checked={
-                    data.roles.filter((_role) => _role === role.name)
-                      .length === 1
-                  }
+                  checked={data.roles.filter((_role) => _role === role.name).length === 1}
                   onChange={roleHandler}
                 />
               </div>
@@ -103,16 +76,9 @@ export default function Edit({ can, user, roles, status }) {
       </form>
       {can.users.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
-          <Fieldset
-            title="Danger zone"
-            description="All alone in the danger zone."
-            danger
-          >
+          <Fieldset title="Danger zone" description="All alone in the danger zone." danger>
             <div className="col-12">
-              <p>
-                Deleting a user will remove all the content associated with that
-                user. Are you sure?
-              </p>
+              <p>Deleting a user will remove all the content associated with that user. Are you sure?</p>
               <button className="btn btn-danger btn-sm" type="submit">
                 <Amicon icon={aiTrashCan} /> Delete
               </button>
