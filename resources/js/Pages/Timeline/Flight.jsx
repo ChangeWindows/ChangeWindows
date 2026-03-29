@@ -9,13 +9,13 @@ export default function Flight({ platform, build, channels, version = null, url 
   return (
     <Component
       {...mainProps}
-      className="col-span-full grid h-10 grid-cols-subgrid items-center justify-center px-2 transition hover:bg-zinc-100"
+      className="col-span-full grid min-h-10 grid-cols-subgrid items-center justify-center px-2 transition hover:bg-zinc-100 first:rounded-tr-lg last:rounded-br-lg"
     >
       <div className="font-mono text-sm text-zinc-500">{platform.tool ? null : version}</div>
       <div className="tabular-nums">{build}</div>
-      <div className="subevent-tags">
+      <div className="flex flex-row gap-1 flex-wrap py-2">
         {channels.map((channel, key) => (
-          <span key={key} className="badge" style={{ backgroundColor: channel.color }}>
+          <span key={key} className="text-sm font-semibold px-1.5 rounded-md pb-0.5" style={{ backgroundColor: channel.color }}>
             {channel.name}
           </span>
         ))}

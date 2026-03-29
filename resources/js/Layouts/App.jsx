@@ -12,7 +12,7 @@ export default function App({ children, background = false }) {
         <Navigation />
       </header>
       <main
-        className={clsx("relative me-2 mb-2 overflow-auto rounded-lg border border-zinc-300 bg-white shadow-md", {
+        className={clsx("relative me-2 mb-2 overflow-auto rounded-lg border border-zinc-200 bg-zinc-50 shadow-md", {
           auth: background,
         })}
       >

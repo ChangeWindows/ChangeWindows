@@ -26,7 +26,7 @@ export default function Channel({ date, build, channel, disabled = false, url = 
     <Component
       {...mainProps}
       className={clsx(
-        "flex flex-col bg-white p-2 transition hover:bg-zinc-100",
+        "flex flex-col bg-white p-2 transition hover:bg-zinc-50 hover:shadow-md rounded-lg shadow-sm border border-zinc-200",
         { "channel-disabled": disabled },
         classNames,
       )}

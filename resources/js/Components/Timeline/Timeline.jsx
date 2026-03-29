@@ -16,8 +16,8 @@ export default function Timeline({ date, children, className }) {
 
   return (
     <>
-      <h3 className="font-display mt-4 mb-1 text-base font-semibold text-blue-600">{formatedDate}</h3>
-      <div className="flex flex-col gap-1">{children}</div>
+      <h3 className="font-display mt-4 mb-1 text-base font-semibold text-blue-600 col-span-full">{formatedDate}</h3>
+      <div className="gap-y-1 col-span-full grid grid-cols-subgrid">{children}</div>
     </>
   );
 }

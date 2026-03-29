@@ -20,15 +20,14 @@ export default function Navigation() {
 
   return (
     <NavigationBar
-      main={[
+      navigationItems={[
         { type: "link", url: "/timeline", icon: aiBarsStaggered, title: "Timeline" },
         { type: "link", url: "/flags", icon: aiFlag, title: "Flags" },
         { type: "link", url: "/platforms", primary: "/pc", icon: aiDevices, title: "Platforms" },
         { type: "link", url: "/channels", icon: aiCodeBranch, title: "Channels" },
         { type: "divider" },
         { type: "link", url: "/settings", icon: aiGear, title: "Settings" },
-      ]}
-      overflow={[
+        { type: "divider" },
         { type: "external", url: "https://medium.com/changewindows", icon: aiMegaphone, title: "Blog" },
         { type: "link", url: "/admin/flights", icon: aiGauge, title: "Backstage", permission: navCan.dashboard },
       ]}

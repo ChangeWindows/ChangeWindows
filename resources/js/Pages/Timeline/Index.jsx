@@ -27,9 +27,9 @@ export default function Index({ timeline, pagination, platforms, channel_platfor
         platforms={platforms}
       />
 
-      <div className="container grid grid-rows-[repeat(2,min_content)] gap-3 lg:grid-cols-[5fr_3fr]">
-        <div>
-          <h1 className="font-display my-2 text-2xl font-bold">Timeline</h1>
+      <div className="container grid grid-rows-[repeat(2,min_content)] gap-3 lg:grid-cols-[1fr_420px]">
+        <div className="grid grid-cols-[min-content_min-content_min-content_auto]">
+          <h1 className="font-display mt-2 -mb-2 text-2xl font-bold col-span-full">Timeline</h1>
           {Object.keys(timeline).map((date, key) => (
             <Timeline date={parseISO(timeline[date].date)} key={key}>
               {timeline[date].flights.map((platform, _key) => (
@@ -45,15 +45,15 @@ export default function Index({ timeline, pagination, platforms, channel_platfor
               {key === 2 && patron && (
                 <a
                   href="https://www.patreon.com/changewindows"
-                  className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-zinc-200 p-2 px-4 shadow-sm transition hover:shadow-lg"
+                  className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-zinc-200 ps-4 py-3 pe-5 shadow-sm transition hover:shadow-md hover:bg-zinc-50"
                   key={key}
                 >
                   <img src={patron.avatar} alt={patron.name} className="size-8 rounded-full" />
                   <div className="flex grow flex-col">
-                    <span className="block truncate">
+                    <span className="block truncate text-base/5">
                       Join <b>{patron.name}</b>
                     </span>
-                    <small className="block truncate text-zinc-500">in supporting ChangeWindows</small>
+                    <small className="block truncate text-zinc-500 text-base/5">in supporting ChangeWindows</small>
                   </div>
                   <Amicon icon={aiPatreon} />
                 </a>
@@ -62,9 +62,8 @@ export default function Index({ timeline, pagination, platforms, channel_platfor
                 <h3 className="flex items-center gap-2 px-2 text-lg font-semibold" style={{ color: platform.color }}>
                   <PlatformIcon platform={platform} color />
                   <span>{platform.name}</span>
-                  <span>{platform.channels.length}</span>
                 </h3>
-                <div className="grid grid-cols-6 gap-px rounded-lg border border-zinc-200 bg-zinc-200 shadow-sm contain-paint">
+                <div className="grid grid-cols-6 gap-1">
                   {platform.channels.map((channel, _key) => (
                     <Channel
                       key={_key}

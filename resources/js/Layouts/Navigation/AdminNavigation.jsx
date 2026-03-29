@@ -10,7 +10,7 @@ export default function AdminNavigation() {
 
   return (
     <NavigationBar
-      main={[
+      navigationItems={[
         { type: "link", url: "/admin/flights", icon: aiPlane, title: "Flights", permission: navCan.flights.show },
         { type: "link", url: "/admin/flags", icon: aiFlag, title: "Flags", permission: navCan.flags.show },
         {
@@ -27,8 +27,7 @@ export default function AdminNavigation() {
           title: "Platforms",
           permission: navCan.platforms.show,
         },
-      ]}
-      overflow={[
+        { type: "divider" },
         { type: "link", url: "/admin/users", icon: aiPerson, title: "Users", permission: navCan.users.show },
         { type: "link", url: "/admin/roles", icon: aiPersonLock, title: "Roles", permission: navCan.roles.show },
         {
