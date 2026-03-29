@@ -1,7 +1,7 @@
 import { Button as ButtonPrimitive } from "@base-ui/react";
 import clsx from "clsx";
 
-export default function Button({ icon, ...props }: ButtonPrimitive.Props & { icon?: boolean }) {
+export default function Button({ icon, className, ...props }: ButtonPrimitive.Props & { icon?: boolean }) {
     return (
         <ButtonPrimitive
             className={clsx(
@@ -31,6 +31,7 @@ export default function Button({ icon, ...props }: ButtonPrimitive.Props & { ico
 
                 // Disabled
                 "data-disabled:text-zinc-500",
+                className,
             )}
             {...props}
         />
