@@ -219,7 +219,7 @@ export default function Show({ app, patrons, user }) {
               ChangeWindows {app.preview === "preview" && "Preview"}
               {app.preview === "canary" && "Canary"} {app.version}
               <br />
-              &copy; 2014-2023{" "}
+              &copy; 2014-2026{" "}
               <a className="f-384 fw-bold m-0" href="https://studio384.be" target="_blank" rel="noreferrer">
                 Studio <span className="studio-384">384</span>
               </a>
