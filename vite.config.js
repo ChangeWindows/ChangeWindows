@@ -10,6 +10,6 @@ export default defineConfig({
       ],
       refresh: true,
     }),
-    react(),
+    react({ compiler: true }),
   ],
 });
