@@ -15,11 +15,7 @@ export default function Index() {
             <h1>Search</h1>
           </div>
           <div className="col-12 my-3">
-            {url.includes("/flags") ? (
-              <p>You can search through our flags by their name, readable name, feature id or description.</p>
-            ) : (
-              <p>You can search through our release list by name, version, canonical version, and codename.</p>
-            )}
+            <p>You can search through our release list by name, version, canonical version, and codename.</p>
           </div>
         </div>
       </div>

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Flag;
 use App\Models\Release;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -61,48 +60,6 @@ class SearchController extends Controller
                                 'order' => $channel->channel->order,
                             ];
                         })->values()->all(),
-                    ],
-                ];
-            }),
-        ]);
-    }
-
-    public function flagResults(Request $request)
-    {
-        if (! $request->input('search')) {
-            return redirect()->route('front.search');
-        }
-
-        $term = mb_strtolower($request->input('search'));
-
-        $search_results = (new Search)
-            ->registerModel(
-                Flag::class,
-                function (ModelSearchAspect $modelSearchAspect) use ($term) {
-                    $modelSearchAspect
-                        ->addSearchableAttribute('feature_name')
-                        ->orWhereHas('latestContents', function ($query) use ($term) {
-                            $query->whereRaw('LOWER(name) LIKE ?', ["%{$term}%"])
-                                ->orWhereRaw('LOWER(description) LIKE ?', ["%{$term}%"]);
-                        })
-                        ->orWhereHas('latestStatus', function ($query) use ($term) {
-                            $query->whereRaw('LOWER(feature_id) LIKE ?', ["%{$term}%"]);
-                        })
-                        ->with('latestContents', 'latestStatus');
-                }
-            )
-            ->perform($request->input('search'));
-
-        return Inertia::render('Search/FlagResults', [
-            'query' => $request->input('search'),
-            'results' => $search_results->map(function ($result) {
-                return [
-                    'title' => $result->title,
-                    'type' => $result->type,
-                    'searchable' => [
-                        'slug' => $result->searchable->slug,
-                        'description' => $result->searchable->latestContents?->description,
-                        'status' => $result->searchable->latestStatus,
                     ],
                 ];
             }),

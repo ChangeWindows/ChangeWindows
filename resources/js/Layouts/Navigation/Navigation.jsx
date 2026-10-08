@@ -8,7 +8,6 @@ import {
   aiBarsStaggered,
   aiTwitter,
   aiGear,
-  aiFlag,
 } from "@studio384/amaranth";
 
 import NavigationBar from "./components/NavigationBar";
@@ -20,7 +19,6 @@ export default function Navigation() {
     <NavigationBar
       main={[
         { type: "link", url: "/timeline", icon: aiBarsStaggered, title: "Timeline" },
-        { type: "link", url: "/flags", icon: aiFlag, title: "Flags" },
         { type: "link", url: "/platforms", primary: "/pc", icon: aiDevices, title: "Platforms" },
         { type: "link", url: "/channels", icon: aiCodeBranch, title: "Channels" },
         { type: "divider" },

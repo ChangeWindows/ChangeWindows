@@ -1,5 +1,5 @@
 import { usePage } from "@inertiajs/react";
-import { aiDevices, aiFlag, aiLock, aiPlane, aiBoxOpenFull, aiPerson, aiPersonLock } from "@studio384/amaranth";
+import { aiDevices, aiLock, aiPlane, aiBoxOpenFull, aiPerson, aiPersonLock } from "@studio384/amaranth";
 
 import NavigationBar from "./components/NavigationBar";
 
@@ -10,7 +10,6 @@ export default function AdminNavigation() {
     <NavigationBar
       main={[
         { type: "link", url: "/admin/flights", icon: aiPlane, title: "Flights", permission: navCan.flights.show },
-        { type: "link", url: "/admin/flags", icon: aiFlag, title: "Flags", permission: navCan.flags.show },
         {
           type: "link",
           url: "/admin/releases",

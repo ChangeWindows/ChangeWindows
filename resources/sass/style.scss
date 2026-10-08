@@ -39,75 +39,85 @@ span {
 
     --nav-bg: #{light-dark(color.adjust($light, $lightness: -4.5%), color.adjust($dark, $lightness: -6.5%))};
     --nav-bg-acrylic: #{light-dark(
-            color.change(color.adjust($light, $lightness: -6%), $alpha: 0.75),
-            color.change(color.adjust($dark, $lightness: -6%), $alpha: 0.75)
-        )};
-    --nav-border-color: #{light-dark(color.adjust($light, $lightness: -12%), color.adjust($dark, $lightness: -9%))};
-    --nav-mobile-bg: #{light-dark($light, $dark)};
-    --nav-color-label: #{light-dark(
-            color.adjust($body-color, $lightness: 35%),
-            color.adjust($gray-100, $lightness: 35%)
-        )};
-    --nav-search-bg: #{light-dark(#fff, color.adjust($dark, $lightness: -4%))};
+ color.change(color.adjust($light, $lightness: -6%), $alpha: 0.75),
+    color.change(color.adjust($dark, $lightness: -6%), $alpha: 0.75))
+}
 
-    --bs-border-color: var(--nav-border-color);
+;
+--nav-border-color: #{light-dark(color.adjust($light, $lightness: -12%), color.adjust($dark, $lightness: -9%))};
+--nav-mobile-bg: #{light-dark($light, $dark)};
+--nav-color-label: #{light-dark(
+ color.adjust($body-color, $lightness: 35%),
+color.adjust($gray-100, $lightness: 35%))
+}
 
-    --nav-item-hover: #{light-dark(color.adjust($light, $lightness: -9%), color.adjust($dark, $lightness: -3%))};
-    --nav-bar-item-hover: #{light-dark(color.adjust($light, $lightness: -3%), color.adjust($dark, $lightness: -3%))};
+;
+--nav-search-bg: #{light-dark(#fff, color.adjust($dark, $lightness: -4%))};
 
-    --main-bg: #{light-dark(color.adjust($light, $lightness: -2%), color.adjust($dark, $lightness: -4%))};
-    --main-bg-acrylic: #{light-dark(
-            color.change(color.adjust($light, $lightness: -2%), $alpha: 0.75),
-            color.change(color.adjust($dark, $lightness: -4%), $alpha: 0.75)
-        )};
-    --main-border-color: #{light-dark(color.adjust($light, $lightness: -10%), color.adjust($dark, $lightness: -8%))};
-    --table-border-color: #{light-dark(color.adjust($light, $lightness: -14%), color.adjust($dark, $lightness: 8%))};
+--bs-border-color: var(--nav-border-color);
 
-    --timeline-bg-nth: #{light-dark(color.adjust($light, $lightness: -6%), $dark)};
-    --timeline-bg-hover: #{light-dark(color.adjust($light, $lightness: -8%), color.adjust($dark, $lightness: 4%))};
+--nav-item-hover: #{light-dark(color.adjust($light, $lightness: -9%), color.adjust($dark, $lightness: -3%))};
+--nav-bar-item-hover: #{light-dark(color.adjust($light, $lightness: -3%), color.adjust($dark, $lightness: -3%))};
 
-    --card-bg: #{light-dark($light, $dark)};
-    --card-bg-hover: #{light-dark(color.adjust($light, $lightness: -3%), color.adjust($dark, $lightness: 4%))};
+--main-bg: #{light-dark(color.adjust($light, $lightness: -2%), color.adjust($dark, $lightness: -4%))};
+--main-bg-acrylic: #{light-dark(
+ color.change(color.adjust($light, $lightness: -2%), $alpha: 0.75),
+color.change(color.adjust($dark, $lightness: -4%), $alpha: 0.75))
+}
 
-    --card-add-bg-hover: #{light-dark(
-            color.change(color.adjust($light, $lightness: -5%), $alpha: 0.5),
-            color.change(color.adjust($dark, $lightness: -5%), $alpha: 0.5)
-        )};
-    --card-add-border: #{light-dark(color.adjust($light, $lightness: -10%), color.adjust($dark, $lightness: -7%))};
-    --card-add-border-hover: #{light-dark(color.adjust($light, $lightness: -13%), color.adjust($dark, $lightness: -9%))};
+;
+--main-border-color: #{light-dark(color.adjust($light, $lightness: -10%), color.adjust($dark, $lightness: -8%))};
+--table-border-color: #{light-dark(color.adjust($light, $lightness: -14%), color.adjust($dark, $lightness: 8%))};
 
-    --dropdown-bg: #{light-dark($light, color.adjust($dark, $lightness: 3%))};
-    --dropdown-bg-hover: #{light-dark(color.adjust($light, $lightness: -3%), color.adjust($dark, $lightness: -1%))};
+--timeline-bg-nth: #{light-dark(color.adjust($light, $lightness: -6%), $dark)};
+--timeline-bg-hover: #{light-dark(color.adjust($light, $lightness: -8%), color.adjust($dark, $lightness: 4%))};
 
-    --form-disabled-bg: #{light-dark($light, transparent)};
-    --checkbox-bg: #{light-dark(#fff, color.adjust($dark, $lightness: -6%))};
-    --checkbox-disabled-bg: #{light-dark(#eee, color.adjust($dark, $lightness: -2%))};
-    --switch-bg-image: #{light-dark(
-            url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e"),
-            url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%28255, 255, 255, 0.25%29'/%3e%3c/svg%3e")
-        )};
+--card-bg: #{light-dark($light, $dark)};
+--card-bg-hover: #{light-dark(color.adjust($light, $lightness: -3%), color.adjust($dark, $lightness: 4%))};
 
-    --btn-transparent-bg-hover: #{light-dark(color.change($dark, $alpha: 0.2), color.change($light, $alpha: 0.1))};
+--card-add-bg-hover: #{light-dark(
+ color.change(color.adjust($light, $lightness: -5%), $alpha: 0.5),
+color.change(color.adjust($dark, $lightness: -5%), $alpha: 0.5))
+}
 
-    --progress-bg: #{light-dark(#fff, color.adjust($dark, $lightness: -6%))};
+;
+--card-add-border: #{light-dark(color.adjust($light, $lightness: -10%), color.adjust($dark, $lightness: -7%))};
+--card-add-border-hover: #{light-dark(color.adjust($light, $lightness: -13%), color.adjust($dark, $lightness: -9%))};
 
-    --scroll-native: #{light-dark(color.adjust($light, $lightness: -6%), color.adjust($dark, $lightness: -6%))};
-    --scroll-webkit: #{light-dark(color.adjust($light, $lightness: -16%), color.adjust($dark, $lightness: 12%))};
+--dropdown-bg: #{light-dark($light, color.adjust($dark, $lightness: 3%))};
+--dropdown-bg-hover: #{light-dark(color.adjust($light, $lightness: -3%), color.adjust($dark, $lightness: -1%))};
 
-    --alert-success-bg: #{light-dark($green-100, $green-800)};
-    --alert-success-color: #{light-dark($green-700, $green-100)};
+--form-disabled-bg: #{light-dark($light, transparent)};
+--checkbox-bg: #{light-dark(#fff, color.adjust($dark, $lightness: -6%))};
+--checkbox-disabled-bg: #{light-dark(#eee, color.adjust($dark, $lightness: -2%))};
+--switch-bg-image: #{light-dark(
+ url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e"),
+url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%28255, 255, 255, 0.25%29'/%3e%3c/svg%3e"))
+}
 
-    --alert-warning-bg: #{light-dark($yellow-100, $yellow-800)};
-    --alert-warning-color: #{light-dark($yellow-800, $yellow-100)};
+;
 
-    --alert-danger-bg: #{light-dark($red-100, $red-800)};
-    --alert-danger-color: #{light-dark($red-700, $red-100)};
+--btn-transparent-bg-hover: #{light-dark(color.change($dark, $alpha: 0.2), color.change($light, $alpha: 0.1))};
 
-    --alert-info-bg: #{light-dark($cyan-100, $cyan-800)};
-    --alert-info-color: #{light-dark($cyan-700, $cyan-100)};
+--progress-bg: #{light-dark(#fff, color.adjust($dark, $lightness: -6%))};
 
-    --display-light: #{light-dark(block, none)};
-    --display-dark: #{light-dark(none, block)};
+--scroll-native: #{light-dark(color.adjust($light, $lightness: -6%), color.adjust($dark, $lightness: -6%))};
+--scroll-webkit: #{light-dark(color.adjust($light, $lightness: -16%), color.adjust($dark, $lightness: 12%))};
+
+--alert-success-bg: #{light-dark($green-100, $green-800)};
+--alert-success-color: #{light-dark($green-700, $green-100)};
+
+--alert-warning-bg: #{light-dark($yellow-100, $yellow-800)};
+--alert-warning-color: #{light-dark($yellow-800, $yellow-100)};
+
+--alert-danger-bg: #{light-dark($red-100, $red-800)};
+--alert-danger-color: #{light-dark($red-700, $red-100)};
+
+--alert-info-bg: #{light-dark($cyan-100, $cyan-800)};
+--alert-info-color: #{light-dark($cyan-700, $cyan-100)};
+
+--display-light: #{light-dark(block, none)};
+--display-dark: #{light-dark(none, block)};
 }
 
 .theme-default,
@@ -163,7 +173,7 @@ body {
 
 // Titels
 .titlebar {
-    & > h1 {
+    &>h1 {
         min-height: 28px;
         margin-top: 6px;
         margin-bottom: 0;
@@ -174,7 +184,7 @@ body {
         }
     }
 
-    & > .d-flex {
+    &>.d-flex {
         margin-top: 6px;
         margin-bottom: 0;
 
@@ -205,10 +215,10 @@ body {
 }
 
 .timeline {
+
     a.event,
     a.platform-event,
-    a.subevent,
-    a.flag {
+    a.subevent {
         text-decoration: none;
         color: inherit;
 
@@ -264,7 +274,7 @@ body {
             padding: 0;
             gap: 4px;
 
-            & > span {
+            &>span {
                 margin: 0.25rem 0 0 0;
             }
         }
@@ -347,7 +357,7 @@ body {
                 border-top-color: transparent;
                 border-radius: var(--event-border-radius) 0 0 var(--event-border-radius);
 
-                & + .subevent {
+                &+.subevent {
                     border-top-color: transparent;
                 }
 
@@ -405,7 +415,7 @@ body {
                 background-color: var(--card-bg-hover);
             }
 
-            &:hover + .subevent {
+            &:hover+.subevent {
                 border-top-color: transparent;
             }
         }
@@ -442,7 +452,7 @@ body {
             padding: 0;
             gap: 4px;
 
-            & > span {
+            &>span {
                 margin: 0.25rem 0 0 0;
             }
         }
@@ -451,60 +461,6 @@ body {
             margin-right: 0.5rem;
             font-size: 90%;
             text-align: right;
-        }
-    }
-
-    .flag {
-        width: 100%;
-        gap: 0.25rem 1rem;
-        padding: 0.25rem 0.5rem;
-        display: grid;
-        grid-template-columns: fit-content(100%) auto auto;
-        grid-template-rows: auto;
-        grid-template-areas: "flag-name flag-id flag-status";
-        transition: $transition-base;
-        border-radius: 0.25rem;
-        height: 40px;
-        align-items: center;
-
-        &.flag-descripted {
-            grid-template-areas: "flag-name flag-id flag-status" "flag-description flag-description flag-description";
-            padding: 0.25rem 0.5rem 0.5rem;
-            height: auto;
-
-            .flag-description {
-                color: $text-muted;
-                font-size: 0.875rem;
-            }
-        }
-
-        .flag-name {
-            grid-area: flag-name;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .flag-id {
-            grid-area: flag-id;
-        }
-
-        .flag-status {
-            grid-area: flag-status;
-
-            justify-self: flex-end;
-        }
-
-        .flag-description {
-            grid-area: flag-description;
-        }
-
-        &:not(:last-child) {
-            margin-bottom: 0.25rem;
-        }
-
-        &:nth-child(odd) {
-            background-color: var(--timeline-bg-nth);
         }
     }
 }
@@ -616,7 +572,7 @@ a.card {
     border-radius: $border-radius;
     border: var(--main-border-color) 1px solid;
 
-    & + & {
+    &+& {
         margin-top: 0.125rem;
     }
 

@@ -45,9 +45,7 @@ export default function AppBar() {
 
   function handleSearch(e) {
     e.preventDefault();
-    router.post(url.includes("/flags") ? "/search/flags" : "/search", {
-      search,
-    });
+    router.post("/search", { search });
   }
 
   return (
@@ -89,7 +87,7 @@ export default function AppBar() {
                 id="search"
                 name="search"
                 className="form-control"
-                placeholder={url.includes("/flags") ? "Search flags..." : "Search releases..."}
+                placeholder="Search releases..."
                 onChange={(event) => setSearch(event.target.value)}
                 aria-label="Search"
                 aria-describedby="search"

@@ -42,11 +42,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function flagContents()
-    {
-        return $this->hasMany(FlagContent::class);
-    }
-
     public function setPasswordAttribute($value)
     {
         if (Hash::needsRehash($value)) {
