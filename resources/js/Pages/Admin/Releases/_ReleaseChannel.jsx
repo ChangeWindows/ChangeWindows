@@ -20,7 +20,7 @@ export default function ReleaseChannel({ can, releaseChannel }) {
             </h3>
             <div className="ms-2">
               <h3 className="h6 mb-0">{releaseChannel.name}</h3>
-              <p className="text-muted mb-0">
+              <p className="text-secondary mb-0">
                 <small>{releaseChannel.short_name}</small>
               </p>
             </div>

@@ -17,7 +17,7 @@ export default function Index({ users, status }) {
               <Link href={route("admin.users.edit", user)} className="card border-0 shadow-sm">
                 <div className="card-body">
                   <h3 className="h6 mb-0">{user.name}</h3>
-                  <p className="text-muted mt-n1 mb-0">
+                  <p className="text-secondary mt-n1 mb-0">
                     <small>{user.email}</small>
                   </p>
                 </div>

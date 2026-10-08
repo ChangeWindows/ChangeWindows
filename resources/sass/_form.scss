@@ -21,8 +21,21 @@
     }
 }
 
+.form-control::placeholder {
+    color: var(--text);
+    opacity: 0.65;
+}
+
+.form-floating > label {
+    color: var(--text);
+}
+
 .form-check {
     min-height: auto;
+
+    .form-check-label {
+        color: var(--text);
+    }
 
     .form-check-input {
         background-color: var(--checkbox-bg);

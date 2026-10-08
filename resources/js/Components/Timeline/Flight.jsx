@@ -31,7 +31,7 @@ export default function Flight({
         ))}
       </div>
       <div
-        className={clsx("version", "text-muted", {
+        className={clsx("version", "text-secondary", {
           "d-none": overview || sidebar,
         })}
       >

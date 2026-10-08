@@ -56,7 +56,7 @@ export default function Show({ platform, platforms, channel_order, releases }) {
                     </h3>
                     <div className="ms-2">
                       <h3 className="h6 mb-0">{release.name}</h3>
-                      <p className="text-muted mt-n1 mb-1">
+                      <p className="text-secondary mt-n1 mb-1">
                         <small>
                           Version {release.version}, {release.codename}
                         </small>

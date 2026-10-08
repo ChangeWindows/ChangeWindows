@@ -184,7 +184,7 @@ export default function Create({ releases }) {
                     <label className="form-check-label" htmlFor="showEligible">
                       <span className="fw-bold">Show all eligible releases and channels</span>
                       <p className="lh-sm mt-1 mb-0">
-                        <small className="text-muted d-block mt-n1">
+                        <small className="text-secondary d-block mt-n1">
                           You'll be able to select any channel within a release that accepts this build string.
                         </small>
                       </p>
@@ -203,7 +203,7 @@ export default function Create({ releases }) {
                     <label className="form-check-label" htmlFor="showAll">
                       <span className="fw-bold">Show all releases and channels</span>
                       <p className="lh-sm mt-1 mb-0">
-                        <small className="text-muted d-block mt-n1">
+                        <small className="text-secondary d-block mt-n1">
                           You'll be able to select any channel, but publishing may be blocked if the build doesn't
                           match.
                         </small>
@@ -221,7 +221,7 @@ export default function Create({ releases }) {
                           </div>
                           <div className="d-flex flex-column">
                             <span className="fw-bold">{release.name}</span>
-                            <small className="text-muted mt-n1">
+                            <small className="text-secondary mt-n1">
                               {`${release.start_build}.${release.start_delta}`} -{" "}
                               {`${release.end_build}.${release.end_delta}`}
                             </small>
@@ -241,7 +241,7 @@ export default function Create({ releases }) {
                             <label className="form-check-label" htmlFor={channel.id}>
                               <span style={{ color: channel.color }}>{channel.name}</span>
                               {!channel.supported && (
-                                <small className="text-muted">
+                                <small className="text-secondary">
                                   {" "}
                                   - <i>Unsupported</i>
                                 </small>

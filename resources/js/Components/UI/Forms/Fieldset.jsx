@@ -17,7 +17,7 @@ export default function Fieldset({
       <div className={fullWidth ? "my-md-0 col-12 mt-3 pb-3" : "col-md-4 my-md-0 col-12 mt-3 mb-4"}>
         <h4 className={clsx("h5 mb-0", { "text-danger": danger })}>{title}</h4>
         {description && (
-          <p className="text-muted mb-0">
+          <p className="text-secondary mb-0">
             <small>{description}</small>
           </p>
         )}

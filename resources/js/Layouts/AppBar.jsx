@@ -68,9 +68,9 @@ export default function AppBar() {
               <span className="brand-label d-none d-md-inline">
                 ChangeWindows
                 {props.app.preview === "canary" ? (
-                  <span className="text-muted text-sm"> canary</span>
+                  <span className="text-secondary text-sm"> canary</span>
                 ) : props.app.preview === "preview" ? (
-                  <span className="text-muted text-sm"> preview</span>
+                  <span className="text-secondary text-sm"> preview</span>
                 ) : (
                   ""
                 )}

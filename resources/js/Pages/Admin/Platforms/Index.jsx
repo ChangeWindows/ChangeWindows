@@ -45,7 +45,7 @@ export default function Index({ can, platforms, status }) {
                       </h3>
                       <div className="ms-2">
                         <h3 className="h6 mb-0">{platform.name}</h3>
-                        <p className="text-muted mt-n1 mb-0">
+                        <p className="text-secondary mt-n1 mb-0">
                           <small>{platformStatus.join(", ")}</small>
                         </p>
                       </div>

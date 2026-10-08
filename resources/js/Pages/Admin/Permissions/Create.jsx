@@ -60,7 +60,7 @@ export default function Create() {
                   label={
                     <>
                       {data.name}
-                      <span className="text-muted">{variant}</span>
+                      <span className="text-secondary">{variant}</span>
                     </>
                   }
                   checked={data.variants.filter((_permission) => _permission === `${data.name}${variant}`).length === 1}

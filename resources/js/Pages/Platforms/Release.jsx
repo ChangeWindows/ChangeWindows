@@ -117,7 +117,7 @@ export default function Release({ release, platform, channels, timeline, paginat
                   <h1 className="fw-bold m-0" style={{ color: platform.color }}>
                     {release.name}
                   </h1>
-                  <h2 className="h6 text-muted m-0">
+                  <h2 className="h6 text-secondary m-0">
                     Version {release.version}, {release.codename}
                   </h2>
                 </div>
