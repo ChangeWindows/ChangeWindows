@@ -79,7 +79,7 @@ export default function AppBar() {
           </div>
           <div className="navbar-search">
             <form onSubmit={handleSearch} className="input-group input-group-search">
-              <span className="input-group-text">
+              <span className="input-group-text text-secondary">
                 <Amicon icon={aiMagnifyingGlass} />
               </span>
               <input
