@@ -36,13 +36,8 @@ import Amicon, {
   aiTableHeaderCell,
   aiAngleDown,
 } from "@studio384/amicons";
-import Link from "@tiptap/extension-link";
-import { Table } from "@tiptap/extension-table";
-import { TableCell } from "@tiptap/extension-table-cell";
-import { TableHeader } from "@tiptap/extension-table-header";
-import { TableRow } from "@tiptap/extension-table-row";
+import { TableKit } from "@tiptap/extension-table";
 import Typography from "@tiptap/extension-typography";
-import Underline from "@tiptap/extension-underline";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import clsx from "clsx";
@@ -50,18 +45,17 @@ import clsx from "clsx";
 export default function Editor({ content = null, setData }) {
   const editor = useEditor({
     extensions: [
-      StarterKit,
-      Typography,
-      Underline,
-      Link.configure({
-        openOnClick: false,
+      StarterKit.configure({
+        link: {
+          openOnClick: false,
+        },
       }),
-      TableRow,
-      TableHeader,
-      TableCell,
-      Table.configure({
-        HTMLAttributes: {
-          class: "table table-bordered table-sm",
+      Typography,
+      TableKit.configure({
+        table: {
+          HTMLAttributes: {
+            class: "table table-bordered table-sm",
+          },
         },
       }),
     ],

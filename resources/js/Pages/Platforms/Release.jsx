@@ -9,13 +9,8 @@ import App from "@/Layouts/App";
 
 import { Link as ILink, Head } from "@inertiajs/react";
 import Amicon, { aiAngleLeft, aiAngleRight, aiArrowLeft, aiNotes, aiBarsStaggered } from "@studio384/amicons";
-import Link from "@tiptap/extension-link";
-import { Table } from "@tiptap/extension-table";
-import { TableCell } from "@tiptap/extension-table-cell";
-import { TableHeader } from "@tiptap/extension-table-header";
-import { TableRow } from "@tiptap/extension-table-row";
+import { TableKit } from "@tiptap/extension-table";
 import Typography from "@tiptap/extension-typography";
-import Underline from "@tiptap/extension-underline";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { parseISO } from "date-fns";
@@ -28,14 +23,11 @@ export default function Release({ release, platform, channels, timeline, paginat
     extensions: [
       StarterKit,
       Typography,
-      Underline,
-      Link,
-      TableRow,
-      TableHeader,
-      TableCell,
-      Table.configure({
-        HTMLAttributes: {
-          class: "table table-bordered table-sm",
+      TableKit.configure({
+        table: {
+          HTMLAttributes: {
+            class: "table table-bordered table-sm",
+          },
         },
       }),
     ],
@@ -46,14 +38,11 @@ export default function Release({ release, platform, channels, timeline, paginat
     extensions: [
       StarterKit,
       Typography,
-      Underline,
-      Link,
-      TableRow,
-      TableHeader,
-      TableCell,
-      Table.configure({
-        HTMLAttributes: {
-          class: "table table-bordered table-sm",
+      TableKit.configure({
+        table: {
+          HTMLAttributes: {
+            class: "table table-bordered table-sm",
+          },
         },
       }),
     ],
