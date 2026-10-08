@@ -9,7 +9,7 @@ import TextField from "@/Components/UI/Forms/TextField";
 import Admin from "@/Layouts/Admin";
 
 import { useForm } from "@inertiajs/react";
-import Amicon, { aiTrashCan } from "@studio384/amaranth";
+import Amicon, { aiTrashCan } from "@studio384/amicons";
 import { parse, format, isValid, parseISO } from "date-fns";
 
 export default function Edit({ can, flight, platform, release_channel, status }) {
@@ -133,7 +133,11 @@ export default function Edit({ can, flight, platform, release_channel, status })
                 type="date"
                 id="date"
                 label="Date"
-                value={isValid(parse(data.date, "P", today)) ? format(parseISO(data.date), "yyyy-MM-dd") : data.date}
+                value={
+                  data.date && isValid(parse(data.date, "P", today))
+                    ? format(parseISO(data.date), "yyyy-MM-dd")
+                    : data.date
+                }
                 errors={errors.date}
                 onChange={setData}
               />

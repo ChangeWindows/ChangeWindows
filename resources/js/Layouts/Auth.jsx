@@ -4,7 +4,7 @@ import { usePage } from "@inertiajs/react";
 
 import "../../sass/style.scss";
 
-import Amicon, { aiArrowLeft, aiChangeWindows } from "@studio384/amaranth";
+import Amicon, { aiArrowLeft, aiChangeWindows } from "@studio384/amicons";
 
 import useMediaQuery from "../hooks/useMediaQuery";
 import { getLocal, setLocal } from "../utils/localStorage";

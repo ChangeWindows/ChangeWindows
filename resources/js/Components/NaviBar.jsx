@@ -1,5 +1,5 @@
 import { Link } from "@inertiajs/react";
-import Amicon, { aiArrowLeft } from "@studio384/amaranth";
+import Amicon, { aiArrowLeft } from "@studio384/amicons";
 
 /* -- Utilities -- */
 

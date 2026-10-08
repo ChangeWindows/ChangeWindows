@@ -3,7 +3,7 @@ import { useState } from "react";
 import Auth from "@/Layouts/Auth";
 
 import { Head, router } from "@inertiajs/react";
-import Amicon, { aiCheck } from "@studio384/amaranth";
+import Amicon, { aiCheck } from "@studio384/amicons";
 
 export default function ConfirmPassword({ status }) {
   const [form, setForm] = useState({ password: "" });

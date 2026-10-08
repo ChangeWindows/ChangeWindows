@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@inertiajs/react": "^3.8.0",
-    "@studio384/amaranth": "^1.0.0-alpha.7",
+    "@studio384/amicons": "^1.0.0-alpha.12",
     "@tiptap/extension-link": "^2.27.2",
     "@tiptap/extension-table": "^2.27.2",
     "@tiptap/extension-table-cell": "^2.27.2",

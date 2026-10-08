@@ -8,7 +8,7 @@ import {
   aiBarsStaggered,
   aiTwitter,
   aiGear,
-} from "@studio384/amaranth";
+} from "@studio384/amicons";
 
 import NavigationBar from "./components/NavigationBar";
 

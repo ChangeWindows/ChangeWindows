@@ -1,4 +1,4 @@
-import Amicon, { aiCircleCheck, aiCircleInfo, aiCircleExclamation } from "@studio384/amaranth";
+import Amicon, { aiCircleCheck, aiCircleInfo, aiCircleExclamation } from "@studio384/amicons";
 import clsx from "clsx";
 
 export default function Status({ status }) {

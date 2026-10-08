@@ -18,7 +18,7 @@ import Amicon, {
   aiShieldKeyhole,
   aiSpinnerThird,
   aiPerson,
-} from "@studio384/amaranth";
+} from "@studio384/amicons";
 
 export default function Show({ app, patrons, user }) {
   // Live settings

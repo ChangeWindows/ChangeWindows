@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 import { Link, usePage } from "@inertiajs/react";
-import Amicon, { aiAngleDown, aiEllipsisH } from "@studio384/amaranth";
+import Amicon, { aiAngleDown, aiEllipsisH } from "@studio384/amicons";
 import clsx from "clsx";
 
 import useMediaQuery from "../hooks/useMediaQuery";

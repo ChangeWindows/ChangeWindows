@@ -3,7 +3,7 @@ import { useState } from "react";
 import Auth from "@/Layouts/Auth";
 
 import { Head, router } from "@inertiajs/react";
-import Amicon, { aiShieldKeyhole } from "@studio384/amaranth";
+import Amicon, { aiShieldKeyhole } from "@studio384/amicons";
 
 export default function ResetPassword({ token, status }) {
   const [form, setForm] = useState({

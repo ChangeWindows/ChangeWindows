@@ -1,5 +1,5 @@
 import { Link, useForm } from "@inertiajs/react";
-import Amicon, { aiCheck, aiSpinnerThird, aiXmark } from "@studio384/amaranth";
+import Amicon, { aiCheck, aiSpinnerThird, aiXmark } from "@studio384/amicons";
 import clsx from "clsx";
 
 export default function ReleaseChannel({ can, releaseChannel }) {

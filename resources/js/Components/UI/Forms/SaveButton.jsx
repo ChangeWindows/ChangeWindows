@@ -1,4 +1,4 @@
-import Amicon, { aiFloppyDisk, aiSpinnerThird } from "@studio384/amaranth";
+import Amicon, { aiFloppyDisk, aiSpinnerThird } from "@studio384/amicons";
 import clsx from "clsx";
 
 export default function SaveButton({ className, loading, ...props }) {

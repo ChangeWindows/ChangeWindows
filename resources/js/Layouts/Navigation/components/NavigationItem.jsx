@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 import { Link, usePage } from "@inertiajs/react";
-import Amicon from "@studio384/amaranth";
+import Amicon from "@studio384/amicons";
 import clsx from "clsx";
 
 export default function NavigationItem({ title, url, icon, primary, external = false }) {

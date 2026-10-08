@@ -3,7 +3,7 @@ import Status from "@/Components/Status";
 import Admin from "@/Layouts/Admin";
 
 import { Link } from "@inertiajs/react";
-import Amicon, { aiPlus } from "@studio384/amaranth";
+import Amicon, { aiPlus } from "@studio384/amicons";
 
 export default function Show({ can, roles, status }) {
   return (

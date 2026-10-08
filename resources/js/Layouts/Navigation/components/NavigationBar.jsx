@@ -4,7 +4,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import useWidth from "@/hooks/useWidth";
 
 import { Link, usePage } from "@inertiajs/react";
-import Amicon, { aiEllipsisH } from "@studio384/amaranth";
+import Amicon, { aiEllipsisH } from "@studio384/amicons";
 import clsx from "clsx";
 
 import NavigationItem from "./NavigationItem";

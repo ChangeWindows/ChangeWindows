@@ -4,7 +4,7 @@ import TextField from "@/Components/UI/Forms/TextField";
 import App from "@/Layouts/App";
 
 import { Head, useForm } from "@inertiajs/react";
-import Amicon, { aiCheck, aiShieldKeyhole, aiSpinnerThird } from "@studio384/amaranth";
+import Amicon, { aiCheck, aiShieldKeyhole, aiSpinnerThird } from "@studio384/amicons";
 
 export default function Index({ status, user }) {
   const { data, setData, patch, processing, errors } = useForm(user);

@@ -8,7 +8,7 @@ import TextField from "@/Components/UI/Forms/TextField";
 import Admin from "@/Layouts/Admin";
 
 import { useForm } from "@inertiajs/react";
-import Amicon, { aiTrashCan } from "@studio384/amaranth";
+import Amicon, { aiTrashCan } from "@studio384/amicons";
 
 export default function Edit({ can, releaseChannel, releases, channels, status }) {
   const { data, setData, patch, delete: destroy, processing, errors } = useForm(releaseChannel);

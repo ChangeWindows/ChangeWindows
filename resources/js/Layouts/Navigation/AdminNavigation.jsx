@@ -1,5 +1,5 @@
 import { usePage } from "@inertiajs/react";
-import { aiDevices, aiLock, aiPlane, aiBoxOpenFull, aiPerson, aiPersonLock } from "@studio384/amaranth";
+import { aiDevices, aiLock, aiPlane, aiBoxOpenFull, aiPerson, aiPersonLock } from "@studio384/amicons";
 
 import NavigationBar from "./components/NavigationBar";
 

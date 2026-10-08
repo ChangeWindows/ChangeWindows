@@ -3,7 +3,7 @@ import { useState } from "react";
 import Auth from "@/Layouts/Auth";
 
 import { Link, Head, router } from "@inertiajs/react";
-import Amicon, { aiArrowRightToBracket, aiShieldKeyhole, aiPersonPlus } from "@studio384/amaranth";
+import Amicon, { aiArrowRightToBracket, aiShieldKeyhole, aiPersonPlus } from "@studio384/amicons";
 
 export default function Login({ status }) {
   const [form, setForm] = useState({ email: "", password: "", remember: true });

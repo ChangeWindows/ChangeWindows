@@ -8,7 +8,7 @@ import Timeline from "@/Components/Timeline/Timeline";
 import App from "@/Layouts/App";
 
 import { Head } from "@inertiajs/react";
-import Amicon, { aiPatreon } from "@studio384/amaranth";
+import Amicon, { aiPatreon } from "@studio384/amicons";
 import { parseISO } from "date-fns";
 
 import PlatformTimelineCard from "./_PlatformTimelineCard";

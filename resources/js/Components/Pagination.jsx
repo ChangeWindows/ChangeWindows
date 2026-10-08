@@ -1,5 +1,5 @@
 import { Link } from "@inertiajs/react";
-import Amicon, { aiArrowLeft, aiArrowRight } from "@studio384/amaranth";
+import Amicon, { aiArrowLeft, aiArrowRight } from "@studio384/amicons";
 import clsx from "clsx";
 
 export default function Pagination({ pagination }) {

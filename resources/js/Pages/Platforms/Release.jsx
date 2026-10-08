@@ -8,7 +8,7 @@ import Timeline from "@/Components/Timeline/Timeline";
 import App from "@/Layouts/App";
 
 import { Link as ILink, Head } from "@inertiajs/react";
-import Amicon, { aiAngleLeft, aiAngleRight, aiArrowLeft, aiNotes, aiBarsStaggered } from "@studio384/amaranth";
+import Amicon, { aiAngleLeft, aiAngleRight, aiArrowLeft, aiNotes, aiBarsStaggered } from "@studio384/amicons";
 import Link from "@tiptap/extension-link";
 import { Table } from "@tiptap/extension-table";
 import { TableCell } from "@tiptap/extension-table-cell";

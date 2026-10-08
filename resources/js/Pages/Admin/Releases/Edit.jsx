@@ -10,7 +10,7 @@ import TextField from "@/Components/UI/Forms/TextField";
 import Admin from "@/Layouts/Admin";
 
 import { Link, useForm } from "@inertiajs/react";
-import Amicon, { aiEye, aiNotes, aiPlus, aiTrashCan } from "@studio384/amaranth";
+import Amicon, { aiEye, aiNotes, aiPlus, aiTrashCan } from "@studio384/amicons";
 import { parse, format, isValid, parseISO } from "date-fns";
 
 import ReleaseChannel from "./_ReleaseChannel";
@@ -114,7 +114,7 @@ export default function Edit({ can, platforms, release, channels, release_channe
                 id="start_preview"
                 label="Start preview"
                 value={
-                  isValid(parse(data.start_preview, "P", today))
+                  data.start_preview && isValid(parse(data.start_preview, "P", today))
                     ? format(parseISO(data.start_preview), "yyyy-MM-dd")
                     : data.start_preview
                 }
@@ -128,7 +128,7 @@ export default function Edit({ can, platforms, release, channels, release_channe
                 id="start_public"
                 label="Start public"
                 value={
-                  isValid(parse(data.start_public, "P", today))
+                  data.start_public && isValid(parse(data.start_public, "P", today))
                     ? format(parseISO(data.start_public), "yyyy-MM-dd")
                     : data.start_public
                 }
@@ -142,7 +142,7 @@ export default function Edit({ can, platforms, release, channels, release_channe
                 id="start_extended"
                 label="Start extended"
                 value={
-                  isValid(parse(data.start_extended, "P", today))
+                  data.start_extended && isValid(parse(data.start_extended, "P", today))
                     ? format(parseISO(data.start_extended), "yyyy-MM-dd")
                     : data.start_extended
                 }
@@ -156,7 +156,7 @@ export default function Edit({ can, platforms, release, channels, release_channe
                 id="start_lts"
                 label="Start LTS"
                 value={
-                  isValid(parse(data.start_lts, "P", today))
+                  data.start_lts && isValid(parse(data.start_lts, "P", today))
                     ? format(parseISO(data.start_lts), "yyyy-MM-dd")
                     : data.start_lts
                 }
@@ -170,7 +170,9 @@ export default function Edit({ can, platforms, release, channels, release_channe
                 id="end_lts"
                 label="End LTS"
                 value={
-                  isValid(parse(data.end_lts, "P", today)) ? format(parseISO(data.end_lts), "yyyy-MM-dd") : data.end_lts
+                  data.end_lts && isValid(parse(data.end_lts, "P", today))
+                    ? format(parseISO(data.end_lts), "yyyy-MM-dd")
+                    : data.end_lts
                 }
                 errors={errors.end_lts}
                 onChange={setData}

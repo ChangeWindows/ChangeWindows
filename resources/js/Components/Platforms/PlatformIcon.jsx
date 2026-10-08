@@ -14,7 +14,7 @@ import Amicon, {
   aiServer,
   aiDisplayCam,
   aiWindows,
-} from "@studio384/amaranth";
+} from "@studio384/amicons";
 import clsx from "clsx";
 
 export default function PlatformIcon({ platform, color = false, className = null }) {

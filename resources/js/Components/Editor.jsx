@@ -35,7 +35,7 @@ import Amicon, {
   aiTableHeaderRow,
   aiTableHeaderCell,
   aiAngleDown,
-} from "@studio384/amaranth";
+} from "@studio384/amicons";
 import Link from "@tiptap/extension-link";
 import { Table } from "@tiptap/extension-table";
 import { TableCell } from "@tiptap/extension-table-cell";
