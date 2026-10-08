@@ -22,7 +22,7 @@ export default function Pagination({ pagination }) {
                     <Amicon icon={aiArrowLeft} />
                   </Link>
                 ) : (
-                  <span className="page-link" aria-disabled="true">
+                  <span className="page-link text-secondary" aria-disabled="true">
                     <Amicon icon={aiArrowLeft} />
                   </span>
                 )}
@@ -39,7 +39,7 @@ export default function Pagination({ pagination }) {
                     <Amicon icon={aiArrowRight} />
                   </Link>
                 ) : (
-                  <span className="page-link" aria-disabled="true">
+                  <span className="page-link text-secondary" aria-disabled="true">
                     <Amicon icon={aiArrowRight} />
                   </span>
                 )}
@@ -59,7 +59,7 @@ export default function Pagination({ pagination }) {
                     {link.label}
                   </Link>
                 ) : (
-                  <span className="page-link" aria-disabled="true">
+                  <span className="page-link text-secondary" aria-disabled="true">
                     {link.label}
                   </span>
                 )}

@@ -64,7 +64,7 @@ export default function Index({ timeline, pagination, platforms, channel_platfor
                               <span className="d-block text-truncate">
                                 Join <b>{patron.name}</b>
                               </span>
-                              <small className="d-block mt-n1 text-muted text-truncate">
+                              <small className="d-block mt-n1 text-secondary text-truncate">
                                 in supporting ChangeWindows
                               </small>
                             </div>

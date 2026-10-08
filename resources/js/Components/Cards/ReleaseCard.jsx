@@ -31,10 +31,10 @@ export default function ReleaseCard({ name, platform, channels, alts, flight, ur
                   )}
                 </div>
                 <div className="col-lg-4 d-flex flex-column align-items-start justify-content-center col-12">
-                  {flight && !platform?.tool && <small className="text-muted mt-lg-0 mt-1 mb-0">{flight}</small>}
+                  {flight && !platform?.tool && <small className="text-secondary mt-lg-0 mt-1 mb-0">{flight}</small>}
                   {alts && !platform?.tool && (
                     <small
-                      className={clsx("text-muted mt-lg-n1 mb-0", {
+                      className={clsx("text-secondary mt-lg-n1 mb-0", {
                         "mt-n1": flight,
                         "mt-1": !flight,
                       })}

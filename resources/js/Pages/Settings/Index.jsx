@@ -135,7 +135,7 @@ export default function Show({ app, patrons, user }) {
                     </div>
                     <div className="flex-grow-1">
                       <span className="d-block mb-n1">Password</span>
-                      <span className="d-block text-muted text-sm">Manage your password</span>
+                      <span className="d-block text-secondary text-sm">Manage your password</span>
                     </div>
                     <div>
                       <Link href={route("front.profile.password")} className="btn btn-primary btn-sm">
@@ -154,7 +154,7 @@ export default function Show({ app, patrons, user }) {
                   </div>
                   <div className="flex-grow-1">
                     <span className="d-block mb-n1">Choose your theme</span>
-                    <span className="d-block text-muted text-sm">Change the ChangeWindows theme.</span>
+                    <span className="d-block text-secondary text-sm">Change the ChangeWindows theme.</span>
                   </div>
                   <div>
                     <select className="form-control" onChange={(e) => toggleTheme(e.target.value)} defaultValue={theme}>
@@ -174,7 +174,7 @@ export default function Show({ app, patrons, user }) {
                   </div>
                   <div className="flex-grow-1">
                     <span className="d-block mb-n1">Show inactive channels</span>
-                    <span className="d-block text-muted text-sm">
+                    <span className="d-block text-secondary text-sm">
                       Hide channels on the Channels-pages when they aren't active.
                     </span>
                   </div>
