@@ -1,9 +1,13 @@
-import React, { useState } from "react";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { useState } from "react";
 
+import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
+import TextField from "@/Components/UI/Forms/TextField";
 import App from "@/Layouts/App";
+import { getLocal, setLocal } from "@/utils/localStorage";
 
-import AmaranthIcon, {
+import { Head, Link, useForm } from "@inertiajs/react";
+import Amicon, {
   aiCodeBranch,
   aiGithub,
   aiPatreon,
@@ -14,19 +18,12 @@ import AmaranthIcon, {
   aiShieldKeyhole,
   aiSpinnerThird,
   aiPerson,
-} from "@studio384/amaranth";
-
-import { getLocal, setLocal } from "@/utils/localStorage";
-import TextField from "@/Components/UI/Forms/TextField";
-import NaviBar from "@/Components/NaviBar";
-import Status from "@/Components/Status";
+} from "@studio384/amicons";
 
 export default function Show({ app, patrons, user }) {
   // Live settings
   const [theme, setTheme] = useState(getLocal("theme"));
-  const [showActiveOnly, setShowActiveOnly] = useState(
-    getLocal("showActiveOnly")
-  );
+  const [showActiveOnly, setShowActiveOnly] = useState(getLocal("showActiveOnly"));
 
   function toggleTheme(mode) {
     if (mode === "default") {
@@ -72,17 +69,8 @@ export default function Show({ app, patrons, user }) {
       <NaviBar
         actions={
           user && (
-            <button
-              type="submit"
-              className="btn btn-primary btn-sm"
-              disabled={processing}
-              onClick={submitPatch}
-            >
-              <AmaranthIcon
-                icon={processing ? aiSpinnerThird : aiCheck}
-                spin={processing}
-              />{" "}
-              Save
+            <button type="submit" className="btn btn-primary btn-sm" disabled={processing} onClick={submitPatch}>
+              <Amicon icon={processing ? aiSpinnerThird : aiCheck} spin={processing} /> Save
             </button>
           )
         }
@@ -93,14 +81,14 @@ export default function Show({ app, patrons, user }) {
       <form className="container" onSubmit={submitPatch}>
         <Status status={status} />
         <fieldset className="row g-3">
-          <div className="col-12 col-lg-8 col-xl-9">
+          <div className="col-lg-8 col-xl-9 col-12">
             <div className="row g-3">
               {user && (
                 <div className="col-12 pt-3">
                   <p className="h6 mb-2">Details</p>
                   <div className="settings-card">
                     <div className="settings-icon">
-                      <AmaranthIcon icon={aiPerson} className="fs-6" />
+                      <Amicon icon={aiPerson} className="fs-6" />
                     </div>
                     <div className="flex-grow-1">
                       <span className="d-block">Username</span>
@@ -118,7 +106,7 @@ export default function Show({ app, patrons, user }) {
                   </div>
                   <div className="settings-card">
                     <div className="settings-icon">
-                      <AmaranthIcon icon={aiEnvelope} className="fs-6" />
+                      <Amicon icon={aiEnvelope} className="fs-6" />
                     </div>
                     <div className="flex-grow-1">
                       <span className="d-block">Email address</span>
@@ -143,20 +131,15 @@ export default function Show({ app, patrons, user }) {
                   <p className="h6 mb-2">Security</p>
                   <div className="settings-card">
                     <div className="settings-icon">
-                      <AmaranthIcon icon={aiShieldKeyhole} className="fs-6" />
+                      <Amicon icon={aiShieldKeyhole} className="fs-6" />
                     </div>
                     <div className="flex-grow-1">
                       <span className="d-block mb-n1">Password</span>
-                      <span className="d-block text-muted text-sm">
-                        Manage your password
-                      </span>
+                      <span className="d-block text-secondary text-sm">Manage your password</span>
                     </div>
                     <div>
-                      <Link
-                        href={route("front.profile.password")}
-                        className="btn btn-primary btn-sm"
-                      >
-                        <AmaranthIcon icon={aiShieldKeyhole} /> Change password
+                      <Link href={route("front.profile.password")} className="btn btn-primary btn-sm">
+                        <Amicon icon={aiShieldKeyhole} /> Change password
                       </Link>
                     </div>
                   </div>
@@ -167,20 +150,14 @@ export default function Show({ app, patrons, user }) {
                 <p className="h6 mb-2">Appearance</p>
                 <div className="settings-card">
                   <div className="settings-icon">
-                    <AmaranthIcon icon={aiSwatchbook} className="fs-6" />
+                    <Amicon icon={aiSwatchbook} className="fs-6" />
                   </div>
                   <div className="flex-grow-1">
                     <span className="d-block mb-n1">Choose your theme</span>
-                    <span className="d-block text-muted text-sm">
-                      Change the ChangeWindows theme.
-                    </span>
+                    <span className="d-block text-secondary text-sm">Change the ChangeWindows theme.</span>
                   </div>
                   <div>
-                    <select
-                      className="form-control"
-                      onChange={(e) => toggleTheme(e.target.value)}
-                      defaultValue={theme}
-                    >
+                    <select className="form-control" onChange={(e) => toggleTheme(e.target.value)} defaultValue={theme}>
                       <option value="light">Light</option>
                       <option value="dark">Dark</option>
                       <option value="default">Use system theme</option>
@@ -193,15 +170,12 @@ export default function Show({ app, patrons, user }) {
                 <p className="h6 mb-2">Channels</p>
                 <div className="settings-card">
                   <div className="settings-icon">
-                    <AmaranthIcon icon={aiCodeBranch} className="fs-6" />
+                    <Amicon icon={aiCodeBranch} className="fs-6" />
                   </div>
                   <div className="flex-grow-1">
-                    <span className="d-block mb-n1">
-                      Show inactive channels
-                    </span>
-                    <span className="d-block text-muted text-sm">
-                      Hide channels on the Channels-pages when they aren't
-                      active.
+                    <span className="d-block mb-n1">Show inactive channels</span>
+                    <span className="d-block text-secondary text-sm">
+                      Hide channels on the Channels-pages when they aren't active.
                     </span>
                   </div>
                   <div>
@@ -238,19 +212,15 @@ export default function Show({ app, patrons, user }) {
               </div>
             </div>
           </div>
-          <div className="col-12 col-lg-4 col-xl-3">
+          <div className="col-lg-4 col-xl-3 col-12">
             <p className="h6 pt-3">About ChangeWindows</p>
 
             <p className="text-md">
               ChangeWindows {app.preview === "preview" && "Preview"}
               {app.preview === "canary" && "Canary"} {app.version}
               <br />
-              &copy; 2014-2023{" "}
-              <a
-                className="m-0 f-384 fw-bold"
-                href="https://studio384.be"
-                target="_blank"
-              >
+              &copy; 2014-2026{" "}
+              <a className="f-384 fw-bold m-0" href="https://studio384.be" target="_blank" rel="noreferrer">
                 Studio <span className="studio-384">384</span>
               </a>
               <br />
@@ -258,42 +228,39 @@ export default function Show({ app, patrons, user }) {
             </p>
 
             <p className="text-md">
-              ChangeWindows is a detailed changelog and release history for
-              Windows across all platforms it appears on. With detailed and
-              timely updates, as well as a clean and clear interface,
-              ChangeWindows' goal is to provide a solid resource for anyone
-              interested in knowing what's next for Windows.
+              ChangeWindows is a detailed changelog and release history for Windows across all platforms it appears on.
+              With detailed and timely updates, as well as a clean and clear interface, ChangeWindows' goal is to
+              provide a solid resource for anyone interested in knowing what's next for Windows.
             </p>
 
-            <div className="d-flex gap-1 flex-wrap">
+            <div className="d-flex flex-wrap gap-1">
               <a
                 href="https://twitter.com/changewindows"
                 target="_blank"
+                rel="noreferrer"
                 className="btn btn-primary btn-sm"
               >
-                <AmaranthIcon icon={aiTwitter} /> Twitter
+                <Amicon icon={aiTwitter} /> Twitter
               </a>
               <a
                 href="https://github.com/changewindows/changewindows"
                 target="_blank"
+                rel="noreferrer"
                 className="btn btn-primary btn-sm"
               >
-                <AmaranthIcon icon={aiGithub} /> GitHub
+                <Amicon icon={aiGithub} /> GitHub
               </a>
               <a
                 href="https://patreon.com/changewindows"
                 target="_blank"
+                rel="noreferrer"
                 className="btn btn-primary btn-sm"
               >
-                <AmaranthIcon icon={aiPatreon} /> Patreon
+                <Amicon icon={aiPatreon} /> Patreon
               </a>
             </div>
             <div className="mt-3">
-              <a
-                className="h1 m-0 f-384 fw-bold"
-                href="https://studio384.be"
-                target="_blank"
-              >
+              <a className="h1 f-384 fw-bold m-0" href="https://studio384.be" target="_blank" rel="noreferrer">
                 Studio <span className="studio-384">384</span>
               </a>
             </div>

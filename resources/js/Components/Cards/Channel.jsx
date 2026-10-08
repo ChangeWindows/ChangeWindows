@@ -1,18 +1,12 @@
-import React, { useMemo } from "react";
-import { Link } from '@inertiajs/react';
+import { useMemo } from "react";
 
+import { Link } from "@inertiajs/react";
 import clsx from "clsx";
-import { format, isToday, isYesterday, parseISO, isValid } from "date-fns";
+import { format, isToday, isYesterday, isValid } from "date-fns";
 
-export default function Channel({
-  date,
-  build,
-  channel,
-  disabled = false,
-  url = null,
-}) {
-  const Component = useMemo(() => (url ? Link : "div"), ["url"]);
-  const mainProps = useMemo(() => ({ href: url }), ["url"]);
+export default function Channel({ date, build, channel, disabled = false, url = null }) {
+  const Component = useMemo(() => (url ? Link : "div"), [url]);
+  const mainProps = useMemo(() => ({ href: url }), [url]);
 
   const formatedDate = useMemo(() => {
     if (isValid(date)) {
@@ -30,10 +24,7 @@ export default function Channel({
 
   return (
     <div className="col">
-      <Component
-        {...mainProps}
-        className={clsx("channel", "card", { "channel-disabled": disabled })}
-      >
+      <Component {...mainProps} className={clsx("channel", "card", { "channel-disabled": disabled })}>
         <div className="channel-name" style={{ color: channel.color }}>
           {channel.name}
         </div>

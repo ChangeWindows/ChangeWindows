@@ -1,27 +1,25 @@
-import React, { useMemo } from 'react';
+import { useMemo } from "react";
 
-import { format, isToday, isYesterday } from 'date-fns';
-import clsx from 'clsx';
+import clsx from "clsx";
+import { format, isToday, isYesterday } from "date-fns";
 
 export default function Timeline({ date, children, className }) {
   const formatedDate = useMemo(() => {
     if (isToday(date)) {
-      return 'Today';
+      return "Today";
     } else if (isYesterday(date)) {
-      return 'Yesterday';
+      return "Yesterday";
     } else {
-      return format(date, 'd MMMM yyyy');
-    };
+      return format(date, "d MMMM yyyy");
+    }
   }, [date]);
 
   return (
     <>
-      <div className="col-12 titel">
+      <div className="titel col-12">
         <h3 className="h6 text-primary">{formatedDate}</h3>
       </div>
-      <div className={clsx('timeline', className, { 'col-12': !className })}>
-        {children}
-      </div>
+      <div className={clsx("timeline", className, { "col-12": !className })}>{children}</div>
     </>
   );
-};
+}

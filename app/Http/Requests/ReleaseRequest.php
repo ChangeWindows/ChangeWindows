@@ -40,7 +40,7 @@ class ReleaseRequest extends FormRequest
                 'start_build' => ['required', 'numeric'],
                 'start_delta' => ['required', 'numeric'],
                 'end_build' => ['required', 'numeric'],
-                'end_delta' => ['required', 'numeric']
+                'end_delta' => ['required', 'numeric'],
             ];
         }
 
@@ -61,7 +61,7 @@ class ReleaseRequest extends FormRequest
             'start_build' => ['required', 'numeric'],
             'start_delta' => ['required', 'numeric'],
             'end_build' => ['required', 'numeric'],
-            'end_delta' => ['required', 'numeric']
+            'end_delta' => ['required', 'numeric'],
         ];
     }
 }

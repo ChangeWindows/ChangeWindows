@@ -1,7 +1,6 @@
-import React, { useMemo } from "react";
-import clsx from "clsx";
+import { useMemo } from "react";
 
-import AmaranthIcon, {
+import Amicon, {
   aiAzure,
   aiMicrochip,
   aiTerminal,
@@ -15,13 +14,10 @@ import AmaranthIcon, {
   aiServer,
   aiDisplayCam,
   aiWindows,
-} from "@studio384/amaranth";
+} from "@studio384/amicons";
+import clsx from "clsx";
 
-export default function PlatformIcon({
-  platform,
-  color = false,
-  className = null,
-}) {
+export default function PlatformIcon({ platform, color = false, className = null }) {
   const icon = useMemo(() => {
     switch (platform.icon) {
       case "cloud":
@@ -51,13 +47,7 @@ export default function PlatformIcon({
       default:
         return aiWindows;
     }
-  }, []);
+  }, [platform.icon]);
 
-  return (
-    <AmaranthIcon
-      icon={icon}
-      className={clsx(className)}
-      style={{ color: color ? platform.color : "inherit" }}
-    />
-  );
+  return <Amicon icon={icon} className={clsx(className)} style={{ color: color ? platform.color : "inherit" }} />;
 }

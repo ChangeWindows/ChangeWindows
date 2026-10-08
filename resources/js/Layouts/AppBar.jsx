@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
 import { Link, router, usePage } from "@inertiajs/react";
+import Amicon, { aiArrowRightFromBracket, aiArrowRightToBracket, aiMagnifyingGlass } from "@studio384/amicons";
 
-import AmaranthIcon, {
-  aiArrowRightFromBracket,
-  aiArrowRightToBracket,
-  aiMagnifyingGlass,
-} from "@studio384/amaranth";
-
-import { getLocal, setLocal } from "../utils/localStorage";
 import useMediaQuery from "../hooks/useMediaQuery";
+import { getLocal, setLocal } from "../utils/localStorage";
 
 export default function AppBar() {
-  const { props, url } = usePage();
+  const { props } = usePage();
   const matchesDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const [search, setSearch] = useState("");
@@ -49,9 +45,7 @@ export default function AppBar() {
 
   function handleSearch(e) {
     e.preventDefault();
-    router.post(url.includes("/flags") ? "/search/flags" : "/search", {
-      search,
-    });
+    router.post("/search", { search });
   }
 
   return (
@@ -65,8 +59,8 @@ export default function AppBar() {
                   props.app.preview === "preview"
                     ? "/images/logo-preview.svg"
                     : props.app.preview === "canary"
-                    ? "/images/logo-canary.svg"
-                    : "/images/logo.svg"
+                      ? "/images/logo-canary.svg"
+                      : "/images/logo.svg"
                 }
                 alt="ChangeWindows"
                 className="app-icon"
@@ -74,9 +68,9 @@ export default function AppBar() {
               <span className="brand-label d-none d-md-inline">
                 ChangeWindows
                 {props.app.preview === "canary" ? (
-                  <span className="text-muted text-sm"> canary</span>
+                  <span className="text-secondary text-sm"> canary</span>
                 ) : props.app.preview === "preview" ? (
-                  <span className="text-muted text-sm"> preview</span>
+                  <span className="text-secondary text-sm"> preview</span>
                 ) : (
                   ""
                 )}
@@ -84,23 +78,16 @@ export default function AppBar() {
             </Link>
           </div>
           <div className="navbar-search">
-            <form
-              onSubmit={handleSearch}
-              className="input-group input-group-search"
-            >
-              <span className="input-group-text">
-                <AmaranthIcon icon={aiMagnifyingGlass} />
+            <form onSubmit={handleSearch} className="input-group input-group-search">
+              <span className="input-group-text text-secondary">
+                <Amicon icon={aiMagnifyingGlass} />
               </span>
               <input
                 type="text"
                 id="search"
                 name="search"
                 className="form-control"
-                placeholder={
-                  url.includes("/flags")
-                    ? "Search flags..."
-                    : "Search releases..."
-                }
+                placeholder="Search releases..."
                 onChange={(event) => setSearch(event.target.value)}
                 aria-label="Search"
                 aria-describedby="search"
@@ -110,16 +97,13 @@ export default function AppBar() {
           <div className="navbar-actions">
             {props.auth ? (
               <form onSubmit={handleLogout} className="d-block">
-                <button
-                  type="submit"
-                  className="btn btn-transparent btn-profile"
-                >
-                  <AmaranthIcon icon={aiArrowRightFromBracket} />
+                <button type="submit" className="btn btn-transparent btn-profile">
+                  <Amicon icon={aiArrowRightFromBracket} />
                 </button>
               </form>
             ) : (
               <Link href="/login" className="btn btn-transparent btn-profile">
-                <AmaranthIcon icon={aiArrowRightToBracket} />
+                <Amicon icon={aiArrowRightToBracket} />
               </Link>
             )}
           </div>

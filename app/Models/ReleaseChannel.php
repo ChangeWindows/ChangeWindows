@@ -12,35 +12,42 @@ class ReleaseChannel extends Model
     use HasRelationships;
 
     protected $table = 'release_channels';
+
     protected $fillable = ['name', 'short_name', 'supported', 'channel_id', 'release_id'];
 
     protected $casts = [
-        'supported' => 'integer'
+        'supported' => 'integer',
     ];
 
-    public function channel() {
+    public function channel()
+    {
         return $this->belongsTo(Channel::class);
     }
 
-    public function release() {
+    public function release()
+    {
         return $this->belongsTo(Release::class);
     }
 
     // Deprecated, go through channel instead
-    public function platform() {
+    public function platform()
+    {
         return $this->hasOneThrough(Platform::class, Channel::class);
     }
 
-    public function flights() {
+    public function flights()
+    {
         return $this->hasMany(Flight::class);
     }
 
-    public function latestFlight() {
+    public function latestFlight()
+    {
         return $this->hasOne(Flight::class)->ofMany('date', 'max');
     }
 
     // Deprecated, use latestFlight instead
-    public function getLatestAttribute() {
+    public function getLatestAttribute()
+    {
         return Flight::where('release_channel_id', '=', $this->id)
             ->orderBy('build', 'desc')
             ->orderBy('delta', 'desc')

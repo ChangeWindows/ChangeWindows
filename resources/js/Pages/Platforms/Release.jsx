@@ -1,56 +1,33 @@
-import React from "react";
-import { Link as ILink, Head } from "@inertiajs/react";
-
-import App from "@/Layouts/App";
-import Channel from "@/Components/Cards/Channel";
-import Flight from "@/Components/Timeline/Flight";
-import LifeCycle from "./_LifeCycle";
-import Pagination from "@/Components/Pagination";
-import PlatformIcon from "@/Components/Platforms/PlatformIcon";
-import Timeline from "@/Components/Timeline/Timeline";
-
-import AmaranthIcon, {
-  aiAngleLeft,
-  aiAngleRight,
-  aiArrowLeft,
-  aiNotes,
-  aiBarsStaggered,
-} from "@studio384/amaranth";
-
-import { parseISO } from "date-fns";
-
-import { useEditor, EditorContent } from "@tiptap/react";
-import Typography from "@tiptap/extension-typography";
-import Underline from "@tiptap/extension-underline";
-import Link from "@tiptap/extension-link";
-import StarterKit from "@tiptap/starter-kit";
-import { Table } from "@tiptap/extension-table";
-import { TableRow } from "@tiptap/extension-table-row";
-import { TableHeader } from "@tiptap/extension-table-header";
-import { TableCell } from "@tiptap/extension-table-cell";
 import { Nav, Tab } from "react-bootstrap";
 
-export default function Release({
-  release,
-  platform,
-  channels,
-  timeline,
-  pagination,
-  quickNav,
-}) {
+import Channel from "@/Components/Cards/Channel";
+import Pagination from "@/Components/Pagination";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+import Flight from "@/Components/Timeline/Flight";
+import Timeline from "@/Components/Timeline/Timeline";
+import App from "@/Layouts/App";
+
+import { Link as ILink, Head } from "@inertiajs/react";
+import Amicon, { aiAngleLeft, aiAngleRight, aiArrowLeft, aiNotes, aiBarsStaggered } from "@studio384/amicons";
+import { TableKit } from "@tiptap/extension-table";
+import Typography from "@tiptap/extension-typography";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { parseISO } from "date-fns";
+
+import LifeCycle from "./_LifeCycle";
+
+export default function Release({ release, platform, channels, timeline, pagination, quickNav }) {
   const editor = useEditor({
     editable: false,
     extensions: [
       StarterKit,
       Typography,
-      Underline,
-      Link,
-      TableRow,
-      TableHeader,
-      TableCell,
-      Table.configure({
-        HTMLAttributes: {
-          class: "table table-bordered table-sm",
+      TableKit.configure({
+        table: {
+          HTMLAttributes: {
+            class: "table table-bordered table-sm",
+          },
         },
       }),
     ],
@@ -61,14 +38,11 @@ export default function Release({
     extensions: [
       StarterKit,
       Typography,
-      Underline,
-      Link,
-      TableRow,
-      TableHeader,
-      TableCell,
-      Table.configure({
-        HTMLAttributes: {
-          class: "table table-bordered table-sm",
+      TableKit.configure({
+        table: {
+          HTMLAttributes: {
+            class: "table table-bordered table-sm",
+          },
         },
       }),
     ],
@@ -82,52 +56,38 @@ export default function Release({
       <Tab.Container defaultActiveKey="timeline">
         <nav className="navbar navbar-expand-xl navbar-light sticky-top">
           <div className="container">
-            <ILink
-              href={route("front.platforms.show", platform)}
-              className="btn btn-transparent btn-sm me-2"
-            >
-              <AmaranthIcon icon={aiArrowLeft} />
+            <ILink href={route("front.platforms.show", platform)} className="btn btn-transparent btn-sm me-2">
+              <Amicon icon={aiArrowLeft} />
             </ILink>
             <Nav className="d-flex d-xl-none">
               <Nav.Item>
                 <Nav.Link eventKey="timeline">
-                  <AmaranthIcon icon={aiBarsStaggered} /> Timeline
+                  <Amicon icon={aiBarsStaggered} /> Timeline
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="changelog">
-                  <AmaranthIcon icon={aiNotes} /> Changelog
+                  <Amicon icon={aiNotes} /> Changelog
                 </Nav.Link>
               </Nav.Item>
             </Nav>
             <div className="flex-grow-1" />
             {quickNav.prev && (
               <ILink
-                href={route("front.platforms.releases", [
-                  platform,
-                  quickNav.prev,
-                ])}
+                href={route("front.platforms.releases", [platform, quickNav.prev])}
                 className="btn btn-transparent btn-sm"
               >
-                <AmaranthIcon icon={aiAngleLeft} />
-                <span className="d-none d-sm-inline">
-                  {" "}
-                  {quickNav.prev.version}
-                </span>
+                <Amicon icon={aiAngleLeft} />
+                <span className="d-none d-sm-inline"> {quickNav.prev.version}</span>
               </ILink>
             )}
             {quickNav.next && (
               <ILink
-                href={route("front.platforms.releases", [
-                  platform,
-                  quickNav.next,
-                ])}
+                href={route("front.platforms.releases", [platform, quickNav.next])}
                 className="btn btn-transparent btn-sm ms-2"
               >
-                <span className="d-none d-sm-inline">
-                  {quickNav.next.version}{" "}
-                </span>
-                <AmaranthIcon icon={aiAngleRight} />
+                <span className="d-none d-sm-inline">{quickNav.next.version} </span>
+                <Amicon icon={aiAngleRight} />
               </ILink>
             )}
           </div>
@@ -135,7 +95,7 @@ export default function Release({
 
         <div className="container">
           <div className="row g-1">
-            <div className="col-12 titlebar">
+            <div className="titlebar col-12">
               <div className="d-flex">
                 <div className="me-3">
                   <h1>
@@ -143,10 +103,10 @@ export default function Release({
                   </h1>
                 </div>
                 <div>
-                  <h1 className="m-0 fw-bold" style={{ color: platform.color }}>
+                  <h1 className="fw-bold m-0" style={{ color: platform.color }}>
                     {release.name}
                   </h1>
-                  <h2 className="h6 m-0 text-muted">
+                  <h2 className="h6 text-secondary m-0">
                     Version {release.version}, {release.codename}
                   </h2>
                 </div>
@@ -170,30 +130,19 @@ export default function Release({
                               name: channel.name,
                             }}
                             build={channel.flight.version ?? "None"}
-                            date={
-                              channel.flight?.date
-                                ? parseISO(channel.flight.date)
-                                : "No flight"
-                            }
+                            date={channel.flight?.date ? parseISO(channel.flight.date) : "No flight"}
                             disabled={channel.disabled}
                           />
                         ))}
                       </div>
                     </div>
                     <div className="d-none d-xl-block col-xl-8 col-xxl-9 mt-4">
-                      <EditorContent
-                        editor={editor}
-                        className="editor-content"
-                        key="main"
-                      />
+                      <EditorContent editor={editor} className="editor-content" key="main" />
                     </div>
-                    <div className="col-12 col-xl-4 col-xxl-3 mt-4">
+                    <div className="col-xl-4 col-xxl-3 col-12 mt-4">
                       <div className="row g-1">
                         {Object.keys(timeline).map((date, key) => (
-                          <Timeline
-                            date={parseISO(timeline[date].date)}
-                            key={key}
-                          >
+                          <Timeline date={parseISO(timeline[date].date)} key={key}>
                             {timeline[date].flights.map((flight, _key) => (
                               <Flight
                                 key={`${flight.type}-${flight.id}`}
@@ -215,11 +164,7 @@ export default function Release({
                 <Tab.Pane eventKey="changelog">
                   <div className="row">
                     <div className="col-12 mt-3">
-                      <EditorContent
-                        editor={editorTwo}
-                        className="editor-content"
-                        key="secondary"
-                      />
+                      <EditorContent editor={editorTwo} className="editor-content" key="secondary" />
                     </div>
                   </div>
                 </Tab.Pane>

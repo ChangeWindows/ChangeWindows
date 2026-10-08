@@ -21,7 +21,7 @@
                 svg {
                     color: $primary;
                 }
-                
+
                 &::after {
                     position: absolute;
                     background-color: $primary;
@@ -30,7 +30,7 @@
                     height: 3.5px;
                     border-radius: 6px;
                     width: 16px;
-                    content: '';
+                    content: "";
                 }
             }
         }
@@ -38,8 +38,8 @@
 }
 
 .pagination {
-    margin-bottom: .5rem;
-    margin-top: .75rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.75rem;
     background-color: var(--card-bg);
     box-shadow: $box-shadow-sm;
     border: none;
@@ -75,8 +75,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: .25rem;
-    
+            border-radius: 0.25rem;
+
             &:hover {
                 background: var(--card-bg-hover);
             }
@@ -84,9 +84,9 @@
 
         .pagination-divider {
             height: 1.25rem;
-            margin-top: .5rem;
-            margin-left: .25rem;
-            margin-right: .25rem;
+            margin-top: 0.5rem;
+            margin-left: 0.25rem;
+            margin-right: 0.25rem;
             border-left: 1px solid var(--main-border-color);
         }
 
@@ -94,11 +94,11 @@
             .page-link {
                 position: relative;
                 background: transparent;
-    
+
                 &:hover {
                     background: var(--card-bg-hover);
                 }
-                
+
                 &::after {
                     position: absolute;
                     background-color: $primary;
@@ -107,7 +107,7 @@
                     height: 3.5px;
                     border-radius: 6px;
                     width: 16px;
-                    content: '';
+                    content: "";
                 }
             }
         }

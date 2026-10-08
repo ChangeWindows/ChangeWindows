@@ -1,5 +1,5 @@
 .progress {
-    height: .5rem;
+    height: 0.5rem;
     background-color: var(--progress-bg);
     border-radius: 1rem;
     overflow: hidden;
@@ -8,16 +8,16 @@
 
 .progress-group {
     & > :not(:first-child) {
-        margin-left: .25rem;
+        margin-left: 0.25rem;
     }
 }
 
 .progress-title {
     white-space: nowrap;
     color: var(--text);
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
     font-weight: 600;
-    
+
     @media (min-width: 768px) {
         text-align: center;
     }
@@ -39,7 +39,7 @@
 
 .legend-stage {
     margin: 0;
-    font-size: .9rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--text);
     text-align: right;
@@ -47,7 +47,7 @@
 
 .legend-dates {
     margin: 0;
-    font-size: .9rem;
+    font-size: 0.9rem;
     color: $text-muted;
 }
 
@@ -55,7 +55,7 @@
     width: 3px;
     border-radius: 2px;
     height: 1.125rem;
-    margin: .125rem .5rem;
+    margin: 0.125rem 0.5rem;
 
     &.legend-bar-primary {
         background-color: $primary;

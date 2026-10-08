@@ -17,7 +17,7 @@ class CreateLaunchesTable extends Migration
             $table->id();
             $table->foreignId('release_id')->constrained('releases')->onDelete('cascade');
             $table->timestamps();
-            
+
             $table->unique('release_id');
         });
     }

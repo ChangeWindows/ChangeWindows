@@ -1,14 +1,13 @@
-import React from "react";
-import { Link } from '@inertiajs/react';
-
-import Admin from "@/Layouts/Admin";
 import NaviBar from "@/Components/NaviBar";
 import Pagination from "@/Components/Pagination";
 import Status from "@/Components/Status";
 import Timeline from "@/Components/Timeline/Timeline";
+import Admin from "@/Layouts/Admin";
 
-import AmaranthIcon, { aiPlus } from "@studio384/amaranth";
+import { Link } from "@inertiajs/react";
+import Amicon, { aiPlus } from "@studio384/amicons";
 import { parseISO } from "date-fns";
+
 import PlatformFlightCard from "./_PlatformFlightCard";
 
 export default function Index({ can, timeline, pagination, status }) {
@@ -17,11 +16,8 @@ export default function Index({ can, timeline, pagination, status }) {
       <NaviBar
         actions={
           can.flights.create && (
-            <Link
-              href={route("admin.flights.create")}
-              className="btn btn-primary btn-sm"
-            >
-              <AmaranthIcon icon={aiPlus} /> Add
+            <Link href={route("admin.flights.create")} className="btn btn-primary btn-sm">
+              <Amicon icon={aiPlus} /> Add
             </Link>
           )
         }
@@ -35,8 +31,8 @@ export default function Index({ can, timeline, pagination, status }) {
           {Object.keys(timeline).map((date, key) => (
             <Timeline date={parseISO(timeline[date].date)} key={key}>
               <div className="card-grid">
-                {timeline[date].flights.map((platform, _key) => (
-                  <PlatformFlightCard platform={platform} />
+                {timeline[date].flights.map((platform) => (
+                  <PlatformFlightCard key={platform[0].platform.id} platform={platform} />
                 ))}
               </div>
             </Timeline>

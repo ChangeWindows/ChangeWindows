@@ -1,25 +1,19 @@
-import React, { Fragment } from "react";
-import { Head } from "@inertiajs/react";
+import { Fragment } from "react";
 
-import App from "@/Layouts/App";
 import Channel from "@/Components/Cards/Channel";
 import Pagination from "@/Components/Pagination";
-import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import PlatformNavigation from "@/Components/PlatformNavigation";
+import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import Timeline from "@/Components/Timeline/Timeline";
+import App from "@/Layouts/App";
+
+import { Head } from "@inertiajs/react";
+import Amicon, { aiPatreon } from "@studio384/amicons";
+import { parseISO } from "date-fns";
 
 import PlatformTimelineCard from "./_PlatformTimelineCard";
 
-import { parseISO } from "date-fns";
-import AmaranthIcon, { aiPatreon } from "@studio384/amaranth";
-
-export default function Index({
-  timeline,
-  pagination,
-  platforms,
-  channel_platforms,
-  patron,
-}) {
+export default function Index({ timeline, pagination, platforms, channel_platforms, patron }) {
   return (
     <App>
       <Head title="Timeline" />
@@ -34,17 +28,17 @@ export default function Index({
 
       <div className="container">
         <div className="row g-1">
-          <div className="col-12 titlebar">
+          <div className="titlebar col-12">
             <h1>Timeline</h1>
           </div>
           <div className="col">
             <div className="row g-3">
-              <div className="col-12 col-md-8 col-lg-7">
+              <div className="col-md-8 col-lg-7 col-12">
                 <div className="row g-1">
                   {Object.keys(timeline).map((date, key) => (
                     <Timeline date={parseISO(timeline[date].date)} key={key}>
-                      {timeline[date].flights.map((platform, _key) => (
-                        <PlatformTimelineCard platform={platform} />
+                      {timeline[date].flights.map((platform) => (
+                        <PlatformTimelineCard key={platform[0].platform.id} platform={platform} />
                       ))}
                     </Timeline>
                   ))}
@@ -57,12 +51,8 @@ export default function Index({
                     <Fragment key={key}>
                       {key === 2 && patron && (
                         <div className="col-12 mt-3">
-                          <a
-                            href="https://www.patreon.com/changewindows"
-                            className="settings-card"
-                            key={key}
-                          >
-                            <div className="settings-icon ms-1 me-2 ms-lg-0 me-lg-0">
+                          <a href="https://www.patreon.com/changewindows" className="settings-card" key={key}>
+                            <div className="settings-icon ms-lg-0 me-lg-0 ms-1 me-2">
                               <img
                                 src={patron.avatar}
                                 alt={patron.name}
@@ -70,21 +60,21 @@ export default function Index({
                                 className="rounded-circle"
                               />
                             </div>
-                            <div className="flex-grow-1 mw-0">
+                            <div className="mw-0 flex-grow-1">
                               <span className="d-block text-truncate">
                                 Join <b>{patron.name}</b>
                               </span>
-                              <small className="d-block mt-n1 text-muted text-truncate">
+                              <small className="d-block mt-n1 text-secondary text-truncate">
                                 in supporting ChangeWindows
                               </small>
                             </div>
-                            <div className="ms-2 d-block d-md-none d-lg-block">
-                              <AmaranthIcon icon={aiPatreon} />
+                            <div className="d-block d-md-none d-lg-block ms-2">
+                              <Amicon icon={aiPatreon} />
                             </div>
                           </a>
                         </div>
                       )}
-                      <div className="col-12 titel">
+                      <div className="titel col-12">
                         <h3 className="h6" style={{ color: platform.color }}>
                           <PlatformIcon platform={platform} color />
                           <span className="fw-bold ms-2">{platform.name}</span>
@@ -95,10 +85,12 @@ export default function Index({
                           key={_key}
                           channel={{ color: channel.color, name: channel.name }}
                           build={channel.flight ? channel.flight.version : ""}
-                          date={
-                            channel.flight ? parseISO(channel.flight.date) : ""
+                          date={channel.flight ? parseISO(channel.flight.date) : ""}
+                          url={
+                            channel.flight
+                              ? route("front.platforms.releases", { release: channel.release, platform })
+                              : undefined
                           }
-                          url={channel.flight ? route('front.platforms.releases', { release: channel.release, platform }) : undefined}
                         />
                       ))}
                     </Fragment>

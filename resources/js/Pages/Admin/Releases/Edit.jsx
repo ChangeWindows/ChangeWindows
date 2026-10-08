@@ -1,42 +1,23 @@
-import React, { useMemo } from "react";
-import { Link, useForm } from "@inertiajs/react";
+import { useMemo, useState } from "react";
 
-import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
 import Fieldset from "@/Components/UI/Forms/Fieldset";
-import NaviBar from "@/Components/NaviBar";
 import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Select from "@/Components/UI/Forms/Select";
-import Status from "@/Components/Status";
 import TextField from "@/Components/UI/Forms/TextField";
+import Admin from "@/Layouts/Admin";
+
+import { Link, useForm } from "@inertiajs/react";
+import Amicon, { aiEye, aiNotes, aiPlus, aiTrashCan } from "@studio384/amicons";
+import { parse, format, isValid, parseISO } from "date-fns";
 
 import ReleaseChannel from "./_ReleaseChannel";
 
-import AmaranthIcon, {
-  aiEye,
-  aiNotes,
-  aiPlus,
-  aiTrashCan,
-} from "@studio384/amaranth";
-
-import { parse, format, isValid, parseISO } from "date-fns";
-
-export default function Edit({
-  can,
-  platforms,
-  release,
-  channels,
-  release_channels,
-  status,
-}) {
-  const {
-    data,
-    setData,
-    patch,
-    delete: destroy,
-    processing,
-    errors,
-  } = useForm(release);
+export default function Edit({ can, platforms, release, channels, release_channels, status }) {
+  const [today] = useState(() => new Date());
+  const { data, setData, patch, delete: destroy, processing, errors } = useForm(release);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -51,32 +32,22 @@ export default function Edit({
   const availablePlatformChannels = useMemo(
     () =>
       channels.filter(
-        (channel) =>
-          !release_channels.find(
-            (releaseChannel) => releaseChannel.channel_id === channel.id
-          )
+        (channel) => !release_channels.find((releaseChannel) => releaseChannel.channel_id === channel.id),
       ),
-    [channels, release_channels]
+    [channels, release_channels],
   );
 
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
-        <NaviBar
-          back="/admin/releases"
-          actions={can.releases.edit && <SaveButton loading={processing} />}
-        >
+        <NaviBar back="/admin/releases" actions={can.releases.edit && <SaveButton loading={processing} />}>
           {data.name || "Unnamed release"}
         </NaviBar>
 
         <div className="container my-3">
           <Status status={status} />
-          <Fieldset
-            title="Identity"
-            description="About this release."
-            disabled={!can.releases.edit}
-          >
-            <div className="col-12 col-lg-6">
+          <Fieldset title="Identity" description="About this release." disabled={!can.releases.edit}>
+            <div className="col-lg-6 col-12">
               <Select
                 disabled
                 id="platform_id"
@@ -89,25 +60,13 @@ export default function Edit({
                 onChange={(e) => setData("platform_id", e.target.value)}
               />
             </div>
-            <div className="col-12 col-lg-6">
-              <TextField
-                id="name"
-                label="Name"
-                value={data.name}
-                errors={errors.name}
-                onChange={setData}
-              />
+            <div className="col-lg-6 col-12">
+              <TextField id="name" label="Name" value={data.name} errors={errors.name} onChange={setData} />
             </div>
-            <div className="col-12 col-lg-6">
-              <TextField
-                id="version"
-                label="Version"
-                value={data.version}
-                errors={errors.version}
-                onChange={setData}
-              />
+            <div className="col-lg-6 col-12">
+              <TextField id="version" label="Version" value={data.version} errors={errors.version} onChange={setData} />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 id="canonical_version"
                 label="Canonical Version"
@@ -116,7 +75,7 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 id="codename"
                 label="Codename"
@@ -138,14 +97,8 @@ export default function Edit({
           </Fieldset>
           <Fieldset title="Changelog" description="What's new?" disabledCard>
             <div className="col-12">
-              <Link
-                href={route("admin.releases.changelog.edit", release)}
-                className="btn btn-primary btn-sm"
-              >
-                <AmaranthIcon
-                  icon={can.releases.edit ? aiNotes : aiEye}
-                  className="me-2"
-                />
+              <Link href={route("admin.releases.changelog.edit", release)} className="btn btn-primary btn-sm">
+                <Amicon icon={can.releases.edit ? aiNotes : aiEye} className="me-2" />
                 {can.releases.edit ? "Edit changelog" : "View changelog"}
               </Link>
             </div>
@@ -155,13 +108,13 @@ export default function Edit({
             description="Dates relate to the life cycle of the release."
             disabled={!can.releases.edit}
           >
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="date"
                 id="start_preview"
                 label="Start preview"
                 value={
-                  isValid(parse(data.start_preview, "P", new Date()))
+                  data.start_preview && isValid(parse(data.start_preview, "P", today))
                     ? format(parseISO(data.start_preview), "yyyy-MM-dd")
                     : data.start_preview
                 }
@@ -169,13 +122,13 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="date"
                 id="start_public"
                 label="Start public"
                 value={
-                  isValid(parse(data.start_public, "P", new Date()))
+                  data.start_public && isValid(parse(data.start_public, "P", today))
                     ? format(parseISO(data.start_public), "yyyy-MM-dd")
                     : data.start_public
                 }
@@ -183,13 +136,13 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="date"
                 id="start_extended"
                 label="Start extended"
                 value={
-                  isValid(parse(data.start_extended, "P", new Date()))
+                  data.start_extended && isValid(parse(data.start_extended, "P", today))
                     ? format(parseISO(data.start_extended), "yyyy-MM-dd")
                     : data.start_extended
                 }
@@ -197,13 +150,13 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="date"
                 id="start_lts"
                 label="Start LTS"
                 value={
-                  isValid(parse(data.start_lts, "P", new Date()))
+                  data.start_lts && isValid(parse(data.start_lts, "P", today))
                     ? format(parseISO(data.start_lts), "yyyy-MM-dd")
                     : data.start_lts
                 }
@@ -211,13 +164,13 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="date"
                 id="end_lts"
                 label="End LTS"
                 value={
-                  isValid(parse(data.end_lts, "P", new Date()))
+                  data.end_lts && isValid(parse(data.end_lts, "P", today))
                     ? format(parseISO(data.end_lts), "yyyy-MM-dd")
                     : data.end_lts
                 }
@@ -225,7 +178,7 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <Checkbox
                 id="ongoing"
                 label="Ongoing phase"
@@ -240,7 +193,7 @@ export default function Edit({
             description="The range within all flights of this release fall."
             disabled={!can.releases.edit}
           >
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="number"
                 id="start_build"
@@ -250,7 +203,7 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="number"
                 id="start_delta"
@@ -260,7 +213,7 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="number"
                 id="end_build"
@@ -270,7 +223,7 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 type="number"
                 id="end_delta"
@@ -284,18 +237,14 @@ export default function Edit({
         </div>
       </form>
       <div className="container mb-0">
-        <Fieldset
-          title="Release channels"
-          description="The channels for this release."
-          disabledCard
-        >
+        <Fieldset title="Release channels" description="The channels for this release." disabledCard>
           <div className="col-12">
             <div className="row g-1">
               {release_channels.map((releaseChannel, key) => (
                 <ReleaseChannel key={key} releaseChannel={releaseChannel} can={can} />
               ))}
               {can.releases.edit && availablePlatformChannels.length > 0 && (
-                <div className="col-12 col-sm-6 col-xl-4">
+                <div className="col-sm-6 col-xl-4 col-12">
                   <div className="dropdown h-100">
                     <a
                       href="#"
@@ -307,14 +256,11 @@ export default function Edit({
                     >
                       <div className="card-body py-3">
                         <h3 className="h5 fw-normal m-0">
-                          <AmaranthIcon icon={aiPlus} /> New channel
+                          <Amicon icon={aiPlus} /> New channel
                         </h3>
                       </div>
                     </a>
-                    <ul
-                      className="dropdown-menu"
-                      aria-labelledby="dropdownMenuLink"
-                    >
+                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       {availablePlatformChannels.map((channel, key) => (
                         <Link
                           key={key}
@@ -346,18 +292,11 @@ export default function Edit({
       </div>
       {can.delete_releases && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
-          <Fieldset
-            title="Danger zone"
-            description="All alone in the danger zone."
-            danger
-          >
+          <Fieldset title="Danger zone" description="All alone in the danger zone." danger>
             <div className="col-12">
-              <p>
-                Deleting a release will remove all the content associated with
-                that release. Are you sure?
-              </p>
+              <p>Deleting a release will remove all the content associated with that release. Are you sure?</p>
               <button className="btn btn-danger btn-sm" type="submit">
-                <AmaranthIcon icon={aiTrashCan} /> Delete
+                <Amicon icon={aiTrashCan} /> Delete
               </button>
             </div>
           </Fieldset>

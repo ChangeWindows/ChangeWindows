@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Channel;
 use App\Models\Platform;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Inertia\Inertia;
 use Redirect;
 
 class ChannelController extends Controller
@@ -15,16 +16,14 @@ class ChannelController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function index()
-    {
-    }
+    public function index() {}
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create(Request $request)
     {
@@ -37,17 +36,16 @@ class ChannelController extends Controller
                 'platform' => [
                     'slug' => $platform->slug,
                     'id' => $platform->id,
-                ]
+                ],
             ],
-            'platforms' => Platform::orderBy('position')->get()
+            'platforms' => Platform::orderBy('position')->get(),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -58,20 +56,19 @@ class ChannelController extends Controller
             'order' => request('order'),
             'color' => request('color'),
             'platform_id' => request('platform_id'),
-            'active' => request('active') ? 1 : 0
+            'active' => request('active') ? 1 : 0,
         ]);
 
         return Redirect::route('admin.channels.edit', $channel)->with('status', [
             'message' => 'Succesfully created this channel.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Channel  $channel
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Channel $channel)
     {
@@ -81,8 +78,7 @@ class ChannelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Channel  $channel
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Channel $channel)
     {
@@ -92,8 +88,8 @@ class ChannelController extends Controller
             'can' => [
                 'channels' => [
                     'edit' => Auth::user()->can('channels.edit'),
-                    'delete' => Auth::user()->can('channels.delete')
-                ]
+                    'delete' => Auth::user()->can('channels.delete'),
+                ],
             ],
             'channel' => [
                 'slug' => $channel->slug,
@@ -102,19 +98,17 @@ class ChannelController extends Controller
                 'color' => $channel->color,
                 'active' => $channel->active,
                 'platform' => $channel->platform,
-                'platform_id' => $channel->platform_id
+                'platform_id' => $channel->platform_id,
             ],
             'platforms' => Platform::orderBy('position')->get(),
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Channel  $channel
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, Channel $channel)
     {
@@ -125,20 +119,19 @@ class ChannelController extends Controller
             'order' => request('order'),
             'color' => request('color'),
             'platform_id' => request('platform_id'),
-            'active' => request('active') ? 1 : 0
+            'active' => request('active') ? 1 : 0,
         ]);
 
         return Redirect::route('admin.channels.edit', $channel)->with('status', [
             'message' => 'Succesfully updated the channel.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Channel  $channel
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Channel $channel)
     {
@@ -149,7 +142,7 @@ class ChannelController extends Controller
 
         return Redirect::route('admin.platforms.edit', $platform)->with('status', [
             'message' => 'Succesfully deleted channel.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Platform;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
+use App\Models\Platform;
 use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Inertia\Inertia;
 use Redirect;
 
 class PlatformController extends Controller
@@ -14,7 +15,7 @@ class PlatformController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -23,18 +24,18 @@ class PlatformController extends Controller
         return Inertia::render('Admin/Platforms/Index', [
             'can' => [
                 'platforms' => [
-                    'create' => Auth::user()->can('platforms.create')
+                    'create' => Auth::user()->can('platforms.create'),
                 ],
             ],
             'platforms' => Platform::orderBy('position')->get(),
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -46,8 +47,7 @@ class PlatformController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -61,20 +61,19 @@ class PlatformController extends Controller
             'icon' => request('icon'),
             'legacy' => request('legacy') ? 1 : 0,
             'active' => request('active') ? 1 : 0,
-            'tool' => request('tool') ? 1 : 0
+            'tool' => request('tool') ? 1 : 0,
         ]);
 
         return Redirect::route('admin.platforms.edit', $platform)->with('status', [
             'message' => 'Succesfully created this platform.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Platform  $platform
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Platform $platform)
     {
@@ -84,8 +83,7 @@ class PlatformController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Platform  $platform
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Platform $platform)
     {
@@ -97,25 +95,23 @@ class PlatformController extends Controller
             'can' => [
                 'platforms' => [
                     'edit' => Auth::user()->can('platforms.edit'),
-                    'delete' => Auth::user()->can('platforms.delete')
+                    'delete' => Auth::user()->can('platforms.delete'),
                 ],
                 'channels' => [
                     'create' => Auth::user()->can('channels.create'),
-                    'edit' => Auth::user()->can('channels.edit')
+                    'edit' => Auth::user()->can('channels.edit'),
                 ],
             ],
             'platform' => $platform,
             'channels' => $platform->channels->sortBy('order')->values()->all(),
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Platform  $platform
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, Platform $platform)
     {
@@ -129,20 +125,19 @@ class PlatformController extends Controller
             'icon' => request('icon'),
             'legacy' => request('legacy') ? 1 : 0,
             'active' => request('active') ? 1 : 0,
-            'tool' => request('tool') ? 1 : 0
+            'tool' => request('tool') ? 1 : 0,
         ]);
 
         return Redirect::route('admin.platforms.edit', $platform)->with('status', [
             'message' => 'Succesfully updated the platform.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Platform  $platform
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Platform $platform)
     {
@@ -152,7 +147,7 @@ class PlatformController extends Controller
 
         return Redirect::route('admin.platforms')->with('status', [
             'message' => 'Succesfully deleted platform.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 }

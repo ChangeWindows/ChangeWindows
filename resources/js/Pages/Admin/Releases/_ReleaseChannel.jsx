@@ -1,11 +1,5 @@
-import React from "react";
 import { Link, useForm } from "@inertiajs/react";
-
-import AmaranthIcon, {
-  aiCheck,
-  aiSpinnerThird,
-  aiXmark,
-} from "@studio384/amaranth";
+import Amicon, { aiCheck, aiSpinnerThird, aiXmark } from "@studio384/amicons";
 import clsx from "clsx";
 
 export default function ReleaseChannel({ can, releaseChannel }) {
@@ -17,22 +11,16 @@ export default function ReleaseChannel({ can, releaseChannel }) {
   }
 
   return (
-    <div className="col-12 col-sm-6 col-xl-4">
-      <Link
-        href={route("admin.releasechannels.edit", releaseChannel)}
-        className="card border-0 shadow-sm h-100"
-      >
+    <div className="col-sm-6 col-xl-4 col-12">
+      <Link href={route("admin.releasechannels.edit", releaseChannel)} className="card h-100 border-0 shadow-sm">
         <div className="card-body">
           <div className="d-flex">
             <h3 className="h6 mb-0">
-              <div
-                className="dot"
-                style={{ backgroundColor: releaseChannel.color }}
-              />
+              <div className="dot" style={{ backgroundColor: releaseChannel.color }} />
             </h3>
             <div className="ms-2">
               <h3 className="h6 mb-0">{releaseChannel.name}</h3>
-              <p className="text-muted mb-0">
+              <p className="text-secondary mb-0">
                 <small>{releaseChannel.short_name}</small>
               </p>
             </div>
@@ -47,14 +35,8 @@ export default function ReleaseChannel({ can, releaseChannel }) {
               disabled={!can.releases.edit}
               onClick={toggleSupported}
             >
-              <AmaranthIcon
-                icon={
-                  processing
-                    ? aiSpinnerThird
-                    : releaseChannel.supported
-                    ? aiCheck
-                    : aiXmark
-                }
+              <Amicon
+                icon={processing ? aiSpinnerThird : releaseChannel.supported ? aiCheck : aiXmark}
                 spin={processing}
               />{" "}
               {processing ? "Toggling..." : "Supported"}

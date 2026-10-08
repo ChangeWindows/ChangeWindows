@@ -1,6 +1,5 @@
-import React from "react";
-
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
+
 import Flight from "./Flight";
 
 export default function PlatformTimelineCard({ platform }) {
