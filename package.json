@@ -11,8 +11,6 @@
         "start": "vite"
     },
     "dependencies": {
-        "@emotion/react": "^11.14.0",
-        "@emotion/styled": "^11.14.1",
         "@inertiajs/react": "^3.8.0",
         "@studio384/amaranth": "^1.0.0-alpha.7",
         "@tiptap/extension-link": "^2.27.2",
