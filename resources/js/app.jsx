@@ -5,28 +5,21 @@ import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createRoot } from "react-dom/client";
 import "bootstrap";
 
+const legacyPage = typeof document === "undefined" ? undefined : document.getElementById("app")?.dataset.page;
+const initialPage = legacyPage ? JSON.parse(legacyPage) : undefined;
+
 createInertiaApp({
+  page: initialPage,
   title: (title) => `${title} &middot; ChangeWindows`,
   resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob("./Pages/**/*.jsx")),
   setup({ el, App, props }) {
     const root = createRoot(el);
     root.render(<App {...props} />);
   },
-  progress: {
-    color: "#0066ff",
+  progress: { color: "#0066ff" },
+  defaults: {
+    future: {
+      useDataInertiaHeadAttribute: true,
+    },
   },
 });
-
-function appHeight() {
-  const doc = document.documentElement;
-  doc.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
-}
-
-window.addEventListener("resize", appHeight);
-appHeight();
-
-if (navigator.platform == "iPad") {
-  window.onorientationchange = function () {
-    appHeight();
-  };
-}
