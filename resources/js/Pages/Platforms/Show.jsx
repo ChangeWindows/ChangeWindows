@@ -45,9 +45,9 @@ export default function Show({ platforms, platform, channels, releases }) {
                     url={
                       channel.release
                         ? route("front.platforms.releases", {
-                          release: channel.release,
-                          platform,
-                        })
+                            release: channel.release,
+                            platform,
+                          })
                         : undefined
                     }
                   />
