@@ -3,22 +3,22 @@
     box-shadow: $box-shadow-lg;
     min-width: 200px;
     background-color: var(--dropdown-bg);
-    padding: .5rem;
+    padding: 0.5rem;
 
     .dropdown-header {
-        padding: .5rem .75rem;
+        padding: 0.5rem 0.75rem;
         font-weight: 500;
     }
 
     .dropdown-item {
-        padding: .5rem;
+        padding: 0.5rem;
         color: var(--text);
         position: relative;
-        border-radius: .25rem;
+        border-radius: 0.25rem;
         transition: $transition-base;
 
         .css-1d9d6by {
-            padding-right: .5rem;
+            padding-right: 0.5rem;
         }
 
         &:hover,
@@ -45,7 +45,7 @@
                 top: 25%;
                 height: 50%;
                 width: 2px;
-                content: '';
+                content: "";
             }
         }
     }

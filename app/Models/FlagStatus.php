@@ -12,9 +12,11 @@ class FlagStatus extends Model
     public $searchableType = 'FlagStatus';
 
     protected $table = 'flag_status';
+
     protected $fillable = ['flag_id', 'feature_id', 'build', 'status'];
 
-    public function flag() {
+    public function flag()
+    {
         return $this->belongsTo(Flag::class);
     }
 }

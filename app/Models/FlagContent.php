@@ -10,6 +10,7 @@ class FlagContent extends Model
     use HasFactory;
 
     protected $table = 'flag_contents';
+
     protected $fillable = ['name', 'flag_id', 'description', 'status', 'user_id'];
 
     public function flag()

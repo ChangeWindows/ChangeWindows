@@ -7,12 +7,11 @@ export default function Progress({
   endDescription = null,
   duration = null,
   totalDuration = null,
-  highestDuration = null,
   small,
 }) {
   const width = useMemo(() => {
     return `${(duration / totalDuration) * 100}%`;
-  }, [duration, totalDuration, highestDuration]);
+  }, [duration, totalDuration]);
 
   return (
     <div style={{ width }} className="progress-block d-block">
@@ -21,7 +20,9 @@ export default function Progress({
           <small>{title}</small>
         </p>
       )}
-      <div className="progress" style={small && { height: 2 }}>{children}</div>
+      <div className="progress" style={small && { height: 2 }}>
+        {children}
+      </div>
       {(startDescription || endDescription) && !small && (
         <div className="d-none d-lg-flex">
           <p className="progress-date me-2">

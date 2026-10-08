@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Redirect;
-
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
+use Inertia\Inertia;
 
 class ProfileController extends Controller
 {
-    public function index()
-    {
-    }
+    public function index() {}
 
     public function password()
     {
@@ -24,7 +21,7 @@ class ProfileController extends Controller
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
-            ]
+            ],
         ]);
     }
 
@@ -41,17 +38,17 @@ class ProfileController extends Controller
             'name.required' => 'Your name is required.',
             'email.required' => 'An email address is required.',
             'email.max' => 'Your email address cannot excede 255 characters.',
-            'email.email' => 'This is not a valid email address.'
+            'email.email' => 'This is not a valid email address.',
         ]);
 
         $user->update([
             'name' => request('name'),
-            'email' => request('email')
+            'email' => request('email'),
         ]);
 
         return Redirect::route('front.settings')->with('status', [
             'message' => 'Your profile has been saved.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
@@ -62,20 +59,20 @@ class ProfileController extends Controller
         }
 
         $this->validate(request(), [
-            'password' => ['nullable', 'string', 'min:8', 'max:255', 'confirmed']
+            'password' => ['nullable', 'string', 'min:8', 'max:255', 'confirmed'],
         ], [
             'password.min' => 'Password must contain at least 8 characters.',
             'password.max' => 'Password cannot contain more than 255 characters.',
-            'password.confirmed' => 'Password does not match.'
+            'password.confirmed' => 'Password does not match.',
         ]);
 
         $user->update([
-            'password' => request('password')
+            'password' => request('password'),
         ]);
 
         return Redirect::route('front.settings')->with('status', [
             'message' => 'Your password has been updated.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 }

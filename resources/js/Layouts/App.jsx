@@ -1,10 +1,10 @@
-import React from 'react';
-import clsx from 'clsx';
+import React from "react";
 
-import '../../sass/style.scss';
+import clsx from "clsx";
 
-import AppBar from './AppBar';
-import Navigation from './Navigation/Navigation';
+import "../../sass/style.scss";
+import AppBar from "./AppBar";
+import Navigation from "./Navigation/Navigation";
 
 export default function App({ children, background = false }) {
   return (
@@ -14,10 +14,8 @@ export default function App({ children, background = false }) {
           <Navigation />
         </header>
         <AppBar />
-        <main className={clsx('grid-content', { 'auth': background })}>
-          { children }
-        </main>
+        <main className={clsx("grid-content", { auth: background })}>{children}</main>
       </div>
     </div>
-  )
+  );
 }

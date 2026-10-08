@@ -13,31 +13,37 @@ class Channel extends Model
     use HasSlug;
 
     protected $table = 'channels';
+
     protected $fillable = ['name', 'color', 'order', 'active', 'platform_id', 'slug'];
+
     protected $appends = ['bg_color'];
 
     protected $casts = [
         'active' => 'integer',
-        'order' => 'integer'
+        'order' => 'integer',
     ];
 
-    public function platform() {
+    public function platform()
+    {
         return $this->belongsTo(Platform::class);
     }
 
-    public function releaseChannels() {
+    public function releaseChannels()
+    {
         return $this->hasMany(ReleaseChannel::class);
     }
 
-    public function activeReleaseChannels() {
+    public function activeReleaseChannels()
+    {
         return $this->hasMany(ReleaseChannel::class)->whereHas('flights')->with('release');
     }
 
-    public function getBgColorAttribute() {
+    public function getBgColorAttribute()
+    {
         return 'background-color: '.$this->color;
     }
 
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')

@@ -1,26 +1,19 @@
 import React from "react";
-import { useForm } from "@inertiajs/react";
 
-import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
 import Fieldset from "@/Components/UI/Forms/Fieldset";
-import NaviBar from "@/Components/NaviBar";
 import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Select from "@/Components/UI/Forms/Select";
-import Status from "@/Components/Status";
 import TextField from "@/Components/UI/Forms/TextField";
+import Admin from "@/Layouts/Admin";
 
+import { useForm } from "@inertiajs/react";
 import Amicon, { aiTrashCan } from "@studio384/amaranth";
 
 export default function Edit({ can, channel, platforms, status }) {
-  const {
-    data,
-    setData,
-    patch,
-    delete: destroy,
-    processing,
-    errors,
-  } = useForm(channel);
+  const { data, setData, patch, delete: destroy, processing, errors } = useForm(channel);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -44,21 +37,11 @@ export default function Edit({ can, channel, platforms, status }) {
 
         <div className="container my-3">
           <Status status={status} />
-          <Fieldset
-            title="Identity"
-            description="About this channel."
-            disabled={!can.channels.edit}
-          >
-            <div className="col-12 col-lg-6">
-              <TextField
-                id="name"
-                label="Name"
-                value={data.name}
-                errors={errors.name}
-                onChange={setData}
-              />
+          <Fieldset title="Identity" description="About this channel." disabled={!can.channels.edit}>
+            <div className="col-lg-6 col-12">
+              <TextField id="name" label="Name" value={data.name} errors={errors.name} onChange={setData} />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <Select
                 disabled
                 id="platform_id"
@@ -72,12 +55,8 @@ export default function Edit({ can, channel, platforms, status }) {
               />
             </div>
           </Fieldset>
-          <Fieldset
-            title="Appearance"
-            description="The way it will look."
-            disabled={!can.channels.edit}
-          >
-            <div className="col-12 col-lg-6">
+          <Fieldset title="Appearance" description="The way it will look." disabled={!can.channels.edit}>
+            <div className="col-lg-6 col-12">
               <TextField
                 type="number"
                 id="order"
@@ -87,22 +66,12 @@ export default function Edit({ can, channel, platforms, status }) {
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
-              <TextField
-                id="color"
-                label="Color"
-                value={data.color}
-                errors={errors.color}
-                onChange={setData}
-              />
+            <div className="col-lg-6 col-12">
+              <TextField id="color" label="Color" value={data.color} errors={errors.color} onChange={setData} />
             </div>
           </Fieldset>
-          <Fieldset
-            title="Status"
-            description="The paltform's current status."
-            disabled={!can.channels.edit}
-          >
-            <div className="col-12 col-lg-6">
+          <Fieldset title="Status" description="The paltform's current status." disabled={!can.channels.edit}>
+            <div className="col-lg-6 col-12">
               <Checkbox
                 id="active"
                 label="Active"
@@ -116,16 +85,9 @@ export default function Edit({ can, channel, platforms, status }) {
       </form>
       {can.channels.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
-          <Fieldset
-            title="Danger zone"
-            description="All alone in the danger zone."
-            danger
-          >
+          <Fieldset title="Danger zone" description="All alone in the danger zone." danger>
             <div className="col-12">
-              <p>
-                Deleting a channel will remove all the content associated with
-                that channel. Are you sure?
-              </p>
+              <p>Deleting a channel will remove all the content associated with that channel. Are you sure?</p>
               <button className="btn btn-danger btn-sm" type="submit">
                 <Amicon icon={aiTrashCan} /> Delete
               </button>

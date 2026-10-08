@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Models\Release;
 use App\Models\Flag;
+use App\Models\Release;
 use Illuminate\Http\Request;
-use Spatie\Searchable\Search;
+use Inertia\Inertia;
 use Spatie\Searchable\ModelSearchAspect;
+use Spatie\Searchable\Search;
 
 class SearchController extends Controller
 {
@@ -18,11 +18,11 @@ class SearchController extends Controller
 
     public function results(Request $request)
     {
-        if (!$request->input('search')) {
+        if (! $request->input('search')) {
             return redirect()->route('front.search');
         }
 
-        $search_results = (new Search())
+        $search_results = (new Search)
             ->registerModel(Release::class, function (ModelSearchAspect $modelSearchAspect) {
                 $modelSearchAspect
                     ->addSearchableAttribute('name')
@@ -50,7 +50,7 @@ class SearchController extends Controller
                             'icon' => $result->searchable->platform->icon,
                             'name' => $result->searchable->platform->name,
                             'color' => $result->searchable->platform->color,
-                            'tool' => $result->searchable->platform->tool
+                            'tool' => $result->searchable->platform->tool,
                         ],
                         'channels' => $result->searchable->releaseChannels->where('supported')->map(function ($channel) {
                             return [
@@ -58,24 +58,24 @@ class SearchController extends Controller
                                 'short_name' => $channel->short_name,
                                 'supported' => $channel->supported,
                                 'color' => $channel->channel->color,
-                                'order' => $channel->channel->order
+                                'order' => $channel->channel->order,
                             ];
-                        })->values()->all()
-                    ]
+                        })->values()->all(),
+                    ],
                 ];
-            })
+            }),
         ]);
     }
 
     public function flagResults(Request $request)
     {
-        if (!$request->input('search')) {
+        if (! $request->input('search')) {
             return redirect()->route('front.search');
         }
 
         $term = mb_strtolower($request->input('search'));
 
-        $search_results = (new Search())
+        $search_results = (new Search)
             ->registerModel(
                 Flag::class,
                 function (ModelSearchAspect $modelSearchAspect) use ($term) {
@@ -102,10 +102,10 @@ class SearchController extends Controller
                     'searchable' => [
                         'slug' => $result->searchable->slug,
                         'description' => $result->searchable->latestContents?->description,
-                        'status' => $result->searchable->latestStatus
-                    ]
+                        'status' => $result->searchable->latestStatus,
+                    ],
                 ];
-            })
+            }),
         ]);
     }
 }

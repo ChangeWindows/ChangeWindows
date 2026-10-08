@@ -2,16 +2,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview",
-    "start": "vite",
+    "dev": "vite",
     "fix": "oxfmt && oxlint --fix",
     "format": "oxfmt --check",
     "format:fix": "oxfmt",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "lint:github": "oxlint --format=github"
+    "lint:github": "oxlint --format=github",
+    "serve": "vite preview",
+    "start": "vite"
   },
   "dependencies": {
     "@inertiajs/react": "^3.8.0",

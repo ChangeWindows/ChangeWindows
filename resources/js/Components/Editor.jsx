@@ -1,10 +1,5 @@
-import React, { useCallback } from "react";
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Typography from "@tiptap/extension-typography";
-import Underline from "@tiptap/extension-underline";
-import Link from "@tiptap/extension-link";
-import clsx from "clsx";
+import { useCallback } from "react";
+
 import Amicon, {
   aiBold,
   aiAGum,
@@ -41,11 +36,16 @@ import Amicon, {
   aiTableHeaderCell,
   aiAngleDown,
 } from "@studio384/amaranth";
+import Link from "@tiptap/extension-link";
 import { Table } from "@tiptap/extension-table";
-import { TableRow } from "@tiptap/extension-table-row";
-import { TableHeader } from "@tiptap/extension-table-header";
 import { TableCell } from "@tiptap/extension-table-cell";
-import DropdownItem from "./Navbar/DropdownItem";
+import { TableHeader } from "@tiptap/extension-table-header";
+import { TableRow } from "@tiptap/extension-table-row";
+import Typography from "@tiptap/extension-typography";
+import Underline from "@tiptap/extension-underline";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import clsx from "clsx";
 
 export default function Editor({ content = null, setData }) {
   const editor = useEditor({
@@ -80,10 +80,6 @@ export default function Editor({ content = null, setData }) {
 }
 
 function MenuBar({ editor }) {
-  if (!editor) {
-    return null;
-  }
-
   const setLink = useCallback(() => {
     const previousUrl = editor.getAttributes("link").href;
     const url = window.prompt("URL", previousUrl);
@@ -100,6 +96,10 @@ function MenuBar({ editor }) {
 
     editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
   }, [editor]);
+
+  if (!editor) {
+    return null;
+  }
 
   return (
     <div className="editor-toolbar btn-toolbar">
@@ -151,9 +151,7 @@ function MenuBar({ editor }) {
         </button>
         <button
           type="button"
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
-          }
+          onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
           className={clsx("editor-btn", {
             active: editor.isActive("heading", { level: 1 }),
           })}
@@ -162,9 +160,7 @@ function MenuBar({ editor }) {
         </button>
         <button
           type="button"
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 2 }).run()
-          }
+          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
           className={clsx("editor-btn", {
             active: editor.isActive("heading", { level: 2 }),
           })}
@@ -173,9 +169,7 @@ function MenuBar({ editor }) {
         </button>
         <button
           type="button"
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 3 }).run()
-          }
+          onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
           className={clsx("editor-btn", {
             active: editor.isActive("heading", { level: 3 }),
           })}
@@ -184,9 +178,7 @@ function MenuBar({ editor }) {
         </button>
         <button
           type="button"
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 4 }).run()
-          }
+          onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
           className={clsx("editor-btn", {
             active: editor.isActive("heading", { level: 4 }),
           })}
@@ -195,9 +187,7 @@ function MenuBar({ editor }) {
         </button>
         <button
           type="button"
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 5 }).run()
-          }
+          onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
           className={clsx("editor-btn", {
             active: editor.isActive("heading", { level: 5 }),
           })}
@@ -206,9 +196,7 @@ function MenuBar({ editor }) {
         </button>
         <button
           type="button"
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 6 }).run()
-          }
+          onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
           className={clsx("editor-btn", {
             active: editor.isActive("heading", { level: 6 }),
           })}
@@ -303,10 +291,7 @@ function MenuBar({ editor }) {
         >
           <Amicon icon={aiAngleDown} />
         </a>
-        <ul
-          className="dropdown-menu dropdown-menu-end"
-          aria-labelledby="tableTools"
-        >
+        <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="tableTools">
           <button className="dropdown-item" type="button" onClick={() => editor.commands.addColumnBefore()}>
             <Amicon icon={aiTableColumnInsertLeft} /> Add column before
           </button>
@@ -352,28 +337,16 @@ function MenuBar({ editor }) {
         >
           <Amicon icon={aiQuote} />
         </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.chain().focus().setHorizontalRule().run()}
-        >
+        <button className="editor-btn" type="button" onClick={() => editor.chain().focus().setHorizontalRule().run()}>
           <Amicon icon={aiLine} />
         </button>
       </div>
       <div className="flex-grow-1" />
       <div className="btn-group">
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.chain().focus().unsetAllMarks().run()}
-        >
+        <button className="editor-btn" type="button" onClick={() => editor.chain().focus().unsetAllMarks().run()}>
           <Amicon icon={aiAGum} />
         </button>
-        <button
-          className="editor-btn"
-          type="button"
-          onClick={() => editor.chain().focus().clearNodes().run()}
-        >
+        <button className="editor-btn" type="button" onClick={() => editor.chain().focus().clearNodes().run()}>
           <Amicon icon={aiSquareGum} />
         </button>
       </div>

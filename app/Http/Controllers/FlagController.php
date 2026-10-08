@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Inertia\Inertia;
-use App\Models\Flag;
-use App\Models\FlagStatus;
-use App\Models\FlagContent;
-use Auth;
-use Redirect;
-use File;
-use Illuminate\Support\Str;
 use App\Http\Requests\FlagContentRequest;
+use App\Models\Flag;
+use App\Models\FlagContent;
+use App\Models\FlagStatus;
+use Auth;
+use Illuminate\Http\Response;
+use Inertia\Inertia;
+use Redirect;
 
 class FlagController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -39,19 +37,19 @@ class FlagController extends Controller
                             'build' => $status->build,
                             'status' => $status->status,
                             'flag' => $status->flag,
-                            'previousStatus' => $status->flag->flagStatus->where('build', '<', $status->build)->sortByDesc('build')->first()
+                            'previousStatus' => $status->flag->flagStatus->where('build', '<', $status->build)->sortByDesc('build')->first(),
                         ];
-                    })
+                    }),
                 ];
             })->values(),
-            'pagination' => $paginator
+            'pagination' => $paginator,
         ]);
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function active()
     {
@@ -62,14 +60,14 @@ class FlagController extends Controller
 
         return Inertia::render('Flags/Active', [
             'flags' => $flags->paginate(100),
-            'pagination' => $paginator
+            'pagination' => $paginator,
         ]);
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function removed()
     {
@@ -80,28 +78,28 @@ class FlagController extends Controller
 
         return Inertia::render('Flags/Removed', [
             'flags' => $flags->paginate(100),
-            'pagination' => $paginator
+            'pagination' => $paginator,
         ]);
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Flag $flag)
     {
         return Inertia::render('Flags/Show', [
             'flag' => Flag::where('feature_name', $flag->feature_name)->with('flagStatus', 'latestContents')->first(),
             'flagContent' => FlagContent::where('user_id', Auth::user()->id)->where('status', 1)->first(),
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function about()
     {
@@ -111,7 +109,7 @@ class FlagController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function suggestion(Flag $flag, FlagContentRequest $request)
     {
@@ -120,21 +118,21 @@ class FlagController extends Controller
                 $request->validated(),
                 [
                     'status' => 1,
-                    'user_id' => Auth::user() ? Auth::user()->id : null
+                    'user_id' => Auth::user() ? Auth::user()->id : null,
                 ]
             )
         );
 
         return Redirect::route('front.flags.show', $flag)->with('status', [
             'message' => 'Your suggestion has been saved.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function suggestionPatch(Flag $flag, FlagContent $flag_content, FlagContentRequest $flag_content_request)
     {
@@ -144,14 +142,14 @@ class FlagController extends Controller
                     $flag_content_request->validated(),
                     [
                         'status' => 1,
-                        'user_id' => Auth::user() ? Auth::user()->id : null
+                        'user_id' => Auth::user() ? Auth::user()->id : null,
                     ]
                 )
             );
 
             return Redirect::route('front.flags.show', $flag)->with('status', [
                 'message' => 'The suggestion your are trying to edit was already moderated. We created a new suggestion instead.',
-                'type' => 'success'
+                'type' => 'success',
             ]);
         }
 
@@ -159,7 +157,7 @@ class FlagController extends Controller
 
         return Redirect::route('front.flags.show', $flag)->with('status', [
             'message' => 'Your suggestion has been saved.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 }

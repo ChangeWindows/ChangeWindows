@@ -12,26 +12,33 @@ class Flight extends Model
     public $searchableType = 'Flights';
 
     protected $table = 'flights';
+
     protected $fillable = ['major', 'minor', 'build', 'delta', 'date', 'release_channel_id'];
+
     protected $appends = ['version', 'flight'];
 
-    public function releaseChannel() {
+    public function releaseChannel()
+    {
         return $this->belongsTo(ReleaseChannel::class);
     }
 
-    public function getReleaseAttribute() {
+    public function getReleaseAttribute()
+    {
         return $this->releaseChannel->release;
     }
 
-    public function getPlatformAttribute() {
+    public function getPlatformAttribute()
+    {
         return $this->releaseChannel->release->platform;
     }
 
-    public function getFlightAttribute() {
+    public function getFlightAttribute()
+    {
         return $this->build.'.'.$this->delta;
     }
 
-    public function getVersionAttribute() {
+    public function getVersionAttribute()
+    {
         return $this->major.'.'.$this->minor.'.'.$this->build.'.'.$this->delta;
     }
 }

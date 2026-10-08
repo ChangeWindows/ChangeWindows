@@ -1,11 +1,7 @@
 import React from "react";
-import { useForm } from "@inertiajs/react";
 
-import Amicon, {
-  aiCheck,
-  aiSpinnerThird,
-  aiTrashCan,
-} from "@studio384/amaranth";
+import { useForm } from "@inertiajs/react";
+import Amicon, { aiCheck, aiSpinnerThird, aiTrashCan } from "@studio384/amaranth";
 
 export default function Suggestion({ suggestion }) {
   const { data, patch, processing } = useForm(suggestion);
@@ -25,11 +21,9 @@ export default function Suggestion({ suggestion }) {
       <div className="card-body">
         <div className="row">
           <div className="col-12">
-            <h4 className="pb-3 mb-3 border-bottom">
-              {suggestion.flag.feature_name}
-            </h4>
+            <h4 className="border-bottom mb-3 pb-3">{suggestion.flag.feature_name}</h4>
           </div>
-          <div className="col-6 border-end">
+          <div className="border-end col-6">
             {suggestion.flag.latest_contents ? (
               <>
                 <h5>{suggestion.flag.latest_contents.name}</h5>
@@ -42,33 +36,14 @@ export default function Suggestion({ suggestion }) {
           <div className="col-6">
             <h5>{suggestion.name}</h5>
             <p>{suggestion.description}</p>
-            <p>
-              By{" "}
-              {suggestion.user ? (
-                suggestion.user.name
-              ) : (
-                <i className="text-muted">Anonymous</i>
-              )}
-            </p>
+            <p>By {suggestion.user ? suggestion.user.name : <i className="text-muted">Anonymous</i>}</p>
             <div className="btn-toolbar justify-content-between">
-              <button
-                className="btn btn-secondary btn-sm"
-                onClick={submitDiscard}
-              >
-                <Amicon
-                  icon={processing ? aiSpinnerThird : aiTrashCan}
-                  spin={processing}
-                />{" "}
+              <button className="btn btn-secondary btn-sm" onClick={submitDiscard}>
+                <Amicon icon={processing ? aiSpinnerThird : aiTrashCan} spin={processing} />{" "}
                 {processing ? "Saving..." : "Discard"}
               </button>
-              <button
-                className="btn btn-success btn-sm"
-                onClick={submitApprove}
-              >
-                <Amicon
-                  icon={processing ? aiSpinnerThird : aiCheck}
-                  spin={processing}
-                />{" "}
+              <button className="btn btn-success btn-sm" onClick={submitApprove}>
+                <Amicon icon={processing ? aiSpinnerThird : aiCheck} spin={processing} />{" "}
                 {processing ? "Saving..." : "Approve"}
               </button>
             </div>

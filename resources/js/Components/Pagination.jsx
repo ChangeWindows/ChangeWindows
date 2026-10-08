@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from '@inertiajs/react';
+import React from "react";
 
-import clsx from 'clsx';
-import Amicon, { aiArrowLeft, aiArrowRight } from '@studio384/amaranth';
+import { Link } from "@inertiajs/react";
+import Amicon, { aiArrowLeft, aiArrowRight } from "@studio384/amaranth";
+import clsx from "clsx";
 
 export default function Pagination({ pagination }) {
   if (pagination.links.length <= 3) return;
@@ -11,28 +11,40 @@ export default function Pagination({ pagination }) {
     <nav aria-label="Pagination" className="d-flex justify-content-center">
       <ul className="pagination">
         {pagination.links.map((link, key) => {
-          if (link.label.includes('Previous')) {
+          if (link.label.includes("Previous")) {
             return (
-              <li className={clsx('page-item d-none d-md-inline-block', { 'active': link.active, 'disabled': !link.url })} key={key}>
-                <Link className="page-link" href={link.url}><Amicon icon={aiArrowLeft} /></Link>
+              <li
+                className={clsx("page-item d-none d-md-inline-block", { active: link.active, disabled: !link.url })}
+                key={key}
+              >
+                <Link className="page-link" href={link.url}>
+                  <Amicon icon={aiArrowLeft} />
+                </Link>
               </li>
             );
-          } else if (link.label.includes('Next')) {
+          } else if (link.label.includes("Next")) {
             return (
-              <li className={clsx('page-item d-none d-md-inline-block', { 'active': link.active, 'disabled': !link.url })} key={key}>
-                <Link className="page-link" href={link.url}><Amicon icon={aiArrowRight} /></Link>
+              <li
+                className={clsx("page-item d-none d-md-inline-block", { active: link.active, disabled: !link.url })}
+                key={key}
+              >
+                <Link className="page-link" href={link.url}>
+                  <Amicon icon={aiArrowRight} />
+                </Link>
               </li>
             );
-          } else if (link.label === '...') {
+          } else if (link.label === "...") {
             return (
-              <li className={clsx('page-item', { 'active': link.active, 'disabled': !link.url })} key={key}>
+              <li className={clsx("page-item", { active: link.active, disabled: !link.url })} key={key}>
                 <div className="pagination-divider" />
               </li>
             );
           } else {
             return (
-              <li className={clsx('page-item', { 'active': link.active, 'disabled': !link.url })} key={key}>
-                <Link className="page-link" href={link.url}>{link.label}</Link>
+              <li className={clsx("page-item", { active: link.active, disabled: !link.url })} key={key}>
+                <Link className="page-link" href={link.url}>
+                  {link.label}
+                </Link>
               </li>
             );
           }
@@ -40,4 +52,4 @@ export default function Pagination({ pagination }) {
       </ul>
     </nav>
   );
-};
+}

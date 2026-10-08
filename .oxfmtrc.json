@@ -2,10 +2,7 @@
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
   "printWidth": 120,
   "sortTailwindcss": {
-    "functions": [
-      "clsx",
-      "cn"
-    ]
+    "functions": ["clsx", "cn"]
   },
   "sortPackageJson": {
     "sortScripts": true
@@ -14,34 +11,20 @@
     "customGroups": [
       {
         "groupName": "react-libs",
-        "elementNamePattern": [
-          "react",
-          "react-**",
-          "@react"
-        ]
+        "elementNamePattern": ["react", "react-**", "@react"]
       },
       {
         "groupName": "sippy-platform",
-        "elementNamePattern": [
-          "@sippy-platform/**",
-          "@/**"
-        ]
+        "elementNamePattern": ["@sippy-platform/**", "@/**"]
       }
     ],
     "newlinesBetween": true,
     "groups": [
       "react-libs",
       "sippy-platform",
-      [
-        "value-builtin",
-        "value-external"
-      ],
+      ["value-builtin", "value-external"],
       "value-internal",
-      [
-        "value-parent",
-        "value-sibling",
-        "value-index"
-      ],
+      ["value-parent", "value-sibling", "value-index"],
       "unknown"
     ]
   },

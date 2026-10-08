@@ -4,22 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
-use Spatie\Searchable\Searchable;
-use Spatie\Searchable\SearchResult;
-
 class Flag extends Model implements Searchable
 {
     use HasFactory;
-    use HasSlug;
     use HasRelationships;
+    use HasSlug;
 
     public $searchableType = 'Flag';
 
     protected $table = 'flags';
+
     protected $fillable = ['feature_name', 'added', 'removed'];
 
     public function flagStatus()
@@ -58,7 +58,7 @@ class Flag extends Model implements Searchable
         }
     }
 
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('feature_name')
@@ -72,7 +72,7 @@ class Flag extends Model implements Searchable
 
     public function getSearchResult(): SearchResult
     {
-        return new \Spatie\Searchable\SearchResult(
+        return new SearchResult(
             $this,
             $this->feature_name,
             route('front.flags.show', $this)

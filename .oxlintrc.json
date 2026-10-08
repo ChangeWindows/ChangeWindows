@@ -1,19 +1,11 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "typescript",
-    "react",
-    "unicorn"
-  ],
+  "plugins": ["typescript", "react", "unicorn"],
   "env": {
     "builtin": true,
     "browser": true
   },
-  "ignorePatterns": [
-    "dist",
-    "node_modules",
-    "public"
-  ],
+  "ignorePatterns": ["dist", "node_modules", "public"],
   "categories": {
     "correctness": "error"
   },

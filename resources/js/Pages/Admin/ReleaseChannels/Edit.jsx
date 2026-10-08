@@ -1,32 +1,19 @@
 import React from "react";
-import { useForm } from "@inertiajs/react";
 
-import Admin from "@/Layouts/Admin";
+import NaviBar from "@/Components/NaviBar";
+import Status from "@/Components/Status";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
 import Fieldset from "@/Components/UI/Forms/Fieldset";
-import NaviBar from "@/Components/NaviBar";
 import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Select from "@/Components/UI/Forms/Select";
-import Status from "@/Components/Status";
 import TextField from "@/Components/UI/Forms/TextField";
+import Admin from "@/Layouts/Admin";
 
+import { useForm } from "@inertiajs/react";
 import Amicon, { aiTrashCan } from "@studio384/amaranth";
 
-export default function Edit({
-  can,
-  releaseChannel,
-  releases,
-  channels,
-  status,
-}) {
-  const {
-    data,
-    setData,
-    patch,
-    delete: destroy,
-    processing,
-    errors,
-  } = useForm(releaseChannel);
+export default function Edit({ can, releaseChannel, releases, channels, status }) {
+  const { data, setData, patch, delete: destroy, processing, errors } = useForm(releaseChannel);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -41,21 +28,14 @@ export default function Edit({
   return (
     <Admin>
       <form onSubmit={handleSubmit}>
-        <NaviBar
-          back="/admin/releases"
-          actions={can.releases.edit && <SaveButton loading={processing} />}
-        >
+        <NaviBar back="/admin/releases" actions={can.releases.edit && <SaveButton loading={processing} />}>
           {data.name || "Unnamed channel"}
         </NaviBar>
 
         <div className="container my-3">
           <Status status={status} />
-          <Fieldset
-            title="Identity"
-            description="About this release channel."
-            disabled={!can.releases.edit}
-          >
-            <div className="col-12 col-lg-6">
+          <Fieldset title="Identity" description="About this release channel." disabled={!can.releases.edit}>
+            <div className="col-lg-6 col-12">
               <Select
                 id="channel_id"
                 label="Channel"
@@ -67,7 +47,7 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <Select
                 id="release_id"
                 label="Release"
@@ -79,16 +59,10 @@ export default function Edit({
                 onChange={setData}
               />
             </div>
-            <div className="col-12 col-lg-6">
-              <TextField
-                id="name"
-                label="Name"
-                value={data.name}
-                errors={errors.name}
-                onChange={setData}
-              />
+            <div className="col-lg-6 col-12">
+              <TextField id="name" label="Name" value={data.name} errors={errors.name} onChange={setData} />
             </div>
-            <div className="col-12 col-lg-6">
+            <div className="col-lg-6 col-12">
               <TextField
                 id="short_name"
                 label="Short name"
@@ -98,12 +72,8 @@ export default function Edit({
               />
             </div>
           </Fieldset>
-          <Fieldset
-            title="Status"
-            description="The channel's current status."
-            disabled={!can.releases.edit}
-          >
-            <div className="col-12 col-lg-6">
+          <Fieldset title="Status" description="The channel's current status." disabled={!can.releases.edit}>
+            <div className="col-lg-6 col-12">
               <Checkbox
                 id="supported"
                 label="Supported"
@@ -117,16 +87,9 @@ export default function Edit({
       </form>
       {can.releases.delete && (
         <form onSubmit={handleDelete} className="container my-3 py-0">
-          <Fieldset
-            title="Danger zone"
-            description="All alone in the danger zone."
-            danger
-          >
+          <Fieldset title="Danger zone" description="All alone in the danger zone." danger>
             <div className="col-12">
-              <p>
-                Deleting a release will remove all the content associated with
-                that release. Are you sure?
-              </p>
+              <p>Deleting a release will remove all the content associated with that release. Are you sure?</p>
               <button className="btn btn-danger btn-sm" type="submit">
                 <Amicon icon={aiTrashCan} /> Delete
               </button>

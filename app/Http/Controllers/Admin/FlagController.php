@@ -3,22 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
 use App\Models\Flag;
-use App\Models\FlagStatus;
 use App\Models\FlagContent;
+use App\Models\FlagStatus;
+use App\Models\Permission;
 use Auth;
-use Redirect;
 use File;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
+use Redirect;
 
 class FlagController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,18 +30,18 @@ class FlagController extends Controller
             'can' => [
                 'flags' => [
                     'create' => Auth::user()->can('flags.create'),
-                    'edit' => Auth::user()->can('flags.edit')
-                ]
+                    'edit' => Auth::user()->can('flags.edit'),
+                ],
             ],
             'suggestion' => FlagContent::where('status', 1)->orderBy('created_at', 'asc')->with('flag', 'flag.latestContents')->first(),
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function history()
     {
@@ -54,32 +56,32 @@ class FlagController extends Controller
             'can' => [
                 'flags' => [
                     'create' => Auth::user()->can('flags.create'),
-                    'edit' => Auth::user()->can('flags.edit')
-                ]
+                    'edit' => Auth::user()->can('flags.edit'),
+                ],
             ],
             'flagStatus' => $flag_status->paginate(150)->map(function ($flag_status) {
                 $flag_status->flag->setRelation('latestStatusChange', $flag_status->flag->latestStatusChange->take(2));
+
                 return $flag_status;
             }),
             'pagination' => $paginator,
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function batch(Request $request)
     {
         $this->authorize('flags.edit');
 
         $this->validate(request(), [
-            'build' => ['required']
+            'build' => ['required'],
         ], [
-            'build.required' => 'A build is required.'
+            'build.required' => 'A build is required.',
         ]);
 
         $flag_status_type = 'unknown';
@@ -93,7 +95,7 @@ class FlagController extends Controller
 
             if (Str::contains($line, '##')) {
                 $flag_status_type = Str::slug(preg_replace('/[^a-zA-Z ]/', '', $line));
-            } else if (Str::contains($line, ': ')) {
+            } elseif (Str::contains($line, ': ')) {
                 $flag_id_pair = explode(': ', trim($line));
 
                 // XAMLAppResolver appears twice in Mach2 logs
@@ -102,27 +104,27 @@ class FlagController extends Controller
                 }
 
                 $flag = Flag::firstOrCreate([
-                    'feature_name' => $flag_id_pair[0]
+                    'feature_name' => $flag_id_pair[0],
                 ], [
                     'added' => request('build'),
-                    'removed' => null
+                    'removed' => null,
                 ]);
 
                 $active_flags = $active_flags->filter(function ($value, $key) use ($flag) {
                     return $value !== $flag->id;
                 });
 
-                if (!$flag->latestStatus || $flag->latestStatus && ($flag->latestStatus->status !== $flag_status_type || intval($flag->latestStatus->feature_id) !== intval($flag_id_pair[1]))) {
+                if (! $flag->latestStatus || $flag->latestStatus && ($flag->latestStatus->status !== $flag_status_type || intval($flag->latestStatus->feature_id) !== intval($flag_id_pair[1]))) {
                     $flag->flagStatus()->create([
                         'build' => request('build'),
                         'feature_id' => intval($flag_id_pair[1]),
-                        'status' => $flag_status_type
+                        'status' => $flag_status_type,
                     ]);
 
                     // We just added a new status, if the flag was previously removed, we should reset removed
                     if ($flag->removed) {
                         $flag->update([
-                            'removed' => null
+                            'removed' => null,
                         ]);
                     }
                 }
@@ -133,28 +135,27 @@ class FlagController extends Controller
             $flag = Flag::find($flag_id);
 
             $flag->update([
-                'removed' => request('build')
+                'removed' => request('build'),
             ]);
 
             $flag->flagStatus()->create([
                 'build' => request('build'),
                 'feature_id' => null,
-                'status' => 'removed'
+                'status' => 'removed',
             ]);
         }
 
         return Redirect::route('admin.flags')->with('status', [
             'message' => 'Succesfully created flags for build '.request('build').'.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Permission  $permission
-     * @return \Illuminate\Http\Response
+     * @param  Permission  $permission
+     * @return Response
      */
     public function moderateApprove(Request $request, FlagContent $flag_content)
     {
@@ -166,16 +167,15 @@ class FlagController extends Controller
 
         return Redirect::route('admin.flags')->with('status', [
             'message' => 'Succesfully applied content suggestion.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Permission  $permission
-     * @return \Illuminate\Http\Response
+     * @param  Permission  $permission
+     * @return Response
      */
     public function moderateDiscard(Request $request, FlagContent $flag_content)
     {
@@ -187,7 +187,7 @@ class FlagController extends Controller
 
         return Redirect::route('admin.flags')->with('status', [
             'message' => 'Succesfully applied content suggestion.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 }

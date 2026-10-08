@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Release;
-use App\Models\Platform;
 use App\Http\Controllers\Controller;
-use Inertia\Inertia;
-use Auth;
-use Redirect;
 use App\Http\Requests\ReleaseRequest;
+use App\Models\Platform;
+use App\Models\Release;
+use Auth;
+use Illuminate\Http\Response;
+use Inertia\Inertia;
+use Redirect;
 
 class ReleaseController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -27,10 +28,10 @@ class ReleaseController extends Controller
             'can' => [
                 'releases' => [
                     'edit' => Auth::user()->can('releases.edit'),
-                    'create' => Auth::user()->can('releases.create')
+                    'create' => Auth::user()->can('releases.create'),
                 ],
             ],
-            'releases' => $releases->groupBy(function($item) {
+            'releases' => $releases->groupBy(function ($item) {
                 return $item->platform->slug;
             })->map(function ($platform) {
                 return [
@@ -54,35 +55,35 @@ class ReleaseController extends Controller
                             'platform' => [
                                 'icon' => $release->platform->icon,
                                 'name' => $release->platform->name,
-                                'color' => $release->platform->color
+                                'color' => $release->platform->color,
                             ],
                             'channels' => $release->releaseChannels->where('supported', '=', 1)->values()->map(function ($channel) {
                                 return [
                                     'id' => $channel->id,
                                     'short_name' => $channel->short_name,
                                     'color' => $channel->channel->color,
-                                    'order' => $channel->channel->order
+                                    'order' => $channel->channel->order,
                                 ];
-                            })
+                            }),
                         ];
-                    }))
+                    })),
                 ];
             }),
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
         $this->authorize('releases.create');
 
         return Inertia::render('Admin/Releases/Create', [
-            'platforms' => Platform::orderBy('position')->get()
+            'platforms' => Platform::orderBy('position')->get(),
         ]);
     }
 
@@ -90,7 +91,7 @@ class ReleaseController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\ReleaseRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(ReleaseRequest $request)
     {
@@ -100,15 +101,14 @@ class ReleaseController extends Controller
 
         return Redirect::route('admin.releases.edit', $release)->with('status', [
             'message' => 'Succesfully created this release.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Release  $release
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Release $release)
     {
@@ -118,8 +118,7 @@ class ReleaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Release  $release
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Release $release)
     {
@@ -131,7 +130,7 @@ class ReleaseController extends Controller
             'can' => [
                 'releases' => [
                     'edit' => Auth::user()->can('releases.edit'),
-                    'delete' => Auth::user()->can('releases.delete')
+                    'delete' => Auth::user()->can('releases.delete'),
                 ],
             ],
             'release' => $release,
@@ -145,10 +144,10 @@ class ReleaseController extends Controller
                     'supported' => $channel->supported,
                     'color' => $channel->channel->color,
                     'order' => $channel->channel->order,
-                    'channel_id' => $channel->channel_id
+                    'channel_id' => $channel->channel_id,
                 ];
             }),
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
@@ -156,8 +155,7 @@ class ReleaseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\ReleaseRequest  $request
-     * @param  \App\Models\Release  $release
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(ReleaseRequest $request, Release $release)
     {
@@ -167,15 +165,14 @@ class ReleaseController extends Controller
 
         return Redirect::route('admin.releases.edit', $release)->with('status', [
             'message' => 'Succesfully updated this release.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Release  $release
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function editChangelog(Release $release)
     {
@@ -184,15 +181,15 @@ class ReleaseController extends Controller
         return Inertia::render('Admin/Releases/Changelog', [
             'can' => [
                 'releases' => [
-                    'edit' => Auth::user()->can('releases.edit')
+                    'edit' => Auth::user()->can('releases.edit'),
                 ],
             ],
             'release' => [
                 'name' => $release->name,
                 'slug' => $release->slug,
-                'changelog' => $release->changelog
+                'changelog' => $release->changelog,
             ],
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
@@ -200,28 +197,26 @@ class ReleaseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\ReleaseRequest  $request
-     * @param  \App\Models\Release  $release
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function updateChangelog(Release $release)
     {
         $this->authorize('releases.edit');
 
         $release->update([
-            'changelog' => request('changelog')
+            'changelog' => request('changelog'),
         ]);
 
         return Redirect::route('admin.releases.changelog.edit', $release)->with('status', [
             'message' => 'Succesfully updated this release.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Release  $release
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Release $release)
     {
@@ -231,7 +226,7 @@ class ReleaseController extends Controller
 
         return Redirect::route('admin.releases')->with('status', [
             'message' => 'Succesfully deleted this release.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 }

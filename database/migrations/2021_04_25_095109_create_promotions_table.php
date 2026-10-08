@@ -17,7 +17,7 @@ class CreatePromotionsTable extends Migration
             $table->id();
             $table->foreignId('release_channel_id')->constrained('release_channels')->onDelete('cascade');
             $table->timestamps();
-            
+
             $table->unique('release_channel_id');
         });
     }

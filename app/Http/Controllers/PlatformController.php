@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Platform;
+use Illuminate\Http\Response;
 use Inertia\Inertia;
 use Redirect;
-use App\Models\Platform;
-use App\Models\Timeline;
-use Illuminate\Database\Eloquent\Builder;
 
 class PlatformController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -25,7 +23,7 @@ class PlatformController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Platform $platform)
     {
@@ -55,12 +53,12 @@ class PlatformController extends Controller
                     'color' => $channel->color,
                     'flight' => [
                         'version' => $release_channel->latestFlight->flight,
-                        'date' => $release_channel->latestFlight->date
+                        'date' => $release_channel->latestFlight->date,
                     ],
                     'release' => [
                         'id' => $release_channel->release->id,
                         'slug' => $release_channel->release->slug,
-                    ]
+                    ],
                 ];
             })->sortBy('order')->values()->all(),
             'releases' => $platform->releases->sortByDesc('canonical_version')->map(function ($release) use ($platform) {
@@ -75,13 +73,13 @@ class PlatformController extends Controller
                         'start_extended' => $release->start_extended,
                         'start_lts' => $release->start_lts,
                         'end_lts' => $release->end_lts,
-                        'ongoing' => $release->ongoing
+                        'ongoing' => $release->ongoing,
                     ],
                     'platform' => [
                         'icon' => $platform->icon,
                         'name' => $platform->name,
                         'color' => $platform->color,
-                        'tool' => $platform->tool
+                        'tool' => $platform->tool,
                     ],
                     'latest_flight' => $release->latest->flight,
                     'channels' => $release->releaseChannels->where('supported')->map(function ($channel) {
@@ -90,11 +88,11 @@ class PlatformController extends Controller
                             'short_name' => $channel->short_name,
                             'supported' => $channel->supported,
                             'color' => $channel->channel->color,
-                            'order' => $channel->channel->order
+                            'order' => $channel->channel->order,
                         ];
-                    })->values()->all()
+                    })->values()->all(),
                 ];
-            })->values()->all()
+            })->values()->all(),
         ]);
     }
 }

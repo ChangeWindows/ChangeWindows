@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import clsx from 'clsx';
+import clsx from "clsx";
 
 export default function Select({
   disabled,
@@ -13,26 +13,17 @@ export default function Select({
   nullProps,
   selects,
   selectLabel,
-  selectValue
+  selectValue,
 }) {
   return (
     <>
-      <div
-        className={
-          clsx(
-            'form-floating w-100',
-            { 'is-invalid': errors }
-          )
-        }
-      >
-        <select
-          className="form-select"
-          id={id}
-          defaultValue={value}
-          onChange={onChange}
-          disabled={disabled}
-        >
-          {!!nullProps && <option value={nullProps.value} disabled={!nullProps.selectable}>{nullProps.label}</option>}
+      <div className={clsx("form-floating w-100", { "is-invalid": errors })}>
+        <select className="form-select" id={id} defaultValue={value} onChange={onChange} disabled={disabled}>
+          {!!nullProps && (
+            <option value={nullProps.value} disabled={!nullProps.selectable}>
+              {nullProps.label}
+            </option>
+          )}
           {selects.map((item, key) => (
             <option value={selectValue(item)} key={key}>
               {selectLabel(item)}
@@ -41,10 +32,8 @@ export default function Select({
         </select>
         <label htmlFor={id}>{label}</label>
       </div>
-      {errors &&
-        <div className="invalid-feedback">{errors}</div>
-      }
+      {errors && <div className="invalid-feedback">{errors}</div>}
       {!!helper && <small className="form-text">{helper}</small>}
     </>
-  )
+  );
 }
