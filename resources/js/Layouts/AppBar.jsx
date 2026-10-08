@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Link, router, usePage } from "@inertiajs/react";
 import Amicon, { aiArrowRightFromBracket, aiArrowRightToBracket, aiMagnifyingGlass } from "@studio384/amaranth";

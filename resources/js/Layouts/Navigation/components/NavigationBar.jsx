@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useWidth from "@/hooks/useWidth";

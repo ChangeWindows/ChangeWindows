@@ -1,5 +1,3 @@
-import React from "react";
-
 import { usePage } from "@inertiajs/react";
 import { aiDevices, aiFlag, aiLock, aiPlane, aiBoxOpenFull, aiPerson, aiPersonLock } from "@studio384/amaranth";
 

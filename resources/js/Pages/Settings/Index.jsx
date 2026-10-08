@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";

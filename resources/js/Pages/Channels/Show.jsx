@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import Channel from "@/Components/Cards/Channel";
 import PlatformNavigation from "@/Components/PlatformNavigation";

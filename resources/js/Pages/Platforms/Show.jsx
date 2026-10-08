@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import Channel from "@/Components/Cards/Channel";
 import ReleaseCard from "@/Components/Cards/ReleaseCard";
@@ -45,9 +45,9 @@ export default function Show({ platforms, platform, channels, releases }) {
                     url={
                       channel.release
                         ? route("front.platforms.releases", {
-                            release: channel.release,
-                            platform,
-                          })
+                          release: channel.release,
+                          platform,
+                        })
                         : undefined
                     }
                   />

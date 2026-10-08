@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Link } from "@inertiajs/react";
 import Amicon, { aiArrowLeft, aiArrowRight } from "@studio384/amaranth";
 import clsx from "clsx";

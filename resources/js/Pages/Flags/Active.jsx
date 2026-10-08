@@ -1,5 +1,3 @@
-import React from "react";
-
 import Pagination from "@/Components/Pagination";
 import App from "@/Layouts/App";
 

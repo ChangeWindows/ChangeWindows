@@ -1,5 +1,3 @@
-import React from "react";
-
 import Amicon, { aiCircleCheck, aiCircleInfo, aiCircleExclamation } from "@studio384/amaranth";
 import clsx from "clsx";
 

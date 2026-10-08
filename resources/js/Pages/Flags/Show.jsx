@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import FlagStatus from "@/Components/_FlagStatus";
 import NaviBar from "@/Components/NaviBar";

@@ -1,5 +1,3 @@
-import React from "react";
-
 import NaviBar from "@/Components/NaviBar";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
 import Fieldset from "@/Components/UI/Forms/Fieldset";

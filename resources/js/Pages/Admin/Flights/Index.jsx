@@ -1,5 +1,3 @@
-import React from "react";
-
 import NaviBar from "@/Components/NaviBar";
 import Pagination from "@/Components/Pagination";
 import Status from "@/Components/Status";

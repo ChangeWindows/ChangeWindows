@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import NaviBar from "@/Components/NaviBar";
 import Checkbox from "@/Components/UI/Forms/Checkbox";

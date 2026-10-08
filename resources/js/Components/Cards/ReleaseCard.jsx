@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import LifeCycle from "@/Pages/Platforms/_LifeCycle";

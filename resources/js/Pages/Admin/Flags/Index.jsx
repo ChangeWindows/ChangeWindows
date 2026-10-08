@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";

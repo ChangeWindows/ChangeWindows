@@ -1,5 +1,3 @@
-import React from "react";
-
 import FlagStatus from "@/Components/_FlagStatus";
 import App from "@/Layouts/App";
 

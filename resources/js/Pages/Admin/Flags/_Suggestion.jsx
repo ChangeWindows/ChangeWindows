@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useForm } from "@inertiajs/react";
 import Amicon, { aiCheck, aiSpinnerThird, aiTrashCan } from "@studio384/amaranth";
 

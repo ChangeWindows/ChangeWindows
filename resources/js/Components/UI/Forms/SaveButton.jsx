@@ -1,5 +1,3 @@
-import React from "react";
-
 import Amicon, { aiFloppyDisk, aiSpinnerThird } from "@studio384/amaranth";
 import clsx from "clsx";
 

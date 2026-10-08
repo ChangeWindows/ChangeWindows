@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { Link } from "@inertiajs/react";
 import Amicon, { aiAngleRight } from "@studio384/amaranth";

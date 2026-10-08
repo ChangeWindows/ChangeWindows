@@ -1,5 +1,3 @@
-import React from "react";
-
 import Auth from "@/Layouts/Auth";
 
 import { Head, router } from "@inertiajs/react";

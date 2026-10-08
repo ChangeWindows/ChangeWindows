@@ -1,5 +1,3 @@
-import React from "react";
-
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";
 import TextField from "@/Components/UI/Forms/TextField";

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import Progress from "@/Components/Progress/Progress";
 import ProgressBar from "@/Components/Progress/ProgressBar";

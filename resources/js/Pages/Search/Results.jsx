@@ -1,5 +1,3 @@
-import React from "react";
-
 import ReleaseCard from "@/Components/Cards/ReleaseCard";
 import App from "@/Layouts/App";
 

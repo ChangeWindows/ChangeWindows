@@ -1,5 +1,3 @@
-import React from "react";
-
 import FlagTimeline from "@/Components/_FlagsTimeline";
 import Flag from "@/Components/Flag";
 import Pagination from "@/Components/Pagination";

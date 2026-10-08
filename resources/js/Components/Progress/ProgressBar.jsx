@@ -1,5 +1,3 @@
-import React from "react";
-
 import clsx from "clsx";
 
 export default function ProgressBar({ color = false, progress }) {

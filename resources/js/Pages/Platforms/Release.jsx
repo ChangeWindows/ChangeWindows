@@ -1,4 +1,3 @@
-import React from "react";
 import { Nav, Tab } from "react-bootstrap";
 
 import Channel from "@/Components/Cards/Channel";

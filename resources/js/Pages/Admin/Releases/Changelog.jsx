@@ -1,5 +1,3 @@
-import React from "react";
-
 import Editor from "@/Components/Editor";
 import NaviBar from "@/Components/NaviBar";
 import Status from "@/Components/Status";

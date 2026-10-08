@@ -1,5 +1,3 @@
-import React from "react";
-
 import App from "@/Layouts/App";
 
 import { Head } from "@inertiajs/react";

@@ -1,5 +1,3 @@
-import React from "react";
-
 import Channel from "@/Components/Cards/Channel";
 import PlatformNavigation from "@/Components/PlatformNavigation";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";

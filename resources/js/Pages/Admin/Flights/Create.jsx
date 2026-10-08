@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";

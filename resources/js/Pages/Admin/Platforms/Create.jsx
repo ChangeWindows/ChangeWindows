@@ -1,5 +1,3 @@
-import React from "react";
-
 import NaviBar from "@/Components/NaviBar";
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 import Checkbox from "@/Components/UI/Forms/Checkbox";
