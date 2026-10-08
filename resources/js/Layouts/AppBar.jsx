@@ -7,7 +7,7 @@ import useMediaQuery from "../hooks/useMediaQuery";
 import { getLocal, setLocal } from "../utils/localStorage";
 
 export default function AppBar() {
-  const { props, url } = usePage();
+  const { props } = usePage();
   const matchesDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const [search, setSearch] = useState("");

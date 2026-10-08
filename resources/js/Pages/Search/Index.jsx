@@ -1,10 +1,8 @@
 import App from "@/Layouts/App";
 
-import { Head, usePage } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 
 export default function Index() {
-  const { url } = usePage();
-
   return (
     <App>
       <Head title="Search" />
