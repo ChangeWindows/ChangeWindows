@@ -10,9 +10,9 @@
     "require": {
         "php": "^8.3",
         "guzzlehttp/guzzle": "^7.8",
-        "inertiajs/inertia-laravel": "^1.2",
-        "laravel/framework": "^11.39",
-        "laravel/tinker": "^2.9",
+        "inertiajs/inertia-laravel": "^2.0",
+        "laravel/framework": "^13",
+        "laravel/tinker": "^3",
         "patreon/patreon": "^1.0",
         "spatie/laravel-permission": "^6.10",
         "spatie/laravel-searchable": "^1.13",
