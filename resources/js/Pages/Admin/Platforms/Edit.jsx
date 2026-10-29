@@ -9,8 +9,10 @@ import Admin from "@/Layouts/Admin";
 
 import { Link, useForm } from "@inertiajs/react";
 import Amicon, { aiPlus, aiTrashCan } from "@studio384/amicons";
+import { useRoute } from "ziggy-js";
 
 export default function Edit({ can, platform, channels, status }) {
+  const route = useRoute();
   const { data, setData, patch, delete: destroy, processing, errors } = useForm(platform);
 
   function handleSubmit(e) {

@@ -19,8 +19,10 @@ import Amicon, {
   aiSpinnerThird,
   aiPerson,
 } from "@studio384/amicons";
+import { useRoute } from "ziggy-js";
 
 export default function Show({ app, patrons, user }) {
+  const route = useRoute();
   // Live settings
   const [theme, setTheme] = useState(getLocal("theme"));
   const [showActiveOnly, setShowActiveOnly] = useState(getLocal("showActiveOnly"));

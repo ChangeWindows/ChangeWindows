@@ -5,8 +5,10 @@ import App from "@/Layouts/App";
 
 import { Head, useForm } from "@inertiajs/react";
 import Amicon, { aiCheck, aiShieldKeyhole, aiSpinnerThird } from "@studio384/amicons";
+import { useRoute } from "ziggy-js";
 
 export default function Index({ status, user }) {
+  const route = useRoute();
   const { data, setData, patch, processing, errors } = useForm(user);
 
   function submitPatch(event) {

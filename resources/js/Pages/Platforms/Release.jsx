@@ -14,10 +14,12 @@ import Typography from "@tiptap/extension-typography";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { parseISO } from "date-fns";
+import { useRoute } from "ziggy-js";
 
 import LifeCycle from "./_LifeCycle";
 
 export default function Release({ release, platform, channels, timeline, pagination, quickNav }) {
+  const route = useRoute();
   const editor = useEditor({
     editable: false,
     extensions: [

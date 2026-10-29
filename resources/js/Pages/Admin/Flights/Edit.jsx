@@ -11,8 +11,10 @@ import Admin from "@/Layouts/Admin";
 import { useForm } from "@inertiajs/react";
 import Amicon, { aiTrashCan } from "@studio384/amicons";
 import { parse, format, isValid, parseISO } from "date-fns";
+import { useRoute } from "ziggy-js";
 
 export default function Edit({ can, flight, platform, release_channel, status }) {
+  const route = useRoute();
   const [today] = useState(() => new Date());
   const {
     data,

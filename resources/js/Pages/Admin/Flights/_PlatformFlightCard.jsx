@@ -1,7 +1,9 @@
 import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
 import { Link } from "@inertiajs/react";
+import { useRoute } from "ziggy-js";
 export default function PlatformFlightCard({ platform }) {
+  const route = useRoute();
   return (
     <div className="d-block">
       <div className="platform-event">

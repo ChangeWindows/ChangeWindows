@@ -4,8 +4,10 @@ import Admin from "@/Layouts/Admin";
 
 import { Link } from "@inertiajs/react";
 import Amicon, { aiPlus } from "@studio384/amicons";
+import { useRoute } from "ziggy-js";
 
 export default function Show({ can, roles, status }) {
+  const route = useRoute();
   return (
     <Admin>
       <NaviBar

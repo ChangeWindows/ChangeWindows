@@ -6,8 +6,10 @@ import App from "@/Layouts/App";
 import { Head } from "@inertiajs/react";
 import clsx from "clsx";
 import { parseISO } from "date-fns";
+import { useRoute } from "ziggy-js";
 
 export default function Index({ platforms, channel_platforms }) {
+  const route = useRoute();
   return (
     <App>
       <Head title="Channels" />

@@ -8,8 +8,10 @@ import App from "@/Layouts/App";
 
 import { Head } from "@inertiajs/react";
 import { parseISO } from "date-fns";
+import { useRoute } from "ziggy-js";
 
 export default function Show({ platforms, platform, channels, releases }) {
+  const route = useRoute();
   const [currentReleases, legacyReleases] = useMemo(() => {
     const currentReleases = releases.filter((release) => release.channels.length > 0);
     const legacyReleases = releases.filter((release) => release.channels.length === 0);
@@ -45,9 +47,9 @@ export default function Show({ platforms, platform, channels, releases }) {
                     url={
                       channel.release
                         ? route("front.platforms.releases", {
-                          release: channel.release,
-                          platform,
-                        })
+                            release: channel.release,
+                            platform,
+                          })
                         : undefined
                     }
                   />

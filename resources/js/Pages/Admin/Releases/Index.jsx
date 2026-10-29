@@ -6,10 +6,12 @@ import Admin from "@/Layouts/Admin";
 
 import { Link } from "@inertiajs/react";
 import Amicon, { aiPlus } from "@studio384/amicons";
+import { useRoute } from "ziggy-js";
 
 import PlatformCard from "./_PlatformCard";
 
 export default function Index({ can, releases, status }) {
+  const route = useRoute();
   const [now] = useState(() => new Date().getTime());
 
   const _releases = useMemo(() => {

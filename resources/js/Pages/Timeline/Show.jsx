@@ -9,10 +9,12 @@ import App from "@/Layouts/App";
 
 import { Head } from "@inertiajs/react";
 import { parseISO } from "date-fns";
+import { useRoute } from "ziggy-js";
 
 import PlatformTimelineCard from "./_PlatformTimelineCard";
 
 export default function Show({ timeline, pagination, platform, platforms, channel_platforms }) {
+  const route = useRoute();
   return (
     <App>
       <Head title={`${platform.name} timeline`} />

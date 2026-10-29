@@ -6,8 +6,10 @@ import TextField from "@/Components/UI/Forms/TextField";
 import Admin from "@/Layouts/Admin";
 
 import { useForm } from "@inertiajs/react";
+import { useRoute } from "ziggy-js";
 
 export default function Create() {
+  const route = useRoute();
   const { data, setData, post, processing, errors } = useForm({
     name: "",
     variants: [],

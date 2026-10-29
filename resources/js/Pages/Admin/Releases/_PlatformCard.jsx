@@ -2,8 +2,10 @@ import PlatformIcon from "@/Components/Platforms/PlatformIcon";
 
 import { Link } from "@inertiajs/react";
 import Amicon, { aiEye, aiNotes, aiPen } from "@studio384/amicons";
+import { useRoute } from "ziggy-js";
 
 export default function PlatformCard({ can, platform }) {
+  const route = useRoute();
   return (
     <div className="platform-event">
       <div className="platform-event-icon">

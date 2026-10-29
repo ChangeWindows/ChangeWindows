@@ -208,6 +208,9 @@ importers:
       styled-components:
         specifier: ^6.5.3
         version: 6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      ziggy-js:
+        specifier: 2.6.4
+        version: 2.6.4
     devDependencies:
       '@types/react':
         specifier: ^19.2.18
@@ -1399,6 +1402,10 @@ packages:
   prosemirror-view@1.42.6:
     resolution: {integrity: sha512-3g25f6hKV2bBxo3puH3EcYWmmVNSH0iWmNsMVT7sugDSpA025jgpOLarcDWr39SdzPjYMaiYtRdNtXialPSjEQ==}
 
+  qs-esm@7.0.3:
+    resolution: {integrity: sha512-8jbjCR0PPbqoQcv83C2K/zvVeytRPwPpt3WPDbq51qyLAxcWGtXVRjSe6GHtLCoVbg9+NEFkv7GyUxqjcDIJzw==}
+    engines: {node: '>=18'}
+
   react-aria@3.52.1:
     resolution: {integrity: sha512-fdZZruC9/x/joCg0mhKGs5aHpwrXLCSZ4GOJmhhYyiE0ffyEsk9MLFt9LCOCF9tn8ErTD+UDQP4oDUSlZkmpCg==}
     peerDependencies:
@@ -1567,6 +1574,9 @@ packages:
 
   warning@4.0.3:
     resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
+
+  ziggy-js@2.6.4:
+    resolution: {integrity: sha512-JIOpCCo0kA2f6cQa5F8cMBKsuFTc3MNrLtaf0RyYywQ30hRR6mq6F51h71woCs3O6MukzpeEpBVRfnlbmwfBNQ==}
 
 snapshots:
 
@@ -2486,6 +2496,8 @@ snapshots:
       prosemirror-state: 1.4.4
       prosemirror-transform: 1.12.2
 
+  qs-esm@7.0.3: {}
+
   react-aria@3.52.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
     dependencies:
       '@internationalized/date': 3.12.4
@@ -2650,3 +2662,7 @@ snapshots:
   warning@4.0.3:
     dependencies:
       loose-envify: 1.4.0
+
+  ziggy-js@2.6.4:
+    dependencies:
+      qs-esm: 7.0.3

@@ -9,8 +9,10 @@ import Admin from "@/Layouts/Admin";
 
 import { useForm } from "@inertiajs/react";
 import { parse, format, isValid, parseISO } from "date-fns";
+import { useRoute } from "ziggy-js";
 
 export default function Create({ releases }) {
+  const route = useRoute();
   const [showAll, setShowAll] = useState(false);
   const [showEligible, setShowEligible] = useState(false);
   const [today] = useState(() => new Date());

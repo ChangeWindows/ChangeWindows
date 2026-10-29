@@ -3,8 +3,10 @@ import Status from "@/Components/Status";
 import Admin from "@/Layouts/Admin";
 
 import { Link } from "@inertiajs/react";
+import { useRoute } from "ziggy-js";
 
 export default function Index({ users, status }) {
+  const route = useRoute();
   return (
     <Admin>
       <NaviBar>Users</NaviBar>

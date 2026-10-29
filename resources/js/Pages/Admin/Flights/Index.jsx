@@ -7,10 +7,12 @@ import Admin from "@/Layouts/Admin";
 import { Link } from "@inertiajs/react";
 import Amicon, { aiPlus } from "@studio384/amicons";
 import { parseISO } from "date-fns";
+import { useRoute } from "ziggy-js";
 
 import PlatformFlightCard from "./_PlatformFlightCard";
 
 export default function Index({ can, timeline, pagination, status }) {
+  const route = useRoute();
   return (
     <Admin>
       <NaviBar

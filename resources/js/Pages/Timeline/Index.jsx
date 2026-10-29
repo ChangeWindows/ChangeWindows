@@ -10,10 +10,12 @@ import App from "@/Layouts/App";
 import { Head } from "@inertiajs/react";
 import Amicon, { aiPatreon } from "@studio384/amicons";
 import { parseISO } from "date-fns";
+import { useRoute } from "ziggy-js";
 
 import PlatformTimelineCard from "./_PlatformTimelineCard";
 
 export default function Index({ timeline, pagination, platforms, channel_platforms, patron }) {
+  const route = useRoute();
   return (
     <App>
       <Head title="Timeline" />

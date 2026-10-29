@@ -1,8 +1,10 @@
 import { Link, useForm } from "@inertiajs/react";
 import Amicon, { aiCheck, aiSpinnerThird, aiXmark } from "@studio384/amicons";
 import clsx from "clsx";
+import { useRoute } from "ziggy-js";
 
 export default function ReleaseChannel({ can, releaseChannel }) {
+  const route = useRoute();
   const { data, patch, processing } = useForm(releaseChannel);
 
   function toggleSupported(e) {

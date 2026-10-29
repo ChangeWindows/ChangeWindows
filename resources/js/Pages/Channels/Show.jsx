@@ -8,8 +8,10 @@ import { getLocal } from "@/utils/localStorage";
 
 import { Head } from "@inertiajs/react";
 import { parseISO } from "date-fns";
+import { useRoute } from "ziggy-js";
 
 export default function Show({ platform, platforms, channel_order, releases }) {
+  const route = useRoute();
   const showActiveOnly = getLocal("showActiveOnly");
 
   const releaseList = useMemo(() => {

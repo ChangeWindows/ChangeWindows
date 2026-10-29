@@ -5,8 +5,10 @@ import SaveButton from "@/Components/UI/Forms/SaveButton";
 import Admin from "@/Layouts/Admin";
 
 import { useForm } from "@inertiajs/react";
+import { useRoute } from "ziggy-js";
 
 export default function Edit({ release, status }) {
+  const route = useRoute();
   const { data, setData, patch, processing } = useForm(release);
 
   function handleSubmit(e) {

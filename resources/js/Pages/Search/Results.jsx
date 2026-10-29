@@ -2,8 +2,10 @@ import ReleaseCard from "@/Components/Cards/ReleaseCard";
 import App from "@/Layouts/App";
 
 import { Head } from "@inertiajs/react";
+import { useRoute } from "ziggy-js";
 
 export default function Index({ results, query }) {
+  const route = useRoute();
   return (
     <App>
       <Head title="Search" />

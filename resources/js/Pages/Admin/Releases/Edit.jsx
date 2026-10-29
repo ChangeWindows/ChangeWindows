@@ -12,10 +12,12 @@ import Admin from "@/Layouts/Admin";
 import { Link, useForm } from "@inertiajs/react";
 import Amicon, { aiEye, aiNotes, aiPlus, aiTrashCan } from "@studio384/amicons";
 import { parse, format, isValid, parseISO } from "date-fns";
+import { useRoute } from "ziggy-js";
 
 import ReleaseChannel from "./_ReleaseChannel";
 
 export default function Edit({ can, platforms, release, channels, release_channels, status }) {
+  const route = useRoute();
   const [today] = useState(() => new Date());
   const { data, setData, patch, delete: destroy, processing, errors } = useForm(release);
 

@@ -8,8 +8,10 @@ import Admin from "@/Layouts/Admin";
 
 import { useForm } from "@inertiajs/react";
 import Amicon, { aiTrashCan } from "@studio384/amicons";
+import { useRoute } from "ziggy-js";
 
 export default function Edit({ can, user, roles, status }) {
+  const route = useRoute();
   const { data, setData, patch, delete: destroy, processing, errors } = useForm(user);
 
   function roleHandler(role) {

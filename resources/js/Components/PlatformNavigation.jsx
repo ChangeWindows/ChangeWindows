@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { Link, usePage } from "@inertiajs/react";
 import Amicon, { aiAngleDown, aiEllipsisH } from "@studio384/amicons";
 import clsx from "clsx";
+import { useRoute } from "ziggy-js";
 
 import useMediaQuery from "../hooks/useMediaQuery";
 import DropdownItem from "./Navbar/DropdownItem";
@@ -10,6 +11,7 @@ import NavItem from "./Navbar/NavItem";
 import PlatformIcon from "./Platforms/PlatformIcon";
 
 export default function Navigation({ platforms, routeName, all = false }) {
+  const route = useRoute();
   const matchesSmUp = useMediaQuery("(min-width: 576px)");
   const page = usePage();
 

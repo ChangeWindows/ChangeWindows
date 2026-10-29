@@ -10,8 +10,10 @@ import Admin from "@/Layouts/Admin";
 
 import { useForm } from "@inertiajs/react";
 import { parse, format, isValid, parseISO } from "date-fns";
+import { useRoute } from "ziggy-js";
 
 export default function Create({ platforms }) {
+  const route = useRoute();
   const [today] = useState(() => new Date());
   const { data, setData, post, processing, errors } = useForm({
     name: "",
