@@ -14,38 +14,38 @@
     "start": "vite"
   },
   "dependencies": {
-    "@inertiajs/react": "^3.8.0",
+    "@inertiajs/react": "^3.9.1",
     "@studio384/amicons": "^1.0.0-alpha.12",
-    "@tiptap/extension-table": "^3.31.4",
-    "@tiptap/extension-typography": "^3.31.4",
-    "@tiptap/react": "^3.31.4",
-    "@tiptap/starter-kit": "^3.31.4",
+    "@tiptap/extension-table": "^3.32.1",
+    "@tiptap/extension-typography": "^3.32.1",
+    "@tiptap/react": "^3.32.1",
+    "@tiptap/starter-kit": "^3.32.1",
     "bootstrap": "^5.3.8",
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
-    "react": "^19.3.0",
+    "react": "^19.3.1",
     "react-bootstrap": "^2.10.10",
-    "react-dom": "^19.3.0",
-    "sass": "^1.102.0",
-    "styled-components": "^6.5.3",
-    "ziggy-js": "2.6.4"
+    "react-dom": "^19.3.1",
+    "sass": "^1.107.0",
+    "styled-components": "^6.6.0",
+    "ziggy-js": "2.6.5"
   },
   "devDependencies": {
-    "@types/react": "^19.2.18",
+    "@types/react": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
-    "autoprefixer": "^10.5.4",
+    "autoprefixer": "^10.6.2",
     "laravel-vite-plugin": "^3.2.0",
-    "oxc-transform-react": "^0.153.0",
-    "oxfmt": "^0.72.0",
-    "oxlint": "^1.79.0",
-    "postcss": "^8.5.26",
-    "vite": "^8.3.4"
+    "oxc-transform-react": "^0.156.0",
+    "oxfmt": "^0.75.0",
+    "oxlint": "^1.90.0",
+    "postcss": "^8.5.32",
+    "vite": "^8.3.5"
   },
   "engines": {
     "node": ">=24",
     "npm": "use pnpm",
     "pnpm": ">=12"
   },
-  "packageManager": "pnpm@12.10.1",
+  "packageManager": "pnpm@12.16.1",
   "globals": {}
 }
