@@ -7,7 +7,7 @@
         top: 4rem;
         left: 0;
         right: 0;
-        padding: .5rem;
+        padding: 0.5rem;
         background-color: var(--nav-bg-acrylic);
         backdrop-filter: blur(10px) saturate(120%);
         z-index: 100;
@@ -16,7 +16,7 @@
     .editor-btn {
         all: unset;
         cursor: pointer;
-        padding: .375rem .5rem;
+        padding: 0.375rem 0.5rem;
         border-radius: $border-radius;
 
         &:hover {
@@ -34,7 +34,7 @@
                 height: 3.5px;
                 border-radius: 6px;
                 width: 16px;
-                content: '';
+                content: "";
             }
         }
     }
@@ -43,7 +43,7 @@
         border: 1px solid var(--nav-border-color);
 
         &:not(:last-child) {
-            margin-right: .5rem;
+            margin-right: 0.5rem;
         }
     }
 }

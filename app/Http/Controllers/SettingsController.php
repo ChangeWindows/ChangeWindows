@@ -2,41 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
-
-use App\Models\User;
+use Patreon\API;
 
 class SettingsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
         $user = User::find(Auth::user()?->id);
 
-        $patreon_api = new \Patreon\API(env('PATREON_API_KEY'));
+        $patreon_api = new API(env('PATREON_API_KEY'));
 
         $campaign_id = 1028298;
 
         $fields = [
-            "page" => [
-                "size" => 100
+            'page' => [
+                'size' => 100,
             ],
-            "include" => implode(",", [
-                "user",
-                "currently_entitled_tiers"
+            'include' => implode(',', [
+                'user',
+                'currently_entitled_tiers',
             ]),
-            "fields" => [
-                "member" => implode(",", [
-                    "full_name",
-                    "patron_status"
-                ])
-            ]
+            'fields' => [
+                'member' => implode(',', [
+                    'full_name',
+                    'patron_status',
+                ]),
+            ],
         ];
         $query = http_build_query($fields);
 
@@ -49,7 +49,7 @@ class SettingsController extends Controller
             if ($pledge_data['attributes']['patron_status'] === 'active_patron') {
                 $patrons->push([
                     'name' => $pledge_data['attributes']['full_name'],
-                    'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}"
+                    'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}",
                 ]);
             }
         }
@@ -59,16 +59,16 @@ class SettingsController extends Controller
             'user' => $user ? [
                 'id' => $user->id,
                 'name' => $user->name,
-                'email' => $user->email
+                'email' => $user->email,
             ] : null,
-            'patrons' => $patrons
+            'patrons' => $patrons,
         ]);
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function privacy()
     {

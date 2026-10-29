@@ -1,10 +1,9 @@
 <?php
 
+use App\Models\Flight;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
-use App\Models\Flight;
 
 return new class extends Migration
 {
@@ -22,9 +21,9 @@ return new class extends Migration
             $table->dateTime('date')->nullable()->after('delta');
         });
 
-        foreach(Flight::get() as $flight) {
+        foreach (Flight::get() as $flight) {
             $flight->update([
-                'date' => $flight->timeline->date
+                'date' => $flight->timeline->date,
             ]);
         }
 

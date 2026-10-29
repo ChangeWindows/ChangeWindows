@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use App\Models\Platform;
+use Illuminate\Http\Response;
+use Inertia\Inertia;
 
 class ChannelController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -45,24 +46,24 @@ class ChannelController extends Controller
                             'color' => $channel->color,
                             'flight' => [
                                 'version' => $release_channel->latestFlight->flight,
-                                'date' => $release_channel->latestFlight->date
+                                'date' => $release_channel->latestFlight->date,
                             ],
                             'release' => [
                                 'id' => $release_channel->release->id,
                                 'slug' => $release_channel->release->slug,
-                            ]
+                            ],
                         ];
                     })->sortBy('order')->values()->all(),
                 ];
             }),
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Platform $platform)
     {
@@ -83,12 +84,12 @@ class ChannelController extends Controller
                 'slug' => $platform->slug,
                 'name' => $platform->name,
                 'icon' => $platform->icon,
-                'color' => $platform->color
+                'color' => $platform->color,
             ],
             'channel_order' => $platform->channels->sortBy('order')->map(function ($channel) {
                 return [
                     'id' => $channel->id,
-                    'active' => $channel->active
+                    'active' => $channel->active,
                 ];
             })->values()->all(),
             'releases' => $platform->releases->sortByDesc('canonical_version')->map(function ($release) use ($platform) {
@@ -101,7 +102,7 @@ class ChannelController extends Controller
                         'icon' => $platform->icon,
                         'name' => $platform->name,
                         'color' => $platform->color,
-                        'tool' => $platform->tool
+                        'tool' => $platform->tool,
                     ],
                     'channels' => $release->releaseChannels->map(function ($channel) {
                         return [
@@ -113,10 +114,10 @@ class ChannelController extends Controller
                             'channel_id' => $channel->channel->id,
                             'flight' => $channel->latestFlight ? [
                                 'version' => $channel->latestFlight->flight,
-                                'date' => $channel->latestFlight->date
-                            ] : null
+                                'date' => $channel->latestFlight->date,
+                            ] : null,
                         ];
-                    })->values()->all()
+                    })->values()->all(),
                 ];
             })->values()->all(),
         ]);

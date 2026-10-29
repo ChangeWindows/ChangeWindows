@@ -12,7 +12,6 @@ class EmailVerificationPromptController extends Controller
     /**
      * Display the email verification prompt.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
     public function __invoke(Request $request)
@@ -21,7 +20,7 @@ class EmailVerificationPromptController extends Controller
                     ? redirect()->intended(RouteServiceProvider::HOME)
                     : Inertia::render('Auth/VerifyEmail', [
                         'session' => $request->session()->get('status'),
-                        'status' => session('errors') ? session('errors')->default->messages() : false
+                        'status' => session('errors') ? session('errors')->default->messages() : false,
                     ]);
     }
 }

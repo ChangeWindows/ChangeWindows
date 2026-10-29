@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Release;
-use App\Models\Flight;
-use App\Models\ReleaseChannel;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
+use App\Models\Flight;
+use App\Models\Release;
 use Auth;
-use Redirect;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Inertia\Inertia;
+use Redirect;
 
 class FlightController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -30,8 +30,8 @@ class FlightController extends Controller
             'can' => [
                 'flights' => [
                     'create' => Auth::user()->can('flights.create'),
-                    'edit' => Auth::user()->can('flights.edit')
-                ]
+                    'edit' => Auth::user()->can('flights.edit'),
+                ],
             ],
             'timeline' => $timeline->paginate(100)->groupBy('date')->map(function ($items, $date) {
                 return [
@@ -43,34 +43,34 @@ class FlightController extends Controller
                             'date' => $flight->date,
                             'release_channel' => [
                                 'name' => $flight->releaseChannel->short_name,
-                                'color' => $flight->releaseChannel->channel->color
+                                'color' => $flight->releaseChannel->channel->color,
                             ],
                             'platform' => [
                                 'id' => $flight->releaseChannel->channel->platform->id,
                                 'icon' => $flight->releaseChannel->channel->platform->icon,
                                 'name' => $flight->releaseChannel->channel->platform->name,
                                 'position' => $flight->releaseChannel->channel->platform->position,
-                                'color' => $flight->releaseChannel->channel->platform->color
-                            ]
+                                'color' => $flight->releaseChannel->channel->platform->color,
+                            ],
                         ];
                     })->sortByDesc(function ($item) {
                         return $item['version'];
-                    })->groupBy(function($item) {
+                    })->groupBy(function ($item) {
                         return $item['platform']['id'];
-                    })->sortBy(function($item) {
+                    })->sortBy(function ($item) {
                         return $item[0]['platform']['position'];
-                    })->values()->all()
+                    })->values()->all(),
                 ];
             }),
             'pagination' => $paginator,
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -90,7 +90,7 @@ class FlightController extends Controller
                     'platform' => [
                         'icon' => $release->platform->icon,
                         'name' => $release->platform->name,
-                        'color' => $release->platform->color
+                        'color' => $release->platform->color,
                     ],
                     'channels' => $release->releaseChannels->map(function ($channel) {
                         return [
@@ -98,19 +98,18 @@ class FlightController extends Controller
                             'name' => $channel->name,
                             'supported' => $channel->supported,
                             'color' => $channel->channel->color,
-                            'order' => $channel->channel->order
+                            'order' => $channel->channel->order,
                         ];
-                    })
+                    }),
                 ];
-            })
+            }),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -123,21 +122,20 @@ class FlightController extends Controller
                 'build' => request('build'),
                 'delta' => request('delta'),
                 'date' => (new Carbon(request('date'))),
-                'release_channel_id' => $releaseChannel
+                'release_channel_id' => $releaseChannel,
             ]);
         }
 
         return Redirect::route('admin.flights')->with('status', [
             'message' => 'Succesfully created these flights.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Flight  $flight
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Flight $flight)
     {
@@ -147,8 +145,7 @@ class FlightController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Flight  $flight
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Flight $flight)
     {
@@ -160,29 +157,27 @@ class FlightController extends Controller
             'can' => [
                 'flights' => [
                     'delete' => Auth::user()->can('flights.delete'),
-                    'edit' => Auth::user()->can('flights.edit')
-                ]
+                    'edit' => Auth::user()->can('flights.edit'),
+                ],
             ],
             'flight' => $flight,
             'platform' => [
                 'icon' => $flight->releaseChannel->channel->platform->icon,
                 'name' => $flight->releaseChannel->channel->platform->name,
-                'color' => $flight->releaseChannel->channel->platform->color
+                'color' => $flight->releaseChannel->channel->platform->color,
             ],
             'release_channel' => [
                 'name' => $flight->releaseChannel->short_name,
-                'color' => $flight->releaseChannel->channel->color
+                'color' => $flight->releaseChannel->channel->color,
             ],
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Flight  $flight
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, Flight $flight)
     {
@@ -193,20 +188,19 @@ class FlightController extends Controller
             'minor' => request('minor'),
             'build' => request('build'),
             'delta' => request('delta'),
-            'date' => (new Carbon(request('date')))
+            'date' => (new Carbon(request('date'))),
         ]);
 
         return Redirect::route('admin.flights.edit', $flight)->with('status', [
             'message' => 'Succesfully updated the flight.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Flight  $flight
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Flight $flight)
     {
@@ -216,7 +210,7 @@ class FlightController extends Controller
 
         return Redirect::route('admin.flights')->with('status', [
             'message' => 'Succesfully deleted flight.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 }

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use Inertia\Inertia;
 
 class PasswordResetLinkController extends Controller
@@ -12,22 +15,21 @@ class PasswordResetLinkController extends Controller
     /**
      * Display the password reset link request view.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
         return Inertia::render('Auth/ForgotPassword', [
-            'status' => session('errors') ? session('errors')->default->messages() : false
+            'status' => session('errors') ? session('errors')->default->messages() : false,
         ]);
     }
 
     /**
      * Handle an incoming password reset link request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -45,9 +47,9 @@ class PasswordResetLinkController extends Controller
         return $status == Password::RESET_LINK_SENT
             ? back()->with('status', [
                 'message' => __($status),
-                'type' => 'success'
+                'type' => 'success',
             ])
             : back()->withInput($request->only('email'))
-            ->withErrors(['email' => __($status)]);
+                ->withErrors(['email' => __($status)]);
     }
 }

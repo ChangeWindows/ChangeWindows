@@ -21,7 +21,7 @@ class CreateFlightsTable extends Migration
             $table->integer('delta')->required();
             $table->foreignId('release_channel_id')->constrained('release_channels')->onDelete('cascade');
             $table->timestamps();
-            
+
             $table->unique(['major', 'minor', 'build', 'delta', 'release_channel_id']);
         });
     }

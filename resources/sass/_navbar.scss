@@ -14,11 +14,11 @@
         display: grid;
         grid-template-columns: fit-content(240px) minmax(auto, 500px) fit-content(240px);
         grid-template-rows: auto;
-        grid-template-areas: 'title' 'search' 'actions';
+        grid-template-areas: "title" "search" "actions";
     }
 
     .navbar-brand {
-        grid-area: 'title';
+        grid-area: "title";
 
         display: flex;
         justify-content: center;
@@ -50,10 +50,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: .1875rem 1rem .0625rem .625rem;
+        margin: 0.1875rem 1rem 0.0625rem 0.625rem;
 
         @media (max-width: 575px) {
-            margin: .1875rem 0 .0625rem .365rem;
+            margin: 0.1875rem 0 0.0625rem 0.365rem;
         }
     }
 
@@ -88,7 +88,7 @@
                     height: 3.5px;
                     border-radius: 6px;
                     width: 16px;
-                    content: '';
+                    content: "";
                 }
             }
         }
@@ -103,7 +103,7 @@
     }
 
     .navbar-actions {
-        grid-area: 'actions';
+        grid-area: "actions";
 
         app-region: no-drag;
         display: flex;
@@ -114,7 +114,7 @@
     }
 
     .navbar-search {
-        grid-area: 'search';
+        grid-area: "search";
 
         display: flex;
         flex-direction: row;
@@ -149,7 +149,7 @@
             background: transparent;
             border: none;
             height: 34px;
-            padding: .125rem .75rem .125rem 0;
+            padding: 0.125rem 0.75rem 0.125rem 0;
 
             &:focus {
                 box-shadow: none;
@@ -160,7 +160,7 @@
             height: 34px;
             background: transparent;
             border: none;
-            padding: .125rem .5rem .125rem .75rem;
+            padding: 0.125rem 0.5rem 0.125rem 0.75rem;
             color: $input-placeholder-color;
         }
     }

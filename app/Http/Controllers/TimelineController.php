@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Models\Platform;
 use App\Models\Flight;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-
+use App\Models\Platform;
+use Illuminate\Http\Response;
+use Inertia\Inertia;
+use Patreon\API;
 
 class TimelineController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -22,23 +21,23 @@ class TimelineController extends Controller
         $timeline = Flight::with('releaseChannel', 'releaseChannel.channel', 'releaseChannel.release', 'releaseChannel.release.platform')->orderBy('date', 'desc');
         $paginator = $timeline->paginate(75)->onEachSide(2);
 
-        $patreon_api = new \Patreon\API(env('PATREON_API_KEY'));
+        $patreon_api = new API(env('PATREON_API_KEY'));
         $campaign_id = 1028298;
 
         $fields = [
-            "page" => [
-                "size" => 100
+            'page' => [
+                'size' => 100,
             ],
-            "include" => implode(",", [
-                "user",
-                "currently_entitled_tiers"
+            'include' => implode(',', [
+                'user',
+                'currently_entitled_tiers',
             ]),
-            "fields" => [
-                "member" => implode(",", [
-                    "full_name",
-                    "patron_status"
-                ])
-            ]
+            'fields' => [
+                'member' => implode(',', [
+                    'full_name',
+                    'patron_status',
+                ]),
+            ],
         ];
         $query = http_build_query($fields);
 
@@ -51,7 +50,7 @@ class TimelineController extends Controller
             if ($pledge_data['attributes']['patron_status'] === 'active_patron') {
                 $patrons->push([
                     'name' => $pledge_data['attributes']['full_name'],
-                    'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}"
+                    'avatar' => "https://c8.patreon.com/2/200/{$pledge_data['relationships']['user']['data']['id']}",
                 ]);
             }
         }
@@ -85,12 +84,12 @@ class TimelineController extends Controller
                             'color' => $channel->color,
                             'flight' => [
                                 'version' => $release_channel->latestFlight->flight,
-                                'date' => $release_channel->latestFlight->date
+                                'date' => $release_channel->latestFlight->date,
                             ],
                             'release' => [
                                 'id' => $release_channel->release->id,
                                 'slug' => $release_channel->release->slug,
-                            ]
+                            ],
                         ];
                     })->sortBy('order')->values()->all(),
                 ];
@@ -99,9 +98,10 @@ class TimelineController extends Controller
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function ($item) {
-                        return $item->platform->position . '-' . $item->flight;
+                        return $item->platform->position.'-'.$item->flight;
                     })->map(function ($flights) {
                         $_cur = $flights->first();
+
                         return [
                             'id' => $_cur->id,
                             'flight' => $_cur->flight,
@@ -109,13 +109,13 @@ class TimelineController extends Controller
                             'release' => [
                                 'slug' => $_cur->releaseChannel->release->slug,
                                 'version' => $_cur->releaseChannel->release->version,
-                                'cversion' => $_cur->releaseChannel->release->canonical_version
+                                'cversion' => $_cur->releaseChannel->release->canonical_version,
                             ],
                             'release_channel' => $flights->map(function ($channels) {
                                 return [
                                     'order' => $channels->releaseChannel->channel->order,
                                     'name' => $channels->releaseChannel->short_name,
-                                    'color' => $channels->releaseChannel->channel->color
+                                    'color' => $channels->releaseChannel->channel->color,
                                 ];
                             })->sortBy('order')->values()->all(),
                             'platform' => [
@@ -125,8 +125,8 @@ class TimelineController extends Controller
                                 'icon' => $_cur->releaseChannel->release->platform->icon,
                                 'name' => $_cur->releaseChannel->release->platform->name,
                                 'tool' => $_cur->releaseChannel->release->platform->tool,
-                                'color' => $_cur->releaseChannel->release->platform->color
-                            ]
+                                'color' => $_cur->releaseChannel->release->platform->color,
+                            ],
                         ];
                     })->groupBy(function ($item) {
                         return $item['platform']['id'];
@@ -134,21 +134,21 @@ class TimelineController extends Controller
                         return $item[0]['platform']['position'];
                     })->map(function ($platform) {
                         return $platform->sortByDesc(function ($item) {
-                            return $item['platform']['position'] . '.' . $item['flight'];
+                            return $item['platform']['position'].'.'.$item['flight'];
                         })->values()->all();
-                    })->values()->all()
+                    })->values()->all(),
                 ];
             }),
             'pagination' => $paginator,
             'patron' => $patrons->random(),
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Platform $platform)
     {
@@ -173,13 +173,13 @@ class TimelineController extends Controller
                     'color' => $_platform->color,
                     'icon' => $_platform->icon,
                     'legacy' => $_platform->legacy,
-                    'tool' => $_platform->tool
+                    'tool' => $_platform->tool,
                 ];
             }),
             'platform' => [
                 'name' => $platform->name,
                 'icon' => $platform->icon,
-                'color' => $platform->color
+                'color' => $platform->color,
             ],
             'channel_platforms' => $channel_platforms->map(function ($platform) {
                 return [
@@ -199,12 +199,12 @@ class TimelineController extends Controller
                             'color' => $channel->color,
                             'flight' => [
                                 'version' => $release_channel->latestFlight->flight,
-                                'date' => $release_channel->latestFlight->date
+                                'date' => $release_channel->latestFlight->date,
                             ],
                             'release' => [
                                 'id' => $release_channel->release->id,
                                 'slug' => $release_channel->release->slug,
-                            ]
+                            ],
                         ];
                     })->sortBy('order')->values()->all(),
                 ];
@@ -213,9 +213,10 @@ class TimelineController extends Controller
                 return [
                     'date' => $items[0]->date,
                     'flights' => $items->groupBy(function ($item, $key) {
-                        return $item->platform->position . '-' . $item->flight;
+                        return $item->platform->position.'-'.$item->flight;
                     })->map(function ($flights) {
                         $_cur = $flights->first();
+
                         return [
                             'id' => $_cur->id,
                             'flight' => $_cur->flight,
@@ -223,13 +224,13 @@ class TimelineController extends Controller
                             'release' => [
                                 'slug' => $_cur->releaseChannel->release->slug,
                                 'version' => $_cur->releaseChannel->release->version,
-                                'cversion' => $_cur->releaseChannel->release->canonical_version
+                                'cversion' => $_cur->releaseChannel->release->canonical_version,
                             ],
                             'release_channel' => $flights->map(function ($channels) {
                                 return [
                                     'order' => $channels->releaseChannel->channel->order,
                                     'name' => $channels->releaseChannel->short_name,
-                                    'color' => $channels->releaseChannel->channel->color
+                                    'color' => $channels->releaseChannel->channel->color,
                                 ];
                             })->sortBy('order')->values()->all(),
                             'platform' => [
@@ -239,8 +240,8 @@ class TimelineController extends Controller
                                 'icon' => $_cur->platform->icon,
                                 'name' => $_cur->platform->name,
                                 'tool' => $_cur->platform->tool,
-                                'color' => $_cur->platform->color
-                            ]
+                                'color' => $_cur->platform->color,
+                            ],
                         ];
                     })->groupBy(function ($item, $key) {
                         return $item['platform']['id'];
@@ -248,13 +249,13 @@ class TimelineController extends Controller
                         return $item[0]['platform']['position'];
                     })->map(function ($platform) {
                         return $platform->sortByDesc(function ($item, $key) {
-                            return $item['platform']['position'] . '.' . $item['flight'];
+                            return $item['platform']['position'].'.'.$item['flight'];
                         })->values()->all();
-                    })->values()->all()
+                    })->values()->all(),
                 ];
             }),
             'pagination' => $paginator,
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 }

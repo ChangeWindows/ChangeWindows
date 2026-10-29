@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Platform;
+use Illuminate\Database\Seeder;
 
 class PlatformSeeder extends Seeder
 {
@@ -22,18 +22,18 @@ class PlatformSeeder extends Seeder
             'position' => 1,
             'active' => 1,
             'legacy' => 0,
-            'tool' => 0
+            'tool' => 0,
         ]);
 
         Platform::create([
             'name' => 'Mobile',
             'description' => 'Mobile evolved from Windows Phone merging into the mainline Windows NT-family. Here the OS saw 4 major revisions (8, 8.1, 10 v1511 and 10 v1607) and a number of smaller upgrades after which the platform was deprecated when Microsoft left the smartphone OS market.',
             'color' => '#00bcf2',
-            'icon' => 'mobile', 
+            'icon' => 'mobile',
             'position' => 20,
             'active' => 0,
             'legacy' => 1,
-            'tool' => 0
+            'tool' => 0,
         ]);
 
         Platform::create([
@@ -44,7 +44,7 @@ class PlatformSeeder extends Seeder
             'position' => 2,
             'active' => 1,
             'legacy' => 0,
-            'tool' => 0
+            'tool' => 0,
         ]);
 
         Platform::create([
@@ -55,7 +55,7 @@ class PlatformSeeder extends Seeder
             'position' => 3,
             'active' => 1,
             'legacy' => 0,
-            'tool' => 0
+            'tool' => 0,
         ]);
 
         Platform::create([
@@ -66,7 +66,7 @@ class PlatformSeeder extends Seeder
             'position' => 4,
             'active' => 1,
             'legacy' => 0,
-            'tool' => 0
+            'tool' => 0,
         ]);
 
         Platform::create([
@@ -77,7 +77,7 @@ class PlatformSeeder extends Seeder
             'position' => 21,
             'active' => 1,
             'legacy' => 1,
-            'tool' => 0
+            'tool' => 0,
         ]);
 
         Platform::create([
@@ -88,7 +88,7 @@ class PlatformSeeder extends Seeder
             'position' => 5,
             'active' => 1,
             'legacy' => 0,
-            'tool' => 0
+            'tool' => 0,
         ]);
 
         Platform::create([
@@ -99,7 +99,7 @@ class PlatformSeeder extends Seeder
             'position' => 9,
             'active' => 1,
             'legacy' => 0,
-            'tool' => 1
+            'tool' => 1,
         ]);
 
         Platform::create([
@@ -110,7 +110,7 @@ class PlatformSeeder extends Seeder
             'position' => 8,
             'active' => 1,
             'legacy' => 0,
-            'tool' => 1
+            'tool' => 1,
         ]);
 
         Platform::create([
@@ -121,18 +121,18 @@ class PlatformSeeder extends Seeder
             'position' => 6,
             'active' => 1,
             'legacy' => 0,
-            'tool' => 0
+            'tool' => 0,
         ]);
 
         Platform::create([
             'name' => 'Azure',
             'description' => 'Windows, but it is actually Azure.',
             'color' => '#005aa3',
-            'icon' => 'cloud', 
+            'icon' => 'cloud',
             'position' => 7,
             'active' => 1,
             'legacy' => 0,
-            'tool' => 0
+            'tool' => 0,
         ]);
     }
 }

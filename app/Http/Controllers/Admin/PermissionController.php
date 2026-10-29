@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
+use Inertia\Inertia;
 use Redirect;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Support\Collection;
 
 class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -30,24 +31,24 @@ class PermissionController extends Controller
             'can' => [
                 'permissions' => [
                     'create' => Auth::user()->can('permissions.create'),
-                    'edit' => Auth::user()->can('permissions.edit')
+                    'edit' => Auth::user()->can('permissions.edit'),
                 ],
             ],
             'permissions' => $permissions->paginate(100)->map(function ($permission) {
                 return [
                     'id' => $permission->id,
-                    'name' => $permission->name
+                    'name' => $permission->name,
                 ];
             }),
             'pagination' => $paginator,
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -59,8 +60,7 @@ class PermissionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -76,7 +76,7 @@ class PermissionController extends Controller
 
         return Redirect::route('admin.permissions')->with('status', [
             'message' => 'Succesfully created this permission.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
@@ -84,7 +84,7 @@ class PermissionController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Permission  $permission
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Permission $permission)
     {
@@ -95,7 +95,7 @@ class PermissionController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Permission  $permission
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Permission $permission)
     {
@@ -105,24 +105,23 @@ class PermissionController extends Controller
             'can' => [
                 'permissions' => [
                     'delete' => Auth::user()->can('permissions.delete'),
-                    'edit' => Auth::user()->can('permissions.edit')
+                    'edit' => Auth::user()->can('permissions.edit'),
                 ],
             ],
             'permission' => [
                 'id' => $permission->id,
                 'name' => $permission->name,
-                'permissions' => $permission->getPermissionNames()
+                'permissions' => $permission->getPermissionNames(),
             ],
-            'status' => session('status')
+            'status' => session('status'),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Permission  $permission
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, Permission $permission)
     {
@@ -134,7 +133,7 @@ class PermissionController extends Controller
 
         return Redirect::route('admin.permissions.edit', $permission)->with('status', [
             'message' => 'Succesfully updated this permission.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
@@ -142,7 +141,7 @@ class PermissionController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Permission  $user
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Permission $permission)
     {
@@ -152,7 +151,7 @@ class PermissionController extends Controller
 
         return Redirect::route('admin.permissions')->with('status', [
             'message' => 'Succesfully deleted permission.',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 }
